@@ -1,0 +1,6 @@
+fragment CurrentUserFields on User {
+  id
+  username
+  createdAt
+  updatedAt
+}
