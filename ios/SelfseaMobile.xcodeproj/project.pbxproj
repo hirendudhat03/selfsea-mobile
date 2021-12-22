@@ -14,6 +14,20 @@
 		6172F2D35A4C3AA820D92908 /* libPods-SelfseaMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423831EA8574132BED9D8CC /* libPods-SelfseaMobile.a */; };
 		7EF68E3733C33B6898317E18 /* libPods-SelfseaMobile-SelfseaMobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFE59519B596E51CEFDCCC0 /* libPods-SelfseaMobile-SelfseaMobileTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		CB4965EB8A804B41B3413551 /* CalibreBlack.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5B3B9F838A5E4E95AAC15152 /* CalibreBlack.otf */; };
+		9A73C1E366D84C239E94EC21 /* CalibreBlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = ED5723D8672C4D4D87DAA20E /* CalibreBlackItalic.otf */; };
+		4D304DF194724321889BDD80 /* CalibreBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 974EA2E367E74DF3A214D64E /* CalibreBold.otf */; };
+		7F91090F2E3C4F66A6AF33A9 /* CalibreBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F65B4F7207FC487C89B06E70 /* CalibreBoldItalic.otf */; };
+		BABDEDE499FE4CB388024BC0 /* CalibreLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 16E6AB9BC0D44D9297935E51 /* CalibreLight.otf */; };
+		2F42CAD365A7433D8FB21208 /* CalibreLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = D720EAC8B28D43E0AF0DA413 /* CalibreLightItalic.otf */; };
+		A75CFE8ED98C4461AEBE5A6E /* CalibreMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8681B71F573F4155BC652768 /* CalibreMedium.otf */; };
+		FDBAF035D9CD4F0EA5A65659 /* CalibreMediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 75E53402ECC6482A83A5932D /* CalibreMediumItalic.otf */; };
+		546C85B8BFA1446984C12192 /* CalibreRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 44EE4E4BE946488B814BE61C /* CalibreRegular.otf */; };
+		8884ED6FC2D64ED38DC2025B /* CalibreRegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 46B6BCDC825E4681A75172F0 /* CalibreRegularItalic.otf */; };
+		56F80A08A18F4AB0BC98D660 /* CalibreSemibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 169A3EE749344DA790732A80 /* CalibreSemibold.otf */; };
+		BB314FAF8EEB4EFBBC6BFD26 /* CalibreSemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F751994CAD10459E9029F7F0 /* CalibreSemiboldItalic.otf */; };
+		0D52ECBB2A2C406A83FAFA74 /* CalibreThin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4529320C2DE2411BBA683C10 /* CalibreThin.otf */; };
+		F32875D9B16347998249CA50 /* CalibreThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = D60BF355545E4BB0B389F23B /* CalibreThinItalic.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +58,20 @@
 		C0A881CF5CF3F2B244570E2A /* Pods-SelfseaMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SelfseaMobile.debug.xcconfig"; path = "Target Support Files/Pods-SelfseaMobile/Pods-SelfseaMobile.debug.xcconfig"; sourceTree = "<group>"; };
 		D00AAFFCFCFDA5787532823F /* Pods-SelfseaMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SelfseaMobile.release.xcconfig"; path = "Target Support Files/Pods-SelfseaMobile/Pods-SelfseaMobile.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		5B3B9F838A5E4E95AAC15152 /* CalibreBlack.otf */ = {isa = PBXFileReference; name = "CalibreBlack.otf"; path = "../app/assets/fonts/CalibreBlack.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		ED5723D8672C4D4D87DAA20E /* CalibreBlackItalic.otf */ = {isa = PBXFileReference; name = "CalibreBlackItalic.otf"; path = "../app/assets/fonts/CalibreBlackItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		974EA2E367E74DF3A214D64E /* CalibreBold.otf */ = {isa = PBXFileReference; name = "CalibreBold.otf"; path = "../app/assets/fonts/CalibreBold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F65B4F7207FC487C89B06E70 /* CalibreBoldItalic.otf */ = {isa = PBXFileReference; name = "CalibreBoldItalic.otf"; path = "../app/assets/fonts/CalibreBoldItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		16E6AB9BC0D44D9297935E51 /* CalibreLight.otf */ = {isa = PBXFileReference; name = "CalibreLight.otf"; path = "../app/assets/fonts/CalibreLight.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D720EAC8B28D43E0AF0DA413 /* CalibreLightItalic.otf */ = {isa = PBXFileReference; name = "CalibreLightItalic.otf"; path = "../app/assets/fonts/CalibreLightItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8681B71F573F4155BC652768 /* CalibreMedium.otf */ = {isa = PBXFileReference; name = "CalibreMedium.otf"; path = "../app/assets/fonts/CalibreMedium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		75E53402ECC6482A83A5932D /* CalibreMediumItalic.otf */ = {isa = PBXFileReference; name = "CalibreMediumItalic.otf"; path = "../app/assets/fonts/CalibreMediumItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		44EE4E4BE946488B814BE61C /* CalibreRegular.otf */ = {isa = PBXFileReference; name = "CalibreRegular.otf"; path = "../app/assets/fonts/CalibreRegular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		46B6BCDC825E4681A75172F0 /* CalibreRegularItalic.otf */ = {isa = PBXFileReference; name = "CalibreRegularItalic.otf"; path = "../app/assets/fonts/CalibreRegularItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		169A3EE749344DA790732A80 /* CalibreSemibold.otf */ = {isa = PBXFileReference; name = "CalibreSemibold.otf"; path = "../app/assets/fonts/CalibreSemibold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F751994CAD10459E9029F7F0 /* CalibreSemiboldItalic.otf */ = {isa = PBXFileReference; name = "CalibreSemiboldItalic.otf"; path = "../app/assets/fonts/CalibreSemiboldItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4529320C2DE2411BBA683C10 /* CalibreThin.otf */ = {isa = PBXFileReference; name = "CalibreThin.otf"; path = "../app/assets/fonts/CalibreThin.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D60BF355545E4BB0B389F23B /* CalibreThinItalic.otf */ = {isa = PBXFileReference; name = "CalibreThinItalic.otf"; path = "../app/assets/fonts/CalibreThinItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +150,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				E233CBF5F47BEE60B243DCF8 /* Pods */,
+				46C5608A06F147E29B97F18A /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -148,6 +177,28 @@
 			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		46C5608A06F147E29B97F18A /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				5B3B9F838A5E4E95AAC15152 /* CalibreBlack.otf */,
+				ED5723D8672C4D4D87DAA20E /* CalibreBlackItalic.otf */,
+				974EA2E367E74DF3A214D64E /* CalibreBold.otf */,
+				F65B4F7207FC487C89B06E70 /* CalibreBoldItalic.otf */,
+				16E6AB9BC0D44D9297935E51 /* CalibreLight.otf */,
+				D720EAC8B28D43E0AF0DA413 /* CalibreLightItalic.otf */,
+				8681B71F573F4155BC652768 /* CalibreMedium.otf */,
+				75E53402ECC6482A83A5932D /* CalibreMediumItalic.otf */,
+				44EE4E4BE946488B814BE61C /* CalibreRegular.otf */,
+				46B6BCDC825E4681A75172F0 /* CalibreRegularItalic.otf */,
+				169A3EE749344DA790732A80 /* CalibreSemibold.otf */,
+				F751994CAD10459E9029F7F0 /* CalibreSemiboldItalic.otf */,
+				4529320C2DE2411BBA683C10 /* CalibreThin.otf */,
+				D60BF355545E4BB0B389F23B /* CalibreThinItalic.otf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -245,6 +296,20 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				CB4965EB8A804B41B3413551 /* CalibreBlack.otf in Resources */,
+				9A73C1E366D84C239E94EC21 /* CalibreBlackItalic.otf in Resources */,
+				4D304DF194724321889BDD80 /* CalibreBold.otf in Resources */,
+				7F91090F2E3C4F66A6AF33A9 /* CalibreBoldItalic.otf in Resources */,
+				BABDEDE499FE4CB388024BC0 /* CalibreLight.otf in Resources */,
+				2F42CAD365A7433D8FB21208 /* CalibreLightItalic.otf in Resources */,
+				A75CFE8ED98C4461AEBE5A6E /* CalibreMedium.otf in Resources */,
+				FDBAF035D9CD4F0EA5A65659 /* CalibreMediumItalic.otf in Resources */,
+				546C85B8BFA1446984C12192 /* CalibreRegular.otf in Resources */,
+				8884ED6FC2D64ED38DC2025B /* CalibreRegularItalic.otf in Resources */,
+				56F80A08A18F4AB0BC98D660 /* CalibreSemibold.otf in Resources */,
+				BB314FAF8EEB4EFBBC6BFD26 /* CalibreSemiboldItalic.otf in Resources */,
+				0D52ECBB2A2C406A83FAFA74 /* CalibreThin.otf in Resources */,
+				F32875D9B16347998249CA50 /* CalibreThinItalic.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
