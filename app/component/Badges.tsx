@@ -21,44 +21,43 @@ interface Props {
 }
 
 const Badges = ({ type, leftIcon, rigthIcon, text }: Props) => {
+
+
     return (
-       
-    return(
 
 
-            <View style={
-                type === Constant.MENTORBADGES ? styles.mentorView :
+        <View style={
+            type === Constant.MENTORBADGES ? styles.mentorView :
                 type === Constant.CONTENT ? styles.contentView :
-                type === Constant.COMMENTS ?styles.commentsView :
-                type === Constant.ACTIVE  ? styles.activeView :
-                type === Constant.INACTIVE  ? styles.inActiveView :
-                type === Constant.DESCRIPTOR ? styles.descriptorView :
-                type === Constant.MULTISELECT ? styles.multiSelectView :
-                null}
-            >
-                {leftIcon != undefined ? (<Image source={leftIcon} style={{ width: 16,height: 16,marginHorizontal:5,marginVertical:5}} />) : null}
+                    type === Constant.COMMENTS ? styles.commentsView :
+                        type === Constant.ACTIVE ? styles.activeView :
+                            type === Constant.INACTIVE ? styles.inActiveView :
+                                type === Constant.DESCRIPTOR ? styles.descriptorView :
+                                    type === Constant.MULTISELECT ? styles.multiSelectView :
+                                        null}
+        >
+            {leftIcon != undefined ? (<Image source={leftIcon} style={{ width: 16, height: 16, marginHorizontal: 5, marginVertical: 5 }} />) : null}
 
-                <Text style={
-                    type ===  Constant.MENTORBADGES  ? styles.mentorText :
-                    type ===  Constant.CONTENT  ? styles.contentText :
-                    type ===  Constant.COMMENTS  ?styles.commentsText :
-                    type ===  Constant.ACTIVE   ? styles.activeText :
-                    type ===  Constant.INACTIVE   ? styles.inActiveText :
-                    type ===  Constant.DESCRIPTOR  ? styles.descriptorText :
-                    type ===  Constant.MULTISELECT  ? styles.MultiSelectText :
-                    null}
-                >
+            <Text style={
+                type === Constant.MENTORBADGES ? styles.mentorText :
+                    type === Constant.CONTENT ? styles.contentText :
+                        type === Constant.COMMENTS ? styles.commentsText :
+                            type === Constant.ACTIVE ? styles.activeText :
+                                type === Constant.INACTIVE ? styles.inActiveText :
+                                    type === Constant.DESCRIPTOR ? styles.descriptorText :
+                                        type === Constant.MULTISELECT ? styles.MultiSelectText :
+                                            null}
+            >
 
                 {text}
-                </Text>
-                {rigthIcon != undefined ? (<Image source={rigthIcon} style={{ width: 16,height: 16,alignSelf:'center',marginLeft:9}} />) : null}
-            </View>
+            </Text>
+            {rigthIcon != undefined ? (<Image source={rigthIcon} style={{ width: 16, height: 16, alignSelf: 'center', marginLeft: 9 }} />) : null}
+        </View>
 
 
     );
-}
 
-   
+
 };
 
 const styles = StyleSheet.create({
