@@ -1,52 +1,84 @@
-import React from 'react';
-import { ImageBackground, SafeAreaView, StyleSheet, View } from 'react-native';
+import React from "react";
+import { View, Text, Image, StyleSheet, SafeAreaView } from 'react-native';
+
 import Background from '../assets/images/pngs/background.png';
 import Warning from '../assets/images/pngs/exclamation-triangle.png';
 import Circle from '../assets/images/pngs/x-circle.png';
-import Alert from '../component/Alert';
-import Badges from '../component/Badges';
-import Button from '../component/Button';
-import Send from '../assets/images/pngs/logo-s-red-1.png';
 
-const Home = () => {
+import Send from '../assets/images/pngs/logo-s-red-1.png'
+
+import Alert from '../component/Alert'
+import Badges from '../component/Badges'
+import Button from '../component/Button'
+import Form from '../component/formComponent'
+import Constant from '../theme/constant'
+
+const Home = ({ navigation }) => {
   return (
     <SafeAreaView>
       <View style={styles.container}>
-        <ImageBackground
-          source={Background}
-          resizeMode="cover"
-          style={styles.image}>
-          <Alert type={'Mentor'} text={'mentor related alert badge '} />
-          <Alert type={'Urgent'} text={'Urgent'} />
-          <Alert type={'Warning'} text={'Warning'} />
+        <Alert type={Constant.MENTOR} text={'mentor related alert badge '} />
+        <Alert type={Constant.URGENT} text={'Urgent'} />
+        <Alert type={Constant.WARNING} text={'Warning'} />
 
-          <Alert
-            type={'Success'}
-            text={'This is a success alert—check it out! '}
+        <Alert type={Constant.SUCCESS} text={'This is a success alert—check it out! '} />
+        <Alert type={Constant.INFO} text={'This is a info alert—check it out!  '} />
+
+        {/* 
+          <Badges type={Constant.MENTORBADGES}
+            text={'mentor'}
           />
-          <Alert type={'Info'} text={'This is a info alert—check it out!  '} />
-
-          <Badges type={'Mentor'} text={'mentor'} />
-          <Badges
-            type={'Content'}
+          <Badges type={Constant.CONTENT}
             text={'[content warning]'}
             leftIcon={Warning}
           />
-          <Badges type={'Comments'} text={'4 Comments'} />
-          <Badges type={'Active'} text={'Active'} />
-          <Badges type={'Inactive'} text={'inactive'} />
-          <Badges type={'Descriptor'} text={'[profile item]'} />
-          <Badges type={'Multi-Select'} text={'they/them'} rigthIcon={Circle} />
-          <Button type={'Desktop'} text={'Primary Button'} />
-          <Button type={'Mobile'} text={'reply'} />
-          <Button type={'MobileSwitch'} text={'Offline'} />
-          <Button type={'Primary'} text={'primary button'} />
+          <Badges type={Constant.COMMENTS}
+            text={'4 Comments'}
 
-          <Button type={'Close'} text={'Close'} />
-          <Button type={'selfseaSend'} icon={Send} />
-        </ImageBackground>
+          />
+          <Badges type={Constant.ACTIVE}
+            text={'Active'}
+
+          />
+          <Badges type={Constant.INACTIVE}
+            text={'inactive'}
+
+          />
+          <Badges type={Constant.DESCRIPTOR}
+            text={'[profile item]'}
+
+          />
+          <Badges type={Constant.MULTISELECT}
+            text={'they/them'}
+            rigthIcon={Circle}
+          /> */}
+        <Button type={Constant.DESKTOP}
+          text={"Primary Button"} />
+        <Button type={Constant.SECONDARY}
+          text={"Secondary"} />
+        <Button type={Constant.MOBILE}
+          text={"reply"} />
+        <Button type={"MobileSwitch"}
+          text={"Offline"} />
+        <Button type={Constant.PRIMARY}
+          text={"primary button"} />
+
+        <Button type={Constant.CLOSE}
+          text={"Close"} />
+        <Button type={Constant.SELFSEASEND}
+          icon={Send} />
+
+
+        <Form type={Constant.LARGEINPUT}
+          placeholder={"Placeholder"} />
+        <Form type={Constant.LARGETEXTAREA}
+          placeholder={"Placeholder"} />
+        <Form type="Checkbox" />
+
+
       </View>
     </SafeAreaView>
+
   );
 };
 
@@ -56,6 +88,7 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
+
   },
   logo: {
     alignSelf: 'center',
