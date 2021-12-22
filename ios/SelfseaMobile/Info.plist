@@ -36,7 +36,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -51,5 +51,22 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>CalibreBlack.otf</string>
+		<string>CalibreBlackItalic.otf</string>
+		<string>CalibreBold.otf</string>
+		<string>CalibreBoldItalic.otf</string>
+		<string>CalibreLight.otf</string>
+		<string>CalibreLightItalic.otf</string>
+		<string>CalibreMedium.otf</string>
+		<string>CalibreMediumItalic.otf</string>
+		<string>CalibreRegular.otf</string>
+		<string>CalibreRegularItalic.otf</string>
+		<string>CalibreSemibold.otf</string>
+		<string>CalibreSemiboldItalic.otf</string>
+		<string>CalibreThin.otf</string>
+		<string>CalibreThinItalic.otf</string>
+	</array>
 </dict>
 </plist>

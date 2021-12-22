@@ -1,62 +1,55 @@
-import React, { useState } from "react";
-import { Text, View,Switch, Dimensions,StyleSheet, Image} from 'react-native'
+import React from "react";
+import { Text, View, Dimensions,StyleSheet, Image} from 'react-native'
+import Color from '../theme/colors';
 
 const width = Dimensions.get('window').width ;
     const height = Dimensions.get('window').height ;
  console.log("height : ", height)
 
-const Button = (props) => {
+ interface Props {
+    type: string;
+    text: string;
+    icon:string;
+  }
 
-    const [isEnabled, setIsEnabled] = useState(false);
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-   
+const Button = ({type,text,icon} : Props) => {
+
+  
     return(
 <>
-        {props.type == 'Desktop' ? (
-            <View style={styles.DesktopView}>
-                <Text style={styles.DesktopText}>{props.text}</Text>
+            <View style={
+                type == 'Desktop' ? styles.desktopView : 
+                type == 'Mobile' ? styles.mobileView : 
+                type == 'Primary' ?styles.primaryView : 
+                type == 'Close'  ? styles.closeButtonView : 
+                type == 'selfseaSend' ? styles.selfseaSendView : 
+                null}
+                >
+                {icon != undefined ? (<Image style={styles.selfseaSendImage} source={icon}/>) : (
+                    <Text style={
+                        type == 'Desktop' ? styles.desktopText : 
+                        type == 'Mobile' ? styles.mobileText : 
+                        type == 'Primary' ?styles.primaryText :
+                        type == 'Close'  ? styles.closeButtonText : 
+                        null}
+                        >
+                        {text}</Text>
+                )}
+                
             </View>
-        ) : null}
-
-        {props.type == 'Mobile' ? (
-            <View style={styles.MobileView}>
-                    <Text style={styles.MobileText}>{props.text}</Text>
-            </View>
-        ) : null}
-
-        {props.type == 'MobileSwitch' ? (
-              <View style={{width:50}}>
-              <Switch
-                trackColor={{ false: "white", true: "green" }}
-                thumbColor={isEnabled ? "white" : "#f4f3f4"}
-                ios_backgroundColor="#3e3e3e"
-                onValueChange={toggleSwitch}
-                value={isEnabled}
-              />
-            </View>
-        ) : null}
-          {props.type == 'MobileButton' ? (
-              <View style={styles.MobileButtonView}>
-                <Text style={styles.MobileButtonText}>{props.text}</Text>
-            </View>
-        ) : null}
-         {props.type == 'MobileselfseaSend' ? (
-              <View style={styles.MobileselfseaSendView}>
-                <Image style={styles.MobileselfseaSendImage} source={props.icon}/>
-            </View>
-        ) : null}
+       
         </>      
     );
 }
 const styles = StyleSheet.create({
-    DesktopView: {
+    desktopView: {
         width: width * 0.32,
         height: height * 0.053,
         borderRadius: 4,
-        backgroundColor:'#003275',
+        backgroundColor:Color.BASE_COLOR_DARK_BLUE,
         justifyContent:'center'
     },
-    DesktopText: {
+    desktopText: {
         fontFamily: "Calibre",
         fontSize: 16,
         fontWeight: "normal",
@@ -64,17 +57,18 @@ const styles = StyleSheet.create({
         lineHeight: 24,
         letterSpacing: 0,
         textAlign: "center",
-        color: "#ffffff"
+        color: Color.BASE_COLOR_WHITE
     },
-    MobileView:{
-        width: 70,
-        height: 36,
+    mobileView:{
+        width: width * 0.18,
+        height: height * 0.043,
         borderRadius: 18,
         borderStyle: "solid",
         borderWidth: 1,
-        borderColor: "#6c757d"
+        borderColor: Color.BORDER_COLOR_DARKGRAY,
+        justifyContent:'center'
     },
-    MobileText:{
+    mobileText:{
         fontFamily: "Calibre",
         fontSize: 20,
         fontWeight: "normal",
@@ -82,16 +76,16 @@ const styles = StyleSheet.create({
         lineHeight: 30,
         letterSpacing: 0,
         textAlign: "center",
-        color: "#000000"
+        color: Color.CONTENT_COLOR_BLACK_TEXT
     },
-    MobileButtonView:{
+    primaryView:{
         width: width * 0.77,
         height: height * 0.065,
         borderRadius: 4,
-        backgroundColor: "#ff9829",
+        backgroundColor: Color.BASE_COLOR_ORANGE,
         justifyContent:'center'      
     },
-    MobileButtonText:{
+    primaryText:{
         fontFamily: "Calibre",
         fontSize: 20,
         fontWeight: "500",
@@ -99,18 +93,38 @@ const styles = StyleSheet.create({
         lineHeight: 21,
         letterSpacing: 0,
         textAlign: "center",
-        color: "#ffffff"
+        color: Color.BASE_COLOR_WHITE
     },
-    MobileselfseaSendView:{
-        width: 48,
-        height: 48,
+    closeButtonView:{
+        width: width * 0.77,
+        height: height * 0.065,
         borderRadius: 4,
-        backgroundColor: "#ff9829",
-        justifyContent:'center'
-
+        backgroundColor:Color.BASE_COLOR_WHITE,
+        borderStyle: "solid",
+        borderWidth: 1,
+        borderColor: Color.BORDER_COLOR_LIGHTGRAY,
+        justifyContent:'center'      
     },
-    MobileselfseaSendImage:{
-        alignSelf:'center'
+    closeButtonText:{
+        fontFamily: "Calibre",
+        fontSize: 20,
+        fontWeight: "500",
+        fontStyle: "normal",
+        lineHeight: 21,
+        letterSpacing: 0,
+        textAlign: "center",
+        color: Color.TEXT_COLOR
+    },
+    selfseaSendView:{
+        width: width * 0.13,
+        height: height * 0.06,
+        borderRadius: 4,
+        backgroundColor: Color.BASE_COLOR_ORANGE,
+        justifyContent:'center',
+        
+    },
+    selfseaSendImage:{
+       alignSelf:'center'
     }
 
   

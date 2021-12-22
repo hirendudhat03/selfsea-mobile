@@ -1,6 +1,6 @@
 
 import React from "react";
-import {View,Text, TouchableOpacity,Image,ImageBackground,StyleSheet,} from 'react-native';
+import {View,Text, TouchableOpacity,Image,ImageBackground,StyleSheet,SafeAreaView} from 'react-native';
 import Background from '../assets/images/pngs/background.png';
 import Logo from '../assets/images/pngs/logo.png';
 import Warning from '../assets/images/pngs/exclamation-triangle.png';
@@ -12,7 +12,7 @@ import Send from '../assets/images/pngs/logo-s-red-1.png'
 
 const Home = ({navigation}) => {
   return(
-   <>
+   <SafeAreaView>
    <View style={styles.container}>
     <ImageBackground source={Background} resizeMode="cover" style={styles.image}>
       {/* <Image
@@ -35,34 +35,37 @@ leftIcon={Warning}
 />
 <Badges type={'Comments'} 
 text={'4 Comments'}
-// icon={Warning}
+
 />
 <Badges type={'Active'} 
 text={'Active'}
-// icon={Warning}
+
 />
 <Badges type={'Inactive'} 
 text={'inactive'}
-// icon={Warning}
+
 />
 <Badges type={'Descriptor'} 
 text={'[profile item]'}
-// icon={Warning}
+
 />
 <Badges type={'Multi-Select'} 
 text={'they/them'}
 rigthIcon={Circle}
 />
-{/* <Button type={"Desktop"}
+<Button type={"Desktop"}
   text={"Primary Button"}/>
 <Button type={"Mobile"}
   text={"reply"}/>
   <Button type={"MobileSwitch"}
   text={"Offline"}/>
-  <Button type={"MobileButton"}
+  <Button type={"Primary"}
   text={"primary button"}/>
-   <Button type={"MobileselfseaSend"}
-  icon={Send}/> */}
+  
+  <Button type={"Close"}
+  text={"Close"}/>
+   <Button type={"selfseaSend"}
+    icon={Send}/>
     </ImageBackground>
   </View>
   
@@ -72,7 +75,7 @@ rigthIcon={Circle}
        <Text style={{fontSize:18}}>click me</Text>
      </TouchableOpacity>
     </View> */}
-    </>
+    </SafeAreaView>
   );
 }
 

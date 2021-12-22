@@ -1,42 +1,50 @@
 import React from "react";
 import { Text, View, Dimensions, Image,StyleSheet} from 'react-native'
+import Color from '../theme/colors';
 
 
 const width = Dimensions.get('window').width ;
     const height = Dimensions.get('window').height ;
 
 
-const Badges = (props) => {
+    interface Props {
+        type: string;
+        leftIcon: string;
+        rigthIcon: string;
+        text: string;
+      }
+
+const Badges = ({type,leftIcon,rigthIcon,text} : Props) => {
 
     return(
 <>
        
             <View style={
-                props.type == 'Mentor' ? styles.MentorView :  
-                props.type == 'Content' ? styles.ContentView : 
-                props.type == 'Comments' ?styles.CommentsView : 
-                props.type == 'Active'  ? styles.ActiveView : 
-                props.type == 'Inactive'  ? styles.inActiveView : 
-                props.type == 'Descriptor' ? styles.DescriptorView : 
-                props.type == 'Multi-Select' ? styles.MultiSelectView : 
+                type == 'Mentor' ? styles.mentorView :  
+                type == 'Content' ? styles.contentView : 
+                type == 'Comments' ?styles.commentsView : 
+                type == 'Active'  ? styles.activeView : 
+                type == 'Inactive'  ? styles.inActiveView : 
+                type == 'Descriptor' ? styles.descriptorView : 
+                type == 'Multi-Select' ? styles.multiSelectView : 
                 null}
             >
-                {props.leftIcon != undefined ? (<Image source={props.leftIcon} style={{ width: 16,height: 16,marginHorizontal:5,marginVertical:5}} />) : null}
+                {leftIcon != undefined ? (<Image source={leftIcon} style={{ width: 16,height: 16,marginHorizontal:5,marginVertical:5}} />) : null}
                 
                 <Text style={
-                    props.type == 'Mentor' ? styles.MentorText :  
-                    props.type == 'Content' ? styles.ContentText : 
-                    props.type == 'Comments' ?styles.CommentsText : 
-                    props.type == 'Active'  ? styles.ActiveText : 
-                    props.type == 'Inactive'  ? styles.inActiveText : 
-                    props.type == 'Descriptor' ? styles.DescriptorText : 
-                    props.type == 'Multi-Select' ? styles.MultiSelectText : 
+                    type == 'Mentor' ? styles.mentorText :  
+                    type == 'Content' ? styles.contentText : 
+                    type == 'Comments' ?styles.commentsText : 
+                    type == 'Active'  ? styles.activeText : 
+                    type == 'Inactive'  ? styles.inActiveText : 
+                    type == 'Descriptor' ? styles.descriptorText : 
+                    type == 'Multi-Select' ? styles.MultiSelectText : 
                     null}
                 >
                 
-                {props.text}
+                {text}
                 </Text>
-                {props.rigthIcon != undefined ? (<Image source={props.rigthIcon} style={{ width: 16,height: 16,alignSelf:'center',marginLeft:9}} />) : null}
+                {rigthIcon != undefined ? (<Image source={rigthIcon} style={{ width: 16,height: 16,alignSelf:'center',marginLeft:9}} />) : null}
             </View>
        
         </>      
@@ -44,14 +52,14 @@ const Badges = (props) => {
 }
 
 const styles = StyleSheet.create({
-    MentorView: {
+    mentorView: {
         width: width * 0.2,
         height: height * 0.03,
         borderRadius: 11,
-        backgroundColor: "#003275",
+        backgroundColor: Color.COMMUNITY_DARK_BLUE,
         justifyContent:'center'
     },
-    MentorText: {
+    mentorText: {
         fontFamily: "Calibre",
         fontSize: 15,
         fontWeight: "bold",
@@ -59,32 +67,34 @@ const styles = StyleSheet.create({
         lineHeight: 15,
         letterSpacing: 0,
         textAlign: "center",
-        color: "#ffffff"
+        color: Color.BASE_COLOR_WHITE
     },
-    ContentView:{ width: width * 0.4,
+    contentView:{ width: width * 0.4,
         height: height * 0.04,
         borderRadius: 14,
-        backgroundColor: "#ffffff",
+        backgroundColor: Color.BASE_COLOR_WHITE,
         borderStyle: "solid",
         borderWidth: 1,
-        borderColor: "#ececec",
-        flexDirection:'row'},
-    ContentText:{
+        borderColor: Color.BASE_COLOR_BORDER_GRAY,
+        flexDirection:'row',
+    },
+    contentText:{
         fontFamily: "Calibre",
         fontSize: 16,
         fontWeight: "normal",
         fontStyle: "normal",
         lineHeight: 24,
         letterSpacing: 0,
-        color: "#000000"},
-    CommentsView:{
+        color: Color.CONTENT_COLOR_BLACK_TEXT
+    },
+    commentsView:{
         width: width * 0.3,
         height: height * 0.04,
         borderRadius: 14,
-        backgroundColor: "#ececec",
+        backgroundColor: Color.BASE_COLOR_BORDER_GRAY,
         justifyContent:'center'
     },
-    CommentsText:{
+    commentsText:{
         textAlign:'center',
         fontFamily: "Calibre",
         fontSize: 16,
@@ -92,16 +102,16 @@ const styles = StyleSheet.create({
         fontStyle: "normal",
         lineHeight: 24,
         letterSpacing: 0,
-        color: "#212529"
+        color: Color.BASE_COLOR_GRAY
     },
-    ActiveView:{
+    activeView:{
         width: width * 0.2,
         height: height * 0.03,
         borderRadius: 2,
-        backgroundColor: "#28a745",
+        backgroundColor: Color.BASE_COLOR_GREEN,
         justifyContent:'center'
     },
-    ActiveText:{ 
+    activeText:{ 
         fontFamily: "Calibre",
         fontSize: 15,
         fontWeight: "bold",
@@ -109,38 +119,38 @@ const styles = StyleSheet.create({
         lineHeight: 15,
         letterSpacing: 0,
         textAlign: "center",
-        color: "#ffffff"
+        color: Color.BASE_COLOR_WHITE
     },
     inActiveView:{
         width: width * 0.2,
         height: height * 0.03,
         borderRadius: 2,
-        backgroundColor: "#d6d8d9",
+        backgroundColor: Color.BASE_COLOR_LIGHTGRAY,
         borderStyle: "solid",
         borderWidth: 1,
-        borderColor: "#c6c8ca",
+        borderColor: Color.BORDER_COLOR_GRAY,
         justifyContent:'center'
     },
     inActiveText:{ 
         fontFamily: "Calibre",
-  fontSize: 15,
-  fontWeight: "bold",
-  fontStyle: "normal",
-  lineHeight: 15,
-  letterSpacing: 0,
-  textAlign: "center",
-  color: "#111111"
+        fontSize: 15,
+        fontWeight: "bold",
+        fontStyle: "normal",
+        lineHeight: 15,
+        letterSpacing: 0,
+        textAlign: "center",
+        color: Color.TEXT_COLOR
     },
-    DescriptorView:{
+    descriptorView:{
         width: width * 0.3,
         height: height * 0.035,
         borderRadius: 14,
-        backgroundColor: "#ffffff",
+        backgroundColor: Color.BASE_COLOR_WHITE,
         borderStyle: "solid",
         borderWidth: 1,
-        borderColor: "#ced4da"
+        borderColor: Color.BORDER_COLOR_LIGHTGRAY
     },
-    DescriptorText:{
+    descriptorText:{
         textAlign:'center',
         fontFamily: "Calibre",
         fontSize: 16,
@@ -148,16 +158,16 @@ const styles = StyleSheet.create({
         fontStyle: "normal",
         lineHeight: 24,
         letterSpacing: 0,
-        color: "#212529"
+        color: Color.DESCRIPTION_COLOR_TEXT
     },
-    MultiSelectView:{
+    multiSelectView:{
         width: width * 0.3,
         height: height * 0.035,
         borderRadius: 14,
-        backgroundColor: "#ffffff",
+        backgroundColor: Color.BASE_COLOR_WHITE,
         borderStyle: "solid",
         borderWidth: 1,
-        borderColor: "#ced4da",
+        borderColor: Color.BORDER_COLOR_LIGHTGRAY,
         flexDirection:'row',
         justifyContent:'center'
     },
@@ -168,7 +178,7 @@ const styles = StyleSheet.create({
         fontStyle: "normal",
         lineHeight: 24,
         letterSpacing: 0,
-        color: "#212529"
+        color: Color.BASE_COLOR_GRAY
     },
   });
 
