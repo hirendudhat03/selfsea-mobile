@@ -14,7 +14,6 @@ import Constant from '../theme/constant'
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
-console.log('height : ', height);
 
 interface Props {
     type: string;
@@ -38,7 +37,7 @@ const Button = ({ type, text, icon }: Props) => {
                                 type === Constant.SELFSEASEND ? styles.selfseaSendView :
                                     null}
         >
-            {icon != undefined ? (<Image style={styles.selfseaSendImage} source={icon} />) : (
+            {icon !== undefined ? (<Image style={styles.selfseaSendImage} source={icon} />) : (
                 <Text style={
                     type === Constant.DESKTOP ? styles.desktopText :
                         type === Constant.SECONDARY ? styles.secondaryText :

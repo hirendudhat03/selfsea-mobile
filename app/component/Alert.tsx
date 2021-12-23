@@ -5,7 +5,6 @@ import Constant from '../theme/constant'
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
-console.log("height : ", height)
 
 interface Props {
     type: string;
@@ -17,19 +16,19 @@ const Alert = ({ type, text }: Props) => {
     return (
 
         <View style={
-            type == Constant.MENTOR ? styles.mentorView :
-                type == Constant.URGENT ? styles.modUrgentView :
-                    type == Constant.WARNING ? styles.modWarning :
-                        type == Constant.SUCCESS ? styles.actionSuccessView :
-                            type == Constant.INFO ? styles.actionInfoView :
+            type === Constant.MENTOR ? styles.mentorView :
+                type === Constant.URGENT ? styles.modUrgentView :
+                    type === Constant.WARNING ? styles.modWarning :
+                        type === Constant.SUCCESS ? styles.actionSuccessView :
+                            type === Constant.INFO ? styles.actionInfoView :
                                 null}
         >
             <Text style={
-                type == Constant.MENTOR ? styles.mentorText :
-                    type == Constant.URGENT ? styles.modUrgentText :
-                        type == Constant.WARNING ? styles.modWarningText :
-                            type == Constant.SUCCESS ? styles.actionSuccessText :
-                                type == Constant.INFO ? styles.actionInfoText :
+                type === Constant.MENTOR ? styles.mentorText :
+                    type === Constant.URGENT ? styles.modUrgentText :
+                        type === Constant.WARNING ? styles.modWarningText :
+                            type === Constant.SUCCESS ? styles.actionSuccessText :
+                                type === Constant.INFO ? styles.actionInfoText :
                                     null}
             >
                 {text}

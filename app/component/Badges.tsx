@@ -27,7 +27,7 @@ const Badges = ({ type, leftIcon, rigthIcon, text }: Props) => {
 
 
         <View style={
-            type === Constant.MENTORBADGES ? styles.mentorView :
+            type === Constant.MENTOR_BADGE ? styles.mentorView :
                 type === Constant.CONTENT ? styles.contentView :
                     type === Constant.COMMENTS ? styles.commentsView :
                         type === Constant.ACTIVE ? styles.activeView :
@@ -36,22 +36,22 @@ const Badges = ({ type, leftIcon, rigthIcon, text }: Props) => {
                                     type === Constant.MULTISELECT ? styles.multiSelectView :
                                         null}
         >
-            {leftIcon != undefined ? (<Image source={leftIcon} style={{ width: 16, height: 16, marginHorizontal: 5, marginVertical: 5 }} />) : null}
+            {leftIcon ? (<Image source={leftIcon} style={styles.leftIconStyle} />) : null}
 
             <Text style={
-                type === Constant.MENTORBADGES ? styles.mentorText :
+                type === Constant.MENTOR_BADGE ? styles.mentorText :
                     type === Constant.CONTENT ? styles.contentText :
                         type === Constant.COMMENTS ? styles.commentsText :
                             type === Constant.ACTIVE ? styles.activeText :
                                 type === Constant.INACTIVE ? styles.inActiveText :
                                     type === Constant.DESCRIPTOR ? styles.descriptorText :
-                                        type === Constant.MULTISELECT ? styles.MultiSelectText :
+                                        type === Constant.MULTISELECT ? styles.multiSelectText :
                                             null}
             >
 
                 {text}
             </Text>
-            {rigthIcon != undefined ? (<Image source={rigthIcon} style={{ width: 16, height: 16, alignSelf: 'center', marginLeft: 9 }} />) : null}
+            {rigthIcon ? (<Image source={rigthIcon} style={styles.rightIconStyle} />) : null}
         </View>
 
 
@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
         letterSpacing: 0,
         textAlign: 'center',
         color: Color.BASE_COLOR_WHITE,
+
     },
     contentView: {
         width: width * 0.4,
@@ -87,6 +88,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: Color.BASE_COLOR_BORDER_GRAY,
         flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     contentText: {
         fontFamily: 'Calibre',
@@ -159,6 +162,8 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderWidth: 1,
         borderColor: Color.BORDER_COLOR_LIGHTGRAY,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     descriptorText: {
         textAlign: 'center',
@@ -180,8 +185,9 @@ const styles = StyleSheet.create({
         borderColor: Color.BORDER_COLOR_LIGHTGRAY,
         flexDirection: 'row',
         justifyContent: 'center',
+        alignItems: 'center'
     },
-    MultiSelectText: {
+    multiSelectText: {
         fontFamily: 'Calibre',
         fontSize: 16,
         fontWeight: 'normal',
@@ -191,12 +197,17 @@ const styles = StyleSheet.create({
         color: Color.BASE_COLOR_GRAY,
     },
     leftIconStyle: {
-        width: 16,
-        height: 16,
+        width: width * 0.045,
+        height: height * 0.02,
         marginHorizontal: 5,
-        marginVertical: 5,
+        marginVertical: 0,
     },
-    rightIconStyle: { width: 16, height: 16, alignSelf: 'center', marginLeft: 9 },
+    rightIconStyle: {
+        width: width * 0.045,
+        height: height * 0.02,
+        alignSelf: 'center',
+        marginLeft: 9
+    },
 });
 
 export default Badges;
