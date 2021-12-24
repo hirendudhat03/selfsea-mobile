@@ -54,17 +54,17 @@ const styles = StyleSheet.create({
 
     Container: {
         borderRadius: 4,
-        backgroundColor: "#ffffff",
+        backgroundColor: Color.BASE_COLOR_WHITE,
         borderStyle: "solid",
         borderWidth: 1,
-        borderColor: "#ced4da"
+        borderColor: Color.BORDER_COLOR_LIGHTGRAY
     },
     iconView:{
         width: width * 0.1,
-        height: 48,
-        backgroundColor: "#ffffff",
+        height: height * 0.06,
+        backgroundColor: Color.BASE_COLOR_WHITE,
         borderStyle: "solid",
-        borderLeftColor: "#ced4da",
+        borderLeftColor: Color.BORDER_COLOR_LIGHTGRAY,
         justifyContent:'center',
         alignItems:'center',
         borderLeftWidth:1

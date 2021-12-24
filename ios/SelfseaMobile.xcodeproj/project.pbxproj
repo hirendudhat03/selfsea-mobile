@@ -28,6 +28,20 @@
 		BB314FAF8EEB4EFBBC6BFD26 /* CalibreSemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F751994CAD10459E9029F7F0 /* CalibreSemiboldItalic.otf */; };
 		0D52ECBB2A2C406A83FAFA74 /* CalibreThin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4529320C2DE2411BBA683C10 /* CalibreThin.otf */; };
 		F32875D9B16347998249CA50 /* CalibreThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = D60BF355545E4BB0B389F23B /* CalibreThinItalic.otf */; };
+		785668AC7CC74133A00F9CB5 /* Calibre-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 164BD6250E734F80A488BB86 /* Calibre-Black.otf */; };
+		F0163815AB7B40FA8C2E5534 /* Calibre-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1ADFE35426894EAA887C3C70 /* Calibre-BlackItalic.otf */; };
+		526E139E68F04B89BEC9A72A /* Calibre-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 76E6D6214E374D889891369B /* Calibre-Bold.otf */; };
+		F4CC123D2B724745A8AB35AF /* Calibre-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = D4CF8467B47244E697320F5E /* Calibre-BoldItalic.otf */; };
+		E7AB141284DC4C5982EBE218 /* Calibre-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37FBC0E50A134CA4A5E80B87 /* Calibre-Light.otf */; };
+		E737DBDC7CC44E429810DAE7 /* Calibre-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 55C5F16058FF456C8EF46772 /* Calibre-LightItalic.otf */; };
+		5BA5F467E3874BEA83E6E05B /* Calibre-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6FB035F637C24658998314A0 /* Calibre-Medium.otf */; };
+		F372C5C30FBD48678F62175C /* Calibre-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = E85ADF25970F41C0ADAE9B07 /* Calibre-MediumItalic.otf */; };
+		0C40EA6C9A4F4CFCB5E4AB7A /* Calibre-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = BD31AC78DABB43B1853C0057 /* Calibre-Regular.otf */; };
+		3F8B90F1CBFD4AED8AE2A3EF /* Calibre-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A1A145FAAA1E4AF2935CB210 /* Calibre-RegularItalic.otf */; };
+		59F81D9638574F2E83E81BAD /* Calibre-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4DCE71D9D8CF4E84BF3ACDC7 /* Calibre-Semibold.otf */; };
+		03A3FCA203F54A108799B6AD /* Calibre-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B58F4FB7644F44408FA82C53 /* Calibre-SemiboldItalic.otf */; };
+		712D6B8DE10B48A9A2BC2769 /* Calibre-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3C7A708EC99E49C8A3C5E587 /* Calibre-Thin.otf */; };
+		A3DCB0374D0D41D3887FE78F /* Calibre-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2CFD1BD252DB48199ED3F1FC /* Calibre-ThinItalic.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +86,20 @@
 		F751994CAD10459E9029F7F0 /* CalibreSemiboldItalic.otf */ = {isa = PBXFileReference; name = "CalibreSemiboldItalic.otf"; path = "../app/assets/fonts/CalibreSemiboldItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		4529320C2DE2411BBA683C10 /* CalibreThin.otf */ = {isa = PBXFileReference; name = "CalibreThin.otf"; path = "../app/assets/fonts/CalibreThin.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		D60BF355545E4BB0B389F23B /* CalibreThinItalic.otf */ = {isa = PBXFileReference; name = "CalibreThinItalic.otf"; path = "../app/assets/fonts/CalibreThinItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		164BD6250E734F80A488BB86 /* Calibre-Black.otf */ = {isa = PBXFileReference; name = "Calibre-Black.otf"; path = "../app/assets/fonts/Calibre-Black.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1ADFE35426894EAA887C3C70 /* Calibre-BlackItalic.otf */ = {isa = PBXFileReference; name = "Calibre-BlackItalic.otf"; path = "../app/assets/fonts/Calibre-BlackItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		76E6D6214E374D889891369B /* Calibre-Bold.otf */ = {isa = PBXFileReference; name = "Calibre-Bold.otf"; path = "../app/assets/fonts/Calibre-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D4CF8467B47244E697320F5E /* Calibre-BoldItalic.otf */ = {isa = PBXFileReference; name = "Calibre-BoldItalic.otf"; path = "../app/assets/fonts/Calibre-BoldItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		37FBC0E50A134CA4A5E80B87 /* Calibre-Light.otf */ = {isa = PBXFileReference; name = "Calibre-Light.otf"; path = "../app/assets/fonts/Calibre-Light.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		55C5F16058FF456C8EF46772 /* Calibre-LightItalic.otf */ = {isa = PBXFileReference; name = "Calibre-LightItalic.otf"; path = "../app/assets/fonts/Calibre-LightItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6FB035F637C24658998314A0 /* Calibre-Medium.otf */ = {isa = PBXFileReference; name = "Calibre-Medium.otf"; path = "../app/assets/fonts/Calibre-Medium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E85ADF25970F41C0ADAE9B07 /* Calibre-MediumItalic.otf */ = {isa = PBXFileReference; name = "Calibre-MediumItalic.otf"; path = "../app/assets/fonts/Calibre-MediumItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BD31AC78DABB43B1853C0057 /* Calibre-Regular.otf */ = {isa = PBXFileReference; name = "Calibre-Regular.otf"; path = "../app/assets/fonts/Calibre-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A1A145FAAA1E4AF2935CB210 /* Calibre-RegularItalic.otf */ = {isa = PBXFileReference; name = "Calibre-RegularItalic.otf"; path = "../app/assets/fonts/Calibre-RegularItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4DCE71D9D8CF4E84BF3ACDC7 /* Calibre-Semibold.otf */ = {isa = PBXFileReference; name = "Calibre-Semibold.otf"; path = "../app/assets/fonts/Calibre-Semibold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B58F4FB7644F44408FA82C53 /* Calibre-SemiboldItalic.otf */ = {isa = PBXFileReference; name = "Calibre-SemiboldItalic.otf"; path = "../app/assets/fonts/Calibre-SemiboldItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3C7A708EC99E49C8A3C5E587 /* Calibre-Thin.otf */ = {isa = PBXFileReference; name = "Calibre-Thin.otf"; path = "../app/assets/fonts/Calibre-Thin.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2CFD1BD252DB48199ED3F1FC /* Calibre-ThinItalic.otf */ = {isa = PBXFileReference; name = "Calibre-ThinItalic.otf"; path = "../app/assets/fonts/Calibre-ThinItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +223,20 @@
 				F751994CAD10459E9029F7F0 /* CalibreSemiboldItalic.otf */,
 				4529320C2DE2411BBA683C10 /* CalibreThin.otf */,
 				D60BF355545E4BB0B389F23B /* CalibreThinItalic.otf */,
+				164BD6250E734F80A488BB86 /* Calibre-Black.otf */,
+				1ADFE35426894EAA887C3C70 /* Calibre-BlackItalic.otf */,
+				76E6D6214E374D889891369B /* Calibre-Bold.otf */,
+				D4CF8467B47244E697320F5E /* Calibre-BoldItalic.otf */,
+				37FBC0E50A134CA4A5E80B87 /* Calibre-Light.otf */,
+				55C5F16058FF456C8EF46772 /* Calibre-LightItalic.otf */,
+				6FB035F637C24658998314A0 /* Calibre-Medium.otf */,
+				E85ADF25970F41C0ADAE9B07 /* Calibre-MediumItalic.otf */,
+				BD31AC78DABB43B1853C0057 /* Calibre-Regular.otf */,
+				A1A145FAAA1E4AF2935CB210 /* Calibre-RegularItalic.otf */,
+				4DCE71D9D8CF4E84BF3ACDC7 /* Calibre-Semibold.otf */,
+				B58F4FB7644F44408FA82C53 /* Calibre-SemiboldItalic.otf */,
+				3C7A708EC99E49C8A3C5E587 /* Calibre-Thin.otf */,
+				2CFD1BD252DB48199ED3F1FC /* Calibre-ThinItalic.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -310,6 +352,20 @@
 				BB314FAF8EEB4EFBBC6BFD26 /* CalibreSemiboldItalic.otf in Resources */,
 				0D52ECBB2A2C406A83FAFA74 /* CalibreThin.otf in Resources */,
 				F32875D9B16347998249CA50 /* CalibreThinItalic.otf in Resources */,
+				785668AC7CC74133A00F9CB5 /* Calibre-Black.otf in Resources */,
+				F0163815AB7B40FA8C2E5534 /* Calibre-BlackItalic.otf in Resources */,
+				526E139E68F04B89BEC9A72A /* Calibre-Bold.otf in Resources */,
+				F4CC123D2B724745A8AB35AF /* Calibre-BoldItalic.otf in Resources */,
+				E7AB141284DC4C5982EBE218 /* Calibre-Light.otf in Resources */,
+				E737DBDC7CC44E429810DAE7 /* Calibre-LightItalic.otf in Resources */,
+				5BA5F467E3874BEA83E6E05B /* Calibre-Medium.otf in Resources */,
+				F372C5C30FBD48678F62175C /* Calibre-MediumItalic.otf in Resources */,
+				0C40EA6C9A4F4CFCB5E4AB7A /* Calibre-Regular.otf in Resources */,
+				3F8B90F1CBFD4AED8AE2A3EF /* Calibre-RegularItalic.otf in Resources */,
+				59F81D9638574F2E83E81BAD /* Calibre-Semibold.otf in Resources */,
+				03A3FCA203F54A108799B6AD /* Calibre-SemiboldItalic.otf in Resources */,
+				712D6B8DE10B48A9A2BC2769 /* Calibre-Thin.otf in Resources */,
+				A3DCB0374D0D41D3887FE78F /* Calibre-ThinItalic.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

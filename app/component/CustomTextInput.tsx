@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Text, View, Dimensions, StyleSheet, TextInput, Image, Switch, TouchableOpacity, } from 'react-native'
 import Color from '../theme/colors';
 import Constant from '../theme/constant'
+import Font from '../theme/fonts'
+
 import Right from '../assets/images/pngs/Vector.png'
 
 
@@ -91,7 +93,7 @@ const styles = StyleSheet.create({
     labelText: {
         width: width * 0.78,
         height: height * 0.04,
-        fontFamily: "Calibre",
+        fontFamily: Font.CALIBRE,
         fontSize: 20,
         fontWeight: "normal",
         fontStyle: "normal",
@@ -102,7 +104,7 @@ const styles = StyleSheet.create({
     helperText: {
         width: width * 0.78,
         height: height * 0.02,
-        fontFamily: "Calibre",
+        fontFamily: Font.CALIBRE,
         fontSize: 12,
         fontWeight: "normal",
         fontStyle: "normal",
@@ -111,7 +113,7 @@ const styles = StyleSheet.create({
         color: Color.PLACEHOLDER_TEXT
     },
     toggleLabel: {
-        fontFamily: "Calibre",
+        fontFamily: Font.CALIBRE,
         fontSize: 18,
         fontWeight: "bold",
         fontStyle: "normal",

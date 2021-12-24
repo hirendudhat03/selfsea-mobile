@@ -10,6 +10,8 @@ import {
 
 import Color from '../theme/colors';
 import Constant from '../theme/constant'
+import Font from '../theme/fonts'
+
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -63,7 +65,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     desktopText: {
-        fontFamily: "Calibre",
+        fontFamily: Font.CALIBRE,
         fontSize: 16,
         fontWeight: "normal",
         fontStyle: "normal",
@@ -83,7 +85,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     secondaryText: {
-        fontFamily: "Calibre",
+        fontFamily: Font.CALIBRE,
         fontSize: 16,
         fontWeight: "normal",
         fontStyle: "normal",
@@ -102,7 +104,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     mobileText: {
-        fontFamily: "Calibre",
+        fontFamily: Font.CALIBRE,
         fontSize: 20,
         fontWeight: "normal",
         fontStyle: "normal",
@@ -119,7 +121,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     primaryText: {
-        fontFamily: "Calibre",
+        fontFamily: Font.CALIBRE,
         fontSize: 20,
         fontWeight: "500",
         fontStyle: "normal",
@@ -139,7 +141,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     closeButtonText: {
-        fontFamily: "Calibre",
+        fontFamily: Font.CALIBRE,
         fontSize: 20,
         fontWeight: "500",
         fontStyle: "normal",

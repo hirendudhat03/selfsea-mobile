@@ -2,6 +2,7 @@ import React from "react";
 import { Text, View, Dimensions, StyleSheet } from 'react-native'
 import Color from '../theme/colors';
 import Constant from '../theme/constant'
+import Font from '../theme/fonts'
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     mentorText: {
-        fontFamily: 'Calibre',
+        fontFamily: Font.CALIBRE,
         fontSize: 20,
         fontWeight: 'normal',
         fontStyle: 'normal',
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     modUrgentText: {
-        fontFamily: 'Calibre',
+        fontFamily: Font.CALIBRE,
         fontSize: 16,
         fontWeight: 'normal',
         fontStyle: 'normal',
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     modWarningText: {
-        fontFamily: 'Calibre',
+        fontFamily: Font.CALIBRE,
         fontSize: 16,
         fontWeight: 'normal',
         fontStyle: 'normal',

@@ -2,6 +2,7 @@ import React from "react";
 import { Text, View, Dimensions, StyleSheet, TouchableOpacity,Image } from 'react-native'
 import Color from '../theme/colors';
 import Constant from '../theme/constant'
+import Font from '../theme/fonts'
 import Right from '../assets/images/pngs/Vector.png'
 
 
@@ -33,7 +34,7 @@ const CheckBox = ({ type, text, isSelectedCheckBox, onPressCheckbox,status }: Pr
                         style={isSelectedCheckBox ? styles.checkBoxViewEnable : styles.checkBoxDisableView}>
                         {
                             isSelectedCheckBox ? (
-                                <Image style={status !== Constant.ENABLE ? {tintColor :'#ffffff'} : {tintColor:'#212529'}} source={Right} ></Image>
+                                <Image style={status !== Constant.ENABLE ? {tintColor :'#ffffff'} : {tintColor:'#212529'}}   source={Right} ></Image>
                             ) : null
                         }
 
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     checkBoxLabelText: {
-        fontFamily: "Calibre",
+        fontFamily: Font.CALIBRE,
         fontSize: 16,
         fontWeight: "normal",
         fontStyle: "normal",
@@ -99,6 +100,8 @@ const styles = StyleSheet.create({
     },
     checkBoxImage:{
         tintColor:'red',
+        
+
     },
 
 

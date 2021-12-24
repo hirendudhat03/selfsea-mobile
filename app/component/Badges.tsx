@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Color from '../theme/colors';
 import Constant from '../theme/constant'
+import Font from '../theme/fonts'
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     mentorText: {
-        fontFamily: 'Calibre',
+        fontFamily: Font.CALIBRE,
         fontSize: 15,
         fontWeight: 'bold',
         fontStyle: 'normal',
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     contentText: {
-        fontFamily: 'Calibre',
+        fontFamily: Font.CALIBRE,
         fontSize: 16,
         fontWeight: 'normal',
         fontStyle: 'normal',
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
     },
     commentsText: {
         textAlign: 'center',
-        fontFamily: 'Calibre',
+        fontFamily: Font.CALIBRE,
         fontSize: 16,
         fontWeight: 'normal',
         fontStyle: 'normal',
@@ -125,7 +126,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     activeText: {
-        fontFamily: 'Calibre',
+        fontFamily: Font.CALIBRE,
         fontSize: 15,
         fontWeight: 'bold',
         fontStyle: 'normal',
@@ -145,7 +146,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     inActiveText: {
-        fontFamily: 'Calibre',
+        fontFamily: Font.CALIBRE,
         fontSize: 15,
         fontWeight: 'bold',
         fontStyle: 'normal',
@@ -167,7 +168,7 @@ const styles = StyleSheet.create({
     },
     descriptorText: {
         textAlign: 'center',
-        fontFamily: 'Calibre',
+        fontFamily: Font.CALIBRE,
         fontSize: 16,
         fontWeight: 'normal',
         fontStyle: 'normal',
@@ -188,7 +189,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     multiSelectText: {
-        fontFamily: 'Calibre',
+        fontFamily: Font.CALIBRE,
         fontSize: 16,
         fontWeight: 'normal',
         fontStyle: 'normal',
