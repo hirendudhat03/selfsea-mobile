@@ -9,11 +9,13 @@ import Send from '../assets/images/pngs/logo-s-red-1.png'
 import Alert from '../component/Alert'
 import Badges from '../component/Badges'
 import Button from '../component/Button'
-import Form from '../component/CustomTextInput'
+import TextInput from '../component/CustomTextInput'
 import Dropdown from '../component/dropdownComponent'
 import Radio from '../component/Radio'
 import Constant from '../theme/constant'
 import CheckBox from "app/component/Checkbox";
+
+const countries = ["Menu Item","Menu Item1","Menu Item2","Menu Item3"]
 
 
 const Home = ({ navigation }) => {
@@ -96,23 +98,25 @@ const Home = ({ navigation }) => {
         <Button type={Constant.SELFSEASEND}
           icon={Send} />
 
-        <Radio type={Constant.RADIOBUTTON} onPressRadioButton={selectRadioButton}
-          isSelectedRadioButton={isSelectedRadioButton} text={"Radio"} />
-        <CheckBox type={Constant.CHECKBOX} onPressCheckbox={selectCheckBox}
-          isSelectedCheckBox={isSelectedCheckBox} text={"checkbox"} />
+        <Radio  onPressRadioButton={selectRadioButton}
+          isSelectedRadioButton={isSelectedRadioButton} text={"Radio"} enable={true} />
+        <CheckBox  onPressCheckbox={selectCheckBox}
+          isSelectedCheckBox={isSelectedCheckBox} text={"checkbox"} enable={true}/>
 
-        <Form type={Constant.LARGEINPUT}
+        <TextInput type={Constant.LARGEINPUT}
           placeholder={"Placeholder"}
           label={'label'}
           helperText={'Helper Text'}
         />
-        <Form type={Constant.LARGETEXTAREA}
+        <TextInput type={Constant.LARGETEXTAREA}
           placeholder={"Placeholder"} />
 
-        <Form type={Constant.SWITCHBUTTON} onEnableToggle={toggleSwitch} isEnabled={isEnabled} text={"online"} />
+        <TextInput type={Constant.SWITCHBUTTON} onEnableToggle={toggleSwitch} isEnabled={isEnabled} text={"online"} />
 
 
-        <Dropdown type={Constant.DROPDOWN} />
+        <Dropdown data={countries} defaultButtonText="DropDown" onSelect={(selectedItem, index) => {
+                            console.log(selectedItem, index)
+                        }}/>
 
 
       </View>

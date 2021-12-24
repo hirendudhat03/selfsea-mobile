@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, Dimensions, StyleSheet, TouchableOpacity,Image } from 'react-native'
+import { Text, View, Dimensions, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import Color from '../theme/colors';
 import Constant from '../theme/constant'
 import Font from '../theme/fonts'
@@ -10,9 +10,8 @@ const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
 interface Props {
-    type: string;
     text: string;
-    status: string;
+    enable: boolean;
     isSelectedCheckBox: boolean;
     onPressCheckbox: () => void;
 }
@@ -21,30 +20,39 @@ interface Props {
 
 
 
-const CheckBox = ({ type, text, isSelectedCheckBox, onPressCheckbox,status }: Props) => {
+const CheckBox = ({ text, isSelectedCheckBox, onPressCheckbox, enable }: Props) => {
 
 
     return (
-        <>
-            {type === Constant.CHECKBOX ? (
 
-                <View style={status !== Constant.ENABLE ? styles.checBoxView : styles.checBoxView1}>
-                    <TouchableOpacity
-                        onPress={status !== Constant.ENABLE ?onPressCheckbox : null}
-                        style={isSelectedCheckBox ? styles.checkBoxViewEnable : styles.checkBoxDisableView}>
-                        {
-                            isSelectedCheckBox ? (
-                                <Image style={status !== Constant.ENABLE ? {tintColor :'#ffffff'} : {tintColor:'#212529'}}   source={Right} ></Image>
-                            ) : null
-                        }
+        enable ? (
+            <View style={styles.checBoxView}>
 
-                    </TouchableOpacity>
-                    {text !== undefined ? (<Text style={styles.checkBoxLabelText}>{text}</Text>) : null}
+                <View
+                    style={isSelectedCheckBox ? styles.checkBoxViewEnableClick : styles.checkBoxDisableView}>
+                    {
+                        isSelectedCheckBox ? (
+                            <Image style={styles.checkBoxImage} source={Right} ></Image>
+                        ) : null
+                    }
                 </View>
+                {text !== undefined ? (<Text style={styles.checkBoxLabelText}>{text}</Text>) : null}
+            </View>
+        ) : (
+            <View style={styles.checBoxView}>
+                <TouchableOpacity
+                    onPress={onPressCheckbox}
+                    style={isSelectedCheckBox ? styles.checkBoxViewEnable : styles.checkBoxDisableView}>
+                    {
+                        isSelectedCheckBox ? (
+                            <Image source={Right} ></Image>
+                        ) : null
+                    }
 
-            ) :
-                null}
-        </>
+                </TouchableOpacity>
+                {text !== undefined ? (<Text style={styles.checkBoxLabelText}>{text}</Text>) : null}
+            </View>
+        )
 
     );
 }
@@ -57,17 +65,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         alignItems: 'center',
         flexDirection: 'row',
-        
+
     },
-    checBoxView1: {
-        alignSelf: 'baseline',
-        height: height * 0.03,
-        width: width * 0.25,
-        justifyContent: 'space-evenly',
-        alignItems: 'center',
-        flexDirection: 'row',
-        opacity:0.5
-    },
+
     checkBoxDisableView: {
         width: width * 0.04,
         height: height * 0.02,
@@ -89,6 +89,17 @@ const styles = StyleSheet.create({
         borderColor: Color.BASE_COLOR_SKYBLUE,
         justifyContent: 'center',
     },
+    checkBoxViewEnableClick: {
+        width: width * 0.04,
+        height: height * 0.02,
+        borderRadius: 3,
+        backgroundColor: Color.BASE_COLOR_WHITE,
+        borderStyle: "solid",
+        borderWidth: 1,
+        borderColor: Color.FORM_BORDER_COLOR,
+        justifyContent: 'center',
+    },
+
     checkBoxLabelText: {
         fontFamily: Font.CALIBRE,
         fontSize: 16,
@@ -98,9 +109,9 @@ const styles = StyleSheet.create({
         letterSpacing: 0,
         color: Color.DESCRIPTION_COLOR_TEXT
     },
-    checkBoxImage:{
-        tintColor:'red',
-        
+    checkBoxImage: {
+        tintColor:Color.DISABLE_ICON_COLOR,
+
 
     },
 

@@ -7,46 +7,58 @@ import Constant from '../theme/constant'
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 interface Props {
-    type: string;
     text: string;
+    enable: boolean;
     isSelectedRadioButton: boolean;
     onPressRadioButton: () => void;
 
 }
 
 
-const Radio = ({ type, text,  isSelectedRadioButton, onPressRadioButton }: Props) => {
+const Radio = ({ text, enable, isSelectedRadioButton, onPressRadioButton }: Props) => {
 
 
     return (
-        <>
-            {type === Constant.RADIOBUTTON ? (
-                isSelectedRadioButton ? (
-                    <View style={styles.radioButtonView}>
-                        <TouchableOpacity
-                            onPress={onPressRadioButton}
-                            style={styles.radioButtonEnableView}>
+        enable ? (
+            isSelectedRadioButton ? (
+                <View style={styles.radioButtonView}>
+                    <View
+                        style={styles.radioButtonEnableClick}>
 
-
-                        </TouchableOpacity>
-                        {text !== undefined ? (<Text style={styles.checkBoxLabelText}>{text}</Text>) : null}
                     </View>
-                ) : (
-                    <View style={styles.radioButtonView}>
-                        <TouchableOpacity
-                            onPress={onPressRadioButton}
-                            style={styles.radioButtonDisableView}>
+                    {text !== undefined ? (<Text style={styles.checkBoxLabelText}>{text}</Text>) : null}
+                </View>
+            ) : (
+                <View style={styles.radioButtonView}>
+                    <View
+                        style={styles.radioButtonDisableView}>
 
-
-                        </TouchableOpacity>
-                        {text != undefined ? (<Text style={styles.checkBoxLabelText}>{text}</Text>) : null}
                     </View>
-                )
+                    {text !== undefined ? (<Text style={styles.checkBoxLabelText}>{text}</Text>) : null}
+                </View>
+            )
+        ) : (
+            isSelectedRadioButton ? (
+                <View style={styles.radioButtonView}>
+                    <TouchableOpacity
+                        onPress={onPressRadioButton}
+                        style={styles.radioButtonEnableView}>
 
-            ) :
-                null}
+                    </TouchableOpacity>
+                    {text !== undefined ? (<Text style={styles.checkBoxLabelText}>{text}</Text>) : null}
+                </View>
+            ) : (
+                <View style={styles.radioButtonView}>
+                    <TouchableOpacity
+                        onPress={onPressRadioButton}
+                        style={styles.radioButtonDisableView}>
 
-        </>
+                    </TouchableOpacity>
+                    {text !== undefined ? (<Text style={styles.checkBoxLabelText}>{text}</Text>) : null}
+                </View>
+            )
+        )
+
 
     );
 }
@@ -78,6 +90,15 @@ const styles = StyleSheet.create({
         borderColor: Color.BASE_COLOR_SKYBLUE,
         borderRadius: 14,
     },
+    radioButtonEnableClick:{
+        width: width * 0.042,
+        height: height * 0.020,
+        backgroundColor: Color.BASE_COLOR_WHITE,
+        borderStyle: "solid",
+        borderWidth: 6,
+        borderColor: Color.DISABLE_ICON_COLOR,
+        borderRadius: 14,
+    },
     checkBoxLabelText: {
         fontFamily: "Calibre",
         fontSize: 16,
@@ -87,7 +108,7 @@ const styles = StyleSheet.create({
         letterSpacing: 0,
         color: Color.DESCRIPTION_COLOR_TEXT,
     },
-    
+
 
 
 

@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-import { Text, View, Dimensions, StyleSheet, TextInput, Image, Switch, TouchableOpacity, } from 'react-native'
+import React from "react";
+import { Text, View, Dimensions, StyleSheet, TextInput,  Switch,  } from 'react-native'
 import Color from '../theme/colors';
 import Constant from '../theme/constant'
 import Font from '../theme/fonts'
-
-import Right from '../assets/images/pngs/Vector.png'
 
 
 const width = Dimensions.get('window').width;
@@ -16,16 +14,12 @@ interface Props {
     placeholder: string;
     helperText: string;
     label: string;
-    isSelectedCheckBox: boolean;
-    isSelectedRadioButton: boolean;
     isEnabled: boolean;
-    onPressCheckbox: () => void;
-    onPressRadioButton: () => void;
     onEnableToggle: () => void;
 }
 
 
-const formComponent = ({ type, text, placeholder, helperText, label, isSelectedCheckBox, isSelectedRadioButton, isEnabled, onEnableToggle, onPressCheckbox, onPressRadioButton }: Props) => {
+const CustomTextInput = ({ type, text, placeholder, helperText, label,  isEnabled, onEnableToggle, }: Props) => {
 
 
     return (
@@ -134,4 +128,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default formComponent;
+export default CustomTextInput;

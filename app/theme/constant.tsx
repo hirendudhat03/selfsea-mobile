@@ -19,11 +19,8 @@ export default {
     SELFSEASEND: 'selfseaSend',
     LARGEINPUT: 'largeInput',
     LARGETEXTAREA: 'largeTextarea',
-    CHECKBOX: 'checkbox',
-    RADIOBUTTON: "radioButton",
     LABEL: 'label',
     SWITCHBUTTON: 'switchButton',
-    DROPDOWN: 'dropDown',
     ENABLE: "enable"
 
 };
