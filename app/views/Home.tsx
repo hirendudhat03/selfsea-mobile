@@ -62,6 +62,9 @@ const Home = ({ navigation }) => {
     <SafeAreaView>
       <ScrollView>
         <View style={styles.container}>
+
+          <Text style={{fontSize:20}} onPress={()=>navigation.navigate("Login")}>SECOND SCREEN</Text>
+
           <Alert type={Constant.alert.MENTOR} text={'mentor related alert badge '} />
           <Alert type={Constant.alert.URGENT} text={'Urgent'} />
           <Alert type={Constant.alert.WARNING} text={'Warning'} />

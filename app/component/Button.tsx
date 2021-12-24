@@ -1,10 +1,10 @@
 import React from 'react';
 import {
   Text,
-  View,
   StyleSheet,
   Image,
   ImageSourcePropType,
+  TouchableOpacity,
 } from 'react-native';
 
 import Color from '../theme/colors';
@@ -16,11 +16,13 @@ interface Props {
   type: string;
   text?: string;
   icon?: ImageSourcePropType;
+  onPress: string;
+  style:{};
 }
 
-const Button = ({ type, text, icon }: Props) => {
+const Button = ({ type, text, icon, onPress,style }: Props) => {
   return (
-    <View
+    <TouchableOpacity
       style={
         type === Constant.buttons.DESKTOP
           ? styles.desktopView
@@ -29,13 +31,13 @@ const Button = ({ type, text, icon }: Props) => {
             : type === Constant.buttons.MOBILE
               ? styles.mobileView
               : type === Constant.buttons.PRIMARY
-                ? styles.primaryView
+                ? [styles.primaryView,style]
                 : type === Constant.buttons.CLOSE
                   ? styles.closeButtonView
                   : type === Constant.buttons.SELFSEASEND
                     ? styles.selfseaSendView
                     : null
-      }>
+      } onPress={onPress}>
       {icon !== undefined ? (
         <Image style={styles.selfseaSendImage} source={icon} />
       ) : (
@@ -56,7 +58,7 @@ const Button = ({ type, text, icon }: Props) => {
           {text}
         </Text>
       )}
-    </View>
+    </TouchableOpacity>
   );
 };
 const styles = StyleSheet.create({
