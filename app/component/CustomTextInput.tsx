@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Text, View, Dimensions, StyleSheet, TextInput,  Switch,  } from 'react-native'
+import { Text, View, Dimensions, StyleSheet, TextInput, Switch, } from 'react-native'
 import Color from '../theme/colors';
 import Constant from '../theme/constant'
 import Font from '../theme/fonts'
@@ -10,59 +10,43 @@ const height = Dimensions.get('window').height;
 
 interface Props {
 
-    type: string;
-    text: string;
-    placeholder: string;
-    helperText: string;
-    label: string;
-    isEnabled: boolean;
-    onEnableToggle: () => void;
+  type: string;
+  placeholder: string;
+  helperText: string;
+  label: string;
+
 }
 
 
-const CustomTextInput = ({ type, text, placeholder, helperText, label,  isEnabled, onEnableToggle, }: Props) => {
+const CustomTextInput = ({ type, placeholder, helperText, label, }: Props) => {
 
 
-    return (
+  return (
+    <>
+      {type === Constant.textInput.LARGE_INPUT ? (
         <>
-            {type === Constant.LARGEINPUT ? (
-                <>
-                    {label !== undefined ? (<Text style={styles.labelText}>{label}</Text>) : null}
+          {label !== undefined ? (<Text style={styles.labelText}>{label}</Text>) : null}
 
-                    <TextInput
-                        style={styles.largeInputView}
-                        placeholder={placeholder}
-                    />
-                    {helperText !== undefined ? (<Text style={styles.helperText}>{helperText}</Text>) : null}
-                </>
-            ) :
-                null}
-            {type === Constant.LARGETEXTAREA ? (
-                <TextInput
-                    style={styles.largeTextareaView}
-                    placeholder={placeholder}
-                />)
-                :
-                null}
-           
-          
-            {type === Constant.SWITCHBUTTON ? (
-                <View style={styles.container}>
-                    {text !== undefined ? (<Text style={styles.toggleLabel}>{text}</Text>) : null}
-                    <Switch
-                        trackColor={{ false: "#ffffff", true: "#008400" }}
-                        thumbColor={Color.BASE_COLOR_WHITE}
-                        ios_backgroundColor="#ffffff"
-                        onValueChange={onEnableToggle}
-                        value={isEnabled}
-                    />
-                </View>
-            ) :
-                null}
-
+          <TextInput
+            style={styles.largeInputView}
+            placeholder={placeholder}
+          />
+          {helperText !== undefined ? (<Text style={styles.helperText}>{helperText}</Text>) : null}
         </>
+      ) :
+        null}
+      {type === Constant.textInput.LARGE_TEXT_AREA ? (
+        <TextInput
+          style={styles.largeTextareaView}
+          placeholder={placeholder}
+        />)
+        :
+        null}
 
-    );
+
+    </>
+
+  );
 }
 
 

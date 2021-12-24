@@ -13,29 +13,29 @@ import Font from '../theme/fonts';
 interface Props {
   type: string;
   leftIcon?: ImageSourcePropType;
-  rightIcon?: ImageSourcePropType;
+  rigthIcon?: ImageSourcePropType;
   text: string;
 }
 
-const Badges = ({ type, leftIcon, rightIcon, text }: Props) => {
+const Badges = ({ type, leftIcon, rigthIcon, text }: Props) => {
   return (
     <View
       style={
         type === Constant.badges.MENTOR_BADGE
           ? styles.mentorView
           : type === Constant.badges.CONTENT
-          ? styles.contentView
-          : type === Constant.badges.COMMENTS
-          ? styles.commentsView
-          : type === Constant.badges.ACTIVE
-          ? styles.activeView
-          : type === Constant.badges.INACTIVE
-          ? styles.inActiveView
-          : type === Constant.badges.DESCRIPTOR
-          ? styles.descriptorView
-          : type === Constant.badges.MULTISELECT
-          ? styles.multiSelectView
-          : null
+            ? styles.contentView
+            : type === Constant.badges.COMMENTS
+              ? styles.commentsView
+              : type === Constant.badges.ACTIVE
+                ? styles.activeView
+                : type === Constant.badges.INACTIVE
+                  ? styles.inActiveView
+                  : type === Constant.badges.DESCRIPTOR
+                    ? styles.descriptorView
+                    : type === Constant.badges.MULTISELECT
+                      ? styles.multiSelectView
+                      : null
       }>
       {leftIcon ? (
         <Image source={leftIcon} style={styles.leftIconStyle} />
@@ -46,23 +46,23 @@ const Badges = ({ type, leftIcon, rightIcon, text }: Props) => {
           type === Constant.badges.MENTOR_BADGE
             ? styles.mentorText
             : type === Constant.badges.CONTENT
-            ? styles.contentText
-            : type === Constant.badges.COMMENTS
-            ? styles.commentsText
-            : type === Constant.badges.ACTIVE
-            ? styles.activeText
-            : type === Constant.badges.INACTIVE
-            ? styles.inActiveText
-            : type === Constant.badges.DESCRIPTOR
-            ? styles.descriptorText
-            : type === Constant.badges.MULTISELECT
-            ? styles.multiSelectText
-            : null
+              ? styles.contentText
+              : type === Constant.badges.COMMENTS
+                ? styles.commentsText
+                : type === Constant.badges.ACTIVE
+                  ? styles.activeText
+                  : type === Constant.badges.INACTIVE
+                    ? styles.inActiveText
+                    : type === Constant.badges.DESCRIPTOR
+                      ? styles.descriptorText
+                      : type === Constant.badges.MULTISELECT
+                        ? styles.multiSelectText
+                        : null
         }>
         {text}
       </Text>
-      {rightIcon ? (
-        <Image source={rightIcon} style={styles.rightIconStyle} />
+      {rigthIcon ? (
+        <Image source={rigthIcon} style={styles.rightIconStyle} />
       ) : null}
     </View>
   );

@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     radioButtonDisableView: {
+        padding: 8,
         backgroundColor: Color.BASE_COLOR_WHITE,
         borderStyle: 'solid',
         borderWidth: 1,

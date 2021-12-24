@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, Dimensions, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import Color from '../theme/colors';
 import Font from '../theme/fonts';
 // @ts-ignore
@@ -18,8 +18,7 @@ const CheckBox = ({ text, isSelectedCheckBox, onPressCheckbox, enable }: Props) 
     return (
 
         enable ? (
-            <View style={styles.checBoxView}>
-
+            <View style={styles.checkBoxView}>
                 <View
                     style={isSelectedCheckBox ? styles.checkBoxViewEnableClick : styles.checkBoxDisableView}>
                     {
@@ -31,7 +30,7 @@ const CheckBox = ({ text, isSelectedCheckBox, onPressCheckbox, enable }: Props) 
                 {text !== undefined ? (<Text style={styles.checkBoxLabelText}>{text}</Text>) : null}
             </View>
         ) : (
-            <View style={styles.checBoxView}>
+            <View style={styles.checkBoxView}>
                 <TouchableOpacity
                     onPress={onPressCheckbox}
                     style={isSelectedCheckBox ? styles.checkBoxViewEnable : styles.checkBoxDisableView}>
@@ -40,7 +39,6 @@ const CheckBox = ({ text, isSelectedCheckBox, onPressCheckbox, enable }: Props) 
                             <Image source={Right} ></Image>
                         ) : null
                     }
-
                 </TouchableOpacity>
                 {text !== undefined ? (<Text style={styles.checkBoxLabelText}>{text}</Text>) : null}
             </View>
@@ -51,62 +49,61 @@ const CheckBox = ({ text, isSelectedCheckBox, onPressCheckbox, enable }: Props) 
 
 
 const styles = StyleSheet.create({
-  checkBoxView: {
-    alignSelf: 'baseline',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  checkBoxViewDisabled: {
-    alignSelf: 'baseline',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    flexDirection: 'row',
-    opacity: 0.5,
-  },
-  checkBoxDisableView: {
-    borderRadius: 3,
-    backgroundColor: Color.BASE_COLOR_WHITE,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: Color.FORM_BORDER_COLOR,
-    justifyContent: 'center',
-  },
-  checkBoxViewEnable: {
-    borderRadius: 3,
-    backgroundColor: Color.BASE_COLOR_SKYBLUE,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    padding: 2,
-    borderColor: Color.BASE_COLOR_SKYBLUE,
-    justifyContent: 'center',
-  },
-  checkBoxLabelText: {
-    fontFamily: Font.CALIBRE,
-    fontSize: 16,
-    marginLeft: 5,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
-    lineHeight: 24,
-    letterSpacing: 0,
-    color: Color.DESCRIPTION_COLOR_TEXT,
-  },
+    checkBoxView: {
+        alignSelf: 'baseline',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        flexDirection: 'row',
+    },
+    checkBoxViewDisabled: {
+        alignSelf: 'baseline',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        flexDirection: 'row',
+        opacity: 0.5,
+    },
+    checkBoxDisableView: {
+        borderRadius: 3,
+        backgroundColor: Color.BASE_COLOR_WHITE,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        padding: 8,
+        borderColor: Color.FORM_BORDER_COLOR,
+        justifyContent: 'center',
+    },
+    checkBoxViewEnable: {
+        borderRadius: 3,
+        backgroundColor: Color.BASE_COLOR_SKYBLUE,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        padding: 2,
+        borderColor: Color.BASE_COLOR_SKYBLUE,
+        justifyContent: 'center',
+    },
+    checkBoxLabelText: {
+        fontFamily: Font.CALIBRE,
+        fontSize: 16,
+        marginLeft: 5,
+        fontWeight: 'normal',
+        fontStyle: 'normal',
+        lineHeight: 24,
+        letterSpacing: 0,
+        color: Color.DESCRIPTION_COLOR_TEXT,
+    },
 
-  checkBoxViewEnableClick: {
-    borderRadius: 3,
-    backgroundColor: Color.BASE_COLOR_WHITE,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    padding: 2,
-    borderColor: Color.FORM_BORDER_COLOR,
-    justifyContent: 'center',
-},
+    checkBoxViewEnableClick: {
+        borderRadius: 3,
+        backgroundColor: Color.BASE_COLOR_WHITE,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        padding: 2,
+        borderColor: Color.FORM_BORDER_COLOR,
+        justifyContent: 'center',
+    },
 
-checkBoxImage: {
-    tintColor:Color.DISABLE_ICON_COLOR,
-
-
-},
+    checkBoxImage: {
+        tintColor: Color.DISABLE_ICON_COLOR,
+    },
 
 });
 

@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Text,
   View,
-  Dimensions,
   StyleSheet,
   Image,
   ImageSourcePropType,
@@ -12,8 +11,6 @@ import Color from '../theme/colors';
 import Constant from '../theme/constant';
 import Font from '../theme/fonts';
 
-const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
 
 interface Props {
   type: string;
@@ -25,36 +22,36 @@ const Button = ({ type, text, icon }: Props) => {
   return (
     <View
       style={
-        type === Constant.DESKTOP
+        type === Constant.buttons.DESKTOP
           ? styles.desktopView
-          : type === Constant.SECONDARY
-          ? styles.secondaryView
-          : type === Constant.MOBILE
-          ? styles.mobileView
-          : type === Constant.PRIMARY
-          ? styles.primaryView
-          : type === Constant.CLOSE
-          ? styles.closeButtonView
-          : type === Constant.SELFSEASEND
-          ? styles.selfseaSendView
-          : null
+          : type === Constant.buttons.SECONDARY
+            ? styles.secondaryView
+            : type === Constant.buttons.MOBILE
+              ? styles.mobileView
+              : type === Constant.buttons.PRIMARY
+                ? styles.primaryView
+                : type === Constant.buttons.CLOSE
+                  ? styles.closeButtonView
+                  : type === Constant.buttons.SELFSEASEND
+                    ? styles.selfseaSendView
+                    : null
       }>
       {icon !== undefined ? (
         <Image style={styles.selfseaSendImage} source={icon} />
       ) : (
         <Text
           style={
-            type === Constant.DESKTOP
+            type === Constant.buttons.DESKTOP
               ? styles.desktopText
-              : type === Constant.SECONDARY
-              ? styles.secondaryText
-              : type === Constant.MOBILE
-              ? styles.mobileText
-              : type === Constant.PRIMARY
-              ? styles.primaryText
-              : type === Constant.CLOSE
-              ? styles.closeButtonText
-              : null
+              : type === Constant.buttons.SECONDARY
+                ? styles.secondaryText
+                : type === Constant.buttons.MOBILE
+                  ? styles.mobileText
+                  : type === Constant.buttons.PRIMARY
+                    ? styles.primaryText
+                    : type === Constant.buttons.CLOSE
+                      ? styles.closeButtonText
+                      : null
           }>
           {text}
         </Text>
@@ -160,11 +157,12 @@ const styles = StyleSheet.create({
     color: Color.TEXT_COLOR,
   },
   selfseaSendView: {
-    width: width * 0.13,
-    height: height * 0.06,
-    borderRadius: 4,
+    borderTopRightRadius: 4,
+    borderBottomRightRadius: 4,
     backgroundColor: Color.BASE_COLOR_ORANGE,
     justifyContent: 'center',
+    width: '15%',
+    padding: 8,
   },
   selfseaSendImage: {
     alignSelf: 'center',
