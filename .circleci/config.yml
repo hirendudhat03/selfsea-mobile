@@ -1,0 +1,18 @@
+version: 2.1
+
+workflows:
+  version: 2
+  lint-and-test:
+    jobs:
+      - lint-and-test
+jobs:
+  lint-and-test:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
+      - run: node --version
+      - run: npm install
+      - run: npm run lint
+      # We allow no tests for now
+      - run: npm test -- --passWithNoTests
