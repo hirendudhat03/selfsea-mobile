@@ -17,21 +17,21 @@ interface Props {
   text?: string;
   icon?: ImageSourcePropType;
   onPress: string;
-  style:{};
+  style: {};
 }
 
-const Button = ({ type, text, icon, onPress,style }: Props) => {
+const Button = ({ type, text, icon, onPress, style }: Props) => {
   return (
     <TouchableOpacity
       style={
         type === Constant.buttons.DESKTOP
-          ? styles.desktopView
+          ? [styles.desktopView, style]
           : type === Constant.buttons.SECONDARY
-            ? styles.secondaryView
+            ? [styles.secondaryView, style]
             : type === Constant.buttons.MOBILE
               ? styles.mobileView
               : type === Constant.buttons.PRIMARY
-                ? [styles.primaryView,style]
+                ? [styles.primaryView, style]
                 : type === Constant.buttons.CLOSE
                   ? styles.closeButtonView
                   : type === Constant.buttons.SELFSEASEND

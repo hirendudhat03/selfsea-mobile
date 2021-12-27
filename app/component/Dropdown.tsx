@@ -1,13 +1,14 @@
 import React from 'react';
 import { Dimensions, Image, StyleSheet, View } from 'react-native';
 import Color from '../theme/colors';
+import Images from '../theme/images';
 import SelectDropdown from 'react-native-select-dropdown';
 // @ts-ignore
-import DropdownIcon from '../assets/images/pngs/dropdown-button-carot-down.png';
+
+
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
-console.log('height : ', height);
 
 interface OptionListType {
   title: string;
@@ -18,19 +19,20 @@ interface Props {
   defaultButtonText: string;
   onSelect: (item: string, index: number) => void;
   optionList: OptionListType[];
+  style: {};
 }
 
-const Dropdown = ({ optionList, onSelect, defaultButtonText }: Props) => {
+const Dropdown = ({ optionList, onSelect, defaultButtonText, style }: Props) => {
   return (
     <View>
       <SelectDropdown
         renderDropdownIcon={() => (
           <View style={styles.iconView}>
-            <Image source={DropdownIcon} />
+            <Image source={Images.DropdownIcon} />
           </View>
         )}
         defaultButtonText={defaultButtonText}
-        buttonStyle={styles.Container}
+        buttonStyle={[styles.Container, style]}
         data={optionList.map(item => item.title)}
         onSelect={onSelect}
         buttonTextAfterSelection={selectedItem => {

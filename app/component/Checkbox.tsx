@@ -2,8 +2,9 @@ import React from "react";
 import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import Color from '../theme/colors';
 import Font from '../theme/fonts';
+import Images from '../theme/images';
 // @ts-ignore
-import Right from '../assets/images/pngs/Vector.png';
+// import Right from '../assets/images/pngs/Vector.png';
 
 interface Props {
     text: string;
@@ -23,7 +24,7 @@ const CheckBox = ({ text, isSelectedCheckBox, onPressCheckbox, enable }: Props) 
                     style={isSelectedCheckBox ? styles.checkBoxViewEnableClick : styles.checkBoxDisableView}>
                     {
                         isSelectedCheckBox ? (
-                            <Image style={styles.checkBoxImage} source={Right} ></Image>
+                            <Image style={styles.checkBoxImage} source={Images.Right} ></Image>
                         ) : null
                     }
                 </View>
@@ -36,7 +37,7 @@ const CheckBox = ({ text, isSelectedCheckBox, onPressCheckbox, enable }: Props) 
                     style={isSelectedCheckBox ? styles.checkBoxViewEnable : styles.checkBoxDisableView}>
                     {
                         isSelectedCheckBox ? (
-                            <Image source={Right} ></Image>
+                            <Image source={Images.Right} ></Image>
                         ) : null
                     }
                 </TouchableOpacity>
