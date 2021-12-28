@@ -1,11 +1,10 @@
 
 import React from "react";
-import { Text, View, Dimensions, StyleSheet, TextInput, Switch, Image, TouchableOpacity, } from 'react-native'
+import { Text, View, Dimensions, StyleSheet,  Image, TouchableOpacity, } from 'react-native'
 import Color from '../theme/colors';
 import Constant from '../theme/constant'
 import fonts from "../theme/fonts";
 import Font from '../theme/fonts'
-import Images from '../theme/images';
 
 interface Props {
 
@@ -15,20 +14,21 @@ interface Props {
     rightIcon?: ImageSourcePropType;
     text: string;
     underlinetext: string;
+    style: {};
 
 }
 
 
-const MobileNavigation = ({ type, rightIcon, label, leftIcon, text, underlinetext }: Props) => {
+const Header = ({ type, rightIcon, label, leftIcon, text, underlinetext, style }: Props) => {
 
 
     return (
         <>
             {type === Constant.navigatioHeader.PAGE_HEADER ? (
                 <View
-                    style={styles.primaryPageHeaderView}>
+                    style={[styles.primaryPageHeaderView, style]}>
                     <View style={styles.primaryPageHeaderRow}>
-                        <TouchableOpacity><Image source={leftIcon} /></TouchableOpacity>
+                        <TouchableOpacity ><Image source={leftIcon} /></TouchableOpacity>
                         <Text style={styles.primaryPageHeaderText}>{label}</Text>
                         <TouchableOpacity><Image source={rightIcon} /></TouchableOpacity>
                     </View>
@@ -36,7 +36,7 @@ const MobileNavigation = ({ type, rightIcon, label, leftIcon, text, underlinetex
             ) :
                 null}
             {type === Constant.navigatioHeader.POST ? (
-                <View style={styles.createPostView}>
+                <View style={[styles.createPostView, style]}>
                     <TouchableOpacity><Image source={leftIcon} /></TouchableOpacity>
                     <Text style={styles.createPostText}>{label} <Text style={styles.createPostTextSmall}>{text}</Text></Text>
                     <View style={styles.downView}><Text style={styles.underlineText} >{underlinetext}</Text>
@@ -45,8 +45,7 @@ const MobileNavigation = ({ type, rightIcon, label, leftIcon, text, underlinetex
                 </View>
             ) :
                 null}
-
-
+      
 
 
         </>
@@ -61,14 +60,21 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 16,
         borderBottomRightRadius: 16,
         backgroundColor: Color.BASE_COLOR_LIGHT_BLUE,
-
+        height:120,
+        shadowColor: Color.BASE_COLOR_GRAY,
+        shadowOffset: {
+          width: 0,
+          height: 3,
+        },
+        shadowRadius: 0,
+        shadowOpacity: 1,
     },
     primaryPageHeaderRow: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingTop: 50,
+        justifyContent: 'space-between',
+        alignItems: 'flex-end',
+        // paddingTop: 50,
     },
     primaryPageHeaderText: {
         fontFamily: Font.CALIBRE,
@@ -79,7 +85,6 @@ const styles = StyleSheet.create({
         letterSpacing: 0,
         textAlign: "center",
         color: Color.BASE_COLOR_WHITE,
-        paddingHorizontal: "30%",
     },
     createPostView: {
         padding: 20,
@@ -123,12 +128,33 @@ const styles = StyleSheet.create({
     },
     downIconStyle: {
         margin: 5,
-    }
+    },
+    communityHeaderView: {
+        padding: 20,
+        paddingTop: 80,
+    },
+    communityHeaderText: {
+        fontFamily: Font.CALIBRE,
+        fontSize: 24,
+        fontWeight: "bold",
+        fontStyle: "normal",
+        lineHeight: 24,
+        letterSpacing: 0,
+        color: Color.CONTENT_COLOR_BLACK_TEXT,
+    },
+    communityText: {
+        fontFamily: Font.CALIBRE,
+        fontSize: 18,
+        fontWeight: "normal",
+        fontStyle: "normal",
+        letterSpacing: 0,
+        color: Color.CONTENT_COLOR_BLACK_TEXT,
 
+    },
 
 });
 
 
 
 
-export default MobileNavigation;
+export default Header;

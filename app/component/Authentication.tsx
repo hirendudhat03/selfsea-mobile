@@ -16,6 +16,7 @@ import Constant from '../theme/constant';
 
 
 
+
 interface Props {
   text: string;
   icon?: ImageSourcePropType;
@@ -97,7 +98,7 @@ const Authentication = ({ text, icon, type }: Props) => {
 };
 const styles = StyleSheet.create({
   container: {
-    width: '77%',
+    width: '90%',
     padding: 15,
     borderRadius: 4,
     backgroundColor: Color.BASE_COLOR_WHITE,

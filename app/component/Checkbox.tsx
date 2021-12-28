@@ -11,15 +11,16 @@ interface Props {
     enable: boolean;
     isSelectedCheckBox: boolean;
     onPressCheckbox: () => void;
+    style: {};
 }
 
-const CheckBox = ({ text, isSelectedCheckBox, onPressCheckbox, enable }: Props) => {
+const CheckBox = ({ text, isSelectedCheckBox, onPressCheckbox, enable, style }: Props) => {
 
 
     return (
 
         enable ? (
-            <View style={styles.checkBoxView}>
+            <View style={[styles.checkBoxView, style]}>
                 <View
                     style={isSelectedCheckBox ? styles.checkBoxViewEnableClick : styles.checkBoxDisableView}>
                     {
@@ -31,7 +32,7 @@ const CheckBox = ({ text, isSelectedCheckBox, onPressCheckbox, enable }: Props) 
                 {text !== undefined ? (<Text style={styles.checkBoxLabelText}>{text}</Text>) : null}
             </View>
         ) : (
-            <View style={styles.checkBoxView}>
+            <View style={[styles.checkBoxView, style]}>
                 <TouchableOpacity
                     onPress={onPressCheckbox}
                     style={isSelectedCheckBox ? styles.checkBoxViewEnable : styles.checkBoxDisableView}>

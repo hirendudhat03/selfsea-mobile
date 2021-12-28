@@ -18,6 +18,8 @@ import Pencil from '../assets/images/pngs/pencil-square.png';
 import Gear from '../assets/images/pngs/gear.png';
 import Arrow from '../assets/images/pngs/arrow-left-square-fill.png';
 import Downarrow from '../assets/images/pngs/caret-down-square-fill.png'
+import Infocircle from '../assets/images/pngs/infoCircle.png';
+import Arrowsquare from '../assets/images/pngs/arrowLeftSquareFill.png';
 
  const images ={
     Right,
@@ -39,6 +41,8 @@ import Downarrow from '../assets/images/pngs/caret-down-square-fill.png'
     Gear,
     Arrow,
     Downarrow,
+    Infocircle,
+    Arrowsquare,
 
 
 

@@ -12,6 +12,7 @@ import Constant from '../theme/constant';
 import Font from '../theme/fonts';
 
 
+
 interface Props {
   type: string;
   text?: string;
@@ -122,7 +123,7 @@ const styles = StyleSheet.create({
     color: Color.CONTENT_COLOR_BLACK_TEXT,
   },
   primaryView: {
-    width: '77%',
+    width: '90%',
     padding: 15,
     borderRadius: 4,
     backgroundColor: Color.BASE_COLOR_ORANGE,
@@ -139,7 +140,7 @@ const styles = StyleSheet.create({
     color: Color.BASE_COLOR_WHITE,
   },
   closeButtonView: {
-    width: '77%',
+    width: '90%',
     padding: 15,
     borderRadius: 4,
     backgroundColor: Color.BASE_COLOR_WHITE,

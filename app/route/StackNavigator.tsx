@@ -4,6 +4,7 @@ import Home from '../views/Home';
 import Login from '../views/LoginScreen';
 import Signup from '../views/SigninEmailScreen';
 import TabNavigator from '../route/TabNavigator';
+import Signin from '../views/SigninScreen';
 
 const stackNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -19,8 +20,10 @@ const stackNavigator = () => {
           }}
         />
         <Stack.Screen name="Login" component={Login} options={{ headerShown:false }}/>
-        <Stack.Screen name="Signup" component={Signup} />
+        <Stack.Screen name="Signup" component={Signup} options={{ headerShown:false }}/>
         <Stack.Screen name="TanNavigator" component={TabNavigator} />
+        <Stack.Screen name="Signin" component={Signin} options={{ headerShown:false }} />
+
 
       </Stack.Navigator>
     )

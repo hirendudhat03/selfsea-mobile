@@ -37,6 +37,7 @@ export default {
     navigatioHeader: {
         PAGE_HEADER: "pageheader",
         POST: 'post',
+        COMMUNITY_HEADER: 'communityheader',
     }
 
 

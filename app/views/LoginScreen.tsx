@@ -52,7 +52,7 @@ const Login = ({ navigation }) => {
 
           <Text style={styles.bottomText} onPress={() => onPressText()}>already have an account?</Text>
           <Button type={Constant.buttons.CLOSE}
-            text={"Sign in"} onPress={() => navigation.navigate('Home')} />
+            text={"Sign in"} onPress={() => navigation.navigate('Signin')} />
 
         </View>
 

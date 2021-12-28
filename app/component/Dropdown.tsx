@@ -20,15 +20,16 @@ interface Props {
   onSelect: (item: string, index: number) => void;
   optionList: OptionListType[];
   style: {};
+  icon?: ImageSourcePropType;
 }
 
-const Dropdown = ({ optionList, onSelect, defaultButtonText, style }: Props) => {
+const Dropdown = ({ optionList, onSelect, defaultButtonText, style, icon }: Props) => {
   return (
     <View>
       <SelectDropdown
         renderDropdownIcon={() => (
           <View style={styles.iconView}>
-            <Image source={Images.DropdownIcon} />
+            <Image source={icon} />
           </View>
         )}
         defaultButtonText={defaultButtonText}
