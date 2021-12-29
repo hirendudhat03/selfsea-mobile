@@ -20,6 +20,10 @@ import Arrow from '../assets/images/pngs/arrow-left-square-fill.png';
 import Downarrow from '../assets/images/pngs/caret-down-square-fill.png'
 import Infocircle from '../assets/images/pngs/infoCircle.png';
 import Arrowsquare from '../assets/images/pngs/arrowLeftSquareFill.png';
+import LogoTab from '../assets/images/pngs/logo-diamond.png';
+import MenuDropdown from '../assets/images/pngs/chevron-down.png';
+import DrawerLogo from '../assets/images/pngs/drawerLogo.png';
+import MenuDropdownup from '../assets/images/pngs/chevron-up.png';
 
  const images ={
     Right,
@@ -43,7 +47,10 @@ import Arrowsquare from '../assets/images/pngs/arrowLeftSquareFill.png';
     Downarrow,
     Infocircle,
     Arrowsquare,
-
+    LogoTab,
+    MenuDropdown,
+    DrawerLogo,
+    MenuDropdownup,
 
 
 

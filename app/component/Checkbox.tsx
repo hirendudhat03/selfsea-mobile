@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     },
     checkBoxLabelText: {
         fontFamily: Font.CALIBRE,
-        fontSize: 16,
+        fontSize: 17,
         marginLeft: 5,
         fontWeight: 'normal',
         fontStyle: 'normal',

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { View,Text } from 'react-native';
+import { View,Text, TouchableOpacity } from 'react-native';
 
 
-const TabHome = () => {
+const TabHome = ({navigation}) => {
 
     return (
-        <View style={{ flex: 1 }}>
-            <Text >Tab Home</Text>
+        <View style={{ flex: 1 ,backgroundColor:'white'}}>
+            <Text>Tab Home</Text>
         </View>
     );
 }

@@ -36,21 +36,21 @@ const Signup = ({ navigation }) => {
 
         <View style={styles.container}>
             <Header type={Constant.navigatioHeader.PAGE_HEADER} leftIcon={Images.Arrowsquare}
-                label={'sign up with email'} />
+                label={'sign up with email'} onPress={() => navigation.goBack()} />
 
             <View style={styles.contentView}>
 
                 <TextInput type={Constant.textInput.LARGE_INPUT}
                     placeholder={"email@address.com"}
                     label={'email'}
-                    style={{fontSize:18,}}
+                    style={{ fontSize: 18, }}
                 />
-                   
-                    <TextInput type={Constant.textInput.LARGE_INPUT}
-                        label={'password'}
-                        style={{fontSize:18}}
-                    />
-                   
+
+                <TextInput type={Constant.textInput.LARGE_INPUT}
+                    label={'password'}
+                    style={{ fontSize: 18 }}
+                />
+
                 <View style={styles.viewStyle}>
                     <View style={styles.passwordStyle}></View>
                     <View style={styles.passwordStyle}></View>
@@ -94,11 +94,11 @@ const Signup = ({ navigation }) => {
                 </View>
                 <TextInput type={Constant.textInput.LARGE_INPUT}
                     placeholder={"@"}
-                    style={{fontSize:18}}
+                    style={{ fontSize: 18 }}
                 />
             </View>
             <View style={styles.bottomView}>
-                <Button type={Constant.buttons.PRIMARY} text={"create account"} style={{ marginTop: 15 }} onPress={() => navigation.navigate('Home')} />
+                <Button type={Constant.buttons.PRIMARY} text={"create account"} style={{ marginTop: 15 }} onPress={() => navigation.navigate('DrawerNavigator')} />
             </View>
 
         </View>
@@ -116,8 +116,6 @@ const styles = StyleSheet.create({
     contentView: {
         flex: 4,
         alignItems: 'center',
-        paddingTop: 25,
-
     },
     infoIcon: {
         alignSelf: 'center', marginLeft: 4
@@ -131,7 +129,7 @@ const styles = StyleSheet.create({
 
 
     },
-    passwordView:{
+    passwordView: {
         // width:'100%',
         // marginTop:20
     },
@@ -155,12 +153,13 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     rowView: {
-        flexDirection: 'row', justifyContent: 'flex-start',
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
     },
     yearText: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        marginLeft: 88,
+        marginLeft: 98,
     },
     yearDropdown: {
         flexDirection: 'row',
@@ -179,13 +178,13 @@ const styles = StyleSheet.create({
     },
     iconStyle: {
         alignSelf: 'center',
-        marginLeft: 4
+        marginLeft: 5,
     },
     userName: {
-        width:'90%',
+        width: '90%',
         flexDirection: 'row',
         marginTop: 9,
-        
+
     }
 
 });

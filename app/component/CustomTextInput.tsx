@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     letterSpacing: 0,
     color: Color.BASE_COLOR_GRAY,
+    marginTop:25,
   },
   helperText: {
     width: width * 0.78,

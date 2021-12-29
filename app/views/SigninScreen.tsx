@@ -40,7 +40,7 @@ const Signin = ({ navigation }) => {
 
         <View style={styles.container}>
             <Header type={Constant.navigatioHeader.PAGE_HEADER} leftIcon={Images.Arrowsquare}
-                label={'sign in'} />
+                label={'sign in'}  onPress={() => navigation.goBack()}/>
             <ScrollView>
                 <View style={styles.contentView}>
 
@@ -59,7 +59,7 @@ const Signin = ({ navigation }) => {
                     <CheckBox onPressCheckbox={selectCheckBox} style={styles.checkBox}
                         isSelectedCheckBox={isSelectedCheckBox} text={"keep me signed in"} />
 
-                    <Button type={Constant.buttons.PRIMARY} text={"sign in"} style={{ marginTop: 10 ,marginBottom:10}} onPress={() => navigation.navigate('Signup')} />
+                    <Button type={Constant.buttons.PRIMARY} text={"sign in"} style={{ marginTop: 10 ,marginBottom:10}} onPress={() => navigation.navigate('DrawerNavigator')} />
 
                     <View style={{ flexDirection: 'row' }}>
 
@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
     contentView: {
         flex: 1.5,
         alignItems: 'center',
-        paddingTop: 18,
     },
 
     bottomView: {

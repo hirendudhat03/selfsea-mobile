@@ -5,7 +5,8 @@ import { View,Text } from 'react-native';
 const Bell = () => {
 
     return (
-        <View style={{ flex: 1 }}>
+        
+        <View style={{ flex: 1 ,backgroundColor:'white'}}>
             <Text >Tab bell</Text>
         </View>
     );

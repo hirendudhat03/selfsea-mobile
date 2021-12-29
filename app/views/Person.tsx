@@ -5,7 +5,7 @@ import { View,Text } from 'react-native';
 const Person = () => {
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1,backgroundColor:'white' }}>
             <Text >Tab Person</Text>
         </View>
     );

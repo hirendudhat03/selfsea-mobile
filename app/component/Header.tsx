@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Text, View, Dimensions, StyleSheet,  Image, TouchableOpacity, } from 'react-native'
+import { Text, View, Dimensions, StyleSheet, Image, TouchableOpacity, } from 'react-native'
 import Color from '../theme/colors';
 import Constant from '../theme/constant'
 import fonts from "../theme/fonts";
@@ -13,13 +13,14 @@ interface Props {
     leftIcon?: ImageSourcePropType;
     rightIcon?: ImageSourcePropType;
     text: string;
+    onPress: string;
     underlinetext: string;
     style: {};
 
 }
 
 
-const Header = ({ type, rightIcon, label, leftIcon, text, underlinetext, style }: Props) => {
+const Header = ({ type, rightIcon, label, leftIcon, text, underlinetext, style, onPress}: Props) => {
 
 
     return (
@@ -28,7 +29,7 @@ const Header = ({ type, rightIcon, label, leftIcon, text, underlinetext, style }
                 <View
                     style={[styles.primaryPageHeaderView, style]}>
                     <View style={styles.primaryPageHeaderRow}>
-                        <TouchableOpacity ><Image source={leftIcon} /></TouchableOpacity>
+                        <TouchableOpacity onPress={onPress} ><Image source={leftIcon} /></TouchableOpacity>
                         <Text style={styles.primaryPageHeaderText}>{label}</Text>
                         <TouchableOpacity><Image source={rightIcon} /></TouchableOpacity>
                     </View>
@@ -45,7 +46,7 @@ const Header = ({ type, rightIcon, label, leftIcon, text, underlinetext, style }
                 </View>
             ) :
                 null}
-      
+
 
 
         </>
@@ -60,11 +61,11 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 16,
         borderBottomRightRadius: 16,
         backgroundColor: Color.BASE_COLOR_LIGHT_BLUE,
-        height:120,
-        shadowColor: Color.BASE_COLOR_GRAY,
+        height: 120,
+        shadowColor: Color.BASE_COLOR_LIGHTGRAY,
         shadowOffset: {
-          width: 0,
-          height: 3,
+            width: 0,
+            height: 3,
         },
         shadowRadius: 0,
         shadowOpacity: 1,
