@@ -1,10 +1,10 @@
 import React from 'react';
 import {
   Text,
-  View,
   StyleSheet,
   Image,
   ImageSourcePropType,
+  TouchableOpacity,
 } from 'react-native';
 
 import Color from '../theme/colors';
@@ -12,30 +12,33 @@ import Constant from '../theme/constant';
 import Font from '../theme/fonts';
 
 
+
 interface Props {
   type: string;
   text?: string;
   icon?: ImageSourcePropType;
+  onPress: string;
+  style: {};
 }
 
-const Button = ({ type, text, icon }: Props) => {
+const Button = ({ type, text, icon, onPress, style }: Props) => {
   return (
-    <View
+    <TouchableOpacity
       style={
         type === Constant.buttons.DESKTOP
-          ? styles.desktopView
+          ? [styles.desktopView, style]
           : type === Constant.buttons.SECONDARY
-            ? styles.secondaryView
+            ? [styles.secondaryView, style]
             : type === Constant.buttons.MOBILE
               ? styles.mobileView
               : type === Constant.buttons.PRIMARY
-                ? styles.primaryView
+                ? [styles.primaryView, style]
                 : type === Constant.buttons.CLOSE
                   ? styles.closeButtonView
                   : type === Constant.buttons.SELFSEASEND
                     ? styles.selfseaSendView
                     : null
-      }>
+      } onPress={onPress}>
       {icon !== undefined ? (
         <Image style={styles.selfseaSendImage} source={icon} />
       ) : (
@@ -56,7 +59,7 @@ const Button = ({ type, text, icon }: Props) => {
           {text}
         </Text>
       )}
-    </View>
+    </TouchableOpacity>
   );
 };
 const styles = StyleSheet.create({
@@ -120,7 +123,7 @@ const styles = StyleSheet.create({
     color: Color.CONTENT_COLOR_BLACK_TEXT,
   },
   primaryView: {
-    width: '77%',
+    width: '90%',
     padding: 15,
     borderRadius: 4,
     backgroundColor: Color.BASE_COLOR_ORANGE,
@@ -137,7 +140,7 @@ const styles = StyleSheet.create({
     color: Color.BASE_COLOR_WHITE,
   },
   closeButtonView: {
-    width: '77%',
+    width: '90%',
     padding: 15,
     borderRadius: 4,
     backgroundColor: Color.BASE_COLOR_WHITE,

@@ -14,22 +14,25 @@ interface Props {
   placeholder: string;
   helperText: string;
   label: string;
+  style: {};
 
 }
 
 
-const CustomTextInput = ({ type, placeholder, helperText, label, }: Props) => {
+const CustomTextInput = ({ type, placeholder, helperText, label, style }: Props) => {
 
 
   return (
     <>
       {type === Constant.textInput.LARGE_INPUT ? (
         <>
-          {label !== undefined ? (<Text style={styles.labelText}>{label}</Text>) : null}
+          {label !== undefined ? (<Text style={[styles.labelText, style]}>{label}</Text>) : null}
 
           <TextInput
             style={styles.largeInputView}
             placeholder={placeholder}
+
+
           />
           {helperText !== undefined ? (<Text style={styles.helperText}>{helperText}</Text>) : null}
         </>
@@ -52,13 +55,16 @@ const CustomTextInput = ({ type, placeholder, helperText, label, }: Props) => {
 
 const styles = StyleSheet.create({
   largeInputView: {
-    width: width * 0.78,
+    width: '90%',
     height: height * 0.064,
     borderRadius: 4,
     backgroundColor: Color.BASE_COLOR_WHITE,
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: Color.BORDER_COLOR_LIGHTGRAY,
+    marginTop: 5,
+    paddingHorizontal: 16,
+    fontSize: 17,
   },
 
   largeTextareaView: {
@@ -69,10 +75,11 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: Color.BORDER_COLOR_LIGHTGRAY,
+
   },
 
   labelText: {
-    width: width * 0.78,
+    width: '90%',
     height: height * 0.04,
     fontFamily: Font.CALIBRE,
     fontSize: 20,
@@ -81,6 +88,7 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     letterSpacing: 0,
     color: Color.BASE_COLOR_GRAY,
+    marginTop:25,
   },
   helperText: {
     width: width * 0.78,

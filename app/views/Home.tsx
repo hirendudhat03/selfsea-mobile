@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { View, Text, Image, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 
-import Warning from '../assets/images/pngs/exclamation-triangle.png';
-import Circle from '../assets/images/pngs/x-circle.png';
-import Send from '../assets/images/pngs/logo-s-red-1.png';
+import Images from '../theme/images';
 
 import Alert from '../component/Alert'
 import Badges from '../component/Badges'
@@ -11,9 +9,11 @@ import Button from '../component/Button'
 import TextInput from '../component/CustomTextInput'
 import Radio from '../component/Radio'
 import Constant from '../theme/constant'
-import CheckBox from "app/component/Checkbox";
+import CheckBox from "../component/Checkbox";
 import Switch from '../component/Switch'
-import Dropdown from "app/component/Dropdown";
+import Dropdown from "../component/Dropdown";
+import Header from '../component/Header';
+import Color from '../theme/colors';
 
 
 
@@ -62,6 +62,9 @@ const Home = ({ navigation }) => {
     <SafeAreaView>
       <ScrollView>
         <View style={styles.container}>
+
+          <Text style={{ fontSize: 20 }} onPress={() => navigation.navigate("TanNavigator")}>SECOND SCREEN</Text>
+
           <Alert type={Constant.alert.MENTOR} text={'mentor related alert badge '} />
           <Alert type={Constant.alert.URGENT} text={'Urgent'} />
           <Alert type={Constant.alert.WARNING} text={'Warning'} />
@@ -75,7 +78,7 @@ const Home = ({ navigation }) => {
           />
           <Badges type={Constant.badges.CONTENT}
             text={'[content warning]'}
-            leftIcon={Warning}
+            leftIcon={Images.Warning}
           />
           <Badges type={Constant.badges.COMMENTS}
             text={'4 Comments'}
@@ -95,9 +98,9 @@ const Home = ({ navigation }) => {
           />
           <Badges type={Constant.badges.MULTISELECT}
             text={'they/them'}
-            rigthIcon={Circle}
+            rigthIcon={Images.Circle}
           />
-          <Button type={Constant.buttons.DESKTOP}
+          {/* <Button type={Constant.buttons.DESKTOP}
             text={"Primary Button"} />
           <Button type={Constant.buttons.SECONDARY}
             text={"Secondary"} />
@@ -110,7 +113,7 @@ const Home = ({ navigation }) => {
           <Button type={Constant.buttons.CLOSE}
             text={"Close"} />
           <Button type={Constant.buttons.SELFSEASEND}
-            icon={Send} />
+            icon={Images.Send} />
 
           <Radio onPressRadioButton={selectRadioButton}
             isSelectedRadioButton={isSelectedRadioButton} text={"Radio"} />
@@ -130,12 +133,32 @@ const Home = ({ navigation }) => {
             helperText={'Helper Text'}
           />
           <TextInput type={Constant.textInput.LARGE_TEXT_AREA}
-            placeholder={"Placeholder"} />
+            placeholder={"Placeholder"} /> */}
 
           <Dropdown
             optionList={countries}
             onSelect={() => { }}
-            defaultButtonText={'selfsea'} />
+            defaultButtonText={'selfsea'} 
+            icon={Images.DropdownIcon}/>
+
+          <Header type={Constant.navigatioHeader.PAGE_HEADER} leftIcon={Images.Pencil}
+            rightIcon={Images.Gear} label={'page title'} style={{ backgroundColor: Color.COMMUNITY_MAROON }} />
+          <Header type={Constant.navigatioHeader.PAGE_HEADER} leftIcon={Images.Pencil}
+            rightIcon={Images.Gear} label={'page title'} style={{ backgroundColor: Color.COMMUNITY_YELLOW }} />
+
+          <Header type={Constant.navigatioHeader.PAGE_HEADER} leftIcon={Images.Pencil} rightIcon={Images.Gear} 
+          label={'page title'} />
+
+          <Header type={Constant.navigatioHeader.POST} leftIcon={Images.Arrow} text={'in'} label={'create a post'}
+            rightIcon={Images.Downarrow} underlinetext={'select a community'} />
+
+          {/* <Text onPress={() => setmodalVisible(true)}>open modal</Text>
+            <ModalView headertext={'[modal title]'} placeholder={'[modal description]'} 
+            data={countries} text={'Primary'} visible={modalVisible} closeModal={() => setmodalVisible(false)}/>
+    // const [modalVisible, setmodalVisible] = useState(false);
+
+             */}
+
 
         </View>
       </ScrollView>

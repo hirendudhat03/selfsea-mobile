@@ -2,41 +2,43 @@ import React from "react";
 import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import Color from '../theme/colors';
 import Font from '../theme/fonts';
+import Images from '../theme/images';
 // @ts-ignore
-import Right from '../assets/images/pngs/Vector.png';
+// import Right from '../assets/images/pngs/Vector.png';
 
 interface Props {
     text: string;
     enable: boolean;
     isSelectedCheckBox: boolean;
     onPressCheckbox: () => void;
+    style: {};
 }
 
-const CheckBox = ({ text, isSelectedCheckBox, onPressCheckbox, enable }: Props) => {
+const CheckBox = ({ text, isSelectedCheckBox, onPressCheckbox, enable, style }: Props) => {
 
 
     return (
 
         enable ? (
-            <View style={styles.checkBoxView}>
+            <View style={[styles.checkBoxView, style]}>
                 <View
                     style={isSelectedCheckBox ? styles.checkBoxViewEnableClick : styles.checkBoxDisableView}>
                     {
                         isSelectedCheckBox ? (
-                            <Image style={styles.checkBoxImage} source={Right} ></Image>
+                            <Image style={styles.checkBoxImage} source={Images.Right} ></Image>
                         ) : null
                     }
                 </View>
                 {text !== undefined ? (<Text style={styles.checkBoxLabelText}>{text}</Text>) : null}
             </View>
         ) : (
-            <View style={styles.checkBoxView}>
+            <View style={[styles.checkBoxView, style]}>
                 <TouchableOpacity
                     onPress={onPressCheckbox}
                     style={isSelectedCheckBox ? styles.checkBoxViewEnable : styles.checkBoxDisableView}>
                     {
                         isSelectedCheckBox ? (
-                            <Image source={Right} ></Image>
+                            <Image source={Images.Right} ></Image>
                         ) : null
                     }
                 </TouchableOpacity>
@@ -82,7 +84,7 @@ const styles = StyleSheet.create({
     },
     checkBoxLabelText: {
         fontFamily: Font.CALIBRE,
-        fontSize: 16,
+        fontSize: 17,
         marginLeft: 5,
         fontWeight: 'normal',
         fontStyle: 'normal',

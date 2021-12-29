@@ -29,6 +29,16 @@ export default {
         LARGE_TEXT_AREA: 'largeTextarea',
 
     },
+    authLogin: {
+        GOOGLE: 'google',
+        INSTAGRAM: 'instagram',
+        APPLE: 'apple',
+    },
+    navigatioHeader: {
+        PAGE_HEADER: "pageheader",
+        POST: 'post',
+        COMMUNITY_HEADER: 'communityheader',
+    }
 
 
 };
