@@ -1,11 +1,11 @@
 import React from 'react';
 import {
-  Image,
-  ImageSourcePropType,
-  StyleSheet,
   Text,
-  TouchableOpacity,
   View,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  ImageSourcePropType,
 } from 'react-native';
 import Color from '../theme/colors';
 import Constant from '../theme/constant';
@@ -13,14 +13,14 @@ import fonts from '../theme/fonts';
 import Font from '../theme/fonts';
 
 interface Props {
-  type: string;
-  label: string;
+  type?: string;
+  label?: string;
   leftIcon?: ImageSourcePropType;
   rightIcon?: ImageSourcePropType;
-  text: string;
-  onPress: string;
-  underlinetext: string;
-  style: {};
+  text?: string;
+  onPress: () => void;
+  underlinetext?: string;
+  style?: {};
 }
 
 const Header = ({

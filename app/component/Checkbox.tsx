@@ -8,7 +8,7 @@ import Images from '../theme/images';
 
 interface Props {
   text: string;
-  enable: boolean;
+  enable?: boolean;
   isSelectedCheckBox: boolean;
   onPressCheckbox: () => void;
   style: {};

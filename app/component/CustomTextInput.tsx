@@ -7,7 +7,6 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
-  ImageSourcePropType,
 } from 'react-native';
 import Color from '../theme/colors';
 import Constant from '../theme/constant';
@@ -19,15 +18,15 @@ const height = Dimensions.get('window').height;
 
 interface Props {
   type: string;
-  placeholder: string;
+  placeholder?: string;
   helperText: string;
-  label: string;
+  label?: string;
   style: {};
-  onChangeText: () => void;
+  onChangeText: (text: string) => void;
   value: string;
-  iconvisible?: ImageSourcePropType;
-  secureTextEntryChange: () => void;
-  secureTextEntry: boolean;
+  secureTextEntryChange?: () => void;
+  secureTextEntry?: boolean;
+  iconVisible?: boolean;
 }
 
 const CustomTextInput = ({
@@ -39,7 +38,7 @@ const CustomTextInput = ({
   onChangeText,
   value,
   secureTextEntryChange,
-  iconvisible,
+  iconVisible,
   secureTextEntry,
 }: Props) => {
   return (
@@ -52,22 +51,17 @@ const CustomTextInput = ({
 
           <View style={styles.largeInputView}>
             <TextInput
-              style={{
-                fontSize: 17,
-                height: height * 0.064,
-                width: '90%',
-                paddingHorizontal: 16,
-              }}
+              style={styles.textInputStyle}
               placeholder={placeholder}
               onChangeText={onChangeText}
               secureTextEntry={secureTextEntry}
               value={value}
             />
 
-            {iconvisible ? (
+            {iconVisible ? (
               secureTextEntry ? (
                 <TouchableOpacity
-                  style={{ justifyContent: 'center' }}
+                  style={styles.touchableStyle}
                   onPress={secureTextEntryChange}>
                   <Image
                     source={Images.PasswordIcon}
@@ -76,7 +70,7 @@ const CustomTextInput = ({
                 </TouchableOpacity>
               ) : (
                 <TouchableOpacity
-                  style={{ justifyContent: 'center' }}
+                  style={styles.touchableStyle}
                   onPress={secureTextEntryChange}>
                   <Image
                     source={Images.visibilityShow}
@@ -108,10 +102,7 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: Color.BORDER_COLOR_LIGHTGRAY,
-
-    // justifyContent: 'space-between',
     flexDirection: 'row',
-    // alignItems:'center'
   },
 
   largeTextareaView: {
@@ -168,6 +159,13 @@ const styles = StyleSheet.create({
     width: 25,
     alignSelf: 'flex-end',
   },
+  textInputStyle: {
+    fontSize: 17,
+    height: height * 0.064,
+    width: '90%',
+    paddingHorizontal: 16,
+  },
+  touchableStyle: { justifyContent: 'center' },
 });
 
 export default CustomTextInput;

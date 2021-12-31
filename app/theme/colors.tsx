@@ -37,4 +37,5 @@ export default {
   BORDER_COLOR: '#e3e3e3',
   TEXT_COLOR_PASSWORD: '#495057',
   PASSWORD_NORMAL_COLOR: '#d8d8d8',
+  DRAWER_TEXT_COLOR: '#868e9d',
 };

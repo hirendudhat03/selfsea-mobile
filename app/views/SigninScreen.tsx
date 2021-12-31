@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
 import Constant from '../theme/constant';
 import Fonts from '../theme/fonts';
@@ -23,7 +23,7 @@ const Signin = ({ navigation }) => {
     }
   };
 
-  const [focus, setFocus] = useState(undefined);
+  const [focus, setFocus] = useState<boolean>();
 
   const selectFocus = () => {
     if (focus) {
@@ -34,24 +34,23 @@ const Signin = ({ navigation }) => {
   };
 
   const [email, setEmail] = useState('');
-  const [EmailError, setEmailError] = useState('');
+  const [emailError, setEmailError] = useState('');
 
-  const [Password, setPassword] = useState('');
-  const [PasswordError, setPasswordError] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   const SigninValidation = () => {
-    if (!email && !Password) {
-      setEmailError('Email Requied');
-      setPasswordError('Password Requied');
+    if (!email && !password) {
+      setEmailError('Email Required');
+      setPasswordError('Password Required');
     } else if (!email) {
-      setEmailError('Email Requied');
+      setEmailError('Email Required');
     } else if (
       email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null
     ) {
-      setEmailError('Valid email required');
-    } else if (!Password) {
-      console.log('pswrd');
-      setPasswordError('Password Requied');
+      setEmailError('Valid email Required');
+    } else if (!password) {
+      setPasswordError('Password Required');
     } else {
       navigation.navigate('DrawerNavigator');
     }
@@ -77,7 +76,7 @@ const Signin = ({ navigation }) => {
               setEmailError(' ');
             }}
             value={email}
-            helperText={EmailError}
+            helperText={emailError}
           />
 
           <TextInput
@@ -88,17 +87,13 @@ const Signin = ({ navigation }) => {
               setPassword(text);
               setPasswordError(' ');
             }}
-            value={Password}
-            helperText={PasswordError}
-            iconvisible={true}
+            value={password}
+            helperText={passwordError}
+            iconVisible={true}
             secureTextEntry={focus === undefined ? true : focus}
             secureTextEntryChange={selectFocus}
           />
-          <Text
-            style={styles.contentText}
-            onPress={() => alert('forgot password')}>
-            forgot your password?{' '}
-          </Text>
+          <Text style={styles.contentText}>forgot your password? </Text>
           <CheckBox
             onPressCheckbox={selectCheckBox}
             style={styles.checkBox}

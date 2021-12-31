@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import {
-  Dimensions,
-  Image,
-  Modal,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
   View,
+  Text,
+  StyleSheet,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+  Modal,
 } from 'react-native';
-import ModalPicker from '../views/ModalPicker';
+
+import ModalPicker from './ModalPicker';
 
 import Button from '../component/Button';
 import TextInput from '../component/CustomTextInput';
@@ -41,7 +42,7 @@ const countries = [
 
 const Signup = ({ navigation }) => {
   const [email, setEmail] = useState('');
-  const [EmailError, setEmailError] = useState('');
+  const [emailError, setEmailError] = useState('');
 
   const [Password, setPassword] = useState('');
   const [PasswordError, setPasswordError] = useState('');
@@ -49,13 +50,13 @@ const Signup = ({ navigation }) => {
   const [userName, setUserName] = useState('');
   const [userNameError, setUserNameError] = useState('');
 
-  const [birthmonth, setBirthmonth] = useState('');
-  const [BirthmonthError, setBirthmonthError] = useState('');
+  const [birthMonth, setBirthMonth] = useState('');
+  const [birthMonthError, setBirthMonthError] = useState('');
 
-  const [birthyear, setBirthyear] = useState('');
-  const [BirthYearError, setBirthyearError] = useState('');
+  const [birthYear, setBirthYear] = useState('');
+  const [birthYearError, setBirthYearError] = useState('');
 
-  const [focus, setFocus] = useState(undefined);
+  const [focus, setFocus] = useState<boolean>();
   const [passwordScore, setPasswordScore] = useState<0 | 1 | 2 | 3 | 4>(0);
 
   const selectFocus = () => {
@@ -66,7 +67,7 @@ const Signup = ({ navigation }) => {
     }
   };
   const [isModalVisible, setIsMoalVisiable] = useState(false);
-  const changeModalVisibility = bool => {
+  const changeModalVisibility = (bool: boolean) => {
     setIsMoalVisiable(bool);
   };
 
@@ -74,29 +75,29 @@ const Signup = ({ navigation }) => {
     if (
       !email &&
       !Password &&
-      birthmonth === '' &&
-      birthyear === '' &&
+      birthMonth === '' &&
+      birthYear === '' &&
       !userName
     ) {
-      setEmailError('Email Requied');
-      setPasswordError('Password Requied');
-      setBirthmonthError('Birth month Requied');
-      setBirthyearError('Birth year Requied');
-      setUserNameError('UserName Requied');
+      setEmailError('Email Required');
+      setPasswordError('Password Required');
+      setBirthMonthError('Birth month Required');
+      setBirthYearError('Birth year Required');
+      setUserNameError('UserName Required');
     } else if (!email) {
-      setEmailError('Email Requied');
+      setEmailError('Email Required');
     } else if (
       email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null
     ) {
-      setEmailError('Valid email required');
+      setEmailError('Valid email Required');
     } else if (!Password) {
-      setPasswordError('Password Requied');
-    } else if (birthmonth === '') {
-      setBirthmonthError('Birth month Requied');
-    } else if (birthyear === '') {
-      setBirthyearError('Birth year Requied');
+      setPasswordError('Password Required');
+    } else if (birthMonth === '') {
+      setBirthMonthError('Birth Month Required');
+    } else if (birthYear === '') {
+      setBirthYearError('Birth Year Required');
     } else if (!userName) {
-      setUserNameError('UserName Requied');
+      setUserNameError('UserName Required');
     } else {
       navigation.navigate('DrawerNavigator');
     }
@@ -141,19 +142,8 @@ const Signup = ({ navigation }) => {
             setEmailError(' ');
           }}
           value={email}
-          helperText={EmailError}
+          helperText={emailError}
         />
-        {/*
-                <RNPasswordStrengthMeter
-                   onChangeText={text => setPassword(text)}
-                    meterType="box"
-                    password={Password}
-                    inputStyle={styles.largeInputView}
-                    containerWrapperStyle={{backgroundColor:'green',paddingLeft:30}}
-                    imageStyle={{marginLeft:-65,marginBottom:16}}
-                    labelVisible={false}
-
-                /> */}
 
         <TextInput
           type={Constant.textInput.LARGE_INPUT}
@@ -168,17 +158,10 @@ const Signup = ({ navigation }) => {
           }}
           value={Password}
           helperText={PasswordError}
-          iconvisible={true}
+          iconVisible={true}
           secureTextEntry={focus === undefined ? true : focus}
           secureTextEntryChange={selectFocus}
         />
-        {/*<BoxPasswordStrengthDisplay*/}
-        {/*            password={Password}*/}
-
-        {/*            labelVisible={false}*/}
-
-        {/*               />*/}
-
         <View style={styles.viewStyle}>
           <View
             style={[
@@ -205,11 +188,12 @@ const Signup = ({ navigation }) => {
             ]}
           />
         </View>
+
         <View style={styles.monthView}>
           <View style={styles.rowView}>
             <Text style={styles.birthMonthText}>birth month</Text>
             <TouchableOpacity
-              style={{ justifyContent: 'center' }}
+              style={styles.touchableStyle}
               onPress={() => changeModalVisibility(true)}>
               <Image source={Images.Infocircle} style={styles.infoIcon} />
             </TouchableOpacity>
@@ -223,25 +207,25 @@ const Signup = ({ navigation }) => {
             <Dropdown
               optionList={countries}
               onSelect={value => {
-                setBirthmonth(value);
-                setBirthmonthError('');
+                setBirthMonth(value);
+                setBirthMonthError('');
               }}
               defaultButtonText={'select one'}
               icon={Images.DropdownIcon}
-              helperText={BirthmonthError}
+              helperText={birthMonthError}
             />
           </View>
           <View style={styles.yearDropdown}>
             <Dropdown
               optionList={countries}
               onSelect={value => {
-                setBirthyear(value);
-                setBirthyearError(' ');
+                setBirthYear(value);
+                setBirthYearError(' ');
               }}
               defaultButtonText={'select one'}
               style={{ width: 150 }}
               icon={Images.DropdownIcon}
-              helperText={BirthYearError}
+              helperText={birthYearError}
             />
           </View>
         </View>
@@ -249,12 +233,13 @@ const Signup = ({ navigation }) => {
         <View style={styles.userName}>
           <Text style={styles.birthMonthText}>username</Text>
           <TouchableOpacity
-            style={{ justifyContent: 'center' }}
+            style={styles.touchableStyle}
             onPress={() => changeModalVisibility(true)}>
             <Image source={Images.Infocircle} style={styles.iconStyle} />
           </TouchableOpacity>
         </View>
         <TextInput
+          value={userName}
           type={Constant.textInput.LARGE_INPUT}
           placeholder={'@'}
           style={{ fontSize: 18 }}
@@ -386,6 +371,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
     paddingHorizontal: 16,
     fontSize: 17,
+  },
+  touchableStyle: {
+    justifyContent: 'center',
   },
 });
 export default Signup;

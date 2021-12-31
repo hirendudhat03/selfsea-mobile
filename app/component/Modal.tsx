@@ -16,6 +16,7 @@ import Constant from '../theme/constant';
 
 import Dropdown from './Dropdown';
 import Button from './Button';
+import fonts from 'app/theme/fonts';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -104,13 +105,13 @@ const styles = StyleSheet.create({
   },
 
   headerText: {
-    fontFamily: 'Calibre',
+    fontFamily: fonts.CALIBRE,
     fontSize: 24,
     fontWeight: 'bold',
     fontStyle: 'normal',
     lineHeight: 24,
     letterSpacing: 0,
-    color: '#111111',
+    color: Color.CONTENT_COLOR_BLACK_TEXT,
     paddingRight: 83,
     textAlign: 'center',
   },

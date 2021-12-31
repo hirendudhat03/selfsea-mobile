@@ -24,9 +24,9 @@ interface Props {
   defaultButtonText: string;
   onSelect: (item: string, index: number) => void;
   optionList: OptionListType[];
-  style: {};
+  style?: {};
   icon?: ImageSourcePropType;
-  helperText: string;
+  helperText?: string;
 }
 
 const Dropdown = ({

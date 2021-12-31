@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import { View, StyleSheet, Text, Dimensions } from 'react-native';
 
 import Font from '../theme/fonts';
 import Color from '../theme/colors';
@@ -7,7 +7,11 @@ import Constant from '../theme/constant';
 
 import Button from '../component/Button';
 
-const ModalPicker = props => {
+interface Props {
+  changeModalVisibility: (bool: boolean) => void;
+}
+
+const ModalPicker = ({ changeModalVisibility }: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.modal}>
@@ -40,7 +44,7 @@ const ModalPicker = props => {
           type={Constant.buttons.CLOSE}
           text={'Close'}
           style={{ marginVertical: 10, width: '100%' }}
-          onPress={() => props.changeModalVisibility(false)}
+          onPress={() => changeModalVisibility(false)}
         />
       </View>
     </View>
