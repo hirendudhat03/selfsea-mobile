@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TouchableOpacity,  Text,  Dimensions, } from "react-native";
+import { View, StyleSheet, Text, Dimensions, } from "react-native";
 
 import Font from '../theme/fonts';
 import Color from '../theme/colors';
@@ -7,7 +7,16 @@ import Constant from '../theme/constant';
 
 import Button from '../component/Button';
 
-const ModalPicker = (props) => {
+
+interface Props {
+
+
+    changeModalVisibility: () => void;
+
+}
+
+
+const ModalPicker = ({ changeModalVisibility }: Props) => {
 
 
 
@@ -15,7 +24,7 @@ const ModalPicker = (props) => {
     return (
 
         <View
-            
+
             style={styles.container}>
             <View style={styles.modal}>
                 <Text style={styles.textTitle}>selfsea usernames</Text>
@@ -26,18 +35,18 @@ const ModalPicker = (props) => {
                 <Text style={styles.descriptionText}
                     numberOfLines={2}
                     ellipsizeMode='middle'>usernames cannot contain any personal identifiers (e.g. name, location, school, age)
-                   </Text>
-                    <Text style={styles.descriptionText}
+                </Text>
+                <Text style={styles.descriptionText}
                     numberOfLines={2}
                     ellipsizeMode='middle'>
                     usernames cannot contain any harmful or offensive language
-                   </Text>
-                    <Text style={styles.descriptionText}
+                </Text>
+                <Text style={styles.descriptionText}
                     numberOfLines={5}
                     ellipsizeMode='middle'>
                     usernames can only contain letters and numbers (no emojis)</Text>
-                    <Button type={Constant.buttons.CLOSE}
-            text={"Close"} style={{marginVertical:10,width:'100%'}}  onPress={()=> props.changeModalVisibility(false)}/>
+                <Button type={Constant.buttons.CLOSE}
+                    text={"Close"} style={{ marginVertical: 10, width: '100%' }} onPress={() => changeModalVisibility(false)} />
             </View>
         </View>
     )
@@ -59,7 +68,7 @@ const styles = StyleSheet.create({
         height: 'auto',
         width: width,
         padding: 15,
-        
+
     },
     textTitle: {
         fontFamily: Font.CALIBRE,
@@ -72,7 +81,7 @@ const styles = StyleSheet.create({
         color: Color.CONTENT_COLOR_BLACK_TEXT,
     },
     smallText: {
-        fontFamily:Font.CALIBRE,
+        fontFamily: Font.CALIBRE,
         fontSize: 16,
         fontWeight: "normal",
         fontStyle: "normal",
@@ -80,9 +89,9 @@ const styles = StyleSheet.create({
         letterSpacing: 0,
         textAlign: "center",
         color: Color.TEXT_COLOR_PASSWORD,
-        marginVertical:10
-        },
-    descriptionText:{
+        marginVertical: 10
+    },
+    descriptionText: {
         fontFamily: Font.CALIBRE,
         fontSize: 18,
         fontWeight: "normal",
@@ -90,7 +99,7 @@ const styles = StyleSheet.create({
         letterSpacing: 0,
         textAlign: "center",
         color: Color.CONTENT_COLOR_BLACK_TEXT,
-        marginVertical:10
+        marginVertical: 10
     },
 
 

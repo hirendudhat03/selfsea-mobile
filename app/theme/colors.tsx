@@ -36,5 +36,6 @@ export default {
   CIRCLE_ICON_COLOR: '#6a6e73',
   BORDER_COLOR: '#e3e3e3',
   TEXT_COLOR_PASSWORD: '#495057',
+  DRAWER_TEXT_COLOR:'#868e9d'
 
 };

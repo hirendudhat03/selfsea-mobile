@@ -16,15 +16,14 @@ interface Props {
   helperText: string;
   label: string;
   style: {};
-  onChangeText: () => void;
+  onChangeText: (text: string) => void;
   value: string;
-  iconvisible?: ImageSourcePropType;
   secureTextEntryChange: () => void;
   secureTextEntry: boolean;
 }
 
 
-const CustomTextInput = ({ type, placeholder, helperText, label, style, onChangeText, value,secureTextEntryChange,  iconvisible,  secureTextEntry,  }: Props) => {
+const CustomTextInput = ({ type, placeholder, helperText, label, style, onChangeText, value, secureTextEntryChange, iconVisible, secureTextEntry, }: Props) => {
 
 
   return (
@@ -37,7 +36,7 @@ const CustomTextInput = ({ type, placeholder, helperText, label, style, onChange
           <View style={styles.largeInputView}>
 
             <TextInput
-              style={{ fontSize: 17, height: height * 0.064, width: '90%', paddingHorizontal: 16 }}
+              style={styles.textInputStyle}
               placeholder={placeholder}
               onChangeText={onChangeText}
               secureTextEntry={secureTextEntry}
@@ -46,21 +45,21 @@ const CustomTextInput = ({ type, placeholder, helperText, label, style, onChange
             />
 
             {
-              iconvisible ? (
+              iconVisible ? (
                 secureTextEntry ? (
-                  <TouchableOpacity style={{justifyContent:'center'}} onPress={secureTextEntryChange}>
-                  <Image source={Images.PasswordIcon} style={styles.passwordIcon} />
+                  <TouchableOpacity style={styles.touchableStyle} onPress={secureTextEntryChange}>
+                    <Image source={Images.PasswordIcon} style={styles.passwordIcon} />
                   </TouchableOpacity>
-                ) : (<TouchableOpacity style={{justifyContent:'center'}} onPress={secureTextEntryChange}>
-                <Image source={Images.visibilityShow} style={styles.passwordIcon} />
-                </TouchableOpacity> )
+                ) : (<TouchableOpacity style={styles.touchableStyle} onPress={secureTextEntryChange}>
+                  <Image source={Images.visibilityShow} style={styles.passwordIcon} />
+                </TouchableOpacity>)
               ) : null
             }
-            
-            
 
 
-        
+
+
+
           </View>
 
 
@@ -92,10 +91,7 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: Color.BORDER_COLOR_LIGHTGRAY,
-
-    // justifyContent: 'space-between',
     flexDirection: 'row',
-    // alignItems:'center'
 
   },
 
@@ -154,6 +150,13 @@ const styles = StyleSheet.create({
     width: 25,
     alignSelf: 'flex-end',
   },
+  textInputStyle: {
+    fontSize: 17,
+    height: height * 0.064,
+    width: '90%',
+    paddingHorizontal: 16
+  },
+  touchableStyle: { justifyContent: 'center' },
 });
 
 

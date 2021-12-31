@@ -134,7 +134,6 @@ const Drawer = (props) => {
                                         </View>}
                                     onPress={() => {
                                         setFocus('Mentors');
-                                        alert('Mentors')
                                     }}
                                 />
                                 <DrawerItem
@@ -146,7 +145,6 @@ const Drawer = (props) => {
                                         </View>}
                                     onPress={() => {
                                         setFocus('Moderators');
-                                        alert('Moderators')
                                     }}
                                 />
                                 <DrawerItem
@@ -158,7 +156,6 @@ const Drawer = (props) => {
                                         </View>}
                                     onPress={() => {
                                         setFocus('Admins');
-                                        alert('Admins')
                                     }}
                                 />
                             </>
@@ -199,7 +196,6 @@ const Drawer = (props) => {
                                         </View>}
                                     onPress={() => {
                                         setFocus('AllQ');
-                                        alert('AllQ')
                                     }}
                                 />
                                 <DrawerItem
@@ -211,7 +207,6 @@ const Drawer = (props) => {
                                         </View>}
                                     onPress={() => {
                                         setFocus('Comments');
-                                        alert('Comments')
                                     }}
                                 />
                                 <DrawerItem
@@ -223,7 +218,6 @@ const Drawer = (props) => {
                                         </View>}
                                     onPress={() => {
                                         setFocus('Post');
-                                        alert('Post')
                                     }}
                                 />
                                 <DrawerItem
@@ -235,7 +229,6 @@ const Drawer = (props) => {
                                         </View>}
                                     onPress={() => {
                                         setFocus('Reports');
-                                        alert('Reports')
                                     }}
                                 />
                                 <DrawerItem
@@ -247,7 +240,6 @@ const Drawer = (props) => {
                                         </View>}
                                     onPress={() => {
                                         setFocus('Usernames');
-                                        alert('Usernames')
                                     }}
                                 />
                             </>
@@ -287,7 +279,6 @@ const Drawer = (props) => {
                                         </View>}
                                     onPress={() => {
                                         setFocus('Settings');
-                                        alert('Settings')
                                     }}
                                 />
                                 <DrawerItem
@@ -299,7 +290,6 @@ const Drawer = (props) => {
                                         </View>}
                                     onPress={() => {
                                         setFocus('Terms');
-                                        alert('Terms')
                                     }}
                                 />
                                 <DrawerItem
@@ -311,7 +301,6 @@ const Drawer = (props) => {
                                         </View>}
                                     onPress={() => {
                                         setFocus('Privacy');
-                                        alert('Privacy')
                                     }}
                                 />
 
@@ -358,7 +347,7 @@ const styles = StyleSheet.create({
         fontStyle: "normal",
         lineHeight: 24,
         letterSpacing: 0,
-        color: "#868e9d",
+        color: Color.DRAWER_TEXT_COLOR,
         marginLeft: 15,
     },
     logoutText: {
@@ -368,7 +357,7 @@ const styles = StyleSheet.create({
         fontStyle: "normal",
         lineHeight: 24,
         letterSpacing: 0,
-        color: "#868e9d",
+        color: Color.DRAWER_TEXT_COLOR,
         marginVertical: 15,
         marginHorizontal: 20,
     },
@@ -379,7 +368,7 @@ const styles = StyleSheet.create({
         fontStyle: "normal",
         lineHeight: 24,
         letterSpacing: 0,
-        color: '#868e9d',
+        color: Color.DRAWER_TEXT_COLOR,
         paddingLeft: 20,
     },
     imageView: {

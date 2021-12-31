@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, Alert,Modal } from 'react-native';
-import { BoxPasswordStrengthDisplay } from 'react-native-password-strength-meter';
-import RNPasswordStrengthMeter from 'react-native-password-strength-meter';
-import ModalPicker from '../views/ModalPicker';
+import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, Modal } from 'react-native';
+
+import ModalPicker from './ModalPicker';
 
 import Button from '../component/Button'
 import TextInput from '../component/CustomTextInput'
@@ -37,7 +36,7 @@ const countries = [
 const Signup = ({ navigation }) => {
 
     const [email, setEmail] = useState('');
-    const [EmailError, setEmailError] = useState('');
+    const [emailError, setEmailError] = useState('');
 
     const [Password, setPassword] = useState('');
     const [PasswordError, setPasswordError] = useState('');
@@ -45,11 +44,11 @@ const Signup = ({ navigation }) => {
     const [userName, setUserName] = useState('');
     const [userNameError, setUserNameError] = useState('');
 
-    const [birthmonth, setBirthmonth] = useState('');
-    const [BirthmonthError, setBirthmonthError] = useState('');
+    const [birthMonth, setBirthMonth] = useState('');
+    const [birthMonthError, setBirthMonthError] = useState('');
 
-    const [birthyear, setBirthyear] = useState('');
-    const [BirthYearError, setBirthyearError] = useState('');
+    const [birthYear, setBirthYear] = useState('');
+    const [birthYearError, setBirthYearError] = useState('');
 
 
     const [focus, setFocus] = useState(undefined);
@@ -69,38 +68,37 @@ const Signup = ({ navigation }) => {
 
     const SignupValidation = () => {
 
-        if (!email && !Password && birthmonth === '' && birthyear === '' && !userName ) {
-            setEmailError('Email Requied')
-            setPasswordError('Password Requied')
-            setBirthmonthError('Birth month Requied')
-            setBirthyearError('Birth year Requied')
-            setUserNameError('UserName Requied')
+        if (!email && !Password && birthMonth === '' && birthYear === '' && !userName) {
+            setEmailError('Email Required')
+            setPasswordError('Password Required')
+            setBirthmonthError('Birth month Required')
+            setBirthyearError('Birth year Required')
+            setUserNameError('UserName Required')
         }
         else if (!email) {
-            setEmailError('Email Requied')
+            setEmailError('Email Required')
         }
         else if (email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null) {
-            setEmailError('Valid email required')
+            setEmailError('Valid email Required')
         }
         else if (!Password) {
-            setPasswordError('Password Requied')
+            setPasswordError('Password Required')
         }
-      
-        else if (birthmonth === '') {
-            setBirthmonthError('Birth month Requied')
+
+        else if (birthMonth === '') {
+            setBirthmonthError('Birth Month Required')
         }
-        else if (birthyear === '') {
-            setBirthyearError('Birth year Requied')
+        else if (birthYear === '') {
+            setBirthyearError('Birth Year Required')
         }
         else if (!userName) {
-            setUserNameError('UserName Requied')
+            setUserNameError('UserName Required')
         }
         else {
             navigation.navigate('DrawerNavigator')
         }
     }
 
-    onChange = Password => setPassword({ Password })
 
 
     return (
@@ -115,21 +113,11 @@ const Signup = ({ navigation }) => {
                     placeholder={"email@address.com"}
                     label={'email'}
                     style={{ fontSize: 18, }}
-                    onChangeText={text => {setEmail(text); setEmailError(' ')}}
+                    onChangeText={text => { setEmail(text); setEmailError(' ') }}
                     value={email}
-                    helperText={EmailError}
+                    helperText={emailError}
                 />
-                {/* 
-                <RNPasswordStrengthMeter
-                   onChangeText={text => setPassword(text)}
-                    meterType="box"
-                    password={Password}
-                    inputStyle={styles.largeInputView}
-                    containerWrapperStyle={{backgroundColor:'green',paddingLeft:30}}
-                    imageStyle={{marginLeft:-65,marginBottom:16}}
-                    labelVisible={false}
-                 
-                /> */}
+
 
                 <TextInput type={Constant.textInput.LARGE_INPUT}
                     label={'password'}
@@ -141,26 +129,12 @@ const Signup = ({ navigation }) => {
                     secureTextEntry={focus === undefined ? true : focus}
                     secureTextEntryChange={selectFocus}
                 />
-                {/* <BoxPasswordStrengthDisplay
-                    password={Password}
-                    
-                    labelVisible={false}
 
-                       /> */}
-
-                {/* <View style={styles.viewStyle}>
-                    <View style={styles.passwordStyle}></View>
-                    <View style={styles.passwordStyle}></View>
-                    <View style={styles.passwordStyle}></View>
-                    <View style={styles.passwordStyle}></View>
-
-
-                </View> */}
                 <View style={styles.monthView}>
                     <View style={styles.rowView}>
                         <Text style={styles.birthMonthText}>birth month</Text>
-                        <TouchableOpacity style={{ justifyContent: 'center' }}
-                         onPress={()=>changeModalVisibility(true)}><Image source={Images.Infocircle} style={styles.infoIcon} /></TouchableOpacity>
+                        <TouchableOpacity style={styles.touchableStyle}
+                            onPress={() => changeModalVisibility(true)}><Image source={Images.Infocircle} style={styles.infoIcon} /></TouchableOpacity>
                     </View>
                     <View style={styles.yearText}>
                         <Text style={styles.birthMonthText}>birth year</Text>
@@ -173,32 +147,32 @@ const Signup = ({ navigation }) => {
                     <View style={styles.rowView}>
                         <Dropdown
                             optionList={countries}
-                            onSelect={(value) => {setBirthmonth(value); setBirthmonthError('')}}
+                            onSelect={(value) => { setBirthMonth(value); setBirthMonthError('') }}
                             defaultButtonText={'select one'}
                             icon={Images.DropdownIcon}
-                            helperText={BirthmonthError} />
+                            helperText={birthMonthError} />
                     </View>
                     <View style={styles.yearDropdown}>
                         <Dropdown
                             optionList={countries}
-                            onSelect={(value) => {setBirthyear(value); setBirthyearError(' ')}}
+                            onSelect={(value) => { setBirthYear(value); setBirthYearError(' ') }}
                             defaultButtonText={'select one'} style={{ width: 150 }}
                             icon={Images.DropdownIcon}
-                            helperText={BirthYearError} />
+                            helperText={birthYearError} />
                     </View>
 
                 </View>
 
                 <View style={styles.userName}>
                     <Text style={styles.birthMonthText}>username</Text>
-                    <TouchableOpacity style={{ justifyContent: 'center' }}
-                                        onPress={()=>changeModalVisibility(true)}
+                    <TouchableOpacity style={styles.touchableStyle}
+                        onPress={() => changeModalVisibility(true)}
                     ><Image source={Images.Infocircle} style={styles.iconStyle} /></TouchableOpacity>
                 </View>
                 <TextInput type={Constant.textInput.LARGE_INPUT}
                     placeholder={"@"}
                     style={{ fontSize: 18 }}
-                    onChangeText={text => {setUserName(text); setUserNameError(' ')}}
+                    onChangeText={text => { setUserName(text); setUserNameError(' ') }}
                     helperText={userNameError}
                 />
             </View>
@@ -243,22 +217,6 @@ const styles = StyleSheet.create({
         borderTopWidth: 2,
 
 
-    },
-    passwordView: {
-        // width:'100%',
-        // marginTop:20
-    },
-    viewStyle: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        width: "89%",
-        marginVertical: 10,
-    },
-    passwordStyle: {
-        borderColor: Color.BORDER_COLOR,
-        width: '22%',
-        height: 6,
-        backgroundColor: "#d8d8d8",
     },
     monthView: {
         flexDirection: 'row',
@@ -327,6 +285,9 @@ const styles = StyleSheet.create({
         fontSize: 17,
 
     },
+    touchableStyle: {
+        justifyContent: 'center'
+    }
 
 });
 export default Signup;

@@ -2,10 +2,10 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from '../views/Home';
 import Login from '../views/LoginScreen';
-import Signup from '../views/SigninEmailScreen';
+import Signup from '../views/SignUpWithEmailScreen';
 import TabNavigator from '../route/TabNavigator';
 import DrawerNavigator from '../route/DrawerNavigator';
-import Signin from '../views/SigninScreen';
+import Signin from '../views/SignInScreen';
 import All from '../views/All';
 import Mentees from '../views/Mentees';
 
@@ -29,6 +29,7 @@ const stackNavigator = () => {
         <Stack.Screen name="Signin" component={Signin} options={{ headerShown:false }} />
         <Stack.Screen name="All" component={All}/>
         <Stack.Screen name="Mentees" component={Mentees}/>
+
 
       </Stack.Navigator>
     )

@@ -16,7 +16,6 @@ import Auth from '../component/Authentication';
 import TextInput from '../component/CustomTextInput';
 import CheckBox from "../component/Checkbox";
 import Header from '../component/Header';
-import Alert from "app/component/Alert";
 
 
 
@@ -47,27 +46,26 @@ const Signin = ({ navigation }) => {
   }
 
     const [email, setEmail] = useState('');
-    const [EmailError, setEmailError] = useState('');
+    const [emailError, setEmailError] = useState('');
 
-    const [Password, setPassword] = useState('');
-    const [PasswordError, setPasswordError] = useState('');
+    const [password, setPassword] = useState('');
+    const [passwordError, setPasswordError] = useState('');
 
 
     const SigninValidation = () => {
 
-        if (!email && !Password) {
-            setEmailError('Email Requied')
-            setPasswordError('Password Requied')
+        if (!email && !password) {
+            setEmailError('Email Required')
+            setPasswordError('Password Required')
         }
         else if (!email) {
-            setEmailError('Email Requied')
+            setEmailError('Email Required')
         }
         else if (email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null) {
-            setEmailError('Valid email required')
+            setEmailError('Valid email Required')
         }
-        else if (!Password) {
-            console.log('pswrd')
-            setPasswordError('Password Requied')
+        else if (!password) {
+            setPasswordError('Password Required')
         }
       
         else {
@@ -89,7 +87,7 @@ const Signin = ({ navigation }) => {
                         style={{ fontSize: 18 }}
                         onChangeText={text => {setEmail(text); setEmailError(' ')}}
                         value={email}
-                        helperText={EmailError}
+                        helperText={emailError}
                     />
 
 
@@ -97,13 +95,13 @@ const Signin = ({ navigation }) => {
                         label={'password'}
                         style={{ fontSize: 18 }}
                         onChangeText={text => {setPassword(text); setPasswordError(' ')}}
-                        value={Password}
-                        helperText={PasswordError}
+                        value={password}
+                        helperText={passwordError}
                         iconvisible={true}
                         secureTextEntry={focus === undefined ? true : focus}
                         secureTextEntryChange={selectFocus}
                     />
-                    <Text style={styles.contentText} onPress={()=>alert("forgot password")}>forgot your password? </Text>
+                    <Text style={styles.contentText} >forgot your password? </Text>
                     <CheckBox onPressCheckbox={selectCheckBox} style={styles.checkBox}
                         isSelectedCheckBox={isSelectedCheckBox} text={"keep me signed in"} />
 

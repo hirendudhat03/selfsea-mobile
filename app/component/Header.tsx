@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Text, View, Dimensions, StyleSheet, Image, TouchableOpacity, } from 'react-native'
+import { Text, View,  StyleSheet, Image, TouchableOpacity, } from 'react-native'
 import Color from '../theme/colors';
 import Constant from '../theme/constant'
 import fonts from "../theme/fonts";
@@ -13,7 +13,7 @@ interface Props {
     leftIcon?: ImageSourcePropType;
     rightIcon?: ImageSourcePropType;
     text: string;
-    onPress: string;
+    onPress: () => void;
     underlinetext: string;
     style: {};
 
