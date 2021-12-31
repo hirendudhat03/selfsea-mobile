@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text, Image, StyleSheet, } from "react-native";
+import { View, Text, Image, StyleSheet,Dimensions } from "react-native";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Images from '../theme/images';
 import TabHome from '../views/TabHome';
@@ -8,6 +8,8 @@ import Book from '../views/Book';
 import Person from '../views/Person';
 import TabScreen from '../views/TabScreen';
 import Color from '../theme/colors';
+
+const height = Dimensions.get('window').height;
 
 
 const Tab = createBottomTabNavigator();
@@ -20,7 +22,7 @@ const BottomTabNavigator = ({ navigation }) => {
             <Tab.Navigator
                 screenOptions={{
                     tabBarStyle: {
-                        height: 100,
+                        height:height/9 ,
                         borderTopColor: Color.BORDER_COLOR,
                         borderTopWidth: 1,
                     },
@@ -36,13 +38,15 @@ const BottomTabNavigator = ({ navigation }) => {
                         headerShown: false,
                         tabBarLabel: () => { return null },
                         tabBarIcon: ({focused}) => {
+                            const image = focused
+                            ? Images.HomeFill
+                            : Images.House
 
 
 
                             return (
                                 <Image
-                                    source={Images.House}
-                                    style={focused ? {tintColor:'#000000'} : null}
+                                    source={image}
 
                                 />
                             )
@@ -57,13 +61,14 @@ const BottomTabNavigator = ({ navigation }) => {
                         headerShown: false,
                         tabBarLabel: () => { return null },
                         tabBarIcon: ({focused}) => {
-
+                         
+                            const image = focused
+                            ? Images.BellFill
+                            : Images.Bell
 
                             return (
                                 <Image
-                                    source={Images.Bell}
-                                    style={focused ? {tintColor:'#000000'} : null}
-
+                                    source={image}
 
                                 />
                             )
@@ -97,12 +102,13 @@ const BottomTabNavigator = ({ navigation }) => {
                         headerShown: false,
                         tabBarLabel: () => { return null },
                         tabBarIcon: ({focused}) => {
-
+                            const image = focused
+                            ? Images.BookFill
+                            : Images.Book
 
                             return (
                                 <Image
-                                    source={Images.Book}
-                                    style={focused ? {tintColor:'#000000'} : null}
+                                    source={image}
 
 
                                 />
@@ -118,12 +124,14 @@ const BottomTabNavigator = ({ navigation }) => {
                         headerShown: false,
                         tabBarLabel: () => { return null },
                         tabBarIcon: ({focused}) => {
+                            const image = focused
+                            ? Images.PersonFill
+                            : Images.Person
 
 
                             return (
                                 <Image
-                                    source={Images.Person}
-                                    style={focused ? {tintColor:'#000000'} : null}
+                                    source={image}
 
 
                                 />

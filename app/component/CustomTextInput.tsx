@@ -1,9 +1,10 @@
 
 import React from "react";
-import { Text, View, Dimensions, StyleSheet, TextInput, Switch, } from 'react-native'
+import { Text, View, Dimensions, StyleSheet, TextInput, Image, TouchableOpacity, } from 'react-native'
 import Color from '../theme/colors';
 import Constant from '../theme/constant'
 import Font from '../theme/fonts'
+import Images from '../theme/images'
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -15,11 +16,15 @@ interface Props {
   helperText: string;
   label: string;
   style: {};
-
+  onChangeText: () => void;
+  value: string;
+  iconvisible?: ImageSourcePropType;
+  secureTextEntryChange: () => void;
+  secureTextEntry: boolean;
 }
 
 
-const CustomTextInput = ({ type, placeholder, helperText, label, style }: Props) => {
+const CustomTextInput = ({ type, placeholder, helperText, label, style, onChangeText, value,secureTextEntryChange,  iconvisible,  secureTextEntry,  }: Props) => {
 
 
   return (
@@ -28,12 +33,37 @@ const CustomTextInput = ({ type, placeholder, helperText, label, style }: Props)
         <>
           {label !== undefined ? (<Text style={[styles.labelText, style]}>{label}</Text>) : null}
 
-          <TextInput
-            style={styles.largeInputView}
-            placeholder={placeholder}
+
+          <View style={styles.largeInputView}>
+
+            <TextInput
+              style={{ fontSize: 17, height: height * 0.064, width: '90%', paddingHorizontal: 16 }}
+              placeholder={placeholder}
+              onChangeText={onChangeText}
+              secureTextEntry={secureTextEntry}
+              value={value}
+
+            />
+
+            {
+              iconvisible ? (
+                secureTextEntry ? (
+                  <TouchableOpacity style={{justifyContent:'center'}} onPress={secureTextEntryChange}>
+                  <Image source={Images.PasswordIcon} style={styles.passwordIcon} />
+                  </TouchableOpacity>
+                ) : (<TouchableOpacity style={{justifyContent:'center'}} onPress={secureTextEntryChange}>
+                <Image source={Images.visibilityShow} style={styles.passwordIcon} />
+                </TouchableOpacity> )
+              ) : null
+            }
+            
+            
 
 
-          />
+        
+          </View>
+
+
           {helperText !== undefined ? (<Text style={styles.helperText}>{helperText}</Text>) : null}
         </>
       ) :
@@ -62,9 +92,11 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: Color.BORDER_COLOR_LIGHTGRAY,
-    marginTop: 5,
-    paddingHorizontal: 16,
-    fontSize: 17,
+
+    // justifyContent: 'space-between',
+    flexDirection: 'row',
+    // alignItems:'center'
+
   },
 
   largeTextareaView: {
@@ -88,10 +120,10 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     letterSpacing: 0,
     color: Color.BASE_COLOR_GRAY,
-    marginTop:25,
+    marginTop: 25,
   },
   helperText: {
-    width: width * 0.78,
+    width: '90%',
     height: height * 0.02,
     fontFamily: Font.CALIBRE,
     fontSize: 12,
@@ -116,6 +148,11 @@ const styles = StyleSheet.create({
     height: height * 0.05,
     alignItems: 'center',
     flexDirection: 'row',
+  },
+  passwordIcon: {
+    height: 25,
+    width: 25,
+    alignSelf: 'flex-end',
   },
 });
 

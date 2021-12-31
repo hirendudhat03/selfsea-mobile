@@ -16,6 +16,7 @@ import Auth from '../component/Authentication';
 import TextInput from '../component/CustomTextInput';
 import CheckBox from "../component/Checkbox";
 import Header from '../component/Header';
+import Alert from "app/component/Alert";
 
 
 
@@ -35,31 +36,79 @@ const Signin = ({ navigation }) => {
     }
 
 
+    const [focus,setFocus] = useState(undefined);
+
+  const selectFocus = () => {
+    if (focus) {
+        setFocus(false);
+    } else {
+        setFocus(true);
+    }
+  }
+
+    const [email, setEmail] = useState('');
+    const [EmailError, setEmailError] = useState('');
+
+    const [Password, setPassword] = useState('');
+    const [PasswordError, setPasswordError] = useState('');
+
+
+    const SigninValidation = () => {
+
+        if (!email && !Password) {
+            setEmailError('Email Requied')
+            setPasswordError('Password Requied')
+        }
+        else if (!email) {
+            setEmailError('Email Requied')
+        }
+        else if (email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null) {
+            setEmailError('Valid email required')
+        }
+        else if (!Password) {
+            console.log('pswrd')
+            setPasswordError('Password Requied')
+        }
+      
+        else {
+            navigation.navigate('DrawerNavigator')
+        }
+    }
 
     return (
 
         <View style={styles.container}>
             <Header type={Constant.navigatioHeader.PAGE_HEADER} leftIcon={Images.Arrowsquare}
-                label={'sign in'}  onPress={() => navigation.goBack()}/>
+                label={'sign in'} onPress={() => navigation.goBack()} />
             <ScrollView>
                 <View style={styles.contentView}>
 
                     <TextInput type={Constant.textInput.LARGE_INPUT}
                         placeholder={"email@address.com"}
                         label={'email'}
-                        style={{fontSize:18}}
+                        style={{ fontSize: 18 }}
+                        onChangeText={text => {setEmail(text); setEmailError(' ')}}
+                        value={email}
+                        helperText={EmailError}
                     />
 
-                   
-                        <TextInput type={Constant.textInput.LARGE_INPUT}
-                            label={'password'}
-                            style={{fontSize:18}}
-                        />
-                    <Text style={styles.contentText}>forgot your password? </Text>
+
+                    <TextInput type={Constant.textInput.LARGE_INPUT}
+                        label={'password'}
+                        style={{ fontSize: 18 }}
+                        onChangeText={text => {setPassword(text); setPasswordError(' ')}}
+                        value={Password}
+                        helperText={PasswordError}
+                        iconvisible={true}
+                        secureTextEntry={focus === undefined ? true : focus}
+                        secureTextEntryChange={selectFocus}
+                    />
+                    <Text style={styles.contentText} onPress={()=>alert("forgot password")}>forgot your password? </Text>
                     <CheckBox onPressCheckbox={selectCheckBox} style={styles.checkBox}
                         isSelectedCheckBox={isSelectedCheckBox} text={"keep me signed in"} />
 
-                    <Button type={Constant.buttons.PRIMARY} text={"sign in"} style={{ marginTop: 10 ,marginBottom:10}} onPress={() => navigation.navigate('DrawerNavigator')} />
+                    <Button type={Constant.buttons.PRIMARY} text={"sign in"} style={{ marginTop: 10, marginBottom: 10 }}
+                        onPress={() => SigninValidation()} />
 
                     <View style={{ flexDirection: 'row' }}>
 

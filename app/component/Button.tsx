@@ -34,7 +34,7 @@ const Button = ({ type, text, icon, onPress, style }: Props) => {
               : type === Constant.buttons.PRIMARY
                 ? [styles.primaryView, style]
                 : type === Constant.buttons.CLOSE
-                  ? styles.closeButtonView
+                  ? [styles.closeButtonView, style]
                   : type === Constant.buttons.SELFSEASEND
                     ? styles.selfseaSendView
                     : null

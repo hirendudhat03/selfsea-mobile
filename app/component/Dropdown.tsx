@@ -1,7 +1,7 @@
 import React from 'react';
-import { Dimensions, Image, StyleSheet, View } from 'react-native';
+import { Dimensions, Image, StyleSheet, View, Text} from 'react-native';
 import Color from '../theme/colors';
-import Images from '../theme/images';
+import Font from '../theme/fonts';
 import SelectDropdown from 'react-native-select-dropdown';
 // @ts-ignore
 
@@ -21,29 +21,35 @@ interface Props {
   optionList: OptionListType[];
   style: {};
   icon?: ImageSourcePropType;
+  helperText: string;
+
 }
 
-const Dropdown = ({ optionList, onSelect, defaultButtonText, style, icon }: Props) => {
+const Dropdown = ({ optionList, onSelect, defaultButtonText, style, icon,helperText }: Props) => {
   return (
-    <View>
-      <SelectDropdown
-        renderDropdownIcon={() => (
-          <View style={styles.iconView}>
-            <Image source={icon} />
-          </View>
-        )}
-        defaultButtonText={defaultButtonText}
-        buttonStyle={[styles.Container, style]}
-        data={optionList.map(item => item.title)}
-        onSelect={onSelect}
-        buttonTextAfterSelection={selectedItem => {
-          return selectedItem;
-        }}
-        rowTextForSelection={item => {
-          return item;
-        }}
-      />
-    </View>
+   
+      <View >
+        <SelectDropdown
+          renderDropdownIcon={() => (
+            <View style={styles.iconView}>
+              <Image source={icon} />
+            </View>
+          )}
+          defaultButtonText={defaultButtonText}
+          buttonStyle={[styles.Container, style]}
+          data={optionList.map(item => item.title)}
+          onSelect={onSelect}
+          buttonTextAfterSelection={selectedItem => {
+            return selectedItem;
+          }}
+          rowTextForSelection={item => {
+            return item;
+          }}
+        />
+           {helperText !== undefined ? (<Text style={styles.helperText}>{helperText}</Text>) : null}
+      </View>
+   
+    
   );
 };
 const styles = StyleSheet.create({
@@ -63,6 +69,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderLeftWidth: 1,
+  },
+  helperText: {
+    width: '90%',
+    height: height * 0.02,
+    fontFamily: Font.CALIBRE,
+    fontSize: 12,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 16,
+    letterSpacing: 0,
+    color: Color.PLACEHOLDER_TEXT,
   },
 });
 
