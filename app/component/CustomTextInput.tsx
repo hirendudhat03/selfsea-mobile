@@ -1,87 +1,97 @@
-
-import React from "react";
-import { Text, View, Dimensions, StyleSheet, TextInput, Image, TouchableOpacity, } from 'react-native'
+import React from 'react';
+import {
+  Text,
+  View,
+  Dimensions,
+  StyleSheet,
+  TextInput,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import Color from '../theme/colors';
-import Constant from '../theme/constant'
-import Font from '../theme/fonts'
-import Images from '../theme/images'
+import Constant from '../theme/constant';
+import Font from '../theme/fonts';
+import Images from '../theme/images';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
 interface Props {
-
   type: string;
-  placeholder: string;
+  placeholder?: string;
   helperText: string;
-  label: string;
+  label?: string;
   style: {};
   onChangeText: (text: string) => void;
   value: string;
-  secureTextEntryChange: () => void;
-  secureTextEntry: boolean;
-  iconVisible?: ImageSourcePropType;
+  secureTextEntryChange?: () => void;
+  secureTextEntry?: boolean;
+  iconVisible?: boolean;
 }
 
-
-const CustomTextInput = ({ type, placeholder, helperText, label, style, onChangeText, value, secureTextEntryChange, iconVisible, secureTextEntry, }: Props) => {
-
-
+const CustomTextInput = ({
+  type,
+  placeholder,
+  helperText,
+  label,
+  style,
+  onChangeText,
+  value,
+  secureTextEntryChange,
+  iconVisible,
+  secureTextEntry,
+}: Props) => {
   return (
     <>
       {type === Constant.textInput.LARGE_INPUT ? (
         <>
-          {label !== undefined ? (<Text style={[styles.labelText, style]}>{label}</Text>) : null}
-
+          {label !== undefined ? (
+            <Text style={[styles.labelText, style]}>{label}</Text>
+          ) : null}
 
           <View style={styles.largeInputView}>
-
             <TextInput
               style={styles.textInputStyle}
               placeholder={placeholder}
               onChangeText={onChangeText}
               secureTextEntry={secureTextEntry}
               value={value}
-
             />
 
-            {
-              iconVisible ? (
-                secureTextEntry ? (
-                  <TouchableOpacity style={styles.touchableStyle} onPress={secureTextEntryChange}>
-                    <Image source={Images.PasswordIcon} style={styles.passwordIcon} />
-                  </TouchableOpacity>
-                ) : (<TouchableOpacity style={styles.touchableStyle} onPress={secureTextEntryChange}>
-                  <Image source={Images.visibilityShow} style={styles.passwordIcon} />
-                </TouchableOpacity>)
-              ) : null
-            }
-
-
-
-
-
+            {iconVisible ? (
+              secureTextEntry ? (
+                <TouchableOpacity
+                  style={styles.touchableStyle}
+                  onPress={secureTextEntryChange}>
+                  <Image
+                    source={Images.PasswordIcon}
+                    style={styles.passwordIcon}
+                  />
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={styles.touchableStyle}
+                  onPress={secureTextEntryChange}>
+                  <Image
+                    source={Images.visibilityShow}
+                    style={styles.passwordIcon}
+                  />
+                </TouchableOpacity>
+              )
+            ) : null}
           </View>
 
-
-          {helperText !== undefined ? (<Text style={styles.helperText}>{helperText}</Text>) : null}
+          {helperText !== undefined ? (
+            <Text style={styles.helperText}>{helperText}</Text>
+          ) : null}
         </>
-      ) :
-        null}
+      ) : null}
       {type === Constant.textInput.LARGE_TEXT_AREA ? (
-        <TextInput
-          style={styles.largeTextareaView}
-          placeholder={placeholder}
-        />)
-        :
-        null}
-
-
+        <TextInput style={styles.largeTextareaView} placeholder={placeholder} />
+      ) : null}
     </>
-
   );
-}
-
+};
 
 const styles = StyleSheet.create({
   largeInputView: {
@@ -93,7 +103,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Color.BORDER_COLOR_LIGHTGRAY,
     flexDirection: 'row',
-
   },
 
   largeTextareaView: {
@@ -104,7 +113,6 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: Color.BORDER_COLOR_LIGHTGRAY,
-
   },
 
   labelText: {
@@ -155,10 +163,9 @@ const styles = StyleSheet.create({
     fontSize: 17,
     height: height * 0.064,
     width: '90%',
-    paddingHorizontal: 16
+    paddingHorizontal: 16,
   },
   touchableStyle: { justifyContent: 'center' },
 });
-
 
 export default CustomTextInput;

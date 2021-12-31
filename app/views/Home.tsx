@@ -1,24 +1,16 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import Images from '../theme/images';
 
-import Alert from '../component/Alert'
-import Badges from '../component/Badges'
-import Button from '../component/Button'
-import TextInput from '../component/CustomTextInput'
-import Radio from '../component/Radio'
-import Constant from '../theme/constant'
-import CheckBox from "../component/Checkbox";
-import Switch from '../component/Switch'
-import Dropdown from "../component/Dropdown";
+import Alert from '../component/Alert';
+import Badges from '../component/Badges';
+import Constant from '../theme/constant';
+import Dropdown from '../component/Dropdown';
 import Header from '../component/Header';
 import Color from '../theme/colors';
 
-
-
 const Home = ({ navigation }) => {
-
   const [isSelectedCheckBox, setISSelectionCheckBox] = useState(false);
 
   const selectCheckBox = () => {
@@ -27,7 +19,7 @@ const Home = ({ navigation }) => {
     } else {
       setISSelectionCheckBox(true);
     }
-  }
+  };
 
   const [isSelectedRadioButton, setISSelectedRadioButton] = useState(false);
 
@@ -37,7 +29,7 @@ const Home = ({ navigation }) => {
     } else {
       setISSelectedRadioButton(true);
     }
-  }
+  };
 
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
@@ -57,46 +49,44 @@ const Home = ({ navigation }) => {
     },
   ];
 
-
   return (
     <SafeAreaView>
       <ScrollView>
         <View style={styles.container}>
+          <Text
+            style={{ fontSize: 20 }}
+            onPress={() => navigation.navigate('TanNavigator')}>
+            SECOND SCREEN
+          </Text>
 
-          <Text style={{ fontSize: 20 }} onPress={() => navigation.navigate("TanNavigator")}>SECOND SCREEN</Text>
-
-          <Alert type={Constant.alert.MENTOR} text={'mentor related alert badge '} />
+          <Alert
+            type={Constant.alert.MENTOR}
+            text={'mentor related alert badge '}
+          />
           <Alert type={Constant.alert.URGENT} text={'Urgent'} />
           <Alert type={Constant.alert.WARNING} text={'Warning'} />
 
-          <Alert type={Constant.alert.SUCCESS} text={'This is a success alert—check it out! '} />
-          <Alert type={Constant.alert.INFO} text={'This is a info alert—check it out!  '} />
-
-
-          <Badges type={Constant.badges.MENTOR_BADGE}
-            text={'mentor'}
+          <Alert
+            type={Constant.alert.SUCCESS}
+            text={'This is a success alert—check it out! '}
           />
-          <Badges type={Constant.badges.CONTENT}
+          <Alert
+            type={Constant.alert.INFO}
+            text={'This is a info alert—check it out!  '}
+          />
+
+          <Badges type={Constant.badges.MENTOR_BADGE} text={'mentor'} />
+          <Badges
+            type={Constant.badges.CONTENT}
             text={'[content warning]'}
             leftIcon={Images.Warning}
           />
-          <Badges type={Constant.badges.COMMENTS}
-            text={'4 Comments'}
-
-          />
-          <Badges type={Constant.badges.ACTIVE}
-            text={'Active'}
-
-          />
-          <Badges type={Constant.badges.INACTIVE}
-            text={'inactive'}
-
-          />
-          <Badges type={Constant.badges.DESCRIPTOR}
-            text={'[profile item]'}
-
-          />
-          <Badges type={Constant.badges.MULTISELECT}
+          <Badges type={Constant.badges.COMMENTS} text={'4 Comments'} />
+          <Badges type={Constant.badges.ACTIVE} text={'Active'} />
+          <Badges type={Constant.badges.INACTIVE} text={'inactive'} />
+          <Badges type={Constant.badges.DESCRIPTOR} text={'[profile item]'} />
+          <Badges
+            type={Constant.badges.MULTISELECT}
             text={'they/them'}
             rigthIcon={Images.Circle}
           />
@@ -137,33 +127,51 @@ const Home = ({ navigation }) => {
 
           <Dropdown
             optionList={countries}
-            onSelect={() => { }}
-            defaultButtonText={'selfsea'} 
-            icon={Images.DropdownIcon}/>
+            onSelect={() => {}}
+            defaultButtonText={'selfsea'}
+            icon={Images.DropdownIcon}
+          />
 
-          <Header type={Constant.navigatioHeader.PAGE_HEADER} leftIcon={Images.Pencil}
-            rightIcon={Images.Gear} label={'page title'} style={{ backgroundColor: Color.COMMUNITY_MAROON }} />
-          <Header type={Constant.navigatioHeader.PAGE_HEADER} leftIcon={Images.Pencil}
-            rightIcon={Images.Gear} label={'page title'} style={{ backgroundColor: Color.COMMUNITY_YELLOW }} />
+          <Header
+            type={Constant.navigatioHeader.PAGE_HEADER}
+            leftIcon={Images.Pencil}
+            rightIcon={Images.Gear}
+            label={'page title'}
+            style={{ backgroundColor: Color.COMMUNITY_MAROON }}
+          />
+          <Header
+            type={Constant.navigatioHeader.PAGE_HEADER}
+            leftIcon={Images.Pencil}
+            rightIcon={Images.Gear}
+            label={'page title'}
+            style={{ backgroundColor: Color.COMMUNITY_YELLOW }}
+          />
 
-          <Header type={Constant.navigatioHeader.PAGE_HEADER} leftIcon={Images.Pencil} rightIcon={Images.Gear} 
-          label={'page title'} />
+          <Header
+            type={Constant.navigatioHeader.PAGE_HEADER}
+            leftIcon={Images.Pencil}
+            rightIcon={Images.Gear}
+            label={'page title'}
+          />
 
-          <Header type={Constant.navigatioHeader.POST} leftIcon={Images.Arrow} text={'in'} label={'create a post'}
-            rightIcon={Images.Downarrow} underlinetext={'select a community'} />
+          <Header
+            type={Constant.navigatioHeader.POST}
+            leftIcon={Images.Arrow}
+            text={'in'}
+            label={'create a post'}
+            rightIcon={Images.Downarrow}
+            underlinetext={'select a community'}
+          />
 
           {/* <Text onPress={() => setmodalVisible(true)}>open modal</Text>
-            <ModalView headertext={'[modal title]'} placeholder={'[modal description]'} 
+            <ModalView headertext={'[modal title]'} placeholder={'[modal description]'}
             data={countries} text={'Primary'} visible={modalVisible} closeModal={() => setmodalVisible(false)}/>
     // const [modalVisible, setmodalVisible] = useState(false);
 
              */}
-
-
         </View>
       </ScrollView>
     </SafeAreaView>
-
   );
 };
 
@@ -173,7 +181,6 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-
   },
   logo: {
     alignSelf: 'center',
@@ -181,5 +188,3 @@ const styles = StyleSheet.create({
   },
 });
 export default Home;
-
-

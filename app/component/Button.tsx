@@ -11,14 +11,13 @@ import Color from '../theme/colors';
 import Constant from '../theme/constant';
 import Font from '../theme/fonts';
 
-
-
 interface Props {
   type: string;
   text?: string;
   icon?: ImageSourcePropType;
-  onPress: () => void;
-  style: {};
+
+  onPress?: () => void
+
 }
 
 const Button = ({ type, text, icon, onPress, style }: Props) => {
@@ -28,17 +27,18 @@ const Button = ({ type, text, icon, onPress, style }: Props) => {
         type === Constant.buttons.DESKTOP
           ? [styles.desktopView, style]
           : type === Constant.buttons.SECONDARY
-            ? [styles.secondaryView, style]
-            : type === Constant.buttons.MOBILE
-              ? styles.mobileView
-              : type === Constant.buttons.PRIMARY
-                ? [styles.primaryView, style]
-                : type === Constant.buttons.CLOSE
-                  ? [styles.closeButtonView, style]
-                  : type === Constant.buttons.SELFSEASEND
-                    ? styles.selfseaSendView
-                    : null
-      } onPress={onPress}>
+          ? [styles.secondaryView, style]
+          : type === Constant.buttons.MOBILE
+          ? styles.mobileView
+          : type === Constant.buttons.PRIMARY
+          ? [styles.primaryView, style]
+          : type === Constant.buttons.CLOSE
+          ? [styles.closeButtonView, style]
+          : type === Constant.buttons.SELFSEASEND
+          ? styles.selfseaSendView
+          : null
+      }
+      onPress={onPress}>
       {icon !== undefined ? (
         <Image style={styles.selfseaSendImage} source={icon} />
       ) : (
@@ -47,14 +47,14 @@ const Button = ({ type, text, icon, onPress, style }: Props) => {
             type === Constant.buttons.DESKTOP
               ? styles.desktopText
               : type === Constant.buttons.SECONDARY
-                ? styles.secondaryText
-                : type === Constant.buttons.MOBILE
-                  ? styles.mobileText
-                  : type === Constant.buttons.PRIMARY
-                    ? styles.primaryText
-                    : type === Constant.buttons.CLOSE
-                      ? styles.closeButtonText
-                      : null
+              ? styles.secondaryText
+              : type === Constant.buttons.MOBILE
+              ? styles.mobileText
+              : type === Constant.buttons.PRIMARY
+              ? styles.primaryText
+              : type === Constant.buttons.CLOSE
+              ? styles.closeButtonText
+              : null
           }>
           {text}
         </Text>

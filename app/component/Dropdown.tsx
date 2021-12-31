@@ -1,11 +1,16 @@
 import React from 'react';
-import { Dimensions, Image, StyleSheet, View, Text} from 'react-native';
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  View,
+  Text,
+  ImageSourcePropType,
+} from 'react-native';
 import Color from '../theme/colors';
 import Font from '../theme/fonts';
 import SelectDropdown from 'react-native-select-dropdown';
 // @ts-ignore
-
-
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -19,37 +24,42 @@ interface Props {
   defaultButtonText: string;
   onSelect: (item: string, index: number) => void;
   optionList: OptionListType[];
-  style: {};
+  style?: {};
   icon?: ImageSourcePropType;
-  helperText: string;
-
+  helperText?: string;
 }
 
-const Dropdown = ({ optionList, onSelect, defaultButtonText, style, icon,helperText }: Props) => {
+const Dropdown = ({
+  optionList,
+  onSelect,
+  defaultButtonText,
+  style,
+  icon,
+  helperText,
+}: Props) => {
   return (
-   
-      <View >
-        <SelectDropdown
-          renderDropdownIcon={() => (
-            <View style={styles.iconView}>
-              <Image source={icon} />
-            </View>
-          )}
-          defaultButtonText={defaultButtonText}
-          buttonStyle={[styles.Container, style]}
-          data={optionList.map(item => item.title)}
-          onSelect={onSelect}
-          buttonTextAfterSelection={selectedItem => {
-            return selectedItem;
-          }}
-          rowTextForSelection={item => {
-            return item;
-          }}
-        />
-           {helperText !== undefined ? (<Text style={styles.helperText}>{helperText}</Text>) : null}
-      </View>
-   
-    
+    <View>
+      <SelectDropdown
+        renderDropdownIcon={() => (
+          <View style={styles.iconView}>
+            <Image source={icon} />
+          </View>
+        )}
+        defaultButtonText={defaultButtonText}
+        buttonStyle={[styles.Container, style]}
+        data={optionList.map(item => item.title)}
+        onSelect={onSelect}
+        buttonTextAfterSelection={selectedItem => {
+          return selectedItem;
+        }}
+        rowTextForSelection={item => {
+          return item;
+        }}
+      />
+      {helperText !== undefined ? (
+        <Text style={styles.helperText}>{helperText}</Text>
+      ) : null}
+    </View>
   );
 };
 const styles = StyleSheet.create({
