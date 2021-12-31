@@ -17,7 +17,7 @@ interface Props {
   type: string;
   text?: string;
   icon?: ImageSourcePropType;
-  onPress: string;
+  onPress: () => void;
   style: {};
 }
 

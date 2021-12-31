@@ -8,7 +8,7 @@ import DrawerNavigator from '../route/DrawerNavigator';
 import Signin from '../views/SignInScreen';
 import All from '../views/All';
 import Mentees from '../views/Mentees';
-
+import CreateProfile from '../views/CreateProfile';
 const stackNavigator = () => {
   const Stack = createNativeStackNavigator();
 
@@ -29,6 +29,9 @@ const stackNavigator = () => {
         <Stack.Screen name="Signin" component={Signin} options={{ headerShown:false }} />
         <Stack.Screen name="All" component={All}/>
         <Stack.Screen name="Mentees" component={Mentees}/>
+        <Stack.Screen name="CreateProfile" component={CreateProfile} options={{ headerShown:false }}/>
+
+
 
 
       </Stack.Navigator>

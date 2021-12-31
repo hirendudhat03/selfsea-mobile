@@ -20,6 +20,7 @@ interface Props {
   value: string;
   secureTextEntryChange: () => void;
   secureTextEntry: boolean;
+  iconVisible?: ImageSourcePropType;
 }
 
 

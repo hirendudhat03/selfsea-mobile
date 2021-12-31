@@ -66,13 +66,13 @@ const Signup = ({ navigation }) => {
     }
 
 
-    const SignupValidation = () => {
+    const signupValidation = () => {
 
         if (!email && !Password && birthMonth === '' && birthYear === '' && !userName) {
             setEmailError('Email Required')
             setPasswordError('Password Required')
-            setBirthmonthError('Birth month Required')
-            setBirthyearError('Birth year Required')
+            setBirthMonthError('Birth month Required')
+            setBirthYearError('Birth year Required')
             setUserNameError('UserName Required')
         }
         else if (!email) {
@@ -86,16 +86,16 @@ const Signup = ({ navigation }) => {
         }
 
         else if (birthMonth === '') {
-            setBirthmonthError('Birth Month Required')
+            setBirthMonthError('Birth Month Required')
         }
         else if (birthYear === '') {
-            setBirthyearError('Birth Year Required')
+            setBirthYearError('Birth Year Required')
         }
         else if (!userName) {
             setUserNameError('UserName Required')
         }
         else {
-            navigation.navigate('DrawerNavigator')
+            navigation.navigate('CreateProfile')
         }
     }
 
@@ -125,7 +125,7 @@ const Signup = ({ navigation }) => {
                     onChangeText={text => { setPassword(text); setPasswordError(' ') }}
                     value={Password}
                     helperText={PasswordError}
-                    iconvisible={true}
+                    iconVisible={true}
                     secureTextEntry={focus === undefined ? true : focus}
                     secureTextEntryChange={selectFocus}
                 />
@@ -178,7 +178,7 @@ const Signup = ({ navigation }) => {
             </View>
             <View style={styles.bottomView}>
                 <Button type={Constant.buttons.PRIMARY} text={"create account"} style={{ marginTop: 15 }}
-                    onPress={() => SignupValidation()} />
+                    onPress={() => signupValidation()} />
             </View>
             <Modal
                 transparent={false}

@@ -10,9 +10,12 @@ import Images from '../theme/images';
 import { DrawerItem } from "@react-navigation/drawer";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+interface Props {
+    props: () => void;
+}
 
-
-const Drawer = (props) => {
+const Drawer = ({ props } : Props) => {
+    
     const [focus, setFocus] = useState('1')
 
 
@@ -341,7 +344,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     menuText: {
-        fontFamily: "Calibre",
+        fontFamily: Font.CALIBRE,
         fontSize: 20,
         fontWeight: "normal",
         fontStyle: "normal",
@@ -351,7 +354,7 @@ const styles = StyleSheet.create({
         marginLeft: 15,
     },
     logoutText: {
-        fontFamily: "Calibre",
+        fontFamily:  Font.CALIBRE,
         fontSize: 20,
         fontWeight: "normal",
         fontStyle: "normal",
@@ -362,7 +365,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
     },
     subMenuText: {
-        fontFamily: "Calibre",
+        fontFamily: Font.CALIBRE,
         fontSize: 20,
         // fontWeight:'bold',
         fontStyle: "normal",

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, StyleSheet, Text, Dimensions, } from "react-native";
 
 import Font from '../theme/fonts';
@@ -9,10 +9,7 @@ import Button from '../component/Button';
 
 
 interface Props {
-
-
     changeModalVisibility: () => void;
-
 }
 
 

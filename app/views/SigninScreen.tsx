@@ -52,7 +52,7 @@ const Signin = ({ navigation }) => {
     const [passwordError, setPasswordError] = useState('');
 
 
-    const SigninValidation = () => {
+    const signinValidation = () => {
 
         if (!email && !password) {
             setEmailError('Email Required')
@@ -97,7 +97,7 @@ const Signin = ({ navigation }) => {
                         onChangeText={text => {setPassword(text); setPasswordError(' ')}}
                         value={password}
                         helperText={passwordError}
-                        iconvisible={true}
+                        iconVisible={true}
                         secureTextEntry={focus === undefined ? true : focus}
                         secureTextEntryChange={selectFocus}
                     />
@@ -106,7 +106,7 @@ const Signin = ({ navigation }) => {
                         isSelectedCheckBox={isSelectedCheckBox} text={"keep me signed in"} />
 
                     <Button type={Constant.buttons.PRIMARY} text={"sign in"} style={{ marginTop: 10, marginBottom: 10 }}
-                        onPress={() => SigninValidation()} />
+                        onPress={() => signinValidation()} />
 
                     <View style={{ flexDirection: 'row' }}>
 
