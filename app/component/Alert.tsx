@@ -16,28 +16,28 @@ const Alert = ({ type, text }: Props) => {
         type === Constant.alert.MENTOR
           ? styles.mentorView
           : type === Constant.alert.URGENT
-            ? styles.modUrgentView
-            : type === Constant.alert.WARNING
-              ? styles.modWarning
-              : type === Constant.alert.SUCCESS
-                ? styles.actionSuccessView
-                : type === Constant.alert.INFO
-                  ? styles.actionInfoView
-                  : null
+          ? styles.modUrgentView
+          : type === Constant.alert.WARNING
+          ? styles.modWarning
+          : type === Constant.alert.SUCCESS
+          ? styles.actionSuccessView
+          : type === Constant.alert.INFO
+          ? styles.actionInfoView
+          : null
       }>
       <Text
         style={
           type === Constant.alert.MENTOR
             ? styles.mentorText
             : type === Constant.alert.URGENT
-              ? styles.modUrgentText
-              : type === Constant.alert.WARNING
-                ? styles.modWarningText
-                : type === Constant.alert.SUCCESS
-                  ? styles.actionSuccessText
-                  : type === Constant.alert.INFO
-                    ? styles.actionInfoText
-                    : null
+            ? styles.modUrgentText
+            : type === Constant.alert.WARNING
+            ? styles.modWarningText
+            : type === Constant.alert.SUCCESS
+            ? styles.actionSuccessText
+            : type === Constant.alert.INFO
+            ? styles.actionInfoText
+            : null
         }>
         {text}
       </Text>
