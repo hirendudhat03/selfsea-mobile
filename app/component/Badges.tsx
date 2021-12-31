@@ -190,8 +190,8 @@ const styles = StyleSheet.create({
   },
   multiSelectView: {
     alignSelf: 'baseline',
-    paddingVertical: 5,
-    paddingHorizontal: 15,
+    paddingVertical: 3,
+    paddingHorizontal: 9,
     borderRadius: 18,
     backgroundColor: Color.BASE_COLOR_WHITE,
     borderStyle: 'solid',
@@ -200,6 +200,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    margin:2
   },
   multiSelectText: {
     fontFamily: Font.CALIBRE,

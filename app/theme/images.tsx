@@ -30,6 +30,9 @@ import HomeFill from '../assets/images/pngs/home.png';
 import BellFill from '../assets/images/pngs/bellfill.png';
 import BookFill from '../assets/images/pngs/open-book.png';
 import PersonFill from '../assets/images/pngs/user.png';
+import plusCircle from '../assets/images/pngs/plusCircle.png';
+
+
 
  const images ={
     Right,
@@ -63,6 +66,7 @@ import PersonFill from '../assets/images/pngs/user.png';
     BellFill,
     BookFill,
     PersonFill,
+    plusCircle,
 
 
 

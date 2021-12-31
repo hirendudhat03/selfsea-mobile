@@ -99,7 +99,7 @@ const Signup = ({ navigation }) => {
     } else if (!userName) {
       setUserNameError('UserName Required');
     } else {
-      navigation.navigate('DrawerNavigator');
+      navigation.navigate('CreateProfile');
     }
   };
 
