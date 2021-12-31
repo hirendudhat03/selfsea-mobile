@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { DrawerItem } from '@react-navigation/drawer';
 
 import Color from '../theme/colors';
 import Font from '../theme/fonts';
 import Images from '../theme/images';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 import { DrawerItem } from "@react-navigation/drawer";
