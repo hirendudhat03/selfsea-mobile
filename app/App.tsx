@@ -28,6 +28,7 @@
 // export default App;
 
 import React from 'react';
+import { LogBox } from 'react-native';
 // import {StyleSheet, View} from 'react-native';
 // import {Root} from 'native-base';
 // import { Provider } from "react-redux";
@@ -35,7 +36,8 @@ import React from 'react';
 import RootNavigators from './route/Route';
 
 
-console.disableYellowBox = true;
+// console.disableYellowBox = true;
+LogBox.ignoreAllLogs();
 const App = () => {
   const Navigation = RootNavigators;
 

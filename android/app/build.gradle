@@ -79,7 +79,7 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-        enableHermes: false,
+        enableHermes: true,
         entryFile: "index.js",
         bundleAssetName: "index.android.bundle",
         bundleInAlpha: true,
