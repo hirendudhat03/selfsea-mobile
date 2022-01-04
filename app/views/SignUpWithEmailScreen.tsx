@@ -40,6 +40,21 @@ const countries = [
   },
 ];
 
+const descriptionData = [
+  {
+     title: "usernames cannot contain any personal identifiers (e.g. name,location, school, age)"
+  },
+  {
+    title:'usernames cannot contain any harmful or offensive language'
+  },
+  {
+    title:'usernames can only contain letters and numbers (no emojis)'
+  },
+
+];
+
+
+
 const Signup = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -105,7 +120,7 @@ const Signup = ({ navigation }) => {
 
 
 
-    
+
 
   const passwordStrengthColor = (barNumber: number) => {
     if (Password === '') {
@@ -235,7 +250,7 @@ const Signup = ({ navigation }) => {
         </View>
 
 
-   
+
 
         <View style={styles.userName}>
           <Text style={styles.birthMonthText}>username</Text>
@@ -270,7 +285,16 @@ const Signup = ({ navigation }) => {
         animationType="fade"
         visible={isModalVisible}
         onRequestClose={() => changeModalVisibility(false)}>
-        <ModalPicker changeModalVisibility={changeModalVisibility} />
+        <ModalPicker changeModalVisibility={changeModalVisibility}
+          textTitle={'selfsea usernames'}
+          smallText={'your username will need to be approved by a moderator before your first post or comment can be approved. it cannot be changed after that.'}
+          descriptionData={descriptionData}
+          numberOfLines={2}
+          button={Constant.buttons.CLOSE}
+          text={'close'}
+        />
+
+
       </Modal>
     </View>
   );
@@ -299,7 +323,7 @@ const styles = StyleSheet.create({
     borderTopColor: Color.BORDER_COLOR,
     borderTopWidth: 2,
   },
- 
+
   viewStyle: {
     flexDirection: 'row',
     justifyContent: 'space-between',

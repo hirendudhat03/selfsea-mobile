@@ -17,7 +17,7 @@ const stackNavigator = () => {
     //initRoute && (
 
   
-    <Stack.Navigator initialRouteName="CreateProfile">
+    <Stack.Navigator initialRouteName="Login">
       <Stack.Screen
         name="Home"
         component={Home}
@@ -35,7 +35,11 @@ const stackNavigator = () => {
         component={Signup}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="TabNavigator" component={TabNavigator} />
+      <Stack.Screen 
+      name="TabNavigator" 
+      component={TabNavigator} 
+      options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="DrawerNavigator"
         component={DrawerNavigator}

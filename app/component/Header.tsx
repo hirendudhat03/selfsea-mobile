@@ -19,7 +19,8 @@ interface Props {
   rightIcon?: ImageSourcePropType;
   text?: string;
   onPress: () => void;
-  underlinetext?: string;
+  underlineText?: string;
+  descriptionText: string;
   style?: {};
 }
 
@@ -29,7 +30,8 @@ const Header = ({
   label,
   leftIcon,
   text,
-  underlinetext,
+  underlineText,
+  descriptionText,
   style,
   onPress,
 }: Props) => {
@@ -57,11 +59,27 @@ const Header = ({
             {label} <Text style={styles.createPostTextSmall}>{text}</Text>
           </Text>
           <View style={styles.downView}>
-            <Text style={styles.underlineText}>{underlinetext}</Text>
+            <Text style={styles.underlineText}>{underlineText}</Text>
             <TouchableOpacity>
               <Image source={rightIcon} style={styles.downIconStyle} />
             </TouchableOpacity>
           </View>
+        </View>
+      ) : null}
+      {type === Constant.navigatioHeader.COMMUNITY_HEADER ? (
+        <View style={[styles.communityHeader, style]}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <TouchableOpacity>
+              <Image source={leftIcon} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Image source={rightIcon} />
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.createPostText}>
+            {label} <Text style={styles.createPostTextSmall}>{text}</Text>
+          </Text>
+          <Text style={styles.descriptionText}>{descriptionText}</Text>
         </View>
       ) : null}
     </>
@@ -160,6 +178,18 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'normal',
     fontStyle: 'normal',
+    letterSpacing: 0,
+    color: Color.CONTENT_COLOR_BLACK_TEXT,
+  },
+  communityHeader: {
+    padding: 20,
+    paddingTop: 80,
+  },
+  descriptionText: {
+    fontFamily: Font.CALIBRE,
+    fontSize: 18,
+    fontWeight: "normal",
+    fontStyle: "normal",
     letterSpacing: 0,
     color: Color.CONTENT_COLOR_BLACK_TEXT,
   },

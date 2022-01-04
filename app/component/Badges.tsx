@@ -5,6 +5,7 @@ import {
   Image,
   StyleSheet,
   ImageSourcePropType,
+  TouchableOpacity,
 } from 'react-native';
 import Color from '../theme/colors';
 import Constant from '../theme/constant';
@@ -15,30 +16,31 @@ interface Props {
   leftIcon?: ImageSourcePropType;
   rigthIcon?: ImageSourcePropType;
   text: string;
+  onPress: () => void;
 }
 
-const Badges = ({ type, leftIcon, rigthIcon, text }: Props) => {
+const Badges = ({ type, leftIcon, rigthIcon, text, onPress }: Props) => {
   return (
     <View
       style={
         type === Constant.badges.MENTOR_BADGE
           ? styles.mentorView
           : type === Constant.badges.CONTENT
-          ? styles.contentView
-          : type === Constant.badges.COMMENTS
-          ? styles.commentsView
-          : type === Constant.badges.ACTIVE
-          ? styles.activeView
-          : type === Constant.badges.INACTIVE
-          ? styles.inActiveView
-          : type === Constant.badges.DESCRIPTOR
-          ? styles.descriptorView
-          : type === Constant.badges.MULTISELECT
-          ? styles.multiSelectView
-          : null
+            ? styles.contentView
+            : type === Constant.badges.COMMENTS
+              ? styles.commentsView
+              : type === Constant.badges.ACTIVE
+                ? styles.activeView
+                : type === Constant.badges.INACTIVE
+                  ? styles.inActiveView
+                  : type === Constant.badges.DESCRIPTOR
+                    ? styles.descriptorView
+                    : type === Constant.badges.MULTISELECT
+                      ? styles.multiSelectView
+                      : null
       }>
       {leftIcon ? (
-        <Image source={leftIcon} style={styles.leftIconStyle} />
+        <TouchableOpacity> <Image source={leftIcon} style={styles.leftIconStyle} /></TouchableOpacity>
       ) : null}
 
       <Text
@@ -46,23 +48,23 @@ const Badges = ({ type, leftIcon, rigthIcon, text }: Props) => {
           type === Constant.badges.MENTOR_BADGE
             ? styles.mentorText
             : type === Constant.badges.CONTENT
-            ? styles.contentText
-            : type === Constant.badges.COMMENTS
-            ? styles.commentsText
-            : type === Constant.badges.ACTIVE
-            ? styles.activeText
-            : type === Constant.badges.INACTIVE
-            ? styles.inActiveText
-            : type === Constant.badges.DESCRIPTOR
-            ? styles.descriptorText
-            : type === Constant.badges.MULTISELECT
-            ? styles.multiSelectText
-            : null
+              ? styles.contentText
+              : type === Constant.badges.COMMENTS
+                ? styles.commentsText
+                : type === Constant.badges.ACTIVE
+                  ? styles.activeText
+                  : type === Constant.badges.INACTIVE
+                    ? styles.inActiveText
+                    : type === Constant.badges.DESCRIPTOR
+                      ? styles.descriptorText
+                      : type === Constant.badges.MULTISELECT
+                        ? styles.multiSelectText
+                        : null
         }>
         {text}
       </Text>
       {rigthIcon ? (
-        <Image source={rigthIcon} style={styles.rightIconStyle} />
+        <TouchableOpacity onPress={onPress}><Image source={rigthIcon} style={styles.rightIconStyle} /></TouchableOpacity>
       ) : null}
     </View>
   );
@@ -200,7 +202,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    margin:2
+    margin: 2
   },
   multiSelectText: {
     fontFamily: Font.CALIBRE,

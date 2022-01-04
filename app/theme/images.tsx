@@ -31,7 +31,7 @@ import BellFill from '../assets/images/pngs/bellfill.png';
 import BookFill from '../assets/images/pngs/open-book.png';
 import PersonFill from '../assets/images/pngs/user.png';
 import plusCircle from '../assets/images/pngs/plusCircle.png';
-
+import Dots from '../assets/images/pngs/three-dots.png';
 
 
  const images ={
@@ -67,6 +67,7 @@ import plusCircle from '../assets/images/pngs/plusCircle.png';
     BookFill,
     PersonFill,
     plusCircle,
+    Dots,
 
 
 

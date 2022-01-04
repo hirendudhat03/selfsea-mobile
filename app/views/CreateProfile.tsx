@@ -49,32 +49,76 @@ const countries = [
 const CreateProfile = ({ navigation }) => {
 
     const [pronouns, setPronouns] = useState('');
-    const [pronounsDropDown, setPronounsDropDown] = useState([{ name: 'A' }, { name: 'BC' }, { name: 'DEF' }, { name: 'GHIJ' }]);
-    const [selectPronounsDropDown, setselectpronounsDropDown] = useState([]);
-
+    const [pronounsDropDown, setPronounsDropDown] = useState([{ name: 'she/her' }, { name: 'he/him' }, { name: 'they/them' },]);
+    const [selectPronounsDropDown, setSelectPronounsDropDown] = useState([]);
 
     const clickDropDownItem = (item, val) => {
-
         setPronouns('')
 
         if (val === 'add') {
 
             var temp = selectPronounsDropDown;
-
             temp.push(item)
+            setSelectPronounsDropDown([...temp])
 
-            setselectpronounsDropDown([...temp])
+            const newData = pronounsDropDown.filter(itemdata => itemdata.name !== item.name);
+            setPronounsDropDown([...newData])
+
+
+        }
+        else {
+
+            var temp = pronounsDropDown;
+            temp.push(item)
+            setPronounsDropDown([...temp])
+
+
+            const temp1 = selectPronounsDropDown.filter(itemdata => itemdata.name !== item.name);
+            setSelectPronounsDropDown([...temp1])
+
         }
 
 
     }
+
+    const [orientation, setOrientation] = useState('');
+    const [orientationDropDown, setOrientationDropDown] = useState([{ name: 'lesbian/gay' }, { name: 'bisexual' }, { name: 'asexual' },]);
+    const [selectOrientationDropDown, setSelectOrientationDropDown] = useState([]);
+
+    const orientationDropDownItem = (item, val) => {
+
+        setOrientation('')
+
+        if (val === 'add') {
+
+            var temp = selectOrientationDropDown;
+            temp.push(item)
+            setSelectOrientationDropDown([...temp])
+
+            const newData = orientationDropDown.filter(itemData => itemData.name !== item.name);
+            setOrientationDropDown([...newData])
+        }
+        else {
+            var temp = orientationDropDown;
+            temp.push(item)
+            setOrientationDropDown([...temp])
+
+            const temp1 = selectOrientationDropDown.filter(itemData => itemData.name !== item.name);
+            setSelectOrientationDropDown([...temp1])
+        }
+
+
+    }
+
+
+
 
     return (
         <View style={styles.container}>
             <Header
                 type={Constant.navigatioHeader.PAGE_HEADER}
                 leftIcon={Images.Arrowsquare}
-                label={'sign up with email'}
+                label={'create your profile'}
                 onPress={() => navigation.goBack()}
             />
 
@@ -107,107 +151,12 @@ const CreateProfile = ({ navigation }) => {
                         defaultButtonText={'select one'}
                         icon={Images.DropdownIcon}
                     />
-                    {/* <Text style={styles.labelText}>pronouns</Text> */}
-                    {/* <View style={styles.largeInputView}>
-                        <TextInput
-                            style={styles.textInputStyle}
-                            placeholder={"placeholder"}
-                        // onChangeText={onChangeText}
-                        // secureTextEntry={secureTextEntry}
-                        // value={value}
-                        />
 
-
-                        <TouchableOpacity
-                            style={styles.touchableStyle}>
-                            <Image
-                                source={Images.plusCircle}
-                                style={styles.passwordIcon}
-                            />
-                        </TouchableOpacity>
-
-                    </View> */}
-
-                    {/* <Text style={styles.labelText}>pronouns</Text>
-
-                    <View style={styles.mainView}>
-                    <View style={styles.View}>
-                        {
-                            selectPronounsDropDown.map((item) => {
-                                return (
-                                  
-                                    <Badges
-                                        type={Constant.badges.MULTISELECT}
-                                        text={item.name}
-                                        rigthIcon={Images.Circle}
-                                    />
-                                )
-                            })
-                        }
-                        <TextInput value={pronouns} style={{ height: 30, backgroundColor: 'blue', width: 100 }} onChangeText={(val) => setPronouns(val)} />
-                     
-                    </View>
-                    <View style={{justifyContent:'center'}}>
-                    <TouchableOpacity
-                            style={styles.touchableStyle}>
-                            <Image
-                                source={Images.plusCircle}
-                                style={styles.passwordIcon}
-                            />
-                        </TouchableOpacity>
-                    </View>
-                    </View>
-                    {pronouns !== '' ? (<View style={{ backgroundColor: 'green' }}>
-                        {pronounsDropDown.map((item) => {
-
-                            return (
-                                <Text onPress={() => clickDropDownItem(item, 'add')} style={{ paddingVertical: 10 }}>{item.name}</Text>
-                            )
-                        })}
-
-                    </View>) : null} */}
-                    {/* <View style={styles.View}>
-                        {
-                            selectPronounsDropDown.map((item) => {
-                                return (
-                                  
-                                    <Badges
-                                        type={Constant.badges.MULTISELECT}
-                                        text={item.name}
-                                        rigthIcon={Images.Circle}
-                                    />
-                                )
-                            })
-                        }
-                        <TextInput value={pronouns} style={{ height: 30, backgroundColor: 'blue', width: 100 }} onChangeText={(val) => setPronouns(val)} />
-                        <TouchableOpacity
-                            style={styles.touchableStyle}>
-                            <Image
-                                source={Images.plusCircle}
-                                style={styles.passwordIcon}
-                            />
-                        </TouchableOpacity>
-                    </View>
-                    {pronouns !== '' ? (<View style={{ backgroundColor: 'green' }}>
-                        {pronounsDropDown.map((item) => {
-
-                            return (
-                                <Text onPress={() => clickDropDownItem(item, 'add')} style={{ paddingVertical: 10 }}>{item.name}</Text>
-                            )
-                        })}
-
-                    </View>) : null} */}
 
                     <Text style={styles.labelText}>pronouns</Text>
 
-                    <View style={{
-                        paddingVertical: 10, backgroundColor: 'white', flexDirection: 'row', borderRadius: 4,
-                        backgroundColor: Color.BASE_COLOR_WHITE,
-                        borderStyle: 'solid',
-                        borderWidth: 1,
-                        borderColor: Color.BORDER_COLOR_LIGHTGRAY,
-                    }}>
-                        <View style={{ flex: 6, flexDirection: 'row', flexWrap: 'wrap', paddingLeft: 5 }}>
+                    <View style={styles.viewStyle}>
+                        <View style={styles.inputView}>
 
                             {
                                 selectPronounsDropDown.map((item) => {
@@ -216,13 +165,70 @@ const CreateProfile = ({ navigation }) => {
                                             type={Constant.badges.MULTISELECT}
                                             text={item.name}
                                             rigthIcon={Images.Circle}
+                                            onPress={() => clickDropDownItem(item)}
                                         />
                                     )
                                 })
                             }
-                            <TextInput value={pronouns} style={{ height: 30, width: 100 }} onChangeText={(val) => setPronouns(val)} />
+                            <TextInput value={pronouns} style={styles.textInputStyle}
+                                placeholder="she/her,he/him/they/them"
+                                onChangeText={(val) => setPronouns(val)} />
                         </View>
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                        <View style={styles.imageView}>
+                            <TouchableOpacity
+
+                                style={styles.touchableStyle}>
+                                <Image
+                                    source={Images.plusCircle}
+                                    style={styles.passwordIcon}
+                                />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    {pronouns !== '' ? (
+                        <View style={styles.menuListView}>
+
+                            {pronounsDropDown.map((item) => {
+
+                                return (
+                                    <Text onPress={() => clickDropDownItem(item, 'add')} style={styles.menuTextStyle}>{item.name}</Text>
+                                )
+                            })}
+
+                        </View>
+                    ) : null}
+
+
+
+
+
+
+
+
+
+
+                    <Text style={styles.labelText}>sexual orientation</Text>
+
+                    <View style={styles.viewStyle}>
+                        <View style={styles.inputView}>
+
+                            {
+                                selectOrientationDropDown.map((item) => {
+                                    return (
+                                        <Badges
+                                            type={Constant.badges.MULTISELECT}
+                                            text={item.name}
+                                            rigthIcon={Images.Circle}
+                                            onPress={() => orientationDropDownItem(item)}
+                                        />
+                                    )
+                                })
+                            }
+                            <TextInput value={orientation} style={styles.textInputStyle}
+                                placeholder="lesbian/gay,bisexual,asexual"
+                                onChangeText={(val) => setOrientation(val)} />
+                        </View>
+                        <View style={styles.imageView}>
                             <TouchableOpacity
                                 style={styles.touchableStyle}>
                                 <Image
@@ -232,46 +238,29 @@ const CreateProfile = ({ navigation }) => {
                             </TouchableOpacity>
                         </View>
                     </View>
-                    {pronouns !== '' ? (<View style={{
-                        borderRadius: 4,
-                        backgroundColor: Color.BASE_COLOR_WHITE,
-                        borderStyle: 'solid',
-                        borderWidth: 1,
-                        borderColor: Color.BORDER_COLOR_LIGHTGRAY,
-                        
-                    }}>
-                        {pronounsDropDown.map((item) => {
 
-                            return (
-                                <Text onPress={() => clickDropDownItem(item, 'add')} style={{ padding: 10, }}>{item.name}</Text>
-                            )
-                        })}
+                    {orientation !== '' ? (
+                        <View style={styles.menuListView}>
+                            {orientationDropDown.map((item) => {
 
-                    </View>) : null}
-
-
-
-                    {/* <View style={{ backgroundColor: 'red', marginTop: 50, flexDirection: 'row', flexWrap: 'wrap' }}>
-                        {
-                            selectPronounsDropDown.map((item) => {
                                 return (
-                                    <View style={{ height: 30, backgroundColor: 'yellow', margin: 5, paddingHorizontal: 20 }}>
-                                        <Text style={{ textAlign: 'center' }}>{item.name}</Text>
-                                    </View>
+                                    <Text onPress={() => orientationDropDownItem(item, 'add')} style={styles.menuTextStyle}>{item.name}</Text>
                                 )
-                            })
-                        }
-                        <TextInput value={pronouns} style={{ height: 30, backgroundColor: 'blue', width: 100 }} onChangeText={(val) => setPronouns(val)} />
-                    </View>
-                    {pronouns !== '' ? (<View style={{ backgroundColor: 'green' }}>
-                        {pronounsDropDown.map((item) => {
+                            })}
 
-                            return (
-                                <Text onPress={() => clickDropDownItem(item, 'add')} style={{ paddingVertical: 10 }}>{item.name}</Text>
-                            )
-                        })}
+                        </View>) : (
+                        orientationDropDown === null ? (
+                            <View style={styles.recordView}>
+                                <Text>No Record Found</Text>
+                            </View>
+                        ) : null
 
-                    </View>) : null} */}
+
+                    )
+                    }
+
+
+
 
                 </View>
 
@@ -284,8 +273,9 @@ const CreateProfile = ({ navigation }) => {
             </View>
             <View style={styles.bottomView}>
                 <Button
+                onPress={()=>navigation.navigate('TabNavigator')}
                     type={Constant.buttons.PRIMARY}
-                    text={'create account'}
+                    text={'take me to selfsea'}
                     style={{ marginTop: 15 }}
 
                 />
@@ -338,12 +328,7 @@ const styles = StyleSheet.create({
         color: Color.BASE_COLOR_GRAY,
         marginTop: 25,
     },
-    textInputStyle: {
-        fontSize: 17,
-        height: height * 0.064,
-        width: '90%',
-        paddingHorizontal: 16,
-    },
+
 
     profileView: {
         justifyContent: 'space-between',
@@ -371,50 +356,57 @@ const styles = StyleSheet.create({
 
     touchableStyle: { justifyContent: 'center' },
 
-    largeInputView: {
-        width: '100%',
-        height: height * 0.064,
-        borderRadius: 4,
-        backgroundColor: Color.BASE_COLOR_WHITE,
-        borderStyle: 'solid',
-        //borderWidth: 1,
-        //borderColor: Color.BORDER_COLOR_LIGHTGRAY,
+    viewStyle: {
+        paddingVertical: 10,
         flexDirection: 'row',
-
-
-    },
-    passwordIcon: {
-        // height: 25,
-        // width: 25,
-        // alignSelf: 'flex-end',
-    },
-    View: {
-
-        // marginTop: 50, 
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        borderRadius: 4,
-        backgroundColor: Color.BASE_COLOR_WHITE,
-        borderStyle: 'solid',
-        // borderWidth: 1,
-        // borderColor: Color.BORDER_COLOR_LIGHTGRAY,
-        padding: 5,
-
-
-    },
-    mainView: {
-        justifyContent: 'space-between',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
         borderRadius: 4,
         backgroundColor: Color.BASE_COLOR_WHITE,
         borderStyle: 'solid',
         borderWidth: 1,
         borderColor: Color.BORDER_COLOR_LIGHTGRAY,
-        padding: 5,
-
+    },
+    inputView: {
+        flex: 6,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        paddingLeft: 5
+    },
+    textInputStyle: {
+        height: 30,
+        width: 'auto',
+        fontSize: 15,
+    },
+    imageView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    menuListView: {
+        borderRadius: 4,
+        backgroundColor: Color.BASE_COLOR_WHITE,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: Color.BORDER_COLOR_LIGHTGRAY,
 
     },
+    menuTextStyle: {
+        padding: 10,
+
+    },
+    recordView: {
+
+        borderRadius: 4,
+        backgroundColor: Color.BASE_COLOR_WHITE,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: Color.BORDER_COLOR_LIGHTGRAY,
+        justifyContent: 'center',
+        padding: 8,
+    },
+
+
+
+
 
 });
 

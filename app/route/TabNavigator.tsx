@@ -1,19 +1,55 @@
 import React, { useEffect } from "react";
 import { View, Text, Image, StyleSheet,Dimensions } from "react-native";
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 import Images from '../theme/images';
-import TabHome from '../views/TabHome';
+
+import CommunitiesHome from '../views/CommunitiesHome';
 import Bell from '../views/Bell';
 import Book from '../views/Book';
 import Person from '../views/Person';
 import TabScreen from '../views/TabScreen';
 import Color from '../theme/colors';
 
+import CommunitiesTab from '../views/CommunitiTabScreen';
+
 const height = Dimensions.get('window').height;
 
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+
 const BottomTabNavigator = ({ navigation }) => {
+
+
+const CommunitiesHomeStack =()=>{
+    return(
+
+    <Stack.Navigator initialRouteName="CommunitiesHome">
+      <Stack.Screen
+        name="CommunitiesHome"
+        component={CommunitiesHome}
+        options={{
+          headerShown: false,
+        }}
+      />
+        <Stack.Screen
+        name="CommunitiesTab"
+        component={CommunitiesTab}
+        options={{
+            headerShown: false,
+          }}
+      />
+      </Stack.Navigator>
+    );
+ 
+}
+
+
+
+    
 
 
     return (
@@ -33,7 +69,7 @@ const BottomTabNavigator = ({ navigation }) => {
             >
                 <Tab.Screen
                     name="TabHome"
-                    component={TabHome}
+                    component={CommunitiesHomeStack}
                     options={{
                         headerShown: false,
                         tabBarLabel: () => { return null },

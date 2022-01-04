@@ -10,43 +10,48 @@ import Constant from '../theme/constant';
 import Button from '../component/Button';
 
 interface Props {
-   
+
   changeModalVisibility: (bool: boolean) => void;
+  textTitle: string;
+  smallText: string;
+  button: string;
+  text: string;
+  descriptionData: [];
+  numberOfLines: number;
+
 
 }
 
-const ModalPicker = ({ changeModalVisibility }: Props) => {
+const ModalPicker = ({ changeModalVisibility, textTitle, smallText, button, text, descriptionData,numberOfLines }: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.modal}>
-        <Text style={styles.textTitle}>selfsea usernames</Text>
+        <Text style={styles.textTitle}>{textTitle}
+
+        </Text>
         <Text style={styles.smallText} numberOfLines={3} ellipsizeMode="middle">
-          your username will need to be approved by a moderator before your
-          first post or comment can be approved. it cannot be changed after
-          that.
+
+          {smallText}
         </Text>
-        <Text
-          style={styles.descriptionText}
-          numberOfLines={2}
-          ellipsizeMode="middle">
-          usernames cannot contain any personal identifiers (e.g. name,
-          location, school, age)
-        </Text>
-        <Text
-          style={styles.descriptionText}
-          numberOfLines={2}
-          ellipsizeMode="middle">
-          usernames cannot contain any harmful or offensive language
-        </Text>
-        <Text
-          style={styles.descriptionText}
-          numberOfLines={5}
-          ellipsizeMode="middle">
-          usernames can only contain letters and numbers (no emojis)
-        </Text>
+
+
+        {descriptionData.map((item) => {
+          console.log("descriptionData::",descriptionData)
+          return(
+            <Text
+            style={styles.descriptionText}
+            numberOfLines={numberOfLines}
+            ellipsizeMode="middle">{item.title}
+          </Text>
+          )
+       })
+      }
+      
+
+        
         <Button
-          type={Constant.buttons.CLOSE}
-          text={'Close'}
+          type={button}
+          text={text}
           style={{ marginVertical: 10, width: '100%' }}
           onPress={() => changeModalVisibility(false)}
         />

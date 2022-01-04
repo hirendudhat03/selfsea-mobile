@@ -1662,6 +1662,11 @@
     opencollective-postinstall "^2.0.1"
     superstruct "^0.6.2"
 
+"@react-native-firebase/auth@^14.2.1":
+  version "14.2.1"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/auth/-/auth-14.2.1.tgz#8121f94d4b4bcd1947ba9adeaef1807bfc8b3d4d"
+  integrity sha512-ULHPFw+lvjZQsKKFPeeuuyZ+Khhu5hu/W3xnbbtFQ1W7C0oj+BeEC6kvhck14SWm7Hzt8zapcqngqfC7GRyOwg==
+
 "@react-native-google-signin/google-signin@^7.0.4":
   version "7.0.4"
   resolved "https://registry.yarnpkg.com/@react-native-google-signin/google-signin/-/google-signin-7.0.4.tgz#b557be28dac0af8fd020010b8a9670ae65bedba8"
@@ -7317,6 +7322,11 @@ react-native-gesture-handler@^2.1.0:
     invariant "^2.2.4"
     lodash "^4.17.21"
     prop-types "^15.7.2"
+
+react-native-linear-gradient@^2.5.6:
+  version "2.5.6"
+  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.5.6.tgz#96215cbc5ec7a01247a20890888aa75b834d44a0"
+  integrity sha512-HDwEaXcQIuXXCV70O+bK1rizFong3wj+5Q/jSyifKFLg0VWF95xh8XQgfzXwtq0NggL9vNjPKXa016KuFu+VFg==
 
 react-native-password-strength-meter@0.0.5:
   version "0.0.5"

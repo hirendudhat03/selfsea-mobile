@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { View, Text, StyleSheet, ScrollView,  } from 'react-native';
 
 import Constant from '../theme/constant';
 import Fonts from '../theme/fonts';
@@ -12,7 +12,11 @@ import TextInput from '../component/CustomTextInput';
 import CheckBox from '../component/Checkbox';
 import Header from '../component/Header';
 
+import auth from '@react-native-firebase/auth';
+
+
 const Signin = ({ navigation }) => {
+
   const [isSelectedCheckBox, setISSelectionCheckBox] = useState(false);
 
   const selectCheckBox = () => {
@@ -31,16 +35,16 @@ const Signin = ({ navigation }) => {
     } else {
       setFocus(true);
     }
- 
+
   };
 
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('test@selfsea.com');
   const [emailError, setEmailError] = useState('');
 
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState('1234567890');
   const [passwordError, setPasswordError] = useState('');
 
-  const SigninValidation = () => {
+  const SigninValidation = async () => {
     if (!email && !password) {
       setEmailError('Email Required');
       setPasswordError('Password Required');
@@ -53,10 +57,23 @@ const Signin = ({ navigation }) => {
     } else if (!password) {
       setPasswordError('Password Required');
     } else {
-      navigation.navigate('DrawerNavigator');
+      try {
+        await auth().signInWithEmailAndPassword(email, password).then((res) => {
+          alert(JSON.stringify(res))
+          navigation.navigate('DrawerNavigator');
+
+        })
+  
+      } catch (e) {
+        console.log(e);
+        alert(e)
+  
+      }
     }
   };
 
+
+  
   return (
     <View style={styles.container}>
       <Header
