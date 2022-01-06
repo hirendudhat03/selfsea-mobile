@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   },
   primaryText: {
     fontFamily: Font.CALIBRE,
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '500',
     fontStyle: 'normal',
     lineHeight: 21,
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
   },
   closeButtonText: {
     fontFamily: Font.CALIBRE,
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '500',
     fontStyle: 'normal',
     lineHeight: 21,

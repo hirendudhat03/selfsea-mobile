@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ImageBackground, StyleSheet, Image } from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, Image, TouchableOpacity,Linking } from 'react-native';
 
 import Constant from '../theme/constant';
 import Fonts from '../theme/fonts';
@@ -13,6 +13,7 @@ const onPressText = () => {
   alert('onPressText');
 };
 
+
 const Login = ({ navigation }) => {
   return (
     <View style={styles.container}>
@@ -25,17 +26,17 @@ const Login = ({ navigation }) => {
         </View>
         <View style={styles.contentView}>
           <Auth
-            text={'Continue with Google'}
+            text={'continue with Google'}
             icon={Images.Google}
             type={Constant.authLogin.GOOGLE}
           />
           <Auth
-            text={'Continue with Instagram'}
+            text={'continue with Instagram'}
             icon={Images.Instagram}
             type={Constant.authLogin.INSTAGRAM}
           />
           <Auth
-            text={'Continue with Apple'}
+            text={'continue with Apple'}
             icon={Images.Apple}
             type={Constant.authLogin.APPLE}
           />
@@ -51,9 +52,11 @@ const Login = ({ navigation }) => {
             by signing up for selfsea, you are agreeing to the
           </Text>
           <View style={{ flexDirection: 'row' }}>
-            <Text style={styles.contentSecondText}>Privacy Policy</Text>
+            <TouchableOpacity  onPress={()=>{ Linking.openURL(Constant.link.PRIVACY_POLICY)}}
+            ><Text style={styles.contentSecondText}>Privacy Policy</Text></TouchableOpacity>
             <Text style={styles.contentSecondTextAnd}> and</Text>
-            <Text style={styles.contentSecondText}> Terms of Use</Text>
+            <TouchableOpacity   onPress={()=>{ Linking.openURL(Constant.link.TERMS_OF_USE)}}
+            ><Text style={styles.contentSecondText}> Terms of Use</Text></TouchableOpacity>
           </View>
         </View>
         <View style={styles.bottomView}>
@@ -62,7 +65,7 @@ const Login = ({ navigation }) => {
           </Text>
           <Button
             type={Constant.buttons.CLOSE}
-            text={'Sign in'}
+            text={'sign in'}
             onPress={() => navigation.navigate('Signin')}
           />
         </View>
@@ -114,6 +117,8 @@ const styles = StyleSheet.create({
   bottomText: {
     fontFamily: Fonts.CALIBRE,
     marginVertical: 9,
+    fontWeight: 'bold',
+    color: Color.DESCRIPTION_COLOR_TEXT,
   },
 });
 

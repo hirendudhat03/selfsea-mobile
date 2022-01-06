@@ -40,7 +40,7 @@ const Badges = ({ type, leftIcon, rigthIcon, text, onPress }: Props) => {
                       : null
       }>
       {leftIcon ? (
-        <TouchableOpacity> <Image source={leftIcon} style={styles.leftIconStyle} /></TouchableOpacity>
+        <TouchableOpacity><Image source={leftIcon} style={styles.leftIconStyle} /></TouchableOpacity>
       ) : null}
 
       <Text

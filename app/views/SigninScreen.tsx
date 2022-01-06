@@ -14,8 +14,16 @@ import Header from '../component/Header';
 
 import auth from '@react-native-firebase/auth';
 
+import {useDispatch, useSelector} from 'react-redux'
+import {LoginRequest} from '../redux/actions/LoginAction'
+
 
 const Signin = ({ navigation }) => {
+
+
+  const dispatch = useDispatch()
+
+ 
 
   const [isSelectedCheckBox, setISSelectionCheckBox] = useState(false);
 
@@ -57,18 +65,21 @@ const Signin = ({ navigation }) => {
     } else if (!password) {
       setPasswordError('Password Required');
     } else {
-      try {
-        await auth().signInWithEmailAndPassword(email, password).then((res) => {
-          alert(JSON.stringify(res))
-          navigation.navigate('DrawerNavigator');
 
-        })
+      dispatch(LoginRequest(email,password,navigation))
+      // try {
+      //   await auth().signInWithEmailAndPassword(email, password).then((res) => {
+      //     alert(JSON.stringify(res))
+          
+      //     navigation.navigate("Home");
+
+      //   })
   
-      } catch (e) {
-        console.log(e);
-        alert(e)
+      // } catch (e) {
+      //   console.log(e);
+      //   alert(e)
   
-      }
+      // }
     }
   };
 

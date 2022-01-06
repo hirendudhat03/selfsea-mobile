@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* SelfseaMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SelfseaMobileTests.m */; };
-		04155BE42782FB9F00BD099F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04155BE32782FB9E00BD099F /* GoogleService-Info.plist */; };
+		0464C368278446B30053F7BD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0464C367278446B30053F7BD /* GoogleService-Info.plist */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -45,7 +45,7 @@
 		00E356EE1AD99517003FC87E /* SelfseaMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SelfseaMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* SelfseaMobileTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelfseaMobileTests.m; sourceTree = "<group>"; };
-		04155BE32782FB9E00BD099F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Documents/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0464C367278446B30053F7BD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Documents/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* SelfseaMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SelfseaMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = SelfseaMobile/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = SelfseaMobile/AppDelegate.m; sourceTree = "<group>"; };
@@ -116,7 +116,7 @@
 		13B07FAE1A68108700A75B9A /* SelfseaMobile */ = {
 			isa = PBXGroup;
 			children = (
-				04155BE32782FB9E00BD099F /* GoogleService-Info.plist */,
+				0464C367278446B30053F7BD /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -308,7 +308,7 @@
 				4114504E27758D82001B5C0E /* Calibre-RegularItalic.otf in Resources */,
 				4114504F27758D82001B5C0E /* Calibre-Semibold.otf in Resources */,
 				4114505027758D82001B5C0E /* Calibre-SemiboldItalic.otf in Resources */,
-				04155BE42782FB9F00BD099F /* GoogleService-Info.plist in Resources */,
+				0464C368278446B30053F7BD /* GoogleService-Info.plist in Resources */,
 				4114505127758D82001B5C0E /* Calibre-Thin.otf in Resources */,
 				4114505227758D82001B5C0E /* Calibre-ThinItalic.otf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,

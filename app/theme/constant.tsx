@@ -38,6 +38,10 @@ export default {
         PAGE_HEADER: "pageheader",
         POST: 'post',
         COMMUNITY_HEADER: 'communityheader',
+    },
+    link: {
+        PRIVACY_POLICY: 'https://www.peerhealthexchange.org/privacy-policy',
+        TERMS_OF_USE: 'https://www.peerhealthexchange.org/terms-of-service',
     }
 
 

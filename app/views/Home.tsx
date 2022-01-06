@@ -3,14 +3,28 @@ import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import Images from '../theme/images';
 
+import Switch from '../component/Switch';
+import CheckBox from '../component/Checkbox';
+import Radio from '../component/Radio';
+import Button from '../component/Button';
 import Alert from '../component/Alert';
 import Badges from '../component/Badges';
 import Constant from '../theme/constant';
 import Dropdown from '../component/Dropdown';
+import TextInput from '../component/CustomTextInput';
 import Header from '../component/Header';
 import Color from '../theme/colors';
 
+
+import { useDispatch,useSelector } from 'react-redux';
+
+
 const Home = ({ navigation }) => {
+
+
+  const loginRes = useSelector(state => state.LoginReducer)
+  console.log('loginRes : ',JSON.stringify(loginRes))
+
   const [isSelectedCheckBox, setISSelectionCheckBox] = useState(false);
 
   const selectCheckBox = () => {
@@ -55,9 +69,7 @@ const Home = ({ navigation }) => {
         <View style={styles.container}>
           <Text
             style={{ fontSize: 20 }}
-            onPress={() => navigation.navigate('TanNavigator')}>
-            SECOND SCREEN
-          </Text>
+            onPress={() => navigation.goBack()}>SECOND SCREEN</Text>
 
           <Alert
             type={Constant.alert.MENTOR}
@@ -90,8 +102,7 @@ const Home = ({ navigation }) => {
             text={'they/them'}
             rigthIcon={Images.Circle}
           />
-          {/* <Button type={Constant.buttons.DESKTOP}
-            text={"Primary Button"} />
+          <Button type={Constant.buttons.DESKTOP} text={"Primary Button"} />
           <Button type={Constant.buttons.SECONDARY}
             text={"Secondary"} />
           <Button type={Constant.buttons.MOBILE}
@@ -123,7 +134,7 @@ const Home = ({ navigation }) => {
             helperText={'Helper Text'}
           />
           <TextInput type={Constant.textInput.LARGE_TEXT_AREA}
-            placeholder={"Placeholder"} /> */}
+            placeholder={"Placeholder"} />
 
           <Dropdown
             optionList={countries}
@@ -153,6 +164,16 @@ const Home = ({ navigation }) => {
             rightIcon={Images.Gear}
             label={'page title'}
           />
+             <Header
+            type={Constant.navigatioHeader.COMMUNITY_HEADER}
+            leftIcon={Images.Arrowsquare}
+            rightIcon={Images.Dots}
+            label={'navigating identity'}
+            descriptionText={'a community to discuss questions and situations related to gender identity, sexual orientation, race and ethnicity'}
+            style={{ backgroundColor: Color.COMMUNITY_GREEN }}
+                    
+          />
+
 
           <Header
             type={Constant.navigatioHeader.POST}
@@ -163,12 +184,7 @@ const Home = ({ navigation }) => {
             underlinetext={'select a community'}
           />
 
-          {/* <Text onPress={() => setmodalVisible(true)}>open modal</Text>
-            <ModalView headertext={'[modal title]'} placeholder={'[modal description]'}
-            data={countries} text={'Primary'} visible={modalVisible} closeModal={() => setmodalVisible(false)}/>
-    // const [modalVisible, setmodalVisible] = useState(false);
-
-             */}
+         
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -273,7 +273,7 @@ const CreateProfile = ({ navigation }) => {
             </View>
             <View style={styles.bottomView}>
                 <Button
-                onPress={()=>navigation.navigate('TabNavigator')}
+                    onPress={() => navigation.navigate('TabNavigator')}
                     type={Constant.buttons.PRIMARY}
                     text={'take me to selfsea'}
                     style={{ marginTop: 15 }}
@@ -375,6 +375,7 @@ const styles = StyleSheet.create({
         height: 30,
         width: 'auto',
         fontSize: 15,
+        paddingVertical: 0,
     },
     imageView: {
         flex: 1,

@@ -92,13 +92,16 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   image: {
-    height: 18,
-    width: 18,
+    height: 19,
+    width: 19,
+    alignSelf: 'center',
   },
   text: {
     marginHorizontal: 10,
     fontSize: 16,
     color: Color.BORDER_COLOR_DARKGRAY,
+    textAlign: 'center',
+    
   },
 });
 

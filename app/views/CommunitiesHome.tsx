@@ -33,7 +33,6 @@ const DATA = [
 
 
 
-
 const descriptionData = [
   {
     title: 'I will not give out my personal info, or share the personal info of others.'
@@ -55,10 +54,11 @@ const descriptionData = [
 const CommunitiesHome = ({ navigation }) => {
 
 
-
   useEffect(() => {
     changeModalVisibility(false);
   }, []);
+  
+
   const [isModalVisible, setIsMoalVisiable] = useState(false);
   const changeModalVisibility = (bool: boolean) => {
     setIsMoalVisiable(bool);
@@ -89,7 +89,7 @@ const CommunitiesHome = ({ navigation }) => {
           type={Constant.buttons.CLOSE}
           text={'join'}
           style={{ paddingVertical: 12 }}
-          onPress={() => navigation.navigate('CommunitiesTab')}
+          onPress={() => navigation.navigate('HealthScreen')}
         />
 
 

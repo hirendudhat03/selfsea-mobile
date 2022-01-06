@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { View, Text, Image, StyleSheet,Dimensions } from "react-native";
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -13,7 +13,7 @@ import Person from '../views/Person';
 import TabScreen from '../views/TabScreen';
 import Color from '../theme/colors';
 
-import CommunitiesTab from '../views/CommunitiTabScreen';
+import HealthScreen from '../views/HealthScreen';
 
 const height = Dimensions.get('window').height;
 
@@ -36,8 +36,8 @@ const CommunitiesHomeStack =()=>{
         }}
       />
         <Stack.Screen
-        name="CommunitiesTab"
-        component={CommunitiesTab}
+        name="HealthScreen"
+        component={HealthScreen}
         options={{
             headerShown: false,
           }}

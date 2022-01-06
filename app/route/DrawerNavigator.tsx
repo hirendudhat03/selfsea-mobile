@@ -11,7 +11,7 @@ const DrawerNavigator = (props) => {
             <Drawer.Navigator 
             drawerContent={props=><Customdrawer  props={props}/>}
             initialRouteName="TabNavigator">
-                <Drawer.Screen name="TabNavigator" component={TabNavigator} />
+                <Drawer.Screen name="TabNavigator" component={TabNavigator}  options={{ headerShown: false }}/>
             </Drawer.Navigator>
 
     );

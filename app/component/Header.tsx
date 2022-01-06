@@ -68,18 +68,20 @@ const Header = ({
       ) : null}
       {type === Constant.navigatioHeader.COMMUNITY_HEADER ? (
         <View style={[styles.communityHeader, style]}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <TouchableOpacity>
+          <View style={styles.communityImageView}>
+            <TouchableOpacity onPress={onPress} >
               <Image source={leftIcon} />
             </TouchableOpacity>
             <TouchableOpacity>
-              <Image source={rightIcon} />
+              <Image source={rightIcon} style={styles.rightIconStyle} />
             </TouchableOpacity>
           </View>
-          <Text style={styles.createPostText}>
-            {label} <Text style={styles.createPostTextSmall}>{text}</Text>
+          <Text style={styles.communityHeaderText}>
+            {label}
           </Text>
-          <Text style={styles.descriptionText}>{descriptionText}</Text>
+          <Text style={styles.descriptionText}
+            numberOfLines={3}
+          >{descriptionText}</Text>
         </View>
       ) : null}
     </>
@@ -160,10 +162,7 @@ const styles = StyleSheet.create({
   downIconStyle: {
     margin: 5,
   },
-  communityHeaderView: {
-    padding: 20,
-    paddingTop: 80,
-  },
+
   communityHeaderText: {
     fontFamily: Font.CALIBRE,
     fontSize: 24,
@@ -171,27 +170,30 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
     lineHeight: 24,
     letterSpacing: 0,
-    color: Color.CONTENT_COLOR_BLACK_TEXT,
+    color: Color.BASE_COLOR_WHITE,
+
   },
-  communityText: {
-    fontFamily: Font.CALIBRE,
-    fontSize: 18,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
-    letterSpacing: 0,
-    color: Color.CONTENT_COLOR_BLACK_TEXT,
+  rightIconStyle: {
+    tintColor: Color.BASE_COLOR_WHITE,
+
   },
   communityHeader: {
     padding: 20,
     paddingTop: 80,
   },
   descriptionText: {
+    marginVertical:7,
     fontFamily: Font.CALIBRE,
     fontSize: 18,
     fontWeight: "normal",
     fontStyle: "normal",
     letterSpacing: 0,
-    color: Color.CONTENT_COLOR_BLACK_TEXT,
+    color: Color.BASE_COLOR_WHITE,
+  },
+  communityImageView:{ 
+    flexDirection: 'row', 
+    justifyContent: 'space-between' ,
+    marginVertical:14,
   },
 });
 
