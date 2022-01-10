@@ -9,6 +9,6 @@ const TabScreen = () => {
             <Text >Tab strat screen</Text>
         </View>
     );
-}
+};
 
 export default TabScreen;
