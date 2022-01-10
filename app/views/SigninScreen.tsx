@@ -14,7 +14,7 @@ import Header from '../component/Header';
 
 import auth from '@react-native-firebase/auth';
 
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import {LoginRequest} from '../redux/actions/LoginAction'
 
 

@@ -27,5 +27,5 @@ export function* loginSaga(action) {
     const response = yield call(Login, action.email, action.password)
     console.warn('response saga', response)
     yield put(LoginAction.LoginResponse(response))
-    action.navigation.navigate('Home')
+    action.navigation.navigate('DrawerNavigator')
 }

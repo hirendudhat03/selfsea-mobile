@@ -11,6 +11,7 @@ import Header from '../component/Header';
 import Button from '../component/Button';
 
 import LinearGradient from 'react-native-linear-gradient';
+import { useDispatch,useSelector } from 'react-redux';
 
 
 const DATA = [
@@ -53,11 +54,14 @@ const descriptionData = [
 
 const CommunitiesHome = ({ navigation }) => {
 
+  const createprofileRes = useSelector(state => state.CreateProfileReducer)
+console.log('signupRes : ',JSON.stringify(createprofileRes))
+
 
   useEffect(() => {
     changeModalVisibility(false);
   }, []);
-  
+
 
   const [isModalVisible, setIsMoalVisiable] = useState(false);
   const changeModalVisibility = (bool: boolean) => {
@@ -83,7 +87,7 @@ const CommunitiesHome = ({ navigation }) => {
         </Text>
 
       </View>
-      <View style={styles.buttonView}>
+      {/* <View style={styles.buttonView}>
 
         <Button
           type={Constant.buttons.CLOSE}
@@ -93,7 +97,7 @@ const CommunitiesHome = ({ navigation }) => {
         />
 
 
-      </View>
+      </View> */}
 
     </View>
 
@@ -111,7 +115,7 @@ const CommunitiesHome = ({ navigation }) => {
         label={'selfsea communities'}
         style={styles.headerView}
       />
-    
+
 
       <LinearGradient colors={["rgba(255, 255, 255, 0.22)", Color.COLOR_LIGHT]} style={styles.linearGradient}>
 
@@ -162,7 +166,6 @@ const styles = StyleSheet.create({
     flex: 6,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    paddingLeft: 5,
   },
 
   imageView: {

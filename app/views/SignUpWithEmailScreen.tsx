@@ -21,6 +21,9 @@ import Font from '../theme/fonts';
 import Color from '../theme/colors';
 import Dropdown from '../component/Dropdown';
 
+import {useDispatch} from 'react-redux'
+import {SignupRequest} from '../redux/actions/SignupAction'
+
 const zxcvbn = require('zxcvbn');
 
 const height = Dimensions.get('window').height;
@@ -56,6 +59,10 @@ const descriptionData = [
 
 
 const Signup = ({ navigation }) => {
+
+  const dispatch = useDispatch()
+
+
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
 
@@ -114,7 +121,8 @@ const Signup = ({ navigation }) => {
     } else if (!userName) {
       setUserNameError('UserName Required');
     } else {
-      navigation.navigate('CreateProfile');
+      dispatch(SignupRequest(email, Password,  birthMonth, birthYear, userName, navigation))
+      // navigation.navigate('CreateProfile');
     }
   };
 

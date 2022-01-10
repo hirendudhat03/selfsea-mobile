@@ -22,6 +22,8 @@ import Button from '../component/Button';
 import Badges from '../component/Badges';
 
 // import TextInput from '../component/CustomTextInput';
+import { useDispatch, useSelector } from 'react-redux';
+import { CreateProfileRequest } from '../redux/actions/CreateProfileAction'
 
 
 
@@ -31,25 +33,36 @@ const height = Dimensions.get('window').height;
 
 const countries = [
     {
-        title: 'Menu Item',
-        value: 'Menu Item',
+        title: "visible to everyone",
+        value: "visible to everyone",
     },
     {
-        title: 'Menu Item',
-        value: 'Menu Item',
+        title: 'visible only to mentors',
+        value: 'visible only to mentors',
     },
-    {
-        title: 'Menu Item',
-        value: 'Menu Item',
-    },
+
 ];
 
 
 
 const CreateProfile = ({ navigation }) => {
 
+    const dispatch = useDispatch()
+
+
+    const onPressDispatch = () => {
+        dispatch(CreateProfileRequest(profile, selectPronounsDropDown, selectOrientationDropDown, navigation))
+    }
+
+    const signupRes = useSelector(state => state.SignupReducer)
+    console.log('signupRes : ', JSON.stringify(signupRes))
+
+    const [profile, setProfile] = useState('');
+
+
     const [pronouns, setPronouns] = useState('');
-    const [pronounsDropDown, setPronounsDropDown] = useState([{ name: 'she/her' }, { name: 'he/him' }, { name: 'they/them' },]);
+    const [pronounsDropDown, setPronounsDropDown] = useState([{ name: 'she/her/ella' }, { name: ' he/him/his' },
+    { name: 'they/them/theirs' }, { name: 'ze/hir/hirs' }, { name: 'ze/zir/zirs' },]);
     const [selectPronounsDropDown, setSelectPronounsDropDown] = useState([]);
 
     const clickDropDownItem = (item, val) => {
@@ -82,7 +95,7 @@ const CreateProfile = ({ navigation }) => {
     }
 
     const [orientation, setOrientation] = useState('');
-    const [orientationDropDown, setOrientationDropDown] = useState([{ name: 'lesbian/gay' }, { name: 'bisexual' }, { name: 'asexual' },]);
+    const [orientationDropDown, setOrientationDropDown] = useState([{ name: 'gay/lesbian' }, { name: 'heterosexual/straight' }, { name: 'bisexual' }, { name: 'asexual' }, { name: 'pansexual' }, { name: 'queer' }, { name: 'something else' },]);
     const [selectOrientationDropDown, setSelectOrientationDropDown] = useState([]);
 
     const orientationDropDownItem = (item, val) => {
@@ -123,162 +136,153 @@ const CreateProfile = ({ navigation }) => {
             />
 
             <View style={styles.contentView}>
-
-                <Text
-                    style={styles.descriptionText}
-                    numberOfLines={4}
-                    ellipsizeMode="middle">
-                    we can't wait for you to join our community! if you want to tell others about yourself, you can add optional details below.
-                    no one will be able to see your email address, so you'll still participate anonymously!
-                </Text>
-
-
+                <ScrollView>
+                    <Text
+                        style={styles.descriptionText}
+                        numberOfLines={4}
+                        ellipsizeMode="middle">
+                        we can't wait for you to join our community! if you want to tell others about yourself, you can add optional details below.
+                        no one will be able to see your email address, so you'll still participate anonymously!
+                    </Text>
 
 
 
-                <View style={styles.profileView}>
-                    <View style={styles.rowView}>
-                        <Text style={styles.profileText}>profile visibility</Text>
-                        <TouchableOpacity
-                            style={styles.touchableStyle}
-                        >
-                            <Image source={Images.Infocircle} style={styles.infoIcon} />
-                        </TouchableOpacity>
-                    </View>
-                    <Dropdown
-                        optionList={countries}
-                        onSelect={() => { }}
-                        defaultButtonText={'select one'}
-                        icon={Images.DropdownIcon}
-                    />
 
 
-                    <Text style={styles.labelText}>pronouns</Text>
-
-                    <View style={styles.viewStyle}>
-                        <View style={styles.inputView}>
-
-                            {
-                                selectPronounsDropDown.map((item) => {
-                                    return (
-                                        <Badges
-                                            type={Constant.badges.MULTISELECT}
-                                            text={item.name}
-                                            rigthIcon={Images.Circle}
-                                            onPress={() => clickDropDownItem(item)}
-                                        />
-                                    )
-                                })
-                            }
-                            <TextInput value={pronouns} style={styles.textInputStyle}
-                                placeholder="she/her,he/him/they/them"
-                                onChangeText={(val) => setPronouns(val)} />
-                        </View>
-                        <View style={styles.imageView}>
+                    <View style={styles.profileView}>
+                        <View style={styles.rowView}>
+                            <Text style={styles.profileText}>profile visibility</Text>
                             <TouchableOpacity
-
-                                style={styles.touchableStyle}>
-                                <Image
-                                    source={Images.plusCircle}
-                                    style={styles.passwordIcon}
-                                />
+                                style={styles.touchableStyle}
+                            >
+                                <Image source={Images.Infocircle} style={styles.infoIcon} />
                             </TouchableOpacity>
                         </View>
-                    </View>
-                    {pronouns !== '' ? (
-                        <View style={styles.menuListView}>
-
-                            {pronounsDropDown.map((item) => {
-
-                                return (
-                                    <Text onPress={() => clickDropDownItem(item, 'add')} style={styles.menuTextStyle}>{item.name}</Text>
-                                )
-                            })}
-
-                        </View>
-                    ) : null}
+                        <Dropdown
+                            optionList={countries}
+                            onSelect={(value) => setProfile(value)}
+                            defaultButtonText={'select one'}
+                            icon={Images.DropdownIcon}
+                            rowTextStyle={styles.rowTextStyle}
+                        />
 
 
+                        <Text style={styles.labelText}>pronouns</Text>
 
+                        <View style={styles.viewStyle}>
+                            <View style={styles.inputView}>
 
-
-
-
-
-
-
-                    <Text style={styles.labelText}>sexual orientation</Text>
-
-                    <View style={styles.viewStyle}>
-                        <View style={styles.inputView}>
-
-                            {
-                                selectOrientationDropDown.map((item) => {
-                                    return (
-                                        <Badges
-                                            type={Constant.badges.MULTISELECT}
-                                            text={item.name}
-                                            rigthIcon={Images.Circle}
-                                            onPress={() => orientationDropDownItem(item)}
-                                        />
-                                    )
-                                })
-                            }
-                            <TextInput value={orientation} style={styles.textInputStyle}
-                                placeholder="lesbian/gay,bisexual,asexual"
-                                onChangeText={(val) => setOrientation(val)} />
-                        </View>
-                        <View style={styles.imageView}>
-                            <TouchableOpacity
-                                style={styles.touchableStyle}>
-                                <Image
-                                    source={Images.plusCircle}
-                                    style={styles.passwordIcon}
-                                />
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-
-                    {orientation !== '' ? (
-                        <View style={styles.menuListView}>
-                            {orientationDropDown.map((item) => {
-
-                                return (
-                                    <Text onPress={() => orientationDropDownItem(item, 'add')} style={styles.menuTextStyle}>{item.name}</Text>
-                                )
-                            })}
-
-                        </View>) : (
-                        orientationDropDown === null ? (
-                            <View style={styles.recordView}>
-                                <Text>No Record Found</Text>
+                                {
+                                    selectPronounsDropDown.map((item) => {
+                                        return (
+                                            <Badges
+                                                type={Constant.badges.MULTISELECT}
+                                                text={item.name}
+                                                rigthIcon={Images.Circle}
+                                                onPress={() => clickDropDownItem(item)}
+                                            />
+                                        )
+                                    })
+                                }
+                                <TextInput value={pronouns} style={styles.textInputStyle}
+                                    placeholder="she/her,he/him/they/them"
+                                    onChangeText={(val) => setPronouns(val)} />
                             </View>
-                        ) : null
+                            <View style={styles.imageView}>
+                                <TouchableOpacity
+
+                                    style={styles.touchableStyle}>
+                                    <Image
+                                        source={Images.plusCircle}
+                                        style={styles.passwordIcon}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        {pronouns !== '' ? (
+                            <View style={styles.menuListView}>
+
+                                {pronounsDropDown.map((item) => {
+
+                                    return (
+                                        <Text onPress={() => clickDropDownItem(item, 'add')} style={styles.menuTextStyle}>{item.name}</Text>
+                                    )
+                                })}
+
+                            </View>
+                        ) : null}
 
 
-                    )
-                    }
 
 
+                        <Text style={styles.labelText}>sexual orientation</Text>
 
+                        <View style={styles.viewStyle}>
+                            <View style={styles.inputView}>
 
-                </View>
+                                {
+                                    selectOrientationDropDown.map((item) => {
+                                        return (
+                                            <Badges
+                                                type={Constant.badges.MULTISELECT}
+                                                text={item.name}
+                                                rigthIcon={Images.Circle}
+                                                onPress={() => orientationDropDownItem(item)}
+                                            />
+                                        )
+                                    })
+                                }
+                                <TextInput value={orientation} style={styles.textInputStyle}
+                                    placeholder="lesbian/gay,bisexual,asexual"
+                                    onChangeText={(val) => setOrientation(val)} />
+                            </View>
+                            <View style={styles.imageView}>
+                                <TouchableOpacity
+                                    style={styles.touchableStyle}>
+                                    <Image
+                                        source={Images.plusCircle}
+                                        style={styles.passwordIcon}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
 
+                        {orientation !== '' ? (
+                            <View style={styles.menuListView}>
+                                {orientationDropDown.map((item) => {
 
+                                    return (
+                                        <Text onPress={() => orientationDropDownItem(item, 'add')} style={styles.menuTextStyle}>{item.name}</Text>
+                                    )
+                                })}
+                            </View>
+                            ) : (
+                            orientationDropDown === null  ? (
+                                <View style={styles.recordView}>
+                                    {/* {orientation !== '' ? ( */}
+                                        <Text>No Record Found</Text>
+                                    {/* ) :
+                                        null} */}
+                                </View>
+                            ) :
+                                null
+                        )
+                        }
 
+                    </View>
 
-
-
+                </ScrollView>
 
             </View>
             <View style={styles.bottomView}>
                 <Button
-                    onPress={() => navigation.navigate('TabNavigator')}
+                    onPress={() => onPressDispatch()}
                     type={Constant.buttons.PRIMARY}
                     text={'take me to selfsea'}
                     style={{ marginTop: 15 }}
 
                 />
+
             </View>
 
         </View>
@@ -395,7 +399,6 @@ const styles = StyleSheet.create({
 
     },
     recordView: {
-
         borderRadius: 4,
         backgroundColor: Color.BASE_COLOR_WHITE,
         borderStyle: 'solid',
@@ -404,6 +407,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         padding: 8,
     },
+    rowTextStyle: {
+        fontSize: 16,
+    }
 
 
 

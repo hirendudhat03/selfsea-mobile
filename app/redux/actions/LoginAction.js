@@ -1,4 +1,4 @@
-export function LoginResponse (data) {
+export function LoginResponse(data) {
     console.log('call SaveLoginResponse : ', data)
 
     return {
@@ -7,13 +7,13 @@ export function LoginResponse (data) {
     }
 }
 
-export function LoginRequest (email, password, navigation) {
+export function LoginRequest(email, password, navigation) {
     // console.log('call SaveLoginResponse : ', data)
 
     return {
         type: 'LOGIN_REQUEST',
         email: email,
-        password:password,
+        password: password,
         navigation: navigation,
     }
 }

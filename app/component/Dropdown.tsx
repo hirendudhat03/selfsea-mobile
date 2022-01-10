@@ -27,6 +27,7 @@ interface Props {
   style?: {};
   icon?: ImageSourcePropType;
   helperText?: string;
+  rowTextStyle?: {};
 }
 
 const Dropdown = ({
@@ -36,6 +37,7 @@ const Dropdown = ({
   style,
   icon,
   helperText,
+  rowTextStyle,
 }: Props) => {
   return (
     <View>
@@ -45,6 +47,7 @@ const Dropdown = ({
             <Image source={icon} />
           </View>
         )}
+        rowTextStyle={rowTextStyle}
         defaultButtonText={defaultButtonText}
         buttonStyle={[styles.Container, style]}
         data={optionList.map(item => item.title)}
