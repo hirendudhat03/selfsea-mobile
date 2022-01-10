@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   Image,
   StyleSheet,
@@ -12,6 +12,7 @@ import {
   GoogleSignin,GoogleSigninButton,NativeModuleError,statusCodes,
 } from '@react-native-google-signin/google-signin';
 import Constant from '../theme/constant';
+import InstagramLogin from 'react-native-instagram-login';
 
 interface Props {
   text: string;
@@ -19,15 +20,13 @@ interface Props {
   type: () => void;
 }
 
-
-
 const Authentication = ({ text, icon, type }: Props) => {
-
+  let instagramLogin = useRef();
   const _signIn = async () => {
     console.log('handlePressGoogleLogin');
     GoogleSignin.configure({
       // androidClientId: '3A:84:C8:28:4A:5F:82:9F:12:8B:71:46:C9:87:0F:68:E6:38:7E:AE',
-      // iosClientId: '880711382534-k6q6jmtatddtll7u9qfmn31cbc1ckav1.apps.googleusercontent.com',
+      iosClientId: '880711382534-k6q6jmtatddtll7u9qfmn31cbc1ckav1.apps.googleusercontent.com',
     });
 
     // GoogleSignin.hasPlayServices().then((hasPlayService) => {
@@ -58,7 +57,8 @@ const Authentication = ({ text, icon, type }: Props) => {
     if (type === Constant.authLogin.GOOGLE ) {
       _signIn();
     } else if (type === Constant.authLogin.INSTAGRAM) {
-      alert('instagram')
+      // alert('instagram')
+      instagramLogin.show()
     } else if (type === Constant.authLogin.APPLE) {
       alert('Apple')
     }else {
@@ -70,6 +70,16 @@ const Authentication = ({ text, icon, type }: Props) => {
     <TouchableOpacity style={styles.container} onPress={() => authLogin()}>
       <Image style={styles.image} source={icon} />
       <Text style={styles.text}>{text}</Text>
+
+      <InstagramLogin
+        ref={ref => instagramLogin = ref}
+        appId='321916266462620'
+        appSecret='106c0e7f22c7ec3f820e9522cb33d829'
+        redirectUrl='https://www.selfsea.org/'
+        scopes={['user_profile', 'user_media']}
+        onLoginSuccess={(data:any) => console.log('Login Success', data)}
+        onLoginFailure={(data:any) => console.log('failure',data)}
+      />
     </TouchableOpacity>
   );
 };

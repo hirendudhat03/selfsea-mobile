@@ -310,7 +310,11 @@ PODS:
   - React-jsinspector (0.66.4)
   - React-logger (0.66.4):
     - glog
+  - react-native-cookies (5.0.1):
+    - React-Core
   - react-native-safe-area-context (3.3.2):
+    - React-Core
+  - react-native-webview (11.15.0):
     - React-Core
   - React-perflogger (0.66.4)
   - React-RCTActionSheet (0.66.4):
@@ -461,7 +465,9 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
+  - "react-native-cookies (from `../node_modules/@react-native-community/cookies`)"
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - react-native-webview (from `../node_modules/react-native-webview`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -544,8 +550,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   React-logger:
     :path: "../node_modules/react-native/ReactCommon/logger"
+  react-native-cookies:
+    :path: "../node_modules/@react-native-community/cookies"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-webview:
+    :path: "../node_modules/react-native-webview"
   React-perflogger:
     :path: "../node_modules/react-native/ReactCommon/reactperflogger"
   React-RCTActionSheet:
@@ -625,7 +635,9 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 94ce921e1d8ce7023366873ec371f3441383b396
   React-jsinspector: d0374f7509d407d2264168b6d0fad0b54e300b85
   React-logger: 933f80c97c633ee8965d609876848148e3fef438
+  react-native-cookies: ce50e42ace7cf0dd47769260ca5bbe8eee607e4e
   react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
+  react-native-webview: e89bf2dba26a04cda967814df3ed1be99f291233
   React-perflogger: 93075d8931c32cd1fce8a98c15d2d5ccc4d891bd
   React-RCTActionSheet: 7d3041e6761b4f3044a37079ddcb156575fb6d89
   React-RCTAnimation: 743e88b55ac62511ae5c2e22803d4f503f2a3a13
@@ -646,6 +658,6 @@ SPEC CHECKSUMS:
   Yoga: e7dc4e71caba6472ff48ad7d234389b91dadc280
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 32973800c9ed7c3fd146affa562ca8e028ac9ab1
+PODFILE CHECKSUM: f37be3d21282fcbf8d2362ed68f45c6c5b571405
 
 COCOAPODS: 1.11.2

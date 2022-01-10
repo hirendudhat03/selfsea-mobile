@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
   View,
   Text,
   ImageBackground,
   StyleSheet,
   Image,
+  TouchableOpacity,
+  Alert
 } from 'react-native';
 
 import Constant from '../theme/constant';
@@ -14,16 +16,17 @@ import Images from '../theme/images';
 
 import Button from '../component/Button';
 import Auth from '../component/Authentication';
+import InstagramLogin from 'react-native-instagram-login';
+import CookieManager from '@react-native-community/cookies';
+import {  } from "react-native";
 
 const onPressText = () => {
-  alert("onPressText")
+  Alert.alert("onPressText")
 }
 
 
-
-
 const Login = ({ navigation }) => {
-
+  let instagramLogin = useRef();
   return (
     <View style={styles.container}>
       <ImageBackground source={Images.Background} resizeMode="cover" style={styles.image}>
@@ -35,6 +38,22 @@ const Login = ({ navigation }) => {
           <Auth text={"Continue with Google"} icon={Images.Google} type={Constant.authLogin.GOOGLE} />
           <Auth text={"Continue with Instagram"} icon={Images.Instagram} type={Constant.authLogin.INSTAGRAM} />
           <Auth text={"Continue with Apple"} icon={Images.Apple} type={Constant.authLogin.APPLE} />
+
+          {/* <TouchableOpacity
+          // style={styles.btn}
+          onPress={() => instagramLogin.show()}>
+            <Text style={{ color: 'white', textAlign: 'center' }}>Login now</Text>
+          </TouchableOpacity> */}
+
+          <InstagramLogin
+            ref={ref => instagramLogin = ref}
+            appId='321916266462620'
+            appSecret='106c0e7f22c7ec3f820e9522cb33d829'
+            redirectUrl='https://www.selfsea.org/'
+            scopes={['user_profile', 'user_media']}
+            onLoginSuccess={(data:any) => console.log('Login Success', data)}
+            onLoginFailure={(data:any) => console.log('failure',data)}
+          />
 
           <Button type={Constant.buttons.PRIMARY} text={"sign up with email"} style={{ marginTop: 10 }} onPress={() => navigation.navigate('Signup')} />
 
