@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Color from '../theme/colors';
 import Font from '../theme/fonts';
+import Images from '../theme/images';
 import SelectDropdown from 'react-native-select-dropdown';
 // @ts-ignore
 
@@ -28,7 +29,10 @@ interface Props {
   icon?: ImageSourcePropType;
   helperText?: string;
   rowTextStyle?: {};
-  checkRight?: ImageSourcePropType;
+  checkRight?: boolean;
+  circleFill: string;
+  value: string;
+  iconVisibleFill?: boolean;
 }
 
 const Dropdown = ({
@@ -38,22 +42,25 @@ const Dropdown = ({
   style,
   icon,
   helperText,
+  value,
   rowTextStyle,
   checkRight,
+  iconVisibleFill,
+  circleFill,
 }: Props) => {
   return (
     <View>
-      {/* <View style={{ flexDirection: 'row' }}> */}
+      <View style={{ flexDirection: 'row' }}>
         <View>
           <SelectDropdown
             renderDropdownIcon={() => (
-              <View style={styles.iconView}>
+              <View style={[styles.iconView , value === '' ? {borderLeftColor:Color.COMMUNITY_ORANGE} : {borderLeftColor:Color.BORDER_COLOR_LIGHTGRAY}]}>
                 <Image source={icon} />
               </View>
             )}
             rowTextStyle={rowTextStyle}
             defaultButtonText={defaultButtonText}
-            buttonStyle={[styles.Container, style]}
+            buttonStyle={[styles.Container, style, value === '' ? {borderColor:Color.COMMUNITY_ORANGE} : {borderColor:Color.BORDER_COLOR_LIGHTGRAY}]}
             data={optionList.map(item => item.title)}
             onSelect={onSelect}
             buttonTextAfterSelection={selectedItem => {
@@ -64,12 +71,25 @@ const Dropdown = ({
             }}
           />
         </View>
-        {/* {checkRight !== undefined ? (
-          <View style={styles.circleView}>
-            <Image source={checkRight} />
-          </View>
-        ) : null} */}
-      {/* </View> */}
+        {checkRight !== undefined ? (
+           <>
+           {iconVisibleFill ? (
+             circleFill ? (
+               <View style={styles.circleView}
+               >
+                 <Image source={Images.CheckCircleGreen} />
+               </View>
+             ) : (
+               <View style={styles.circleView}
+               >
+                <Image source={Images.CheckCircle} /> 
+               </View>
+             )
+           ) : null}
+
+         </>
+        ) : null}
+      </View>
       {helperText !== undefined ? (
         <Text style={styles.helperText}>{helperText}</Text>
       ) : null}
@@ -103,7 +123,7 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
     lineHeight: 16,
     letterSpacing: 0,
-    color: Color.PLACEHOLDER_TEXT,
+    color: Color.COMMUNITY_ORANGE,
   },
   circleView: {
     justifyContent: 'center',

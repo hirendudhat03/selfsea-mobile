@@ -85,12 +85,66 @@ const Signup = ({ navigation }) => {
 
 
   const selectFill = (text) => {
+    console.log('text : ',text)
     setEmail(text);
-    if (text === ' ') {
-      setEmailError(' ');
+    if (text === '') {
+      setEmailError('');
       setCircleFillEmail(false);
-    } else {
+    } else if(text.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null) {
+      setCircleFillEmail(false);
+    }
+     else {
       setCircleFillEmail(true);
+    }
+  };
+
+  const [circleFillPassword, setCircleFillPassword] = useState<boolean>();
+
+
+  const selectFillPassword = (text) => {
+    setPassword(text);
+    if (text === '') {
+      setPasswordError('');
+      setCircleFillPassword(false);
+    } else {
+      setCircleFillPassword(true);
+    }
+  };
+
+  const [circleFillUser, setCircleFillUser] = useState<boolean>();
+
+  const selectFillUser = (text) => {
+    setUserName(text);
+    if (text === '' ) {
+      setUserNameError('');
+      setCircleFillUser(false);
+    }else{
+      setCircleFillUser(true);
+    }
+  };
+
+  const [circleFillBirth, setCircleFillBirth] = useState<boolean>();
+
+  const selectFillBirth = (value) => {
+    setBirthYear(value);
+               
+    if (value === '' || birthMonth === '') {
+      setBirthYearError('');
+      setCircleFillBirth(false);
+    } else {
+      setCircleFillBirth(true);
+    }
+  };
+
+  const selectFillmonth = (value) => {
+    setBirthMonth(value);
+               
+    if (value === '' || birthYear === '') {
+      
+                setBirthMonthError('');
+      setCircleFillBirth(false);
+    } else {
+      setCircleFillBirth(true);
     }
   };
 
@@ -192,8 +246,7 @@ const Signup = ({ navigation }) => {
           label={'password'}
           style={{ fontSize: 18 }}
           onChangeText={text => {
-            setPassword(text);
-            setPasswordError(' ');
+            selectFillPassword(text);
             const response = zxcvbn(text);
             setPasswordScore(response.score);
             // console.log({ response });
@@ -201,10 +254,11 @@ const Signup = ({ navigation }) => {
           value={Password}
           helperText={PasswordError}
           iconVisible={true}
-          iconVisibleFill={true}
           secureTextEntry={focus === undefined ? true : focus}
           secureTextEntryChange={selectFocus}
+          iconVisibleFill={true}
           checkRight={true}
+          circleFill={circleFillPassword}
 
         />
         <View style={styles.viewStyle}>
@@ -252,27 +306,31 @@ const Signup = ({ navigation }) => {
             <Dropdown
               optionList={countries}
               onSelect={value => {
-                setBirthMonth(value);
-                setBirthMonthError('');
+                selectFillmonth(value)
+                
               }}
               defaultButtonText={'select one'}
               icon={Images.DropdownIcon}
               helperText={birthMonthError}
-              // style={{ width: 190 }}
+              value={birthMonth}
+              style={{ width: 190 }}
             />
           </View>
           <View style={styles.yearDropdown}>
             <Dropdown
               optionList={countries}
               onSelect={value => {
-                setBirthYear(value);
-                setBirthYearError(' ');
+                selectFillBirth(value);
               }}
               defaultButtonText={'select one'}
-              style={{ width: 150 }}
+              style={{ width: 120 }}
               icon={Images.DropdownIcon}
               helperText={birthYearError}
-              checkRight={Images.CheckCircle}
+              iconVisibleFill={true}
+              checkRight={true}
+              value={birthYear}
+              circleFill={circleFillBirth}
+
 
             />
           </View>
@@ -295,13 +353,12 @@ const Signup = ({ navigation }) => {
           placeholder={'@'}
           style={{ fontSize: 18 }}
           onChangeText={text => {
-            setUserName(text);
-            setUserNameError(' ');
+            selectFillUser(text)
           }}
           helperText={userNameError}
           iconVisibleFill={true}
           checkRight={true}
-
+          circleFill={circleFillUser}
 
 
         />
@@ -361,9 +418,9 @@ const styles = StyleSheet.create({
   viewStyle: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '89%',
+    width: '81%',
     marginVertical: 10,
-    // marginRight: 32,
+    marginRight: 32,
   },
   passwordStyle: {
     borderColor: Color.BORDER_COLOR,
