@@ -81,6 +81,8 @@ const Signup = ({ navigation }) => {
   const [focus, setFocus] = useState<boolean>();
   const [passwordScore, setPasswordScore] = useState<0 | 1 | 2 | 3 | 4>(0);
 
+  const [suggestions, setSuggestions] = useState('');
+
   const selectFocus = () => {
     if (focus) {
       setFocus(false);
@@ -181,7 +183,7 @@ const Signup = ({ navigation }) => {
             setPasswordError(' ');
             const response = zxcvbn(text);
             setPasswordScore(response.score);
-            // console.log({ response });
+            setPasswordError(response.feedback.suggestions);
           }}
           value={Password}
           helperText={PasswordError}
