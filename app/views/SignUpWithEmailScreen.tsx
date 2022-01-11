@@ -21,8 +21,8 @@ import Font from '../theme/fonts';
 import Color from '../theme/colors';
 import Dropdown from '../component/Dropdown';
 
-import {useDispatch} from 'react-redux'
-import {SignupRequest} from '../redux/actions/SignupAction'
+import { useDispatch } from 'react-redux'
+import { SignupRequest } from '../redux/actions/SignupAction'
 
 const zxcvbn = require('zxcvbn');
 
@@ -45,13 +45,13 @@ const countries = [
 
 const descriptionData = [
   {
-     title: "usernames cannot contain any personal identifiers (e.g. name,location, school, age)"
+    title: "usernames cannot contain any personal identifiers (e.g. name,location, school, age)"
   },
   {
-    title:'usernames cannot contain any harmful or offensive language'
+    title: 'usernames cannot contain any harmful or offensive language'
   },
   {
-    title:'usernames can only contain letters and numbers (no emojis)'
+    title: 'usernames can only contain letters and numbers (no emojis)'
   },
 
 ];
@@ -80,6 +80,19 @@ const Signup = ({ navigation }) => {
 
   const [focus, setFocus] = useState<boolean>();
   const [passwordScore, setPasswordScore] = useState<0 | 1 | 2 | 3 | 4>(0);
+
+  const [circleFillEmail, setCircleFillEmail] = useState<boolean>();
+
+
+  const selectFill = (text) => {
+    setEmail(text);
+    if (text === ' ') {
+      setEmailError(' ');
+      setCircleFillEmail(false);
+    } else {
+      setCircleFillEmail(true);
+    }
+  };
 
   const selectFocus = () => {
     if (focus) {
@@ -121,7 +134,7 @@ const Signup = ({ navigation }) => {
     } else if (!userName) {
       setUserNameError('UserName Required');
     } else {
-      dispatch(SignupRequest(email, Password,  birthMonth, birthYear, userName, navigation))
+      dispatch(SignupRequest(email, Password, birthMonth, birthYear, userName, navigation))
       // navigation.navigate('CreateProfile');
     }
   };
@@ -163,13 +176,15 @@ const Signup = ({ navigation }) => {
           type={Constant.textInput.LARGE_INPUT}
           placeholder={'email@address.com'}
           label={'email'}
-          style={{ fontSize: 18 }}
-          onChangeText={text => {
-            setEmail(text);
-            setEmailError(' ');
+          style={{ fontSize: 18, }}
+          onChangeText={(text) => {
+            selectFill(text);
           }}
           value={email}
           helperText={emailError}
+          iconVisibleFill={true}
+          checkRight={true}
+          circleFill={circleFillEmail}
         />
 
         <TextInput
@@ -186,8 +201,11 @@ const Signup = ({ navigation }) => {
           value={Password}
           helperText={PasswordError}
           iconVisible={true}
+          iconVisibleFill={true}
           secureTextEntry={focus === undefined ? true : focus}
           secureTextEntryChange={selectFocus}
+          checkRight={true}
+
         />
         <View style={styles.viewStyle}>
           <View
@@ -240,6 +258,7 @@ const Signup = ({ navigation }) => {
               defaultButtonText={'select one'}
               icon={Images.DropdownIcon}
               helperText={birthMonthError}
+              // style={{ width: 190 }}
             />
           </View>
           <View style={styles.yearDropdown}>
@@ -253,6 +272,8 @@ const Signup = ({ navigation }) => {
               style={{ width: 150 }}
               icon={Images.DropdownIcon}
               helperText={birthYearError}
+              checkRight={Images.CheckCircle}
+
             />
           </View>
         </View>
@@ -278,6 +299,11 @@ const Signup = ({ navigation }) => {
             setUserNameError(' ');
           }}
           helperText={userNameError}
+          iconVisibleFill={true}
+          checkRight={true}
+
+
+
         />
       </View>
       <View style={styles.bottomView}>
@@ -337,6 +363,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '89%',
     marginVertical: 10,
+    // marginRight: 32,
   },
   passwordStyle: {
     borderColor: Color.BORDER_COLOR,

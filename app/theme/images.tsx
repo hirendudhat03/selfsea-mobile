@@ -32,6 +32,8 @@ import BookFill from '../assets/images/pngs/open-book.png';
 import PersonFill from '../assets/images/pngs/user.png';
 import plusCircle from '../assets/images/pngs/plusCircle.png';
 import Dots from '../assets/images/pngs/three-dots.png';
+import CheckCircle from '../assets/images/pngs/checkCircleFill.png';
+import CheckCircleGreen from '../assets/images/pngs/checkCircleFillGreen.png';
 
 
  const images ={
@@ -68,6 +70,8 @@ import Dots from '../assets/images/pngs/three-dots.png';
     PersonFill,
     plusCircle,
     Dots,
+    CheckCircle,
+    CheckCircleGreen,
 
 
 

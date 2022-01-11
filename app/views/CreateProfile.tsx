@@ -93,6 +93,83 @@ const CreateProfile = ({ navigation }) => {
 
 
     }
+    
+   
+    
+
+    
+    
+    
+    
+    
+    const [race, setRace] = useState('');
+    const [raceDropDown, setRaceDropDown] = useState([{ name: 'American Indian' }, { name: 'Mixed Race / Mixed Ethnicity' }, 
+    { name: 'Native American' }, { name: 'Alaska Native' }, 
+    { name: ' Asian or Asian American' }, { name: 'Black or African American' }, { name: 'Hispanic' } ,{ name: 'Latino' },
+    { name: 'Latina' },{ name: 'Latine' },{ name: 'Latinx' }, { name: 'Middle Eastern or North African' },{ name: 'Native Hawaiian or Pacific Islander' },
+    { name: 'White' }, { name: 'something else' },]);
+    const [selectRaceDropDown, setSelectRaceDropDown] = useState([]);
+
+    const raceDropDownItem = (item, val) => {
+
+        setRace('')
+
+        if (val === 'add') {
+
+            var temp = selectRaceDropDown;
+            temp.push(item)
+            setSelectRaceDropDown([...temp])
+
+            const newData = raceDropDown.filter(itemData => itemData.name !== item.name);
+            setRaceDropDown([...newData])
+        }
+        else {
+            var temp = raceDropDown;
+            temp.push(item)
+            setRaceDropDown([...temp])
+
+            const temp1 = selectRaceDropDown.filter(itemData => itemData.name !== item.name);
+            setSelectRaceDropDown([...temp1])
+        }
+
+
+    }
+  
+ 
+    
+    
+    
+    const [gender, setGender] = useState('');
+    const [genderDropDown, setGenderDropDown] = useState([{ name: 'cisgender' }, { name: 'genderqueer' }, 
+    { name: 'gender non-binary' }, 
+    { name: 'gender fluid' }, { name: 'man/boy' }, { name: 'transgender' }, 
+    { name:"woman/girl"}, { name: 'something else' },]);
+    const [selectGenderDropDown, setSelectGenderDropDown] = useState([]);
+
+    const genderDropDownItem = (item, val) => {
+
+        setGender('')
+
+        if (val === 'add') {
+
+            var temp = selectGenderDropDown;
+            temp.push(item)
+            setSelectGenderDropDown([...temp])
+
+            const newData = genderDropDown.filter(itemData => itemData.name !== item.name);
+            setGenderDropDown([...newData])
+        }
+        else {
+            var temp = genderDropDown;
+            temp.push(item)
+            setGenderDropDown([...temp])
+
+            const temp1 = selectGenderDropDown.filter(itemData => itemData.name !== item.name);
+            setSelectGenderDropDown([...temp1])
+        }
+
+
+    }
 
     const [orientation, setOrientation] = useState('');
     const [orientationDropDown, setOrientationDropDown] = useState([{ name: 'gay/lesbian' }, { name: 'heterosexual/straight' }, { name: 'bisexual' }, { name: 'asexual' }, { name: 'pansexual' }, { name: 'queer' }, { name: 'something else' },]);
@@ -118,6 +195,33 @@ const CreateProfile = ({ navigation }) => {
 
             const temp1 = selectOrientationDropDown.filter(itemData => itemData.name !== item.name);
             setSelectOrientationDropDown([...temp1])
+        }
+    }
+
+    const [location, setLocation] = useState('');
+    const [locationDropDown, setLocationDropDown] = useState([{ name: '<city>' }, { name: '<state>' },]);
+    const [selectLocationDropDown, setSelectLocationDropDown] = useState([]);
+
+    const locationDropDownItem = (item, val) => {
+
+        setLocation('')
+
+        if (val === 'add') {
+
+            var temp = selectLocationDropDown;
+            temp.push(item)
+            setSelectLocationDropDown([...temp])
+
+            const newData = locationDropDown.filter(itemData => itemData.name !== item.name);
+            setLocationDropDown([...newData])
+        }
+        else {
+            var temp = locationDropDown;
+            temp.push(item)
+            setLocationDropDown([...temp])
+
+            const temp1 = selectLocationDropDown.filter(itemData => itemData.name !== item.name);
+            setSelectLocationDropDown([...temp1])
         }
 
 
@@ -256,11 +360,11 @@ const CreateProfile = ({ navigation }) => {
                                     )
                                 })}
                             </View>
-                            ) : (
-                            orientationDropDown === null  ? (
+                        ) : (
+                            orientationDropDown === null ? (
                                 <View style={styles.recordView}>
                                     {/* {orientation !== '' ? ( */}
-                                        <Text>No Record Found</Text>
+                                    <Text>No Record Found</Text>
                                     {/* ) :
                                         null} */}
                                 </View>
@@ -268,6 +372,165 @@ const CreateProfile = ({ navigation }) => {
                                 null
                         )
                         }
+
+
+                        <Text style={styles.labelText}>gender identity</Text>
+
+                        <View style={styles.viewStyle}>
+                            <View style={styles.inputView}>
+
+                                {
+                                    selectGenderDropDown.map((item) => {
+                                        return (
+                                            <Badges
+                                                type={Constant.badges.MULTISELECT}
+                                                text={item.name}
+                                                rigthIcon={Images.Circle}
+                                                onPress={() => genderDropDownItem(item)}
+                                            />
+                                        )
+                                    })
+                                }
+                                <TextInput value={gender} style={styles.textInputStyle}
+                                    placeholder="genderfluid, non-binary, cisgender"
+                                    onChangeText={(val) => setGender(val)} />
+                            </View>
+                            <View style={styles.imageView}>
+                                <TouchableOpacity
+
+                                    style={styles.touchableStyle}>
+                                    <Image
+                                        source={Images.plusCircle}
+                                        style={styles.passwordIcon}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        {gender !== '' ? (
+                            <View style={styles.menuListView}>
+
+                                {genderDropDown.map((item) => {
+
+                                    return (
+                                        <Text onPress={() => genderDropDownItem(item, 'add')} style={styles.menuTextStyle}>{item.name}</Text>
+                                    )
+                                })}
+
+                            </View>
+                        ) : null}
+
+
+
+
+                        <Text style={styles.labelText}>race/ethnicity</Text>
+
+                        <View style={styles.viewStyle}>
+                            <View style={styles.inputView}>
+
+                                {
+                                    selectRaceDropDown.map((item) => {
+                                        return (
+                                            <Badges
+                                                type={Constant.badges.MULTISELECT}
+                                                text={item.name}
+                                                rigthIcon={Images.Circle}
+                                                onPress={() => raceDropDownItem(item)}
+                                            />
+                                        )
+                                    })
+                                }
+                                <TextInput value={race} style={styles.textInputStyle}
+                                    placeholder="asian american, arab, native hawaiian"
+                                    onChangeText={(val) => setRace(val)} />
+                            </View>
+                            <View style={styles.imageView}>
+                                <TouchableOpacity
+                                    style={styles.touchableStyle}>
+                                    <Image
+                                        source={Images.plusCircle}
+                                        style={styles.passwordIcon}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+
+                        {race !== '' ? (
+                            <View style={styles.menuListView}>
+                                {raceDropDown.map((item) => {
+
+                                    return (
+                                        <Text onPress={() => raceDropDownItem(item, 'add')} style={styles.menuTextStyle}>{item.name}</Text>
+                                    )
+                                })}
+                            </View>
+                        ) : (
+                            raceDropDown === null ? (
+                                <View style={styles.recordView}>
+                                    {/* {orientation !== '' ? ( */}
+                                    <Text>No Record Found</Text>
+                                    {/* ) :
+                null} */}
+                                </View>
+                            ) :
+                                null
+                        )
+                        }
+
+
+                        <Text style={styles.labelText}>location</Text>
+
+                        <View style={styles.viewStyle}>
+                            <View style={styles.inputView}>
+
+                                {
+                                    selectLocationDropDown.map((item) => {
+                                        return (
+                                            <Badges
+                                                type={Constant.badges.MULTISELECT}
+                                                text={item.name}
+                                                rigthIcon={Images.Circle}
+                                                onPress={() => locationDropDownItem(item)}
+                                            />
+                                        )
+                                    })
+                                }
+                                <TextInput value={location} style={styles.textInputStyle}
+                                    placeholder="type in a City or State"
+                                    onChangeText={(val) => setLocation(val)} />
+                            </View>
+                            <View style={styles.imageView}>
+                                <TouchableOpacity
+                                    style={styles.touchableStyle}>
+                                    <Image
+                                        source={Images.plusCircle}
+                                        style={styles.passwordIcon}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+
+                        {location !== '' ? (
+                            <View style={styles.menuListView}>
+                                {locationDropDown.map((item) => {
+
+                                    return (
+                                        <Text onPress={() => locationDropDownItem(item, 'add')} style={styles.menuTextStyle}>{item.name}</Text>
+                                    )
+                                })}
+                            </View>
+                        ) : (
+                            locationDropDown === null ? (
+                                <View style={styles.recordView}>
+                                    {/* {orientation !== '' ? ( */}
+                                    <Text>No Record Found</Text>
+                                    {/* ) :
+null} */}
+                                </View>
+                            ) :
+                                null
+                        )
+                        }
+
 
                     </View>
 
