@@ -16,7 +16,7 @@ import { useDispatch,useSelector } from 'react-redux';
 
 const DATA = [
   {
-
+ 
   },
   {
 
@@ -87,7 +87,7 @@ console.log('signupRes : ',JSON.stringify(createprofileRes))
         </Text>
 
       </View>
-      {/* <View style={styles.buttonView}>
+      <View style={styles.buttonView}>
 
         <Button
           type={Constant.buttons.CLOSE}
@@ -97,7 +97,7 @@ console.log('signupRes : ',JSON.stringify(createprofileRes))
         />
 
 
-      </View> */}
+      </View>
 
     </View>
 

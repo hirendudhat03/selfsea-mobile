@@ -27,6 +27,10 @@ interface Props {
   secureTextEntryChange?: () => void;
   secureTextEntry?: boolean;
   iconVisible?: boolean;
+  textInputstyle: {};
+  checkRight?: boolean;
+  circleFill: string;
+  iconVisibleFill?: boolean;
 }
 
 const CustomTextInput = ({
@@ -40,6 +44,11 @@ const CustomTextInput = ({
   secureTextEntryChange,
   iconVisible,
   secureTextEntry,
+  textInputstyle,
+  // checkRight,
+  // iconVisibleFill,
+  circleFill,
+
 }: Props) => {
   return (
     <>
@@ -48,38 +57,58 @@ const CustomTextInput = ({
           {label !== undefined ? (
             <Text style={[styles.labelText, style]}>{label}</Text>
           ) : null}
+          {/* <View style={styles.contentView}> */}
 
-          <View style={styles.largeInputView}>
-            <TextInput
-              style={styles.textInputStyle}
-              placeholder={placeholder}
-              onChangeText={onChangeText}
-              secureTextEntry={secureTextEntry}
-              value={value}
-            />
+            <View style={styles.largeInputView}>
+              <TextInput
+                style={[styles.textInputStyle, textInputstyle]}
+                placeholder={placeholder}
+                onChangeText={onChangeText}
+                secureTextEntry={secureTextEntry}
+                value={value}
+                circleFill={circleFill}
+              />
 
-            {iconVisible ? (
-              secureTextEntry ? (
-                <TouchableOpacity
-                  style={styles.touchableStyle}
-                  onPress={secureTextEntryChange}>
-                  <Image
-                    source={Images.PasswordIcon}
-                    style={styles.passwordIcon}
-                  />
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity
-                  style={styles.touchableStyle}
-                  onPress={secureTextEntryChange}>
-                  <Image
-                    source={Images.visibilityShow}
-                    style={styles.passwordIcon}
-                  />
-                </TouchableOpacity>
-              )
-            ) : null}
-          </View>
+              {iconVisible ? (
+                secureTextEntry ? (
+                  <TouchableOpacity
+                    style={styles.touchableStyle}
+                    onPress={secureTextEntryChange}>
+                    <Image
+                      source={Images.PasswordIcon}
+                      style={styles.passwordIcon}
+                    />
+                  </TouchableOpacity>
+                ) : (
+                  <TouchableOpacity
+                    style={styles.touchableStyle}
+                    onPress={secureTextEntryChange}>
+                    <Image
+                      source={Images.visibilityShow}
+                      style={styles.passwordIcon}
+                    />
+                  </TouchableOpacity>
+                )
+              ) : null}
+            </View>
+            {/* {checkRight !== undefined ? (
+              <>
+                {iconVisibleFill ? (
+                  <View style={{ justifyContent: 'center' }}
+                  >
+                      <Image source={Images.CheckCircle} />
+                  </View>
+                ) : (
+                  <View style={{ justifyContent: 'center' }}
+                  >
+                 <Image source={Images.CheckCircleGreen} />
+                  </View>
+                )}
+
+              </>
+            ) : null} */}
+
+          {/* </View> */}
 
           {helperText !== undefined ? (
             <Text style={styles.helperText}>{helperText}</Text>
@@ -166,6 +195,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   touchableStyle: { justifyContent: 'center' },
+  contentView: {
+    width: '90%',
+    height: height * 0.064,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
 });
 
 export default CustomTextInput;

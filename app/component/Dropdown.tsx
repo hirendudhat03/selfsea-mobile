@@ -28,6 +28,7 @@ interface Props {
   icon?: ImageSourcePropType;
   helperText?: string;
   rowTextStyle?: {};
+  checkRight?: ImageSourcePropType;
 }
 
 const Dropdown = ({
@@ -38,27 +39,37 @@ const Dropdown = ({
   icon,
   helperText,
   rowTextStyle,
+  checkRight,
 }: Props) => {
   return (
     <View>
-      <SelectDropdown
-        renderDropdownIcon={() => (
-          <View style={styles.iconView}>
-            <Image source={icon} />
+      {/* <View style={{ flexDirection: 'row' }}> */}
+        <View>
+          <SelectDropdown
+            renderDropdownIcon={() => (
+              <View style={styles.iconView}>
+                <Image source={icon} />
+              </View>
+            )}
+            rowTextStyle={rowTextStyle}
+            defaultButtonText={defaultButtonText}
+            buttonStyle={[styles.Container, style]}
+            data={optionList.map(item => item.title)}
+            onSelect={onSelect}
+            buttonTextAfterSelection={selectedItem => {
+              return selectedItem;
+            }}
+            rowTextForSelection={item => {
+              return item;
+            }}
+          />
+        </View>
+        {/* {checkRight !== undefined ? (
+          <View style={styles.circleView}>
+            <Image source={checkRight} />
           </View>
-        )}
-        rowTextStyle={rowTextStyle}
-        defaultButtonText={defaultButtonText}
-        buttonStyle={[styles.Container, style]}
-        data={optionList.map(item => item.title)}
-        onSelect={onSelect}
-        buttonTextAfterSelection={selectedItem => {
-          return selectedItem;
-        }}
-        rowTextForSelection={item => {
-          return item;
-        }}
-      />
+        ) : null} */}
+      {/* </View> */}
       {helperText !== undefined ? (
         <Text style={styles.helperText}>{helperText}</Text>
       ) : null}
@@ -93,6 +104,10 @@ const styles = StyleSheet.create({
     lineHeight: 16,
     letterSpacing: 0,
     color: Color.PLACEHOLDER_TEXT,
+  },
+  circleView: {
+    justifyContent: 'center',
+    marginLeft: 10,
   },
 });
 
