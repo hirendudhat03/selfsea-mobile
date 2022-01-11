@@ -1,17 +1,55 @@
-import React, { useEffect } from "react";
-import { View, Text, Image, StyleSheet, } from "react-native";
+import React from "react";
+import { View, Text, Image, StyleSheet,Dimensions } from "react-native";
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 import Images from '../theme/images';
-import TabHome from '../views/TabHome';
+
+import CommunitiesHome from '../views/CommunitiesHome';
 import Bell from '../views/Bell';
 import Book from '../views/Book';
 import Person from '../views/Person';
 import TabScreen from '../views/TabScreen';
 import Color from '../theme/colors';
 
+import HealthScreen from '../views/HealthScreen';
+
+const height = Dimensions.get('window').height;
+
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+
 const BottomTabNavigator = ({ navigation }) => {
+
+
+const CommunitiesHomeStack =()=>{
+    return(
+
+    <Stack.Navigator initialRouteName="CommunitiesHome">
+      <Stack.Screen
+        name="CommunitiesHome"
+        component={CommunitiesHome}
+        options={{
+          headerShown: false,
+        }}
+      />
+        <Stack.Screen
+        name="HealthScreen"
+        component={HealthScreen}
+        options={{
+            headerShown: false,
+          }}
+      />
+      </Stack.Navigator>
+    );
+ 
+}
+
+
+
+    
 
 
     return (
@@ -20,7 +58,7 @@ const BottomTabNavigator = ({ navigation }) => {
             <Tab.Navigator
                 screenOptions={{
                     tabBarStyle: {
-                        height: 100,
+                        height:height/9 ,
                         borderTopColor: Color.BORDER_COLOR,
                         borderTopWidth: 1,
                     },
@@ -31,18 +69,20 @@ const BottomTabNavigator = ({ navigation }) => {
             >
                 <Tab.Screen
                     name="TabHome"
-                    component={TabHome}
+                    component={CommunitiesHomeStack}
                     options={{
                         headerShown: false,
                         tabBarLabel: () => { return null },
                         tabBarIcon: ({focused}) => {
+                            const image = focused
+                            ? Images.HomeFill
+                            : Images.House
 
 
 
                             return (
                                 <Image
-                                    source={Images.House}
-                                    style={focused ? {tintColor:'#000000'} : null}
+                                    source={image}
 
                                 />
                             )
@@ -57,13 +97,14 @@ const BottomTabNavigator = ({ navigation }) => {
                         headerShown: false,
                         tabBarLabel: () => { return null },
                         tabBarIcon: ({focused}) => {
-
+                         
+                            const image = focused
+                            ? Images.BellFill
+                            : Images.Bell
 
                             return (
                                 <Image
-                                    source={Images.Bell}
-                                    style={focused ? {tintColor:'#000000'} : null}
-
+                                    source={image}
 
                                 />
                             )
@@ -97,12 +138,13 @@ const BottomTabNavigator = ({ navigation }) => {
                         headerShown: false,
                         tabBarLabel: () => { return null },
                         tabBarIcon: ({focused}) => {
-
+                            const image = focused
+                            ? Images.BookFill
+                            : Images.Book
 
                             return (
                                 <Image
-                                    source={Images.Book}
-                                    style={focused ? {tintColor:'#000000'} : null}
+                                    source={image}
 
 
                                 />
@@ -118,12 +160,14 @@ const BottomTabNavigator = ({ navigation }) => {
                         headerShown: false,
                         tabBarLabel: () => { return null },
                         tabBarIcon: ({focused}) => {
+                            const image = focused
+                            ? Images.PersonFill
+                            : Images.Person
 
 
                             return (
                                 <Image
-                                    source={Images.Person}
-                                    style={focused ? {tintColor:'#000000'} : null}
+                                    source={image}
 
 
                                 />

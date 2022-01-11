@@ -5,6 +5,7 @@ import {
   Image,
   StyleSheet,
   ImageSourcePropType,
+  TouchableOpacity,
 } from 'react-native';
 import Color from '../theme/colors';
 import Constant from '../theme/constant';
@@ -15,9 +16,10 @@ interface Props {
   leftIcon?: ImageSourcePropType;
   rigthIcon?: ImageSourcePropType;
   text: string;
+  onPress: () => void;
 }
 
-const Badges = ({ type, leftIcon, rigthIcon, text }: Props) => {
+const Badges = ({ type, leftIcon, rigthIcon, text, onPress }: Props) => {
   return (
     <View
       style={
@@ -38,7 +40,7 @@ const Badges = ({ type, leftIcon, rigthIcon, text }: Props) => {
                       : null
       }>
       {leftIcon ? (
-        <Image source={leftIcon} style={styles.leftIconStyle} />
+        <TouchableOpacity><Image source={leftIcon} style={styles.leftIconStyle} /></TouchableOpacity>
       ) : null}
 
       <Text
@@ -62,7 +64,7 @@ const Badges = ({ type, leftIcon, rigthIcon, text }: Props) => {
         {text}
       </Text>
       {rigthIcon ? (
-        <Image source={rigthIcon} style={styles.rightIconStyle} />
+        <TouchableOpacity onPress={onPress}><Image source={rigthIcon} style={styles.rightIconStyle} /></TouchableOpacity>
       ) : null}
     </View>
   );
@@ -190,8 +192,8 @@ const styles = StyleSheet.create({
   },
   multiSelectView: {
     alignSelf: 'baseline',
-    paddingVertical: 5,
-    paddingHorizontal: 15,
+    paddingVertical: 3,
+    paddingHorizontal: 9,
     borderRadius: 18,
     backgroundColor: Color.BASE_COLOR_WHITE,
     borderStyle: 'solid',
@@ -200,6 +202,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    margin: 2
   },
   multiSelectText: {
     fontFamily: Font.CALIBRE,

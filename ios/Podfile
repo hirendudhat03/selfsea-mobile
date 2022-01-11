@@ -12,6 +12,14 @@ target 'SelfseaMobile' do
     :hermes_enabled => false
   )
 
+  pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
+
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
   target 'SelfseaMobileTests' do
     inherit! :complete
     # Pods for testing

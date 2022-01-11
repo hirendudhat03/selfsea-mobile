@@ -24,6 +24,15 @@ import LogoTab from '../assets/images/pngs/logo-diamond.png';
 import MenuDropdown from '../assets/images/pngs/chevron-down.png';
 import DrawerLogo from '../assets/images/pngs/drawerLogo.png';
 import MenuDropdownup from '../assets/images/pngs/chevron-up.png';
+import PasswordIcon  from '../assets/images/pngs/visibility.png';
+import visibilityShow  from '../assets/images/pngs/visibilityShow.png';
+import HomeFill from '../assets/images/pngs/home.png';
+import BellFill from '../assets/images/pngs/bellfill.png';
+import BookFill from '../assets/images/pngs/open-book.png';
+import PersonFill from '../assets/images/pngs/user.png';
+import plusCircle from '../assets/images/pngs/plusCircle.png';
+import Dots from '../assets/images/pngs/three-dots.png';
+
 
  const images ={
     Right,
@@ -51,6 +60,17 @@ import MenuDropdownup from '../assets/images/pngs/chevron-up.png';
     MenuDropdown,
     DrawerLogo,
     MenuDropdownup,
+    PasswordIcon,
+    visibilityShow,
+    HomeFill,
+    BellFill,
+    BookFill,
+    PersonFill,
+    plusCircle,
+    Dots,
+
+
+
 
 
 

@@ -1,11 +1,16 @@
 import React from 'react';
-import { Dimensions, Image, StyleSheet, View } from 'react-native';
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  View,
+  Text,
+  ImageSourcePropType,
+} from 'react-native';
 import Color from '../theme/colors';
-import Images from '../theme/images';
+import Font from '../theme/fonts';
 import SelectDropdown from 'react-native-select-dropdown';
 // @ts-ignore
-
-
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -19,11 +24,21 @@ interface Props {
   defaultButtonText: string;
   onSelect: (item: string, index: number) => void;
   optionList: OptionListType[];
-  style: {};
+  style?: {};
   icon?: ImageSourcePropType;
+  helperText?: string;
+  rowTextStyle?: {};
 }
 
-const Dropdown = ({ optionList, onSelect, defaultButtonText, style, icon }: Props) => {
+const Dropdown = ({
+  optionList,
+  onSelect,
+  defaultButtonText,
+  style,
+  icon,
+  helperText,
+  rowTextStyle,
+}: Props) => {
   return (
     <View>
       <SelectDropdown
@@ -32,6 +47,7 @@ const Dropdown = ({ optionList, onSelect, defaultButtonText, style, icon }: Prop
             <Image source={icon} />
           </View>
         )}
+        rowTextStyle={rowTextStyle}
         defaultButtonText={defaultButtonText}
         buttonStyle={[styles.Container, style]}
         data={optionList.map(item => item.title)}
@@ -43,6 +59,9 @@ const Dropdown = ({ optionList, onSelect, defaultButtonText, style, icon }: Prop
           return item;
         }}
       />
+      {helperText !== undefined ? (
+        <Text style={styles.helperText}>{helperText}</Text>
+      ) : null}
     </View>
   );
 };
@@ -63,6 +82,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderLeftWidth: 1,
+  },
+  helperText: {
+    width: '90%',
+    height: height * 0.02,
+    fontFamily: Font.CALIBRE,
+    fontSize: 12,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 16,
+    letterSpacing: 0,
+    color: Color.PLACEHOLDER_TEXT,
   },
 });
 
