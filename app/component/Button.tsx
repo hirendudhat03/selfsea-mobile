@@ -15,12 +15,12 @@ interface Props {
   type: string;
   text?: string;
   icon?: ImageSourcePropType;
-
+  disabled?: boolean;
   onPress?: () => void
 
 }
 
-const Button = ({ type, text, icon, onPress, style }: Props) => {
+const Button = ({ type, text, icon, onPress, style, disabled }: Props) => {
   return (
     <TouchableOpacity
       style={
@@ -38,6 +38,7 @@ const Button = ({ type, text, icon, onPress, style }: Props) => {
           ? styles.selfseaSendView
           : null
       }
+      disabled={disabled}
       onPress={onPress}>
       {icon !== undefined ? (
         <Image style={styles.selfseaSendImage} source={icon} />

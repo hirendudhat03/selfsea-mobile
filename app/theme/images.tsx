@@ -34,6 +34,10 @@ import plusCircle from '../assets/images/pngs/plusCircle.png';
 import Dots from '../assets/images/pngs/three-dots.png';
 import CheckCircle from '../assets/images/pngs/checkCircleFill.png';
 import CheckCircleGreen from '../assets/images/pngs/checkCircleFillGreen.png';
+import combinedShape from '../assets/images/pngs/combinedShape.png';
+import combinedShapeOPen from '../assets/images/pngs/combinedShapeOPen.png';
+import xCircle from '../assets/images/pngs/xCircle.png';
+
 
 
  const images ={
@@ -72,6 +76,9 @@ import CheckCircleGreen from '../assets/images/pngs/checkCircleFillGreen.png';
     Dots,
     CheckCircle,
     CheckCircleGreen,
+    combinedShape,
+    combinedShapeOPen,
+    xCircle,
 
 
 

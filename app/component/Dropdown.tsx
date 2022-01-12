@@ -54,13 +54,14 @@ const Dropdown = ({
         <View>
           <SelectDropdown
             renderDropdownIcon={() => (
-              <View style={[styles.iconView , value === '' ? {borderLeftColor:Color.COMMUNITY_ORANGE} : {borderLeftColor:Color.BORDER_COLOR_LIGHTGRAY}]}>
+              <View style={[styles.iconView, ]}>
                 <Image source={icon} />
               </View>
             )}
             rowTextStyle={rowTextStyle}
             defaultButtonText={defaultButtonText}
-            buttonStyle={[styles.Container, style, value === '' ? {borderColor:Color.COMMUNITY_ORANGE} : {borderColor:Color.BORDER_COLOR_LIGHTGRAY}]}
+            buttonTextStyle={{}}
+            buttonStyle={[styles.Container, style,]}
             data={optionList.map(item => item.title)}
             onSelect={onSelect}
             buttonTextAfterSelection={selectedItem => {
@@ -72,22 +73,21 @@ const Dropdown = ({
           />
         </View>
         {checkRight !== undefined ? (
-           <>
-           {iconVisibleFill ? (
-             circleFill ? (
-               <View style={styles.circleView}
-               >
-                 <Image source={Images.CheckCircleGreen} />
-               </View>
-             ) : (
-               <View style={styles.circleView}
-               >
-                <Image source={Images.CheckCircle} /> 
-               </View>
-             )
-           ) : null}
+          <>
+            {iconVisibleFill ? (
+              circleFill ? (
+                <View style={styles.circleView}>
+                  <Image source={Images.CheckCircleGreen} />
+                </View>
+              ) : (
+                <View style={styles.circleView}
+                >
+                  <Image source={Images.CheckCircle} />
+                </View>
+              )
+            ) : null}
 
-         </>
+          </>
         ) : null}
       </View>
       {helperText !== undefined ? (
@@ -113,10 +113,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderLeftWidth: 1,
+    paddingStart: 7,
   },
   helperText: {
     width: '90%',
-    height: height * 0.02,
     fontFamily: Font.CALIBRE,
     fontSize: 12,
     fontWeight: 'normal',
@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
     lineHeight: 16,
     letterSpacing: 0,
     color: Color.COMMUNITY_ORANGE,
+   
   },
   circleView: {
     justifyContent: 'center',
