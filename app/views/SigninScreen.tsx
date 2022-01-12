@@ -215,6 +215,7 @@ const Signin = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: Color.BASE_COLOR_WHITE,
   },
 
   headerView: {

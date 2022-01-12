@@ -50,7 +50,7 @@ const Dropdown = ({
 }: Props) => {
   return (
     <View>
-      <View style={{ flexDirection: 'row' }}>
+      <View style={{ flexDirection: 'row', }}>
         <View>
           <SelectDropdown
             renderDropdownIcon={() => (
@@ -60,7 +60,7 @@ const Dropdown = ({
             )}
             rowTextStyle={rowTextStyle}
             defaultButtonText={defaultButtonText}
-            buttonTextStyle={{}}
+            buttonTextStyle={{textAlign:'left'}}
             buttonStyle={[styles.Container, style,]}
             data={optionList.map(item => item)}
             onSelect={onSelect}
@@ -90,9 +90,9 @@ const Dropdown = ({
           </>
         ) : null}
       </View>
-      {helperText !== undefined ? (
+      {/* {helperText !== '' ? (
         <Text style={styles.helperText}>{helperText}</Text>
-      ) : null}
+      ) : null} */}
     </View>
   );
 };
