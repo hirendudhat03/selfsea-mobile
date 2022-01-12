@@ -93,20 +93,20 @@ const CreateProfile = ({ navigation }) => {
 
 
     }
-    
-   
-    
 
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
     const [race, setRace] = useState('');
-    const [raceDropDown, setRaceDropDown] = useState([{ name: 'American Indian' }, { name: 'Mixed Race / Mixed Ethnicity' }, 
-    { name: 'Native American' }, { name: 'Alaska Native' }, 
-    { name: ' Asian or Asian American' }, { name: 'Black or African American' }, { name: 'Hispanic' } ,{ name: 'Latino' },
-    { name: 'Latina' },{ name: 'Latine' },{ name: 'Latinx' }, { name: 'Middle Eastern or North African' },{ name: 'Native Hawaiian or Pacific Islander' },
+    const [raceDropDown, setRaceDropDown] = useState([{ name: 'American Indian' }, { name: 'Mixed Race / Mixed Ethnicity' },
+    { name: 'Native American' }, { name: 'Alaska Native' },
+    { name: ' Asian or Asian American' }, { name: 'Black or African American' }, { name: 'Hispanic' }, { name: 'Latino' },
+    { name: 'Latina' }, { name: 'Latine' }, { name: 'Latinx' }, { name: 'Middle Eastern or North African' }, { name: 'Native Hawaiian or Pacific Islander' },
     { name: 'White' }, { name: 'something else' },]);
     const [selectRaceDropDown, setSelectRaceDropDown] = useState([]);
 
@@ -134,16 +134,16 @@ const CreateProfile = ({ navigation }) => {
 
 
     }
-  
- 
-    
-    
-    
+
+
+
+
+
     const [gender, setGender] = useState('');
-    const [genderDropDown, setGenderDropDown] = useState([{ name: 'cisgender' }, { name: 'genderqueer' }, 
-    { name: 'gender non-binary' }, 
-    { name: 'gender fluid' }, { name: 'man/boy' }, { name: 'transgender' }, 
-    { name:"woman/girl"}, { name: 'something else' },]);
+    const [genderDropDown, setGenderDropDown] = useState([{ name: 'cisgender' }, { name: 'genderqueer' },
+    { name: 'gender non-binary' },
+    { name: 'gender fluid' }, { name: 'man/boy' }, { name: 'transgender' },
+    { name: "woman/girl" }, { name: 'something else' },]);
     const [selectGenderDropDown, setSelectGenderDropDown] = useState([]);
 
     const genderDropDownItem = (item, val) => {
@@ -265,7 +265,7 @@ const CreateProfile = ({ navigation }) => {
                         <Dropdown
                             optionList={countries}
                             onSelect={(value) => setProfile(value)}
-                            defaultButtonText={'select one'}
+                            defaultButtonText={'visible to everyone'}
                             icon={Images.DropdownIcon}
                             rowTextStyle={styles.rowTextStyle}
                         />
@@ -294,10 +294,10 @@ const CreateProfile = ({ navigation }) => {
                             </View>
                             <View style={styles.imageView}>
                                 <TouchableOpacity
-
+                                    onPress={() => pronouns !== '' ? setPronouns('') : setPronouns(' ')}
                                     style={styles.touchableStyle}>
                                     <Image
-                                        source={Images.plusCircle}
+                                        source={pronouns !== '' ? Images.xCircle : Images.plusCircle}
                                         style={styles.passwordIcon}
                                     />
                                 </TouchableOpacity>
@@ -342,9 +342,10 @@ const CreateProfile = ({ navigation }) => {
                             </View>
                             <View style={styles.imageView}>
                                 <TouchableOpacity
+                                    onPress={() => orientation !== '' ? setOrientation('') : setOrientation(' ')}
                                     style={styles.touchableStyle}>
                                     <Image
-                                        source={Images.plusCircle}
+                                        source={orientation !== '' ? Images.xCircle : Images.plusCircle}
                                         style={styles.passwordIcon}
                                     />
                                 </TouchableOpacity>
@@ -397,10 +398,10 @@ const CreateProfile = ({ navigation }) => {
                             </View>
                             <View style={styles.imageView}>
                                 <TouchableOpacity
-
+                                    onPress={() => gender !== '' ? setGender('') : setGender(' ')}
                                     style={styles.touchableStyle}>
                                     <Image
-                                        source={Images.plusCircle}
+                                        source={gender !== '' ? Images.xCircle : Images.plusCircle}
                                         style={styles.passwordIcon}
                                     />
                                 </TouchableOpacity>
@@ -445,9 +446,10 @@ const CreateProfile = ({ navigation }) => {
                             </View>
                             <View style={styles.imageView}>
                                 <TouchableOpacity
+                                    onPress={() => race !== '' ? setRace('') : setRace(' ')}
                                     style={styles.touchableStyle}>
                                     <Image
-                                        source={Images.plusCircle}
+                                        source={race !== '' ? Images.xCircle : Images.plusCircle}
                                         style={styles.passwordIcon}
                                     />
                                 </TouchableOpacity>
@@ -500,11 +502,12 @@ const CreateProfile = ({ navigation }) => {
                             </View>
                             <View style={styles.imageView}>
                                 <TouchableOpacity
-                                    style={styles.touchableStyle}>
-                                    <Image
-                                        source={Images.plusCircle}
-                                        style={styles.passwordIcon}
-                                    />
+                                       onPress={() => location !== '' ? setLocation('') : setLocation(' ')}
+                                       style={styles.touchableStyle}>
+                                       <Image
+                                           source={location !== '' ? Images.xCircle : Images.plusCircle}
+                                           style={styles.passwordIcon}
+                                       />
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -518,17 +521,7 @@ const CreateProfile = ({ navigation }) => {
                                     )
                                 })}
                             </View>
-                        ) : (
-                            locationDropDown === null ? (
-                                <View style={styles.recordView}>
-                                    {/* {orientation !== '' ? ( */}
-                                    <Text>No Record Found</Text>
-                                    {/* ) :
-null} */}
-                                </View>
-                            ) :
-                                null
-                        )
+                        ) : null
                         }
 
 
@@ -556,6 +549,8 @@ null} */}
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: Color.BASE_COLOR_WHITE,
+
     },
 
     contentView: {
@@ -593,7 +588,7 @@ const styles = StyleSheet.create({
         lineHeight: 30,
         letterSpacing: 0,
         color: Color.BASE_COLOR_GRAY,
-        marginTop: 25,
+        marginTop: 20,
     },
 
 

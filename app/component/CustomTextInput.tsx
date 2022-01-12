@@ -31,6 +31,10 @@ interface Props {
   checkRight?: boolean;
   circleFill: string;
   iconVisibleFill?: boolean;
+  viewStyle: {};
+  onTouchStart?: () => void;
+  borderColor: string;
+  onTouchEnd?: () => void;
 }
 
 const CustomTextInput = ({
@@ -48,18 +52,25 @@ const CustomTextInput = ({
   checkRight,
   iconVisibleFill,
   circleFill,
+  viewStyle,
+  onTouchStart,
+  borderColor,
+  onTouchEnd,
+
 
 }: Props) => {
   return (
     <>
       {type === Constant.textInput.LARGE_INPUT ? (
         <>
+
           {label !== undefined ? (
             <Text style={[styles.labelText, style]}>{label}</Text>
           ) : null}
           <View style={styles.contentView}>
-
-            <View style={[styles.largeInputView, value === '' ? {borderColor:Color.COMMUNITY_ORANGE} : {borderColor:Color.BORDER_COLOR_LIGHTGRAY}]}>
+            {/* value === '' ? { borderColor: Color.COMMUNITY_ORANGE } : { borderColor: Color.BORDER_COLOR_LIGHTGRAY } */}
+            <View style={[styles.largeInputView, viewStyle, { borderColor: borderColor === '' ?  Color.BORDER_COLOR_LIGHTGRAY 
+            : borderColor}]}>
               <TextInput
                 style={[styles.textInputStyle, textInputstyle]}
                 placeholder={placeholder}
@@ -67,6 +78,8 @@ const CustomTextInput = ({
                 secureTextEntry={secureTextEntry}
                 value={value}
                 circleFill={circleFill}
+                onTouchStart={onTouchStart}
+                onTouchEnd={onTouchEnd}
               />
 
               {iconVisible ? (
@@ -75,7 +88,7 @@ const CustomTextInput = ({
                     style={styles.touchableStyle}
                     onPress={secureTextEntryChange}>
                     <Image
-                      source={Images.PasswordIcon}
+                      source={Images.combinedShape}
                       style={styles.passwordIcon}
                     />
                   </TouchableOpacity>
@@ -84,7 +97,7 @@ const CustomTextInput = ({
                     style={styles.touchableStyle}
                     onPress={secureTextEntryChange}>
                     <Image
-                      source={Images.visibilityShow}
+                      source={Images.combinedShapeOPen}
                       style={styles.passwordIcon}
                     />
                   </TouchableOpacity>
@@ -102,7 +115,7 @@ const CustomTextInput = ({
                   ) : (
                     <View style={{ justifyContent: 'center' }}
                     >
-                     <Image source={Images.CheckCircle} /> 
+                      <Image source={Images.CheckCircle} />
                     </View>
                   )
                 ) : null}
@@ -112,11 +125,15 @@ const CustomTextInput = ({
 
           </View>
 
-          {helperText !== undefined ? (
+          {/* {helperText !== undefined ? (
             <Text style={styles.helperText}>{helperText}</Text>
-          ) : null}
+          ) : null} */}
         </>
       ) : null}
+      {helperText !== undefined ? (
+        <Text style={styles.helperText}>{helperText}</Text>
+      ) : null}
+
       {type === Constant.textInput.LARGE_TEXT_AREA ? (
         <TextInput style={styles.largeTextareaView} placeholder={placeholder} />
       ) : null}
@@ -127,12 +144,14 @@ const CustomTextInput = ({
 const styles = StyleSheet.create({
   largeInputView: {
     width: '90%',
-    height: height * 0.064,
+    height: height * 0.060,
     borderRadius: 4,
     backgroundColor: Color.BASE_COLOR_WHITE,
     borderStyle: 'solid',
     borderWidth: 1,
     flexDirection: 'row',
+    borderColor: Color.BORDER_COLOR_LIGHTGRAY,
+
   },
 
   largeTextareaView: {
@@ -155,11 +174,10 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     letterSpacing: 0,
     color: Color.BASE_COLOR_GRAY,
-    marginTop: 25,
   },
   helperText: {
     width: '90%',
-    height: height * 0.02,
+    height: height * 0.03,
     fontFamily: Font.CALIBRE,
     fontSize: 12,
     fontWeight: 'normal',
@@ -167,6 +185,7 @@ const styles = StyleSheet.create({
     lineHeight: 16,
     letterSpacing: 0,
     color: Color.COMMUNITY_ORANGE,
+
   },
   toggleLabel: {
     fontFamily: Font.CALIBRE,
@@ -185,9 +204,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   passwordIcon: {
-    height: 25,
-    width: 25,
-    alignSelf: 'flex-end',
+    // alignSelf: 'flex-end',
+    //  marginRight: 50,
   },
   textInputStyle: {
     fontSize: 17,
@@ -195,7 +213,7 @@ const styles = StyleSheet.create({
     width: '90%',
     paddingHorizontal: 16,
   },
-  touchableStyle: { justifyContent: 'center' },
+  touchableStyle: { justifyContent: 'center', marginLeft: -7 },
   contentView: {
     width: '90%',
     height: height * 0.064,

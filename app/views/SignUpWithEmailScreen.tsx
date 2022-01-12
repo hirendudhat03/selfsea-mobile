@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -23,25 +23,28 @@ import Dropdown from '../component/Dropdown';
 
 import { useDispatch } from 'react-redux'
 import { SignupRequest } from '../redux/actions/SignupAction'
+import Alert from 'app/component/Alert';
 
 const zxcvbn = require('zxcvbn');
 
 const height = Dimensions.get('window').height;
 
-const countries = [
-  {
-    title: 'Menu Item',
-    value: 'Menu Item',
-  },
-  {
-    title: 'Menu Item',
-    value: 'Menu Item',
-  },
-  {
-    title: 'Menu Item',
-    value: 'Menu Item',
-  },
+
+const month = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
 ];
+
 
 const descriptionData = [
   {
@@ -62,14 +65,38 @@ const Signup = ({ navigation }) => {
 
   const dispatch = useDispatch()
 
+  const [years, setYear] = useState([]);
+  useEffect(() => {
+    // const getyeardetails() {
 
-  const [email, setEmail] = useState('');
+    var year = [];
+
+    var currentYear = new Date().getFullYear(), year = [];
+    var startYear = startYear || 1900;
+
+    console.log('currentYear : ', currentYear)
+    console.log('startYear : ', startYear)
+
+
+    while (currentYear >= startYear) {
+      // console.log(currentYear--)
+      year.push(currentYear--);
+    }
+    setYear(year)
+
+    console.log('year::', year);
+    // }
+
+    // console.log( this.years(2019-20));
+  }, [])
+
+  const [email, setEmail] = useState(null);
   const [emailError, setEmailError] = useState('');
 
   const [Password, setPassword] = useState('');
   const [PasswordError, setPasswordError] = useState('');
 
-  const [userName, setUserName] = useState('');
+  const [userName, setUserName] = useState(null);
   const [userNameError, setUserNameError] = useState('');
 
   const [birthMonth, setBirthMonth] = useState('');
@@ -81,20 +108,29 @@ const Signup = ({ navigation }) => {
   const [focus, setFocus] = useState<boolean>();
   const [passwordScore, setPasswordScore] = useState<0 | 1 | 2 | 3 | 4>(0);
 
+
+
+
   const [circleFillEmail, setCircleFillEmail] = useState<boolean>();
 
 
   const selectFill = (text) => {
-    console.log('text : ',text)
     setEmail(text);
     if (text === '') {
-      setEmailError('');
+
       setCircleFillEmail(false);
-    } else if(text.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null) {
+      setEmailBorder(Color.COMMUNITY_ORANGE)
+      setEmailError('Please enter email address. ');
+    } else if (text.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null) {
+      setEmailBorder(Color.COMMUNITY_ORANGE)
+      setEmailError('Please enter a valid email address. ');
       setCircleFillEmail(false);
+
     }
-     else {
+    else {
       setCircleFillEmail(true);
+      setEmailBorder(Color.BORDER_COLOR_LIGHTGRAY)
+      setEmailError('');
     }
   };
 
@@ -102,11 +138,15 @@ const Signup = ({ navigation }) => {
 
 
   const selectFillPassword = (text) => {
+    console.log("text:::", text)
     setPassword(text);
     if (text === '') {
-      setPasswordError('');
+      setpasswordBorder(Color.COMMUNITY_ORANGE)
+      setPasswordError('enter password ');
       setCircleFillPassword(false);
     } else {
+      setpasswordBorder(Color.BORDER_COLOR_LIGHTGRAY)
+      setPasswordError(' ');
       setCircleFillPassword(true);
     }
   };
@@ -115,10 +155,13 @@ const Signup = ({ navigation }) => {
 
   const selectFillUser = (text) => {
     setUserName(text);
-    if (text === '' ) {
-      setUserNameError('');
+    if (text === '') {
+      setUserNameBorder(Color.COMMUNITY_ORANGE)
+      setUserNameError('enter username ');
       setCircleFillUser(false);
-    }else{
+    } else {
+      setUserNameBorder(Color.BORDER_COLOR_LIGHTGRAY)
+      setUserNameError(' ');
       setCircleFillUser(true);
     }
   };
@@ -129,9 +172,10 @@ const Signup = ({ navigation }) => {
     setBirthYear(value);
 
     if (value === '' || birthMonth === '') {
-      setBirthYearError('');
+
       setCircleFillBirth(false);
     } else {
+      setBirthYearError(' ');
       setCircleFillBirth(true);
     }
   };
@@ -141,7 +185,7 @@ const Signup = ({ navigation }) => {
 
     if (value === '' || birthYear === '') {
 
-                setBirthMonthError('');
+      setBirthMonthError('');
       setCircleFillBirth(false);
     } else {
       setCircleFillBirth(true);
@@ -175,6 +219,10 @@ const Signup = ({ navigation }) => {
       setBirthMonthError('Birth month Required');
       setBirthYearError('Birth year Required');
       setUserNameError('UserName Required');
+
+      setEmail('')
+      setUserName('')
+      setPassword('')
     } else if (!email) {
       setEmailError('Email Required');
     } else if (
@@ -188,7 +236,7 @@ const Signup = ({ navigation }) => {
     } else if (birthYear === '') {
       setBirthYearError('Birth Year Required');
     } else if (!userName) {
-      setUserNameError('UserName Required');
+      setUserNameError('21/20');
     } else {
       dispatch(SignupRequest(email, Password, birthMonth, birthYear, userName, navigation))
       // navigation.navigate('CreateProfile');
@@ -197,6 +245,25 @@ const Signup = ({ navigation }) => {
 
 
 
+  const [emailBorder, setEmailBorder] = useState('')
+  const handleTouch = () => {
+
+    setEmailBorder(Color.BASE_COLOR_LIGHT_BLUE)
+
+  }
+
+  const [passwordBorder, setpasswordBorder] = useState('')
+  const handleTouchpasswordBorder = () => {
+
+    setpasswordBorder(Color.BASE_COLOR_LIGHT_BLUE)
+
+  }
+  const [userNameBorder, setUserNameBorder] = useState('')
+  const handleTouchusernameBorder = () => {
+
+    setUserNameBorder(Color.BASE_COLOR_LIGHT_BLUE)
+
+  }
 
 
   const passwordStrengthColor = (barNumber: number) => {
@@ -241,6 +308,8 @@ const Signup = ({ navigation }) => {
           iconVisibleFill={true}
           checkRight={true}
           circleFill={circleFillEmail}
+          onTouchStart={() => handleTouch()}
+          borderColor={emailBorder}
         />
 
         <TextInput
@@ -261,6 +330,8 @@ const Signup = ({ navigation }) => {
           iconVisibleFill={true}
           checkRight={true}
           circleFill={circleFillPassword}
+          onTouchStart={() => handleTouchpasswordBorder()}
+          borderColor={passwordBorder}
 
         />
         <View style={styles.viewStyle}>
@@ -306,7 +377,7 @@ const Signup = ({ navigation }) => {
         <View style={styles.monthView}>
           <View style={styles.rowView}>
             <Dropdown
-              optionList={countries}
+              optionList={month}
               onSelect={value => {
                 selectFillmonth(value)
 
@@ -320,7 +391,7 @@ const Signup = ({ navigation }) => {
           </View>
           <View style={styles.yearDropdown}>
             <Dropdown
-              optionList={countries}
+              optionList={years}
               onSelect={value => {
                 selectFillBirth(value);
               }}
@@ -361,6 +432,8 @@ const Signup = ({ navigation }) => {
           iconVisibleFill={true}
           checkRight={true}
           circleFill={circleFillUser}
+          onTouchStart={() => handleTouchusernameBorder()}
+          borderColor={userNameBorder}
 
 
         />
@@ -369,8 +442,18 @@ const Signup = ({ navigation }) => {
         <Button
           type={Constant.buttons.PRIMARY}
           text={'create account'}
-          style={{ marginTop: 15 }}
+          style={[{ marginTop: 15 },
+          !email ||
+            !Password ||
+            birthMonth === '' ||
+            birthYear === '' ||
+            !userName ? { backgroundColor: Color.BUTTON_DISABLE_COLOR } : { backgroundColor: Color.BASE_COLOR_ORANGE }]}
           onPress={() => SignupValidation()}
+          disabled={!email ||
+            !Password ||
+            birthMonth === '' ||
+            birthYear === '' ||
+            !userName ? true : false}
         />
       </View>
       <Modal
@@ -386,8 +469,6 @@ const Signup = ({ navigation }) => {
           button={Constant.buttons.CLOSE}
           text={'close'}
         />
-
-
       </Modal>
     </View>
   );
@@ -395,6 +476,7 @@ const Signup = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: Color.BASE_COLOR_WHITE,
   },
   headerView: {
     flex: 1,
@@ -404,6 +486,7 @@ const styles = StyleSheet.create({
   contentView: {
     flex: 4,
     alignItems: 'center',
+    marginTop: 25,
   },
   infoIcon: {
     alignSelf: 'center',
@@ -435,7 +518,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignSelf: 'flex-start',
     marginHorizontal: 20,
-    marginTop: 10,
+    marginVertical: 3,
   },
   rowView: {
     flexDirection: 'row',
