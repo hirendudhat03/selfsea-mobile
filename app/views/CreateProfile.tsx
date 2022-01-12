@@ -8,8 +8,10 @@ import {
     TouchableOpacity,
     Dimensions,
     Image,
-    TextInput
+    TextInput,
+    Modal
 } from 'react-native';
+import ModalPicker from './ModalPicker';
 
 import Constant from '../theme/constant';
 import Font from "../theme/fonts";
@@ -32,13 +34,21 @@ const height = Dimensions.get('window').height;
 
 
 const countries = [
+    "visible to everyone",
+    'visible only to mentors',
+
+
+];
+
+const descriptionData = [
     {
-        title: "visible to everyone",
-        value: "visible to everyone",
+        title: "visible to everyone means all other users can see your profile fields and post history."
     },
     {
-        title: 'visible only to mentors',
-        value: 'visible only to mentors',
+        title: 'visible only to mentors means only our trained mentors can see your profile fields and post history.'
+    },
+    {
+        title: 'no one will be able to see your email address!'
     },
 
 ];
@@ -135,7 +145,10 @@ const CreateProfile = ({ navigation }) => {
 
     }
 
-
+    const [isModalVisible, setIsMoalVisiable] = useState(false);
+    const changeModalVisibility = (bool: boolean) => {
+        setIsMoalVisiable(bool);
+    };
 
 
 
@@ -258,6 +271,7 @@ const CreateProfile = ({ navigation }) => {
                             <Text style={styles.profileText}>profile visibility</Text>
                             <TouchableOpacity
                                 style={styles.touchableStyle}
+                                onPress={() => changeModalVisibility(true)}
                             >
                                 <Image source={Images.Infocircle} style={styles.infoIcon} />
                             </TouchableOpacity>
@@ -502,12 +516,12 @@ const CreateProfile = ({ navigation }) => {
                             </View>
                             <View style={styles.imageView}>
                                 <TouchableOpacity
-                                       onPress={() => location !== '' ? setLocation('') : setLocation(' ')}
-                                       style={styles.touchableStyle}>
-                                       <Image
-                                           source={location !== '' ? Images.xCircle : Images.plusCircle}
-                                           style={styles.passwordIcon}
-                                       />
+                                    onPress={() => location !== '' ? setLocation('') : setLocation(' ')}
+                                    style={styles.touchableStyle}>
+                                    <Image
+                                        source={location !== '' ? Images.xCircle : Images.plusCircle}
+                                        style={styles.passwordIcon}
+                                    />
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -540,6 +554,21 @@ const CreateProfile = ({ navigation }) => {
                 />
 
             </View>
+
+            <Modal
+                transparent={false}
+                animationType="fade"
+                visible={isModalVisible}
+                onRequestClose={() => changeModalVisibility(false)}>
+                <ModalPicker changeModalVisibility={changeModalVisibility}
+                    textTitle={'selfsea Profile Visibility'}
+                    smallText={'your Profile Visibility will need to be approved by a moderator before your first post or comment can be approved. it cannot be changed after that.'}
+                    descriptionData={descriptionData}
+                    numberOfLines={2}
+                    button={Constant.buttons.CLOSE}
+                    text={'close'}
+                />
+            </Modal>
 
         </View>
     );

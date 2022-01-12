@@ -125,14 +125,12 @@ const CustomTextInput = ({
 
           </View>
 
-          {/* {helperText !== undefined ? (
-            <Text style={styles.helperText}>{helperText}</Text>
-          ) : null} */}
-        </>
-      ) : null}
-      {helperText !== undefined ? (
+          {helperText !== '' ? (
         <Text style={styles.helperText}>{helperText}</Text>
       ) : null}
+        </>
+      ) : null}
+     
 
       {type === Constant.textInput.LARGE_TEXT_AREA ? (
         <TextInput style={styles.largeTextareaView} placeholder={placeholder} />
@@ -150,6 +148,7 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 1,
     flexDirection: 'row',
+    alignItems:'center',
     borderColor: Color.BORDER_COLOR_LIGHTGRAY,
 
   },
@@ -174,10 +173,11 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     letterSpacing: 0,
     color: Color.BASE_COLOR_GRAY,
+    marginTop:height*0.015
   },
   helperText: {
     width: '90%',
-    height: height * 0.03,
+    height: 14,
     fontFamily: Font.CALIBRE,
     fontSize: 12,
     fontWeight: 'normal',

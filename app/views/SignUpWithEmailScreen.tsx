@@ -59,6 +59,19 @@ const descriptionData = [
 
 ];
 
+const birthnData = [
+  {
+    title: "selfsea is just for the users between the ages 13-18."
+  },
+  {
+    title: 'by signing up, you agree that you are within this age, and with our other terms of use.'
+  },
+  {
+    title: 'if we find out that you are out side of this age range, we will remove your account.'
+  },
+
+];
+
 
 
 const Signup = ({ navigation }) => {
@@ -146,7 +159,7 @@ const Signup = ({ navigation }) => {
       setCircleFillPassword(false);
     } else {
       setpasswordBorder(Color.BORDER_COLOR_LIGHTGRAY)
-      setPasswordError(' ');
+      setPasswordError('');
       setCircleFillPassword(true);
     }
   };
@@ -157,9 +170,13 @@ const Signup = ({ navigation }) => {
     setUserName(text);
     if (text === '') {
       setUserNameBorder(Color.COMMUNITY_ORANGE)
-      setUserNameError('enter username ');
+      setUserNameError(text.length+'/20');
       setCircleFillUser(false);
-    } else {
+    } else if (text.length > 20) {
+      setUserNameBorder(Color.COMMUNITY_ORANGE)
+      setUserNameError(text.length+'/20');
+      setCircleFillUser(false);
+    }else {
       setUserNameBorder(Color.BORDER_COLOR_LIGHTGRAY)
       setUserNameError(' ');
       setCircleFillUser(true);
@@ -203,6 +220,12 @@ const Signup = ({ navigation }) => {
   const changeModalVisibility = (bool: boolean) => {
     setIsMoalVisiable(bool);
   };
+
+  const [isBirthVisible, setIsBirthVisiable] = useState(false);
+  const changeBirthVisibility = (bool: boolean) => {
+    setIsBirthVisiable(bool);
+  };
+  
 
   const SignupValidation = () => {
     if (
@@ -364,7 +387,7 @@ const Signup = ({ navigation }) => {
             <Text style={styles.birthMonthText}>birth month</Text>
             <TouchableOpacity
               style={styles.touchableStyle}
-              onPress={() => changeModalVisibility(true)}>
+              onPress={() => changeBirthVisibility(true)}>
               <Image source={Images.Infocircle} style={styles.infoIcon} />
             </TouchableOpacity>
           </View>
@@ -372,7 +395,7 @@ const Signup = ({ navigation }) => {
             <Text style={styles.birthMonthText}>birth year</Text>
           </View>
         </View>
-        <View style={styles.monthView}>
+        <View style={styles.monthViewBottom}>
           <View style={styles.rowView}>
             <Dropdown
               optionList={month}
@@ -468,6 +491,20 @@ const Signup = ({ navigation }) => {
           text={'close'}
         />
       </Modal>
+      <Modal
+        transparent={false}
+        animationType="fade"
+        visible={isBirthVisible}
+        onRequestClose={() => changeBirthVisibility(false)}>
+        <ModalPicker changeModalVisibility={changeBirthVisibility}
+          textTitle={'selfsea birthnames'}
+          smallText={'your birthname will need to be approved by a moderator before your first post or comment can be approved. it cannot be changed after that.'}
+          descriptionData={birthnData}
+          numberOfLines={2}
+          button={Constant.buttons.CLOSE}
+          text={'close'}
+        />
+      </Modal>
     </View>
   );
 };
@@ -484,7 +521,7 @@ const styles = StyleSheet.create({
   contentView: {
     flex: 4,
     alignItems: 'center',
-    marginTop: 25,
+    // marginTop: 25,
   },
   infoIcon: {
     alignSelf: 'center',
@@ -502,14 +539,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '81%',
-    marginVertical: 10,
     marginRight: 32,
+    
   },
   passwordStyle: {
     borderColor: Color.BORDER_COLOR,
     width: '22%',
     height: 6,
     backgroundColor: '',
+    marginTop:5
   },
   monthView: {
     flexDirection: 'row',
@@ -517,6 +555,13 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     marginHorizontal: 20,
     marginVertical: 3,
+    marginTop: height * 0.017
+  },
+  monthViewBottom: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignSelf: 'flex-start',
+    marginHorizontal: 20,
   },
   rowView: {
     flexDirection: 'row',
@@ -549,7 +594,7 @@ const styles = StyleSheet.create({
   userName: {
     width: '90%',
     flexDirection: 'row',
-    marginTop: 9,
+    marginTop: height*0.015,
   },
   largeInputView: {
     width: '101%',
