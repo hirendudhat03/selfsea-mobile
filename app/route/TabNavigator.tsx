@@ -24,8 +24,7 @@ const Stack = createNativeStackNavigator();
 const BottomTabNavigator = ({ navigation }) => {
 
 
-const CommunitiesHomeStack =()=>{
-    return(
+const CommunitiesHomeStack =()=>(
 
     <Stack.Navigator initialRouteName="CommunitiesHome">
       <Stack.Screen
@@ -43,9 +42,8 @@ const CommunitiesHomeStack =()=>{
           }}
       />
       </Stack.Navigator>
-    );
+    )
  
-}
 
 
 

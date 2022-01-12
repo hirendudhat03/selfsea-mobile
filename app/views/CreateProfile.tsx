@@ -55,7 +55,7 @@ const CreateProfile = ({ navigation }) => {
     }
 
     const signupRes = useSelector(state => state.SignupReducer)
-    console.log('signupRes : ', JSON.stringify(signupRes))
+    console.log('signupRes123 : ', JSON.stringify(signupRes))
 
     const [profile, setProfile] = useState('');
 

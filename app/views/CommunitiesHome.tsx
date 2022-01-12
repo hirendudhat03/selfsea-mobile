@@ -54,8 +54,8 @@ const descriptionData = [
 
 const CommunitiesHome = ({ navigation }) => {
 
-  const createprofileRes = useSelector(state => state.CreateProfileReducer)
-console.log('signupRes : ',JSON.stringify(createprofileRes))
+//   const createprofileRes = useSelector(state => state.CreateProfileReducer)
+// console.log('signupRes321 : ',JSON.stringify(createprofileRes))
 
 
   useEffect(() => {

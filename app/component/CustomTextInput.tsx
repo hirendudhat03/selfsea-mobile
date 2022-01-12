@@ -45,8 +45,8 @@ const CustomTextInput = ({
   iconVisible,
   secureTextEntry,
   textInputstyle,
-  // checkRight,
-  // iconVisibleFill,
+  checkRight,
+  iconVisibleFill,
   circleFill,
 
 }: Props) => {
@@ -57,9 +57,9 @@ const CustomTextInput = ({
           {label !== undefined ? (
             <Text style={[styles.labelText, style]}>{label}</Text>
           ) : null}
-          {/* <View style={styles.contentView}> */}
+          <View style={styles.contentView}>
 
-            <View style={styles.largeInputView}>
+            <View style={[styles.largeInputView, value === '' ? {borderColor:Color.COMMUNITY_ORANGE} : {borderColor:Color.BORDER_COLOR_LIGHTGRAY}]}>
               <TextInput
                 style={[styles.textInputStyle, textInputstyle]}
                 placeholder={placeholder}
@@ -91,24 +91,26 @@ const CustomTextInput = ({
                 )
               ) : null}
             </View>
-            {/* {checkRight !== undefined ? (
+            {checkRight !== undefined ? (
               <>
                 {iconVisibleFill ? (
-                  <View style={{ justifyContent: 'center' }}
-                  >
-                      <Image source={Images.CheckCircle} />
-                  </View>
-                ) : (
-                  <View style={{ justifyContent: 'center' }}
-                  >
-                 <Image source={Images.CheckCircleGreen} />
-                  </View>
-                )}
+                  circleFill ? (
+                    <View style={{ justifyContent: 'center' }}
+                    >
+                      <Image source={Images.CheckCircleGreen} />
+                    </View>
+                  ) : (
+                    <View style={{ justifyContent: 'center' }}
+                    >
+                     <Image source={Images.CheckCircle} /> 
+                    </View>
+                  )
+                ) : null}
 
               </>
-            ) : null} */}
+            ) : null}
 
-          {/* </View> */}
+          </View>
 
           {helperText !== undefined ? (
             <Text style={styles.helperText}>{helperText}</Text>
@@ -130,7 +132,6 @@ const styles = StyleSheet.create({
     backgroundColor: Color.BASE_COLOR_WHITE,
     borderStyle: 'solid',
     borderWidth: 1,
-    borderColor: Color.BORDER_COLOR_LIGHTGRAY,
     flexDirection: 'row',
   },
 
@@ -165,7 +166,7 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
     lineHeight: 16,
     letterSpacing: 0,
-    color: Color.PLACEHOLDER_TEXT,
+    color: Color.COMMUNITY_ORANGE,
   },
   toggleLabel: {
     fontFamily: Font.CALIBRE,
