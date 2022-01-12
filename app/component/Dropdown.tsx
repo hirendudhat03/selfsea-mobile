@@ -62,7 +62,7 @@ const Dropdown = ({
             defaultButtonText={defaultButtonText}
             buttonTextStyle={{}}
             buttonStyle={[styles.Container, style,]}
-            data={optionList.map(item => item.title)}
+            data={optionList.map(item => item)}
             onSelect={onSelect}
             buttonTextAfterSelection={selectedItem => {
               return selectedItem;

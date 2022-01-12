@@ -31,55 +31,18 @@ const height = Dimensions.get('window').height;
 
 
 const month = [
-  {
-    title: 'January',
-    value: 'January',
-  },
-  {
-    title: 'February',
-    value: 'February',
-  },
-  {
-    title: 'March',
-    value: 'March',
-  },
-  {
-    title: 'April',
-    value: 'April',
-  },
-  {
-    title: 'May',
-    value: 'May',
-  },
-  {
-    title: 'June',
-    value: 'June',
-  },
-  {
-    title: 'July',
-    value: 'July',
-  }, {
-    title: 'August',
-    value: 'August',
-  },
-  {
-    title: 'September',
-    value: 'September',
-  },
-  {
-    title: 'October',
-    value: 'October',
-  },
-  {
-    title: 'November',
-    value: 'November',
-  },
-  {
-    title: 'December',
-    value: 'December',
-  },
-
-
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
 ];
 
 
@@ -102,7 +65,7 @@ const Signup = ({ navigation }) => {
 
   const dispatch = useDispatch()
 
-const [years , setYear] = useState([]);
+  const [years, setYear] = useState([]);
   useEffect(() => {
     // const getyeardetails() {
 
@@ -110,11 +73,17 @@ const [years , setYear] = useState([]);
 
     var currentYear = new Date().getFullYear(), year = [];
     var startYear = startYear || 1900;
-    while (startYear <= currentYear) {
-      years.push(startYear++);
+
+    console.log('currentYear : ', currentYear)
+    console.log('startYear : ', startYear)
+
+
+    while (currentYear >= startYear) {
+      // console.log(currentYear--)
+      year.push(currentYear--);
     }
     setYear(year)
-    
+
     console.log('year::', year);
     // }
 
@@ -274,25 +243,25 @@ const [years , setYear] = useState([]);
 
 
 
-const [emailBorder, setEmailBorder] = useState('')
- const handleTouch = () => {
+  const [emailBorder, setEmailBorder] = useState('')
+  const handleTouch = () => {
 
-   setEmailBorder(Color.BASE_COLOR_LIGHT_BLUE)
- 
- }     
+    setEmailBorder(Color.BASE_COLOR_LIGHT_BLUE)
 
- const [passwordBorder, setpasswordBorder] = useState('')
- const handleTouchpasswordBorder = () => {
+  }
 
-  setpasswordBorder(Color.BASE_COLOR_LIGHT_BLUE)
- 
- }   
- const [userNameBorder, setUserNameBorder] = useState('')
- const handleTouchusernameBorder = () => {
+  const [passwordBorder, setpasswordBorder] = useState('')
+  const handleTouchpasswordBorder = () => {
 
-  setUserNameBorder(Color.BASE_COLOR_LIGHT_BLUE)
- 
- }     
+    setpasswordBorder(Color.BASE_COLOR_LIGHT_BLUE)
+
+  }
+  const [userNameBorder, setUserNameBorder] = useState('')
+  const handleTouchusernameBorder = () => {
+
+    setUserNameBorder(Color.BASE_COLOR_LIGHT_BLUE)
+
+  }
 
 
   const passwordStrengthColor = (barNumber: number) => {
@@ -338,8 +307,8 @@ const [emailBorder, setEmailBorder] = useState('')
           checkRight={true}
           circleFill={circleFillEmail}
           onTouchStart={() => handleTouch()}
-        borderColor={emailBorder}
-     />
+          borderColor={emailBorder}
+        />
 
         <TextInput
           type={Constant.textInput.LARGE_INPUT}
@@ -420,7 +389,7 @@ const [emailBorder, setEmailBorder] = useState('')
           </View>
           <View style={styles.yearDropdown}>
             <Dropdown
-              optionList={month}
+              optionList={years}
               onSelect={value => {
                 selectFillBirth(value);
               }}
