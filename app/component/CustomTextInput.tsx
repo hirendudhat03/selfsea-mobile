@@ -35,6 +35,7 @@ interface Props {
   onTouchStart?: () => void;
   borderColor: string;
   onTouchEnd?: () => void;
+  defaultValue: string;
 }
 
 const CustomTextInput = ({
@@ -56,6 +57,7 @@ const CustomTextInput = ({
   onTouchStart,
   borderColor,
   onTouchEnd,
+  defaultValue,
 
 
 }: Props) => {
@@ -67,10 +69,11 @@ const CustomTextInput = ({
           {label !== undefined ? (
             <Text style={[styles.labelText, style]}>{label}</Text>
           ) : null}
-          <View style={styles.contentView}>
-            {/* value === '' ? { borderColor: Color.COMMUNITY_ORANGE } : { borderColor: Color.BORDER_COLOR_LIGHTGRAY } */}
-            <View style={[styles.largeInputView, viewStyle, { borderColor: borderColor === '' ?  Color.BORDER_COLOR_LIGHTGRAY 
-            : borderColor}]}>
+          <View style={[styles.contentView,viewStyle]}>
+            <View style={[styles.largeInputView, {
+              borderColor: borderColor === '' ? Color.BORDER_COLOR_LIGHTGRAY
+                : borderColor
+            }]}>
               <TextInput
                 style={[styles.textInputStyle, textInputstyle]}
                 placeholder={placeholder}
@@ -80,6 +83,7 @@ const CustomTextInput = ({
                 circleFill={circleFill}
                 onTouchStart={onTouchStart}
                 onTouchEnd={onTouchEnd}
+                defaultValue={defaultValue}
               />
 
               {iconVisible ? (
@@ -89,7 +93,7 @@ const CustomTextInput = ({
                     onPress={secureTextEntryChange}>
                     <Image
                       source={Images.combinedShape}
-                      style={styles.passwordIcon}
+                      
                     />
                   </TouchableOpacity>
                 ) : (
@@ -98,7 +102,7 @@ const CustomTextInput = ({
                     onPress={secureTextEntryChange}>
                     <Image
                       source={Images.combinedShapeOPen}
-                      style={styles.passwordIcon}
+                     
                     />
                   </TouchableOpacity>
                 )
@@ -126,11 +130,11 @@ const CustomTextInput = ({
           </View>
 
           {helperText !== '' ? (
-        <Text style={styles.helperText}>{helperText}</Text>
-      ) : null}
+            <Text style={styles.helperText}>{helperText}</Text>
+          ) : null}
         </>
       ) : null}
-     
+
 
       {type === Constant.textInput.LARGE_TEXT_AREA ? (
         <TextInput style={styles.largeTextareaView} placeholder={placeholder} />
@@ -148,7 +152,7 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 1,
     flexDirection: 'row',
-    alignItems:'center',
+    alignItems: 'center',
     borderColor: Color.BORDER_COLOR_LIGHTGRAY,
 
   },
@@ -173,7 +177,7 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     letterSpacing: 0,
     color: Color.BASE_COLOR_GRAY,
-    marginTop:height*0.015
+    marginTop: height * 0.015
   },
   helperText: {
     width: '90%',
@@ -203,10 +207,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
-  passwordIcon: {
-    // alignSelf: 'flex-end',
-    //  marginRight: 50,
-  },
+  
   textInputStyle: {
     fontSize: 17,
     height: height * 0.064,

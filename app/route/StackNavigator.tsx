@@ -9,6 +9,8 @@ import Signin from '../views/SignInScreen';
 import All from '../views/All';
 import Mentees from '../views/Mentees';
 import CreateProfile from '../views/CreateProfile';
+import ForgotPassword from '../views/ForgotPassword';
+import CreateNewPassword from '../views/CreateNewPassword';
 
 const stackNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -53,6 +55,16 @@ const stackNavigator = () => {
        <Stack.Screen
         name="CreateProfile"
         component={CreateProfile}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ForgotPassword"
+        component={ForgotPassword}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="CreateNewPassword"
+        component={CreateNewPassword}
         options={{ headerShown: false }}
       />
       <Stack.Screen name="All" component={All} />

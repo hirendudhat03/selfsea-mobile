@@ -14,7 +14,6 @@ import SelectDropdown from 'react-native-select-dropdown';
 // @ts-ignore
 
 const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
 
 interface OptionListType {
   title: string;
@@ -60,7 +59,7 @@ const Dropdown = ({
             )}
             rowTextStyle={rowTextStyle}
             defaultButtonText={defaultButtonText}
-            buttonTextStyle={{textAlign:'left'}}
+            buttonTextStyle={{textAlign:'left',fontSize:17}}
             buttonStyle={[styles.Container, style,]}
             data={optionList.map(item => item)}
             onSelect={onSelect}
@@ -106,7 +105,7 @@ const styles = StyleSheet.create({
   },
   iconView: {
     width: width * 0.1,
-    height: height * 0.06,
+    height: '100%',
     backgroundColor: Color.BASE_COLOR_WHITE,
     borderStyle: 'solid',
     borderLeftColor: Color.BORDER_COLOR_LIGHTGRAY,
