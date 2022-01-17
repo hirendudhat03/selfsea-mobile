@@ -16,8 +16,7 @@ interface Props {
   text?: string;
   icon?: ImageSourcePropType;
   disabled?: boolean;
-  onPress?: () => void
-
+  onPress?: () => void;
 }
 
 const Button = ({ type, text, icon, onPress, style, disabled }: Props) => {

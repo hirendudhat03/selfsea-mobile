@@ -1,5 +1,14 @@
 import React from 'react';
-import { View, Text, ImageBackground, StyleSheet, Image, TouchableOpacity, Linking, SafeAreaView } from 'react-native';
+import {
+  View,
+  Text,
+  ImageBackground,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Linking,
+  SafeAreaView,
+} from 'react-native';
 
 import Constant from '../theme/constant';
 import Fonts from '../theme/fonts';
@@ -12,7 +21,6 @@ import Auth from '../component/Authentication';
 const onPressText = () => {
   alert('onPressText');
 };
-
 
 const Login = ({ navigation }) => {
   return (
@@ -45,19 +53,27 @@ const Login = ({ navigation }) => {
             <Button
               type={Constant.buttons.PRIMARY}
               text={'sign up with email'}
-              style={{ marginTop: 8, }}
+              style={{ marginTop: 8 }}
               onPress={() => navigation.navigate('Signup')}
             />
 
             <Text style={styles.contentText}>
               by signing up for selfsea, you are agreeing to the
             </Text>
-            <View style={{ flexDirection: 'row', }}>
-              <TouchableOpacity onPress={() => { Linking.openURL(Constant.link.PRIVACY_POLICY) }}
-              ><Text style={styles.contentSecondText}>Privacy Policy</Text></TouchableOpacity>
+            <View style={{ flexDirection: 'row' }}>
+              <TouchableOpacity
+                onPress={() => {
+                  Linking.openURL(Constant.link.PRIVACY_POLICY);
+                }}>
+                <Text style={styles.contentSecondText}>Privacy Policy</Text>
+              </TouchableOpacity>
               <Text style={styles.contentSecondTextAnd}> and</Text>
-              <TouchableOpacity onPress={() => { Linking.openURL(Constant.link.TERMS_OF_USE) }}
-              ><Text style={styles.contentSecondText}> Terms of Use</Text></TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  Linking.openURL(Constant.link.TERMS_OF_USE);
+                }}>
+                <Text style={styles.contentSecondText}> Terms of Use</Text>
+              </TouchableOpacity>
             </View>
           </View>
           <View style={styles.bottomView}>
@@ -88,14 +104,12 @@ const styles = StyleSheet.create({
     flex: 1.2,
     justifyContent: 'center',
     alignItems: 'center',
-
   },
   contentView: {
     flex: 1.8,
     justifyContent: 'flex-start',
     alignItems: 'center',
     marginTop: -10,
-
   },
   contentText: {
     fontSize: 12,
@@ -116,7 +130,6 @@ const styles = StyleSheet.create({
     marginTop: 4,
     marginHorizontal: 2,
     fontSize: 12,
-
   },
   bottomView: {
     flex: 1.1,

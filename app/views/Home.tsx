@@ -15,15 +15,11 @@ import TextInput from '../component/CustomTextInput';
 import Header from '../component/Header';
 import Color from '../theme/colors';
 
-
-import { useDispatch,useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
 
 const Home = ({ navigation }) => {
-
-
-  const loginRes = useSelector(state => state.LoginReducer)
-  console.log('loginRes : ',JSON.stringify(loginRes))
+  const loginRes = useSelector(state => state.LoginReducer);
+  console.log('loginRes : ', JSON.stringify(loginRes));
 
   const [isSelectedCheckBox, setISSelectionCheckBox] = useState(false);
 
@@ -67,9 +63,9 @@ const Home = ({ navigation }) => {
     <SafeAreaView>
       <ScrollView>
         <View style={styles.container}>
-          <Text
-            style={{ fontSize: 20 }}
-            onPress={() => navigation.goBack()}>SECOND SCREEN</Text>
+          <Text style={{ fontSize: 20 }} onPress={() => navigation.goBack()}>
+            SECOND SCREEN
+          </Text>
 
           <Alert
             type={Constant.alert.MENTOR}
@@ -102,24 +98,25 @@ const Home = ({ navigation }) => {
             text={'they/them'}
             rigthIcon={Images.Circle}
           />
-          <Button type={Constant.buttons.DESKTOP} text={"Primary Button"} />
-          <Button type={Constant.buttons.SECONDARY}
-            text={"Secondary"} />
-          <Button type={Constant.buttons.MOBILE}
-            text={"reply"} />
+          <Button type={Constant.buttons.DESKTOP} text={'Primary Button'} />
+          <Button type={Constant.buttons.SECONDARY} text={'Secondary'} />
+          <Button type={Constant.buttons.MOBILE} text={'reply'} />
 
-          <Button type={Constant.buttons.PRIMARY}
-            text={"primary button"} />
+          <Button type={Constant.buttons.PRIMARY} text={'primary button'} />
 
-          <Button type={Constant.buttons.CLOSE}
-            text={"Close"} />
-          <Button type={Constant.buttons.SELFSEASEND}
-            icon={Images.Send} />
+          <Button type={Constant.buttons.CLOSE} text={'Close'} />
+          <Button type={Constant.buttons.SELFSEASEND} icon={Images.Send} />
 
-          <Radio onPressRadioButton={selectRadioButton}
-            isSelectedRadioButton={isSelectedRadioButton} text={"Radio"} />
-          <CheckBox onPressCheckbox={selectCheckBox}
-            isSelectedCheckBox={isSelectedCheckBox} text={"checkbox"} />
+          <Radio
+            onPressRadioButton={selectRadioButton}
+            isSelectedRadioButton={isSelectedRadioButton}
+            text={'Radio'}
+          />
+          <CheckBox
+            onPressCheckbox={selectCheckBox}
+            isSelectedCheckBox={isSelectedCheckBox}
+            text={'checkbox'}
+          />
 
           <Switch
             isEnabled={isEnabled}
@@ -127,14 +124,16 @@ const Home = ({ navigation }) => {
             onEnableToggle={toggleSwitch}
           />
 
-
-          <TextInput type={Constant.textInput.LARGE_INPUT}
-            placeholder={"Placeholder"}
+          <TextInput
+            type={Constant.textInput.LARGE_INPUT}
+            placeholder={'Placeholder'}
             label={'label'}
             helperText={'Helper Text'}
           />
-          <TextInput type={Constant.textInput.LARGE_TEXT_AREA}
-            placeholder={"Placeholder"} />
+          <TextInput
+            type={Constant.textInput.LARGE_TEXT_AREA}
+            placeholder={'Placeholder'}
+          />
 
           <Dropdown
             optionList={countries}
@@ -164,16 +163,16 @@ const Home = ({ navigation }) => {
             rightIcon={Images.Gear}
             label={'page title'}
           />
-             <Header
+          <Header
             type={Constant.navigatioHeader.COMMUNITY_HEADER}
             leftIcon={Images.Arrowsquare}
             rightIcon={Images.Dots}
             label={'navigating identity'}
-            descriptionText={'a community to discuss questions and situations related to gender identity, sexual orientation, race and ethnicity'}
+            descriptionText={
+              'a community to discuss questions and situations related to gender identity, sexual orientation, race and ethnicity'
+            }
             style={{ backgroundColor: Color.COMMUNITY_GREEN }}
-                    
           />
-
 
           <Header
             type={Constant.navigatioHeader.POST}
@@ -183,8 +182,6 @@ const Home = ({ navigation }) => {
             rightIcon={Images.Downarrow}
             underlinetext={'select a community'}
           />
-
-         
         </View>
       </ScrollView>
     </SafeAreaView>

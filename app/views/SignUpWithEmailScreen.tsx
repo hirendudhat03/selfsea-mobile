@@ -21,15 +21,14 @@ import Font from '../theme/fonts';
 import Color from '../theme/colors';
 import Dropdown from '../component/Dropdown';
 
-import { useDispatch } from 'react-redux'
-import { SignupRequest } from '../redux/actions/SignupAction'
+import { useDispatch } from 'react-redux';
+import { SignupRequest } from '../redux/actions/SignupAction';
 import { ScrollView } from 'react-native-gesture-handler';
 
 const zxcvbn = require('zxcvbn');
 
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
-
 
 const month = [
   'January',
@@ -46,60 +45,55 @@ const month = [
   'December',
 ];
 
-
 const descriptionData = [
   {
-    title: "usernames cannot contain any personal identifiers (e.g. name,location, school, age)"
+    title:
+      'usernames cannot contain any personal identifiers (e.g. name,location, school, age)',
   },
   {
-    title: 'usernames cannot contain any harmful or offensive language'
+    title: 'usernames cannot contain any harmful or offensive language',
   },
   {
-    title: 'usernames can only contain letters and numbers (no emojis)'
+    title: 'usernames can only contain letters and numbers (no emojis)',
   },
-
 ];
 
 const birthnData = [
   {
-    title: "selfsea is just for the users between the ages 13-18."
+    title: 'selfsea is just for the users between the ages 13-18.',
   },
   {
-    title: 'by signing up, you agree that you are within this age, and with our other terms of use.'
+    title:
+      'by signing up, you agree that you are within this age, and with our other terms of use.',
   },
   {
-    title: 'if we find out that you are out side of this age range, we will remove your account.'
+    title:
+      'if we find out that you are out side of this age range, we will remove your account.',
   },
-
 ];
 
-
-
 const Signup = ({ navigation }) => {
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [years, setYear] = useState([]);
 
   useEffect(() => {
-
     var year = [];
 
-    var currentYear = new Date().getFullYear(), year = [];
+    var currentYear = new Date().getFullYear(),
+      year = [];
     var startYear = startYear || 1900;
 
-    console.log('currentYear : ', currentYear)
-    console.log('startYear : ', startYear)
-
+    console.log('currentYear : ', currentYear);
+    console.log('startYear : ', startYear);
 
     while (currentYear >= startYear) {
       year.push(currentYear--);
     }
-    setYear(year)
+    setYear(year);
 
     console.log('year::', year);
-
-  }, [])
+  }, []);
 
   const [email, setEmail] = useState(null);
   const [emailError, setEmailError] = useState('');
@@ -127,46 +121,39 @@ const Signup = ({ navigation }) => {
     }
   };
 
-
-
-
-
   const [circleFillEmail, setCircleFillEmail] = useState<boolean>();
 
-
-  const selectFill = (text) => {
+  const selectFill = text => {
     setEmail(text);
     if (text === '') {
-
       setCircleFillEmail(false);
-      setEmailBorder(Color.COMMUNITY_ORANGE)
+      setEmailBorder(Color.COMMUNITY_ORANGE);
       setEmailError('Please enter email address. ');
-    } else if (text.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null) {
-      setEmailBorder(Color.COMMUNITY_ORANGE)
+    } else if (
+      text.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null
+    ) {
+      setEmailBorder(Color.COMMUNITY_ORANGE);
       setEmailError('Please enter a valid email address. ');
       setCircleFillEmail(false);
-
-    }
-    else {
+    } else {
       setCircleFillEmail(true);
-      setEmailBorder(Color.BORDER_COLOR_LIGHTGRAY)
+      setEmailBorder(Color.BORDER_COLOR_LIGHTGRAY);
       setEmailError('');
     }
   };
 
   const [circleFillPassword, setCircleFillPassword] = useState<boolean>();
 
+  const selectFillPassword = text => {
+    console.log('text:::', text);
 
-  const selectFillPassword = (text) => {
-    console.log("text:::", text)
-    
     setPassword(text);
     if (text === '') {
-      setpasswordBorder(Color.COMMUNITY_ORANGE)
+      setpasswordBorder(Color.COMMUNITY_ORANGE);
       setPasswordError('Password must contain a number.');
       setCircleFillPassword(false);
     } else {
-      setpasswordBorder(Color.BORDER_COLOR_LIGHTGRAY)
+      setpasswordBorder(Color.BORDER_COLOR_LIGHTGRAY);
       setPasswordError('');
       setCircleFillPassword(true);
     }
@@ -174,20 +161,20 @@ const Signup = ({ navigation }) => {
 
   const [circleFillUser, setCircleFillUser] = useState<boolean>();
 
-  const selectFillUser = (text) => {
-    global.userNameLength = text.length
-    console.log('userNameLength', global.userNameLength)
+  const selectFillUser = text => {
+    global.userNameLength = text.length;
+    console.log('userNameLength', global.userNameLength);
     setUserName(text);
     if (text === '') {
-      setUserNameBorder(Color.COMMUNITY_ORANGE)
+      setUserNameBorder(Color.COMMUNITY_ORANGE);
       setUserNameError(text.length + '/20');
       setCircleFillUser(false);
     } else if (text.length > 20) {
-      setUserNameBorder(Color.COMMUNITY_ORANGE)
+      setUserNameBorder(Color.COMMUNITY_ORANGE);
       setUserNameError(text.length + '/20');
       setCircleFillUser(false);
     } else {
-      setUserNameBorder(Color.BORDER_COLOR_LIGHTGRAY)
+      setUserNameBorder(Color.BORDER_COLOR_LIGHTGRAY);
       setUserNameError(' ');
       setUserNameError(text.length + '/20');
       setCircleFillUser(true);
@@ -196,11 +183,10 @@ const Signup = ({ navigation }) => {
 
   const [circleFillBirth, setCircleFillBirth] = useState<boolean>();
 
-  const selectFillBirth = (value) => {
+  const selectFillBirth = value => {
     setBirthYear(value);
 
     if (value === '' || birthMonth === '') {
-
       setCircleFillBirth(false);
     } else {
       setBirthYearError(' ');
@@ -208,18 +194,16 @@ const Signup = ({ navigation }) => {
     }
   };
 
-  const selectFillmonth = (value) => {
+  const selectFillmonth = value => {
     setBirthMonth(value);
 
     if (value === '' || birthYear === '') {
-
       setBirthMonthError('');
       setCircleFillBirth(false);
     } else {
       setCircleFillBirth(true);
     }
   };
-
 
   const [isModalVisible, setIsMoalVisiable] = useState(false);
   const changeModalVisibility = (bool: boolean) => {
@@ -230,7 +214,6 @@ const Signup = ({ navigation }) => {
   const changeBirthVisibility = (bool: boolean) => {
     setIsBirthVisiable(bool);
   };
-
 
   const SignupValidation = () => {
     if (
@@ -244,9 +227,9 @@ const Signup = ({ navigation }) => {
       setPasswordError('Password must contain a number.');
       setUserNameError(text.length + '/20');
 
-      setEmail('')
-      setUserName('')
-      setPassword('')
+      setEmail('');
+      setUserName('');
+      setPassword('');
     } else if (!email) {
       setEmailError('Please enter email address.');
     } else if (
@@ -258,32 +241,32 @@ const Signup = ({ navigation }) => {
     } else if (!userName) {
       setUserNameError(text.length + '/20');
     } else {
-      dispatch(SignupRequest(email, Password, birthMonth, birthYear, userName, navigation))
+      dispatch(
+        SignupRequest(
+          email,
+          Password,
+          birthMonth,
+          birthYear,
+          userName,
+          navigation,
+        ),
+      );
     }
   };
 
-
-
-  const [emailBorder, setEmailBorder] = useState('')
+  const [emailBorder, setEmailBorder] = useState('');
   const handleTouch = () => {
+    setEmailBorder(Color.BASE_COLOR_LIGHT_BLUE);
+  };
 
-    setEmailBorder(Color.BASE_COLOR_LIGHT_BLUE)
-
-  }
-
-  const [passwordBorder, setpasswordBorder] = useState('')
+  const [passwordBorder, setpasswordBorder] = useState('');
   const handleTouchpasswordBorder = () => {
-
-    setpasswordBorder(Color.BASE_COLOR_LIGHT_BLUE)
-
-  }
-  const [userNameBorder, setUserNameBorder] = useState('')
+    setpasswordBorder(Color.BASE_COLOR_LIGHT_BLUE);
+  };
+  const [userNameBorder, setUserNameBorder] = useState('');
   const handleTouchusernameBorder = () => {
-
-    setUserNameBorder(Color.BASE_COLOR_LIGHT_BLUE)
-
-  }
-
+    setUserNameBorder(Color.BASE_COLOR_LIGHT_BLUE);
+  };
 
   const passwordStrengthColor = (barNumber: number) => {
     if (Password === '') {
@@ -304,11 +287,7 @@ const Signup = ({ navigation }) => {
     return Color.PASSWORD_NORMAL_COLOR;
   };
 
-
-
   return (
-
-
     <View style={styles.container}>
       <Header
         type={Constant.navigatioHeader.PAGE_HEADER}
@@ -317,14 +296,13 @@ const Signup = ({ navigation }) => {
         onPress={() => navigation.goBack()}
       />
       <ScrollView>
-
         <View style={styles.contentView}>
           <TextInput
             type={Constant.textInput.LARGE_INPUT}
             placeholder={'email@address.com'}
             label={'email'}
-            style={{ fontSize: 18, }}
-            onChangeText={(text) => {
+            style={{ fontSize: 18 }}
+            onChangeText={text => {
               selectFill(text);
             }}
             value={email}
@@ -349,14 +327,13 @@ const Signup = ({ navigation }) => {
             value={Password}
             helperText={PasswordError}
             iconVisible={true}
-            secureTextEntry={focus === true  ?   true : focus }
+            secureTextEntry={focus === true ? true : focus}
             secureTextEntryChange={selectFocus}
             iconVisibleFill={true}
             checkRight={true}
             circleFill={circleFillPassword}
             onTouchStart={() => handleTouchpasswordBorder()}
             borderColor={passwordBorder}
-
           />
           <View style={styles.viewStyle}>
             <View
@@ -403,8 +380,7 @@ const Signup = ({ navigation }) => {
               <Dropdown
                 optionList={month}
                 onSelect={value => {
-                  selectFillmonth(value)
-
+                  selectFillmonth(value);
                 }}
                 defaultButtonText={'select one'}
                 icon={Images.DropdownIcon}
@@ -427,12 +403,9 @@ const Signup = ({ navigation }) => {
                 checkRight={true}
                 value={birthYear}
                 circleFill={circleFillBirth}
-
-
               />
             </View>
           </View>
-
 
           <View style={styles.userName}>
             <Text style={styles.birthMonthText}>username</Text>
@@ -448,7 +421,7 @@ const Signup = ({ navigation }) => {
             text={'@'}
             style={{ fontSize: 18 }}
             onChangeText={text => {
-              selectFillUser(text)
+              selectFillUser(text);
             }}
             // helperText={userNameError}
             iconVisibleFill={true}
@@ -457,23 +430,39 @@ const Signup = ({ navigation }) => {
             onTouchStart={() => handleTouchusernameBorder()}
             borderColor={userNameBorder}
           />
-          <Text style={[styles.helperText, global.userNameLength <= 20 ? {color: Color.BORDER_COLOR_LIGHTGRAY}: {color: Color.COMMUNITY_ORANGE}]}>{userNameError}</Text>
+          <Text
+            style={[
+              styles.helperText,
+              global.userNameLength <= 20
+                ? { color: Color.BORDER_COLOR_LIGHTGRAY }
+                : { color: Color.COMMUNITY_ORANGE },
+            ]}>
+            {userNameError}
+          </Text>
         </View>
       </ScrollView>
       <View style={styles.bottomView}>
         <Button
           type={Constant.buttons.PRIMARY}
           text={'create account'}
-          style={[{ marginTop: 15 },
-          circleFillEmail !== true ||
+          style={[
+            { marginTop: 15 },
+            circleFillEmail !== true ||
             circleFillPassword !== true ||
             circleFillBirth !== true ||
-            circleFillUser !== true ? { backgroundColor: Color.BUTTON_DISABLE_COLOR } : { backgroundColor: Color.BASE_COLOR_ORANGE }]}
+            circleFillUser !== true
+              ? { backgroundColor: Color.BUTTON_DISABLE_COLOR }
+              : { backgroundColor: Color.BASE_COLOR_ORANGE },
+          ]}
           onPress={() => SignupValidation()}
-          disabled={circleFillEmail !== true ||
+          disabled={
+            circleFillEmail !== true ||
             circleFillPassword !== true ||
             circleFillBirth !== true ||
-            circleFillUser !== true ? true : false}
+            circleFillUser !== true
+              ? true
+              : false
+          }
         />
       </View>
       <Modal
@@ -481,10 +470,13 @@ const Signup = ({ navigation }) => {
         animationType="fade"
         visible={isModalVisible}
         onRequestClose={() => changeModalVisibility(false)}>
-        <ModalPicker changeModalVisibility={changeModalVisibility}
+        <ModalPicker
+          changeModalVisibility={changeModalVisibility}
           type={Constant.modal.MODAL}
           textTitle={'selfsea usernames'}
-          smallText={'your username will need to be approved by a moderator before your first post or comment can be approved. it cannot be changed after that.'}
+          smallText={
+            'your username will need to be approved by a moderator before your first post or comment can be approved. it cannot be changed after that.'
+          }
           descriptionData={descriptionData}
           numberOfLines={2}
           button={Constant.buttons.CLOSE}
@@ -496,7 +488,8 @@ const Signup = ({ navigation }) => {
         animationType="fade"
         visible={isBirthVisible}
         onRequestClose={() => changeBirthVisibility(false)}>
-        <ModalPicker changeModalVisibility={changeBirthVisibility}
+        <ModalPicker
+          changeModalVisibility={changeBirthVisibility}
           type={Constant.modal.MODAL}
           textTitle={'selfsea birthnames'}
           // smallText={'your birthname will need to be approved by a moderator before your first post or comment can be approved. it cannot be changed after that.'}
@@ -509,6 +502,7 @@ const Signup = ({ navigation }) => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -541,14 +535,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '81%',
     marginRight: 32,
-
   },
   passwordStyle: {
     borderColor: Color.BORDER_COLOR,
     width: '22%',
     height: 6,
     backgroundColor: '',
-    marginTop: 5
+    marginTop: 5,
   },
   monthView: {
     flexDirection: 'row',
@@ -632,8 +625,7 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     fontStyle: 'normal',
     letterSpacing: 0,
-    marginTop:-11,
-
+    marginTop: -11,
   },
 });
 export default Signup;

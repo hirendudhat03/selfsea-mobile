@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Dimensions,
-  Image,
-  StyleSheet,
-  View,
-  Text,
-  ImageSourcePropType,
-} from 'react-native';
+import { Dimensions, Image, StyleSheet, View } from 'react-native';
 import Color from '../theme/colors';
 import Font from '../theme/fonts';
 import Images from '../theme/images';
@@ -25,8 +18,6 @@ interface Props {
   onSelect: (item: string, index: number) => void;
   optionList: OptionListType[];
   style?: {};
-  icon?: ImageSourcePropType;
-  helperText?: string;
   rowTextStyle?: {};
   checkRight?: boolean;
   circleFill: string;
@@ -39,9 +30,6 @@ const Dropdown = ({
   onSelect,
   defaultButtonText,
   style,
-  icon,
-  helperText,
-  value,
   rowTextStyle,
   checkRight,
   iconVisibleFill,
@@ -49,22 +37,19 @@ const Dropdown = ({
 }: Props) => {
   return (
     <View>
-      <View style={{ flexDirection: 'row', }}>
+      <View style={{ flexDirection: 'row' }}>
         <View>
           <SelectDropdown
             renderDropdownIcon={() => (
-              <View style={[styles.iconView,]}>
+              <View style={[styles.iconView]}>
                 <View style={styles.triangleShapeUpCSS} />
                 <View style={styles.triangleShapeCSS} />
-
-                {/* <Image source={icon} style={styles.dropDownUpIcon} /> */}
-                {/* <Image source={icon} style={styles.dropDownIcon} /> */}
               </View>
             )}
             rowTextStyle={rowTextStyle}
             defaultButtonText={defaultButtonText}
             buttonTextStyle={{ textAlign: 'left', fontSize: 17 }}
-            buttonStyle={[styles.Container, style,]}
+            buttonStyle={[styles.Container, style]}
             data={optionList.map(item => item)}
             onSelect={onSelect}
             buttonTextAfterSelection={selectedItem => {
@@ -83,13 +68,11 @@ const Dropdown = ({
                   <Image source={Images.CheckCircleGreen} />
                 </View>
               ) : (
-                <View style={styles.circleView}
-                >
+                <View style={styles.circleView}>
                   <Image source={Images.CheckCircle} />
                 </View>
               )
             ) : null}
-
           </>
         ) : null}
       </View>
@@ -115,8 +98,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     paddingStart: 7,
     flexDirection: 'column',
-
-
   },
   helperText: {
     width: '90%',
@@ -127,23 +108,12 @@ const styles = StyleSheet.create({
     lineHeight: 16,
     letterSpacing: 0,
     color: Color.COMMUNITY_ORANGE,
-
   },
   circleView: {
     justifyContent: 'center',
     marginLeft: 10,
   },
-  // dropDownUpIcon: {
-  //   width: 10,
-  //   height: 11,
-  //   tintColor: Color.TEXT_COLOR_PASSWORD,
-  //   transform: [{ rotateX: '180deg' }],
-  // },
-  // dropDownIcon: {
-  //   width: 10,
-  //   height: 11,
-  //   tintColor: Color.TEXT_COLOR_PASSWORD,
-  // },
+
   triangleShapeCSS: {
     width: 0,
     height: 0,
@@ -157,7 +127,6 @@ const styles = StyleSheet.create({
     borderBottomColor: Color.TEXT_COLOR_PASSWORD,
     transform: [{ rotateX: '180deg' }],
     marginTop: '9%',
-
   },
   triangleShapeUpCSS: {
     width: 0,

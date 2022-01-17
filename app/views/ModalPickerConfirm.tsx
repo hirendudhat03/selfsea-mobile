@@ -1,7 +1,5 @@
-
 import React from 'react';
 import { View, StyleSheet, Text, Dimensions } from 'react-native';
-
 
 import Font from '../theme/fonts';
 import Color from '../theme/colors';
@@ -19,27 +17,38 @@ interface Props {
   text: string;
   descriptionData: [];
   numberOfLines: number;
-
-
 }
 
-const ModalPicker = ({ type, changeModalVisibility, textTitle, smallText, secondText, firstText, button, text, descriptionData, numberOfLines }: Props) => {
+const ModalPicker = ({
+  type,
+  changeModalVisibility,
+  textTitle,
+  smallText,
+  secondText,
+  firstText,
+  button,
+  text,
+  descriptionData,
+  numberOfLines,
+}: Props) => {
   return (
     <>
       {type === Constant.modal.MODAL_SUCCESS ? (
         <View style={styles.container}>
           <View style={styles.modalSuccess}>
-            <Text style={styles.textTitle}>{textTitle}
-
-            </Text>
-            <Text style={styles.smallText} numberOfLines={5} ellipsizeMode="middle">
+            <Text style={styles.textTitle}>{textTitle}</Text>
+            <Text
+              style={styles.smallText}
+              numberOfLines={5}
+              ellipsizeMode="middle">
               {smallText}
             </Text>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <View
+              style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Button
                 type={Constant.buttons.CLOSE}
                 text={firstText}
-                style={{ marginVertical: 12, width: '26%', }}
+                style={{ marginVertical: 12, width: '26%' }}
                 onPress={() => changeModalVisibility(false)}
               />
               <Button
@@ -50,30 +59,31 @@ const ModalPicker = ({ type, changeModalVisibility, textTitle, smallText, second
               />
             </View>
           </View>
-        </View>) : null}
+        </View>
+      ) : null}
       {type === Constant.modal.MODAL ? (
         <View style={styles.container}>
           <View style={styles.modal}>
-            <Text style={styles.textTitle}>{textTitle}
-
-            </Text>
+            <Text style={styles.textTitle}>{textTitle}</Text>
             {smallText !== undefined ? (
-              <Text style={styles.smallText} numberOfLines={3} ellipsizeMode="middle">
+              <Text
+                style={styles.smallText}
+                numberOfLines={3}
+                ellipsizeMode="middle">
                 {smallText}
               </Text>
             ) : null}
 
-
-            {descriptionData.map((item) => {
+            {descriptionData.map(item => {
               return (
                 <Text
                   style={styles.descriptionText}
                   numberOfLines={numberOfLines}
-                  ellipsizeMode="middle">{item.title}
+                  ellipsizeMode="middle">
+                  {item.title}
                 </Text>
-              )
-            })
-            }
+              );
+            })}
             <Button
               type={button}
               text={text}
@@ -81,9 +91,8 @@ const ModalPicker = ({ type, changeModalVisibility, textTitle, smallText, second
               onPress={() => changeModalVisibility(false)}
             />
           </View>
-        </View>) : null}
-
-
+        </View>
+      ) : null}
     </>
   );
 };
@@ -120,7 +129,6 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     textAlign: 'center',
     color: Color.CONTENT_COLOR_BLACK_TEXT,
-
   },
   smallText: {
     fontFamily: Font.CALIBRE,
@@ -143,6 +151,5 @@ const styles = StyleSheet.create({
     color: Color.CONTENT_COLOR_BLACK_TEXT,
     marginVertical: 10,
   },
-
 });
 export default ModalPicker;

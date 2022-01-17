@@ -5,25 +5,19 @@ import Color from '../theme/colors';
 import Font from '../theme/fonts';
 import Images from '../theme/images';
 
-
-import { DrawerItem } from "@react-navigation/drawer";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { DrawerItem } from '@react-navigation/drawer';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface Props {
-    props: () => void;
+  props: () => void;
 }
 
-const Drawer = ({ props } : Props) => {
-    
-    const [focus, setFocus] = useState('1')
+const Drawer = ({ props }: Props) => {
+  const [focus, setFocus] = useState('1');
 
-
-    const [UserItem, setUserItem] = useState(false);
-    const [QueueItem, setQueueItem] = useState(false);
-    const [AccountItem, setAccountItem] = useState(false);
-
-
-
+  const [UserItem, setUserItem] = useState(false);
+  const [QueueItem, setQueueItem] = useState(false);
+  const [AccountItem, setAccountItem] = useState(false);
 
   const NestedDrawerItemM = () => {
     if (UserItem == true) {
@@ -536,7 +530,6 @@ const Drawer = ({ props } : Props) => {
 };
 
 const styles = StyleSheet.create({
-
   managementText: {
     fontFamily: Font.CALIBRE,
     fontSize: 18,

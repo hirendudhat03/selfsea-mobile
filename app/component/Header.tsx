@@ -71,19 +71,17 @@ const Header = ({
       {type === Constant.navigatioHeader.COMMUNITY_HEADER ? (
         <View style={[styles.communityHeader, style]}>
           <View style={styles.communityImageView}>
-            <TouchableOpacity onPress={onPress} >
+            <TouchableOpacity onPress={onPress}>
               <Image source={leftIcon} />
             </TouchableOpacity>
             <TouchableOpacity onPress={onPressRight}>
               <Image source={rightIcon} style={styles.rightIconStyle} />
             </TouchableOpacity>
           </View>
-          <Text style={styles.communityHeaderText}>
-            {label}
+          <Text style={styles.communityHeaderText}>{label}</Text>
+          <Text style={styles.descriptionText} numberOfLines={3}>
+            {descriptionText}
           </Text>
-          <Text style={styles.descriptionText}
-            numberOfLines={3}
-          >{descriptionText}</Text>
         </View>
       ) : null}
     </>
@@ -173,29 +171,27 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     letterSpacing: 0,
     color: Color.BASE_COLOR_WHITE,
-
   },
   rightIconStyle: {
     tintColor: Color.BASE_COLOR_WHITE,
-
   },
   communityHeader: {
     padding: 20,
     paddingTop: 80,
   },
   descriptionText: {
-    marginVertical:7,
+    marginVertical: 7,
     fontFamily: Font.CALIBRE,
     fontSize: 18,
-    fontWeight: "normal",
-    fontStyle: "normal",
+    fontWeight: 'normal',
+    fontStyle: 'normal',
     letterSpacing: 0,
     color: Color.BASE_COLOR_WHITE,
   },
-  communityImageView:{ 
-    flexDirection: 'row', 
-    justifyContent: 'space-between' ,
-    marginVertical:14,
+  communityImageView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: 14,
   },
 });
 
