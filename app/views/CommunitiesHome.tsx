@@ -59,7 +59,7 @@ const CommunitiesHome = ({ navigation }) => {
 
 
   useEffect(() => {
-    changeModalVisibility(false);
+    changeModalVisibility(true);
   }, []);
 
 

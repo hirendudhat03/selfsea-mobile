@@ -172,7 +172,7 @@ const Signin = ({ navigation }) => {
             onTouchStart={() => handleTouchpasswordBorder()}
             borderColor={passwordBorder}
           />
-          <Text style={styles.contentText}>forgot your password? </Text>
+          <Text style={styles.contentText} onPress={() => navigation.navigate('ForgotPassword')}>forgot your password? </Text>
           <CheckBox
             onPressCheckbox={selectCheckBox}
             style={styles.checkBox}

@@ -69,6 +69,11 @@ const CreateProfile = ({ navigation }) => {
 
     const [profile, setProfile] = useState('');
 
+    const [isModalVisible, setIsMoalVisiable] = useState(false);
+    const changeModalVisibility = (bool: boolean) => {
+        setIsMoalVisiable(bool);
+    };
+
 
     const [pronouns, setPronouns] = useState('');
     const [pronounsDropDown, setPronounsDropDown] = useState([{ name: 'she/her/ella' }, { name: ' he/him/his' },
@@ -104,10 +109,67 @@ const CreateProfile = ({ navigation }) => {
 
     }
 
+    const [orientation, setOrientation] = useState('');
+    const [orientationDropDown, setOrientationDropDown] = useState([{ name: 'gay/lesbian' }, { name: 'heterosexual/straight' }, { name: 'bisexual' }, { name: 'asexual' }, { name: 'pansexual' }, { name: 'queer' }, { name: 'something else' },]);
+    const [selectOrientationDropDown, setSelectOrientationDropDown] = useState([]);
+
+    const orientationDropDownItem = (item, val) => {
+
+        setOrientation('')
+
+        if (val === 'add') {
+
+            var temp = selectOrientationDropDown;
+            temp.push(item)
+            setSelectOrientationDropDown([...temp])
+
+            const newData = orientationDropDown.filter(itemData => itemData.name !== item.name);
+            setOrientationDropDown([...newData])
+        }
+        else {
+            var temp = orientationDropDown;
+            temp.push(item)
+            setOrientationDropDown([...temp])
+
+            const temp1 = selectOrientationDropDown.filter(itemData => itemData.name !== item.name);
+            setSelectOrientationDropDown([...temp1])
+        }
+    }
 
 
 
 
+    const [gender, setGender] = useState('');
+    const [genderDropDown, setGenderDropDown] = useState([{ name: 'cisgender' }, { name: 'genderqueer' },
+    { name: 'gender non-binary' },
+    { name: 'gender fluid' }, { name: 'man/boy' }, { name: 'transgender' },
+    { name: "woman/girl" }, { name: 'something else' },]);
+    const [selectGenderDropDown, setSelectGenderDropDown] = useState([]);
+
+    const genderDropDownItem = (item, val) => {
+
+        setGender('')
+
+        if (val === 'add') {
+
+            var temp = selectGenderDropDown;
+            temp.push(item)
+            setSelectGenderDropDown([...temp])
+
+            const newData = genderDropDown.filter(itemData => itemData.name !== item.name);
+            setGenderDropDown([...newData])
+        }
+        else {
+            var temp = genderDropDown;
+            temp.push(item)
+            setGenderDropDown([...temp])
+
+            const temp1 = selectGenderDropDown.filter(itemData => itemData.name !== item.name);
+            setSelectGenderDropDown([...temp1])
+        }
+
+
+    }
 
 
 
@@ -145,71 +207,8 @@ const CreateProfile = ({ navigation }) => {
 
     }
 
-    const [isModalVisible, setIsMoalVisiable] = useState(false);
-    const changeModalVisibility = (bool: boolean) => {
-        setIsMoalVisiable(bool);
-    };
 
 
-
-    const [gender, setGender] = useState('');
-    const [genderDropDown, setGenderDropDown] = useState([{ name: 'cisgender' }, { name: 'genderqueer' },
-    { name: 'gender non-binary' },
-    { name: 'gender fluid' }, { name: 'man/boy' }, { name: 'transgender' },
-    { name: "woman/girl" }, { name: 'something else' },]);
-    const [selectGenderDropDown, setSelectGenderDropDown] = useState([]);
-
-    const genderDropDownItem = (item, val) => {
-
-        setGender('')
-
-        if (val === 'add') {
-
-            var temp = selectGenderDropDown;
-            temp.push(item)
-            setSelectGenderDropDown([...temp])
-
-            const newData = genderDropDown.filter(itemData => itemData.name !== item.name);
-            setGenderDropDown([...newData])
-        }
-        else {
-            var temp = genderDropDown;
-            temp.push(item)
-            setGenderDropDown([...temp])
-
-            const temp1 = selectGenderDropDown.filter(itemData => itemData.name !== item.name);
-            setSelectGenderDropDown([...temp1])
-        }
-
-
-    }
-
-    const [orientation, setOrientation] = useState('');
-    const [orientationDropDown, setOrientationDropDown] = useState([{ name: 'gay/lesbian' }, { name: 'heterosexual/straight' }, { name: 'bisexual' }, { name: 'asexual' }, { name: 'pansexual' }, { name: 'queer' }, { name: 'something else' },]);
-    const [selectOrientationDropDown, setSelectOrientationDropDown] = useState([]);
-
-    const orientationDropDownItem = (item, val) => {
-
-        setOrientation('')
-
-        if (val === 'add') {
-
-            var temp = selectOrientationDropDown;
-            temp.push(item)
-            setSelectOrientationDropDown([...temp])
-
-            const newData = orientationDropDown.filter(itemData => itemData.name !== item.name);
-            setOrientationDropDown([...newData])
-        }
-        else {
-            var temp = orientationDropDown;
-            temp.push(item)
-            setOrientationDropDown([...temp])
-
-            const temp1 = selectOrientationDropDown.filter(itemData => itemData.name !== item.name);
-            setSelectOrientationDropDown([...temp1])
-        }
-    }
 
     const [location, setLocation] = useState('');
     const [locationDropDown, setLocationDropDown] = useState([{ name: '<city>' }, { name: '<state>' },]);
@@ -251,22 +250,21 @@ const CreateProfile = ({ navigation }) => {
                 label={'create your profile'}
                 onPress={() => navigation.goBack()}
             />
-
             <View style={styles.contentView}>
-                <ScrollView>
-                    <Text
-                        style={styles.descriptionText}
-                        numberOfLines={4}
-                        ellipsizeMode="middle">
-                        we can't wait for you to join our community! if you want to tell others about yourself, you can add optional details below.
-                        no one will be able to see your email address, so you'll still participate anonymously!
-                    </Text>
 
 
-
-
-
+                <ScrollView style={styles.scrollView}>
+                    <View style={{ width: '90%', alignSelf: 'center', padding: 0 }}>
+                        <Text
+                            style={styles.descriptionText}
+                            numberOfLines={4}
+                            ellipsizeMode="middle">
+                            we can't wait for you to join our community! if you want to tell others about yourself, you can add optional details below.
+                            no one will be able to see your email address, so you'll still participate anonymously!
+                        </Text>
+                    </View>
                     <View style={styles.profileView}>
+
                         <View style={styles.rowView}>
                             <Text style={styles.profileText}>profile visibility</Text>
                             <TouchableOpacity
@@ -276,6 +274,7 @@ const CreateProfile = ({ navigation }) => {
                                 <Image source={Images.Infocircle} style={styles.infoIcon} />
                             </TouchableOpacity>
                         </View>
+
                         <Dropdown
                             optionList={countries}
                             onSelect={(value) => setProfile(value)}
@@ -289,21 +288,19 @@ const CreateProfile = ({ navigation }) => {
 
                         <View style={styles.viewStyle}>
                             <View style={styles.inputView}>
-
-                                {
-                                    selectPronounsDropDown.map((item) => {
-                                        return (
-                                            <Badges
-                                                type={Constant.badges.MULTISELECT}
-                                                text={item.name}
-                                                rigthIcon={Images.Circle}
-                                                onPress={() => clickDropDownItem(item)}
-                                            />
-                                        )
-                                    })
+                                {selectPronounsDropDown.map((item) => {
+                                    return (
+                                        <Badges
+                                            type={Constant.badges.MULTISELECT}
+                                            text={item.name}
+                                            rigthIcon={Images.Circle}
+                                            onPress={() => clickDropDownItem(item)}
+                                        />
+                                    )
+                                })
                                 }
                                 <TextInput value={pronouns} style={styles.textInputStyle}
-                                    placeholder="she/her,he/him/they/them"
+                                    placeholder={selectPronounsDropDown.length !== 0 ? '' : "she/her,he/him/they/them"}
                                     onChangeText={(val) => setPronouns(val)} />
                             </View>
                             <View style={styles.imageView}>
@@ -337,21 +334,19 @@ const CreateProfile = ({ navigation }) => {
 
                         <View style={styles.viewStyle}>
                             <View style={styles.inputView}>
-
-                                {
-                                    selectOrientationDropDown.map((item) => {
-                                        return (
-                                            <Badges
-                                                type={Constant.badges.MULTISELECT}
-                                                text={item.name}
-                                                rigthIcon={Images.Circle}
-                                                onPress={() => orientationDropDownItem(item)}
-                                            />
-                                        )
-                                    })
+                                {selectOrientationDropDown.map((item) => {
+                                    return (
+                                        <Badges
+                                            type={Constant.badges.MULTISELECT}
+                                            text={item.name}
+                                            rigthIcon={Images.Circle}
+                                            onPress={() => orientationDropDownItem(item)}
+                                        />
+                                    )
+                                })
                                 }
                                 <TextInput value={orientation} style={styles.textInputStyle}
-                                    placeholder="lesbian/gay,bisexual,asexual"
+                                    placeholder={selectOrientationDropDown.length !== 0 ? '' : "lesbian/gay,bisexual,asexual"}
                                     onChangeText={(val) => setOrientation(val)} />
                             </View>
                             <View style={styles.imageView}>
@@ -393,21 +388,19 @@ const CreateProfile = ({ navigation }) => {
 
                         <View style={styles.viewStyle}>
                             <View style={styles.inputView}>
-
-                                {
-                                    selectGenderDropDown.map((item) => {
-                                        return (
-                                            <Badges
-                                                type={Constant.badges.MULTISELECT}
-                                                text={item.name}
-                                                rigthIcon={Images.Circle}
-                                                onPress={() => genderDropDownItem(item)}
-                                            />
-                                        )
-                                    })
+                                {selectGenderDropDown.map((item) => {
+                                    return (
+                                        <Badges
+                                            type={Constant.badges.MULTISELECT}
+                                            text={item.name}
+                                            rigthIcon={Images.Circle}
+                                            onPress={() => genderDropDownItem(item)}
+                                        />
+                                    )
+                                })
                                 }
                                 <TextInput value={gender} style={styles.textInputStyle}
-                                    placeholder="genderfluid, non-binary, cisgender"
+                                    placeholder={selectGenderDropDown.length !== 0 ? '' : "genderfluid, non-binary, cisgender"}
                                     onChangeText={(val) => setGender(val)} />
                             </View>
                             <View style={styles.imageView}>
@@ -441,21 +434,19 @@ const CreateProfile = ({ navigation }) => {
 
                         <View style={styles.viewStyle}>
                             <View style={styles.inputView}>
-
-                                {
-                                    selectRaceDropDown.map((item) => {
-                                        return (
-                                            <Badges
-                                                type={Constant.badges.MULTISELECT}
-                                                text={item.name}
-                                                rigthIcon={Images.Circle}
-                                                onPress={() => raceDropDownItem(item)}
-                                            />
-                                        )
-                                    })
+                                {selectRaceDropDown.map((item) => {
+                                    return (
+                                        <Badges
+                                            type={Constant.badges.MULTISELECT}
+                                            text={item.name}
+                                            rigthIcon={Images.Circle}
+                                            onPress={() => raceDropDownItem(item)}
+                                        />
+                                    )
+                                })
                                 }
                                 <TextInput value={race} style={styles.textInputStyle}
-                                    placeholder="asian american, arab, native hawaiian"
+                                    placeholder={selectRaceDropDown.length !== 0 ? '' : "asian american, arab, native hawaiian"}
                                     onChangeText={(val) => setRace(val)} />
                             </View>
                             <View style={styles.imageView}>
@@ -497,21 +488,19 @@ const CreateProfile = ({ navigation }) => {
 
                         <View style={styles.viewStyle}>
                             <View style={styles.inputView}>
-
-                                {
-                                    selectLocationDropDown.map((item) => {
-                                        return (
-                                            <Badges
-                                                type={Constant.badges.MULTISELECT}
-                                                text={item.name}
-                                                rigthIcon={Images.Circle}
-                                                onPress={() => locationDropDownItem(item)}
-                                            />
-                                        )
-                                    })
+                                {selectLocationDropDown.map((item) => {
+                                    return (
+                                        <Badges
+                                            type={Constant.badges.MULTISELECT}
+                                            text={item.name}
+                                            rigthIcon={Images.Circle}
+                                            onPress={() => locationDropDownItem(item)}
+                                        />
+                                    )
+                                })
                                 }
                                 <TextInput value={location} style={styles.textInputStyle}
-                                    placeholder="type in a City or State"
+                                    placeholder={selectLocationDropDown.length !== 0 ? '' : "type in a City or State"}
                                     onChangeText={(val) => setLocation(val)} />
                             </View>
                             <View style={styles.imageView}>
@@ -538,22 +527,23 @@ const CreateProfile = ({ navigation }) => {
                         ) : null
                         }
 
-
                     </View>
-
                 </ScrollView>
 
+
             </View>
+
+
+
             <View style={styles.bottomView}>
                 <Button
                     onPress={() => onPressDispatch()}
                     type={Constant.buttons.PRIMARY}
                     text={'take me to selfsea'}
                     style={{ marginTop: 15 }}
-
                 />
-
             </View>
+
 
             <Modal
                 transparent={false}
@@ -596,7 +586,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderTopColor: Color.BORDER_COLOR,
         borderTopWidth: 2,
-    },
+      },
     profileText: {
         fontFamily: Font.CALIBRE,
         fontSize: 20,
@@ -627,6 +617,10 @@ const styles = StyleSheet.create({
         marginHorizontal: '5%',
         marginTop: 10,
         width: '90%',
+
+    },
+    scrollView: {
+        width: '100%',
     },
     rowView: {
         flexDirection: 'row',
@@ -641,7 +635,7 @@ const styles = StyleSheet.create({
         letterSpacing: 0,
         textAlign: "center",
         color: Color.DESCRIPTION_COLOR_TEXT,
-        marginHorizontal: 17,
+        // marginHorizontal: '4%',
         marginVertical: 15,
     },
 
@@ -667,6 +661,7 @@ const styles = StyleSheet.create({
         width: 'auto',
         fontSize: 15,
         paddingVertical: 0,
+        paddingHorizontal: 4,
     },
     imageView: {
         flex: 1,

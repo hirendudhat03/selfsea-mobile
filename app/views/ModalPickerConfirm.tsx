@@ -5,6 +5,7 @@ import { View, StyleSheet, Text, Dimensions } from 'react-native';
 
 import Font from '../theme/fonts';
 import Color from '../theme/colors';
+import Constant from '../theme/constant';
 
 import Button from '../component/Button';
 
@@ -31,25 +32,20 @@ const ModalPicker = ({ changeModalVisibility, textTitle, smallText, button, text
         <Text style={styles.smallText} numberOfLines={3} ellipsizeMode="middle">
           {smallText}
         </Text>
-
-
-        {descriptionData.map((item) => {
-          console.log("descriptionData::",descriptionData)
-          return(
-            <Text
-            style={styles.descriptionText}
-            numberOfLines={numberOfLines}
-            ellipsizeMode="middle">{item.title}
-          </Text>
-          )
-       })
-      }
+        <View style={{flexDirection:'row'}}>
         <Button
-          type={button}
+          type={Constant.buttons.CLOSE}
           text={text}
-          style={{ marginVertical: 10, width: '100%' }}
+          style={{ marginVertical: 10, width: '50%' }}
           onPress={() => changeModalVisibility(false)}
         />
+         <Button
+          type={Constant.buttons.CLOSE}
+          text={text}
+          style={{ marginVertical: 10, width: '50%' }}
+          onPress={() => changeModalVisibility(false)}
+        />
+        </View>
       </View>
     </View>
   );

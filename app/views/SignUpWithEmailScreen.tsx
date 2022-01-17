@@ -23,11 +23,12 @@ import Dropdown from '../component/Dropdown';
 
 import { useDispatch } from 'react-redux'
 import { SignupRequest } from '../redux/actions/SignupAction'
-import Alert from 'app/component/Alert';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const zxcvbn = require('zxcvbn');
 
 const height = Dimensions.get('window').height;
+const width = Dimensions.get('window').width;
 
 
 const month = [
@@ -42,7 +43,7 @@ const month = [
   'September',
   'October',
   'November',
-  'December'
+  'December',
 ];
 
 
@@ -79,8 +80,8 @@ const Signup = ({ navigation }) => {
   const dispatch = useDispatch()
 
   const [years, setYear] = useState([]);
+
   useEffect(() => {
-    // const getyeardetails() {
 
     var year = [];
 
@@ -92,15 +93,12 @@ const Signup = ({ navigation }) => {
 
 
     while (currentYear >= startYear) {
-      // console.log(currentYear--)
       year.push(currentYear--);
     }
     setYear(year)
 
     console.log('year::', year);
-    // }
 
-    // console.log( this.years(2019-20));
   }, [])
 
   const [email, setEmail] = useState(null);
@@ -118,8 +116,17 @@ const Signup = ({ navigation }) => {
   const [birthYear, setBirthYear] = useState('');
   const [birthYearError, setBirthYearError] = useState('');
 
-  const [focus, setFocus] = useState<boolean>();
   const [passwordScore, setPasswordScore] = useState<0 | 1 | 2 | 3 | 4>(0);
+
+  const [focus, setFocus] = useState<boolean>();
+  const selectFocus = () => {
+    if (focus) {
+      setFocus(false);
+    } else {
+      setFocus(true);
+    }
+  };
+
 
 
 
@@ -155,7 +162,7 @@ const Signup = ({ navigation }) => {
     setPassword(text);
     if (text === '') {
       setpasswordBorder(Color.COMMUNITY_ORANGE)
-      setPasswordError('enter password ');
+      setPasswordError('Password must contain a number.');
       setCircleFillPassword(false);
     } else {
       setpasswordBorder(Color.BORDER_COLOR_LIGHTGRAY)
@@ -209,15 +216,16 @@ const Signup = ({ navigation }) => {
     }
   };
 
+
   const [suggestions, setSuggestions] = useState('');
 
-  const selectFocus = () => {
-    if (focus) {
-      setFocus(false);
-    } else {
-      setFocus(true);
-    }
-  };
+  // const selectFocus = () => {
+  //   if (focus) {
+  //     setFocus(false);
+  //   } else {
+  //     setFocus(true);
+  //   }
+  // };
   const [isModalVisible, setIsMoalVisiable] = useState(false);
   const changeModalVisibility = (bool: boolean) => {
     setIsMoalVisiable(bool);
@@ -227,7 +235,7 @@ const Signup = ({ navigation }) => {
   const changeBirthVisibility = (bool: boolean) => {
     setIsBirthVisiable(bool);
   };
-  
+
 
   const SignupValidation = () => {
     if (
@@ -237,32 +245,25 @@ const Signup = ({ navigation }) => {
       birthYear === '' &&
       !userName
     ) {
-      setEmailError('Email Required');
-      setPasswordError('Password Required');
-      setBirthMonthError('Birth month Required');
-      setBirthYearError('Birth year Required');
-      setUserNameError('UserName Required');
+      setEmailError('Please enter email address.');
+      setPasswordError('Password must contain a number.');
+      setUserNameError(text.length+'/20');
 
       setEmail('')
       setUserName('')
       setPassword('')
     } else if (!email) {
-      setEmailError('Email Required');
+      setEmailError('Please enter email address.');
     } else if (
       email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null
     ) {
-      setEmailError('Valid email Required');
+      setEmailError('Please enter a valid email address.');
     } else if (!Password) {
-      setPasswordError('Password Required');
-    } else if (birthMonth === '') {
-      setBirthMonthError('Birth Month Required');
-    } else if (birthYear === '') {
-      setBirthYearError('Birth Year Required');
-    } else if (!userName) {
-      setUserNameError('21/20');
+      setPasswordError('Password must contain a number.');
+    }  else if (!userName) {
+      setUserNameError(text.length+'/20');
     } else {
       dispatch(SignupRequest(email, Password, birthMonth, birthYear, userName, navigation))
-      // navigation.navigate('CreateProfile');
     }
   };
 
@@ -316,6 +317,7 @@ const Signup = ({ navigation }) => {
         label={'sign up with email'}
         onPress={() => navigation.goBack()}
       />
+      <ScrollView>
 
       <View style={styles.contentView}>
         <TextInput
@@ -409,7 +411,7 @@ const Signup = ({ navigation }) => {
               icon={Images.DropdownIcon}
               helperText={birthMonthError}
               value={birthMonth}
-              style={{ width: 190 }}
+              style={{ width: width * 0.5 }}
             />
           </View>
           <View style={styles.yearDropdown}>
@@ -419,7 +421,7 @@ const Signup = ({ navigation }) => {
                 selectFillBirth(value);
               }}
               defaultButtonText={'select one'}
-              style={{ width: 120 }}
+              style={{ width:  width * 0.3}}
               icon={Images.DropdownIcon}
               helperText={birthYearError}
               iconVisibleFill={true}
@@ -433,8 +435,6 @@ const Signup = ({ navigation }) => {
         </View>
 
 
-
-
         <View style={styles.userName}>
           <Text style={styles.birthMonthText}>username</Text>
           <TouchableOpacity
@@ -446,7 +446,7 @@ const Signup = ({ navigation }) => {
         <TextInput
           value={userName}
           type={Constant.textInput.LARGE_INPUT}
-          placeholder={'@'}
+          defaultValue={'@'}
           style={{ fontSize: 18 }}
           onChangeText={text => {
             selectFillUser(text)
@@ -461,6 +461,7 @@ const Signup = ({ navigation }) => {
 
         />
       </View>
+      </ScrollView>
       <View style={styles.bottomView}>
         <Button
           type={Constant.buttons.PRIMARY}
@@ -542,7 +543,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '81%',
     marginRight: 32,
-    
+
   },
   passwordStyle: {
     borderColor: Color.BORDER_COLOR,
@@ -557,13 +558,13 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     marginHorizontal: 20,
     marginVertical: 3,
-    marginTop: height * 0.017
+    marginTop: height * 0.017,
   },
   monthViewBottom: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'flex-start',
-    marginHorizontal: 20,
+    marginHorizontal: 19,
   },
   rowView: {
     flexDirection: 'row',
