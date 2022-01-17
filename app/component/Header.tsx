@@ -67,15 +67,15 @@ const Header = ({
         </View>
       ) : null}
       {type === Constant.navigatioHeader.COMMUNITY_HEADER ? (
-        <View style={[styles.communityHeader, style]}>
-          <View style={styles.communityImageView}>
+        <View style={[styles.communityHeader]}>
+          {/* <View style={styles.communityImageView}>
             <TouchableOpacity onPress={onPress} >
               <Image source={leftIcon} />
             </TouchableOpacity>
             <TouchableOpacity>
               <Image source={rightIcon} style={styles.rightIconStyle} />
             </TouchableOpacity>
-          </View>
+          </View> */}
           <Text style={styles.communityHeaderText}>
             {label}
           </Text>
@@ -178,8 +178,8 @@ const styles = StyleSheet.create({
 
   },
   communityHeader: {
-    padding: 20,
-    paddingTop: 80,
+    padding: 10,
+    paddingTop: 30,
   },
   descriptionText: {
     marginVertical:7,

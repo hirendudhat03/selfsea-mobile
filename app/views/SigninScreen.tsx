@@ -16,6 +16,7 @@ import auth from '@react-native-firebase/auth';
 
 import {useDispatch} from 'react-redux'
 import {LoginRequest} from '../redux/actions/LoginAction'
+import { AppleButton } from '@invertase/react-native-apple-authentication';
 
 
 const Signin = ({ navigation }) => {
@@ -151,10 +152,19 @@ const Signin = ({ navigation }) => {
             icon={Images.Instagram}
             type={Constant.authLogin.INSTAGRAM}
           />
-          <Auth
+          {/* <Auth
             text={'Continue with Apple'}
             icon={Images.Apple}
             type={Constant.authLogin.APPLE}
+          /> */}
+          <AppleButton
+            buttonStyle={AppleButton.Style.WHITE}
+            buttonType={AppleButton.Type.SIGN_IN}
+            style={{
+              width: 160, // You must specify a width
+              height: 45, // You must specify a height
+            }}
+            onPress={() => console.log("Anshuman Gupta")}
           />
         </View>
       </ScrollView>

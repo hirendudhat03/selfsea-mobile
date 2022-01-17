@@ -13,6 +13,8 @@ import {
 } from '@react-native-google-signin/google-signin';
 import Constant from '../theme/constant';
 import InstagramLogin from 'react-native-instagram-login';
+import { appleAuth } from '@invertase/react-native-apple-authentication';
+import  auth from '@react-native-firebase/auth';
 
 interface Props {
   text: string;
@@ -26,7 +28,7 @@ const Authentication = ({ text, icon, type }: Props) => {
     console.log('handlePressGoogleLogin');
     GoogleSignin.configure({
       // androidClientId: '3A:84:C8:28:4A:5F:82:9F:12:8B:71:46:C9:87:0F:68:E6:38:7E:AE',
-      iosClientId: '880711382534-k6q6jmtatddtll7u9qfmn31cbc1ckav1.apps.googleusercontent.com',
+      // iosClientId: '880711382534-k6q6jmtatddtll7u9qfmn31cbc1ckav1.apps.googleusercontent.com',
     });
 
     // GoogleSignin.hasPlayServices().then((hasPlayService) => {
@@ -51,15 +53,37 @@ const Authentication = ({ text, icon, type }: Props) => {
     // })
   };
 
-  const authLogin = () => {
+  const authLogin = async () => {
     console.log('key : ', type);
     if (type === Constant.authLogin.GOOGLE ) {
       _signIn();
     } else if (type === Constant.authLogin.INSTAGRAM) {
-      // alert('instagram')
-      instagramLogin.show()
+      instagramLogin.show();
     } else if (type === Constant.authLogin.APPLE) {
-      alert('Apple')
+      const appleAuthRequestResponse = await appleAuth.performRequest({
+        requestedOperation: appleAuth.Operation.LOGIN,
+        requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+      });
+      console.log("UserData",appleAuthRequestResponse);
+      
+      const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user);
+
+      if (!appleAuthRequestResponse.identityToken) {
+        throw 'Apple Sign-In failed - no identify token returned';
+      }
+    
+      // Create a Firebase credential from the response
+      const { identityToken, nonce, email, fullName } = appleAuthRequestResponse;
+      const appleCredential = auth.AppleAuthProvider.credential(identityToken, nonce);
+
+      console.log("heraa",credentialState);
+      console.log("Apple Credentials", email, fullName, nonce, "Anshh" ,identityToken);
+      // Sign the user in with the credential
+      // let firebaseCreds = auth().signInWithCredential(appleCredential).then(val => {
+      //   console.log("Then",val);
+      // });
+
+      // console.log("Firebase Creds",firebaseCreds);
     }else {
       alert('null')
     }

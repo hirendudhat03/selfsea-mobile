@@ -5,7 +5,7 @@ import Login from '../views/LoginScreen';
 import Signup from '../views/SignUpWithEmailScreen';
 import TabNavigator from '../route/TabNavigator';
 import DrawerNavigator from '../route/DrawerNavigator';
-import Signin from '../views/SignInScreen';
+import Signin from '../views/SigninScreen';
 import All from '../views/All';
 import Mentees from '../views/Mentees';
 import CreateProfile from '../views/CreateProfile';

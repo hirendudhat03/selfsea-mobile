@@ -12,6 +12,7 @@ import Button from '../component/Button';
 
 import LinearGradient from 'react-native-linear-gradient';
 import { useDispatch,useSelector } from 'react-redux';
+import { Theme } from '../assets/styles';
 
 
 const DATA = [
@@ -28,11 +29,6 @@ const DATA = [
 
   },
 ];
-
-
-
-
-
 
 const descriptionData = [
   {
@@ -55,7 +51,7 @@ const descriptionData = [
 const CommunitiesHome = ({ navigation }) => {
 
   const createprofileRes = useSelector(state => state.CreateProfileReducer)
-console.log('signupRes : ',JSON.stringify(createprofileRes))
+  console.log('signupRes : ',JSON.stringify(createprofileRes))
 
 
   useEffect(() => {
@@ -102,16 +98,14 @@ console.log('signupRes : ',JSON.stringify(createprofileRes))
     </View>
 
   );
+  
+  console.log("Theme",Theme);
 
   return (
-
-
-
-
-
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+    {/* <View style={styles.container}> */}
       <Header
-        type={Constant.navigatioHeader.PAGE_HEADER}
+        type={Constant.navigatioHeader.COMMUNITY_HEADER}
         label={'selfsea communities'}
         style={styles.headerView}
       />
@@ -140,7 +134,8 @@ console.log('signupRes : ',JSON.stringify(createprofileRes))
           button={Constant.buttons.PRIMARY}
           text={'I agree to the terms of use'} />
       </Modal>
-    </View >
+    {/* </View > */}
+    </SafeAreaView>
   );
 };
 
@@ -148,6 +143,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Color.BASE_COLOR_LIGHT_BLUE,
+
   },
   viewStyle: {
     paddingVertical: 12,
@@ -155,7 +151,6 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     backgroundColor: Color.BASE_COLOR_WHITE,
     marginVertical: 5,
-
   },
   headerView: {
     borderBottomLeftRadius: 0,

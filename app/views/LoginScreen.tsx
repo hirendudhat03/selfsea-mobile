@@ -10,6 +10,7 @@ import Button from '../component/Button';
 import Auth from '../component/Authentication';
 import InstagramLogin from 'react-native-instagram-login';
 import CookieManager from '@react-native-community/cookies';
+import { AppleButton } from '@invertase/react-native-apple-authentication';
 
 const onPressText = () => {
   Alert.alert("onPressText")
@@ -32,7 +33,7 @@ const Login = ({ navigation }) => {
           <Auth text={"Continue with Google"} icon={Images.Google} type={Constant.authLogin.GOOGLE} />
           <Auth text={"Continue with Instagram"} icon={Images.Instagram} type={Constant.authLogin.INSTAGRAM} />
           <Auth text={"Continue with Apple"} icon={Images.Apple} type={Constant.authLogin.APPLE} />
-
+          
           {/* <TouchableOpacity
           // style={styles.btn}
           onPress={() => instagramLogin.show()}>
