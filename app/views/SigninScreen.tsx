@@ -85,10 +85,10 @@ const Signin = ({ navigation }) => {
       setCircleFillPassword(true);
     }
   };
-  const [email, setEmail] = useState('test@selfsea.com');
+  const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
 
-  const [password, setPassword] = useState('1234567890');
+  const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
 
@@ -119,9 +119,7 @@ const Signin = ({ navigation }) => {
     } else if (!password) {
       setPasswordError('Password Required');
     } else {
-
       dispatch(LoginRequest(email,password,navigation))
-      
     }
   };
 

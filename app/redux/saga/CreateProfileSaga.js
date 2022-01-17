@@ -9,8 +9,8 @@ export function* createProfileSaga(action) {
         console.log('call createprofileSaga : ', action)
         console.log('profile : ', profile)
 
-        console.log('url : ', selectPronounsDropDown)
-        console.log('payload : ', selectOrientationDropDown)
+        console.log('Pronouns : ', selectPronounsDropDown)
+        console.log('Orientation : ', selectOrientationDropDown)
 
 
         try {

@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
   primaryText: {
     fontFamily: Font.CALIBRE,
     fontSize: 18,
-    fontWeight: '500',
+    fontWeight: '600',
     fontStyle: 'normal',
     lineHeight: 21,
     letterSpacing: 0,
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
   closeButtonText: {
     fontFamily: Font.CALIBRE,
     fontSize: 18,
-    fontWeight: '500',
+    fontWeight: '600',
     fontStyle: 'normal',
     lineHeight: 21,
     letterSpacing: 0,

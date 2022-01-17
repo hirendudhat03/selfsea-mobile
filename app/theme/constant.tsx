@@ -42,6 +42,10 @@ export default {
     link: {
         PRIVACY_POLICY: 'https://www.peerhealthexchange.org/privacy-policy',
         TERMS_OF_USE: 'https://www.peerhealthexchange.org/terms-of-service',
+    },
+    modal: {
+        MODAL: 'Modal',
+        MODAL_SUCCESS: 'Success'
     }
 
 

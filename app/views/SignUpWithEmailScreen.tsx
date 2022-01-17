@@ -9,7 +9,7 @@ import {
   Modal,
 } from 'react-native';
 
-import ModalPicker from './ModalPicker';
+import ModalPicker from './ModalPickerConfirm';
 
 import Button from '../component/Button';
 import TextInput from '../component/CustomTextInput';
@@ -98,7 +98,7 @@ const Signup = ({ navigation }) => {
     setYear(year)
 
     console.log('year::', year);
-    
+
   }, [])
 
   const [email, setEmail] = useState(null);
@@ -108,7 +108,7 @@ const Signup = ({ navigation }) => {
   const [PasswordError, setPasswordError] = useState('');
 
   const [userName, setUserName] = useState(null);
-  const [userNameError, setUserNameError] = useState('');
+  const [userNameError, setUserNameError] = useState('0/20');
 
   const [birthMonth, setBirthMonth] = useState('');
   const [birthMonthError, setBirthMonthError] = useState('');
@@ -126,7 +126,7 @@ const Signup = ({ navigation }) => {
       setFocus(true);
     }
   };
- 
+
 
 
 
@@ -159,6 +159,7 @@ const Signup = ({ navigation }) => {
 
   const selectFillPassword = (text) => {
     console.log("text:::", text)
+    
     setPassword(text);
     if (text === '') {
       setpasswordBorder(Color.COMMUNITY_ORANGE)
@@ -174,18 +175,21 @@ const Signup = ({ navigation }) => {
   const [circleFillUser, setCircleFillUser] = useState<boolean>();
 
   const selectFillUser = (text) => {
+    global.userNameLength = text.length
+    console.log('userNameLength', global.userNameLength)
     setUserName(text);
     if (text === '') {
       setUserNameBorder(Color.COMMUNITY_ORANGE)
-      setUserNameError(text.length+'/20');
+      setUserNameError(text.length + '/20');
       setCircleFillUser(false);
     } else if (text.length > 20) {
       setUserNameBorder(Color.COMMUNITY_ORANGE)
-      setUserNameError(text.length+'/20');
+      setUserNameError(text.length + '/20');
       setCircleFillUser(false);
-    }else {
+    } else {
       setUserNameBorder(Color.BORDER_COLOR_LIGHTGRAY)
       setUserNameError(' ');
+      setUserNameError(text.length + '/20');
       setCircleFillUser(true);
     }
   };
@@ -216,7 +220,7 @@ const Signup = ({ navigation }) => {
     }
   };
 
- 
+
   const [isModalVisible, setIsMoalVisiable] = useState(false);
   const changeModalVisibility = (bool: boolean) => {
     setIsMoalVisiable(bool);
@@ -226,7 +230,7 @@ const Signup = ({ navigation }) => {
   const changeBirthVisibility = (bool: boolean) => {
     setIsBirthVisiable(bool);
   };
-  
+
 
   const SignupValidation = () => {
     if (
@@ -238,7 +242,7 @@ const Signup = ({ navigation }) => {
     ) {
       setEmailError('Please enter email address.');
       setPasswordError('Password must contain a number.');
-      setUserNameError(text.length+'/20');
+      setUserNameError(text.length + '/20');
 
       setEmail('')
       setUserName('')
@@ -251,8 +255,8 @@ const Signup = ({ navigation }) => {
       setEmailError('Please enter a valid email address.');
     } else if (!Password) {
       setPasswordError('Password must contain a number.');
-    }  else if (!userName) {
-      setUserNameError(text.length+'/20');
+    } else if (!userName) {
+      setUserNameError(text.length + '/20');
     } else {
       dispatch(SignupRequest(email, Password, birthMonth, birthYear, userName, navigation))
     }
@@ -300,7 +304,11 @@ const Signup = ({ navigation }) => {
     return Color.PASSWORD_NORMAL_COLOR;
   };
 
+
+
   return (
+
+
     <View style={styles.container}>
       <Header
         type={Constant.navigatioHeader.PAGE_HEADER}
@@ -310,165 +318,162 @@ const Signup = ({ navigation }) => {
       />
       <ScrollView>
 
-      <View style={styles.contentView}>
-        <TextInput
-          type={Constant.textInput.LARGE_INPUT}
-          placeholder={'email@address.com'}
-          label={'email'}
-          style={{ fontSize: 18, }}
-          onChangeText={(text) => {
-            selectFill(text);
-          }}
-          value={email}
-          helperText={emailError}
-          iconVisibleFill={true}
-          checkRight={true}
-          circleFill={circleFillEmail}
-          onTouchStart={() => handleTouch()}
-          borderColor={emailBorder}
-        />
+        <View style={styles.contentView}>
+          <TextInput
+            type={Constant.textInput.LARGE_INPUT}
+            placeholder={'email@address.com'}
+            label={'email'}
+            style={{ fontSize: 18, }}
+            onChangeText={(text) => {
+              selectFill(text);
+            }}
+            value={email}
+            helperText={emailError}
+            iconVisibleFill={true}
+            checkRight={true}
+            circleFill={circleFillEmail}
+            onTouchStart={() => handleTouch()}
+            borderColor={emailBorder}
+          />
 
-        <TextInput
-          type={Constant.textInput.LARGE_INPUT}
-          label={'password'}
-          style={{ fontSize: 18 }}
-          onChangeText={text => {
-            selectFillPassword(text);
-            const response = zxcvbn(text);
-            setPasswordScore(response.score);
-            // console.log({ response });
-          }}
-          value={Password}
-          helperText={PasswordError}
-          iconVisible={true}
-          secureTextEntry={focus === undefined ? true : focus}
-          secureTextEntryChange={selectFocus}
-          iconVisibleFill={true}
-          checkRight={true}
-          circleFill={circleFillPassword}
-          onTouchStart={() => handleTouchpasswordBorder()}
-          borderColor={passwordBorder}
+          <TextInput
+            type={Constant.textInput.LARGE_INPUT}
+            label={'password'}
+            style={{ fontSize: 18 }}
+            onChangeText={text => {
+              selectFillPassword(text);
+              const response = zxcvbn(text);
+              setPasswordScore(response.score);
+              // console.log({ response });
+            }}
+            value={Password}
+            helperText={PasswordError}
+            iconVisible={true}
+            secureTextEntry={focus === true  ?   true : focus }
+            secureTextEntryChange={selectFocus}
+            iconVisibleFill={true}
+            checkRight={true}
+            circleFill={circleFillPassword}
+            onTouchStart={() => handleTouchpasswordBorder()}
+            borderColor={passwordBorder}
 
-        />
-        <View style={styles.viewStyle}>
-          <View
-            style={[
-              styles.passwordStyle,
-              { backgroundColor: passwordStrengthColor(0) },
-            ]}
           />
-          <View
-            style={[
-              styles.passwordStyle,
-              { backgroundColor: passwordStrengthColor(1) },
-            ]}
-          />
-          <View
-            style={[
-              styles.passwordStyle,
-              { backgroundColor: passwordStrengthColor(2) },
-            ]}
-          />
-          <View
-            style={[
-              styles.passwordStyle,
-              { backgroundColor: passwordStrengthColor(3) },
-            ]}
-          />
-        </View>
+          <View style={styles.viewStyle}>
+            <View
+              style={[
+                styles.passwordStyle,
+                { backgroundColor: passwordStrengthColor(0) },
+              ]}
+            />
+            <View
+              style={[
+                styles.passwordStyle,
+                { backgroundColor: passwordStrengthColor(1) },
+              ]}
+            />
+            <View
+              style={[
+                styles.passwordStyle,
+                { backgroundColor: passwordStrengthColor(2) },
+              ]}
+            />
+            <View
+              style={[
+                styles.passwordStyle,
+                { backgroundColor: passwordStrengthColor(3) },
+              ]}
+            />
+          </View>
 
-        <View style={styles.monthView}>
-          <View style={styles.rowView}>
-            <Text style={styles.birthMonthText}>birth month</Text>
+          <View style={styles.monthView}>
+            <View style={styles.rowView}>
+              <Text style={styles.birthMonthText}>birth month</Text>
+              <TouchableOpacity
+                style={styles.touchableStyle}
+                onPress={() => changeBirthVisibility(true)}>
+                <Image source={Images.Infocircle} style={styles.infoIcon} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.yearText}>
+              <Text style={styles.birthMonthText}>birth year</Text>
+            </View>
+          </View>
+          <View style={styles.monthViewBottom}>
+            <View style={styles.rowView}>
+              <Dropdown
+                optionList={month}
+                onSelect={value => {
+                  selectFillmonth(value)
+
+                }}
+                defaultButtonText={'select one'}
+                icon={Images.DropdownIcon}
+                helperText={birthMonthError}
+                value={birthMonth}
+                style={{ width: width * 0.48 }}
+              />
+            </View>
+            <View style={styles.yearDropdown}>
+              <Dropdown
+                optionList={years}
+                onSelect={value => {
+                  selectFillBirth(value);
+                }}
+                defaultButtonText={'select one'}
+                style={{ width: width * 0.3 }}
+                icon={Images.DropdownIcon}
+                helperText={birthYearError}
+                iconVisibleFill={true}
+                checkRight={true}
+                value={birthYear}
+                circleFill={circleFillBirth}
+
+
+              />
+            </View>
+          </View>
+
+
+          <View style={styles.userName}>
+            <Text style={styles.birthMonthText}>username</Text>
             <TouchableOpacity
               style={styles.touchableStyle}
-              onPress={() => changeBirthVisibility(true)}>
-              <Image source={Images.Infocircle} style={styles.infoIcon} />
+              onPress={() => changeModalVisibility(true)}>
+              <Image source={Images.Infocircle} style={styles.iconStyle} />
             </TouchableOpacity>
           </View>
-          <View style={styles.yearText}>
-            <Text style={styles.birthMonthText}>birth year</Text>
-          </View>
+          <TextInput
+            value={userName}
+            type={Constant.textInput.LARGE_INPUT}
+            text={'@'}
+            style={{ fontSize: 18 }}
+            onChangeText={text => {
+              selectFillUser(text)
+            }}
+            // helperText={userNameError}
+            iconVisibleFill={true}
+            checkRight={true}
+            circleFill={circleFillUser}
+            onTouchStart={() => handleTouchusernameBorder()}
+            borderColor={userNameBorder}
+          />
+          <Text style={[styles.helperText, global.userNameLength <= 20 ? {color: Color.BORDER_COLOR_LIGHTGRAY}: {color: Color.COMMUNITY_ORANGE}]}>{userNameError}</Text>
         </View>
-        <View style={styles.monthViewBottom}>
-          <View style={styles.rowView}>
-            <Dropdown
-              optionList={month}
-              onSelect={value => {
-                selectFillmonth(value)
-
-              }}
-              defaultButtonText={'select one'}
-              icon={Images.DropdownIcon}
-              helperText={birthMonthError}
-              value={birthMonth}
-              style={{ width: width * 0.5 }}
-            />
-          </View>
-          <View style={styles.yearDropdown}>
-            <Dropdown
-              optionList={years}
-              onSelect={value => {
-                selectFillBirth(value);
-              }}
-              defaultButtonText={'select one'}
-              style={{ width:  width * 0.3}}
-              icon={Images.DropdownIcon}
-              helperText={birthYearError}
-              iconVisibleFill={true}
-              checkRight={true}
-              value={birthYear}
-              circleFill={circleFillBirth}
-
-
-            />
-          </View>
-        </View>
-
-
-        <View style={styles.userName}>
-          <Text style={styles.birthMonthText}>username</Text>
-          <TouchableOpacity
-            style={styles.touchableStyle}
-            onPress={() => changeModalVisibility(true)}>
-            <Image source={Images.Infocircle} style={styles.iconStyle} />
-          </TouchableOpacity>
-        </View>
-        <TextInput
-          value={userName}
-          type={Constant.textInput.LARGE_INPUT}
-          defaultValue={'@'}
-          style={{ fontSize: 18 }}
-          onChangeText={text => {
-            selectFillUser(text)
-          }}
-          helperText={userNameError}
-          iconVisibleFill={true}
-          checkRight={true}
-          circleFill={circleFillUser}
-          onTouchStart={() => handleTouchusernameBorder()}
-          borderColor={userNameBorder}
-
-
-        />
-      </View>
       </ScrollView>
       <View style={styles.bottomView}>
         <Button
           type={Constant.buttons.PRIMARY}
           text={'create account'}
           style={[{ marginTop: 15 },
-          !email ||
-            !Password ||
-            birthMonth === '' ||
-            birthYear === '' ||
-            !userName ? { backgroundColor: Color.BUTTON_DISABLE_COLOR } : { backgroundColor: Color.BASE_COLOR_ORANGE }]}
+          circleFillEmail !== true ||
+            circleFillPassword !== true ||
+            circleFillBirth !== true ||
+            circleFillUser !== true ? { backgroundColor: Color.BUTTON_DISABLE_COLOR } : { backgroundColor: Color.BASE_COLOR_ORANGE }]}
           onPress={() => SignupValidation()}
-          disabled={!email ||
-            !Password ||
-            birthMonth === '' ||
-            birthYear === '' ||
-            !userName ? true : false}
+          disabled={circleFillEmail !== true ||
+            circleFillPassword !== true ||
+            circleFillBirth !== true ||
+            circleFillUser !== true ? true : false}
         />
       </View>
       <Modal
@@ -477,6 +482,7 @@ const Signup = ({ navigation }) => {
         visible={isModalVisible}
         onRequestClose={() => changeModalVisibility(false)}>
         <ModalPicker changeModalVisibility={changeModalVisibility}
+          type={Constant.modal.MODAL}
           textTitle={'selfsea usernames'}
           smallText={'your username will need to be approved by a moderator before your first post or comment can be approved. it cannot be changed after that.'}
           descriptionData={descriptionData}
@@ -491,8 +497,9 @@ const Signup = ({ navigation }) => {
         visible={isBirthVisible}
         onRequestClose={() => changeBirthVisibility(false)}>
         <ModalPicker changeModalVisibility={changeBirthVisibility}
+          type={Constant.modal.MODAL}
           textTitle={'selfsea birthnames'}
-          smallText={'your birthname will need to be approved by a moderator before your first post or comment can be approved. it cannot be changed after that.'}
+          // smallText={'your birthname will need to be approved by a moderator before your first post or comment can be approved. it cannot be changed after that.'}
           descriptionData={birthnData}
           numberOfLines={2}
           button={Constant.buttons.CLOSE}
@@ -534,14 +541,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '81%',
     marginRight: 32,
-    
+
   },
   passwordStyle: {
     borderColor: Color.BORDER_COLOR,
     width: '22%',
     height: 6,
     backgroundColor: '',
-    marginTop:5
+    marginTop: 5
   },
   monthView: {
     flexDirection: 'row',
@@ -564,7 +571,7 @@ const styles = StyleSheet.create({
   yearText: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    marginLeft: 98,
+    marginLeft: '25%',
   },
   yearDropdown: {
     flexDirection: 'row',
@@ -588,7 +595,7 @@ const styles = StyleSheet.create({
   userName: {
     width: '90%',
     flexDirection: 'row',
-    marginTop: height*0.015,
+    marginTop: height * 0.015,
   },
   largeInputView: {
     width: '101%',
@@ -616,6 +623,17 @@ const styles = StyleSheet.create({
   },
   touchableStyle: {
     justifyContent: 'center',
+  },
+  helperText: {
+    width: '90%',
+    height: 14,
+    fontFamily: Font.CALIBRE,
+    fontSize: 12,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    letterSpacing: 0,
+    marginTop:-11,
+
   },
 });
 export default Signup;

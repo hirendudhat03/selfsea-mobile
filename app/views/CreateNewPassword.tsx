@@ -3,13 +3,11 @@ import {
     View,
     Text,
     StyleSheet,
-    Image,
     Dimensions,
-    TouchableOpacity,
     Modal,
 } from 'react-native';
 
-import ModalPicker from './ModalPicker';
+import ModalPicker from './ModalPickerConfirm';
 
 import Button from '../component/Button';
 import TextInput from '../component/CustomTextInput';
@@ -123,6 +121,12 @@ const CreateNewPassword = ({ navigation }) => {
                 onPress={() => navigation.goBack()}
             />
             <View style={styles.contentView}>
+                <View style={{ justifyContent: "center", marginVertical: 20 }}>
+                    <Text style={styles.requirementText}>[password requirements]</Text>
+                    <Text style={styles.requirementText}> [password requirements]</Text>
+                    <Text style={styles.requirementText}> [password requirements]</Text>
+
+                </View>
 
                 <View style={{ flex: 1, justifyContent: 'center', }}>
                     <TextInput
@@ -190,12 +194,12 @@ const CreateNewPassword = ({ navigation }) => {
                 visible={isModalVisible}
                 onRequestClose={() => changeModalVisibility(false)}>
                 <ModalPicker changeModalVisibility={changeModalVisibility}
-                    textTitle={'selfsea Profile Visibility'}
-                    smallText={'your Profile Visibility will need to be approved by a moderator before your first post or comment can be approved. it cannot be changed after that.'}
-                    descriptionData={descriptionData}
-                    numberOfLines={2}
+                    textTitle={'success!'}
+                    smallText={'if there is an account associated with the email you entered, an email has been sent with a password reset email. please check your spam forlder. if you do not receive the email within in 24 hours, click the re-send password reset email button below.'}
                     button={Constant.buttons.CLOSE}
-                    text={'close'}
+                    firstText={'close'}
+                    secondText={'re-send email'}
+                    type={Constant.modal.MODAL_SUCCESS}
                 />
             </Modal>
         </View>
@@ -232,6 +236,15 @@ const styles = StyleSheet.create({
     contentView: {
         flex: 4,
         alignItems: 'center',
+    },
+    requirementText:{
+        fontFamily: Font.CALIBRE,
+        fontSize: 18,
+        fontWeight: "normal",
+        fontStyle: "normal",
+        letterSpacing: 0,
+        textAlign: "center",
+        color: Color.CONTENT_COLOR_BLACK_TEXT
     },
 
 });

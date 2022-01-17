@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Modal, StyleSheet, Image, FlatList, SafeAreaView } from 'react-native';
-import ModalPicker from './ModalPicker';
+import ModalPicker from './ModalPickerConfirm';
 
 import Constant from '../theme/constant';
 import Color from '../theme/colors';
@@ -12,6 +12,7 @@ import Button from '../component/Button';
 
 import LinearGradient from 'react-native-linear-gradient';
 import { useDispatch,useSelector } from 'react-redux';
+import {HomeRequest} from '../redux/actions/HomeAction'
 
 
 const DATA = [
@@ -56,10 +57,11 @@ const CommunitiesHome = ({ navigation }) => {
 
 //   const createprofileRes = useSelector(state => state.CreateProfileReducer)
 // console.log('signupRes321 : ',JSON.stringify(createprofileRes))
-
+const dispatch = useDispatch()
 
   useEffect(() => {
-    changeModalVisibility(true);
+    changeModalVisibility(false);
+
   }, []);
 
 
@@ -93,7 +95,7 @@ const CommunitiesHome = ({ navigation }) => {
           type={Constant.buttons.CLOSE}
           text={'join'}
           style={{ paddingVertical: 12 }}
-          onPress={() => navigation.navigate('HealthScreen')}
+          onPress={() => dispatch(HomeRequest(navigation))}
         />
 
 
@@ -133,6 +135,7 @@ const CommunitiesHome = ({ navigation }) => {
         visible={isModalVisible}
         onRequestClose={() => changeModalVisibility(false)}>
         <ModalPicker changeModalVisibility={changeModalVisibility}
+        type={Constant.modal.MODAL}
           textTitle={'welcome to selfsea!'}
           smallText={"in order to participate in selfsea's communities, you must agree to the following."}
           descriptionData={descriptionData}

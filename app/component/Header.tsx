@@ -22,6 +22,7 @@ interface Props {
   underlineText?: string;
   descriptionText: string;
   style?: {};
+  onPressRight: () => void;
 }
 
 const Header = ({
@@ -34,6 +35,7 @@ const Header = ({
   descriptionText,
   style,
   onPress,
+  onPressRight,
 }: Props) => {
   return (
     <>
@@ -72,7 +74,7 @@ const Header = ({
             <TouchableOpacity onPress={onPress} >
               <Image source={leftIcon} />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onPressRight}>
               <Image source={rightIcon} style={styles.rightIconStyle} />
             </TouchableOpacity>
           </View>

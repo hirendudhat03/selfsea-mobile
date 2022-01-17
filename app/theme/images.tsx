@@ -37,6 +37,9 @@ import CheckCircleGreen from '../assets/images/pngs/checkCircleFillGreen.png';
 import combinedShape from '../assets/images/pngs/combinedShape.png';
 import combinedShapeOPen from '../assets/images/pngs/combinedShapeOPen.png';
 import xCircle from '../assets/images/pngs/xCircle.png';
+import infoCircleFill from '../assets/images/pngs/infoCircleFill.png';
+
+
 
 
 
@@ -79,6 +82,7 @@ import xCircle from '../assets/images/pngs/xCircle.png';
     combinedShape,
     combinedShapeOPen,
     xCircle,
+    infoCircleFill,
 
 
 

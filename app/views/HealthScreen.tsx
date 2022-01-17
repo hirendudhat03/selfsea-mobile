@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text, StyleSheet, } from 'react-native';
+import React, { useEffect } from 'react';
+import { View,Text, StyleSheet, TouchableOpacity, SafeAreaView, } from 'react-native';
 
 
 import Constant from '../theme/constant';
@@ -10,7 +10,7 @@ import Images from '../theme/images';
 import LinearGradient from 'react-native-linear-gradient';
 import Header from '../component/Header';
 
-
+import { useDispatch, useSelector } from 'react-redux';
 
 
 
@@ -18,6 +18,8 @@ import Header from '../component/Header';
 const HealthScreen = ({ navigation }) => {
 
 
+    const homeResponse = useSelector(state => state.HomeReducer)
+    console.log(' homeResponse: ', JSON.stringify(homeResponse))
 
     return (
         <LinearGradient colors={[Color.COMMUNITY_GREEN, Color.COLOR_LIGHT]} style={styles.linearGradient}>
@@ -26,9 +28,13 @@ const HealthScreen = ({ navigation }) => {
                 rightIcon={Images.Dots}
                 label={'BIPOC+ mental health'}
                 descriptionText={'a place to discuss mental health and share how these identities play a pivotal role in  experiences and access to resources.'}
-                onPress={() => navigation.goBack()}
+                onPress={()=> navigation.goBack()}
+                onPressRight={()=>alert('setting')}
             />
+           
+         
         </LinearGradient>
+
 
 
     )
@@ -42,3 +48,7 @@ const styles = StyleSheet.create({
 });
 
 export default HealthScreen; 
+
+
+
+

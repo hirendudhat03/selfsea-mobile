@@ -1,5 +1,6 @@
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../views/Home';
 import Login from '../views/LoginScreen';
 import Signup from '../views/SignUpWithEmailScreen';
@@ -13,7 +14,7 @@ import ForgotPassword from '../views/ForgotPassword';
 import CreateNewPassword from '../views/CreateNewPassword';
 
 const stackNavigator = () => {
-  const Stack = createNativeStackNavigator();
+  const Stack = createStackNavigator();
 
   return (
     //initRoute && (

@@ -11,7 +11,7 @@ import {
     TextInput,
     Modal
 } from 'react-native';
-import ModalPicker from './ModalPicker';
+import ModalPicker from './ModalPickerConfirm';
 
 import Constant from '../theme/constant';
 import Font from "../theme/fonts";
@@ -551,8 +551,9 @@ const CreateProfile = ({ navigation }) => {
                 visible={isModalVisible}
                 onRequestClose={() => changeModalVisibility(false)}>
                 <ModalPicker changeModalVisibility={changeModalVisibility}
+                type={Constant.modal.MODAL}
                     textTitle={'selfsea Profile Visibility'}
-                    smallText={'your Profile Visibility will need to be approved by a moderator before your first post or comment can be approved. it cannot be changed after that.'}
+                    // smallText={'your Profile Visibility will need to be approved by a moderator before your first post or comment can be approved. it cannot be changed after that.'}
                     descriptionData={descriptionData}
                     numberOfLines={2}
                     button={Constant.buttons.CLOSE}
@@ -601,7 +602,7 @@ const styles = StyleSheet.create({
         width: '90%',
         height: height * 0.04,
         fontFamily: Font.CALIBRE,
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: 'normal',
         fontStyle: 'normal',
         lineHeight: 30,
@@ -629,7 +630,7 @@ const styles = StyleSheet.create({
 
     descriptionText: {
         fontFamily: Font.CALIBRE,
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: "normal",
         fontStyle: "normal",
         letterSpacing: 0,

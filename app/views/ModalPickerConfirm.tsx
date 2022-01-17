@@ -13,7 +13,9 @@ interface Props {
   changeModalVisibility: (bool: boolean) => void;
   textTitle: string;
   smallText: string;
-  button: string;
+  firstText: string;
+  secondText: string;
+  type: string;
   text: string;
   descriptionData: [];
   numberOfLines: number;
@@ -21,33 +23,68 @@ interface Props {
 
 }
 
-const ModalPicker = ({ changeModalVisibility, textTitle, smallText, button, text, descriptionData,numberOfLines }: Props) => {
+const ModalPicker = ({ type, changeModalVisibility, textTitle, smallText, secondText, firstText, button, text, descriptionData, numberOfLines }: Props) => {
   return (
-    
-    <View style={styles.container}>
-      <View style={styles.modal}>
-        <Text style={styles.textTitle}>{textTitle}
+    <>
+      {type === Constant.modal.MODAL_SUCCESS ? (
+        <View style={styles.container}>
+          <View style={styles.modalSuccess}>
+            <Text style={styles.textTitle}>{textTitle}
 
-        </Text>
-        <Text style={styles.smallText} numberOfLines={3} ellipsizeMode="middle">
-          {smallText}
-        </Text>
-        <View style={{flexDirection:'row'}}>
-        <Button
-          type={Constant.buttons.CLOSE}
-          text={text}
-          style={{ marginVertical: 10, width: '50%' }}
-          onPress={() => changeModalVisibility(false)}
-        />
-         <Button
-          type={Constant.buttons.CLOSE}
-          text={text}
-          style={{ marginVertical: 10, width: '50%' }}
-          onPress={() => changeModalVisibility(false)}
-        />
-        </View>
-      </View>
-    </View>
+            </Text>
+            <Text style={styles.smallText} numberOfLines={5} ellipsizeMode="middle">
+              {smallText}
+            </Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <Button
+                type={Constant.buttons.CLOSE}
+                text={firstText}
+                style={{ marginVertical: 12, width: '26%', }}
+                onPress={() => changeModalVisibility(false)}
+              />
+              <Button
+                type={Constant.buttons.PRIMARY}
+                text={secondText}
+                style={{ marginVertical: 12, width: '70%' }}
+                onPress={() => changeModalVisibility(false)}
+              />
+            </View>
+          </View>
+        </View>) : null}
+      {type === Constant.modal.MODAL ? (
+        <View style={styles.container}>
+          <View style={styles.modal}>
+            <Text style={styles.textTitle}>{textTitle}
+
+            </Text>
+            {smallText !== undefined ? (
+              <Text style={styles.smallText} numberOfLines={3} ellipsizeMode="middle">
+                {smallText}
+              </Text>
+            ) : null}
+
+
+            {descriptionData.map((item) => {
+              return (
+                <Text
+                  style={styles.descriptionText}
+                  numberOfLines={numberOfLines}
+                  ellipsizeMode="middle">{item.title}
+                </Text>
+              )
+            })
+            }
+            <Button
+              type={button}
+              text={text}
+              style={{ marginVertical: 10, width: '100%' }}
+              onPress={() => changeModalVisibility(false)}
+            />
+          </View>
+        </View>) : null}
+
+
+    </>
   );
 };
 const width = Dimensions.get('window').width - 50;
@@ -67,6 +104,13 @@ const styles = StyleSheet.create({
     width: width,
     padding: 15,
   },
+  modalSuccess: {
+    backgroundColor: Color.BASE_COLOR_WHITE,
+    borderRadius: 10,
+    height: 'auto',
+    width: width,
+    padding: 20,
+  },
   textTitle: {
     fontFamily: Font.CALIBRE,
     fontSize: 24,
@@ -76,6 +120,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     textAlign: 'center',
     color: Color.CONTENT_COLOR_BLACK_TEXT,
+
   },
   smallText: {
     fontFamily: Font.CALIBRE,
@@ -98,5 +143,6 @@ const styles = StyleSheet.create({
     color: Color.CONTENT_COLOR_BLACK_TEXT,
     marginVertical: 10,
   },
+
 });
 export default ModalPicker;

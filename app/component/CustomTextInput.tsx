@@ -36,6 +36,8 @@ interface Props {
   borderColor: string;
   onTouchEnd?: () => void;
   defaultValue: string;
+  text: string;
+
 }
 
 const CustomTextInput = ({
@@ -58,6 +60,7 @@ const CustomTextInput = ({
   borderColor,
   onTouchEnd,
   defaultValue,
+  text,
 
 
 }: Props) => {
@@ -69,11 +72,16 @@ const CustomTextInput = ({
           {label !== undefined ? (
             <Text style={[styles.labelText, style]}>{label}</Text>
           ) : null}
-          <View style={[styles.contentView,viewStyle]}>
+          <View style={[styles.contentView, viewStyle]}>
             <View style={[styles.largeInputView, {
               borderColor: borderColor === '' ? Color.BORDER_COLOR_LIGHTGRAY
                 : borderColor
             }]}>
+              {text !== '' ? (
+
+                <Text style={styles.textStyle}>{text}</Text>
+
+              ) : null}
               <TextInput
                 style={[styles.textInputStyle, textInputstyle]}
                 placeholder={placeholder}
@@ -92,8 +100,8 @@ const CustomTextInput = ({
                     style={styles.touchableStyle}
                     onPress={secureTextEntryChange}>
                     <Image
-                      source={Images.combinedShape}
-                      
+                     source={Images.combinedShapeOPen}
+
                     />
                   </TouchableOpacity>
                 ) : (
@@ -101,8 +109,8 @@ const CustomTextInput = ({
                     style={styles.touchableStyle}
                     onPress={secureTextEntryChange}>
                     <Image
-                      source={Images.combinedShapeOPen}
-                     
+                      source={Images.combinedShape}
+
                     />
                   </TouchableOpacity>
                 )
@@ -177,7 +185,18 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     letterSpacing: 0,
     color: Color.BASE_COLOR_GRAY,
-    marginTop: height * 0.015
+    marginTop: height * 0.015,
+  },
+  textStyle: {
+    fontFamily: Font.CALIBRE,
+    fontSize: 18,
+    fontWeight: "normal",
+    fontStyle: "normal",
+    letterSpacing: 0,
+    textAlign: 'center',
+    paddingLeft: 10,
+    paddingRight: 4,
+    color: Color.PLACEHOLDER_TEXT,
   },
   helperText: {
     width: '90%',
@@ -207,14 +226,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
-  
+
   textInputStyle: {
     fontSize: 17,
     height: height * 0.064,
     width: '90%',
-    paddingHorizontal: 16,
+    // paddingHorizontal: 16,
   },
-  touchableStyle: { justifyContent: 'center', marginLeft: -7 },
+  touchableStyle: { justifyContent: 'center', marginLeft: -20 },
   contentView: {
     width: '90%',
     height: height * 0.064,
