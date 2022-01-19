@@ -144,7 +144,7 @@ const Signin = ({ navigation }) => {
             value={password}
             helperText={passwordError}
             iconVisible={true}
-            secureTextEntry={focus === undefined ? true : focus}
+            secureTextEntry={focus !== true ? focus : true}
             secureTextEntryChange={selectFocus}
             iconVisibleFill={true}
             checkRight={true}

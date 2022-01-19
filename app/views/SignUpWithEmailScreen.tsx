@@ -25,6 +25,35 @@ import { useDispatch } from 'react-redux';
 import { SignupRequest } from '../redux/actions/SignupAction';
 import { ScrollView } from 'react-native-gesture-handler';
 
+import { gql, useMutation } from '@apollo/client';
+
+const CREATE_PRODUCT = gql`
+  mutation CreateUser(
+    $email: String!
+    $password: String!
+    $authId: String!
+    $birthMonth: String!
+    $birthYear: String!
+    $username: String!
+  ) {
+    createUser(
+      createUserInput: {
+        email: $email
+        password: $password
+        authId: $authId
+        birthMonth: $birthMonth
+        birthYear: $birthYear
+        username: $username
+      }
+    ) {
+      createUserInput {
+        id
+        authId
+        email
+      }
+    }
+  }
+`;
 const zxcvbn = require('zxcvbn');
 
 const height = Dimensions.get('window').height;
@@ -286,6 +315,16 @@ const Signup = ({ navigation }) => {
     }
     return Color.PASSWORD_NORMAL_COLOR;
   };
+  const [createProduct, { data, loading, error }] = useMutation(
+    CREATE_PRODUCT,
+    {
+      variables: {
+        email,
+        Password,
+      },
+    },
+  );
+  console.log('data:', data);
 
   return (
     <View style={styles.container}>
@@ -327,7 +366,7 @@ const Signup = ({ navigation }) => {
             value={Password}
             helperText={PasswordError}
             iconVisible={true}
-            secureTextEntry={focus === true ? true : focus}
+            secureTextEntry={focus !== true ? focus : true}
             secureTextEntryChange={selectFocus}
             iconVisibleFill={true}
             checkRight={true}
@@ -423,7 +462,6 @@ const Signup = ({ navigation }) => {
             onChangeText={text => {
               selectFillUser(text);
             }}
-            // helperText={userNameError}
             iconVisibleFill={true}
             checkRight={true}
             circleFill={circleFillUser}
@@ -433,9 +471,9 @@ const Signup = ({ navigation }) => {
           <Text
             style={[
               styles.helperText,
-              global.userNameLength <= 20
-                ? { color: Color.BORDER_COLOR_LIGHTGRAY }
-                : { color: Color.COMMUNITY_ORANGE },
+              global.userNameLength > 20
+                ? { color: Color.COMMUNITY_ORANGE }
+                : { color: Color.BORDER_COLOR_LIGHTGRAY },
             ]}>
             {userNameError}
           </Text>
@@ -622,10 +660,11 @@ const styles = StyleSheet.create({
     height: 14,
     fontFamily: Font.CALIBRE,
     fontSize: 12,
-    fontWeight: 'normal',
+    fontWeight: '500',
     fontStyle: 'normal',
     letterSpacing: 0,
     marginTop: -11,
+    color: Color.BASE_COLOR_BORDER_GRAY,
   },
 });
 export default Signup;

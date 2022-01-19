@@ -92,6 +92,7 @@ const CustomTextInput = ({
                 onTouchStart={onTouchStart}
                 onTouchEnd={onTouchEnd}
                 defaultValue={defaultValue}
+                autoCapitalize="none"
               />
 
               {iconVisible ? (
@@ -99,13 +100,13 @@ const CustomTextInput = ({
                   <TouchableOpacity
                     style={styles.touchableStyle}
                     onPress={secureTextEntryChange}>
-                    <Image source={Images.combinedShapeOPen} />
+                    <Image source={Images.combinedShape} />
                   </TouchableOpacity>
                 ) : (
                   <TouchableOpacity
                     style={styles.touchableStyle}
                     onPress={secureTextEntryChange}>
-                    <Image source={Images.combinedShape} />
+                    <Image source={Images.combinedShapeOPen} />
                   </TouchableOpacity>
                 )
               ) : null}
