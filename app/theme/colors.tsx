@@ -39,5 +39,4 @@ export default {
   PASSWORD_NORMAL_COLOR: '#d8d8d8',
   DRAWER_TEXT_COLOR: '#868e9d',
   BUTTON_DISABLE_COLOR: '#fbc68d',
-
 };

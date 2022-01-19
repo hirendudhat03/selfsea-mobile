@@ -5,18 +5,18 @@ import Customdrawer from '../views/CustomDrawer';
 
 const Drawer = createDrawerNavigator();
 
-
-const DrawerNavigator = (props) => {
-    return (
-            <Drawer.Navigator 
-            drawerContent={props=><Customdrawer  props={props}/>}
-            initialRouteName="TabNavigator">
-                <Drawer.Screen name="TabNavigator" component={TabNavigator}  options={{ headerShown: false }}/>
-            </Drawer.Navigator>
-
-    );
-}
-
-
+const DrawerNavigator = props => {
+  return (
+    <Drawer.Navigator
+      drawerContent={props => <Customdrawer props={props} />}
+      initialRouteName="TabNavigator">
+      <Drawer.Screen
+        name="TabNavigator"
+        component={TabNavigator}
+        options={{ headerShown: false }}
+      />
+    </Drawer.Navigator>
+  );
+};
 
 export default DrawerNavigator;

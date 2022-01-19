@@ -36,6 +36,7 @@ interface Props {
   borderColor: string;
   onTouchEnd?: () => void;
   defaultValue: string;
+  text: string;
 }
 
 const CustomTextInput = ({
@@ -58,22 +59,29 @@ const CustomTextInput = ({
   borderColor,
   onTouchEnd,
   defaultValue,
-
-
+  text,
 }: Props) => {
   return (
     <>
       {type === Constant.textInput.LARGE_INPUT ? (
         <>
-
           {label !== undefined ? (
             <Text style={[styles.labelText, style]}>{label}</Text>
           ) : null}
-          <View style={[styles.contentView,viewStyle]}>
-            <View style={[styles.largeInputView, {
-              borderColor: borderColor === '' ? Color.BORDER_COLOR_LIGHTGRAY
-                : borderColor
-            }]}>
+          <View style={[styles.contentView, viewStyle]}>
+            <View
+              style={[
+                styles.largeInputView,
+                {
+                  borderColor:
+                    borderColor === ''
+                      ? Color.BORDER_COLOR_LIGHTGRAY
+                      : borderColor,
+                },
+              ]}>
+              {text !== '' ? (
+                <Text style={styles.textStyle}>{text}</Text>
+              ) : null}
               <TextInput
                 style={[styles.textInputStyle, textInputstyle]}
                 placeholder={placeholder}
@@ -91,19 +99,13 @@ const CustomTextInput = ({
                   <TouchableOpacity
                     style={styles.touchableStyle}
                     onPress={secureTextEntryChange}>
-                    <Image
-                      source={Images.combinedShape}
-                      
-                    />
+                    <Image source={Images.combinedShapeOPen} />
                   </TouchableOpacity>
                 ) : (
                   <TouchableOpacity
                     style={styles.touchableStyle}
                     onPress={secureTextEntryChange}>
-                    <Image
-                      source={Images.combinedShapeOPen}
-                     
-                    />
+                    <Image source={Images.combinedShape} />
                   </TouchableOpacity>
                 )
               ) : null}
@@ -112,21 +114,17 @@ const CustomTextInput = ({
               <>
                 {iconVisibleFill ? (
                   circleFill ? (
-                    <View style={{ justifyContent: 'center' }}
-                    >
+                    <View style={{ justifyContent: 'center' }}>
                       <Image source={Images.CheckCircleGreen} />
                     </View>
                   ) : (
-                    <View style={{ justifyContent: 'center' }}
-                    >
+                    <View style={{ justifyContent: 'center' }}>
                       <Image source={Images.CheckCircle} />
                     </View>
                   )
                 ) : null}
-
               </>
             ) : null}
-
           </View>
 
           {helperText !== '' ? (
@@ -134,7 +132,6 @@ const CustomTextInput = ({
           ) : null}
         </>
       ) : null}
-
 
       {type === Constant.textInput.LARGE_TEXT_AREA ? (
         <TextInput style={styles.largeTextareaView} placeholder={placeholder} />
@@ -146,7 +143,7 @@ const CustomTextInput = ({
 const styles = StyleSheet.create({
   largeInputView: {
     width: '90%',
-    height: height * 0.060,
+    height: height * 0.06,
     borderRadius: 4,
     backgroundColor: Color.BASE_COLOR_WHITE,
     borderStyle: 'solid',
@@ -154,7 +151,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderColor: Color.BORDER_COLOR_LIGHTGRAY,
-
   },
 
   largeTextareaView: {
@@ -177,7 +173,18 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     letterSpacing: 0,
     color: Color.BASE_COLOR_GRAY,
-    marginTop: height * 0.015
+    marginTop: height * 0.015,
+  },
+  textStyle: {
+    fontFamily: Font.CALIBRE,
+    fontSize: 18,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    letterSpacing: 0,
+    textAlign: 'center',
+    paddingLeft: 10,
+    paddingRight: 4,
+    color: Color.PLACEHOLDER_TEXT,
   },
   helperText: {
     width: '90%',
@@ -189,7 +196,6 @@ const styles = StyleSheet.create({
     lineHeight: 16,
     letterSpacing: 0,
     color: Color.COMMUNITY_ORANGE,
-
   },
   toggleLabel: {
     fontFamily: Font.CALIBRE,
@@ -207,14 +213,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
-  
+
   textInputStyle: {
     fontSize: 17,
     height: height * 0.064,
     width: '90%',
-    paddingHorizontal: 16,
+    // paddingHorizontal: 16,
   },
-  touchableStyle: { justifyContent: 'center', marginLeft: -7 },
+  touchableStyle: { justifyContent: 'center', marginLeft: -20 },
   contentView: {
     width: '90%',
     height: height * 0.064,

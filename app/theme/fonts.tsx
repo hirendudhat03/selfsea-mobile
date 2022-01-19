@@ -1,5 +1,3 @@
 export default {
-  
-    CALIBRE:"Calibre",
-  
-  };
+  CALIBRE: 'Calibre',
+};
