@@ -75,17 +75,12 @@ const birthnData = [
 const Signup = ({ navigation }) => {
   const dispatch = useDispatch();
 
-  const [years, setYear] = useState([]);
+  const [years, setYear] = useState<number[]>([]);
 
   useEffect(() => {
-    var year = [];
-
-    var currentYear = new Date().getFullYear(),
-      year = [];
-    var startYear = startYear || 1900;
-
-    console.log('currentYear : ', currentYear);
-    console.log('startYear : ', startYear);
+    let year = [];
+    let currentYear = new Date().getFullYear();
+    let startYear = 1900;
 
     while (currentYear >= startYear) {
       year.push(currentYear--);
@@ -93,23 +88,22 @@ const Signup = ({ navigation }) => {
     setYear(year);
 
     console.log('year::', year);
-
   }, []);
 
-  const [email, setEmail] = useState(null);
+  const [email, setEmail] = useState<string>('');
   const [emailError, setEmailError] = useState('');
 
-  const [Password, setPassword] = useState('');
-  const [PasswordError, setPasswordError] = useState('');
+  const [Password, setPassword] = useState<string>('');
+  const [PasswordError, setPasswordError] = useState<string>('');
 
-  const [userName, setUserName] = useState(null);
-  const [userNameError, setUserNameError] = useState('0/20');
+  const [userName, setUserName] = useState<string>('');
+  const [userNameError, setUserNameError] = useState<string>('0/20');
 
-  const [birthMonth, setBirthMonth] = useState('');
-  const [birthMonthError, setBirthMonthError] = useState('');
+  const [birthMonth, setBirthMonth] = useState<string>('');
+  const [birthMonthError, setBirthMonthError] = useState<string>('');
 
-  const [birthYear, setBirthYear] = useState('');
-  const [birthYearError, setBirthYearError] = useState('');
+  const [birthYear, setBirthYear] = useState<string>('');
+  const [birthYearError, setBirthYearError] = useState<string>('');
 
   const [passwordScore, setPasswordScore] = useState<0 | 1 | 2 | 3 | 4>(0);
 
@@ -122,10 +116,9 @@ const Signup = ({ navigation }) => {
     }
   };
 
-
   const [circleFillEmail, setCircleFillEmail] = useState<boolean>();
 
-  const selectFill = text => {
+  const selectFill = (text: string) => {
     setEmail(text);
     if (text === '') {
       setCircleFillEmail(false);
@@ -146,7 +139,7 @@ const Signup = ({ navigation }) => {
 
   const [circleFillPassword, setCircleFillPassword] = useState<boolean>();
 
-  const selectFillPassword = text => {
+  const selectFillPassword = (text: string) => {
     console.log('text:::', text);
 
     setPassword(text);
@@ -163,9 +156,8 @@ const Signup = ({ navigation }) => {
 
   const [circleFillUser, setCircleFillUser] = useState<boolean>();
 
-  const selectFillUser = text => {
-    global.userNameLength = text.length;
-    console.log('userNameLength', global.userNameLength);
+  const selectFillUser = (text: string) => {
+    // global.userNameLength = text.length;
     setUserName(text);
     if (text === '') {
       setUserNameBorder(Color.COMMUNITY_ORANGE);
@@ -207,8 +199,7 @@ const Signup = ({ navigation }) => {
     }
   };
 
-
-  const [suggestions, setSuggestions] = useState('');
+  // const [suggestions, setSuggestions] = useState('');
 
   // const selectFocus = () => {
   //   if (focus) {
@@ -227,8 +218,7 @@ const Signup = ({ navigation }) => {
     setIsBirthVisiable(bool);
   };
 
-
-  const SignupValidation = () => {
+  const SignupValidation = (text: string) => {
     if (
       !email &&
       !Password &&
@@ -340,7 +330,7 @@ const Signup = ({ navigation }) => {
             value={Password}
             helperText={PasswordError}
             iconVisible={true}
-            secureTextEntry={focus === true ? true : focus}
+            secureTextEntry={focus !== true ? focus : true}
             secureTextEntryChange={selectFocus}
             iconVisibleFill={true}
             checkRight={true}
@@ -436,7 +426,6 @@ const Signup = ({ navigation }) => {
             onChangeText={text => {
               selectFillUser(text);
             }}
-            // helperText={userNameError}
             iconVisibleFill={true}
             checkRight={true}
             circleFill={circleFillUser}
@@ -446,9 +435,9 @@ const Signup = ({ navigation }) => {
           <Text
             style={[
               styles.helperText,
-              global.userNameLength <= 20
-                ? { color: Color.BORDER_COLOR_LIGHTGRAY }
-                : { color: Color.COMMUNITY_ORANGE },
+              userName.length > 20
+                ? { color: Color.COMMUNITY_ORANGE }
+                : { color: Color.BORDER_COLOR_LIGHTGRAY },
             ]}>
             {userNameError}
           </Text>
@@ -548,7 +537,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '81%',
     marginRight: 32,
-
   },
   passwordStyle: {
     borderColor: Color.BORDER_COLOR,
@@ -636,10 +624,11 @@ const styles = StyleSheet.create({
     height: 14,
     fontFamily: Font.CALIBRE,
     fontSize: 12,
-    fontWeight: 'normal',
+    fontWeight: '500',
     fontStyle: 'normal',
     letterSpacing: 0,
     marginTop: -11,
+    color: Color.BASE_COLOR_BORDER_GRAY,
   },
 });
 export default Signup;

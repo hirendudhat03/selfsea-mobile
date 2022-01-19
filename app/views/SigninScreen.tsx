@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import Constant from '../theme/constant';
 import Fonts from '../theme/fonts';
@@ -144,7 +144,7 @@ const Signin = ({ navigation }) => {
             value={password}
             helperText={passwordError}
             iconVisible={true}
-            secureTextEntry={focus === undefined ? true : focus}
+            secureTextEntry={focus !== true ? focus : true}
             secureTextEntryChange={selectFocus}
             iconVisibleFill={true}
             checkRight={true}

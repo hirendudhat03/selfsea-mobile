@@ -16,6 +16,7 @@ export const api = (() => {
   });
 
   return {
+    client,
     ...getSdk(client, errorWrapper),
     setAuthHeader: (token: string | null) =>
       token
