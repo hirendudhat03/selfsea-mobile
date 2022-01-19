@@ -14,7 +14,7 @@ export function* loginSaga(action) {
 
         try {
             const response = await auth().signInWithEmailAndPassword(email, password)
-
+             console.log(response)
             return response
 
         } catch (e) {
@@ -26,6 +26,13 @@ export function* loginSaga(action) {
 
     const response = yield call(Login, action.email, action.password)
     console.warn('response saga', response)
-    yield put(LoginAction.LoginResponse(response))
-    action.navigation.navigate('DrawerNavigator')
+
+    if(response == undefined){
+        
+    }else{
+        yield put(LoginAction.LoginResponse(response))
+        action.navigation.navigate('DrawerNavigator')
+    }
+
+    
 }

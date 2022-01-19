@@ -27,6 +27,16 @@ interface Props {
   secureTextEntryChange?: () => void;
   secureTextEntry?: boolean;
   iconVisible?: boolean;
+  textInputstyle: {};
+  checkRight?: boolean;
+  circleFill: string;
+  iconVisibleFill?: boolean;
+  viewStyle: {};
+  onTouchStart?: () => void;
+  borderColor: string;
+  onTouchEnd?: () => void;
+  defaultValue: string;
+  text: string;
 }
 
 const CustomTextInput = ({
@@ -40,6 +50,16 @@ const CustomTextInput = ({
   secureTextEntryChange,
   iconVisible,
   secureTextEntry,
+  textInputstyle,
+  checkRight,
+  iconVisibleFill,
+  circleFill,
+  viewStyle,
+  onTouchStart,
+  borderColor,
+  onTouchEnd,
+  defaultValue,
+  text,
 }: Props) => {
   return (
     <>
@@ -48,44 +68,71 @@ const CustomTextInput = ({
           {label !== undefined ? (
             <Text style={[styles.labelText, style]}>{label}</Text>
           ) : null}
+          <View style={[styles.contentView, viewStyle]}>
+            <View
+              style={[
+                styles.largeInputView,
+                {
+                  borderColor:
+                    borderColor === ''
+                      ? Color.BORDER_COLOR_LIGHTGRAY
+                      : borderColor,
+                },
+              ]}>
+              {text !== '' ? (
+                <Text style={styles.textStyle}>{text}</Text>
+              ) : null}
+              <TextInput
+                style={[styles.textInputStyle, textInputstyle]}
+                placeholder={placeholder}
+                onChangeText={onChangeText}
+                secureTextEntry={secureTextEntry}
+                value={value}
+                circleFill={circleFill}
+                onTouchStart={onTouchStart}
+                onTouchEnd={onTouchEnd}
+                defaultValue={defaultValue}
+              />
 
-          <View style={styles.largeInputView}>
-            <TextInput
-              style={styles.textInputStyle}
-              placeholder={placeholder}
-              onChangeText={onChangeText}
-              secureTextEntry={secureTextEntry}
-              value={value}
-            />
-
-            {iconVisible ? (
-              secureTextEntry ? (
-                <TouchableOpacity
-                  style={styles.touchableStyle}
-                  onPress={secureTextEntryChange}>
-                  <Image
-                    source={Images.PasswordIcon}
-                    style={styles.passwordIcon}
-                  />
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity
-                  style={styles.touchableStyle}
-                  onPress={secureTextEntryChange}>
-                  <Image
-                    source={Images.visibilityShow}
-                    style={styles.passwordIcon}
-                  />
-                </TouchableOpacity>
-              )
+              {iconVisible ? (
+                secureTextEntry ? (
+                  <TouchableOpacity
+                    style={styles.touchableStyle}
+                    onPress={secureTextEntryChange}>
+                    <Image source={Images.combinedShapeOPen} />
+                  </TouchableOpacity>
+                ) : (
+                  <TouchableOpacity
+                    style={styles.touchableStyle}
+                    onPress={secureTextEntryChange}>
+                    <Image source={Images.combinedShape} />
+                  </TouchableOpacity>
+                )
+              ) : null}
+            </View>
+            {checkRight !== undefined ? (
+              <>
+                {iconVisibleFill ? (
+                  circleFill ? (
+                    <View style={{ justifyContent: 'center' }}>
+                      <Image source={Images.CheckCircleGreen} />
+                    </View>
+                  ) : (
+                    <View style={{ justifyContent: 'center' }}>
+                      <Image source={Images.CheckCircle} />
+                    </View>
+                  )
+                ) : null}
+              </>
             ) : null}
           </View>
 
-          {helperText !== undefined ? (
+          {helperText !== '' ? (
             <Text style={styles.helperText}>{helperText}</Text>
           ) : null}
         </>
       ) : null}
+
       {type === Constant.textInput.LARGE_TEXT_AREA ? (
         <TextInput style={styles.largeTextareaView} placeholder={placeholder} />
       ) : null}
@@ -96,13 +143,14 @@ const CustomTextInput = ({
 const styles = StyleSheet.create({
   largeInputView: {
     width: '90%',
-    height: height * 0.064,
+    height: height * 0.06,
     borderRadius: 4,
     backgroundColor: Color.BASE_COLOR_WHITE,
     borderStyle: 'solid',
     borderWidth: 1,
-    borderColor: Color.BORDER_COLOR_LIGHTGRAY,
     flexDirection: 'row',
+    alignItems: 'center',
+    borderColor: Color.BORDER_COLOR_LIGHTGRAY,
   },
 
   largeTextareaView: {
@@ -125,18 +173,29 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     letterSpacing: 0,
     color: Color.BASE_COLOR_GRAY,
-    marginTop: 25,
+    marginTop: height * 0.015,
+  },
+  textStyle: {
+    fontFamily: Font.CALIBRE,
+    fontSize: 18,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    letterSpacing: 0,
+    textAlign: 'center',
+    paddingLeft: 10,
+    paddingRight: 4,
+    color: Color.PLACEHOLDER_TEXT,
   },
   helperText: {
     width: '90%',
-    height: height * 0.02,
+    height: 14,
     fontFamily: Font.CALIBRE,
     fontSize: 12,
     fontWeight: 'normal',
     fontStyle: 'normal',
     lineHeight: 16,
     letterSpacing: 0,
-    color: Color.PLACEHOLDER_TEXT,
+    color: Color.COMMUNITY_ORANGE,
   },
   toggleLabel: {
     fontFamily: Font.CALIBRE,
@@ -154,18 +213,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
-  passwordIcon: {
-    height: 25,
-    width: 25,
-    alignSelf: 'flex-end',
-  },
+
   textInputStyle: {
     fontSize: 17,
     height: height * 0.064,
     width: '90%',
-    paddingHorizontal: 16,
+    // paddingHorizontal: 16,
   },
-  touchableStyle: { justifyContent: 'center' },
+  touchableStyle: { justifyContent: 'center', marginLeft: -20 },
+  contentView: {
+    width: '90%',
+    height: height * 0.064,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
 });
 
 export default CustomTextInput;

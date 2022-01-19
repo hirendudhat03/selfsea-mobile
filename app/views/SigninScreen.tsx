@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, StyleSheet, ScrollView,  } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
 import Constant from '../theme/constant';
 import Fonts from '../theme/fonts';
@@ -20,11 +20,7 @@ import { AppleButton } from '@invertase/react-native-apple-authentication';
 
 
 const Signin = ({ navigation }) => {
-
-
-  const dispatch = useDispatch()
-
- 
+  const dispatch = useDispatch();
 
   const [isSelectedCheckBox, setISSelectionCheckBox] = useState(false);
 
@@ -44,14 +40,59 @@ const Signin = ({ navigation }) => {
     } else {
       setFocus(true);
     }
-
   };
 
-  const [email, setEmail] = useState('test@selfsea.com');
+  const [circleFillEmail, setCircleFillEmail] = useState<boolean>();
+
+  const selectFill = text => {
+    setEmail(text);
+    if (text === '') {
+      setCircleFillEmail(false);
+      setEmailBorder(Color.COMMUNITY_ORANGE);
+      setEmailError('enter email ');
+    } else if (
+      text.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null
+    ) {
+      setEmailBorder(Color.COMMUNITY_ORANGE);
+      setEmailError('enter valid email ');
+      setCircleFillEmail(false);
+    } else {
+      setCircleFillEmail(true);
+      setEmailBorder(Color.BORDER_COLOR_LIGHTGRAY);
+      setEmailError('');
+    }
+  };
+
+  const [circleFillPassword, setCircleFillPassword] = useState<boolean>();
+
+  const selectFillPassword = text => {
+    console.log('text:::', text);
+    setPassword(text);
+    if (text === '') {
+      setpasswordBorder(Color.COMMUNITY_ORANGE);
+      setPasswordError('enter password ');
+      setCircleFillPassword(false);
+    } else {
+      setpasswordBorder(Color.BORDER_COLOR_LIGHTGRAY);
+      setPasswordError(' ');
+      setCircleFillPassword(true);
+    }
+  };
+  const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
 
-  const [password, setPassword] = useState('1234567890');
+  const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
+
+  const [emailBorder, setEmailBorder] = useState('');
+  const handleTouch = () => {
+    setEmailBorder(Color.BASE_COLOR_LIGHT_BLUE);
+  };
+
+  const [passwordBorder, setpasswordBorder] = useState('');
+  const handleTouchpasswordBorder = () => {
+    setpasswordBorder(Color.BASE_COLOR_LIGHT_BLUE);
+  };
 
   const SigninValidation = async () => {
     if (!email && !password) {
@@ -66,26 +107,10 @@ const Signin = ({ navigation }) => {
     } else if (!password) {
       setPasswordError('Password Required');
     } else {
-
-      dispatch(LoginRequest(email,password,navigation))
-      // try {
-      //   await auth().signInWithEmailAndPassword(email, password).then((res) => {
-      //     alert(JSON.stringify(res))
-          
-      //     navigation.navigate("Home");
-
-      //   })
-  
-      // } catch (e) {
-      //   console.log(e);
-      //   alert(e)
-  
-      // }
+      dispatch(LoginRequest(email, password, navigation));
     }
   };
 
-
-  
   return (
     <View style={styles.container}>
       <Header
@@ -102,11 +127,15 @@ const Signin = ({ navigation }) => {
             label={'email'}
             style={{ fontSize: 18 }}
             onChangeText={text => {
-              setEmail(text);
-              setEmailError(' ');
+              selectFill(text);
             }}
             value={email}
             helperText={emailError}
+            iconVisibleFill={true}
+            checkRight={true}
+            circleFill={circleFillEmail}
+            onTouchStart={() => handleTouch()}
+            borderColor={emailBorder}
           />
 
           <TextInput
@@ -114,16 +143,24 @@ const Signin = ({ navigation }) => {
             label={'password'}
             style={{ fontSize: 18 }}
             onChangeText={text => {
-              setPassword(text);
-              setPasswordError(' ');
+              selectFillPassword(text);
             }}
             value={password}
             helperText={passwordError}
             iconVisible={true}
             secureTextEntry={focus === undefined ? true : focus}
             secureTextEntryChange={selectFocus}
+            iconVisibleFill={true}
+            checkRight={true}
+            circleFill={circleFillPassword}
+            onTouchStart={() => handleTouchpasswordBorder()}
+            borderColor={passwordBorder}
           />
-          <Text style={styles.contentText}>forgot your password? </Text>
+          <Text
+            style={styles.contentText}
+            onPress={() => navigation.navigate('ForgotPassword')}>
+            forgot your password?{' '}
+          </Text>
           <CheckBox
             onPressCheckbox={selectCheckBox}
             style={styles.checkBox}
@@ -175,6 +212,7 @@ const Signin = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: Color.BASE_COLOR_WHITE,
   },
 
   headerView: {

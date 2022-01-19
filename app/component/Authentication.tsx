@@ -40,7 +40,8 @@ const Authentication = ({ text, icon, type }: Props) => {
 
     try{
       GoogleSignin.signIn().then((userInfo) => {
-        console.log(JSON.stringify(userInfo))
+        console.log(JSON.stringify(userInfo));
+        Alert.alert(userInfo.user.givenName, userInfo.user.email);
       }).catch((e) => {
         console.log("ERROR IS: " + JSON.stringify(e));
       })
@@ -49,7 +50,7 @@ const Authentication = ({ text, icon, type }: Props) => {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         Alert.alert('User Cancelled the Login Flow')
       } else {
-        Alert.alert(error.message)
+        Alert.alert(error)
       }
     }
   };
@@ -140,7 +141,10 @@ const Authentication = ({ text, icon, type }: Props) => {
         appSecret='106c0e7f22c7ec3f820e9522cb33d829'
         redirectUrl='https://www.selfsea.org/'
         scopes={['user_profile', 'user_media']}
-        onLoginSuccess={(data:any) => console.log('Login Success', data)}
+        onLoginSuccess={(data:any) => {
+          console.log('Login Success', data)
+          Alert.alert("User Id", data.user_id+'');
+        }}
         onLoginFailure={(data:any) => console.log('failure',data)}
       />
     </TouchableOpacity>
@@ -169,7 +173,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: Color.BORDER_COLOR_DARKGRAY,
     textAlign: 'center',
-    
+    fontWeight: '600',
   },
 });
 

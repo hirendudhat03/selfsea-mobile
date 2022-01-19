@@ -15,12 +15,11 @@ interface Props {
   type: string;
   text?: string;
   icon?: ImageSourcePropType;
-
-  onPress?: () => void
-
+  disabled?: boolean;
+  onPress?: () => void;
 }
 
-const Button = ({ type, text, icon, onPress, style }: Props) => {
+const Button = ({ type, text, icon, onPress, style, disabled }: Props) => {
   return (
     <TouchableOpacity
       style={
@@ -38,6 +37,7 @@ const Button = ({ type, text, icon, onPress, style }: Props) => {
           ? styles.selfseaSendView
           : null
       }
+      disabled={disabled}
       onPress={onPress}>
       {icon !== undefined ? (
         <Image style={styles.selfseaSendImage} source={icon} />
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
   primaryText: {
     fontFamily: Font.CALIBRE,
     fontSize: 18,
-    fontWeight: '500',
+    fontWeight: '600',
     fontStyle: 'normal',
     lineHeight: 21,
     letterSpacing: 0,
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
   closeButtonText: {
     fontFamily: Font.CALIBRE,
     fontSize: 18,
-    fontWeight: '500',
+    fontWeight: '600',
     fontStyle: 'normal',
     lineHeight: 21,
     letterSpacing: 0,
