@@ -12,14 +12,15 @@ export function* loginSaga(action) {
       const response = await auth().signInWithEmailAndPassword(email, password);
       console.log('response', response);
       // yield put(LoginAction.LoginResponse(response));
-      await auth().onAuthStateChanged(user => {
-        if (user) {
-          console.log(user.email);
-        } else {
-          console.log('not verified');
-        }
-      });
-      action.navigation.navigate('DrawerNavigator');
+
+      // await auth().onAuthStateChanged(user => {
+      if (response.user.emailVerified) {
+        console.log(response.user.email);
+        action.navigation.navigate('DrawerNavigator');
+      } else {
+        console.log('please check your verification email');
+      }
+      // });
       return response;
     } catch (e) {
       if (e.code === 'auth/email-already-in-use') {

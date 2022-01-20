@@ -1,5 +1,6 @@
 import auth from '@react-native-firebase/auth';
 import { api } from '../../services';
+// import * as SignupAction from '../actions/SignupAction';
 import { call } from 'redux-saga/effects';
 import { createUserMutation } from '../../graphql/mutations/UserMutation';
 
@@ -16,9 +17,11 @@ export function* signupSaga(action) {
     try {
       const response = await auth().createUserWithEmailAndPassword(
         email,
+        console.log(email),
         Password,
+        console.log(Password),
       );
-      // console.log('response', response);
+      console.log('response', response);
       // send verification mail.
       await response.user.sendEmailVerification();
       // return true
@@ -35,9 +38,11 @@ export function* signupSaga(action) {
       };
       const data = await api.client.request(
         createUserMutation,
+        console.log('createUserMutation', createUserMutation),
         mutationVariables,
+        console.log('mutation variable', mutationVariables),
       );
-      console.log({ data });
+      console.log('data', data);
 
       return response;
     } catch (e) {
@@ -63,6 +68,7 @@ export function* signupSaga(action) {
     action.birthYear,
     action.userName,
   );
+
   console.warn('response saga', response);
   // yield put(SignupAction.SignupResponse(response));
   // action.navigation.navigate('CreateProfile');

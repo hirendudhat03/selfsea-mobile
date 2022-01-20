@@ -5,8 +5,8 @@ export const createUserMutation = gql`
     $email: String!
     $password: String!
     $authId: String!
-    $birthMonth: String!
-    $birthYear: String!
+    $birthMonth: Month!
+    $birthYear: Float!
     $username: String!
   ) {
     createUser(
