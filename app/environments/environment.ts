@@ -3,7 +3,8 @@ import { staging } from './environment.staging';
 
 const development = {
   production: false,
-  graphqlBaseUrl: 'http://localhost:1443/graphql',
+  graphqlBaseUrl:
+    'http://selfseastagingapi-env.eba-zspdnj8e.us-west-2.elasticbeanstalk.com/graphql',
   graphqlTimeoutMs: 10000,
 };
 
