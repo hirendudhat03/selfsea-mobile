@@ -19,7 +19,7 @@ const stackNavigator = () => {
   return (
     //initRoute && (
 
-    <Stack.Navigator initialRouteName="CreateProfile">
+    <Stack.Navigator initialRouteName="Login">
       <Stack.Screen
         name="Home"
         component={Home}
