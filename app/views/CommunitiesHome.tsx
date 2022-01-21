@@ -52,7 +52,7 @@ const CommunitiesHome = ({ navigation }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    changeModalVisibility(false);
+    changeModalVisibility(true);
   }, []);
 
   const [isModalVisible, setIsMoalVisiable] = useState(false);
@@ -110,7 +110,8 @@ const CommunitiesHome = ({ navigation }) => {
             "in order to participate in selfsea's communities, you must agree to the following."
           }
           descriptionData={descriptionData}
-          numberOfLines={3}
+          style={styles.descriptionTextStyle}
+          numberOfLines={4}
           button={Constant.buttons.PRIMARY}
           text={'I agree to the terms of use'}
         />
@@ -183,6 +184,9 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 16,
     paddingVertical: 4,
     paddingHorizontal: 10,
+  },
+  descriptionTextStyle: {
+    textAlign: 'left',
   },
 });
 

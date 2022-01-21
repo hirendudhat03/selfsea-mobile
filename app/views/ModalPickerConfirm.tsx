@@ -17,6 +17,7 @@ interface Props {
   text: string;
   descriptionData: [];
   numberOfLines: number;
+  style?: {};
 }
 
 const ModalPicker = ({
@@ -30,6 +31,7 @@ const ModalPicker = ({
   text,
   descriptionData,
   numberOfLines,
+  style,
 }: Props) => {
   return (
     <>
@@ -77,7 +79,7 @@ const ModalPicker = ({
             {descriptionData.map(item => {
               return (
                 <Text
-                  style={styles.descriptionText}
+                  style={[styles.descriptionText, style]}
                   numberOfLines={numberOfLines}
                   ellipsizeMode="middle">
                   {item.title}
@@ -111,7 +113,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     height: 'auto',
     width: width,
-    padding: 15,
+    padding: 19,
   },
   modalSuccess: {
     backgroundColor: Color.BASE_COLOR_WHITE,

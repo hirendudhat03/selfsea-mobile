@@ -170,7 +170,7 @@ const Signup = ({ navigation }) => {
     } else {
       setUserNameBorder(Color.BORDER_COLOR_LIGHTGRAY);
       setUserNameError(' ');
-      setUserNameError(text.length + '/20');
+      // setUserNameError(text.length + '/20');
       setCircleFillUser(true);
     }
   };
@@ -374,24 +374,22 @@ const Signup = ({ navigation }) => {
                 <Image source={Images.Infocircle} style={styles.infoIcon} />
               </TouchableOpacity>
             </View>
-            <View style={styles.yearText}>
-              <Text style={styles.birthMonthText}>birth year</Text>
+            <View style={styles.yearView}>
+              <Text style={styles.birthYearText}>birth year</Text>
             </View>
           </View>
           <View style={styles.monthViewBottom}>
-            <View style={styles.rowView}>
-              <Dropdown
-                optionList={month}
-                onSelect={value => {
-                  selectFillmonth(value);
-                }}
-                defaultButtonText={'select one'}
-                icon={Images.DropdownIcon}
-                helperText={birthMonthError}
-                value={birthMonth}
-                style={{ width: width * 0.48 }}
-              />
-            </View>
+            <Dropdown
+              optionList={month}
+              onSelect={value => {
+                selectFillmonth(value);
+              }}
+              defaultButtonText={'select one'}
+              icon={Images.DropdownIcon}
+              helperText={birthMonthError}
+              value={birthMonth}
+              style={{ width: width * 0.48 }}
+            />
             <View style={styles.yearDropdown}>
               <Dropdown
                 optionList={years}
@@ -415,7 +413,7 @@ const Signup = ({ navigation }) => {
             <TouchableOpacity
               style={styles.touchableStyle}
               onPress={() => changeModalVisibility(true)}>
-              <Image source={Images.Infocircle} style={styles.iconStyle} />
+              <Image source={Images.Infocircle} style={styles.infoIcon} />
             </TouchableOpacity>
           </View>
           <TextInput
@@ -493,7 +491,7 @@ const Signup = ({ navigation }) => {
         <ModalPicker
           changeModalVisibility={changeBirthVisibility}
           type={Constant.modal.MODAL}
-          textTitle={'selfsea birthnames'}
+          textTitle={'selfsea birth month'}
           // smallText={'your birthname will need to be approved by a moderator before your first post or comment can be approved. it cannot be changed after that.'}
           descriptionData={birthnData}
           numberOfLines={2}
@@ -523,6 +521,8 @@ const styles = StyleSheet.create({
   infoIcon: {
     alignSelf: 'center',
     marginLeft: 4,
+    width: 19,
+    height: 19,
   },
 
   bottomView: {
@@ -546,12 +546,13 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   monthView: {
+    width: '90%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'flex-start',
     marginHorizontal: 20,
     marginVertical: 3,
-    marginTop: height * 0.017,
+    marginTop: height * 0.02,
   },
   monthViewBottom: {
     flexDirection: 'row',
@@ -561,24 +562,34 @@ const styles = StyleSheet.create({
   },
   rowView: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 4,
   },
-  yearText: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    marginLeft: '25%',
+  yearView: {
+    // flexDirection: 'row',
+    justifyContent: 'center',
+    // marginLeft: '25%',
+    paddingRight: '24%',
   },
   yearDropdown: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     marginLeft: 10,
   },
+  birthYearText: {
+    fontFamily: Font.CALIBRE,
+    fontSize: 18,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    letterSpacing: 0,
+    color: Color.DESCRIPTION_COLOR_TEXT,
+  },
   birthMonthText: {
     fontFamily: Font.CALIBRE,
     fontSize: 18,
     fontWeight: 'normal',
     fontStyle: 'normal',
-    lineHeight: 30,
     letterSpacing: 0,
     color: Color.DESCRIPTION_COLOR_TEXT,
     alignSelf: 'flex-start',
@@ -591,6 +602,8 @@ const styles = StyleSheet.create({
     width: '90%',
     flexDirection: 'row',
     marginTop: height * 0.015,
+    paddingVertical: 7,
+    alignItems: 'center',
   },
   largeInputView: {
     width: '101%',
@@ -617,7 +630,9 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   touchableStyle: {
-    justifyContent: 'center',
+    // justifyContent: 'center',
+    // backgroundColor: 'red',
+    alignSelf: 'center',
   },
   helperText: {
     width: '90%',

@@ -84,6 +84,7 @@ const Login = ({ navigation }) => {
               type={Constant.buttons.CLOSE}
               text={'sign in'}
               onPress={() => navigation.navigate('Signin')}
+              style={styles.signinButton}
             />
           </View>
         </ImageBackground>
@@ -112,10 +113,16 @@ const styles = StyleSheet.create({
     marginTop: -10,
   },
   contentText: {
-    fontSize: 12,
+    // fontSize: 12,
     fontFamily: Fonts.CALIBRE,
-    color: Color.BORDER_COLOR_DARKGRAY,
-    marginTop: 15,
+    marginTop: 7,
+    fontSize: 14,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 21,
+    letterSpacing: 0,
+    textAlign: 'center',
+    color: Color.PLACEHOLDER_TEXT,
   },
   contentSecondText: {
     fontFamily: Fonts.CALIBRE,
@@ -142,6 +149,15 @@ const styles = StyleSheet.create({
     marginVertical: 9,
     fontWeight: 'bold',
     color: Color.DESCRIPTION_COLOR_TEXT,
+  },
+  signinButton: {
+    shadowColor: 'rgba(0, 0, 0, 0.24)',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowRadius: 1,
+    shadowOpacity: 1,
   },
 });
 

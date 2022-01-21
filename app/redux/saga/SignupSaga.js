@@ -1,6 +1,5 @@
 import auth from '@react-native-firebase/auth';
 import { api } from '../../services';
-// import * as SignupAction from '../actions/SignupAction';
 import { call } from 'redux-saga/effects';
 import { createUserMutation } from '../../graphql/mutations/UserMutation';
 
@@ -9,9 +8,7 @@ export function* signupSaga(action) {
     try {
       const response = await auth().createUserWithEmailAndPassword(
         email,
-        console.log(email),
         Password,
-        console.log(Password),
       );
 
       await response.user.sendEmailVerification();
@@ -25,11 +22,9 @@ export function* signupSaga(action) {
       };
       const data = await api.client.request(
         createUserMutation,
-        console.log('createUserMutation', createUserMutation),
         mutationVariables,
-        console.log('mutation variable', mutationVariables),
       );
-
+      action.navigation.navigate('Signin');
       return { ...data, ...response };
     } catch (e) {
       if (e.code === 'auth/email-already-in-use') {

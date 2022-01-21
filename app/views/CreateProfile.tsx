@@ -34,14 +34,7 @@ const countries = ['visible to everyone', 'visible only to mentors'];
 const descriptionData = [
   {
     title:
-      'visible to everyone means all other users can see your profile fields and post history.',
-  },
-  {
-    title:
-      'visible only to mentors means only our trained mentors can see your profile fields and post history.',
-  },
-  {
-    title: 'no one will be able to see your email address!',
+      'visible to everyone means all other users can see your profile fields and post history. visible only to mentors means only our trained mentors can see your profile fields and post history.no one will be able to see your email address!',
   },
 ];
 
@@ -229,6 +222,40 @@ const CreateProfile = ({ navigation }) => {
   ]);
   const [selectLocationDropDown, setSelectLocationDropDown] = useState([]);
 
+  const removeAllPronouns = () => {
+    var temp = selectPronounsDropDown;
+    setSelectPronounsDropDown([]);
+
+    setPronounsDropDown([...temp, ...pronounsDropDown]);
+  };
+  const removeAllOrientation = () => {
+    var temp = selectOrientationDropDown;
+    setSelectOrientationDropDown([]);
+
+    setOrientationDropDown([...temp, ...orientationDropDown]);
+  };
+
+  const removeAllGender = () => {
+    var temp = selectGenderDropDown;
+    setSelectGenderDropDown([]);
+
+    setGenderDropDown([...temp, ...genderDropDown]);
+  };
+
+  const removeAllRace = () => {
+    var temp = selectRaceDropDown;
+    setSelectRaceDropDown([]);
+
+    setRaceDropDown([...temp, ...raceDropDown]);
+  };
+
+  const removeAllLocation = () => {
+    var temp = selectLocationDropDown;
+    setSelectLocationDropDown([]);
+
+    setLocationDropDown([...temp, ...locationDropDown]);
+  };
+
   const locationDropDownItem = (item, val) => {
     setLocation('');
 
@@ -266,7 +293,7 @@ const CreateProfile = ({ navigation }) => {
           <View style={{ width: '90%', alignSelf: 'center', padding: 0 }}>
             <Text
               style={styles.descriptionText}
-              numberOfLines={4}
+              numberOfLines={5}
               ellipsizeMode="middle">
               we can't wait for you to join our community! if you want to tell
               others about yourself, you can add optional details below. no one
@@ -320,12 +347,16 @@ const CreateProfile = ({ navigation }) => {
               <View style={styles.imageView}>
                 <TouchableOpacity
                   onPress={() =>
-                    pronouns !== '' ? setPronouns('') : setPronouns(' ')
+                    selectPronounsDropDown.length !== 0
+                      ? removeAllPronouns()
+                      : setPronouns(' ')
                   }
                   style={styles.touchableStyle}>
                   <Image
                     source={
-                      pronouns !== '' ? Images.xCircle : Images.plusCircle
+                      selectPronounsDropDown.length !== 0
+                        ? Images.xCircle
+                        : Images.plusCircle
                     }
                     style={styles.passwordIcon}
                   />
@@ -374,14 +405,16 @@ const CreateProfile = ({ navigation }) => {
               <View style={styles.imageView}>
                 <TouchableOpacity
                   onPress={() =>
-                    orientation !== ''
-                      ? setOrientation('')
+                    selectOrientationDropDown.length !== 0
+                      ? removeAllOrientation()
                       : setOrientation(' ')
                   }
                   style={styles.touchableStyle}>
                   <Image
                     source={
-                      orientation !== '' ? Images.xCircle : Images.plusCircle
+                      selectOrientationDropDown.length !== 0
+                        ? Images.xCircle
+                        : Images.plusCircle
                     }
                     style={styles.passwordIcon}
                   />
@@ -438,11 +471,17 @@ const CreateProfile = ({ navigation }) => {
               <View style={styles.imageView}>
                 <TouchableOpacity
                   onPress={() =>
-                    gender !== '' ? setGender('') : setGender(' ')
+                    selectGenderDropDown.length !== 0
+                      ? removeAllGender()
+                      : setGender(' ')
                   }
                   style={styles.touchableStyle}>
                   <Image
-                    source={gender !== '' ? Images.xCircle : Images.plusCircle}
+                    source={
+                      selectGenderDropDown.length !== 0
+                        ? Images.xCircle
+                        : Images.plusCircle
+                    }
                     style={styles.passwordIcon}
                   />
                 </TouchableOpacity>
@@ -489,10 +528,18 @@ const CreateProfile = ({ navigation }) => {
               </View>
               <View style={styles.imageView}>
                 <TouchableOpacity
-                  onPress={() => (race !== '' ? setRace('') : setRace(' '))}
+                  onPress={() =>
+                    selectRaceDropDown.length !== 0
+                      ? removeAllRace()
+                      : setRace(' ')
+                  }
                   style={styles.touchableStyle}>
                   <Image
-                    source={race !== '' ? Images.xCircle : Images.plusCircle}
+                    source={
+                      selectRaceDropDown.length !== 0
+                        ? Images.xCircle
+                        : Images.plusCircle
+                    }
                     style={styles.passwordIcon}
                   />
                 </TouchableOpacity>
@@ -548,12 +595,16 @@ const CreateProfile = ({ navigation }) => {
               <View style={styles.imageView}>
                 <TouchableOpacity
                   onPress={() =>
-                    location !== '' ? setLocation('') : setLocation(' ')
+                    selectLocationDropDown.length !== 0
+                      ? removeAllLocation()
+                      : setLocation(' ')
                   }
                   style={styles.touchableStyle}>
                   <Image
                     source={
-                      location !== '' ? Images.xCircle : Images.plusCircle
+                      selectLocationDropDown.length !== 0
+                        ? Images.xCircle
+                        : Images.plusCircle
                     }
                     style={styles.passwordIcon}
                   />
@@ -598,7 +649,7 @@ const CreateProfile = ({ navigation }) => {
           textTitle={'selfsea Profile Visibility'}
           // smallText={'your Profile Visibility will need to be approved by a moderator before your first post or comment can be approved. it cannot be changed after that.'}
           descriptionData={descriptionData}
-          numberOfLines={2}
+          numberOfLines={0}
           button={Constant.buttons.CLOSE}
           text={'close'}
         />
@@ -620,6 +671,8 @@ const styles = StyleSheet.create({
   infoIcon: {
     alignSelf: 'center',
     marginLeft: 4,
+    height: 19,
+    width: 19,
   },
 
   bottomView: {
@@ -630,7 +683,7 @@ const styles = StyleSheet.create({
   },
   profileText: {
     fontFamily: Font.CALIBRE,
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'normal',
     fontStyle: 'normal',
     lineHeight: 30,
@@ -659,22 +712,28 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     width: '100%',
+    marginVertical: 15,
   },
   rowView: {
+    // flexDirection: 'row',
+    // justifyContent: 'flex-start',
+    width: '90%',
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    paddingBottom: 5,
+    alignItems: 'center',
+    marginTop: '2%',
   },
 
   descriptionText: {
     fontFamily: Font.CALIBRE,
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: 'normal',
     fontStyle: 'normal',
     letterSpacing: 0,
     textAlign: 'center',
     color: Color.DESCRIPTION_COLOR_TEXT,
     // marginHorizontal: '4%',
-    marginVertical: 15,
+    // marginVertical: 15,
   },
 
   touchableStyle: { justifyContent: 'center' },

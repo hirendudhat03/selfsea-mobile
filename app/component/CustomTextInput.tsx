@@ -115,11 +115,11 @@ const CustomTextInput = ({
               <>
                 {iconVisibleFill ? (
                   circleFill ? (
-                    <View style={{ justifyContent: 'center' }}>
+                    <View style={styles.iconView}>
                       <Image source={Images.CheckCircleGreen} />
                     </View>
                   ) : (
-                    <View style={{ justifyContent: 'center' }}>
+                    <View style={styles.iconView}>
                       <Image source={Images.CheckCircle} />
                     </View>
                   )
@@ -144,6 +144,7 @@ const CustomTextInput = ({
 const styles = StyleSheet.create({
   largeInputView: {
     width: '90%',
+    flex: 9,
     height: height * 0.06,
     borderRadius: 4,
     backgroundColor: Color.BASE_COLOR_WHITE,
@@ -152,6 +153,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderColor: Color.BORDER_COLOR_LIGHTGRAY,
+  },
+  iconView: {
+    justifyContent: 'center',
+    flex: 1,
+    alignItems: 'flex-end',
   },
 
   largeTextareaView: {

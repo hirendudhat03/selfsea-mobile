@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   },
   primaryView: {
     width: '90%',
-    padding: 15,
+    padding: 14,
     borderRadius: 4,
     backgroundColor: Color.BASE_COLOR_ORANGE,
     justifyContent: 'center',
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
   },
   closeButtonView: {
     width: '90%',
-    padding: 15,
+    padding: 14,
     borderRadius: 4,
     backgroundColor: Color.BASE_COLOR_WHITE,
     borderStyle: 'solid',
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
   closeButtonText: {
     fontFamily: Font.CALIBRE,
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: '500',
     fontStyle: 'normal',
     lineHeight: 21,
     letterSpacing: 0,
