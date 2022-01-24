@@ -20,7 +20,7 @@ export const api = (() => {
     ...getSdk(client, errorWrapper),
     setAuthHeader: (token: string | null) =>
       token
-        ? client.setHeader('Authorization', `Bearer ${token}`)
+        ? client.setHeader('Authorization', `Bearer ${'AFxQ4_rclHicsKKl7GDw64S0zgKhIT0J0aiNM-gyvOzMaftHWIUDjKbN40aP5c_LZ_3ikm-vqdVv9N5CV0kwVdXJL_17V75_XiIbAB8Gg7U2teov_lXWNiPHwdIKNgrzJxttyu2iZnmvSjzM1OXPMpq1pwHCI8g14gOYx-7ZqKRtOfHHTzb_F4tpgCTj8u9cqT6Rp4hGmVVX8BKdfli3CNMgNzaEh5uJNQ'}`)
         : client.setHeader('Authorization', ''),
   };
 })();

@@ -15,7 +15,7 @@ export function* loginSaga(action) {
 
       auth().onAuthStateChanged(user => {
         if (user.emailVerified) {
-          AsyncStorage.getItem('user2').then(value => {
+          AsyncStorage.getItem('user3').then(value => {
             console.log('value:', value);
             if (value === 'true') {
               action.navigation.navigate('DrawerNavigator');

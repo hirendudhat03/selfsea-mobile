@@ -22,10 +22,12 @@ import Header from '../component/Header';
 import Dropdown from '../component/Dropdown';
 import Button from '../component/Button';
 import Badges from '../component/Badges';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 // import TextInput from '../component/CustomTextInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { CreateProfileRequest } from '../redux/actions/CreateProfileAction';
+
+import { createUserQuery } from '../graphql/queries/UserProfile';
+import { api } from '../services';
 
 const height = Dimensions.get('window').height;
 
@@ -37,6 +39,15 @@ const descriptionData = [
       'visible to everyone means all other users can see your profile fields and post history. visible only to mentors means only our trained mentors can see your profile fields and post history.no one will be able to see your email address!',
   },
 ];
+
+const ETHNICITIES_QUERY = `
+query ethnicities{
+  ethnicities{
+    id
+    name
+  }
+}
+`;
 
 const CreateProfile = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -51,6 +62,26 @@ const CreateProfile = ({ navigation }) => {
       ),
     );
   };
+
+  useEffect(() => {
+    const data = api.client.request(createUserQuery);
+    console.log('data::', JSON.stringify(data));
+    // fetch(
+    //   'http://selfseastagingapi-env.eba-zspdnj8e.us-west-2.elasticbeanstalk.com/graphql',
+    //   {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       Authorization: `Bearer
+    //       ${'AFxQ4_rU4l4-cd_OAbTcWD1ev7sibWBpUclkApU5qZIJ3wNx9HdVnNkKLlL7SM6YbS9mw2qpyS_JbATxgW1vPKIqxvOvd6ofKpumtx8SeEEIOxfa27C65KPsjN9XTZHKI18CSJ_m5XeWCVV9R7jMA46MtpqlCNfTvhJr1rj1U_HN1z5r6guJKEXEXZsf3syG6WEpjnvxTpaUwFEeEsb6FCULB2HYsKZm2Q'}`,
+    //     },
+
+    //     body: JSON.stringify({ query: ETHNICITIES_QUERY }),
+    //   },
+    // )
+    //   .then(response => response.json())
+    //   .then(data => console.log(JSON.stringify(data)));
+  }, []);
 
   const signupRes = useSelector(state => state.SignupReducer);
   console.log('signupRes123 : ', JSON.stringify(signupRes));
