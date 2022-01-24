@@ -31,18 +31,18 @@ const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
 
 const month = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
+  'january',
+  'february',
+  'march',
+  'april',
+  'may',
+  'june',
+  'july',
+  'august',
+  'september',
+  'october',
+  'november',
+  'december',
 ];
 
 const descriptionData = [
@@ -130,6 +130,10 @@ const Signup = ({ navigation }) => {
       setEmailBorder(Color.COMMUNITY_ORANGE);
       setEmailError('Please enter a valid email address. ');
       setCircleFillEmail(false);
+    } else if (text.length > 64) {
+      setEmailBorder(Color.COMMUNITY_ORANGE);
+      setEmailError('your email cannot be longer than 64 characters.');
+      setCircleFillEmail(false);
     } else {
       setCircleFillEmail(true);
       setEmailBorder(Color.BORDER_COLOR_LIGHTGRAY);
@@ -147,6 +151,10 @@ const Signup = ({ navigation }) => {
       setpasswordBorder(Color.COMMUNITY_ORANGE);
       setPasswordError('Password must contain a number.');
       setCircleFillPassword(false);
+    } else if (8 > text.length || text.length > 255) {
+      setpasswordBorder(Color.COMMUNITY_ORANGE);
+      setPasswordError('your password must be less than 255 characters.');
+      setCircleFillPassword(false);
     } else {
       setpasswordBorder(Color.BORDER_COLOR_LIGHTGRAY);
       setPasswordError('');
@@ -157,7 +165,6 @@ const Signup = ({ navigation }) => {
   const [circleFillUser, setCircleFillUser] = useState<boolean>();
 
   const selectFillUser = (text: string) => {
-    // global.userNameLength = text.length;
     setUserName(text);
     if (text === '') {
       setUserNameBorder(Color.COMMUNITY_ORANGE);
@@ -478,7 +485,7 @@ const Signup = ({ navigation }) => {
             'your username will need to be approved by a moderator before your first post or comment can be approved. it cannot be changed after that.'
           }
           descriptionData={descriptionData}
-          numberOfLines={2}
+          numberOfLines={3}
           button={Constant.buttons.CLOSE}
           text={'close'}
         />
@@ -494,7 +501,7 @@ const Signup = ({ navigation }) => {
           textTitle={'selfsea birth month'}
           // smallText={'your birthname will need to be approved by a moderator before your first post or comment can be approved. it cannot be changed after that.'}
           descriptionData={birthnData}
-          numberOfLines={2}
+          numberOfLines={3}
           button={Constant.buttons.CLOSE}
           text={'close'}
         />

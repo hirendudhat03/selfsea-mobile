@@ -1,6 +1,6 @@
 import { call } from 'redux-saga/effects';
 import auth from '@react-native-firebase/auth';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export function* loginSaga(action) {
   const Login = async (email, password) => {
     console.log('call loginSaga : ', action);
@@ -15,23 +15,38 @@ export function* loginSaga(action) {
 
       auth().onAuthStateChanged(user => {
         if (user.emailVerified) {
-          action.navigation.navigate('DrawerNavigator');
+          AsyncStorage.getItem('user2').then(value => {
+            console.log('value:', value);
+            if (value === 'true') {
+              action.navigation.navigate('DrawerNavigator');
+            } else {
+              action.navigation.navigate('CreateProfile');
+            }
+          });
+
+          // action.navigation.navigate('CreateProfile');
         } else {
           console.log('not verified');
         }
       });
       return response;
     } catch (e) {
-      if (e.code === 'auth/email-already-in-use') {
-        console.log('That email address is already in use!');
+      if (e.code === 'auth/user-not-found') {
+        console.log('That email address is not found!');
       }
 
       if (e.code === 'auth/invalid-email') {
         console.log('That email address is invalid!');
       }
 
-      console.error(e);
-      console.log(e);
+      if (e.code === 'auth/wrong-password') {
+        console.log(
+          'The password is invalid or the user does not have a password.',
+        );
+      }
+
+      // console.error(e);
+      console.log('e : ', e);
       // alert(e);
     }
   };

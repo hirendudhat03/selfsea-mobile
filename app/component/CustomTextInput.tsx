@@ -225,9 +225,13 @@ const styles = StyleSheet.create({
     fontSize: 17,
     height: height * 0.064,
     width: '90%',
-    // paddingHorizontal: 16,
+    flex: 9,
   },
-  touchableStyle: { justifyContent: 'center', marginLeft: -20 },
+  touchableStyle: {
+    justifyContent: 'center',
+    flex: 1,
+    padding: 5,
+  },
   contentView: {
     width: '90%',
     height: height * 0.064,

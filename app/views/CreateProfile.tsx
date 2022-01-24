@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -22,7 +22,7 @@ import Header from '../component/Header';
 import Dropdown from '../component/Dropdown';
 import Button from '../component/Button';
 import Badges from '../component/Badges';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 // import TextInput from '../component/CustomTextInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { CreateProfileRequest } from '../redux/actions/CreateProfileAction';
@@ -341,7 +341,11 @@ const CreateProfile = ({ navigation }) => {
                       ? ''
                       : 'she/her,he/him/they/them'
                   }
-                  onChangeText={val => setPronouns(val)}
+                  onChangeText={
+                    selectPronounsDropDown.length < 3
+                      ? val => setPronouns(val)
+                      : null
+                  }
                 />
               </View>
               <View style={styles.imageView}>
@@ -399,7 +403,11 @@ const CreateProfile = ({ navigation }) => {
                       ? ''
                       : 'lesbian/gay,bisexual,asexual'
                   }
-                  onChangeText={val => setOrientation(val)}
+                  onChangeText={
+                    selectOrientationDropDown.length < 3
+                      ? val => setOrientation(val)
+                      : null
+                  }
                 />
               </View>
               <View style={styles.imageView}>
@@ -465,7 +473,11 @@ const CreateProfile = ({ navigation }) => {
                       ? ''
                       : 'genderfluid, non-binary, cisgender'
                   }
-                  onChangeText={val => setGender(val)}
+                  onChangeText={
+                    selectGenderDropDown.length < 3
+                      ? val => setGender(val)
+                      : null
+                  }
                 />
               </View>
               <View style={styles.imageView}>
@@ -523,7 +535,9 @@ const CreateProfile = ({ navigation }) => {
                       ? ''
                       : 'asian american, arab, native hawaiian'
                   }
-                  onChangeText={val => setRace(val)}
+                  onChangeText={
+                    selectRaceDropDown.length < 3 ? val => setRace(val) : null
+                  }
                 />
               </View>
               <View style={styles.imageView}>
@@ -589,7 +603,11 @@ const CreateProfile = ({ navigation }) => {
                       ? ''
                       : 'type in a City or State'
                   }
-                  onChangeText={val => setLocation(val)}
+                  onChangeText={
+                    selectLocationDropDown.length < 1
+                      ? val => setLocation(val)
+                      : null
+                  }
                 />
               </View>
               <View style={styles.imageView}>
@@ -634,7 +652,25 @@ const CreateProfile = ({ navigation }) => {
           onPress={() => onPressDispatch()}
           type={Constant.buttons.PRIMARY}
           text={'take me to selfsea'}
-          style={{ marginTop: 15 }}
+          style={[
+            { marginTop: 15 },
+            selectPronounsDropDown.length === 0 ||
+            selectOrientationDropDown.length === 0 ||
+            selectGenderDropDown.length === 0 ||
+            selectRaceDropDown.length === 0 ||
+            selectLocationDropDown.length === 0
+              ? { backgroundColor: Color.BUTTON_DISABLE_COLOR }
+              : { backgroundColor: Color.BASE_COLOR_ORANGE },
+          ]}
+          disabled={
+            selectPronounsDropDown.length === 0 ||
+            selectOrientationDropDown.length === 0 ||
+            selectGenderDropDown.length === 0 ||
+            selectRaceDropDown.length === 0 ||
+            selectLocationDropDown.length === 0
+              ? true
+              : false
+          }
         />
       </View>
 
