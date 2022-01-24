@@ -10,25 +10,28 @@ export function* loginSaga(action) {
 
     try {
       const response = await auth().signInWithEmailAndPassword(email, password);
-      console.log('response', response);
-      // yield put(LoginAction.LoginResponse(response));
-
-      auth().onAuthStateChanged(user => {
-        if (user.emailVerified) {
-          AsyncStorage.getItem('user3').then(value => {
-            console.log('value:', value);
-            if (value === 'true') {
-              action.navigation.navigate('DrawerNavigator');
-            } else {
-              action.navigation.navigate('CreateProfile');
-            }
-          });
-
-          // action.navigation.navigate('CreateProfile');
-        } else {
-          console.log('not verified');
-        }
-      });
+      if (response.user.emailVerified) {
+        action.navigation.navigate('DrawerNavigator');
+        await AsyncStorage.setItem(response.user.idToken);
+      } else {
+        action.navigation.navigate('CreateProfile');
+      }
+      // auth().onAuthStateChanged(user => {
+      //   if (user.emailVerified) {
+      //     AsyncStorage.getItem('user3').then(value => {
+      //       console.log('value:', value);
+      //       if (value === 'true') {
+      //         action.navigation.navigate('DrawerNavigator');
+      //       } else {
+      //         action.navigation.navigate('CreateProfile');
+      //       }
+      //     });
+      //
+      //     // action.navigation.navigate('CreateProfile');
+      //   } else {
+      //     console.log('not verified');
+      //   }
+      // });
       return response;
     } catch (e) {
       if (e.code === 'auth/user-not-found') {
