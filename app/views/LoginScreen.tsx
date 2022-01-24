@@ -149,6 +149,7 @@ const styles = StyleSheet.create({
     width:"100%",
     marginBottom:50
   }
+  
 });
 
 export default Login;
