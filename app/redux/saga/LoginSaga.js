@@ -13,8 +13,6 @@ export function* loginSaga(action) {
       if (response.user.emailVerified) {
         const token = await response.user.getIdToken();
         console.log('token : ', token);
-        await AsyncStorage.setItem('token', token);
-
         AsyncStorage.getItem('user3').then(value => {
           console.log('value:', value);
           if (value === 'true') {
@@ -23,6 +21,7 @@ export function* loginSaga(action) {
             action.navigation.navigate('CreateProfile');
           }
         });
+        await AsyncStorage.setItem('jwtToken', token);
       } else {
         console.log('not verified');
         // action.navigation.navigate('CreateProfile');

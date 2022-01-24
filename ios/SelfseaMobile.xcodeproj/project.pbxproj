@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* SelfseaMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SelfseaMobileTests.m */; };
-		04DF839F27991E84001BEDE6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04DF839E27991E84001BEDE6 /* GoogleService-Info.plist */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -26,6 +25,7 @@
 		4114505027758D82001B5C0E /* Calibre-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B58F4FB7644F44408FA82C53 /* Calibre-SemiboldItalic.otf */; };
 		4114505127758D82001B5C0E /* Calibre-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3C7A708EC99E49C8A3C5E587 /* Calibre-Thin.otf */; };
 		4114505227758D82001B5C0E /* Calibre-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2CFD1BD252DB48199ED3F1FC /* Calibre-ThinItalic.otf */; };
+		41CA1FCB279EB2B10042598E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41CA1FCA279EB2B10042598E /* GoogleService-Info.plist */; };
 		6172F2D35A4C3AA820D92908 /* libPods-SelfseaMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423831EA8574132BED9D8CC /* libPods-SelfseaMobile.a */; };
 		7EF68E3733C33B6898317E18 /* libPods-SelfseaMobile-SelfseaMobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFE59519B596E51CEFDCCC0 /* libPods-SelfseaMobile-SelfseaMobileTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -45,7 +45,6 @@
 		00E356EE1AD99517003FC87E /* SelfseaMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SelfseaMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* SelfseaMobileTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelfseaMobileTests.m; sourceTree = "<group>"; };
-		04DF839E27991E84001BEDE6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "SelfseaMobile/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* SelfseaMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SelfseaMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = SelfseaMobile/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = SelfseaMobile/AppDelegate.m; sourceTree = "<group>"; };
@@ -58,6 +57,7 @@
 		2CFD1BD252DB48199ED3F1FC /* Calibre-ThinItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Calibre-ThinItalic.otf"; path = "../app/assets/fonts/Calibre-ThinItalic.otf"; sourceTree = "<group>"; };
 		37FBC0E50A134CA4A5E80B87 /* Calibre-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Calibre-Light.otf"; path = "../app/assets/fonts/Calibre-Light.otf"; sourceTree = "<group>"; };
 		3C7A708EC99E49C8A3C5E587 /* Calibre-Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Calibre-Thin.otf"; path = "../app/assets/fonts/Calibre-Thin.otf"; sourceTree = "<group>"; };
+		41CA1FCA279EB2B10042598E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4DCE71D9D8CF4E84BF3ACDC7 /* Calibre-Semibold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Calibre-Semibold.otf"; path = "../app/assets/fonts/Calibre-Semibold.otf"; sourceTree = "<group>"; };
 		55C5F16058FF456C8EF46772 /* Calibre-LightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Calibre-LightItalic.otf"; path = "../app/assets/fonts/Calibre-LightItalic.otf"; sourceTree = "<group>"; };
 		6423831EA8574132BED9D8CC /* libPods-SelfseaMobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SelfseaMobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,7 +116,7 @@
 		13B07FAE1A68108700A75B9A /* SelfseaMobile */ = {
 			isa = PBXGroup;
 			children = (
-				04DF839E27991E84001BEDE6 /* GoogleService-Info.plist */,
+				41CA1FCA279EB2B10042598E /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -308,7 +308,7 @@
 				4114504E27758D82001B5C0E /* Calibre-RegularItalic.otf in Resources */,
 				4114504F27758D82001B5C0E /* Calibre-Semibold.otf in Resources */,
 				4114505027758D82001B5C0E /* Calibre-SemiboldItalic.otf in Resources */,
-				04DF839F27991E84001BEDE6 /* GoogleService-Info.plist in Resources */,
+				41CA1FCB279EB2B10042598E /* GoogleService-Info.plist in Resources */,
 				4114505127758D82001B5C0E /* Calibre-Thin.otf in Resources */,
 				4114505227758D82001B5C0E /* Calibre-ThinItalic.otf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
@@ -646,7 +646,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -712,7 +712,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
