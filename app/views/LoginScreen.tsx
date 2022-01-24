@@ -7,7 +7,6 @@ import {
   Image,
   TouchableOpacity,
   Linking,
-  SafeAreaView,
 } from 'react-native';
 
 import Constant from '../theme/constant';
@@ -25,70 +24,68 @@ const onPressText = () => {
 const Login = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <SafeAreaView style={styles.container}>
-        <ImageBackground
-          source={Images.Background}
-          resizeMode="stretch"
-          style={styles.image}>
-          <View style={styles.headerView}>
-            <Image source={Images.Logo} />
-          </View>
-          <View style={styles.contentView}>
-            <Auth
-              text={'continue with Google'}
-              icon={Images.Google}
-              type={Constant.authLogin.GOOGLE}
-            />
-            <Auth
-              text={'continue with Instagram'}
-              icon={Images.Instagram}
-              type={Constant.authLogin.INSTAGRAM}
-            />
-            <Auth
-              text={'continue with Apple'}
-              icon={Images.Apple}
-              type={Constant.authLogin.APPLE}
-            />
+      <ImageBackground
+        source={Images.Background}
+        resizeMode="stretch"
+        style={styles.image}>
+        <View style={styles.headerView}>
+          <Image source={Images.Logo} />
+        </View>
+        <View style={styles.contentView}>
+          <Auth
+            text={'continue with Google'}
+            icon={Images.Google}
+            type={Constant.authLogin.GOOGLE}
+          />
+          <Auth
+            text={'continue with Instagram'}
+            icon={Images.Instagram}
+            type={Constant.authLogin.INSTAGRAM}
+          />
+          <Auth
+            text={'continue with Apple'}
+            icon={Images.Apple}
+            type={Constant.authLogin.APPLE}
+          />
 
-            <Button
-              type={Constant.buttons.PRIMARY}
-              text={'sign up with email'}
-              style={{ marginTop: 8 }}
-              onPress={() => navigation.navigate('Signup')}
-            />
+          <Button
+            type={Constant.buttons.PRIMARY}
+            text={'sign up with email'}
+            style={{ marginTop: 8 }}
+            onPress={() => navigation.navigate('Signup')}
+          />
 
-            <Text style={styles.contentText}>
-              by signing up for selfsea, you are agreeing to the
-            </Text>
-            <View style={{ flexDirection: 'row' }}>
-              <TouchableOpacity
-                onPress={() => {
-                  Linking.openURL(Constant.link.PRIVACY_POLICY);
-                }}>
-                <Text style={styles.contentSecondText}>Privacy Policy</Text>
-              </TouchableOpacity>
-              <Text style={styles.contentSecondTextAnd}> and</Text>
-              <TouchableOpacity
-                onPress={() => {
-                  Linking.openURL(Constant.link.TERMS_OF_USE);
-                }}>
-                <Text style={styles.contentSecondText}> Terms of Use</Text>
-              </TouchableOpacity>
-            </View>
+          <Text style={styles.contentText}>
+            by signing up for selfsea, you are agreeing to the
+          </Text>
+          <View style={{ flexDirection: 'row' }}>
+            <TouchableOpacity
+              onPress={() => {
+                Linking.openURL(Constant.link.PRIVACY_POLICY);
+              }}>
+              <Text style={styles.contentSecondText}>Privacy Policy</Text>
+            </TouchableOpacity>
+            <Text style={styles.contentSecondTextAnd}> and</Text>
+            <TouchableOpacity
+              onPress={() => {
+                Linking.openURL(Constant.link.TERMS_OF_USE);
+              }}>
+              <Text style={styles.contentSecondText}> Terms of Use</Text>
+            </TouchableOpacity>
           </View>
-          <View style={styles.bottomView}>
-            <Text style={styles.bottomText} onPress={() => onPressText()}>
-              already have an account?
-            </Text>
-            <Button
-              type={Constant.buttons.CLOSE}
-              text={'sign in'}
-              onPress={() => navigation.navigate('Signin')}
-              style={styles.signinButton}
-            />
-          </View>
-        </ImageBackground>
-      </SafeAreaView>
+        </View>
+        <View style={styles.bottomView}>
+          <Text style={styles.bottomText} onPress={() => onPressText()}>
+            already have an account?
+          </Text>
+          <Button
+            type={Constant.buttons.CLOSE}
+            text={'sign in'}
+            onPress={() => navigation.navigate('Signin')}
+            style={styles.signinButton}
+          />
+        </View>
+      </ImageBackground>
     </View>
   );
 };
