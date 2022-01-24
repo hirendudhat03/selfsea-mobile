@@ -1,25 +1,22 @@
-/* Login Reducer
- * handles login states in the app
- */
 import CreateReducer from './CreateReducer';
 
 const initialState = {
   data: null,
 };
 
-console.log('call loginReducer');
+console.log('call PronounsReducer');
 
-export const LoginReducer = CreateReducer(initialState, {
-  ['LOGIN_RESPONSE'](state, action) {
-    console.log('call LOGIN_RESPONSE');
+export const PronounsReducer = CreateReducer(initialState, {
+  ['PRONOUNS_RESPONSE'](state, action) {
+    console.log('call PRONOUNS_RESPONSE');
     console.log('state : ', state);
     console.log('action : ', action);
     return {
       data: action.payload,
     };
   },
-  ['LOGIN_REQUEST'](state, action) {
-    console.log('call LOGIN_REQUEST');
+  ['PRONOUNS_REQUEST'](state, action) {
+    console.log('call PRONOUNS_REQUEST');
     console.log('state : ', state);
     console.log('action : ', action);
     return {

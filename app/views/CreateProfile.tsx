@@ -26,8 +26,10 @@ import Badges from '../component/Badges';
 import { useDispatch, useSelector } from 'react-redux';
 import { CreateProfileRequest } from '../redux/actions/CreateProfileAction';
 
-import { createUserQuery } from '../graphql/queries/UserProfile';
-import { api } from '../services';
+import { ProunounsRequest } from '../redux/actions/PronounsAction';
+
+// import { createUserQuery } from '../graphql/queries/UserProfile';
+// import { api } from '../services';
 
 const height = Dimensions.get('window').height;
 
@@ -39,15 +41,6 @@ const descriptionData = [
       'visible to everyone means all other users can see your profile fields and post history. visible only to mentors means only our trained mentors can see your profile fields and post history.no one will be able to see your email address!',
   },
 ];
-
-const ETHNICITIES_QUERY = `
-query ethnicities{
-  ethnicities{
-    id
-    name
-  }
-}
-`;
 
 const CreateProfile = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -63,22 +56,12 @@ const CreateProfile = ({ navigation }) => {
     );
   };
 
+  const pronounsResponse = useSelector(state => state.PronounsReducer);
+
   useEffect(() => {
-    const data = api.client.request(createUserQuery);
-    console.log('data::', JSON.stringify(data));
-    // fetch(
-    //   'http://selfseastagingapi-env.eba-zspdnj8e.us-west-2.elasticbeanstalk.com/graphql',
-    //   {
-    //     method: 'POST',
-    //     headers: {
-    //       Authorization:
-    //         'Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjNhYTE0OGNkMDcyOGUzMDNkMzI2ZGU1NjBhMzVmYjFiYTMyYTUxNDkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vc2VsZnNlYS1kZXYiLCJhdWQiOiJzZWxmc2VhLWRldiIsImF1dGhfdGltZSI6MTY0MzAxOTI1NiwidXNlcl9pZCI6InI1N3BYSUFQN3FSU0c4Wk1uZ2w4eGxXNlhSYjIiLCJzdWIiOiJyNTdwWElBUDdxUlNHOFpNbmdsOHhsVzZYUmIyIiwiaWF0IjoxNjQzMDE5MjU2LCJleHAiOjE2NDMwMjI4NTYsImVtYWlsIjoiamF5LnBvb2phcmFAdGVjaG5vaWRlbnRpdHkuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsiamF5LnBvb2phcmFAdGVjaG5vaWRlbnRpdHkuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.hJneDn9s0m0sSpDy1kldT8zD9XG6zs4mGKAb8ou4BNq9p1IYDuhkLPWaq0FOEYAhiWMUoGQME9JjdEhqOwU35BrxHShtTi9bgk8XVbT9cuZwe2ccFEMO4tTZRPz2HsyUZ2tai2YUGxlABIGa_4BVfV0mHoUJBupeRpxF6boul3D5tgRa7v9nYnm7yZo6ECrJWChF7gFG5PNLXZpRwoJoutEkVnwVx4UOxva48ZkD7KHEdoKzxK_TYtjQfPBs5smPepfKGnZ8qQqJLapXXqUf25Zdk_76gpK34yGqnWTwGGZ_jE2wCQrAKktg1UMVk7Ld1MyyustpxGqisECs2BIWGg',
-    //     },
-    //     body: JSON.stringify({ query: ETHNICITIES_QUERY }),
-    //   },
-    // )
-    //   .then(response => response.json())
-    //   .then(data => console.log('Res_Data', JSON.stringify(data)));
+    // setPronounsDropDown(pronounsResponse);
+    dispatch(ProunounsRequest());
+    console.log('ProunounsResponse : ', JSON.stringify(pronounsResponse));
   }, []);
 
   const signupRes = useSelector(state => state.SignupReducer);
