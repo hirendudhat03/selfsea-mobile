@@ -37,6 +37,7 @@ interface Props {
   onTouchEnd?: () => void;
   defaultValue: string;
   text: string;
+  maxLength: number;
 }
 
 const CustomTextInput = ({
@@ -60,6 +61,7 @@ const CustomTextInput = ({
   onTouchEnd,
   defaultValue,
   text,
+  maxLength,
 }: Props) => {
   return (
     <>
@@ -83,6 +85,7 @@ const CustomTextInput = ({
                 <Text style={styles.textStyle}>{text}</Text>
               ) : null}
               <TextInput
+                maxLength={maxLength}
                 style={[styles.textInputStyle, textInputstyle]}
                 placeholder={placeholder}
                 onChangeText={onChangeText}
@@ -135,7 +138,11 @@ const CustomTextInput = ({
       ) : null}
 
       {type === Constant.textInput.LARGE_TEXT_AREA ? (
-        <TextInput style={styles.largeTextareaView} placeholder={placeholder} />
+        <TextInput
+          style={styles.largeTextareaView}
+          placeholder={placeholder}
+          maxLength={maxLength}
+        />
       ) : null}
     </>
   );

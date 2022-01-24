@@ -154,11 +154,11 @@ const Signup = ({ navigation }) => {
     } else if (8 > text.length || text.length > 255) {
       setpasswordBorder(Color.COMMUNITY_ORANGE);
       setPasswordError('your password must be less than 255 characters.');
-      setCircleFillPassword(false);
+      // setCircleFillPassword(false);
     } else {
       setpasswordBorder(Color.BORDER_COLOR_LIGHTGRAY);
       setPasswordError('');
-      setCircleFillPassword(true);
+      // setCircleFillPassword(true);
     }
   };
 
@@ -177,7 +177,7 @@ const Signup = ({ navigation }) => {
     } else {
       setUserNameBorder(Color.BORDER_COLOR_LIGHTGRAY);
       setUserNameError(' ');
-      // setUserNameError(text.length + '/20');
+      setUserNameError(text.length + '/20');
       setCircleFillUser(true);
     }
   };
@@ -308,6 +308,7 @@ const Signup = ({ navigation }) => {
       <ScrollView>
         <View style={styles.contentView}>
           <TextInput
+            maxLength={64}
             type={Constant.textInput.LARGE_INPUT}
             placeholder={'email@address.com'}
             label={'email'}
@@ -333,6 +334,7 @@ const Signup = ({ navigation }) => {
               const response = zxcvbn(text);
               setPasswordScore(response.score);
               setPasswordError(response.feedback.suggestions);
+              setCircleFillPassword(response.score >= 3);
             }}
             value={Password}
             helperText={PasswordError}
@@ -424,6 +426,7 @@ const Signup = ({ navigation }) => {
             </TouchableOpacity>
           </View>
           <TextInput
+            maxLength={20}
             value={userName}
             type={Constant.textInput.LARGE_INPUT}
             text={'@'}
@@ -463,6 +466,7 @@ const Signup = ({ navigation }) => {
           ]}
           onPress={() => SignupValidation()}
           disabled={
+            passwordScore < 3 ||
             circleFillEmail !== true ||
             circleFillPassword !== true ||
             circleFillBirth !== true ||
