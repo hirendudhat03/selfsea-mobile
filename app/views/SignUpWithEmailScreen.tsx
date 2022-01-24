@@ -31,18 +31,18 @@ const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
 
 const month = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
+  'january',
+  'february',
+  'march',
+  'april',
+  'may',
+  'june',
+  'july',
+  'august',
+  'september',
+  'october',
+  'november',
+  'december',
 ];
 
 const descriptionData = [
@@ -75,17 +75,12 @@ const birthnData = [
 const Signup = ({ navigation }) => {
   const dispatch = useDispatch();
 
-  const [years, setYear] = useState([]);
+  const [years, setYear] = useState<number[]>([]);
 
   useEffect(() => {
-    var year = [];
-
-    var currentYear = new Date().getFullYear(),
-      year = [];
-    var startYear = startYear || 1900;
-
-    console.log('currentYear : ', currentYear);
-    console.log('startYear : ', startYear);
+    let year = [];
+    let currentYear = new Date().getFullYear();
+    let startYear = 1900;
 
     while (currentYear >= startYear) {
       year.push(currentYear--);
@@ -95,20 +90,20 @@ const Signup = ({ navigation }) => {
     console.log('year::', year);
   }, []);
 
-  const [email, setEmail] = useState(null);
+  const [email, setEmail] = useState<string>('');
   const [emailError, setEmailError] = useState('');
 
-  const [Password, setPassword] = useState('');
-  const [PasswordError, setPasswordError] = useState('');
+  const [Password, setPassword] = useState<string>('');
+  const [PasswordError, setPasswordError] = useState<string>('');
 
-  const [userName, setUserName] = useState(null);
-  const [userNameError, setUserNameError] = useState('0/20');
+  const [userName, setUserName] = useState<string>('');
+  const [userNameError, setUserNameError] = useState<string>('0/20');
 
-  const [birthMonth, setBirthMonth] = useState('');
-  const [birthMonthError, setBirthMonthError] = useState('');
+  const [birthMonth, setBirthMonth] = useState<string>('');
+  const [birthMonthError, setBirthMonthError] = useState<string>('');
 
-  const [birthYear, setBirthYear] = useState('');
-  const [birthYearError, setBirthYearError] = useState('');
+  const [birthYear, setBirthYear] = useState<string>('');
+  const [birthYearError, setBirthYearError] = useState<string>('');
 
   const [passwordScore, setPasswordScore] = useState<0 | 1 | 2 | 3 | 4>(0);
 
@@ -123,7 +118,7 @@ const Signup = ({ navigation }) => {
 
   const [circleFillEmail, setCircleFillEmail] = useState<boolean>();
 
-  const selectFill = text => {
+  const selectFill = (text: string) => {
     setEmail(text);
     if (text === '') {
       setCircleFillEmail(false);
@@ -135,6 +130,10 @@ const Signup = ({ navigation }) => {
       setEmailBorder(Color.COMMUNITY_ORANGE);
       setEmailError('Please enter a valid email address. ');
       setCircleFillEmail(false);
+    } else if (text.length > 64) {
+      setEmailBorder(Color.COMMUNITY_ORANGE);
+      setEmailError('your email cannot be longer than 64 characters.');
+      setCircleFillEmail(false);
     } else {
       setCircleFillEmail(true);
       setEmailBorder(Color.BORDER_COLOR_LIGHTGRAY);
@@ -144,7 +143,7 @@ const Signup = ({ navigation }) => {
 
   const [circleFillPassword, setCircleFillPassword] = useState<boolean>();
 
-  const selectFillPassword = text => {
+  const selectFillPassword = (text: string) => {
     console.log('text:::', text);
 
     setPassword(text);
@@ -152,18 +151,20 @@ const Signup = ({ navigation }) => {
       setpasswordBorder(Color.COMMUNITY_ORANGE);
       setPasswordError('Password must contain a number.');
       setCircleFillPassword(false);
+    } else if (8 > text.length || text.length > 255) {
+      setpasswordBorder(Color.COMMUNITY_ORANGE);
+      setPasswordError('your password must be less than 255 characters.');
+      // setCircleFillPassword(false);
     } else {
       setpasswordBorder(Color.BORDER_COLOR_LIGHTGRAY);
       setPasswordError('');
-      setCircleFillPassword(true);
+      // setCircleFillPassword(true);
     }
   };
 
   const [circleFillUser, setCircleFillUser] = useState<boolean>();
 
-  const selectFillUser = text => {
-    global.userNameLength = text.length;
-    console.log('userNameLength', global.userNameLength);
+  const selectFillUser = (text: string) => {
     setUserName(text);
     if (text === '') {
       setUserNameBorder(Color.COMMUNITY_ORANGE);
@@ -205,6 +206,15 @@ const Signup = ({ navigation }) => {
     }
   };
 
+  // const [suggestions, setSuggestions] = useState('');
+
+  // const selectFocus = () => {
+  //   if (focus) {
+  //     setFocus(false);
+  //   } else {
+  //     setFocus(true);
+  //   }
+  // };
   const [isModalVisible, setIsMoalVisiable] = useState(false);
   const changeModalVisibility = (bool: boolean) => {
     setIsMoalVisiable(bool);
@@ -215,7 +225,7 @@ const Signup = ({ navigation }) => {
     setIsBirthVisiable(bool);
   };
 
-  const SignupValidation = () => {
+  const SignupValidation = (text: string) => {
     if (
       !email &&
       !Password &&
@@ -298,6 +308,7 @@ const Signup = ({ navigation }) => {
       <ScrollView>
         <View style={styles.contentView}>
           <TextInput
+            maxLength={64}
             type={Constant.textInput.LARGE_INPUT}
             placeholder={'email@address.com'}
             label={'email'}
@@ -322,12 +333,13 @@ const Signup = ({ navigation }) => {
               selectFillPassword(text);
               const response = zxcvbn(text);
               setPasswordScore(response.score);
-              // console.log({ response });
+              setPasswordError(response.feedback.suggestions);
+              setCircleFillPassword(response.score >= 3);
             }}
             value={Password}
             helperText={PasswordError}
             iconVisible={true}
-            secureTextEntry={focus === true ? true : focus}
+            secureTextEntry={focus !== true ? focus : true}
             secureTextEntryChange={selectFocus}
             iconVisibleFill={true}
             checkRight={true}
@@ -371,24 +383,22 @@ const Signup = ({ navigation }) => {
                 <Image source={Images.Infocircle} style={styles.infoIcon} />
               </TouchableOpacity>
             </View>
-            <View style={styles.yearText}>
-              <Text style={styles.birthMonthText}>birth year</Text>
+            <View style={styles.yearView}>
+              <Text style={styles.birthYearText}>birth year</Text>
             </View>
           </View>
           <View style={styles.monthViewBottom}>
-            <View style={styles.rowView}>
-              <Dropdown
-                optionList={month}
-                onSelect={value => {
-                  selectFillmonth(value);
-                }}
-                defaultButtonText={'select one'}
-                icon={Images.DropdownIcon}
-                helperText={birthMonthError}
-                value={birthMonth}
-                style={{ width: width * 0.48 }}
-              />
-            </View>
+            <Dropdown
+              optionList={month}
+              onSelect={value => {
+                selectFillmonth(value);
+              }}
+              defaultButtonText={'select one'}
+              icon={Images.DropdownIcon}
+              helperText={birthMonthError}
+              value={birthMonth}
+              style={{ width: width * 0.48 }}
+            />
             <View style={styles.yearDropdown}>
               <Dropdown
                 optionList={years}
@@ -412,10 +422,11 @@ const Signup = ({ navigation }) => {
             <TouchableOpacity
               style={styles.touchableStyle}
               onPress={() => changeModalVisibility(true)}>
-              <Image source={Images.Infocircle} style={styles.iconStyle} />
+              <Image source={Images.Infocircle} style={styles.infoIcon} />
             </TouchableOpacity>
           </View>
           <TextInput
+            maxLength={20}
             value={userName}
             type={Constant.textInput.LARGE_INPUT}
             text={'@'}
@@ -423,7 +434,6 @@ const Signup = ({ navigation }) => {
             onChangeText={text => {
               selectFillUser(text);
             }}
-            // helperText={userNameError}
             iconVisibleFill={true}
             checkRight={true}
             circleFill={circleFillUser}
@@ -433,9 +443,9 @@ const Signup = ({ navigation }) => {
           <Text
             style={[
               styles.helperText,
-              global.userNameLength <= 20
-                ? { color: Color.BORDER_COLOR_LIGHTGRAY }
-                : { color: Color.COMMUNITY_ORANGE },
+              userName.length > 20
+                ? { color: Color.COMMUNITY_ORANGE }
+                : { color: Color.BORDER_COLOR_LIGHTGRAY },
             ]}>
             {userNameError}
           </Text>
@@ -456,6 +466,7 @@ const Signup = ({ navigation }) => {
           ]}
           onPress={() => SignupValidation()}
           disabled={
+            passwordScore < 3 ||
             circleFillEmail !== true ||
             circleFillPassword !== true ||
             circleFillBirth !== true ||
@@ -478,7 +489,7 @@ const Signup = ({ navigation }) => {
             'your username will need to be approved by a moderator before your first post or comment can be approved. it cannot be changed after that.'
           }
           descriptionData={descriptionData}
-          numberOfLines={2}
+          numberOfLines={3}
           button={Constant.buttons.CLOSE}
           text={'close'}
         />
@@ -491,10 +502,10 @@ const Signup = ({ navigation }) => {
         <ModalPicker
           changeModalVisibility={changeBirthVisibility}
           type={Constant.modal.MODAL}
-          textTitle={'selfsea birthnames'}
+          textTitle={'selfsea birth month'}
           // smallText={'your birthname will need to be approved by a moderator before your first post or comment can be approved. it cannot be changed after that.'}
           descriptionData={birthnData}
-          numberOfLines={2}
+          numberOfLines={3}
           button={Constant.buttons.CLOSE}
           text={'close'}
         />
@@ -521,6 +532,8 @@ const styles = StyleSheet.create({
   infoIcon: {
     alignSelf: 'center',
     marginLeft: 4,
+    width: 19,
+    height: 19,
   },
 
   bottomView: {
@@ -544,12 +557,13 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   monthView: {
+    width: '90%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'flex-start',
     marginHorizontal: 20,
     marginVertical: 3,
-    marginTop: height * 0.017,
+    marginTop: height * 0.02,
   },
   monthViewBottom: {
     flexDirection: 'row',
@@ -559,24 +573,34 @@ const styles = StyleSheet.create({
   },
   rowView: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 4,
   },
-  yearText: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    marginLeft: '25%',
+  yearView: {
+    // flexDirection: 'row',
+    justifyContent: 'center',
+    // marginLeft: '25%',
+    paddingRight: '24%',
   },
   yearDropdown: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     marginLeft: 10,
   },
+  birthYearText: {
+    fontFamily: Font.CALIBRE,
+    fontSize: 18,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    letterSpacing: 0,
+    color: Color.DESCRIPTION_COLOR_TEXT,
+  },
   birthMonthText: {
     fontFamily: Font.CALIBRE,
     fontSize: 18,
     fontWeight: 'normal',
     fontStyle: 'normal',
-    lineHeight: 30,
     letterSpacing: 0,
     color: Color.DESCRIPTION_COLOR_TEXT,
     alignSelf: 'flex-start',
@@ -589,6 +613,8 @@ const styles = StyleSheet.create({
     width: '90%',
     flexDirection: 'row',
     marginTop: height * 0.015,
+    paddingVertical: 7,
+    alignItems: 'center',
   },
   largeInputView: {
     width: '101%',
@@ -615,17 +641,20 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   touchableStyle: {
-    justifyContent: 'center',
+    // justifyContent: 'center',
+    // backgroundColor: 'red',
+    alignSelf: 'center',
   },
   helperText: {
     width: '90%',
     height: 14,
     fontFamily: Font.CALIBRE,
     fontSize: 12,
-    fontWeight: 'normal',
+    fontWeight: '500',
     fontStyle: 'normal',
     letterSpacing: 0,
     marginTop: -11,
+    color: Color.BASE_COLOR_BORDER_GRAY,
   },
 });
 export default Signup;

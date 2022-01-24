@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import Constant from '../theme/constant';
 import Fonts from '../theme/fonts';
@@ -49,12 +49,12 @@ const Signin = ({ navigation }) => {
     if (text === '') {
       setCircleFillEmail(false);
       setEmailBorder(Color.COMMUNITY_ORANGE);
-      setEmailError('enter email ');
+      setEmailError('Please enter email address. ');
     } else if (
       text.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null
     ) {
       setEmailBorder(Color.COMMUNITY_ORANGE);
-      setEmailError('enter valid email ');
+      setEmailError('Please enter a valid email address. ');
       setCircleFillEmail(false);
     } else {
       setCircleFillEmail(true);
@@ -70,7 +70,7 @@ const Signin = ({ navigation }) => {
     setPassword(text);
     if (text === '') {
       setpasswordBorder(Color.COMMUNITY_ORANGE);
-      setPasswordError('enter password ');
+      setPasswordError('Password must contain a number. ');
       setCircleFillPassword(false);
     } else {
       setpasswordBorder(Color.BORDER_COLOR_LIGHTGRAY);
@@ -131,9 +131,7 @@ const Signin = ({ navigation }) => {
             }}
             value={email}
             helperText={emailError}
-            iconVisibleFill={true}
-            checkRight={true}
-            circleFill={circleFillEmail}
+            checkRight={undefined}
             onTouchStart={() => handleTouch()}
             borderColor={emailBorder}
           />
@@ -148,11 +146,9 @@ const Signin = ({ navigation }) => {
             value={password}
             helperText={passwordError}
             iconVisible={true}
-            secureTextEntry={focus === undefined ? true : focus}
+            secureTextEntry={focus !== true ? focus : true}
             secureTextEntryChange={selectFocus}
-            iconVisibleFill={true}
-            checkRight={true}
-            circleFill={circleFillPassword}
+            checkRight={undefined}
             onTouchStart={() => handleTouchpasswordBorder()}
             borderColor={passwordBorder}
           />

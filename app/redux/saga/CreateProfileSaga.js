@@ -3,6 +3,7 @@ import { put, call } from 'redux-saga/effects';
 // import {Login} from '../api/method/Login';
 import * as CreateProfileAction from '../actions/CreateProfileAction';
 // import Constant from '../../theme/Constant'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function* createProfileSaga(action) {
   const CreateProfile = async (
@@ -44,7 +45,13 @@ export function* createProfileSaga(action) {
     action.selectPronounsDropDown,
     action.selectOrientationDropDown,
   );
+
+  if (response === undefined) {
+  } else {
+    AsyncStorage.setItem('user2', 'true');
+    action.navigation.navigate('TabNavigator');
+  }
+
   console.warn('response saga', response);
   yield put(CreateProfileAction.CreateProfileResponse(response));
-  action.navigation.navigate('TabNavigator');
 }

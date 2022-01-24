@@ -37,6 +37,7 @@ interface Props {
   onTouchEnd?: () => void;
   defaultValue: string;
   text: string;
+  maxLength: number;
 }
 
 const CustomTextInput = ({
@@ -60,6 +61,7 @@ const CustomTextInput = ({
   onTouchEnd,
   defaultValue,
   text,
+  maxLength,
 }: Props) => {
   return (
     <>
@@ -83,6 +85,7 @@ const CustomTextInput = ({
                 <Text style={styles.textStyle}>{text}</Text>
               ) : null}
               <TextInput
+                maxLength={maxLength}
                 style={[styles.textInputStyle, textInputstyle]}
                 placeholder={placeholder}
                 onChangeText={onChangeText}
@@ -92,6 +95,7 @@ const CustomTextInput = ({
                 onTouchStart={onTouchStart}
                 onTouchEnd={onTouchEnd}
                 defaultValue={defaultValue}
+                autoCapitalize="none"
               />
 
               {iconVisible ? (
@@ -99,13 +103,13 @@ const CustomTextInput = ({
                   <TouchableOpacity
                     style={styles.touchableStyle}
                     onPress={secureTextEntryChange}>
-                    <Image source={Images.combinedShapeOPen} />
+                    <Image source={Images.combinedShape} />
                   </TouchableOpacity>
                 ) : (
                   <TouchableOpacity
                     style={styles.touchableStyle}
                     onPress={secureTextEntryChange}>
-                    <Image source={Images.combinedShape} />
+                    <Image source={Images.combinedShapeOPen} />
                   </TouchableOpacity>
                 )
               ) : null}
@@ -114,11 +118,11 @@ const CustomTextInput = ({
               <>
                 {iconVisibleFill ? (
                   circleFill ? (
-                    <View style={{ justifyContent: 'center' }}>
+                    <View style={styles.iconView}>
                       <Image source={Images.CheckCircleGreen} />
                     </View>
                   ) : (
-                    <View style={{ justifyContent: 'center' }}>
+                    <View style={styles.iconView}>
                       <Image source={Images.CheckCircle} />
                     </View>
                   )
@@ -134,7 +138,11 @@ const CustomTextInput = ({
       ) : null}
 
       {type === Constant.textInput.LARGE_TEXT_AREA ? (
-        <TextInput style={styles.largeTextareaView} placeholder={placeholder} />
+        <TextInput
+          style={styles.largeTextareaView}
+          placeholder={placeholder}
+          maxLength={maxLength}
+        />
       ) : null}
     </>
   );
@@ -143,6 +151,7 @@ const CustomTextInput = ({
 const styles = StyleSheet.create({
   largeInputView: {
     width: '90%',
+    flex: 9,
     height: height * 0.06,
     borderRadius: 4,
     backgroundColor: Color.BASE_COLOR_WHITE,
@@ -151,6 +160,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderColor: Color.BORDER_COLOR_LIGHTGRAY,
+  },
+  iconView: {
+    justifyContent: 'center',
+    flex: 1,
+    alignItems: 'flex-end',
   },
 
   largeTextareaView: {
@@ -218,9 +232,13 @@ const styles = StyleSheet.create({
     fontSize: 17,
     height: height * 0.064,
     width: '90%',
-    // paddingHorizontal: 16,
+    flex: 9,
   },
-  touchableStyle: { justifyContent: 'center', marginLeft: -20 },
+  touchableStyle: {
+    justifyContent: 'center',
+    flex: 1,
+    padding: 5,
+  },
   contentView: {
     width: '90%',
     height: height * 0.064,

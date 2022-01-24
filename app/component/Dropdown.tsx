@@ -48,7 +48,7 @@ const Dropdown = ({
             )}
             rowTextStyle={rowTextStyle}
             defaultButtonText={defaultButtonText}
-            buttonTextStyle={{ textAlign: 'left', fontSize: 17 }}
+            buttonTextStyle={{ textAlign: 'left', fontSize: 16 }}
             buttonStyle={[styles.Container, style]}
             data={optionList.map(item => item)}
             onSelect={onSelect}
@@ -91,12 +91,12 @@ const styles = StyleSheet.create({
     borderColor: Color.BORDER_COLOR_LIGHTGRAY,
   },
   iconView: {
-    width: width * 0.1,
+    // width: width * 0.1,
     height: '100%',
     backgroundColor: Color.BASE_COLOR_WHITE,
     justifyContent: 'center',
     alignItems: 'flex-end',
-    paddingStart: 7,
+    // paddingStart: 7,
     flexDirection: 'column',
   },
   helperText: {
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     borderRightColor: 'transparent',
     borderBottomColor: Color.TEXT_COLOR_PASSWORD,
     transform: [{ rotateX: '180deg' }],
-    marginTop: '9%',
+    marginTop: '25%',
   },
   triangleShapeUpCSS: {
     width: 0,

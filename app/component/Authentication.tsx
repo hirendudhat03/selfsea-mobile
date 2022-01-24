@@ -153,8 +153,8 @@ const Authentication = ({ text, icon, type }: Props) => {
 const styles = StyleSheet.create({
   container: {
     width: '90%',
-    padding: 15,
-    borderRadius: 4,
+    padding: 13,
+    borderRadius: 2,
     backgroundColor: Color.BASE_COLOR_WHITE,
     borderStyle: 'solid',
     borderWidth: 1,
@@ -162,6 +162,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     marginVertical: 8,
+    shadowColor: 'rgba(0, 0, 0, 0.24)',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowRadius: 1,
+    shadowOpacity: 1,
   },
   image: {
     height: 19,

@@ -1,5 +1,4 @@
 import React from 'react';
-import {} from 'react-native';
 
 //Stack Navigator
 import StackNavigator from './StackNavigator';

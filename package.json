@@ -16,6 +16,8 @@
   "dependencies": {
     "@invertase/react-native-apple-authentication": "^2.1.5",
     "@react-native-community/cookies": "^5.0.1",
+    "@apollo/client": "^3.5.7",
+    "@react-native-async-storage/async-storage": "^1.15.16",
     "@react-native-firebase/app": "^14.1.0",
     "@react-native-firebase/auth": "^14.2.1",
     "@react-native-google-signin/google-signin": "^7.0.4",
@@ -26,6 +28,8 @@
     "@types/react-redux": "^7.1.20",
     "base-64": "^1.0.0",
     "graphql": "^15.8.0",
+    "graphql-request": "^3.7.0",
+    "graphql-tag": "^2.12.6",
     "react": "17.0.2",
     "react-native": "0.67.0",
     "react-native-gesture-handler": "^2.1.0",
