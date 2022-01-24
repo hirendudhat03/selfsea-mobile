@@ -12,7 +12,8 @@ export function* loginSaga(action) {
       const response = await auth().signInWithEmailAndPassword(email, password);
       if (response.user.emailVerified) {
         action.navigation.navigate('DrawerNavigator');
-        await AsyncStorage.setItem('user3', response.user.getIdToken());
+        const token = await response.user.getIdToken();
+        await AsyncStorage.setItem('user3', token);
       } else {
         action.navigation.navigate('CreateProfile');
       }
