@@ -27,7 +27,6 @@
 		4114505127758D82001B5C0E /* Calibre-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3C7A708EC99E49C8A3C5E587 /* Calibre-Thin.otf */; };
 		4114505227758D82001B5C0E /* Calibre-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2CFD1BD252DB48199ED3F1FC /* Calibre-ThinItalic.otf */; };
 		5B7E3E03279738F6000DD488 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E3E02279738F6000DD488 /* Empty.swift */; };
-		5BFA7637278D84C200CE0C8A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5BFA7636278D84C200CE0C8A /* GoogleService-Info.plist */; };
 		6172F2D35A4C3AA820D92908 /* libPods-SelfseaMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423831EA8574132BED9D8CC /* libPods-SelfseaMobile.a */; };
 		7EF68E3733C33B6898317E18 /* libPods-SelfseaMobile-SelfseaMobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFE59519B596E51CEFDCCC0 /* libPods-SelfseaMobile-SelfseaMobileTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -167,6 +166,14 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		5B09CF6D279E73A8000450E9 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				04DF839E27991E84001BEDE6 /* GoogleService-Info.plist */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +191,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				E233CBF5F47BEE60B243DCF8 /* Pods */,
 				46C5608A06F147E29B97F18A /* Resources */,
+				5B09CF6D279E73A8000450E9 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -541,7 +549,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = KPHB4646P6;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = SelfseaMobile/Info.plist;
@@ -574,7 +582,7 @@
 				CODE_SIGN_ENTITLEMENTS = SelfseaMobile/SelfseaMobile.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = KPHB4646P6;
 				INFOPLIST_FILE = SelfseaMobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
