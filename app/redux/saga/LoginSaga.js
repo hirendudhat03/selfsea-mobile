@@ -13,7 +13,7 @@ export function* loginSaga(action) {
       if (response.user.emailVerified) {
         action.navigation.navigate('DrawerNavigator');
         const token = await response.user.getIdToken();
-        await AsyncStorage.setItem('user3', token);
+        await AsyncStorage.setItem('jwtToken', token);
       } else {
         action.navigation.navigate('CreateProfile');
       }
