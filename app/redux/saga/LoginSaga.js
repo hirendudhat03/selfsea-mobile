@@ -11,11 +11,21 @@ export function* loginSaga(action) {
     try {
       const response = await auth().signInWithEmailAndPassword(email, password);
       if (response.user.emailVerified) {
-        action.navigation.navigate('DrawerNavigator');
         const token = await response.user.getIdToken();
-        await AsyncStorage.setItem('user3', token);
+        console.log('token : ', token);
+        await AsyncStorage.setItem('token', token);
+
+        AsyncStorage.getItem('user3').then(value => {
+          console.log('value:', value);
+          if (value === 'true') {
+            action.navigation.navigate('DrawerNavigator');
+          } else {
+            action.navigation.navigate('CreateProfile');
+          }
+        });
       } else {
-        action.navigation.navigate('CreateProfile');
+        console.log('not verified');
+        // action.navigation.navigate('CreateProfile');
       }
       // auth().onAuthStateChanged(user => {
       //   if (user.emailVerified) {
@@ -27,7 +37,7 @@ export function* loginSaga(action) {
       //         action.navigation.navigate('CreateProfile');
       //       }
       //     });
-      //
+
       //     // action.navigation.navigate('CreateProfile');
       //   } else {
       //     console.log('not verified');

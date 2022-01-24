@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>597759932954-8ktpdsbjpnlhbrlsmc58o0civgjsrbds.apps.googleusercontent.com</string>
+	<string>597759932954-5p7j28bdtmp1jktls8sbq4oh0pbm65af.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.597759932954-8ktpdsbjpnlhbrlsmc58o0civgjsrbds</string>
+	<string>com.googleusercontent.apps.597759932954-5p7j28bdtmp1jktls8sbq4oh0pbm65af</string>
 	<key>API_KEY</key>
 	<string>AIzaSyAnDFC3DZW0ntbjR4TKyl0-ND7bjQMybho</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.reactjs.native.example.SelfseaMobile</string>
+	<string>com.selfseamobile</string>
 	<key>PROJECT_ID</key>
 	<string>selfsea-dev</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:597759932954:ios:98b2c4a94059061ea1efa3</string>
+	<string>1:597759932954:ios:8f583a98506999d2a1efa3</string>
 </dict>
 </plist>
