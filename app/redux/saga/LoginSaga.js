@@ -1,6 +1,7 @@
 import { call } from 'redux-saga/effects';
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { api } from '../../services';
 export function* loginSaga(action) {
   const Login = async (email, password) => {
     console.log('call loginSaga : ', action);
@@ -14,6 +15,7 @@ export function* loginSaga(action) {
         action.navigation.navigate('DrawerNavigator');
         const token = await response.user.getIdToken();
         await AsyncStorage.setItem('jwtToken', token);
+        api.setAuthHeader(token);
       } else {
         action.navigation.navigate('CreateProfile');
       }
