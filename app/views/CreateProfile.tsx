@@ -4,7 +4,6 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  SafeAreaView,
   TouchableOpacity,
   Dimensions,
   Image,
@@ -22,14 +21,13 @@ import Header from '../component/Header';
 import Dropdown from '../component/Dropdown';
 import Button from '../component/Button';
 import Badges from '../component/Badges';
-// import TextInput from '../component/CustomTextInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { CreateProfileRequest } from '../redux/actions/CreateProfileAction';
 
 import { ProunounsRequest } from '../redux/actions/PronounsAction';
-
-// import { createUserQuery } from '../graphql/queries/UserProfile';
-// import { api } from '../services';
+import { OrientationRequest } from '../redux/actions/OrientationAction';
+import { GenderRequest } from '../redux/actions/GenderAction';
+import { EthnicityRequest } from '../redux/actions/EthnicityAction';
 
 const height = Dimensions.get('window').height;
 
@@ -51,21 +49,42 @@ const CreateProfile = ({ navigation }) => {
         profile,
         selectPronounsDropDown,
         selectOrientationDropDown,
+        selectLocationDropDown,
+        selectRaceDropDown,
+        selectGenderDropDown,
         navigation,
       ),
     );
   };
+  const sectionDispatch = () => {
+    dispatch(ProunounsRequest());
+    setPronounsDropDown([pronounsResponse]);
+
+    dispatch(OrientationRequest());
+    setOrientationDropDown([orientationResponse]);
+
+    dispatch(GenderRequest());
+    setGenderDropDown([genderResponse]);
+
+    dispatch(EthnicityRequest());
+    setRaceDropDown([ethnicityResponse]);
+  };
 
   const pronounsResponse = useSelector(state => state.PronounsReducer);
+  console.log('ProunounsResponse::: ', JSON.stringify(pronounsResponse));
+
+  const orientationResponse = useSelector(state => state.OrientationReducer);
+  console.log('orientationResponse::: ', JSON.stringify(orientationResponse));
+
+  const genderResponse = useSelector(state => state.GenderReducer);
+  console.log('genderResponse::: ', JSON.stringify(genderResponse));
+
+  const ethnicityResponse = useSelector(state => state.EthnicityReducer);
+  console.log('ethnicityResponse::: ', JSON.stringify(ethnicityResponse));
 
   useEffect(() => {
-    // setPronounsDropDown(pronounsResponse);
-    dispatch(ProunounsRequest());
-    console.log('ProunounsResponse : ', JSON.stringify(pronounsResponse));
+    sectionDispatch();
   }, []);
-
-  const signupRes = useSelector(state => state.SignupReducer);
-  console.log('signupRes123 : ', JSON.stringify(signupRes));
 
   const [profile, setProfile] = useState('');
 

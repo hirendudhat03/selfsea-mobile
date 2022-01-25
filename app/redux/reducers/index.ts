@@ -5,6 +5,9 @@ import { SignupReducer } from './SignupReducer';
 import { CreateProfileReducer } from './CreateProfileReducer';
 import { HomeReducer } from './HomeReducer';
 import { PronounsReducer } from './PronounsReducer';
+import { OrientationReducer } from './OrientationReducer';
+import { GenderReducer } from './GenderReducer';
+import { EthnicityReducer } from './EthnicityReducer';
 
 export default combineReducers({
   LoginReducer,
@@ -12,4 +15,7 @@ export default combineReducers({
   CreateProfileReducer,
   HomeReducer,
   PronounsReducer,
+  OrientationReducer,
+  GenderReducer,
+  EthnicityReducer,
 });

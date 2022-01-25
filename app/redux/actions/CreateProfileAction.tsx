@@ -11,6 +11,9 @@ export function CreateProfileRequest(
   profile,
   selectPronounsDropDown,
   selectOrientationDropDown,
+  selectGenderDropDown,
+  selectRaceDropDown,
+  selectLocationDropDown,
   navigation,
 ) {
   // console.log('call SaveLoginResponse : ', data)
@@ -20,6 +23,9 @@ export function CreateProfileRequest(
     profile: profile,
     selectPronounsDropDown: selectPronounsDropDown,
     selectOrientationDropDown: selectOrientationDropDown,
+    selectGenderDropDown: selectGenderDropDown,
+    selectRaceDropDown: selectRaceDropDown,
+    selectLocationDropDown: selectLocationDropDown,
     navigation: navigation,
   };
 }

@@ -14,10 +14,14 @@ import TabScreen from '../views/TabScreen';
 import Color from '../theme/colors';
 
 import HealthScreen from '../views/HealthScreen';
+import Communities from '../views/Communities';
+import NavigationIdentity from '../views/NavigationIdentity';
 
 export const screenNames = {
   CommunitiesHome: 'CommunitiesHome',
   HealthScreen: 'HealthScreen',
+  NavigationIdentity: 'NavigationIdentity',
+  Communities: 'Communities',
   homeStack: 'HomeStackScreen',
 };
 
@@ -41,6 +45,14 @@ function HomeStackScreen() {
       <HomeStack.Screen
         name={screenNames.HealthScreen}
         component={HealthScreen}
+      />
+      <HomeStack.Screen
+        name={screenNames.NavigationIdentity}
+        component={NavigationIdentity}
+      />
+      <HomeStack.Screen
+        name={screenNames.Communities}
+        component={Communities}
       />
     </HomeStack.Navigator>
   );

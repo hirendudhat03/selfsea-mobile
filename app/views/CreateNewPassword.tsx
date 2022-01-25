@@ -30,7 +30,7 @@ const descriptionData = [
 
 const CreateNewPassword = ({ navigation }) => {
   useEffect(() => {
-    changeModalVisibility(true);
+    // changeModalVisibility(true);
   }, []);
 
   const [isModalVisible, setIsMoalVisiable] = useState(false);
@@ -106,10 +106,10 @@ const CreateNewPassword = ({ navigation }) => {
           <Text style={styles.requirementText}> [password requirements]</Text>
         </View>
 
-        <View style={{ flex: 1, justifyContent: 'center' }}>
+        <View style={styles.contentInputView}>
           <TextInput
             type={Constant.textInput.LARGE_INPUT}
-            label={'password'}
+            label={'new password'}
             style={{ fontSize: 18 }}
             onChangeText={text => {
               selectFillPassword(text);
@@ -207,13 +207,13 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   bottomView: {
-    flex: 0.7,
+    flex: 0.2,
     alignItems: 'center',
     borderTopColor: Color.BORDER_COLOR,
     borderTopWidth: 2,
   },
   contentView: {
-    flex: 4,
+    flex: 1,
     alignItems: 'center',
   },
   requirementText: {
@@ -224,6 +224,11 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     textAlign: 'center',
     color: Color.CONTENT_COLOR_BLACK_TEXT,
+  },
+  contentInputView: {
+    flex: 0.8,
+    justifyContent: 'center',
+    marginHorizontal: 20,
   },
 });
 export default CreateNewPassword;

@@ -8,12 +8,7 @@ export function ProunounsResponse(data) {
 }
 
 export function ProunounsRequest() {
-  // console.log('call SaveLoginResponse : ', data)
-  // email, password, navigation
   return {
     type: 'PRONOUNS_REQUEST',
-    //   email: email,
-    //   password: password,
-    //   navigation: navigation,
   };
 }

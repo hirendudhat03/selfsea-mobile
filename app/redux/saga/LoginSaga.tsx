@@ -16,7 +16,7 @@ export function* loginSaga(action) {
         console.log('token : ', token);
         await AsyncStorage.setItem('jwtToken', token);
         api.setAuthHeader(token);
-        AsyncStorage.getItem('user3').then(value => {
+        AsyncStorage.getItem('user4').then(value => {
           console.log('value:', value);
           if (value === 'true') {
             action.navigation.navigate('DrawerNavigator');
