@@ -65,7 +65,7 @@ export function* createProfileSaga(action) {
 
   if (response === undefined) {
   } else {
-    AsyncStorage.setItem('user3', 'true');
+    // AsyncStorage.setItem('user3', 'true');
     action.navigation.navigate('TabNavigator');
   }
 

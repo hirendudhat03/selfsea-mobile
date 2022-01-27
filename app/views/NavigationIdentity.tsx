@@ -33,20 +33,29 @@ const descriptionData = [
   },
 ];
 const NavigationIdentity = ({ navigation }) => {
+  useEffect(() => {
+    changeModalVisibility(true);
+  }, []);
+
+  const [isModalVisible, setIsMoalVisiable] = useState(false);
+  const changeModalVisibility = (bool: boolean) => {
+    setIsMoalVisiable(bool);
+  };
+
   const renderItem = () => (
     <View style={styles.viewStyle}>
-      <View style={styles.inputView}>
-        <View style={styles.textView}>
-          <Text style={styles.titleText} onPress={() => alert('ok')}>
-            @litliy
-          </Text>
-          <Text style={styles.titleTextSmall}>(they/them)</Text>
-          <TouchableOpacity onPress={() => alert('settings')}>
-            <Image source={Images.Dots} style={styles.imageView} />
-          </TouchableOpacity>
-        </View>
+      <View style={styles.bottomView}>
+        <View style={styles.inputView}>
+          <Text style={styles.titleText}>@litliy </Text>
 
-        <Text style={styles.descriptionText} numberOfLines={8}>
+          <Text style={styles.titleTextSmall}>(they/them)</Text>
+        </View>
+        <View style={styles.iconView}>
+          <Image source={Images.Dots} style={styles.imageView} />
+        </View>
+      </View>
+      <View style={styles.descriptionView}>
+        <Text style={styles.descriptionText}>
           Need help telling my parents that I want to change my name after
           coming out
         </Text>
@@ -55,19 +64,25 @@ const NavigationIdentity = ({ navigation }) => {
           I recently came out as non-binary and my parents didn't take it super
           great at first, but in the end were sort of supportive. I want to
         </Text>
+      </View>
+
+      <View style={styles.bottomView}>
         <View style={styles.badgesView}>
           <Badges
-            style={styles.commentBadges}
             type={Constant.badges.COMMENTS}
-            text={'5 comments'}
+            text={'0 Comments'}
+            style={{ paddingVertical: 3 }}
           />
+
           <Badges
-            style={styles.warnBadges}
             type={Constant.badges.CONTENT}
-            text={'homiophobia'}
+            text={'homophobia'}
             leftIcon={Images.Warning}
+            style={{ paddingVertical: 2 }}
           />
-          <Text style={styles.timeText}>2:48pm</Text>
+        </View>
+        <View style={styles.timeView}>
+          <Text style={styles.endTimeText}>2:48pm</Text>
         </View>
       </View>
     </View>
@@ -91,6 +106,27 @@ const NavigationIdentity = ({ navigation }) => {
         style={styles.linearGradient}>
         <FlatList data={DATA} renderItem={renderItem} />
       </LinearGradient>
+      <Modal
+        transparent={true}
+        animationType="fade"
+        visible={isModalVisible}
+        onRequestClose={() => changeModalVisibility(false)}>
+        <ModalPicker
+          changeModalVisibility={changeModalVisibility}
+          type={Constant.modal.MODAL_SUCCESS}
+          textTitle={'congrats on joining your first community!'}
+          smallText={
+            'selfsea was designed together with young people, as a place where you’ll see yourself reflected within a supportive and inclusive community that prioritizes your identity and experiences.'
+          }
+          smallTextParagraph={
+            "you have the option of selecting content warnings if there are topics you'd prefer not to see. when you select a content warning, any posts containing that warning will be greyed out. you can add and edit content warnings in your profile settings."
+          }
+          button={Constant.buttons.CLOSE}
+          firstText={'setting'}
+          secondText={'view community'}
+          type={Constant.modal.MODAL_SUCCESS}
+        />
+      </Modal>
     </View>
   );
 };
@@ -100,7 +136,7 @@ const styles = StyleSheet.create({
     flex: 1,
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
-    paddingVertical: 4,
+    paddingVertical: 5,
     paddingHorizontal: 10,
   },
   container: {
@@ -108,33 +144,14 @@ const styles = StyleSheet.create({
     backgroundColor: Color.COMMUNITY_MAROON,
   },
   viewStyle: {
-    paddingVertical: 12,
-    flexDirection: 'row',
     borderRadius: 6,
     backgroundColor: Color.BASE_COLOR_WHITE,
     marginVertical: 5,
-  },
-  headerView: {
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0,
-    shadowColor: Color.BASE_COLOR_LIGHT_BLUE,
+    padding: 18,
   },
   inputView: {
-    flex: 6,
+    flex: 1.5,
     flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-
-  buttonView: {
-    flex: 2,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 5,
-  },
-  iconStyle: {
-    tintColor: Color.COMMUNITY_MAROON,
-    height: 30,
-    width: 20,
   },
   titleText: {
     fontFamily: Font.CALIBRE,
@@ -144,8 +161,6 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     letterSpacing: 0,
     color: Color.CONTENT_COLOR_BLACK_TEXT,
-    flexDirection: 'row',
-    marginHorizontal: 10,
     textDecorationLine: 'underline',
   },
   titleTextSmall: {
@@ -155,58 +170,66 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     letterSpacing: 0,
     color: Color.PLACEHOLDER_TEXT,
-    // alignContent: 'space-between',
   },
   descriptionText: {
+    marginTop: 10,
     marginVertical: 5,
+    fontFamily: Font.CALIBRE,
+    fontSize: 19,
+    fontWeight: '500',
+    fontStyle: 'normal',
+    letterSpacing: 0,
+    color: Color.DESCRIPTION_COLOR_TEXT,
+  },
+  descriptionSmallText: {
     fontFamily: Font.CALIBRE,
     fontSize: 18,
     fontWeight: 'normal',
     fontStyle: 'normal',
     letterSpacing: 0,
-    color: Color.CONTENT_COLOR_BLACK_TEXT,
-    marginHorizontal: 10,
-  },
-  descriptionSmallText: {
-    fontFamily: Font.CALIBRE,
-    fontSize: 15,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
-    letterSpacing: 0,
-    color: Color.CONTENT_COLOR_BLACK_TEXT,
-    marginHorizontal: 10,
+    marginBottom: 16,
+    color: Color.TEXT_COLOR,
   },
 
-  descriptionTextStyle: {
-    width: 90,
-    marginHorizontal: 5,
-  },
   imageView: {
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
-    marginHorizontal: 190,
-    tintColor: Color.BASE_COLOR_LIGHTGRAY,
+    alignSelf: 'center',
+    tintColor: Color.BORDER_COLOR_DARKGRAY,
   },
-  badgesView: {
-    marginVertical: 10,
-    flexDirection: 'row',
-    alignItems: 'baseline',
-    marginHorizontal: 5,
-  },
+
   timeText: {
     alignItems: 'flex-end',
     color: Color.BORDER_COLOR_GRAY,
     fontSize: 12,
     marginHorizontal: 50,
   },
-  textView: {
+  endTimeText: {
+    color: 'grey',
+    alignSelf: 'flex-end',
+    fontSize: 12,
+  },
+  timeView: {
+    justifyContent: 'center',
+    flex: 0.31,
+  },
+  iconView: {
+    justifyContent: 'flex-end',
+    flex: 0.1,
+  },
+  bottomView: {
+    flex: 1,
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
-  commentBadges: {
-    fontSize: 14,
+  badgesView: {
+    flex: 0.95,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
-  warnBadges: {
-    marginHorizontal: 7,
+  descriptionView: {
+    flex: 7,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
 });
 

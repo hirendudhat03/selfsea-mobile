@@ -7,6 +7,7 @@ interface Props {
   text?: string;
   onEnableToggle: () => void;
   isEnabled: boolean;
+  ios_backgroundColor: String;
 }
 
 const styles = StyleSheet.create({
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     color: Color.BASE_COLOR_WHITE,
     alignSelf: 'center',
-    marginHorizontal: 3,
+    marginHorizontal: 5,
   },
   container: {
     alignItems: 'center',
@@ -26,14 +27,19 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Switch({ onEnableToggle, isEnabled, text }: Props) {
+export default function Switch({
+  onEnableToggle,
+  isEnabled,
+  text,
+  ios_backgroundColor,
+}: Props) {
   return (
     <View style={styles.container}>
       {text ? <Text style={styles.toggleLabel}>{text}</Text> : null}
       <RNSwitch
         trackColor={{ false: '#ffffff', true: '#008400' }}
         thumbColor={Color.BASE_COLOR_WHITE}
-        ios_backgroundColor="#ffffff"
+        ios_backgroundColor={ios_backgroundColor}
         onValueChange={onEnableToggle}
         value={isEnabled}
       />

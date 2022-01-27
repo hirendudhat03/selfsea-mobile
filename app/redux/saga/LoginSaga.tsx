@@ -2,6 +2,9 @@ import { call } from 'redux-saga/effects';
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { api } from '../../services';
+
+import { currentUserQuery } from '../../graphql/queries/UserProfile';
+
 export function* loginSaga(action) {
   const Login = async (email, password) => {
     console.log('call loginSaga : ', action);
@@ -16,14 +19,22 @@ export function* loginSaga(action) {
         console.log('token : ', token);
         await AsyncStorage.setItem('jwtToken', token);
         api.setAuthHeader(token);
-        AsyncStorage.getItem('user4').then(value => {
-          console.log('value:', value);
-          if (value === 'true') {
-            action.navigation.navigate('DrawerNavigator');
-          } else {
-            action.navigation.navigate('CreateProfile');
-          }
-        });
+        // AsyncStorage.getItem('user4').then(value => {
+        //   console.log('value:', value);
+        //   if (value === 'true') {
+        //     action.navigation.navigate('DrawerNavigator');
+        //   } else {
+        //     action.navigation.navigate('CreateProfile');
+        //   }
+        // });
+        const data = await api.client.request(currentUserQuery);
+        if (data.currentUser === null) {
+          action.navigation.navigate('CreateProfile');
+        } else {
+          action.navigation.navigate('DrawerNavigator');
+        }
+        console.log('data:', data);
+        return data;
       } else {
         console.log('not verified');
         // action.navigation.navigate('CreateProfile');

@@ -40,6 +40,7 @@ const AllCommunities = ({ navigation }) => {
           type={Constant.buttons.CLOSE}
           text={'join'}
           style={{ paddingVertical: 12 }}
+          onPress={() => navigation.navigate('HealthScreen')}
         />
       </View>
     </View>
@@ -47,12 +48,6 @@ const AllCommunities = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header
-        type={Constant.navigatioHeader.PAGE_HEADER}
-        label={'selfsea communities'}
-        style={styles.headerView}
-      />
-
       <LinearGradient
         colors={['rgba(255, 255, 255, 0.22)', Color.COLOR_LIGHT]}
         style={styles.linearGradient}>
