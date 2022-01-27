@@ -24,6 +24,7 @@ export function* signupSaga(action) {
         createUserMutation,
         mutationVariables,
       );
+      console.log('data::', data);
       action.navigation.navigate('Signin');
       return { ...data, ...response };
     } catch (e) {

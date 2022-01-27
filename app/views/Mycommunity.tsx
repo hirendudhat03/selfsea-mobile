@@ -7,29 +7,55 @@ import {
   Image,
   FlatList,
   SafeAreaView,
+  TouchableOpacity,
 } from 'react-native';
 import ModalPicker from './ModalPickerConfirm';
 
 import Color from '../theme/colors';
 import Font from '../theme/fonts';
 import Images from '../theme/images';
-
+import Constant from '../theme/constant';
 import LinearGradient from 'react-native-linear-gradient';
 
 const DATA = [{}, {}, {}, {}];
 
 const CommunitiesHome = ({ navigation }) => {
+  const [isModalVisible, setIsMoalVisiable] = useState(false);
+  const changeModalVisibility = (bool: boolean) => {
+    setIsMoalVisiable(bool);
+  };
+
+  const descriptionData = [
+    {
+      title:
+        "several mentors will be online during each live session, so you'll get much quicker reply to your post, and can have a real time conversation if you'd like.",
+    },
+  ];
+
   const renderItem = () => (
     <View style={styles.viewStyle}>
-      <View style={styles.imageView}>
-        <Image source={Images.LogoTab} style={styles.iconStyle} />
+      <View style={{ flexDirection: 'row' }}>
+        <View style={styles.imageView}>
+          <Image source={Images.LogoTab} style={styles.iconStyle} />
+        </View>
+        <View style={styles.inputView}>
+          <Text style={styles.titleText}>navigating identity</Text>
+          <Text style={styles.descriptionText}>
+            a community to discuss questions and situations related to gender
+            identity, sexual orientation, race and ethnicity
+          </Text>
+        </View>
       </View>
-      <View style={styles.inputView}>
-        <Text style={styles.titleText}>navigating identity</Text>
-        <Text style={styles.descriptionText} numberOfLines={4}>
-          a community to discuss questions and situations related to gender
-          identity, sexual orientation, race and ethnicity
+      <View style={styles.liveSessionStyle}>
+        <Text style={styles.sessionText}>
+          live session today from 4pm-7pm EST
         </Text>
+        <TouchableOpacity onPress={() => changeModalVisibility(true)}>
+          <Image
+            source={Images.infoCircleFill}
+            style={styles.sessionIconStyle}
+          />
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -41,6 +67,21 @@ const CommunitiesHome = ({ navigation }) => {
         style={styles.linearGradient}>
         <FlatList data={DATA} renderItem={renderItem} />
       </LinearGradient>
+      <Modal
+        transparent={false}
+        animationType="fade"
+        visible={isModalVisible}
+        onRequestClose={() => changeModalVisibility(false)}>
+        <ModalPicker
+          changeModalVisibility={changeModalVisibility}
+          type={Constant.modal.MODAL}
+          textTitle={'live sessions'}
+          descriptionData={descriptionData}
+          numberOfLines={5}
+          button={Constant.buttons.CLOSE}
+          text={'close'}
+        />
+      </Modal>
     </View>
   );
 };
@@ -52,7 +93,6 @@ const styles = StyleSheet.create({
   },
   viewStyle: {
     paddingVertical: 12,
-    flexDirection: 'row',
     borderRadius: 6,
     backgroundColor: Color.BASE_COLOR_WHITE,
     marginVertical: 5,
@@ -102,6 +142,7 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
     letterSpacing: 0,
     color: Color.CONTENT_COLOR_BLACK_TEXT,
+    paddingRight: 16,
   },
   linearGradient: {
     flex: 1,
@@ -112,6 +153,35 @@ const styles = StyleSheet.create({
   },
   descriptionTextStyle: {
     textAlign: 'left',
+  },
+  liveSessionStyle: {
+    padding: 5,
+    width: '94%',
+    flexDirection: 'row',
+    borderRadius: 4,
+    backgroundColor: Color.BASE_COLOR_DARK_SUCCESS,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: Color.BORDER_COLOR_SUCCESS,
+    alignSelf: 'center',
+    justifyContent: 'space-between',
+    marginTop: 5,
+  },
+  sessionText: {
+    fontFamily: Font.CALIBRE,
+    fontSize: 18,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 25,
+    letterSpacing: 0,
+    paddingHorizontal: 15,
+    textAlign: 'center',
+    color: Color.SESSION_TEXT_COLOR,
+  },
+  sessionIconStyle: {
+    alignSelf: 'center',
+    marginRight: 6,
+    tintColor: Color.SESSION_ICON_COLOR,
   },
 });
 

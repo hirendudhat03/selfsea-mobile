@@ -35,3 +35,29 @@ export const userGenderQuery = gql`
     }
   }
 `;
+
+export const currentUserQuery = gql`
+  query {
+    currentUser {
+      id
+      authId
+      email
+      profile {
+        id
+        bio
+        genders {
+          id
+          name
+        }
+        pronouns {
+          id
+          name
+        }
+        orientations {
+          id
+          name
+        }
+      }
+    }
+  }
+`;

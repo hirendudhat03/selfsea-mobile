@@ -1,9 +1,11 @@
 import React from 'react';
-import { SafeAreaView, Dimensions } from 'react-native';
+import { SafeAreaView, Dimensions, StyleSheet } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Mycommunity from './Mycommunity';
 import AllCommunities from './AllCommunities';
 import Color from '../theme/colors';
+import Font from '../theme/fonts';
+
 const Tab = createMaterialTopTabNavigator();
 
 const height = Dimensions.get('window').height;
@@ -14,14 +16,16 @@ const Communities = ({ navigation }) => {
     <Tab.Navigator
       tabBarOptions={{
         activeTintColor: Color.BASE_COLOR_WHITE,
+        indicatorStyle: {
+          opacity: 0,
+        },
         labelStyle: {
-          fontSize: 17,
-          // paddingTop: 60,
-          fontFamily: 'Calibre',
+          textTransform: 'none',
+          fontSize: 20,
+          fontFamily: Font.CALIBRE,
           fontWeight: 'bold',
           fontStyle: 'normal',
-          lineHeight: 150,
-          letterSpacing: 0,
+          lineHeight: 145,
           textAlign: 'center',
         },
         style: {
@@ -47,5 +51,5 @@ const Communities = ({ navigation }) => {
     // </SafeAreaView>
   );
 };
-
+const styles = StyleSheet.create({});
 export default Communities;
