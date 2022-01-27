@@ -71,7 +71,6 @@ const Authentication = ({ text, icon, type }: Props) => {
 
   const authLogin = async () => {
     console.log('key : ', type);
-    console.log("Anshuman Test Auth",appleAuthAndroid.isSupported)
     if (type === Constant.authLogin.GOOGLE ) {
       _signIn();
     } else if (type === Constant.authLogin.INSTAGRAM) {
@@ -93,7 +92,7 @@ const Authentication = ({ text, icon, type }: Props) => {
         // Create a Firebase credential from the response
         const { identityToken, nonce, email, fullName } = appleAuthRequestResponse;
         const appleCredential = auth.AppleAuthProvider.credential(identityToken, nonce);
-  
+        Alert.alert(parseJwt(identityToken).email, parseJwt(identityToken).sub);
         console.log("heraa",credentialState);
         console.log("Apple Credentials", email, fullName, nonce, "Anshh" ,identityToken);
       }else{

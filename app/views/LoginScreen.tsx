@@ -20,7 +20,7 @@ import Images from '../theme/images';
 import Button from '../component/Button';
 import Auth from '../component/Authentication';
 import InstagramLogin from 'react-native-instagram-login';
-import { auth } from '../config/static';
+import { auths } from '../config/static';
 
 const onPressText = () => {
   Alert.alert("onPressText")
@@ -37,9 +37,9 @@ const Login = ({ navigation }) => {
             <Image source={Images.Logo} />
           </View>
           <View style={styles.contentView}>
-            <Auth text={auth.CONTINUE_WITH_GOOGLE} icon={Images.Google} type={Constant.authLogin.GOOGLE} />
-            <Auth text={auth.CONTINUE_WITH_INSTA} icon={Images.Instagram} type={Constant.authLogin.INSTAGRAM} />
-            <Auth text={auth.CONTINUE_WITH_APPLE} icon={Images.Apple} type={Constant.authLogin.APPLE} />
+            <Auth text={auths.CONTINUE_WITH_GOOGLE} icon={Images.Google} type={Constant.authLogin.GOOGLE} />
+            <Auth text={auths.CONTINUE_WITH_INSTA} icon={Images.Instagram} type={Constant.authLogin.INSTAGRAM} />
+            <Auth text={auths.CONTINUE_WITH_APPLE} icon={Images.Apple} type={Constant.authLogin.APPLE} />
             <InstagramLogin
               ref={ref => instagramLogin = ref}
               appId='321916266462620'
@@ -49,26 +49,26 @@ const Login = ({ navigation }) => {
               onLoginSuccess={(data:any) => console.log('Login Success', data)}
               onLoginFailure={(data:any) => console.log('failure',data)}
             />
-            <Button type={Constant.buttons.PRIMARY} text={auth.SIGNUP_WITH_EMAIL} style={{ marginTop: 8 }} onPress={() => navigation.navigate('Signup')} />
-            <Text style={styles.contentText}>{auth.SIGNUP_AGREEMENT_L1}</Text>
+            <Button type={Constant.buttons.PRIMARY} text={auths.SIGNUP_WITH_EMAIL} style={{ marginTop: 8 }} onPress={() => navigation.navigate('Signup')} />
+            <Text style={styles.contentText}>{auths.SIGNUP_AGREEMENT_L1}</Text>
             <View style={{ flexDirection: 'row' }}>
               <TouchableOpacity  onPress={()=>{ Linking.openURL(Constant.link.PRIVACY_POLICY)}}>
-                <Text style={styles.contentSecondText}>{auth.PRIVACY_POLICY}</Text>
+                <Text style={styles.contentSecondText}>{auths.PRIVACY_POLICY}</Text>
               </TouchableOpacity>
               <Text style={styles.contentSecondTextAnd}> and</Text>
               <TouchableOpacity   onPress={()=>{ Linking.openURL(Constant.link.TERMS_OF_USE)}}>
-                <Text style={styles.contentSecondText}> {auth.TERMS_CONDITIONS}</Text>
+                <Text style={styles.contentSecondText}> {auths.TERMS_CONDITIONS}</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.bottomView}>
               <Text style={styles.bottomText} onPress={() => onPressText()}>
-                {auth.ALREADY_HAVE_ACCOUNT}
+                {auths.ALREADY_HAVE_ACCOUNT}
               </Text>
             </View>
             <View style={[styles.signinButtonView]}>
               <Button
                 type={Constant.buttons.CLOSE}
-                text={auth.SIGNIN_BUTTON}
+                text={auths.SIGNIN_BUTTON}
                 onPress={() => navigation.navigate('Signin')}
               />
             </View>

@@ -17,7 +17,7 @@ import auth from '@react-native-firebase/auth';
 import {useDispatch} from 'react-redux'
 import {LoginRequest} from '../redux/actions/LoginAction'
 import { AppleButton } from '@invertase/react-native-apple-authentication';
-
+import { auths } from '../config/static';
 
 const Signin = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -161,13 +161,13 @@ const Signin = ({ navigation }) => {
             onPressCheckbox={selectCheckBox}
             style={styles.checkBox}
             isSelectedCheckBox={isSelectedCheckBox}
-            text={'keep me signed in'}
+            text={auths.KEEP_ME_SIGNED_IN}
           />
 
           <Button
             type={Constant.buttons.PRIMARY}
-            text={'sign in'}
-            style={{ marginTop: 10, marginBottom: 10 }}
+            text={auths.SIGNIN_BUTTON}
+            style={styles.buttonStyle}
             onPress={() => SigninValidation()}
           />
 
@@ -176,21 +176,21 @@ const Signin = ({ navigation }) => {
         <View style={styles.bottomView}>
           <Text style={styles.bottomText}>or</Text>
           <Auth
-            text={'Continue with Google'}
+            text={auths.CONTINUE_WITH_GOOGLE}
             icon={Images.Google}
             type={Constant.authLogin.GOOGLE}
           />
           <Auth
-            text={'Continue with Instagram'}
+            text={auths.CONTINUE_WITH_INSTA}
             icon={Images.Instagram}
             type={Constant.authLogin.INSTAGRAM}
           />
-          {/* <Auth
-            text={'Continue with Apple'}
+          <Auth
+            text={auths.CONTINUE_WITH_APPLE}
             icon={Images.Apple}
             type={Constant.authLogin.APPLE}
-          /> */}
-          <AppleButton
+          />
+          {/* <AppleButton
             buttonStyle={AppleButton.Style.WHITE}
             buttonType={AppleButton.Type.SIGN_IN}
             style={{
@@ -198,7 +198,7 @@ const Signin = ({ navigation }) => {
               height: 45, // You must specify a height
             }}
             onPress={() => console.log("Anshuman Gupta")}
-          />
+          /> */}
         </View>
       </ScrollView>
     </View>
@@ -248,6 +248,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginVertical: 10,
   },
+  buttonStyle:{ marginTop: 10, marginBottom: 10 }
 });
 
 export default Signin;
