@@ -9,7 +9,7 @@ export const createUserMutation = gql`
     $username: String!
   ) {
     createUser(
-      createUserInput: {
+      input: {
         email: $email
         authId: $authId
         birthMonth: $birthMonth
