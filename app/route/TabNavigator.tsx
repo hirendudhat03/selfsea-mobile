@@ -14,11 +14,17 @@ import TabScreen from '../views/TabScreen';
 import Color from '../theme/colors';
 
 import HealthScreen from '../views/HealthScreen';
+import Communities from '../views/Communities';
+import NavigationIdentity from '../views/NavigationIdentity';
+import MentorCommunity from '../views/MentorCommunity';
 
 export const screenNames = {
   CommunitiesHome: 'CommunitiesHome',
   HealthScreen: 'HealthScreen',
+  NavigationIdentity: 'NavigationIdentity',
+  Communities: 'Communities',
   homeStack: 'HomeStackScreen',
+  MentorCommunity: 'MentorCommunity',
 };
 
 const height = Dimensions.get('window').height;
@@ -33,7 +39,7 @@ function HomeStackScreen() {
         gestureEnabled: true,
         gestureDirection: 'horizontal',
       }}
-      initialRouteName={screenNames.CommunitiesHome}>
+      initialRouteName={screenNames.MentorCommunity}>
       <HomeStack.Screen
         name={screenNames.CommunitiesHome}
         component={CommunitiesHome}
@@ -41,6 +47,18 @@ function HomeStackScreen() {
       <HomeStack.Screen
         name={screenNames.HealthScreen}
         component={HealthScreen}
+      />
+      <HomeStack.Screen
+        name={screenNames.NavigationIdentity}
+        component={NavigationIdentity}
+      />
+      <HomeStack.Screen
+        name={screenNames.Communities}
+        component={Communities}
+      />
+      <HomeStack.Screen
+        name={screenNames.MentorCommunity}
+        component={MentorCommunity}
       />
     </HomeStack.Navigator>
   );
@@ -97,7 +115,7 @@ const BottomTabNavigator = ({ navigation }) => {
           },
           tabBarIcon: () => {
             return (
-              <View style={styles.tabView}>
+              <View style={[styles.tabView]}>
                 <Image source={Images.LogoTab} />
               </View>
             );

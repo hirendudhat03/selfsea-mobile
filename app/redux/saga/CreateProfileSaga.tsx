@@ -1,0 +1,74 @@
+import { put, call } from 'redux-saga/effects';
+
+import * as CreateProfileAction from '../actions/CreateProfileAction';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { api } from '../../services';
+import { updateProfileMutation } from '../../graphql/mutations/UserMutation';
+
+export function* createProfileSaga(action) {
+  const CreateProfile = async (
+    profile,
+    selectPronounsDropDown,
+    selectOrientationDropDown,
+    selectGenderDropDown,
+    selectRaceDropDown,
+    selectLocationDropDown,
+  ) => {
+    console.log('call createprofileSaga : ', action);
+    console.log('profile : ', profile);
+
+    console.log('Pronouns : ', selectPronounsDropDown);
+    console.log('Orientation : ', selectOrientationDropDown);
+    console.log('Gender : ', selectGenderDropDown);
+    console.log('Race : ', selectRaceDropDown);
+    console.log('Location : ', selectLocationDropDown);
+
+    try {
+      // const response = {
+      //   data: {
+      //     userProfile: {
+      //       id: 'string',
+      //       isPrivate: 'boolean',
+      //       yearOfBirth: 'integer',
+      //       bio: 'string',
+      //       state: 'string',
+      //       city: 'string',
+      //     },
+      //   },
+      // };
+      // await auth().signInWithEmailAndPassword(email, password)
+      const mutationVariables = {
+        isPrivate: true,
+        location: 'xyz',
+        bio: 'abc',
+      };
+      const data = await api.client.request(
+        updateProfileMutation,
+        mutationVariables,
+      );
+      return { ...data, ...response };
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const response = yield call(
+    CreateProfile,
+    action.profile,
+    action.selectPronounsDropDown,
+    action.selectOrientationDropDown,
+    action.selectGenderDropDown,
+    action.selectRaceDropDown,
+    action.selectLocationDropDown,
+  );
+
+  if (response === undefined) {
+  } else {
+    // AsyncStorage.setItem('user3', 'true');
+    action.navigation.navigate('TabNavigator');
+  }
+
+  console.warn('response saga', response);
+  yield put(CreateProfileAction.CreateProfileResponse(response));
+}

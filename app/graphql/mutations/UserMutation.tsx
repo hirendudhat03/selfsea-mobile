@@ -9,7 +9,7 @@ export const createUserMutation = gql`
     $username: String!
   ) {
     createUser(
-      createUserInput: {
+      input: {
         email: $email
         authId: $authId
         birthMonth: $birthMonth
@@ -23,3 +23,28 @@ export const createUserMutation = gql`
     }
   }
 `;
+
+export const updateProfileMutation = gql`
+  mutation UpadteProfile(
+    $isPrivate: Boolean!
+    $location: String!
+    $bio: String!
+  ) {
+    updateProfile(
+      input: { isPrivate: $isPrivate, location: $location, bio: $bio }
+    ) {
+      id
+      isPrivate
+      location
+      bio
+    }
+  }
+`;
+// $pronouns: [ProfileAssignmentsInput!]
+// $orientations: [ProfileAssignmentsInput!]
+// $genders: [ProfileAssignmentsInput!]
+// $ethnicities: [ProfileAssignmentsInput!]
+// genders: $genders
+// orientations: $orientations
+// ethnicities: $ethnicities
+// pronouns: $pronouns

@@ -17,18 +17,19 @@ interface Props {
   rigthIcon?: ImageSourcePropType;
   text: string;
   onPress: () => void;
+  style: {};
 }
 
-const Badges = ({ type, leftIcon, rigthIcon, text, onPress }: Props) => {
+const Badges = ({ type, leftIcon, rigthIcon, text, onPress, style }: Props) => {
   return (
     <View
       style={
         type === Constant.badges.MENTOR_BADGE
           ? styles.mentorView
           : type === Constant.badges.CONTENT
-          ? styles.contentView
+          ? [styles.contentView, style]
           : type === Constant.badges.COMMENTS
-          ? styles.commentsView
+          ? [styles.commentsView, style]
           : type === Constant.badges.ACTIVE
           ? styles.activeView
           : type === Constant.badges.INACTIVE

@@ -33,5 +33,5 @@ export function* homeSaga(action) {
   const response = yield call(Home);
   console.warn('response saga', response);
   yield put(HomeAction.HomeResponse(response));
-  action.navigation.navigate('HealthScreen');
+  action.navigation.navigate('Communities');
 }

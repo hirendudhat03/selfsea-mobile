@@ -11,6 +11,7 @@ interface Props {
   changeModalVisibility: (bool: boolean) => void;
   textTitle: string;
   smallText: string;
+  smallTextParagraph: string;
   firstText: string;
   secondText: string;
   type: string;
@@ -25,6 +26,7 @@ const ModalPicker = ({
   changeModalVisibility,
   textTitle,
   smallText,
+  smallTextParagraph,
   secondText,
   firstText,
   button,
@@ -45,18 +47,26 @@ const ModalPicker = ({
               ellipsizeMode="middle">
               {smallText}
             </Text>
+            {smallTextParagraph !== undefined ? (
+              <Text
+                style={styles.smallText}
+                numberOfLines={7}
+                ellipsizeMode="middle">
+                {smallTextParagraph}
+              </Text>
+            ) : null}
             <View
               style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Button
                 type={Constant.buttons.CLOSE}
                 text={firstText}
-                style={{ marginVertical: 12, width: '26%' }}
+                style={styles.closeButtonStyle}
                 onPress={() => changeModalVisibility(false)}
               />
               <Button
                 type={Constant.buttons.PRIMARY}
                 text={secondText}
-                style={{ marginVertical: 12, width: '70%' }}
+                style={styles.primaryButtonStyle}
                 onPress={() => changeModalVisibility(false)}
               />
             </View>
@@ -141,7 +151,8 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     textAlign: 'center',
     color: Color.TEXT_COLOR_PASSWORD,
-    marginVertical: 10,
+    marginTop: 10,
+    marginBottom: 15,
   },
   descriptionText: {
     fontFamily: Font.CALIBRE,
@@ -153,5 +164,10 @@ const styles = StyleSheet.create({
     color: Color.CONTENT_COLOR_BLACK_TEXT,
     marginVertical: 10,
   },
+  primaryButtonStyle: {
+    padding: 12,
+    width: '60%',
+  },
+  closeButtonStyle: { padding: 12, width: '35%' },
 });
 export default ModalPicker;

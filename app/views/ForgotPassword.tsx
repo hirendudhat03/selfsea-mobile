@@ -51,7 +51,7 @@ const ForgotPassword = ({ navigation }) => {
         <Text style={styles.descriptionText} ellipsizeMode="middle">
           type in your email below to reset your password.
         </Text>
-        <View style={{ flex: 1, justifyContent: 'center' }}>
+        <View style={styles.contentInputView}>
           <TextInput
             type={Constant.textInput.LARGE_INPUT}
             placeholder={'email@address.com'}
@@ -110,6 +110,11 @@ const styles = StyleSheet.create({
   contentView: {
     flex: 4,
     alignItems: 'center',
+  },
+  contentInputView: {
+    flex: 1,
+    justifyContent: 'center',
+    marginHorizontal: 20,
   },
 });
 export default ForgotPassword;

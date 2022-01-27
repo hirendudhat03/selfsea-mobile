@@ -3,29 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-<<<<<<< HEAD
-	<string>313603573096-10jh0c32gl6sr2ajm7oqpo09f1v496i1.apps.googleusercontent.com</string>
-	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.313603573096-10jh0c32gl6sr2ajm7oqpo09f1v496i1</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>313603573096-pgrbk1q6ale2e8g603kpsd894ibblif7.apps.googleusercontent.com</string>
-=======
 	<string>597759932954-5p7j28bdtmp1jktls8sbq4oh0pbm65af.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
 	<string>com.googleusercontent.apps.597759932954-5p7j28bdtmp1jktls8sbq4oh0pbm65af</string>
->>>>>>> 2516997c126568c4862348f06785292c6ca55da7
 	<key>API_KEY</key>
-	<string>AIzaSyBS-zz8emtzByOkheQunV9vxU2hVNdty_s</string>
+	<string>AIzaSyAnDFC3DZW0ntbjR4TKyl0-ND7bjQMybho</string>
 	<key>GCM_SENDER_ID</key>
-	<string>313603573096</string>
+	<string>597759932954</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.selfseamobile</string>
 	<key>PROJECT_ID</key>
-	<string>selfsea-mobile</string>
+	<string>selfsea-dev</string>
 	<key>STORAGE_BUCKET</key>
-	<string>selfsea-mobile.appspot.com</string>
+	<string>selfsea-dev.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -37,10 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-<<<<<<< HEAD
-	<string>1:313603573096:ios:f2661e703f945212fd02dd</string>
-=======
 	<string>1:597759932954:ios:8f583a98506999d2a1efa3</string>
->>>>>>> 2516997c126568c4862348f06785292c6ca55da7
 </dict>
 </plist>

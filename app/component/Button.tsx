@@ -17,9 +17,18 @@ interface Props {
   icon?: ImageSourcePropType;
   disabled?: boolean;
   onPress?: () => void;
+  textStyle: {};
 }
 
-const Button = ({ type, text, icon, onPress, style, disabled }: Props) => {
+const Button = ({
+  type,
+  text,
+  icon,
+  onPress,
+  style,
+  disabled,
+  textStyle,
+}: Props) => {
   return (
     <TouchableOpacity
       style={
@@ -45,7 +54,7 @@ const Button = ({ type, text, icon, onPress, style, disabled }: Props) => {
         <Text
           style={
             type === Constant.buttons.DESKTOP
-              ? styles.desktopText
+              ? [styles.desktopText, textStyle]
               : type === Constant.buttons.SECONDARY
               ? styles.secondaryText
               : type === Constant.buttons.MOBILE
