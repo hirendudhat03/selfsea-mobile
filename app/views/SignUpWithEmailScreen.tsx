@@ -24,53 +24,12 @@ import Dropdown from '../component/Dropdown';
 import { useDispatch } from 'react-redux';
 import { SignupRequest } from '../redux/actions/SignupAction';
 import { ScrollView } from 'react-native-gesture-handler';
+import { auths, modalBoxes, master } from '../config/static';
 
 const zxcvbn = require('zxcvbn');
 
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
-
-const month = [
-  'january',
-  'february',
-  'march',
-  'april',
-  'may',
-  'june',
-  'july',
-  'august',
-  'september',
-  'october',
-  'november',
-  'december',
-];
-
-const descriptionData = [
-  {
-    title:
-      'usernames cannot contain any personal identifiers (e.g. name,location, school, age)',
-  },
-  {
-    title: 'usernames cannot contain any harmful or offensive language',
-  },
-  {
-    title: 'usernames can only contain letters and numbers (no emojis)',
-  },
-];
-
-const birthnData = [
-  {
-    title: 'selfsea is just for the users between the ages 13-18.',
-  },
-  {
-    title:
-      'by signing up, you agree that you are within this age, and with our other terms of use.',
-  },
-  {
-    title:
-      'if we find out that you are out side of this age range, we will remove your account.',
-  },
-];
 
 const Signup = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -261,6 +220,7 @@ const Signup = ({ navigation }) => {
           navigation,
         ),
       );
+      navigation.navigate('CreateProfile')
     }
   };
 
@@ -302,7 +262,7 @@ const Signup = ({ navigation }) => {
       <Header
         type={Constant.navigatioHeader.PAGE_HEADER}
         leftIcon={Images.Arrowsquare}
-        label={'sign up with email'}
+        label={auths.SIGNUP_WITH_EMAIL}
         onPress={() => navigation.goBack()}
       />
       <ScrollView>
@@ -310,8 +270,8 @@ const Signup = ({ navigation }) => {
           <TextInput
             maxLength={64}
             type={Constant.textInput.LARGE_INPUT}
-            placeholder={'email@address.com'}
-            label={'email'}
+            placeholder={auths.EMAIL_PLACEHOLDER}
+            label={auths.EMAIL_LABEL}
             style={{ fontSize: 18 }}
             onChangeText={text => {
               selectFill(text);
@@ -376,7 +336,7 @@ const Signup = ({ navigation }) => {
 
           <View style={styles.monthView}>
             <View style={styles.rowView}>
-              <Text style={styles.birthMonthText}>birth month</Text>
+              <Text style={styles.birthMonthText}>{auths.BIRTH_MONTH}</Text>
               <TouchableOpacity
                 style={styles.touchableStyle}
                 onPress={() => changeBirthVisibility(true)}>
@@ -384,16 +344,16 @@ const Signup = ({ navigation }) => {
               </TouchableOpacity>
             </View>
             <View style={styles.yearView}>
-              <Text style={styles.birthYearText}>birth year</Text>
+              <Text style={styles.birthYearText}>{auths.BIRTH_YEAR}</Text>
             </View>
           </View>
           <View style={styles.monthViewBottom}>
             <Dropdown
-              optionList={month}
+              optionList={master.MONTHS}
               onSelect={value => {
                 selectFillmonth(value);
               }}
-              defaultButtonText={'select one'}
+              defaultButtonText={auths.SELECT_ONE}
               icon={Images.DropdownIcon}
               helperText={birthMonthError}
               value={birthMonth}
@@ -405,7 +365,7 @@ const Signup = ({ navigation }) => {
                 onSelect={value => {
                   selectFillBirth(value);
                 }}
-                defaultButtonText={'select one'}
+                defaultButtonText={auths.SELECT_ONE}
                 style={{ width: width * 0.3 }}
                 icon={Images.DropdownIcon}
                 helperText={birthYearError}
@@ -418,7 +378,7 @@ const Signup = ({ navigation }) => {
           </View>
 
           <View style={styles.userName}>
-            <Text style={styles.birthMonthText}>username</Text>
+            <Text style={styles.birthMonthText}>{auths.USERNAME}</Text>
             <TouchableOpacity
               style={styles.touchableStyle}
               onPress={() => changeModalVisibility(true)}>
@@ -454,7 +414,7 @@ const Signup = ({ navigation }) => {
       <View style={styles.bottomView}>
         <Button
           type={Constant.buttons.PRIMARY}
-          text={'create account'}
+          text={auths.CREATE_ACCOUNT_BUTTON}
           style={[
             { marginTop: 15 },
             circleFillEmail !== true ||
@@ -484,11 +444,9 @@ const Signup = ({ navigation }) => {
         <ModalPicker
           changeModalVisibility={changeModalVisibility}
           type={Constant.modal.MODAL}
-          textTitle={'selfsea usernames'}
-          smallText={
-            'your username will need to be approved by a moderator before your first post or comment can be approved. it cannot be changed after that.'
-          }
-          descriptionData={descriptionData}
+          textTitle={modalBoxes.TITLES.USERNAME}
+          smallText={modalBoxes.SMALL_TEXTS.USERNAME}
+          descriptionData={modalBoxes.USERNAME_DESCRIPTION}
           numberOfLines={3}
           button={Constant.buttons.CLOSE}
           text={'close'}
@@ -502,9 +460,9 @@ const Signup = ({ navigation }) => {
         <ModalPicker
           changeModalVisibility={changeBirthVisibility}
           type={Constant.modal.MODAL}
-          textTitle={'selfsea birth month'}
+          textTitle={modalBoxes.TITLES.BIRTH_MONTH}
           // smallText={'your birthname will need to be approved by a moderator before your first post or comment can be approved. it cannot be changed after that.'}
-          descriptionData={birthnData}
+          descriptionData={modalBoxes.BIRTH_DESCRIPTION}
           numberOfLines={3}
           button={Constant.buttons.CLOSE}
           text={'close'}

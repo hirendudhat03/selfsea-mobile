@@ -18,10 +18,11 @@ const stackNavigator = () => {
   return (
     //initRoute && (
 
-    <Stack.Navigator initialRouteName="Login">
+    <Stack.Navigator initialRouteName="Home">
       <Stack.Screen
         name="Home"
-        component={Home}
+        // component={Home}
+        component={TabNavigator}
         options={{
           headerShown: false,
         }}

@@ -1,11 +1,11 @@
 import React from 'react';
 import { SafeAreaView, Dimensions, StyleSheet } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import Mycommunity from './Mycommunity';
-import AllCommunities from './AllCommunities';
+// import Mycommunity from './Mycommunity';
+// import AllCommunities from './AllCommunities';
 import Color from '../theme/colors';
 import Font from '../theme/fonts';
-import MenteeCommunity from './Mentee/MenteeCommunity';
+import MenteeCommunity from '../views/Mentee/MenteeCommunity';
 
 const Tab = createMaterialTopTabNavigator();
 

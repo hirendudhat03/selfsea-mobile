@@ -55,6 +55,7 @@ const CreateProfile = ({ navigation }) => {
         navigation,
       ),
     );
+    navigation.navigate("Home")
   };
   const sectionDispatch = () => {
     dispatch(ProunounsRequest());

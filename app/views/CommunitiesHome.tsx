@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Image,
   FlatList,
-  SafeAreaView,
 } from 'react-native';
 import ModalPicker from './ModalPickerConfirm';
 
