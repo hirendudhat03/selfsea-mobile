@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "597759932954",
+    "project_id": "selfsea-dev",
+    "storage_bucket": "selfsea-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:597759932954:android:773623efedf43481a1efa3",
+        "android_client_info": {
+          "package_name": "com.selfseamobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "597759932954-hj037g8cqseqq6dpukg26752k305sqpl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnL2G1eSKLYypP6-g1FaCctRJ7j3Z2M1E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "597759932954-hj037g8cqseqq6dpukg26752k305sqpl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "597759932954-8ktpdsbjpnlhbrlsmc58o0civgjsrbds.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.SelfseaMobile"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -17,26 +17,50 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>localhost</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-		</dict>
-	</dict>
+  <dict>
+      <key>NSAllowsArbitraryLoads</key><true/>
+  </dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>CalibreBlack.otf</string>
+		<string>CalibreBlackItalic.otf</string>
+		<string>CalibreBold.otf</string>
+		<string>CalibreBoldItalic.otf</string>
+		<string>CalibreLight.otf</string>
+		<string>CalibreLightItalic.otf</string>
+		<string>CalibreMedium.otf</string>
+		<string>CalibreMediumItalic.otf</string>
+		<string>CalibreRegular.otf</string>
+		<string>CalibreRegularItalic.otf</string>
+		<string>CalibreSemibold.otf</string>
+		<string>CalibreSemiboldItalic.otf</string>
+		<string>CalibreThin.otf</string>
+		<string>CalibreThinItalic.otf</string>
+		<string>Calibre-Black.otf</string>
+		<string>Calibre-BlackItalic.otf</string>
+		<string>Calibre-Bold.otf</string>
+		<string>Calibre-BoldItalic.otf</string>
+		<string>Calibre-Light.otf</string>
+		<string>Calibre-LightItalic.otf</string>
+		<string>Calibre-Medium.otf</string>
+		<string>Calibre-MediumItalic.otf</string>
+		<string>Calibre-Regular.otf</string>
+		<string>Calibre-RegularItalic.otf</string>
+		<string>Calibre-Semibold.otf</string>
+		<string>Calibre-SemiboldItalic.otf</string>
+		<string>Calibre-Thin.otf</string>
+		<string>Calibre-ThinItalic.otf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
