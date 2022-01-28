@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
   Linking,
+  Alert,
 } from 'react-native';
 
 import Constant from '../theme/constant';
@@ -18,7 +19,7 @@ import Button from '../component/Button';
 import Auth from '../component/Authentication';
 
 const onPressText = () => {
-  alert('onPressText');
+  Alert.alert('onPressText');
 };
 
 const Login = ({ navigation }) => {
@@ -51,14 +52,14 @@ const Login = ({ navigation }) => {
           <Button
             type={Constant.buttons.PRIMARY}
             text={'sign up with email'}
-            style={{ marginTop: 8 }}
+            style={styles.buttonStyle}
             onPress={() => navigation.navigate('Signup')}
           />
 
           <Text style={styles.contentText}>
             by signing up for selfsea, you are agreeing to the
           </Text>
-          <View style={{ flexDirection: 'row' }}>
+          <View style={styles.conditionViewStyle}>
             <TouchableOpacity
               onPress={() => {
                 Linking.openURL(Constant.link.PRIVACY_POLICY);
@@ -110,7 +111,6 @@ const styles = StyleSheet.create({
     marginTop: -10,
   },
   contentText: {
-    // fontSize: 12,
     fontFamily: Fonts.CALIBRE,
     marginTop: 7,
     fontSize: 14,
@@ -156,6 +156,8 @@ const styles = StyleSheet.create({
     shadowRadius: 1,
     shadowOpacity: 1,
   },
+  buttonStyle: { marginTop: 8 },
+  conditionViewStyle: { flexDirection: 'row' },
 });
 
 export default Login;

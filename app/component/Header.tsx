@@ -108,7 +108,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
-    // paddingTop: 50,
   },
   primaryPageHeaderText: {
     fontFamily: Font.CALIBRE,

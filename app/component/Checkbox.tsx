@@ -3,8 +3,6 @@ import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import Color from '../theme/colors';
 import Font from '../theme/fonts';
 import Images from '../theme/images';
-// @ts-ignore
-// import Right from '../assets/images/pngs/Vector.png';
 
 interface Props {
   text: string;

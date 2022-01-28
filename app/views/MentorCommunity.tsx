@@ -11,11 +11,11 @@ import LinearGradient from 'react-native-linear-gradient';
 
 const DATA = [{}, {}];
 
-const MentorCommunity = ({ navigation }) => {
+const MentorCommunity = () => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
-  const [mentorCommunity, setMentorCommunity] = useState([DATA]);
+  const [mentorCommunity] = useState([DATA]);
 
   const renderItem = () => (
     <View style={styles.viewStyle}>

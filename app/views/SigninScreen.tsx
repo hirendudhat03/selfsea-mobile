@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  // ActivityIndicator,
+  // Modal,
+} from 'react-native';
 
 import Constant from '../theme/constant';
 import Fonts from '../theme/fonts';
@@ -12,11 +19,16 @@ import TextInput from '../component/CustomTextInput';
 import CheckBox from '../component/Checkbox';
 import Header from '../component/Header';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { LoginRequest } from '../redux/actions/LoginAction';
+
+// import Loader from '../component/Loader';
 
 const Signin = ({ navigation }) => {
   const dispatch = useDispatch();
+  const loginRes = useSelector(state => state.LoginReducer);
+
+  console.log('LoginReducer : ', JSON.stringify(loginRes));
 
   const [isSelectedCheckBox, setISSelectionCheckBox] = useState(false);
 
@@ -38,28 +50,21 @@ const Signin = ({ navigation }) => {
     }
   };
 
-  const [circleFillEmail, setCircleFillEmail] = useState<boolean>();
-
   const selectFill = text => {
     setEmail(text);
     if (text === '') {
-      setCircleFillEmail(false);
       setEmailBorder(Color.COMMUNITY_ORANGE);
       setEmailError('Please enter email address. ');
     } else if (
-      text.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null
+      text.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/) === null
     ) {
       setEmailBorder(Color.COMMUNITY_ORANGE);
       setEmailError('Please enter a valid email address. ');
-      setCircleFillEmail(false);
     } else {
-      setCircleFillEmail(true);
       setEmailBorder(Color.BORDER_COLOR_LIGHTGRAY);
       setEmailError('');
     }
   };
-
-  const [circleFillPassword, setCircleFillPassword] = useState<boolean>();
 
   const selectFillPassword = text => {
     console.log('text:::', text);
@@ -67,11 +72,9 @@ const Signin = ({ navigation }) => {
     if (text === '') {
       setpasswordBorder(Color.COMMUNITY_ORANGE);
       setPasswordError('Password must contain a number. ');
-      setCircleFillPassword(false);
     } else {
       setpasswordBorder(Color.BORDER_COLOR_LIGHTGRAY);
       setPasswordError(' ');
-      setCircleFillPassword(true);
     }
   };
   const [email, setEmail] = useState('');
@@ -97,18 +100,20 @@ const Signin = ({ navigation }) => {
     } else if (!email) {
       setEmailError('Email Required');
     } else if (
-      email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null
+      email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/) === null
     ) {
       setEmailError('Valid email Required');
     } else if (!password) {
       setPasswordError('Password Required');
     } else {
-      dispatch(LoginRequest(email, password, navigation));
+      dispatch(LoginRequest(email, password, navigation, true));
     }
   };
 
   return (
     <View style={styles.container}>
+      {/* <Loader value={loginRes.loader} /> */}
+
       <Header
         type={Constant.navigatioHeader.PAGE_HEADER}
         leftIcon={Images.Arrowsquare}
@@ -121,7 +126,7 @@ const Signin = ({ navigation }) => {
             type={Constant.textInput.LARGE_INPUT}
             placeholder={'email@address.com'}
             label={'email'}
-            style={{ fontSize: 18 }}
+            style={styles.inputTextStyle}
             onChangeText={text => {
               selectFill(text);
             }}
@@ -135,7 +140,7 @@ const Signin = ({ navigation }) => {
           <TextInput
             type={Constant.textInput.LARGE_INPUT}
             label={'password'}
-            style={{ fontSize: 18 }}
+            style={styles.inputTextStyle}
             onChangeText={text => {
               selectFillPassword(text);
             }}
@@ -163,11 +168,11 @@ const Signin = ({ navigation }) => {
           <Button
             type={Constant.buttons.PRIMARY}
             text={'sign in'}
-            style={{ marginTop: 10, marginBottom: 10 }}
+            style={styles.buttonStyle}
             onPress={() => SigninValidation()}
           />
 
-          <View style={{ flexDirection: 'row' }} />
+          <View style={styles.bottomContentStyle} />
         </View>
         <View style={styles.bottomView}>
           <Text style={styles.bottomText}>or</Text>
@@ -200,7 +205,6 @@ const styles = StyleSheet.create({
 
   headerView: {
     flex: 0.5,
-    // alignItems: 'center',
     backgroundColor: Color.BASE_COLOR_DARK_BLUE,
   },
   contentView: {
@@ -235,6 +239,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginVertical: 10,
   },
+  inputTextStyle: { fontSize: 18 },
+  buttonStyle: { marginTop: 10, marginBottom: 10 },
+  bottomContentStyle: { flexDirection: 'row' },
 });
 
 export default Signin;

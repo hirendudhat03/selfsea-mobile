@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, FlatList } from 'react-native';
 
 import Constant from '../theme/constant';
@@ -11,14 +11,14 @@ import Header from '../component/Header';
 import Button from '../component/Button';
 import Badges from '../component/Badges';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const DATA = [{}, {}, {}, {}];
 const HealthScreen = ({ navigation }) => {
   const homeResponse = useSelector(state => state.HomeReducer);
   console.log(' homeResponse: ', JSON.stringify(homeResponse));
 
-  const [health, setHealth] = useState([DATA]);
+  const [health] = useState([DATA]);
 
   const renderItem = () => (
     <View style={styles.viewStyleFlatlist}>
@@ -26,7 +26,7 @@ const HealthScreen = ({ navigation }) => {
         type={Constant.buttons.DESKTOP}
         text={'this post need a responed'}
         style={styles.desktopStyle}
-        textStyle={{ fontSize: 19 }}
+        textStyle={styles.buttonTextStyle}
       />
 
       <View style={styles.headerTextView}>
@@ -39,7 +39,7 @@ const HealthScreen = ({ navigation }) => {
           In case someone who is struggling needs to hear this: we are a product
           of our circumstances and genetics.
         </Text>
-        <View style={{ marginVertical: 10 }}>
+        <View style={styles.viewDescriptionStyle}>
           <Text style={styles.descriptionsText}>
             Be compassionate with yourself, healing will come later.
           </Text>
@@ -50,14 +50,14 @@ const HealthScreen = ({ navigation }) => {
           <Badges
             type={Constant.badges.COMMENTS}
             text={'0 Comments'}
-            style={{ paddingVertical: 3 }}
+            style={styles.badgeCommentStyle}
           />
 
           <Badges
             type={Constant.badges.CONTENT}
             text={'[example cw]'}
             leftIcon={Images.Warning}
-            style={{ paddingVertical: 2 }}
+            style={styles.badgeContentStyle}
           />
         </View>
         <View style={styles.timeView}>
@@ -78,7 +78,6 @@ const HealthScreen = ({ navigation }) => {
           'a place to discuss mental health and share how these identities play a pivotal role in  experiences and access to resources.'
         }
         onPress={() => navigation.goBack()}
-        onPressRight={() => alert('setting')}
       />
       <LinearGradient
         colors={[Color.COMMUNITY_GREEN, Color.COLOR_LIGHT]}
@@ -242,6 +241,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
+  badgeCommentStyle: { paddingVertical: 3 },
+  badgeContentStyle: { paddingVertical: 2 },
+  viewDescriptionStyle: { marginVertical: 10 },
+  buttonTextStyle: { fontSize: 19 },
 });
 
 export default HealthScreen;

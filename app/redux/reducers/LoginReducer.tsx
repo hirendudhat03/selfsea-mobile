@@ -1,10 +1,8 @@
-/* Login Reducer
- * handles login states in the app
- */
 import CreateReducer from './CreateReducer';
 
 const initialState = {
   data: null,
+  loader: false,
 };
 
 console.log('call loginReducer');
@@ -16,6 +14,7 @@ export const LoginReducer = CreateReducer(initialState, {
     console.log('action : ', action);
     return {
       data: action.payload,
+      loader: action.loader,
     };
   },
   ['LOGIN_REQUEST'](state, action) {
@@ -24,6 +23,7 @@ export const LoginReducer = CreateReducer(initialState, {
     console.log('action : ', action);
     return {
       action: action,
+      loader: action.loader,
     };
   },
 });

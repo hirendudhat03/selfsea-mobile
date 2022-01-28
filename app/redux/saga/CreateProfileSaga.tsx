@@ -2,9 +2,9 @@ import { put, call } from 'redux-saga/effects';
 
 import * as CreateProfileAction from '../actions/CreateProfileAction';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { api } from '../../services';
 import { updateProfileMutation } from '../../graphql/mutations/UserMutation';
+import { Alert } from 'react-native';
 
 export function* createProfileSaga(action) {
   const CreateProfile = async (
@@ -25,19 +25,6 @@ export function* createProfileSaga(action) {
     console.log('Location : ', selectLocationDropDown);
 
     try {
-      // const response = {
-      //   data: {
-      //     userProfile: {
-      //       id: 'string',
-      //       isPrivate: 'boolean',
-      //       yearOfBirth: 'integer',
-      //       bio: 'string',
-      //       state: 'string',
-      //       city: 'string',
-      //     },
-      //   },
-      // };
-      // await auth().signInWithEmailAndPassword(email, password)
       const mutationVariables = {
         isPrivate: true,
         location: 'xyz',
@@ -50,6 +37,7 @@ export function* createProfileSaga(action) {
       return { ...data, ...response };
     } catch (e) {
       console.log(e);
+      Alert.alert(e);
     }
   };
 
@@ -65,7 +53,6 @@ export function* createProfileSaga(action) {
 
   if (response === undefined) {
   } else {
-    // AsyncStorage.setItem('user3', 'true');
     action.navigation.navigate('TabNavigator');
   }
 

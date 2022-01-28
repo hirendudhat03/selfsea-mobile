@@ -1,19 +1,18 @@
-export function HomeResponse(data) {
+export function HomeResponse(data, loader) {
   console.log('call SaveHomeResponse : ', data);
 
   return {
     type: 'HOME_RESPONSE',
     payload: data,
+    loader: loader,
   };
 }
 
-export function HomeRequest(navigation) {
-  // console.log('call SaveLoginResponse : ', data)
-
+export function HomeRequest(navigation, loader) {
   return {
     type: 'HOME_REQUEST',
-    // email: email,
-    // password:password,
+
     navigation: navigation,
+    loader: loader,
   };
 }

@@ -2,6 +2,7 @@ import CreateReducer from './CreateReducer';
 
 const initialState = {
   data: null,
+  loader: false,
 };
 
 console.log('call EthnicityReducer');
@@ -13,6 +14,7 @@ export const EthnicityReducer = CreateReducer(initialState, {
     console.log('action : ', action);
     return {
       data: action.payload,
+      loader: action.loader,
     };
   },
   ['ETHNICITY_REQUEST'](state, action) {
@@ -21,6 +23,7 @@ export const EthnicityReducer = CreateReducer(initialState, {
     console.log('action : ', action);
     return {
       action: action,
+      loader: action.loader,
     };
   },
 });

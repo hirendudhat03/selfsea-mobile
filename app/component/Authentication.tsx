@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import Color from '../theme/colors';
 // @ts-ignore
@@ -46,13 +47,13 @@ const Authentication = ({ text, icon, type }: Props) => {
     } catch (error) {
       console.error('Message', JSON.stringify(error));
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        alert('User Cancelled the Login Flow');
+        Alert.alert('User Cancelled the Login Flow');
       } else if (error.code === statusCodes.IN_PROGRESS) {
-        alert('Signing In');
+        Alert.alert('Signing In');
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        alert('Play Services Not Available or Outdated');
+        Alert.alert('Play Services Not Available or Outdated');
       } else {
-        alert(error.message);
+        Alert.alert(error.message);
       }
     }
   };
@@ -63,11 +64,11 @@ const Authentication = ({ text, icon, type }: Props) => {
     if (type === Constant.authLogin.GOOGLE) {
       _signIn();
     } else if (type === Constant.authLogin.INSTAGRAM) {
-      alert('instagram');
+      Alert.alert('instagram');
     } else if (type === Constant.authLogin.APPLE) {
-      alert('Apple');
+      Alert.alert('Apple');
     } else {
-      alert('null');
+      Alert.alert('null');
     }
   };
 

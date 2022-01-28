@@ -18,6 +18,7 @@ interface Props {
   disabled?: boolean;
   onPress?: () => void;
   textStyle: {};
+  style: {};
 }
 
 const Button = ({

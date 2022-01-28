@@ -1,13 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  Modal,
-  StyleSheet,
-  Image,
-  FlatList,
-  SafeAreaView,
-} from 'react-native';
+import { View, Text, Modal, StyleSheet, Image, FlatList } from 'react-native';
 import ModalPicker from './ModalPickerConfirm';
 
 import Constant from '../theme/constant';
@@ -19,7 +11,7 @@ import Header from '../component/Header';
 import Button from '../component/Button';
 
 import LinearGradient from 'react-native-linear-gradient';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { HomeRequest } from '../redux/actions/HomeAction';
 
 const DATA = [{}, {}, {}, {}];
@@ -47,8 +39,6 @@ const descriptionData = [
 ];
 
 const CommunitiesHome = ({ navigation }) => {
-  //   const createprofileRes = useSelector(state => state.CreateProfileReducer)
-  // console.log('signupRes321 : ',JSON.stringify(createprofileRes))
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -76,7 +66,7 @@ const CommunitiesHome = ({ navigation }) => {
         <Button
           type={Constant.buttons.CLOSE}
           text={'join'}
-          style={{ paddingVertical: 12 }}
+          style={styles.buttonStyle}
           onPress={() => dispatch(HomeRequest(navigation))}
         />
       </View>
@@ -188,6 +178,7 @@ const styles = StyleSheet.create({
   descriptionTextStyle: {
     textAlign: 'left',
   },
+  buttonStyle: { paddingVertical: 12 },
 });
 
 export default CommunitiesHome;

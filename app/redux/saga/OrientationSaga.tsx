@@ -2,7 +2,8 @@ import { call, put } from 'redux-saga/effects';
 
 import { api } from '../../services';
 import { userOrientationQuery } from '../../graphql/queries/UserProfile';
-import * as OrientationAction from '../actions/OrientationAction';
+import { OrientationResponse } from '../actions/OrientationAction';
+import { Alert } from 'react-native';
 
 export function* orientationSaga(action) {
   const Orientation = async () => {
@@ -15,10 +16,16 @@ export function* orientationSaga(action) {
       return response;
     } catch (e) {
       console.log('e : ', e);
+      Alert.alert(e);
     }
   };
 
   const response = yield call(Orientation);
-  yield put(OrientationAction.OrientationResponse(response));
+
   console.warn('response saga', response);
+  if (response === null) {
+    yield put(OrientationResponse(null, false));
+  } else {
+    yield put(OrientationResponse(response, false));
+  }
 }

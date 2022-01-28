@@ -1,4 +1,4 @@
-import { takeEvery, takeLatest, all } from 'redux-saga/effects';
+import { takeEvery, all } from 'redux-saga/effects';
 
 import { loginSaga } from './LoginSaga';
 import { signupSaga } from './SignupSaga';
@@ -8,11 +8,6 @@ import { pronounsSaga } from './PronounsSaga';
 import { orientationSaga } from './OrientationSaga';
 import { ethnicitySaga } from './EthnicitySaga';
 import { genderSaga } from './GenderSaga';
-
-// export default function* root_saga() {
-//   yield takeEvery('LOGIN_REQUEST', loginSaga);
-//   // yield takeEvery('SIGNUP_REQUEST', signupSaga);
-// }
 
 export default function* root_saga() {
   yield all([

@@ -5,7 +5,7 @@ import Customdrawer from '../views/CustomDrawer';
 
 const Drawer = createDrawerNavigator();
 
-const DrawerNavigator = props => {
+const DrawerNavigator = () => {
   return (
     <Drawer.Navigator
       drawerContent={props => <Customdrawer props={props} />}

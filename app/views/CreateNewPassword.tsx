@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Dimensions, Modal } from 'react-native';
+import { View, Text, StyleSheet, Modal } from 'react-native';
 
 import ModalPicker from './ModalPickerConfirm';
 
@@ -13,24 +13,9 @@ import Font from '../theme/fonts';
 import Color from '../theme/colors';
 const zxcvbn = require('zxcvbn');
 
-const height = Dimensions.get('window').height;
-
-const descriptionData = [
-  {
-    title:
-      'usernames cannot contain any personal identifiers (e.g. name,location, school, age)',
-  },
-  {
-    title: 'usernames cannot contain any harmful or offensive language',
-  },
-  {
-    title: 'usernames can only contain letters and numbers (no emojis)',
-  },
-];
-
 const CreateNewPassword = ({ navigation }) => {
   useEffect(() => {
-    // changeModalVisibility(true);
+    changeModalVisibility(true);
   }, []);
 
   const [isModalVisible, setIsMoalVisiable] = useState(false);
@@ -100,7 +85,7 @@ const CreateNewPassword = ({ navigation }) => {
         onPress={() => navigation.goBack()}
       />
       <View style={styles.contentView}>
-        <View style={{ justifyContent: 'center', marginVertical: 20 }}>
+        <View style={styles.requirementView}>
           <Text style={styles.requirementText}>[password requirements]</Text>
           <Text style={styles.requirementText}> [password requirements]</Text>
           <Text style={styles.requirementText}> [password requirements]</Text>
@@ -110,12 +95,11 @@ const CreateNewPassword = ({ navigation }) => {
           <TextInput
             type={Constant.textInput.LARGE_INPUT}
             label={'new password'}
-            style={{ fontSize: 18 }}
+            style={styles.inputStyle}
             onChangeText={text => {
               selectFillPassword(text);
               const response = zxcvbn(text);
               setPasswordScore(response.score);
-              // console.log({ response });
             }}
             value={Password}
             helperText={PasswordError}
@@ -125,7 +109,7 @@ const CreateNewPassword = ({ navigation }) => {
             circleFill={circleFillPassword}
             onTouchStart={() => handleTouchpasswordBorder()}
             borderColor={passwordBorder}
-            viewStyle={{ width: '100%' }}
+            viewStyle={styles.inputViewStyle}
           />
           <View style={styles.viewStyle}>
             <View
@@ -160,8 +144,7 @@ const CreateNewPassword = ({ navigation }) => {
         <Button
           type={Constant.buttons.PRIMARY}
           text={'reset and login'}
-          style={[{ marginTop: 15 }]}
-          //onPress={() => SignupValidation()}
+          style={styles.buttonStyle}
         />
       </View>
       <Modal
@@ -230,5 +213,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginHorizontal: 20,
   },
+  requirementView: { justifyContent: 'center', marginVertical: 20 },
+  buttonStyle: { marginTop: 15 },
+  inputViewStyle: { width: '100%' },
+  inputStyle: { fontSize: 18 },
 });
 export default CreateNewPassword;

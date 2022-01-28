@@ -15,7 +15,7 @@ import TextInput from '../component/CustomTextInput';
 import Header from '../component/Header';
 import Color from '../theme/colors';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const Home = ({ navigation }) => {
   const loginRes = useSelector(state => state.LoginReducer);
@@ -63,7 +63,7 @@ const Home = ({ navigation }) => {
     <SafeAreaView>
       <ScrollView>
         <View style={styles.container}>
-          <Text style={{ fontSize: 20 }} onPress={() => navigation.goBack()}>
+          <Text style={styles.text} onPress={() => navigation.goBack()}>
             SECOND SCREEN
           </Text>
 
@@ -199,5 +199,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginVertical: 40,
   },
+  text: { fontSize: 20 },
 });
 export default Home;

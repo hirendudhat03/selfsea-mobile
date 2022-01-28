@@ -6,32 +6,20 @@ import {
   StyleSheet,
   Image,
   FlatList,
-  TouchableOpacity,
+  Alert,
 } from 'react-native';
 import Constant from '../theme/constant';
 import Color from '../theme/colors';
-// import Font from '../theme/fonts';
 import Images from '../theme/images';
 import Font from '../theme/fonts';
 import ModalPicker from './ModalPickerConfirm';
 
 import LinearGradient from 'react-native-linear-gradient';
 import Header from '../component/Header';
-import Button from '../component/Button';
 import Badges from '../component/Badges';
 
 const DATA = [{}, {}, {}, {}];
 
-const descriptionData = [
-  {
-    title:
-      'selfsea was designed together with young people, as a place where yourself reflected when a supportive and inclusive community that prioritizes your identity and expirience. ',
-  },
-  {
-    title:
-      "you have the option of selecting content warnings if there are topics you'd prefer not to see. when you select a content warning, any posts containing that warning will be greyed out. you can add and edit content warnings in your profile settings.",
-  },
-];
 const NavigationIdentity = ({ navigation }) => {
   useEffect(() => {
     changeModalVisibility(true);
@@ -71,14 +59,14 @@ const NavigationIdentity = ({ navigation }) => {
           <Badges
             type={Constant.badges.COMMENTS}
             text={'0 Comments'}
-            style={{ paddingVertical: 3 }}
+            style={styles.badgeCommentStyle}
           />
 
           <Badges
             type={Constant.badges.CONTENT}
             text={'homophobia'}
             leftIcon={Images.Warning}
-            style={{ paddingVertical: 2 }}
+            style={styles.badgeContentStyle}
           />
         </View>
         <View style={styles.timeView}>
@@ -99,7 +87,7 @@ const NavigationIdentity = ({ navigation }) => {
           'a community to discuss questions and situations related to gender identity, sexual orientation, raceand ethnicity'
         }
         onPress={() => navigation.goBack()}
-        onPressRight={() => alert('setting')}
+        onPressRight={() => Alert.alert('setting')}
       />
       <LinearGradient
         colors={['rgba(255, 255, 255, 0.22)', Color.COLOR_LIGHT]}
@@ -121,10 +109,10 @@ const NavigationIdentity = ({ navigation }) => {
           smallTextParagraph={
             "you have the option of selecting content warnings if there are topics you'd prefer not to see. when you select a content warning, any posts containing that warning will be greyed out. you can add and edit content warnings in your profile settings."
           }
-          button={Constant.buttons.CLOSE}
+          firstType={Constant.buttons.CLOSE}
           firstText={'setting'}
           secondText={'view community'}
-          type={Constant.modal.MODAL_SUCCESS}
+          secondType={Constant.buttons.PRIMARY}
         />
       </Modal>
     </View>
@@ -231,6 +219,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
+  badgeCommentStyle: { paddingVertical: 3 },
+  badgeContentStyle: { paddingVertical: 2 },
 });
 
 export default NavigationIdentity;

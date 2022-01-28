@@ -1,12 +1,17 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 const Person = () => {
   return (
-    <View style={{ flex: 1, backgroundColor: 'white' }}>
+    <View style={styles.viewStyle}>
       <Text>Tab Person</Text>
     </View>
   );
 };
-
+const styles = StyleSheet.create({
+  viewStyle: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+});
 export default Person;
