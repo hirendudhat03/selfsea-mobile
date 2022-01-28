@@ -69,7 +69,7 @@ const CreateProfile = ({ navigation }) => {
   const ethnicityResponse = useSelector(state => state.EthnicityReducer);
   console.log('ethnicityResponse::: ', JSON.stringify(ethnicityResponse));
 
-  const sectionDispatch = () => {
+  useEffect(() => {
     dispatch(ProunounsRequest());
     setPronounsDropDown(...pronounsResponse);
 
@@ -81,11 +81,18 @@ const CreateProfile = ({ navigation }) => {
 
     dispatch(EthnicityRequest());
     setRaceDropDown(...ethnicityResponse);
-  };
+  }, [
+    dispatch,
+    pronounsResponse,
+    orientationResponse,
+    genderResponse,
+    ethnicityResponse,
+    setPronounsDropDown,
+    setOrientationDropDown,
+    setGenderDropDown,
+    setRaceDropDown,
+  ]);
 
-  useEffect(() => {
-    sectionDispatch();
-  }, []);
   const [profile, setProfile] = useState('');
 
   const [isModalVisible, setIsMoalVisiable] = useState(false);
