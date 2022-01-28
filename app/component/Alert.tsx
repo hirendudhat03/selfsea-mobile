@@ -50,7 +50,7 @@ const Alert = ({ type, text }: Props) => {
             {text}
           </Text>
         </View>
-        {type === Constant.alert.MENTEE || type    &&
+        {(type === Constant.alert.MENTEE || type === Constant.alert.MENTEE_FADE)    &&
           <View style={[styles.touchableStyle, {width:"10%"}]} >
             <Image source={Images.Infocircle} />
           </View>
