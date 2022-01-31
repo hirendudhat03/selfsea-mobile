@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { api } from '../../services';
 import { LoginResponse } from '../actions/LoginAction';
 
-// import { currentUserQuery } from '../../graphql/queries/UserProfile';
+import { currentUserQuery } from '../../graphql/queries/UserProfile';
 import { Alert } from 'react-native';
 
 export function* loginSaga(action) {
@@ -16,24 +16,42 @@ export function* loginSaga(action) {
 
     try {
       const response = await auth().signInWithEmailAndPassword(email, password);
-      if (response.user.emailVerified) {
-        const token = await response.user.getIdToken();
-        console.log('token : ', token);
-        await AsyncStorage.setItem('jwtToken', token);
-        api.setAuthHeader(token);
 
-        AsyncStorage.getItem('currentUser').then(value => {
-          console.log('value:', value);
-          if (value === 'true') {
-            action.navigation.navigate('DrawerNavigator');
-          } else {
-            action.navigation.navigate('CreateProfile');
-          }
-        });
-      } else {
-        console.log('not verified');
-        Alert.alert('not verified');
-      }
+      // if (response.user.emailVerified) {
+      const token = await response.user.getIdToken();
+      console.log('token : ', token);
+      await AsyncStorage.setItem('jwtToken', token);
+      api.setAuthHeader(token);
+
+      AsyncStorage.getItem('currentUser12').then(value => {
+        console.log('value:', value);
+        if (value === 'true') {
+          const Getuser = async () => {
+            const data = await api.client.request(currentUserQuery);
+            console.log('data:', JSON.stringify(data));
+
+            if (data.currentUser.roles[0].name === 'MENTEE') {
+              action.navigation.navigate('DrawerNavigator');
+            }
+            if (data.currentUser.roles[0].name === 'MENTOR') {
+              action.navigation.navigate('DrawerNavigator');
+            }
+            if (data.currentUser.roles[0].name === 'MODERATOR') {
+              action.navigation.navigate('DrawerNavigator');
+            }
+            if (data.currentUser.roles[0].name === 'ADMIN') {
+              action.navigation.navigate('DrawerNavigator');
+            }
+          };
+          Getuser();
+        } else {
+          action.navigation.navigate('CreateProfile');
+        }
+      });
+      // } else {
+      //   console.log('not verified');
+      //   Alert.alert('not verified');
+      // }
 
       return response;
     } catch (e) {

@@ -42,6 +42,10 @@ export const currentUserQuery = gql`
       id
       authId
       email
+      roles {
+        id
+        name
+      }
       profile {
         id
         bio

@@ -42,7 +42,7 @@ const descriptionData = [
 const CreateProfile = ({ navigation }) => {
   const dispatch = useDispatch();
   const menuResponse = useSelector(state => state.MenuReducer);
-  console.log('signupResReducer : ', JSON.stringify(menuResponse));
+  console.log('MenuReducer : ', JSON.stringify(menuResponse));
 
   const onPressDispatch = () => {
     dispatch(
@@ -63,15 +63,15 @@ const CreateProfile = ({ navigation }) => {
 
   const sectionDispatch = () => {
     dispatch(DropDownRequest());
-    setPronounsDropDown([menuResponse.pronouns]);
-    setOrientationDropDown([menuResponse.orientations]);
-    setGenderDropDown([menuResponse.genders]);
-    setRaceDropDown([menuResponse.ethnicities]);
+    setPronounsDropDown([menuResponse]);
+    setOrientationDropDown([menuResponse]);
+    setGenderDropDown([menuResponse]);
+    setRaceDropDown([menuResponse]);
   };
 
   useEffect(() => {
     sectionDispatch();
-    AsyncStorage.setItem('currentUser1', 'true');
+    AsyncStorage.setItem('currentUser12', 'true');
   }, []);
 
   const [profile, setProfile] = useState('');

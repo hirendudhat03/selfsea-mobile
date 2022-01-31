@@ -76,8 +76,8 @@ const birthnData = [
 
 const Signup = ({ navigation }) => {
   const dispatch = useDispatch();
-  const signupRes = useSelector(state => state.SignupReducer);
 
+  const signupRes = useSelector(state => state.SignupReducer);
   console.log('signupResReducer : ', JSON.stringify(signupRes));
 
   const [years, setYear] = useState<number[]>([]);

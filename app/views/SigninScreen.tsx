@@ -25,8 +25,8 @@ import Loader from '../component/Loader';
 
 const Signin = ({ navigation }) => {
   const dispatch = useDispatch();
-  const loginRes = useSelector(state => state.LoginReducer);
 
+  const loginRes = useSelector(state => state.LoginReducer);
   console.log('LoginReducer : ', JSON.stringify(loginRes));
 
   const [isSelectedCheckBox, setISSelectionCheckBox] = useState(false);
@@ -105,13 +105,13 @@ const Signin = ({ navigation }) => {
     } else if (!password) {
       setPasswordError('Password Required');
     } else {
-      dispatch(LoginRequest(email, password, navigation, true));
+      dispatch(LoginRequest(email, password, navigation));
     }
   };
 
   return (
     <View style={styles.container}>
-      <Loader value={loginRes.loader} />
+      {/* <Loader value={loginRes.loader} /> */}
 
       <Header
         type={Constant.navigatioHeader.PAGE_HEADER}
@@ -162,10 +162,7 @@ const Signin = ({ navigation }) => {
       </View> */}
 
       <ScrollView>
-        <View
-          style={{
-            flex: 1.5,
-          }}>
+        <View style={styles.contentView}>
           <TextInputCom
             type={Constant.textInput.LARGE_INPUT}
             placeholder={'email@address.com'}
@@ -202,7 +199,7 @@ const Signin = ({ navigation }) => {
           <Text
             style={styles.contentText}
             onPress={() => navigation.navigate('ForgotPassword')}>
-            forgot your password?{' '}
+            forgot your password?
           </Text>
           <CheckBox
             onPressCheckbox={selectCheckBox}
@@ -211,14 +208,13 @@ const Signin = ({ navigation }) => {
             text={'keep me signed in'}
           />
 
-          <Text onPress={() => SigninValidation()}>asd</Text>
-          {/* <Button
+          {/* <Text onPress={() => SigninValidation()}>asd</Text> */}
+          <Button
             type={Constant.buttons.PRIMARY}
             text={'sign in'}
             style={styles.buttonStyle}
             onPress={() => SigninValidation()}
-          /> */}
-
+          />
           <View style={styles.bottomContentStyle} />
         </View>
         <View style={styles.bottomView}>
@@ -288,12 +284,9 @@ const styles = StyleSheet.create({
   },
   inputTextStyle: { fontSize: 18 },
   buttonStyle: { marginTop: 10, marginBottom: 10 },
-  // bottomContentStyle: {
-  //   flexDirection: 'row',
-  //   backgroundColor: 'green',
-  //   height: 50,
-  //   width: 50,
-  // },
+  bottomContentStyle: {
+    flexDirection: 'row',
+  },
   containerLoader: {
     flex: 1,
     backgroundColor: 'transparent',
