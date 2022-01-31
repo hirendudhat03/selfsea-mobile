@@ -71,8 +71,9 @@ const CreateProfile = ({ navigation }) => {
 
   useEffect(() => {
     sectionDispatch();
-    AsyncStorage.setItem('currentUser', 'true');
+    AsyncStorage.setItem('currentUser1', 'true');
   }, []);
+
   const [profile, setProfile] = useState('');
 
   const [isModalVisible, setIsMoalVisiable] = useState(false);
