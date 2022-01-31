@@ -1,6 +1,6 @@
 import { put, call } from 'redux-saga/effects';
 
-import * as CreateProfileAction from '../actions/CreateProfileAction';
+import { CreateProfileResponse } from '../actions/CreateProfileAction';
 
 import { api } from '../../services';
 import { updateProfileMutation } from '../../graphql/mutations/UserMutation';
@@ -38,6 +38,7 @@ export function* createProfileSaga(action) {
     } catch (e) {
       console.log(e);
       Alert.alert(e);
+      return null;
     }
   };
 
@@ -57,5 +58,9 @@ export function* createProfileSaga(action) {
   }
 
   console.warn('response saga', response);
-  yield put(CreateProfileAction.CreateProfileResponse(response));
+  if (response === null) {
+    yield put(CreateProfileResponse(null, false));
+  } else {
+    yield put(CreateProfileResponse(response, false));
+  }
 }

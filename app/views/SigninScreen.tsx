@@ -3,9 +3,8 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
-  // ActivityIndicator,
-  // Modal,
 } from 'react-native';
 
 import Constant from '../theme/constant';
@@ -15,14 +14,14 @@ import Images from '../theme/images';
 
 import Button from '../component/Button';
 import Auth from '../component/Authentication';
-import TextInput from '../component/CustomTextInput';
+import TextInputCom from '../component/CustomTextInput';
 import CheckBox from '../component/Checkbox';
 import Header from '../component/Header';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginRequest } from '../redux/actions/LoginAction';
 
-// import Loader from '../component/Loader';
+import Loader from '../component/Loader';
 
 const Signin = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -112,7 +111,7 @@ const Signin = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      {/* <Loader value={loginRes.loader} /> */}
+      <Loader value={loginRes.loader} />
 
       <Header
         type={Constant.navigatioHeader.PAGE_HEADER}
@@ -120,9 +119,54 @@ const Signin = ({ navigation }) => {
         label={'sign in'}
         onPress={() => navigation.goBack()}
       />
+      {/* <View style={{ flex: 1, paddingTop: 100 }}>
+        <TextInputCom
+          type={Constant.textInput.LARGE_INPUT}
+          placeholder={'email@address.com'}
+          label={'email'}
+          style={styles.inputTextStyle}
+          onChangeText={text => {
+            selectFill(text);
+          }}
+          value={email}
+          helperText={emailError}
+          checkRight={undefined}
+          onTouchStart={() => handleTouch()}
+          borderColor={emailBorder}
+        />
+
+        <TextInputCom
+          type={Constant.textInput.LARGE_INPUT}
+          label={'password'}
+          style={styles.inputTextStyle}
+          onChangeText={text => {
+            selectFillPassword(text);
+          }}
+          value={password}
+          helperText={passwordError}
+          iconVisible={true}
+          secureTextEntry={focus !== true ? focus : true}
+          secureTextEntryChange={selectFocus}
+          checkRight={undefined}
+          onTouchStart={() => handleTouchpasswordBorder()}
+          borderColor={passwordBorder}
+        />
+
+        <Text onPress={() => SigninValidation()}>asd</Text>
+        <Button
+          type={Constant.buttons.PRIMARY}
+          text={'sign in'}
+          style={styles.buttonStyle}
+          onPress={() => SigninValidation()}
+        />
+      </View> */}
+
       <ScrollView>
-        <View style={styles.contentView}>
-          <TextInput
+        <View
+          style={{
+            flex: 1.5,
+          }}>
+          <TextInputCom
             type={Constant.textInput.LARGE_INPUT}
             placeholder={'email@address.com'}
             label={'email'}
@@ -137,7 +181,7 @@ const Signin = ({ navigation }) => {
             borderColor={emailBorder}
           />
 
-          <TextInput
+          <TextInputCom
             type={Constant.textInput.LARGE_INPUT}
             label={'password'}
             style={styles.inputTextStyle}
@@ -153,6 +197,8 @@ const Signin = ({ navigation }) => {
             onTouchStart={() => handleTouchpasswordBorder()}
             borderColor={passwordBorder}
           />
+          {/* <TextInput placeholder="enter email"></TextInput>
+          <TextInput placeholder="enter password"></TextInput> */}
           <Text
             style={styles.contentText}
             onPress={() => navigation.navigate('ForgotPassword')}>
@@ -165,12 +211,13 @@ const Signin = ({ navigation }) => {
             text={'keep me signed in'}
           />
 
-          <Button
+          <Text onPress={() => SigninValidation()}>asd</Text>
+          {/* <Button
             type={Constant.buttons.PRIMARY}
             text={'sign in'}
             style={styles.buttonStyle}
             onPress={() => SigninValidation()}
-          />
+          /> */}
 
           <View style={styles.bottomContentStyle} />
         </View>
@@ -241,7 +288,18 @@ const styles = StyleSheet.create({
   },
   inputTextStyle: { fontSize: 18 },
   buttonStyle: { marginTop: 10, marginBottom: 10 },
-  bottomContentStyle: { flexDirection: 'row' },
+  // bottomContentStyle: {
+  //   flexDirection: 'row',
+  //   backgroundColor: 'green',
+  //   height: 50,
+  //   width: 50,
+  // },
+  containerLoader: {
+    flex: 1,
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 
 export default Signin;

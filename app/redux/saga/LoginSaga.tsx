@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { api } from '../../services';
 import { LoginResponse } from '../actions/LoginAction';
 
-import { currentUserQuery } from '../../graphql/queries/UserProfile';
+// import { currentUserQuery } from '../../graphql/queries/UserProfile';
 import { Alert } from 'react-native';
 
 export function* loginSaga(action) {
@@ -22,14 +22,14 @@ export function* loginSaga(action) {
         await AsyncStorage.setItem('jwtToken', token);
         api.setAuthHeader(token);
 
-        const data = await api.client.request(currentUserQuery);
-        if (data.currentUser === null) {
-          action.navigation.navigate('CreateProfile');
-        } else {
-          action.navigation.navigate('DrawerNavigator');
-        }
-        console.log('data:', data);
-        return data;
+        AsyncStorage.getItem('currentUser').then(value => {
+          console.log('value:', value);
+          if (value === 'true') {
+            action.navigation.navigate('DrawerNavigator');
+          } else {
+            action.navigation.navigate('CreateProfile');
+          }
+        });
       } else {
         console.log('not verified');
         Alert.alert('not verified');

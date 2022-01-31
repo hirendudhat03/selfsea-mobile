@@ -21,9 +21,11 @@ import Font from '../theme/fonts';
 import Color from '../theme/colors';
 import Dropdown from '../component/Dropdown';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { SignupRequest } from '../redux/actions/SignupAction';
 import { ScrollView } from 'react-native-gesture-handler';
+
+import Loader from '../component/Loader';
 
 const zxcvbn = require('zxcvbn');
 
@@ -74,6 +76,9 @@ const birthnData = [
 
 const Signup = ({ navigation }) => {
   const dispatch = useDispatch();
+  const signupRes = useSelector(state => state.SignupReducer);
+
+  console.log('signupResReducer : ', JSON.stringify(signupRes));
 
   const [years, setYear] = useState<number[]>([]);
 
@@ -288,6 +293,7 @@ const Signup = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <Loader value={signupRes.loader} />
       <Header
         type={Constant.navigatioHeader.PAGE_HEADER}
         leftIcon={Images.Arrowsquare}
@@ -641,5 +647,11 @@ const styles = StyleSheet.create({
   },
   inputTextStyle: { fontSize: 18 },
   buttonStyle: { marginTop: 15 },
+  containerLoader: {
+    flex: 1,
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 export default Signup;

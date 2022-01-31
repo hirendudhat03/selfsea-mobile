@@ -1,9 +1,9 @@
 import auth from '@react-native-firebase/auth';
 import { api } from '../../services';
-import { call } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 import { createUserMutation } from '../../graphql/mutations/UserMutation';
 import { Alert } from 'react-native';
-// import { SignupResponse } from '../actions/SignupAction';
+import { SignupResponse } from '../actions/SignupAction';
 
 export function* signupSaga(action) {
   const Signup = async (email, Password, birthMonth, birthYear, userName) => {
@@ -46,7 +46,7 @@ export function* signupSaga(action) {
     }
   };
 
-  yield call(
+  const response = yield call(
     Signup,
     action.email,
     action.Password,
@@ -54,9 +54,11 @@ export function* signupSaga(action) {
     action.birthYear,
     action.userName,
   );
-  // if (response === null) {
-  //   yield put(SignupResponse(null, false));
-  // } else {
-  //   yield put(SignupResponse(response, false));
-  // }
+  console.warn('response saga', response);
+
+  if (response === null) {
+    yield put(SignupResponse(null, false));
+  } else {
+    yield put(SignupResponse(response, false));
+  }
 }
