@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 import Button from '../component/Button';
 import TextInput from '../component/CustomTextInput';
@@ -23,7 +23,7 @@ const ForgotPassword = ({ navigation }) => {
       setEmailBorder(Color.COMMUNITY_ORANGE);
       setEmailError('Please enter email address. ');
     } else if (
-      text.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null
+      text.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/) === null
     ) {
       setEmailBorder(Color.COMMUNITY_ORANGE);
       setEmailError('Please enter a valid email address. ');
@@ -56,7 +56,7 @@ const ForgotPassword = ({ navigation }) => {
             type={Constant.textInput.LARGE_INPUT}
             placeholder={'email@address.com'}
             label={'email'}
-            style={{ fontSize: 18 }}
+            style={styles.inputTextStyle}
             onChangeText={text => {
               selectFill(text);
             }}
@@ -65,7 +65,7 @@ const ForgotPassword = ({ navigation }) => {
             circleFill={circleFillEmail}
             onTouchStart={() => handleTouch()}
             borderColor={emailBorder}
-            viewStyle={{ width: '100%' }}
+            viewStyle={styles.inputViewStyle}
           />
         </View>
       </View>
@@ -74,7 +74,7 @@ const ForgotPassword = ({ navigation }) => {
         <Button
           type={Constant.buttons.PRIMARY}
           text={'send password reset email'}
-          style={[{ marginTop: 15 }]}
+          style={styles.buttonStyle}
           onPress={() => navigation.navigate('CreateNewPassword')}
         />
       </View>
@@ -116,5 +116,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginHorizontal: 20,
   },
+  inputTextStyle: { fontSize: 18 },
+  inputViewStyle: { width: '100%' },
+  buttonStyle: { marginTop: 15 },
 });
 export default ForgotPassword;

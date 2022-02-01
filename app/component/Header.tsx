@@ -108,7 +108,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
-    // paddingTop: 50,
   },
   primaryPageHeaderText: {
     fontFamily: Font.CALIBRE,
@@ -176,8 +175,8 @@ const styles = StyleSheet.create({
     tintColor: Color.BASE_COLOR_WHITE,
   },
   communityHeader: {
-    padding: 20,
-    paddingTop: 80,
+    padding: 10,
+    paddingTop: 30,
   },
   descriptionText: {
     marginVertical: 7,

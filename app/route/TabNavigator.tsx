@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
+import { View, Image, StyleSheet, Dimensions } from 'react-native';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -11,12 +11,14 @@ import Bell from '../views/Bell';
 import Book from '../views/Book';
 import Person from '../views/Person';
 import TabScreen from '../views/TabScreen';
+
 import Color from '../theme/colors';
 
 import HealthScreen from '../views/HealthScreen';
 import Communities from '../views/Communities';
 import NavigationIdentity from '../views/NavigationIdentity';
 import MentorCommunity from '../views/MentorCommunity';
+import MenteeCommunity from '../views/Mentee/MenteeCommunity';
 
 export const screenNames = {
   CommunitiesHome: 'CommunitiesHome',
@@ -25,6 +27,7 @@ export const screenNames = {
   Communities: 'Communities',
   homeStack: 'HomeStackScreen',
   MentorCommunity: 'MentorCommunity',
+  MenteeCommunity: 'MenteeCommunity',
 };
 
 const height = Dimensions.get('window').height;
@@ -34,12 +37,12 @@ const HomeStack = createStackNavigator();
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator
-      headerMode="none"
+      headerMode={"none"}
       screenOptions={{
         gestureEnabled: true,
         gestureDirection: 'horizontal',
       }}
-      initialRouteName={screenNames.MentorCommunity}>
+      initialRouteName={screenNames.Communities}>
       <HomeStack.Screen
         name={screenNames.CommunitiesHome}
         component={CommunitiesHome}
@@ -60,13 +63,17 @@ function HomeStackScreen() {
         name={screenNames.MentorCommunity}
         component={MentorCommunity}
       />
+      <HomeStack.Screen
+        name={screenNames.MenteeCommunity}
+        component={MenteeCommunity}
+      />
     </HomeStack.Navigator>
   );
 }
 
 const Tab = createBottomTabNavigator();
 
-const BottomTabNavigator = ({ navigation }) => {
+const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={{

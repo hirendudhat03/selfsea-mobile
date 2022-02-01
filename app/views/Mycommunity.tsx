@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Image,
   FlatList,
-  SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
 import ModalPicker from './ModalPickerConfirm';
@@ -19,7 +18,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 const DATA = [{}, {}, {}, {}];
 
-const CommunitiesHome = ({ navigation }) => {
+const CommunitiesHome = () => {
   const [isModalVisible, setIsMoalVisiable] = useState(false);
   const changeModalVisibility = (bool: boolean) => {
     setIsMoalVisiable(bool);
@@ -34,7 +33,7 @@ const CommunitiesHome = ({ navigation }) => {
 
   const renderItem = () => (
     <View style={styles.viewStyle}>
-      <View style={{ flexDirection: 'row' }}>
+      <View style={styles.contentView}>
         <View style={styles.imageView}>
           <Image source={Images.LogoTab} style={styles.iconStyle} />
         </View>
@@ -183,6 +182,7 @@ const styles = StyleSheet.create({
     marginRight: 6,
     tintColor: Color.SESSION_ICON_COLOR,
   },
+  contentView: { flexDirection: 'row' },
 });
 
 export default CommunitiesHome;

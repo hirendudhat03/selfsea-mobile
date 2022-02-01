@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SelfseaMobile.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>buildNumber</key>
+			<string>3</string>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>C7CE27808BFCA1A3341DB640E4B11B8FBC0B39F8</string>
+				<key>dateExpires</key>
+				<string>15/01/23</string>
+				<key>type</key>
+				<string>Apple Development</string>
+			</dict>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>KPHB4646P6.com.selfseamobile</string>
+				<key>com.apple.developer.applesignin</key>
+				<array>
+					<string>Default</string>
+				</array>
+				<key>com.apple.developer.team-identifier</key>
+				<string>KPHB4646P6</string>
+				<key>get-task-allow</key>
+				<true/>
+			</dict>
+			<key>name</key>
+			<string>SelfseaMobile.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>db1152a2-21f0-4f28-9491-7a83d1e77397</string>
+				<key>dateExpires</key>
+				<string>15/01/23</string>
+				<key>name</key>
+				<string>iOS Team Provisioning Profile: com.selfseamobile</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>KPHB4646P6</string>
+				<key>name</key>
+				<string>Peer Health Exchange Inc</string>
+			</dict>
+			<key>versionNumber</key>
+			<string>0.1</string>
+		</dict>
+	</array>
+</dict>
+</plist>

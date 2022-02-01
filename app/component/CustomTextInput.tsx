@@ -29,7 +29,7 @@ interface Props {
   iconVisible?: boolean;
   textInputstyle: {};
   checkRight?: boolean;
-  circleFill: string;
+  circleFill?: String;
   iconVisibleFill?: boolean;
   viewStyle: {};
   onTouchStart?: () => void;

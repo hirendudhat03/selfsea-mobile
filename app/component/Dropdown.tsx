@@ -1,12 +1,9 @@
 import React from 'react';
-import { Dimensions, Image, StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import Color from '../theme/colors';
-import Font from '../theme/fonts';
 import Images from '../theme/images';
 import SelectDropdown from 'react-native-select-dropdown';
 // @ts-ignore
-
-const width = Dimensions.get('window').width;
 
 interface OptionListType {
   title: string;
@@ -37,7 +34,7 @@ const Dropdown = ({
 }: Props) => {
   return (
     <View>
-      <View style={{ flexDirection: 'row' }}>
+      <View style={styles.dropDownViewStyle}>
         <View>
           <SelectDropdown
             renderDropdownIcon={() => (
@@ -48,7 +45,7 @@ const Dropdown = ({
             )}
             rowTextStyle={rowTextStyle}
             defaultButtonText={defaultButtonText}
-            buttonTextStyle={{ textAlign: 'left', fontSize: 16 }}
+            buttonTextStyle={styles.buttonTextStyle}
             buttonStyle={[styles.Container, style]}
             data={optionList.map(item => item)}
             onSelect={onSelect}
@@ -76,9 +73,6 @@ const Dropdown = ({
           </>
         ) : null}
       </View>
-      {/* {helperText !== '' ? (
-        <Text style={styles.helperText}>{helperText}</Text>
-      ) : null} */}
     </View>
   );
 };
@@ -91,24 +85,13 @@ const styles = StyleSheet.create({
     borderColor: Color.BORDER_COLOR_LIGHTGRAY,
   },
   iconView: {
-    // width: width * 0.1,
     height: '100%',
     backgroundColor: Color.BASE_COLOR_WHITE,
     justifyContent: 'center',
     alignItems: 'flex-end',
-    // paddingStart: 7,
     flexDirection: 'column',
   },
-  helperText: {
-    width: '90%',
-    fontFamily: Font.CALIBRE,
-    fontSize: 12,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
-    lineHeight: 16,
-    letterSpacing: 0,
-    color: Color.COMMUNITY_ORANGE,
-  },
+
   circleView: {
     justifyContent: 'center',
     marginLeft: 10,
@@ -140,6 +123,8 @@ const styles = StyleSheet.create({
     borderRightColor: 'transparent',
     borderBottomColor: Color.TEXT_COLOR_PASSWORD,
   },
+  dropDownViewStyle: { flexDirection: 'row' },
+  buttonTextStyle: { textAlign: 'left', fontSize: 16 },
 });
 
 export default Dropdown;

@@ -19,6 +19,9 @@ interface Props {
   descriptionData: [];
   numberOfLines: number;
   style?: {};
+  button: String;
+  secondType: string;
+  firstType: string;
 }
 
 const ModalPicker = ({
@@ -34,6 +37,8 @@ const ModalPicker = ({
   descriptionData,
   numberOfLines,
   style,
+  secondType,
+  firstType,
 }: Props) => {
   return (
     <>
@@ -55,16 +60,15 @@ const ModalPicker = ({
                 {smallTextParagraph}
               </Text>
             ) : null}
-            <View
-              style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <View style={styles.buttonContentView}>
               <Button
-                type={Constant.buttons.CLOSE}
+                type={firstType}
                 text={firstText}
                 style={styles.closeButtonStyle}
                 onPress={() => changeModalVisibility(false)}
               />
               <Button
-                type={Constant.buttons.PRIMARY}
+                type={secondType}
                 text={secondText}
                 style={styles.primaryButtonStyle}
                 onPress={() => changeModalVisibility(false)}
@@ -80,8 +84,9 @@ const ModalPicker = ({
             {smallText !== undefined ? (
               <Text
                 style={styles.smallText}
-                numberOfLines={3}
-                ellipsizeMode="middle">
+                numberOfLines={4}
+                // ellipsizeMode="middle"
+              >
                 {smallText}
               </Text>
             ) : null}
@@ -99,7 +104,7 @@ const ModalPicker = ({
             <Button
               type={button}
               text={text}
-              style={{ marginVertical: 10, width: '100%' }}
+              style={styles.buttonStyle}
               onPress={() => changeModalVisibility(false)}
             />
           </View>
@@ -169,5 +174,7 @@ const styles = StyleSheet.create({
     width: '60%',
   },
   closeButtonStyle: { padding: 12, width: '35%' },
+  buttonContentView: { flexDirection: 'row', justifyContent: 'space-between' },
+  buttonStyle: { marginVertical: 10, width: '100%' },
 });
 export default ModalPicker;

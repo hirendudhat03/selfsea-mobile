@@ -1,6 +1,8 @@
 package com.selfseamobile;
 
 import com.facebook.react.ReactActivity;
+import android.os.Bundle;
+import com.facebook.FacebookSdk;
 
 public class MainActivity extends ReactActivity {
 
@@ -11,5 +13,10 @@ public class MainActivity extends ReactActivity {
   @Override
   protected String getMainComponentName() {
     return "SelfseaMobile";
+  }
+  
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(null);
   }
 }

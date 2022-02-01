@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 import Constant from '../theme/constant';
 import Fonts from '../theme/fonts';
@@ -8,15 +14,24 @@ import Images from '../theme/images';
 
 import Button from '../component/Button';
 import Auth from '../component/Authentication';
-import TextInput from '../component/CustomTextInput';
+import TextInputCom from '../component/CustomTextInput';
 import CheckBox from '../component/Checkbox';
 import Header from '../component/Header';
 
+import auth from '@react-native-firebase/auth';
+
 import { useDispatch } from 'react-redux';
 import { LoginRequest } from '../redux/actions/LoginAction';
+import { AppleButton } from '@invertase/react-native-apple-authentication';
+import { auths } from '../config/static';
+
+import Loader from '../component/Loader';
 
 const Signin = ({ navigation }) => {
   const dispatch = useDispatch();
+
+  const loginRes = useSelector(state => state.LoginReducer);
+  console.log('LoginReducer : ', JSON.stringify(loginRes));
 
   const [isSelectedCheckBox, setISSelectionCheckBox] = useState(false);
 
@@ -38,28 +53,21 @@ const Signin = ({ navigation }) => {
     }
   };
 
-  const [circleFillEmail, setCircleFillEmail] = useState<boolean>();
-
   const selectFill = text => {
     setEmail(text);
     if (text === '') {
-      setCircleFillEmail(false);
       setEmailBorder(Color.COMMUNITY_ORANGE);
       setEmailError('Please enter email address. ');
     } else if (
-      text.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null
+      text.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/) === null
     ) {
       setEmailBorder(Color.COMMUNITY_ORANGE);
       setEmailError('Please enter a valid email address. ');
-      setCircleFillEmail(false);
     } else {
-      setCircleFillEmail(true);
       setEmailBorder(Color.BORDER_COLOR_LIGHTGRAY);
       setEmailError('');
     }
   };
-
-  const [circleFillPassword, setCircleFillPassword] = useState<boolean>();
 
   const selectFillPassword = text => {
     console.log('text:::', text);
@@ -67,11 +75,9 @@ const Signin = ({ navigation }) => {
     if (text === '') {
       setpasswordBorder(Color.COMMUNITY_ORANGE);
       setPasswordError('Password must contain a number. ');
-      setCircleFillPassword(false);
     } else {
       setpasswordBorder(Color.BORDER_COLOR_LIGHTGRAY);
       setPasswordError(' ');
-      setCircleFillPassword(true);
     }
   };
   const [email, setEmail] = useState('');
@@ -97,7 +103,7 @@ const Signin = ({ navigation }) => {
     } else if (!email) {
       setEmailError('Email Required');
     } else if (
-      email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null
+      email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/) === null
     ) {
       setEmailError('Valid email Required');
     } else if (!password) {
@@ -109,19 +115,63 @@ const Signin = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      {/* <Loader value={loginRes.loader} /> */}
+
       <Header
         type={Constant.navigatioHeader.PAGE_HEADER}
         leftIcon={Images.Arrowsquare}
         label={'sign in'}
         onPress={() => navigation.goBack()}
       />
+      {/* <View style={{ flex: 1, paddingTop: 100 }}>
+        <TextInputCom
+          type={Constant.textInput.LARGE_INPUT}
+          placeholder={'email@address.com'}
+          label={'email'}
+          style={styles.inputTextStyle}
+          onChangeText={text => {
+            selectFill(text);
+          }}
+          value={email}
+          helperText={emailError}
+          checkRight={undefined}
+          onTouchStart={() => handleTouch()}
+          borderColor={emailBorder}
+        />
+
+        <TextInputCom
+          type={Constant.textInput.LARGE_INPUT}
+          label={'password'}
+          style={styles.inputTextStyle}
+          onChangeText={text => {
+            selectFillPassword(text);
+          }}
+          value={password}
+          helperText={passwordError}
+          iconVisible={true}
+          secureTextEntry={focus !== true ? focus : true}
+          secureTextEntryChange={selectFocus}
+          checkRight={undefined}
+          onTouchStart={() => handleTouchpasswordBorder()}
+          borderColor={passwordBorder}
+        />
+
+        <Text onPress={() => SigninValidation()}>asd</Text>
+        <Button
+          type={Constant.buttons.PRIMARY}
+          text={'sign in'}
+          style={styles.buttonStyle}
+          onPress={() => SigninValidation()}
+        />
+      </View> */}
+
       <ScrollView>
         <View style={styles.contentView}>
-          <TextInput
+          <TextInputCom
             type={Constant.textInput.LARGE_INPUT}
             placeholder={'email@address.com'}
             label={'email'}
-            style={{ fontSize: 18 }}
+            style={styles.inputTextStyle}
             onChangeText={text => {
               selectFill(text);
             }}
@@ -132,10 +182,10 @@ const Signin = ({ navigation }) => {
             borderColor={emailBorder}
           />
 
-          <TextInput
+          <TextInputCom
             type={Constant.textInput.LARGE_INPUT}
             label={'password'}
-            style={{ fontSize: 18 }}
+            style={styles.inputTextStyle}
             onChangeText={text => {
               selectFillPassword(text);
             }}
@@ -148,44 +198,55 @@ const Signin = ({ navigation }) => {
             onTouchStart={() => handleTouchpasswordBorder()}
             borderColor={passwordBorder}
           />
+          {/* <TextInput placeholder="enter email"></TextInput>
+          <TextInput placeholder="enter password"></TextInput> */}
           <Text
             style={styles.contentText}
             onPress={() => navigation.navigate('ForgotPassword')}>
-            forgot your password?{' '}
+            forgot your password?
           </Text>
           <CheckBox
             onPressCheckbox={selectCheckBox}
             style={styles.checkBox}
             isSelectedCheckBox={isSelectedCheckBox}
-            text={'keep me signed in'}
+            text={auths.KEEP_ME_SIGNED_IN}
           />
 
+          {/* <Text onPress={() => SigninValidation()}>asd</Text> */}
           <Button
             type={Constant.buttons.PRIMARY}
-            text={'sign in'}
-            style={{ marginTop: 10, marginBottom: 10 }}
+            text={auths.SIGNIN_BUTTON}
+            style={styles.buttonStyle}
             onPress={() => SigninValidation()}
           />
-
-          <View style={{ flexDirection: 'row' }} />
+          <View style={styles.bottomContentStyle} />
         </View>
         <View style={styles.bottomView}>
           <Text style={styles.bottomText}>or</Text>
           <Auth
-            text={'Continue with Google'}
+            text={auths.CONTINUE_WITH_GOOGLE}
             icon={Images.Google}
             type={Constant.authLogin.GOOGLE}
           />
-          <Auth
-            text={'Continue with Instagram'}
+          {/* <Auth
+            text={auths.CONTINUE_WITH_INSTA}
             icon={Images.Instagram}
             type={Constant.authLogin.INSTAGRAM}
-          />
+          /> */}
           <Auth
-            text={'Continue with Apple'}
+            text={auths.CONTINUE_WITH_APPLE}
             icon={Images.Apple}
             type={Constant.authLogin.APPLE}
           />
+          {/* <AppleButton
+            buttonStyle={AppleButton.Style.WHITE}
+            buttonType={AppleButton.Type.SIGN_IN}
+            style={{
+              width: 160, // You must specify a width
+              height: 45, // You must specify a height
+            }}
+            onPress={() => console.log("Anshuman Gupta")}
+          /> */}
         </View>
       </ScrollView>
     </View>
@@ -200,7 +261,6 @@ const styles = StyleSheet.create({
 
   headerView: {
     flex: 0.5,
-    // alignItems: 'center',
     backgroundColor: Color.BASE_COLOR_DARK_BLUE,
   },
   contentView: {
@@ -235,6 +295,17 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginVertical: 10,
   },
+  inputTextStyle: { fontSize: 18 },
+  bottomContentStyle: {
+    flexDirection: 'row',
+  },
+  containerLoader: {
+    flex: 1,
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonStyle: { marginTop: 10, marginBottom: 10 },
 });
 
 export default Signin;

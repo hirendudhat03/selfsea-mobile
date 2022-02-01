@@ -43,12 +43,7 @@ const ModalView = ({
       <View style={styles.Container}>
         <View style={styles.headerView}>
           <Text style={styles.headerText}>{headertext}</Text>
-          <View
-            style={{
-              flexDirection: 'row-reverse',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
+          <View style={styles.contentView}>
             <TouchableOpacity style={styles.circle} onPress={closeModal}>
               <Image source={Images.Cross} style={styles.circleIcon} />
             </TouchableOpacity>
@@ -61,7 +56,7 @@ const ModalView = ({
           </View>
         </View>
         <View style={styles.lineView} />
-        <View style={{ flex: 1 }}>
+        <View style={styles.inputView}>
           <TextInput
             placeholder={placeholder}
             placeholderTextColor={Color.CONTENT_COLOR_BLACK_TEXT}
@@ -156,6 +151,12 @@ const styles = StyleSheet.create({
   closeButton: {
     marginRight: 15,
   },
+  contentView: {
+    flexDirection: 'row-reverse',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  inputView: { flex: 1 },
 });
 
 export default ModalView;
