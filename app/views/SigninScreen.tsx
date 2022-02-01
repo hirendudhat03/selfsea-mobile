@@ -180,11 +180,11 @@ const Signin = ({ navigation }) => {
             icon={Images.Google}
             type={Constant.authLogin.GOOGLE}
           />
-          <Auth
+          {/* <Auth
             text={auths.CONTINUE_WITH_INSTA}
             icon={Images.Instagram}
             type={Constant.authLogin.INSTAGRAM}
-          />
+          /> */}
           <Auth
             text={auths.CONTINUE_WITH_APPLE}
             icon={Images.Apple}

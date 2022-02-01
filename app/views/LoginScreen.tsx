@@ -38,7 +38,7 @@ const Login = ({ navigation }) => {
           </View>
           <View style={styles.contentView}>
             <Auth text={auths.CONTINUE_WITH_GOOGLE} icon={Images.Google} type={Constant.authLogin.GOOGLE} />
-            <Auth text={auths.CONTINUE_WITH_INSTA} icon={Images.Instagram} type={Constant.authLogin.INSTAGRAM} />
+            {/* <Auth text={auths.CONTINUE_WITH_INSTA} icon={Images.Instagram} type={Constant.authLogin.INSTAGRAM} /> */}
             <Auth text={auths.CONTINUE_WITH_APPLE} icon={Images.Apple} type={Constant.authLogin.APPLE} />
             <InstagramLogin
               ref={ref => instagramLogin = ref}

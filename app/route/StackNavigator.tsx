@@ -18,7 +18,7 @@ const stackNavigator = () => {
   return (
     //initRoute && (
 
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator initialRouteName="Login">
       <Stack.Screen
         name="Home"
         // component={Home}

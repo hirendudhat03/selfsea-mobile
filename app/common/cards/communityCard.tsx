@@ -25,7 +25,7 @@ const CommunityCard = ({navigation, alert}) => {
                         identity, sexual orientation, race and ethnicity
                     </Text>
                 </View>
-                {route.name == "AllCommunities" &&
+                {(route.name == "AllCommunities" && !alert ) &&
                     <View style={[{paddingRight:"5%", paddingVertical:"10%"}]}>
                         <Button type={Constant.buttons.SECONDARY} text={'join'} />
                     </View>
