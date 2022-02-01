@@ -5,6 +5,7 @@ import Mycommunity from './Mycommunity';
 import AllCommunities from './AllCommunities';
 import Color from '../theme/colors';
 import Font from '../theme/fonts';
+import MenteeCommunity from './Mentee/MenteeCommunity';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -34,14 +35,14 @@ const Communities = () => {
       }}>
       <Tab.Screen
         name="Mycommunity"
-        component={Mycommunity}
+        component={MenteeCommunity}
         options={{
           tabBarLabel: 'my communities',
         }}
       />
       <Tab.Screen
         name="AllCommunities"
-        component={AllCommunities}
+        component={MenteeCommunity}
         options={{
           tabBarLabel: 'all communities',
         }}

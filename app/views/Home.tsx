@@ -167,7 +167,7 @@ const Home = ({ navigation }) => {
             type={Constant.navigatioHeader.COMMUNITY_HEADER}
             leftIcon={Images.Arrowsquare}
             rightIcon={Images.Dots}
-            label={'navigating identity'}
+            label={'navigating identityasdda'}
             descriptionText={
               'a community to discuss questions and situations related to gender identity, sexual orientation, race and ethnicity'
             }
