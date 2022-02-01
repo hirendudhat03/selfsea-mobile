@@ -12,7 +12,6 @@ import CreateProfile from '../views/CreateProfile';
 import ForgotPassword from '../views/ForgotPassword';
 import CreateNewPassword from '../views/CreateNewPassword';
 import auth from '@react-native-firebase/auth';
-import { checkDEV } from '@apollo/client/utilities/globals';
 
 const stackNavigator = () => {
   const Stack = createStackNavigator();
