@@ -12,37 +12,27 @@ import CreateProfile from '../views/CreateProfile';
 import ForgotPassword from '../views/ForgotPassword';
 import CreateNewPassword from '../views/CreateNewPassword';
 import auth from '@react-native-firebase/auth';
+import { api } from '../services';
 
 const stackNavigator = () => {
   const Stack = createStackNavigator();
 
-  const [initRoute, setInitRoute] = useState(null);
+  const [initRoute, setInitRoute] = useState('Login');
 
   const sessionInfo = () => {
     console.log('sessionInfo =>');
 
     // AsyncStorage.getItem(GlobalInclude.Constant.sessId).then(value => {
     //   console.log('Tokan =>', value);
-
     // auth().signOut();
-
     auth().onAuthStateChanged(function (user) {
       console.log('user : ', user);
       if (user) {
         const checkTokenFunction = async () => {
-          const idTokenResult = await auth().currentUser.getIdTokenResult();
-          console.log('User JWT: ', idTokenResult.token);
-
-          if (idTokenResult.token) {
-            setInitRoute('DrawerNavigator');
-          } else {
-            setInitRoute('Login');
-          }
+          const idTokenResult = await auth().currentUser.getIdToken();
+          api.setAuthHeader(idTokenResult);
         };
-
         checkTokenFunction();
-
-        // User is signed in.
       } else {
         // No user is signed in.
       }
@@ -64,7 +54,8 @@ const stackNavigator = () => {
 
   return (
     initRoute && (
-      <Stack.Navigator initialRouteName={initRoute}>
+      <Stack.Navigator
+        initialRouteName={auth().currentUser ? 'DrawerNavigator' : 'Login'}>
         <Stack.Screen
           name="Home"
           component={Home}

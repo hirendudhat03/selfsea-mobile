@@ -56,7 +56,6 @@ const CreateProfile = ({ navigation }) => {
         navigation,
       ),
     );
-    navigation.navigate("Home")
   };
 
   // const pronounsResponse = useSelector(state => state.PronounsReducer);
@@ -662,23 +661,8 @@ const CreateProfile = ({ navigation }) => {
           text={'take me to selfsea'}
           style={[
             styles.buttonStyle,
-            selectPronounsDropDown.length === 0 ||
-            selectOrientationDropDown.length === 0 ||
-            selectGenderDropDown.length === 0 ||
-            selectRaceDropDown.length === 0 ||
-            selectLocationDropDown.length === 0
-              ? { backgroundColor: Color.BUTTON_DISABLE_COLOR }
-              : { backgroundColor: Color.BASE_COLOR_ORANGE },
+            { backgroundColor: Color.BASE_COLOR_ORANGE },
           ]}
-          disabled={
-            selectPronounsDropDown.length === 0 ||
-            selectOrientationDropDown.length === 0 ||
-            selectGenderDropDown.length === 0 ||
-            selectRaceDropDown.length === 0 ||
-            selectLocationDropDown.length === 0
-              ? true
-              : false
-          }
         />
       </View>
 

@@ -1,29 +1,17 @@
-import React, { useState } from 'react';
-import { View, Text, FlatList, SafeAreaView } from 'react-native';
-import Color from '../theme/colors';
-import LinearGradient from 'react-native-linear-gradient';
-import { CommonCommunityCard } from '../common';
-import { Theme } from '../assets/styles';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
-const Person = ({ navigation }) => {
-  var theme = Theme();
-
-  const renderItem = item => (
-    <CommonCommunityCard navigation={navigation} alert={item.item.alert} />
-  );
-
+const Person = () => {
   return (
-    <SafeAreaView style={theme.container}>
-      <LinearGradient
-        colors={[Color.BASE_COLOR_LIGHT_BLUE, Color.COLOR_LIGHT]}
-        style={theme.linearGradientHeader}>
-        <View style={theme.contentView}>
-          <View style={theme.blankViewStyle}>
-            <Text style={theme.textStyle}>Profiles WIP.</Text>
-          </View>
-        </View>
-      </LinearGradient>
-    </SafeAreaView>
+    <View style={styles.viewStyle}>
+      <Text>Tab Person</Text>
+    </View>
   );
 };
+const styles = StyleSheet.create({
+  viewStyle: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+});
 export default Person;

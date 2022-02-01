@@ -175,8 +175,8 @@ const styles = StyleSheet.create({
     tintColor: Color.BASE_COLOR_WHITE,
   },
   communityHeader: {
-    padding: 10,
-    paddingTop: 30,
+    padding: 20,
+    paddingTop: 80,
   },
   descriptionText: {
     marginVertical: 7,

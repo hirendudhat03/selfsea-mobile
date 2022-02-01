@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   secondaryText: {
     fontFamily: Font.CALIBRE,
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: 'normal',
     fontStyle: 'normal',
     lineHeight: 24,
     letterSpacing: 0,

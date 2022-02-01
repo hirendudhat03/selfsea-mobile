@@ -11,8 +11,7 @@ import Header from '../component/Header';
 import Button from '../component/Button';
 
 import LinearGradient from 'react-native-linear-gradient';
-import { useDispatch, useSelector } from 'react-redux';
-import { Theme } from '../assets/styles';
+import { useDispatch } from 'react-redux';
 import { HomeRequest } from '../redux/actions/HomeAction';
 
 const DATA = [{}, {}, {}, {}];
@@ -74,12 +73,10 @@ const CommunitiesHome = ({ navigation }) => {
     </View>
   );
 
-  console.log('Theme', Theme);
-
   return (
     <View style={styles.container}>
       <Header
-        type={Constant.navigatioHeader.COMMUNITY_HEADER}
+        type={Constant.navigatioHeader.PAGE_HEADER}
         label={'selfsea communities'}
         style={styles.headerView}
       />

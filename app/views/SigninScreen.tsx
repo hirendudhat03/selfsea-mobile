@@ -18,12 +18,8 @@ import TextInputCom from '../component/CustomTextInput';
 import CheckBox from '../component/Checkbox';
 import Header from '../component/Header';
 
-import auth from '@react-native-firebase/auth';
-
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { LoginRequest } from '../redux/actions/LoginAction';
-import { AppleButton } from '@invertase/react-native-apple-authentication';
-import { auths } from '../config/static';
 
 import Loader from '../component/Loader';
 
@@ -209,13 +205,13 @@ const Signin = ({ navigation }) => {
             onPressCheckbox={selectCheckBox}
             style={styles.checkBox}
             isSelectedCheckBox={isSelectedCheckBox}
-            text={auths.KEEP_ME_SIGNED_IN}
+            text={'keep me signed in'}
           />
 
           {/* <Text onPress={() => SigninValidation()}>asd</Text> */}
           <Button
             type={Constant.buttons.PRIMARY}
-            text={auths.SIGNIN_BUTTON}
+            text={'sign in'}
             style={styles.buttonStyle}
             onPress={() => SigninValidation()}
           />
@@ -224,29 +220,20 @@ const Signin = ({ navigation }) => {
         <View style={styles.bottomView}>
           <Text style={styles.bottomText}>or</Text>
           <Auth
-            text={auths.CONTINUE_WITH_GOOGLE}
+            text={'Continue with Google'}
             icon={Images.Google}
             type={Constant.authLogin.GOOGLE}
           />
-          {/* <Auth
-            text={auths.CONTINUE_WITH_INSTA}
+          <Auth
+            text={'Continue with Instagram'}
             icon={Images.Instagram}
             type={Constant.authLogin.INSTAGRAM}
-          /> */}
+          />
           <Auth
-            text={auths.CONTINUE_WITH_APPLE}
+            text={'Continue with Apple'}
             icon={Images.Apple}
             type={Constant.authLogin.APPLE}
           />
-          {/* <AppleButton
-            buttonStyle={AppleButton.Style.WHITE}
-            buttonType={AppleButton.Type.SIGN_IN}
-            style={{
-              width: 160, // You must specify a width
-              height: 45, // You must specify a height
-            }}
-            onPress={() => console.log("Anshuman Gupta")}
-          /> */}
         </View>
       </ScrollView>
     </View>
@@ -296,6 +283,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   inputTextStyle: { fontSize: 18 },
+  buttonStyle: { marginTop: 10, marginBottom: 10 },
   bottomContentStyle: {
     flexDirection: 'row',
   },
@@ -305,7 +293,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  buttonStyle: { marginTop: 10, marginBottom: 10 },
 });
 
 export default Signin;

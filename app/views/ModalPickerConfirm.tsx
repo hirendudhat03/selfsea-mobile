@@ -84,9 +84,8 @@ const ModalPicker = ({
             {smallText !== undefined ? (
               <Text
                 style={styles.smallText}
-                numberOfLines={4}
-                // ellipsizeMode="middle"
-              >
+                numberOfLines={3}
+                ellipsizeMode="middle">
                 {smallText}
               </Text>
             ) : null}
