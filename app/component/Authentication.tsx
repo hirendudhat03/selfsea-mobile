@@ -47,7 +47,9 @@ const Authentication = ({ text, icon, type }: Props) => {
         .then(async userInfo => {
           console.log(JSON.stringify(userInfo));
           // var emailMethodRes = await auth().fetchSignInMethodsForEmail(userInfo.user.email);
-          var emailMethodRes = await firebase.auth().createUserWithEmailAndPassword(userInfo.user.email,'123456');
+          var emailMethodRes = await firebase
+            .auth()
+            .createUserWithEmailAndPassword(userInfo.user.email, '123456');
           console.log('Email Methods', emailMethodRes);
           Alert.alert(userInfo.user.givenName, userInfo.user.email);
         })
@@ -55,16 +57,18 @@ const Authentication = ({ text, icon, type }: Props) => {
           console.log('ERROR IS: ' + e);
           switch (e.code) {
             case 'auth/email-already-in-use':
-              console.log(`Email address already in use.`);
+              console.log('Email address already in use.');
               break;
             case 'auth/invalid-email':
-              console.log(`Email address is invalid.`);
+              console.log('Email address is invalid.');
               break;
             case 'auth/operation-not-allowed':
-              console.log(`e during sign up.`);
+              console.log('e during sign up.');
               break;
             case 'auth/weak-password':
-              console.log('Password is not strong enough. Add additional characters including special characters and numbers.');
+              console.log(
+                'Password is not strong enough. Add additional characters including special characters and numbers.',
+              );
               break;
             default:
               console.log(e.message);
