@@ -6,7 +6,7 @@ export default {
     SUCCESS: 'success',
     INFO: 'info',
     MENTEE: 'mentee',
-    MENTEE_FADE: 'mentee fade'
+    MENTEE_FADE: 'mentee fade',
   },
   badges: {
     MENTOR_BADGE: 'mentorBadges',

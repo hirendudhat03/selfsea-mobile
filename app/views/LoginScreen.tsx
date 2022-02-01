@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -9,7 +9,7 @@ import {
   Linking,
   SafeAreaView,
   Alert,
-  ScrollView
+  ScrollView,
 } from 'react-native';
 
 import Constant from '../theme/constant';
@@ -19,45 +19,75 @@ import Images from '../theme/images';
 
 import Button from '../component/Button';
 import Auth from '../component/Authentication';
-import InstagramLogin from 'react-native-instagram-login';
+// import InstagramLogin from 'react-native-instagram-login';
 import { auths } from '../config/static';
+import { Theme } from '../assets/styles';
 
 const onPressText = () => {
-  Alert.alert("onPressText")
-}
+  Alert.alert('onPressText');
+};
 
 const Login = ({ navigation }) => {
-  let instagramLogin = useRef();
-  
+  var theme = Theme();
+  //Need to use once we finalize about Insta Login
+  // let instagramLogin = useRef();
+
   return (
     <SafeAreaView style={styles.container}>
-      <ImageBackground source={Images.Background} resizeMode="stretch" style={styles.image}>
+      <ImageBackground
+        source={Images.Background}
+        resizeMode="stretch"
+        style={styles.image}>
         <ScrollView>
           <View style={styles.headerView}>
             <Image source={Images.Logo} />
           </View>
           <View style={styles.contentView}>
-            <Auth text={auths.CONTINUE_WITH_GOOGLE} icon={Images.Google} type={Constant.authLogin.GOOGLE} />
-            {/* <Auth text={auths.CONTINUE_WITH_INSTA} icon={Images.Instagram} type={Constant.authLogin.INSTAGRAM} /> */}
-            <Auth text={auths.CONTINUE_WITH_APPLE} icon={Images.Apple} type={Constant.authLogin.APPLE} />
-            <InstagramLogin
-              ref={ref => instagramLogin = ref}
-              appId='321916266462620'
-              appSecret='106c0e7f22c7ec3f820e9522cb33d829'
-              redirectUrl='https://www.selfsea.org/'
-              scopes={['user_profile', 'user_media']}
-              onLoginSuccess={(data:any) => console.log('Login Success', data)}
-              onLoginFailure={(data:any) => console.log('failure',data)}
+            <Auth
+              text={auths.CONTINUE_WITH_GOOGLE}
+              icon={Images.Google}
+              type={Constant.authLogin.GOOGLE}
             />
-            <Button type={Constant.buttons.PRIMARY} text={auths.SIGNUP_WITH_EMAIL} style={{ marginTop: 8 }} onPress={() => navigation.navigate('Signup')} />
+            {/* <Auth text={auths.CONTINUE_WITH_INSTA} icon={Images.Instagram} type={Constant.authLogin.INSTAGRAM} /> */}
+            <Auth
+              text={auths.CONTINUE_WITH_APPLE}
+              icon={Images.Apple}
+              type={Constant.authLogin.APPLE}
+            />
+            {/* <InstagramLogin
+              ref={ref => (instagramLogin = ref)}
+              appId="321916266462620"
+              appSecret="106c0e7f22c7ec3f820e9522cb33d829"
+              redirectUrl="https://www.selfsea.org/"
+              scopes={['user_profile', 'user_media']}
+              onLoginSuccess={(data: any) => console.log('Login Success', data)}
+              onLoginFailure={(data: any) => console.log('failure', data)}
+            /> */}
+            <Button
+              type={Constant.buttons.PRIMARY}
+              text={auths.SIGNUP_WITH_EMAIL}
+              style={[theme.marginTop8]}
+              onPress={() => navigation.navigate('Signup')}
+            />
             <Text style={styles.contentText}>{auths.SIGNUP_AGREEMENT_L1}</Text>
-            <View style={{ flexDirection: 'row' }}>
-              <TouchableOpacity  onPress={()=>{ Linking.openURL(Constant.link.PRIVACY_POLICY)}}>
-                <Text style={styles.contentSecondText}>{auths.PRIVACY_POLICY}</Text>
+            <View style={[theme.row]}>
+              <TouchableOpacity
+                onPress={() => {
+                  Linking.openURL(Constant.link.PRIVACY_POLICY);
+                }}>
+                <Text style={styles.contentSecondText}>
+                  {auths.PRIVACY_POLICY}
+                </Text>
               </TouchableOpacity>
               <Text style={styles.contentSecondTextAnd}> and</Text>
-              <TouchableOpacity   onPress={()=>{ Linking.openURL(Constant.link.TERMS_OF_USE)}}>
-                <Text style={styles.contentSecondText}> {auths.TERMS_CONDITIONS}</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  Linking.openURL(Constant.link.TERMS_OF_USE);
+                }}>
+                <Text style={styles.contentSecondText}>
+                  {' '}
+                  {auths.TERMS_CONDITIONS}
+                </Text>
               </TouchableOpacity>
             </View>
             <View style={styles.bottomView}>
@@ -89,7 +119,7 @@ const styles = StyleSheet.create({
   },
   headerView: {
     // flex: 1.2,
-    marginTop:100,
+    marginTop: 100,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -100,7 +130,6 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   contentText: {
-    // fontSize: 12,
     fontFamily: Fonts.CALIBRE,
     marginTop: 7,
     fontSize: 14,
@@ -146,12 +175,13 @@ const styles = StyleSheet.create({
     shadowRadius: 1,
     shadowOpacity: 1,
   },
-  signinButtonView:{
-    alignItems:"center",
-    width:"100%",
-    marginBottom:50
-  }
-
+  signinButtonView: {
+    alignItems: 'center',
+    width: '100%',
+    marginBottom: 50,
+  },
+  buttonStyle: { marginTop: 8 },
+  conditionViewStyle: { flexDirection: 'row' },
 });
 
 export default Login;

@@ -1,21 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  Modal,
-  StyleSheet,
-  Image,
-  FlatList,
-  SafeAreaView,
-} from 'react-native';
-import ModalPicker from './ModalPickerConfirm';
+import React from 'react';
+import { View, Text, StyleSheet, Image, FlatList } from 'react-native';
 
 import Constant from '../theme/constant';
 import Color from '../theme/colors';
 import Font from '../theme/fonts';
 import Images from '../theme/images';
 
-import Header from '../component/Header';
 import Button from '../component/Button';
 
 import LinearGradient from 'react-native-linear-gradient';
@@ -39,7 +29,7 @@ const AllCommunities = ({ navigation }) => {
         <Button
           type={Constant.buttons.CLOSE}
           text={'join'}
-          style={{ paddingVertical: 12 }}
+          style={styles.buttonStyle}
           onPress={() => navigation.navigate('HealthScreen')}
         />
       </View>
@@ -125,6 +115,7 @@ const styles = StyleSheet.create({
   descriptionTextStyle: {
     textAlign: 'left',
   },
+  buttonStyle: { paddingVertical: 12 },
 });
 
 export default AllCommunities;

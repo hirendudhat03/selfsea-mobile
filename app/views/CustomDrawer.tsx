@@ -20,21 +20,21 @@ const Drawer = ({ props }: Props) => {
   const [AccountItem, setAccountItem] = useState(false);
 
   const NestedDrawerItemM = () => {
-    if (UserItem == true) {
+    if (UserItem === true) {
       setUserItem(false);
     } else {
       setUserItem(true);
     }
   };
   const NestedDrawerItemQueue = () => {
-    if (QueueItem == true) {
+    if (QueueItem === true) {
       setQueueItem(false);
     } else {
       setQueueItem(true);
     }
   };
   const NestedDrawerItemAccount = () => {
-    if (AccountItem == true) {
+    if (AccountItem === true) {
       setAccountItem(false);
     } else {
       setAccountItem(true);
@@ -43,7 +43,7 @@ const Drawer = ({ props }: Props) => {
 
   return (
     <SafeAreaView>
-      <View style={{ flexDirection: 'column' }}>
+      <View style={styles.viewStyle}>
         <View style={styles.imageView}>
           <Image source={Images.DrawerLogo} style={styles.image} />
           <Text style={styles.managementText}>Management</Text>
@@ -61,23 +61,20 @@ const Drawer = ({ props }: Props) => {
             />
             <DrawerItem
               style={styles.drawerItem}
-              focused={focus == 1 ? true : false}
-              label={({ focused }) => (
+              focused={focus === 1 ? true : false}
+              label={() => (
                 <View style={styles.drawerView}>
                   <Text style={styles.menuText}>Users</Text>
-                  {UserItem == true && (
+                  {UserItem === true && (
                     <Image
                       source={Images.MenuDropdown}
-                      style={{
-                        transform: [{ rotateX: '180deg' }],
-                        marginRight: 15,
-                      }}
+                      style={styles.imageStyle}
                     />
                   )}
-                  {UserItem == false && (
+                  {UserItem === false && (
                     <Image
                       source={Images.MenuDropdown}
-                      style={{ marginRight: 15 }}
+                      style={styles.imageDropStyle}
                     />
                   )}
                 </View>
@@ -88,19 +85,14 @@ const Drawer = ({ props }: Props) => {
               }}
             />
 
-            {UserItem == true && (
+            {UserItem === true && (
               <>
                 <DrawerItem
-                  label={({ focused }) => (
+                  label={() => (
                     <View
                       style={[
                         styles.subView,
-                        focus === 'All'
-                          ? {
-                              borderLeftColor: Color.BASE_COLOR_ORANGE,
-                              borderLeftWidth: 6,
-                            }
-                          : null,
+                        focus === 'All' ? styles.drawerFocusStyle : null,
                       ]}>
                       <Text
                         style={[
@@ -119,16 +111,11 @@ const Drawer = ({ props }: Props) => {
                   }}
                 />
                 <DrawerItem
-                  label={({ focused }) => (
+                  label={() => (
                     <View
                       style={[
                         styles.subView,
-                        focus === 'Mentees'
-                          ? {
-                              borderLeftColor: Color.BASE_COLOR_ORANGE,
-                              borderLeftWidth: 6,
-                            }
-                          : null,
+                        focus === 'Mentees' ? styles.drawerFocusStyle : null,
                       ]}>
                       <Text
                         style={[
@@ -147,16 +134,11 @@ const Drawer = ({ props }: Props) => {
                   }}
                 />
                 <DrawerItem
-                  label={({ focused }) => (
+                  label={() => (
                     <View
                       style={[
                         styles.subView,
-                        focus === 'Mentors'
-                          ? {
-                              borderLeftColor: Color.BASE_COLOR_ORANGE,
-                              borderLeftWidth: 6,
-                            }
-                          : null,
+                        focus === 'Mentors' ? styles.drawerFocusStyle : null,
                       ]}>
                       <Text
                         style={[
@@ -174,16 +156,11 @@ const Drawer = ({ props }: Props) => {
                   }}
                 />
                 <DrawerItem
-                  label={({ focused }) => (
+                  label={() => (
                     <View
                       style={[
                         styles.subView,
-                        focus === 'Moderators'
-                          ? {
-                              borderLeftColor: Color.BASE_COLOR_ORANGE,
-                              borderLeftWidth: 6,
-                            }
-                          : null,
+                        focus === 'Moderators' ? styles.drawerFocusStyle : null,
                       ]}>
                       <Text
                         style={[
@@ -201,16 +178,11 @@ const Drawer = ({ props }: Props) => {
                   }}
                 />
                 <DrawerItem
-                  label={({ focused }) => (
+                  label={() => (
                     <View
                       style={[
                         styles.subView,
-                        focus === 'Admins'
-                          ? {
-                              borderLeftColor: Color.BASE_COLOR_ORANGE,
-                              borderLeftWidth: 6,
-                            }
-                          : null,
+                        focus === 'Admins' ? styles.drawerFocusStyle : null,
                       ]}>
                       <Text
                         style={[
@@ -232,23 +204,20 @@ const Drawer = ({ props }: Props) => {
 
             <DrawerItem
               style={styles.drawerItem}
-              focused={focus == 1 ? true : false}
-              label={({ focused }) => (
+              focused={focus === 1 ? true : false}
+              label={() => (
                 <View style={styles.drawerView}>
                   <Text style={styles.menuText}>Moderation Queue</Text>
-                  {QueueItem == true && (
+                  {QueueItem === true && (
                     <Image
                       source={Images.MenuDropdown}
-                      style={{
-                        transform: [{ rotateX: '180deg' }],
-                        marginRight: 15,
-                      }}
+                      style={styles.imageStyle}
                     />
                   )}
-                  {QueueItem == false && (
+                  {QueueItem === false && (
                     <Image
                       source={Images.MenuDropdown}
-                      style={{ marginRight: 15 }}
+                      style={styles.imageDropStyle}
                     />
                   )}
                 </View>
@@ -259,19 +228,14 @@ const Drawer = ({ props }: Props) => {
               }}
             />
 
-            {QueueItem == true && (
+            {QueueItem === true && (
               <>
                 <DrawerItem
-                  label={({ focused }) => (
+                  label={() => (
                     <View
                       style={[
                         styles.subView,
-                        focus === 'AllQ'
-                          ? {
-                              borderLeftColor: Color.BASE_COLOR_ORANGE,
-                              borderLeftWidth: 6,
-                            }
-                          : null,
+                        focus === 'AllQ' ? styles.drawerFocusStyle : null,
                       ]}>
                       <Text
                         style={[
@@ -289,16 +253,11 @@ const Drawer = ({ props }: Props) => {
                   }}
                 />
                 <DrawerItem
-                  label={({ focused }) => (
+                  label={() => (
                     <View
                       style={[
                         styles.subView,
-                        focus === 'Comments'
-                          ? {
-                              borderLeftColor: Color.BASE_COLOR_ORANGE,
-                              borderLeftWidth: 6,
-                            }
-                          : null,
+                        focus === 'Comments' ? styles.drawerFocusStyle : null,
                       ]}>
                       <Text
                         style={[
@@ -316,16 +275,11 @@ const Drawer = ({ props }: Props) => {
                   }}
                 />
                 <DrawerItem
-                  label={({ focused }) => (
+                  label={() => (
                     <View
                       style={[
                         styles.subView,
-                        focus === 'Post'
-                          ? {
-                              borderLeftColor: Color.BASE_COLOR_ORANGE,
-                              borderLeftWidth: 6,
-                            }
-                          : null,
+                        focus === 'Post' ? styles.drawerFocusStyle : null,
                       ]}>
                       <Text
                         style={[
@@ -343,16 +297,11 @@ const Drawer = ({ props }: Props) => {
                   }}
                 />
                 <DrawerItem
-                  label={({ focused }) => (
+                  label={() => (
                     <View
                       style={[
                         styles.subView,
-                        focus === 'Reports'
-                          ? {
-                              borderLeftColor: Color.BASE_COLOR_ORANGE,
-                              borderLeftWidth: 6,
-                            }
-                          : null,
+                        focus === 'Reports' ? styles.drawerFocusStyle : null,
                       ]}>
                       <Text
                         style={[
@@ -370,16 +319,11 @@ const Drawer = ({ props }: Props) => {
                   }}
                 />
                 <DrawerItem
-                  label={({ focused }) => (
+                  label={() => (
                     <View
                       style={[
                         styles.subView,
-                        focus === 'Usernames'
-                          ? {
-                              borderLeftColor: Color.BASE_COLOR_ORANGE,
-                              borderLeftWidth: 6,
-                            }
-                          : null,
+                        focus === 'Usernames' ? styles.drawerFocusStyle : null,
                       ]}>
                       <Text
                         style={[
@@ -400,23 +344,20 @@ const Drawer = ({ props }: Props) => {
             )}
             <DrawerItem
               style={styles.drawerItem}
-              focused={focus == 1 ? true : false}
-              label={({ focused }) => (
+              focused={focus === 1 ? true : false}
+              label={() => (
                 <View style={styles.drawerView}>
                   <Text style={styles.menuText}>My Account</Text>
-                  {AccountItem == true && (
+                  {AccountItem === true && (
                     <Image
                       source={Images.MenuDropdown}
-                      style={{
-                        transform: [{ rotateX: '180deg' }],
-                        marginRight: 15,
-                      }}
+                      style={styles.imageStyle}
                     />
                   )}
-                  {AccountItem == false && (
+                  {AccountItem === false && (
                     <Image
                       source={Images.MenuDropdown}
-                      style={{ marginRight: 15 }}
+                      style={styles.imageDropStyle}
                     />
                   )}
                 </View>
@@ -427,19 +368,14 @@ const Drawer = ({ props }: Props) => {
               }}
             />
 
-            {AccountItem == true && (
+            {AccountItem === true && (
               <>
                 <DrawerItem
-                  label={({ focused }) => (
+                  label={() => (
                     <View
                       style={[
                         styles.subView,
-                        focus === 'Settings'
-                          ? {
-                              borderLeftColor: Color.BASE_COLOR_ORANGE,
-                              borderLeftWidth: 6,
-                            }
-                          : null,
+                        focus === 'Settings' ? styles.drawerFocusStyle : null,
                       ]}>
                       <Text
                         style={[
@@ -457,16 +393,11 @@ const Drawer = ({ props }: Props) => {
                   }}
                 />
                 <DrawerItem
-                  label={({ focused }) => (
+                  label={() => (
                     <View
                       style={[
                         styles.subView,
-                        focus === 'Terms'
-                          ? {
-                              borderLeftColor: Color.BASE_COLOR_ORANGE,
-                              borderLeftWidth: 6,
-                            }
-                          : null,
+                        focus === 'Terms' ? styles.drawerFocusStyle : null,
                       ]}>
                       <Text
                         style={[
@@ -484,16 +415,11 @@ const Drawer = ({ props }: Props) => {
                   }}
                 />
                 <DrawerItem
-                  label={({ focused }) => (
+                  label={() => (
                     <View
                       style={[
                         styles.subView,
-                        focus === 'Privacy'
-                          ? {
-                              borderLeftColor: Color.BASE_COLOR_ORANGE,
-                              borderLeftWidth: 6,
-                            }
-                          : null,
+                        focus === 'Privacy' ? styles.drawerFocusStyle : null,
                       ]}>
                       <Text
                         style={[
@@ -514,16 +440,6 @@ const Drawer = ({ props }: Props) => {
             )}
           </View>
         </ScrollView>
-
-        {/* </DrawerContentScrollView> */}
-
-        {/* </View> */}
-        {/* <View style={{height:106,}}  onPress={()=>alert("logout")}>
-                    <TouchableOpacity   onPress={()=>alert("logout")}>
-                     <Text style={styles.logoutText}>Logout</Text></TouchableOpacity>
-                     <View style={{borderColor:Color.BASE_COLOR_LIGHTGRAY,borderWidth:1,}}></View>
-
-                     </View> */}
       </View>
     </SafeAreaView>
   );
@@ -565,7 +481,6 @@ const styles = StyleSheet.create({
   subMenuText: {
     fontFamily: 'Calibre',
     fontSize: 20,
-    // fontWeight:'bold',
     fontStyle: 'normal',
     lineHeight: 24,
     letterSpacing: 0,
@@ -634,6 +549,16 @@ const styles = StyleSheet.create({
     margin: 0,
     marginVertical: 0,
     marginTop: -12,
+  },
+  viewStyle: { flexDirection: 'column' },
+  imageStyle: {
+    transform: [{ rotateX: '180deg' }],
+    marginRight: 15,
+  },
+  imageDropStyle: { marginRight: 15 },
+  drawerFocusStyle: {
+    borderLeftColor: Color.BASE_COLOR_ORANGE,
+    borderLeftWidth: 6,
   },
 });
 export default Drawer;

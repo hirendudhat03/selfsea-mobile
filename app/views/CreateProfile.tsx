@@ -55,20 +55,7 @@ const CreateProfile = ({ navigation }) => {
         navigation,
       ),
     );
-    navigation.navigate("Home")
-  };
-  const sectionDispatch = () => {
-    dispatch(ProunounsRequest());
-    setPronounsDropDown([pronounsResponse]);
-
-    dispatch(OrientationRequest());
-    setOrientationDropDown([orientationResponse]);
-
-    dispatch(GenderRequest());
-    setGenderDropDown([genderResponse]);
-
-    dispatch(EthnicityRequest());
-    setRaceDropDown([ethnicityResponse]);
+    navigation.navigate('Home');
   };
 
   const pronounsResponse = useSelector(state => state.PronounsReducer);
@@ -84,8 +71,28 @@ const CreateProfile = ({ navigation }) => {
   console.log('ethnicityResponse::: ', JSON.stringify(ethnicityResponse));
 
   useEffect(() => {
-    sectionDispatch();
-  }, []);
+    dispatch(ProunounsRequest());
+    setPronounsDropDown(...pronounsResponse);
+
+    dispatch(OrientationRequest());
+    setOrientationDropDown(...orientationResponse);
+
+    dispatch(GenderRequest());
+    setGenderDropDown(...genderResponse);
+
+    dispatch(EthnicityRequest());
+    setRaceDropDown(...ethnicityResponse);
+  }, [
+    dispatch,
+    pronounsResponse,
+    orientationResponse,
+    genderResponse,
+    ethnicityResponse,
+    setPronounsDropDown,
+    setOrientationDropDown,
+    setGenderDropDown,
+    setRaceDropDown,
+  ]);
 
   const [profile, setProfile] = useState('');
 
@@ -322,7 +329,7 @@ const CreateProfile = ({ navigation }) => {
       />
       <View style={styles.contentView}>
         <ScrollView style={styles.scrollView}>
-          <View style={{ width: '90%', alignSelf: 'center', padding: 0 }}>
+          <View style={styles.textViewStyle}>
             <Text
               style={styles.descriptionText}
               numberOfLines={5}
@@ -474,13 +481,6 @@ const CreateProfile = ({ navigation }) => {
                   );
                 })}
               </View>
-            ) : orientationDropDown === null ? (
-              <View style={styles.recordView}>
-                {/* {orientation !== '' ? ( */}
-                <Text>No Record Found</Text>
-                {/* ) :
-                                        null} */}
-              </View>
             ) : null}
 
             <Text style={styles.labelText}>gender identity</Text>
@@ -604,13 +604,6 @@ const CreateProfile = ({ navigation }) => {
                   );
                 })}
               </View>
-            ) : raceDropDown === null ? (
-              <View style={styles.recordView}>
-                {/* {orientation !== '' ? ( */}
-                <Text>No Record Found</Text>
-                {/* ) :
-                null} */}
-              </View>
             ) : null}
 
             <Text style={styles.labelText}>location</Text>
@@ -685,7 +678,7 @@ const CreateProfile = ({ navigation }) => {
           type={Constant.buttons.PRIMARY}
           text={'take me to selfsea'}
           style={[
-            { marginTop: 15 },
+            styles.buttonStyle,
             selectPronounsDropDown.length === 0 ||
             selectOrientationDropDown.length === 0 ||
             selectGenderDropDown.length === 0 ||
@@ -714,8 +707,7 @@ const CreateProfile = ({ navigation }) => {
         <ModalPicker
           changeModalVisibility={changeModalVisibility}
           type={Constant.modal.MODAL}
-          textTitle={'selfsea Profile Visibility'}
-          // smallText={'your Profile Visibility will need to be approved by a moderator before your first post or comment can be approved. it cannot be changed after that.'}
+          textTitle={'selfsea profile visibility'}
           descriptionData={descriptionData}
           numberOfLines={0}
           button={Constant.buttons.CLOSE}
@@ -783,8 +775,6 @@ const styles = StyleSheet.create({
     marginVertical: 15,
   },
   rowView: {
-    // flexDirection: 'row',
-    // justifyContent: 'flex-start',
     width: '90%',
     flexDirection: 'row',
     paddingBottom: 5,
@@ -800,8 +790,6 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     textAlign: 'center',
     color: Color.DESCRIPTION_COLOR_TEXT,
-    // marginHorizontal: '4%',
-    // marginVertical: 15,
   },
 
   touchableStyle: { justifyContent: 'center' },
@@ -855,6 +843,8 @@ const styles = StyleSheet.create({
   rowTextStyle: {
     fontSize: 16,
   },
+  textViewStyle: { width: '90%', alignSelf: 'center', padding: 0 },
+  buttonStyle: { marginTop: 15 },
 });
 
 export default CreateProfile;

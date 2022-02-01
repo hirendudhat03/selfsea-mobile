@@ -84,7 +84,7 @@ const Signup = ({ navigation }) => {
       setEmailBorder(Color.COMMUNITY_ORANGE);
       setEmailError('Please enter email address. ');
     } else if (
-      text.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null
+      text.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/) === null
     ) {
       setEmailBorder(Color.COMMUNITY_ORANGE);
       setEmailError('Please enter a valid email address. ');
@@ -110,14 +110,12 @@ const Signup = ({ navigation }) => {
       setpasswordBorder(Color.COMMUNITY_ORANGE);
       setPasswordError('Password must contain a number.');
       setCircleFillPassword(false);
-    } else if (8 > text.length || text.length > 255) {
+    } else if (text.length < 8 || text.length > 255) {
       setpasswordBorder(Color.COMMUNITY_ORANGE);
       setPasswordError('your password must be less than 255 characters.');
-      // setCircleFillPassword(false);
     } else {
       setpasswordBorder(Color.BORDER_COLOR_LIGHTGRAY);
       setPasswordError('');
-      // setCircleFillPassword(true);
     }
   };
 
@@ -165,15 +163,6 @@ const Signup = ({ navigation }) => {
     }
   };
 
-  // const [suggestions, setSuggestions] = useState('');
-
-  // const selectFocus = () => {
-  //   if (focus) {
-  //     setFocus(false);
-  //   } else {
-  //     setFocus(true);
-  //   }
-  // };
   const [isModalVisible, setIsMoalVisiable] = useState(false);
   const changeModalVisibility = (bool: boolean) => {
     setIsMoalVisiable(bool);
@@ -202,7 +191,7 @@ const Signup = ({ navigation }) => {
     } else if (!email) {
       setEmailError('Please enter email address.');
     } else if (
-      email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null
+      email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/) === null
     ) {
       setEmailError('Please enter a valid email address.');
     } else if (!Password) {
@@ -220,7 +209,7 @@ const Signup = ({ navigation }) => {
           navigation,
         ),
       );
-      navigation.navigate('CreateProfile')
+      navigation.navigate('CreateProfile');
     }
   };
 
@@ -272,7 +261,7 @@ const Signup = ({ navigation }) => {
             type={Constant.textInput.LARGE_INPUT}
             placeholder={auths.EMAIL_PLACEHOLDER}
             label={auths.EMAIL_LABEL}
-            style={{ fontSize: 18 }}
+            style={styles.inputTextStyle}
             onChangeText={text => {
               selectFill(text);
             }}
@@ -288,7 +277,7 @@ const Signup = ({ navigation }) => {
           <TextInput
             type={Constant.textInput.LARGE_INPUT}
             label={'password'}
-            style={{ fontSize: 18 }}
+            style={styles.inputTextStyle}
             onChangeText={text => {
               selectFillPassword(text);
               const response = zxcvbn(text);
@@ -390,7 +379,7 @@ const Signup = ({ navigation }) => {
             value={userName}
             type={Constant.textInput.LARGE_INPUT}
             text={'@'}
-            style={{ fontSize: 18 }}
+            style={styles.inputTextStyle}
             onChangeText={text => {
               selectFillUser(text);
             }}
@@ -416,7 +405,7 @@ const Signup = ({ navigation }) => {
           type={Constant.buttons.PRIMARY}
           text={auths.CREATE_ACCOUNT_BUTTON}
           style={[
-            { marginTop: 15 },
+            styles.buttonStyle,
             circleFillEmail !== true ||
             circleFillPassword !== true ||
             circleFillBirth !== true ||
@@ -461,7 +450,6 @@ const Signup = ({ navigation }) => {
           changeModalVisibility={changeBirthVisibility}
           type={Constant.modal.MODAL}
           textTitle={modalBoxes.TITLES.BIRTH_MONTH}
-          // smallText={'your birthname will need to be approved by a moderator before your first post or comment can be approved. it cannot be changed after that.'}
           descriptionData={modalBoxes.BIRTH_DESCRIPTION}
           numberOfLines={3}
           button={Constant.buttons.CLOSE}
@@ -485,7 +473,6 @@ const styles = StyleSheet.create({
   contentView: {
     flex: 4,
     alignItems: 'center',
-    // marginTop: 25,
   },
   infoIcon: {
     alignSelf: 'center',
@@ -536,9 +523,7 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
   },
   yearView: {
-    // flexDirection: 'row',
     justifyContent: 'center',
-    // marginLeft: '25%',
     paddingRight: '24%',
   },
   yearDropdown: {
@@ -599,8 +584,6 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   touchableStyle: {
-    // justifyContent: 'center',
-    // backgroundColor: 'red',
     alignSelf: 'center',
   },
   helperText: {
@@ -614,5 +597,7 @@ const styles = StyleSheet.create({
     marginTop: -11,
     color: Color.BASE_COLOR_BORDER_GRAY,
   },
+  inputTextStyle: { fontSize: 18 },
+  buttonStyle: { marginTop: 15 },
 });
 export default Signup;

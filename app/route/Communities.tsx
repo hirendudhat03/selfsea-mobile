@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, Dimensions, StyleSheet } from 'react-native';
+import { Dimensions } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 // import Mycommunity from './Mycommunity';
 // import AllCommunities from './AllCommunities';
@@ -12,6 +12,7 @@ const Tab = createMaterialTopTabNavigator();
 const height = Dimensions.get('window').height;
 
 const Communities = ({ navigation }) => {
+  console.log(navigation);
   return (
     // <SafeAreaView style={{ flex: 1 }}>
     <Tab.Navigator
@@ -52,5 +53,4 @@ const Communities = ({ navigation }) => {
     // </SafeAreaView>
   );
 };
-const styles = StyleSheet.create({});
 export default Communities;

@@ -2,7 +2,8 @@ import { call, put } from 'redux-saga/effects';
 
 import { api } from '../../services';
 import { userGenderQuery } from '../../graphql/queries/UserProfile';
-import * as GenderAction from '../actions/GenderAction';
+import { GenderResponse } from '../actions/GenderAction';
+import { Alert } from 'react-native';
 
 export function* genderSaga(action) {
   const Gender = async () => {
@@ -15,10 +16,15 @@ export function* genderSaga(action) {
       return response;
     } catch (e) {
       console.log('e : ', e);
+      Alert.alert(e);
     }
   };
 
   const response = yield call(Gender);
-  yield put(GenderAction.GenderResponse(response));
   console.warn('response saga', response);
+  if (response === null) {
+    yield put(GenderResponse(null, false));
+  } else {
+    yield put(GenderResponse(response, false));
+  }
 }

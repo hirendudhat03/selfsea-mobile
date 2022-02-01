@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
+import { View, Image, StyleSheet, Dimensions } from 'react-native';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -11,6 +11,7 @@ import Bell from '../views/Bell';
 import Book from '../views/Book';
 import Person from '../views/Person';
 import TabScreen from '../views/TabScreen';
+
 import Color from '../theme/colors';
 
 import HealthScreen from '../views/HealthScreen';
@@ -36,7 +37,7 @@ const HomeStack = createStackNavigator();
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator
-      headerMode={"none"}
+      headerMode={'none'}
       screenOptions={{
         gestureEnabled: true,
         gestureDirection: 'horizontal',
@@ -72,7 +73,7 @@ function HomeStackScreen() {
 
 const Tab = createBottomTabNavigator();
 
-const BottomTabNavigator = ({ navigation }) => {
+const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={{

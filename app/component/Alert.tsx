@@ -4,12 +4,15 @@ import { Text, View, StyleSheet, Image } from 'react-native';
 import Color from '../theme/colors';
 import Constant from '../theme/constant';
 import Font from '../theme/fonts';
+import { Theme } from '../assets/styles';
+
 interface Props {
   type: string;
   text: string;
 }
 
 const Alert = ({ type, text }: Props) => {
+  var theme = Theme();
   return (
     <View
       style={
@@ -29,8 +32,14 @@ const Alert = ({ type, text }: Props) => {
           ? styles.actionInfoView
           : null
       }>
-      <View style={[{flexDirection:"row"}]}>
-        <View style={[(type === Constant.alert.MENTEE || type === Constant.alert.MENTEE_FADE) ? {width:"90%"}: {width:"100%"}]}>
+      <View style={[theme.row]}>
+        <View
+          style={[
+            type === Constant.alert.MENTEE ||
+            type === Constant.alert.MENTEE_FADE
+              ? theme.width90p
+              : theme.width100p,
+          ]}>
           <Text
             style={
               type === Constant.alert.MENTOR
@@ -50,11 +59,12 @@ const Alert = ({ type, text }: Props) => {
             {text}
           </Text>
         </View>
-        {(type === Constant.alert.MENTEE || type === Constant.alert.MENTEE_FADE)    &&
-          <View style={[styles.touchableStyle, {width:"10%"}]} >
+        {(type === Constant.alert.MENTEE ||
+          type === Constant.alert.MENTEE_FADE) && (
+          <View style={[styles.touchableStyle, theme.width10p]}>
             <Image source={Images.Infocircle} />
           </View>
-        }
+        )}
       </View>
     </View>
   );
@@ -147,7 +157,7 @@ const styles = StyleSheet.create({
     borderColor: Color.BORDER_COLOR_SUCCESS,
     justifyContent: 'center',
     paddingLeft: 15,
-    textAlign:"center"
+    textAlign: 'center',
   },
   actionSuccessText: {
     fontFamily: 'HelveticaNeue',
@@ -188,7 +198,7 @@ const styles = StyleSheet.create({
   },
   touchableStyle: {
     justifyContent: 'center',
-    flex: 1
+    flex: 1,
   },
 });
 

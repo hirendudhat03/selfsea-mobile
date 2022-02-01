@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  Modal,
-  StyleSheet,
-  Image,
-  FlatList,
-} from 'react-native';
+import { View, Text, Modal, StyleSheet, Image, FlatList } from 'react-native';
 import ModalPicker from './ModalPickerConfirm';
 
 import Constant from '../theme/constant';
@@ -18,7 +11,7 @@ import Header from '../component/Header';
 import Button from '../component/Button';
 
 import LinearGradient from 'react-native-linear-gradient';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Theme } from '../assets/styles';
 import { HomeRequest } from '../redux/actions/HomeAction';
 
@@ -47,8 +40,6 @@ const descriptionData = [
 ];
 
 const CommunitiesHome = ({ navigation }) => {
-  //   const createprofileRes = useSelector(state => state.CreateProfileReducer)
-  // console.log('signupRes321 : ',JSON.stringify(createprofileRes))
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -76,14 +67,14 @@ const CommunitiesHome = ({ navigation }) => {
         <Button
           type={Constant.buttons.CLOSE}
           text={'join'}
-          style={{ paddingVertical: 12 }}
+          style={styles.buttonStyle}
           onPress={() => dispatch(HomeRequest(navigation))}
         />
       </View>
     </View>
   );
-  
-  console.log("Theme",Theme);
+
+  console.log('Theme', Theme);
 
   return (
     <View style={styles.container}>
@@ -126,7 +117,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Color.BASE_COLOR_LIGHT_BLUE,
-
   },
   viewStyle: {
     paddingVertical: 12,
@@ -191,6 +181,7 @@ const styles = StyleSheet.create({
   descriptionTextStyle: {
     textAlign: 'left',
   },
+  buttonStyle: { paddingVertical: 12 },
 });
 
 export default CommunitiesHome;

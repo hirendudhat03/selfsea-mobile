@@ -1,8 +1,7 @@
+import { Alert } from 'react-native';
 import { put, call } from 'redux-saga/effects';
-//import { showMessage } from 'react-native-flash-message';
-// import {Login} from '../api/method/Login';
-import * as HomeAction from '../actions/HomeAction';
-// import Constant from '../../theme/Constant'
+
+import { HomeResponse } from '../actions/HomeAction';
 
 export function* homeSaga(action) {
   const Home = async () => {
@@ -21,17 +20,20 @@ export function* homeSaga(action) {
         },
       };
 
-      // await auth().signInWithEmailAndPassword(email, password)
-
       return response;
     } catch (e) {
       console.log(e);
-      alert(e);
+      Alert.alert(e);
     }
   };
 
   const response = yield call(Home);
   console.warn('response saga', response);
-  yield put(HomeAction.HomeResponse(response));
+
   action.navigation.navigate('Communities');
+  if (response === null) {
+    yield put(HomeResponse(null, false));
+  } else {
+    yield put(HomeResponse(response, false));
+  }
 }

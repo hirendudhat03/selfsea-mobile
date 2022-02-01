@@ -1,8 +1,6 @@
 import React from 'react';
-import { SafeAreaView, Dimensions, StyleSheet } from 'react-native';
+import { Dimensions } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import Mycommunity from './Mycommunity';
-import AllCommunities from './AllCommunities';
 import Color from '../theme/colors';
 import Font from '../theme/fonts';
 import MenteeCommunity from './Mentee/MenteeCommunity';
@@ -11,9 +9,8 @@ const Tab = createMaterialTopTabNavigator();
 
 const height = Dimensions.get('window').height;
 
-const Communities = ({ navigation }) => {
+const Communities = () => {
   return (
-    // <SafeAreaView style={{ flex: 1 }}>
     <Tab.Navigator
       tabBarOptions={{
         activeTintColor: Color.BASE_COLOR_WHITE,
@@ -49,8 +46,6 @@ const Communities = ({ navigation }) => {
         }}
       />
     </Tab.Navigator>
-    // </SafeAreaView>
   );
 };
-const styles = StyleSheet.create({});
 export default Communities;
