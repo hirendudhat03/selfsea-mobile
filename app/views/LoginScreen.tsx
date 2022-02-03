@@ -24,7 +24,7 @@ import { auths } from '../config/static';
 import { Theme } from '../assets/styles';
 import auth from '@react-native-firebase/auth';
 import { api } from '../services';
-import { SignupRequest, SignupResponse } from '../redux/actions/SignupAction';
+import { SignupResponse } from '../redux/actions/SignupAction';
 import { useDispatch } from 'react-redux';
 
 const onPressText = () => {
@@ -71,7 +71,8 @@ const Login = ({ navigation }) => {
         source={Images.Background}
         resizeMode="stretch"
         style={styles.image}>
-        <ScrollView>
+        <View style={styles.containerView}>
+          {/* <ScrollView > */}
           <View style={styles.headerView}>
             <Image source={Images.Logo} />
           </View>
@@ -126,6 +127,8 @@ const Login = ({ navigation }) => {
                 </Text>
               </TouchableOpacity>
             </View>
+          </View>
+          <View style={styles.signinBottomView}>
             <View style={styles.bottomView}>
               <Text style={styles.bottomText} onPress={() => onPressText()}>
                 {auths.ALREADY_HAVE_ACCOUNT}
@@ -139,7 +142,8 @@ const Login = ({ navigation }) => {
               />
             </View>
           </View>
-        </ScrollView>
+          {/* </ScrollView> */}
+        </View>
       </ImageBackground>
     </SafeAreaView>
   );
@@ -154,8 +158,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   headerView: {
-    // flex: 1.2,
-    marginTop: 100,
+    flex: 1.2,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -163,7 +166,6 @@ const styles = StyleSheet.create({
     flex: 1.8,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginTop: 50,
   },
   contentText: {
     fontFamily: Fonts.CALIBRE,
@@ -191,9 +193,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   bottomView: {
-    flex: 1.1,
     justifyContent: 'center',
-    marginTop: 50,
     alignItems: 'center',
   },
   bottomText: {
@@ -218,6 +218,8 @@ const styles = StyleSheet.create({
   },
   buttonStyle: { marginTop: 8 },
   conditionViewStyle: { flexDirection: 'row' },
+  containerView: { flex: 1 },
+  signinBottomView: { flex: 1, justifyContent: 'flex-end' },
 });
 
 export default Login;
