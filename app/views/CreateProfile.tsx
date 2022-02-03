@@ -9,6 +9,7 @@ import {
   Image,
   TextInput,
   Modal,
+  KeyboardAvoidingView,
 } from 'react-native';
 import ModalPicker from './ModalPickerConfirm';
 
@@ -42,7 +43,7 @@ const descriptionData = [
       'visible only to mentors means only our trained mentors can see your profile fields and post history.',
   },
   {
-    title: '.no one will be able to see your email address!',
+    title: 'no one will be able to see your email address!',
   },
 ];
 
@@ -63,7 +64,6 @@ const CreateProfile = ({ navigation }) => {
         navigation,
       ),
     );
-    navigation.navigate('Home');
   };
 
   // const pronounsResponse = useSelector(state => state.PronounsReducer);
@@ -71,10 +71,11 @@ const CreateProfile = ({ navigation }) => {
 
   const sectionDispatch = () => {
     dispatch(DropDownRequest());
-    setPronounsDropDown([menuResponse]);
-    setOrientationDropDown([menuResponse]);
-    setGenderDropDown([menuResponse]);
-    setRaceDropDown([menuResponse]);
+    // console.log({menuResponse})
+    setPronounsDropDown(menuResponse.pronouns);
+    setOrientationDropDown(menuResponse.orientations);
+    setGenderDropDown(menuResponse.genders);
+    setRaceDropDown(menuResponse.ethnicities);
   };
 
   useEffect(() => {
@@ -318,7 +319,7 @@ const CreateProfile = ({ navigation }) => {
         label={'create your profile'}
         onPress={() => navigation.goBack()}
       />
-      <View style={styles.contentView}>
+      <KeyboardAvoidingView style={styles.contentView} behavior={'padding'}>
         <ScrollView style={styles.scrollView}>
           <View style={styles.textViewStyle}>
             <Text
@@ -661,7 +662,7 @@ const CreateProfile = ({ navigation }) => {
             ) : null}
           </View>
         </ScrollView>
-      </View>
+      </KeyboardAvoidingView>
 
       <View style={styles.bottomView}>
         <Button
