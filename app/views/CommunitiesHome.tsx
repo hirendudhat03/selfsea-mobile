@@ -11,8 +11,9 @@ import Header from '../component/Header';
 import Button from '../component/Button';
 
 import LinearGradient from 'react-native-linear-gradient';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { HomeRequest } from '../redux/actions/HomeAction';
+import { AcceptRequest } from '../redux/actions/AcceptTermAction';
 
 const DATA = [{}, {}, {}, {}];
 
@@ -38,14 +39,32 @@ const descriptionData = [
   },
 ];
 
-const CommunitiesHome = ({ navigation }) => {
+const CommunitiesHome = () => {
+  const [title, setTitle] = useState(null);
+  const [content, setContent] = useState(null);
+  // const [hasAcceptedLatestTerms, setHasAcceptedLatestTerms] = useState(null);
+  const [isModalVisible, setIsMoalVisiable] = useState(null);
+
   const dispatch = useDispatch();
 
+  const homeResponse = useSelector(state => state.HomeReducer);
+  console.log('HomeReducer123 : ', JSON.stringify(homeResponse));
+
   useEffect(() => {
-    changeModalVisibility(true);
+    dispatch(HomeRequest());
   }, []);
 
-  const [isModalVisible, setIsMoalVisiable] = useState(false);
+  useEffect(() => {
+    if (homeResponse.data) {
+      console.log('homeResponse.data if: ', homeResponse.data);
+      setTitle(homeResponse.data.currentTermsAndConditions.title);
+      setContent(homeResponse.data.currentTermsAndConditions.content);
+      setIsMoalVisiable(homeResponse.data.currentUser.hasAcceptedLatestTerms);
+    } else {
+      console.log('homeResponse.data : ', homeResponse.data);
+    }
+  }, [homeResponse]);
+
   const changeModalVisibility = (bool: boolean) => {
     setIsMoalVisiable(bool);
   };
@@ -67,7 +86,7 @@ const CommunitiesHome = ({ navigation }) => {
           type={Constant.buttons.CLOSE}
           text={'join'}
           style={styles.buttonStyle}
-          onPress={() => dispatch(HomeRequest(navigation))}
+          //onPress={() => dispatch(HomeRequest(navigation))}
         />
       </View>
     </View>
@@ -95,15 +114,17 @@ const CommunitiesHome = ({ navigation }) => {
         <ModalPicker
           changeModalVisibility={changeModalVisibility}
           type={Constant.modal.MODAL}
-          textTitle={'welcome to selfsea!'}
-          smallText={
-            "in order to participate in selfsea's communities, you must agree to the following."
-          }
+          textTitle={title}
+          smallText={content}
           descriptionData={descriptionData}
           style={styles.descriptionTextStyle}
           numberOfLines={4}
           button={Constant.buttons.PRIMARY}
           text={'I agree to the terms of use'}
+          onPress={() => {
+            dispatch(AcceptRequest());
+            changeModalVisibility(false);
+          }}
         />
       </Modal>
     </View>

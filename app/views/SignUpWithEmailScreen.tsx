@@ -7,6 +7,7 @@ import {
   Dimensions,
   TouchableOpacity,
   Modal,
+  KeyboardAvoidingView,
 } from 'react-native';
 
 import ModalPicker from './ModalPickerConfirm';
@@ -94,6 +95,14 @@ const Signup = ({ navigation }) => {
 
     console.log('year::', year);
   }, []);
+  useEffect(() => {
+    if (signupRes.data) {
+      console.log('signupRes.data if: ', signupRes.data);
+      setEmailError(signupRes.data.error);
+    } else {
+      console.log('signupRes.data : ', signupRes.data);
+    }
+  }, [signupRes]);
 
   const [email, setEmail] = useState<string>('');
   const [emailError, setEmailError] = useState('');
@@ -112,7 +121,7 @@ const Signup = ({ navigation }) => {
 
   const [passwordScore, setPasswordScore] = useState<0 | 1 | 2 | 3 | 4>(0);
 
-  const [focus, setFocus] = useState<boolean>();
+  const [focus, setFocus] = useState<boolean>(true);
   const selectFocus = () => {
     if (focus) {
       setFocus(false);
@@ -173,7 +182,7 @@ const Signup = ({ navigation }) => {
       setUserNameBorder(Color.COMMUNITY_ORANGE);
       setUserNameError(text.length + '/20');
       setCircleFillUser(false);
-    } else if (text.length > 20) {
+    } else if (text.length < 3) {
       setUserNameBorder(Color.COMMUNITY_ORANGE);
       setUserNameError(text.length + '/20');
       setCircleFillUser(false);
@@ -292,219 +301,221 @@ const Signup = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Loader value={signupRes.loader} />
-      <Header
-        type={Constant.navigatioHeader.PAGE_HEADER}
-        leftIcon={Images.Arrowsquare}
-        label={'sign up with email'}
-        onPress={() => navigation.goBack()}
-      />
-      <ScrollView>
-        <View style={styles.contentView}>
-          <TextInput
-            maxLength={64}
-            type={Constant.textInput.LARGE_INPUT}
-            placeholder={'email@address.com'}
-            label={'email'}
-            style={styles.inputTextStyle}
-            onChangeText={text => {
-              selectFill(text);
-            }}
-            value={email}
-            helperText={emailError}
-            iconVisibleFill={true}
-            checkRight={true}
-            circleFill={circleFillEmail}
-            onTouchStart={() => handleTouch()}
-            borderColor={emailBorder}
-          />
+    <KeyboardAvoidingView behavior="padding" style={styles.container}>
+      <View style={styles.container}>
+        <Loader value={signupRes.loader} />
+        <Header
+          type={Constant.navigatioHeader.PAGE_HEADER}
+          leftIcon={Images.Arrowsquare}
+          label={'sign up with email'}
+          onPress={() => navigation.goBack()}
+        />
+        <ScrollView>
+          <View style={styles.contentView}>
+            <TextInput
+              maxLength={64}
+              type={Constant.textInput.LARGE_INPUT}
+              placeholder={'email@address.com'}
+              label={'email'}
+              style={styles.inputTextStyle}
+              onChangeText={text => {
+                selectFill(text);
+              }}
+              value={email}
+              helperText={emailError}
+              iconVisibleFill={true}
+              checkRight={true}
+              circleFill={circleFillEmail}
+              onTouchStart={() => handleTouch()}
+              borderColor={emailBorder}
+            />
 
-          <TextInput
-            type={Constant.textInput.LARGE_INPUT}
-            label={'password'}
-            style={styles.inputTextStyle}
-            onChangeText={text => {
-              selectFillPassword(text);
-              const response = zxcvbn(text);
-              setPasswordScore(response.score);
-              setPasswordError(response.feedback.suggestions);
-              setCircleFillPassword(response.score >= 3);
-            }}
-            value={Password}
-            helperText={PasswordError}
-            iconVisible={true}
-            secureTextEntry={focus !== true ? focus : true}
-            secureTextEntryChange={selectFocus}
-            iconVisibleFill={true}
-            checkRight={true}
-            circleFill={circleFillPassword}
-            onTouchStart={() => handleTouchpasswordBorder()}
-            borderColor={passwordBorder}
-          />
-          <View style={styles.viewStyle}>
-            <View
-              style={[
-                styles.passwordStyle,
-                { backgroundColor: passwordStrengthColor(0) },
-              ]}
+            <TextInput
+              type={Constant.textInput.LARGE_INPUT}
+              label={'password'}
+              style={styles.inputTextStyle}
+              onChangeText={text => {
+                selectFillPassword(text);
+                const response = zxcvbn(text);
+                setPasswordScore(response.score);
+                setPasswordError(response.feedback.suggestions);
+                setCircleFillPassword(response.score >= 2);
+              }}
+              value={Password}
+              helperText={PasswordError}
+              iconVisible={true}
+              secureTextEntry={focus !== true ? focus : true}
+              secureTextEntryChange={selectFocus}
+              iconVisibleFill={true}
+              checkRight={true}
+              circleFill={circleFillPassword}
+              onTouchStart={() => handleTouchpasswordBorder()}
+              borderColor={passwordBorder}
             />
-            <View
-              style={[
-                styles.passwordStyle,
-                { backgroundColor: passwordStrengthColor(1) },
-              ]}
-            />
-            <View
-              style={[
-                styles.passwordStyle,
-                { backgroundColor: passwordStrengthColor(2) },
-              ]}
-            />
-            <View
-              style={[
-                styles.passwordStyle,
-                { backgroundColor: passwordStrengthColor(3) },
-              ]}
-            />
-          </View>
+            <View style={styles.viewStyle}>
+              <View
+                style={[
+                  styles.passwordStyle,
+                  { backgroundColor: passwordStrengthColor(0) },
+                ]}
+              />
+              <View
+                style={[
+                  styles.passwordStyle,
+                  { backgroundColor: passwordStrengthColor(1) },
+                ]}
+              />
+              <View
+                style={[
+                  styles.passwordStyle,
+                  { backgroundColor: passwordStrengthColor(2) },
+                ]}
+              />
+              <View
+                style={[
+                  styles.passwordStyle,
+                  { backgroundColor: passwordStrengthColor(3) },
+                ]}
+              />
+            </View>
 
-          <View style={styles.monthView}>
-            <View style={styles.rowView}>
-              <Text style={styles.birthMonthText}>birth month</Text>
+            <View style={styles.monthView}>
+              <View style={styles.rowView}>
+                <Text style={styles.birthMonthText}>birth month</Text>
+                <TouchableOpacity
+                  style={styles.touchableStyle}
+                  onPress={() => changeBirthVisibility(true)}>
+                  <Image source={Images.Infocircle} style={styles.infoIcon} />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.yearView}>
+                <Text style={styles.birthYearText}>birth year</Text>
+              </View>
+            </View>
+            <View style={styles.monthViewBottom}>
+              <Dropdown
+                optionList={month}
+                onSelect={value => {
+                  selectFillmonth(value);
+                }}
+                defaultButtonText={'select one'}
+                icon={Images.DropdownIcon}
+                helperText={birthMonthError}
+                value={birthMonth}
+                style={{ width: width * 0.48 }}
+              />
+              <View style={styles.yearDropdown}>
+                <Dropdown
+                  optionList={years}
+                  onSelect={value => {
+                    selectFillBirth(value);
+                  }}
+                  defaultButtonText={'select one'}
+                  style={{ width: width * 0.3 }}
+                  icon={Images.DropdownIcon}
+                  helperText={birthYearError}
+                  iconVisibleFill={true}
+                  checkRight={true}
+                  value={birthYear}
+                  circleFill={circleFillBirth}
+                />
+              </View>
+            </View>
+
+            <View style={styles.userName}>
+              <Text style={styles.birthMonthText}>username</Text>
               <TouchableOpacity
                 style={styles.touchableStyle}
-                onPress={() => changeBirthVisibility(true)}>
+                onPress={() => changeModalVisibility(true)}>
                 <Image source={Images.Infocircle} style={styles.infoIcon} />
               </TouchableOpacity>
             </View>
-            <View style={styles.yearView}>
-              <Text style={styles.birthYearText}>birth year</Text>
-            </View>
-          </View>
-          <View style={styles.monthViewBottom}>
-            <Dropdown
-              optionList={month}
-              onSelect={value => {
-                selectFillmonth(value);
+            <TextInput
+              maxLength={20}
+              value={userName}
+              type={Constant.textInput.LARGE_INPUT}
+              text={'@'}
+              style={styles.inputTextStyle}
+              onChangeText={text => {
+                selectFillUser(text);
               }}
-              defaultButtonText={'select one'}
-              icon={Images.DropdownIcon}
-              helperText={birthMonthError}
-              value={birthMonth}
-              style={{ width: width * 0.48 }}
+              iconVisibleFill={true}
+              checkRight={true}
+              circleFill={circleFillUser}
+              onTouchStart={() => handleTouchusernameBorder()}
+              borderColor={userNameBorder}
             />
-            <View style={styles.yearDropdown}>
-              <Dropdown
-                optionList={years}
-                onSelect={value => {
-                  selectFillBirth(value);
-                }}
-                defaultButtonText={'select one'}
-                style={{ width: width * 0.3 }}
-                icon={Images.DropdownIcon}
-                helperText={birthYearError}
-                iconVisibleFill={true}
-                checkRight={true}
-                value={birthYear}
-                circleFill={circleFillBirth}
-              />
-            </View>
+            <Text
+              style={[
+                styles.helperText,
+                userName.length > 20
+                  ? { color: Color.COMMUNITY_ORANGE }
+                  : { color: Color.BORDER_COLOR_LIGHTGRAY },
+              ]}>
+              {userNameError}
+            </Text>
           </View>
-
-          <View style={styles.userName}>
-            <Text style={styles.birthMonthText}>username</Text>
-            <TouchableOpacity
-              style={styles.touchableStyle}
-              onPress={() => changeModalVisibility(true)}>
-              <Image source={Images.Infocircle} style={styles.infoIcon} />
-            </TouchableOpacity>
-          </View>
-          <TextInput
-            maxLength={20}
-            value={userName}
-            type={Constant.textInput.LARGE_INPUT}
-            text={'@'}
-            style={styles.inputTextStyle}
-            onChangeText={text => {
-              selectFillUser(text);
-            }}
-            iconVisibleFill={true}
-            checkRight={true}
-            circleFill={circleFillUser}
-            onTouchStart={() => handleTouchusernameBorder()}
-            borderColor={userNameBorder}
-          />
-          <Text
+        </ScrollView>
+        <View style={styles.bottomView}>
+          <Button
+            type={Constant.buttons.PRIMARY}
+            text={'create account'}
             style={[
-              styles.helperText,
-              userName.length > 20
-                ? { color: Color.COMMUNITY_ORANGE }
-                : { color: Color.BORDER_COLOR_LIGHTGRAY },
-            ]}>
-            {userNameError}
-          </Text>
+              styles.buttonStyle,
+              circleFillEmail !== true ||
+              circleFillPassword !== true ||
+              circleFillBirth !== true ||
+              circleFillUser !== true
+                ? { backgroundColor: Color.BUTTON_DISABLE_COLOR }
+                : { backgroundColor: Color.BASE_COLOR_ORANGE },
+            ]}
+            onPress={() => SignupValidation()}
+            disabled={
+              passwordScore < 3 ||
+              circleFillEmail !== true ||
+              circleFillPassword !== true ||
+              circleFillBirth !== true ||
+              circleFillUser !== true
+                ? true
+                : false
+            }
+          />
         </View>
-      </ScrollView>
-      <View style={styles.bottomView}>
-        <Button
-          type={Constant.buttons.PRIMARY}
-          text={'create account'}
-          style={[
-            styles.buttonStyle,
-            circleFillEmail !== true ||
-            circleFillPassword !== true ||
-            circleFillBirth !== true ||
-            circleFillUser !== true
-              ? { backgroundColor: Color.BUTTON_DISABLE_COLOR }
-              : { backgroundColor: Color.BASE_COLOR_ORANGE },
-          ]}
-          onPress={() => SignupValidation()}
-          disabled={
-            passwordScore < 3 ||
-            circleFillEmail !== true ||
-            circleFillPassword !== true ||
-            circleFillBirth !== true ||
-            circleFillUser !== true
-              ? true
-              : false
-          }
-        />
+        <Modal
+          transparent={false}
+          animationType="fade"
+          visible={isModalVisible}
+          onRequestClose={() => changeModalVisibility(false)}>
+          <ModalPicker
+            changeModalVisibility={changeModalVisibility}
+            type={Constant.modal.MODAL}
+            textTitle={'selfsea usernames'}
+            smallText={
+              'your username will need to be approved by a moderator before your first post or comment can be approved. it cannot be changed after that.'
+            }
+            descriptionData={descriptionData}
+            numberOfLines={3}
+            button={Constant.buttons.CLOSE}
+            text={'close'}
+          />
+        </Modal>
+        <Modal
+          transparent={false}
+          animationType="fade"
+          visible={isBirthVisible}
+          onRequestClose={() => changeBirthVisibility(false)}>
+          <ModalPicker
+            changeModalVisibility={changeBirthVisibility}
+            type={Constant.modal.MODAL}
+            textTitle={'selfsea birth month'}
+            descriptionData={birthnData}
+            numberOfLines={3}
+            button={Constant.buttons.CLOSE}
+            text={'close'}
+          />
+        </Modal>
       </View>
-      <Modal
-        transparent={false}
-        animationType="fade"
-        visible={isModalVisible}
-        onRequestClose={() => changeModalVisibility(false)}>
-        <ModalPicker
-          changeModalVisibility={changeModalVisibility}
-          type={Constant.modal.MODAL}
-          textTitle={'selfsea usernames'}
-          smallText={
-            'your username will need to be approved by a moderator before your first post or comment can be approved. it cannot be changed after that.'
-          }
-          descriptionData={descriptionData}
-          numberOfLines={3}
-          button={Constant.buttons.CLOSE}
-          text={'close'}
-        />
-      </Modal>
-      <Modal
-        transparent={false}
-        animationType="fade"
-        visible={isBirthVisible}
-        onRequestClose={() => changeBirthVisibility(false)}>
-        <ModalPicker
-          changeModalVisibility={changeBirthVisibility}
-          type={Constant.modal.MODAL}
-          textTitle={'selfsea birth month'}
-          descriptionData={birthnData}
-          numberOfLines={3}
-          button={Constant.buttons.CLOSE}
-          text={'close'}
-        />
-      </Modal>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

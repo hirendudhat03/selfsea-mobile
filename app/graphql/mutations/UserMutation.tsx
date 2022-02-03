@@ -48,3 +48,10 @@ export const updateProfileMutation = gql`
 // orientations: $orientations
 // ethnicities: $ethnicities
 // pronouns: $pronouns
+export const acceptCurrentTermsMutation = gql`
+  mutation {
+    acceptCurrentTerms {
+      acceptCurrentTerms
+    }
+  }
+`;

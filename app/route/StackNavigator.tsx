@@ -11,8 +11,8 @@ import Mentees from '../views/Mentees';
 import CreateProfile from '../views/CreateProfile';
 import ForgotPassword from '../views/ForgotPassword';
 import CreateNewPassword from '../views/CreateNewPassword';
-import auth from '@react-native-firebase/auth';
-import { api } from '../services';
+// import auth from '@react-native-firebase/auth';
+// import { api } from '../services';
 
 const stackNavigator = () => {
   const Stack = createStackNavigator();
@@ -24,19 +24,46 @@ const stackNavigator = () => {
 
     // AsyncStorage.getItem(GlobalInclude.Constant.sessId).then(value => {
     //   console.log('Tokan =>', value);
+
     // auth().signOut();
-    auth().onAuthStateChanged(function (user) {
-      console.log('user : ', user);
-      if (user) {
-        const checkTokenFunction = async () => {
-          const idTokenResult = await auth().currentUser.getIdToken();
-          api.setAuthHeader(idTokenResult);
-        };
-        checkTokenFunction();
-      } else {
-        // No user is signed in.
-      }
-    });
+
+    // auth().onAuthStateChanged(function (user) {
+    //   console.log('user : ', user);
+    //   if (user) {
+    //     const checkTokenFunction = async () => {
+    //       const idTokenResult = await auth().currentUser.getIdToken();
+    //       api.setAuthHeader(idTokenResult);
+    //     };
+    //     checkTokenFunction();
+    //   } else {
+    //     // No user is signed in.
+    //   }
+    // });
+
+    // auth().onAuthStateChanged(function (user) {
+    //   console.log('user : ', user);
+    //   if (user) {
+    //     const checkTokenFunction = async () => {
+    //       const idTokenResult = await auth().currentUser.getIdTokenResult();
+    //       api.setAuthHeader(idTokenResult);
+    //       console.log('User JWT: ', idTokenResult.token);
+
+    //       if (idTokenResult.token) {
+    //         setInitRoute('DrawerNavigator');
+    //       } else {
+    //         setInitRoute('Login');
+    //       }
+    //     };
+
+    //     checkTokenFunction();
+
+    //     // User is signed in.
+    //   } else {
+    //     setInitRoute('Login');
+    //     // No user is signed in.
+    //   }
+    // });
+
     // var value = false;
 
     // if (value) {
@@ -48,14 +75,13 @@ const stackNavigator = () => {
     // });
   };
 
-  useEffect(() => {
-    sessionInfo();
-  }, []);
+  // useEffect(() => {
+  //   sessionInfo();
+  // }, []);
 
   return (
     initRoute && (
-      <Stack.Navigator
-        initialRouteName={auth().currentUser ? 'DrawerNavigator' : 'Login'}>
+      <Stack.Navigator initialRouteName={initRoute}>
         <Stack.Screen
           name="Home"
           component={Home}

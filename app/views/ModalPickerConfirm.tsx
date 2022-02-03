@@ -22,6 +22,7 @@ interface Props {
   button: String;
   secondType: string;
   firstType: string;
+  onPress: () => void;
 }
 
 const ModalPicker = ({
@@ -39,6 +40,7 @@ const ModalPicker = ({
   style,
   secondType,
   firstType,
+  onPress,
 }: Props) => {
   return (
     <>
@@ -104,7 +106,7 @@ const ModalPicker = ({
               type={button}
               text={text}
               style={styles.buttonStyle}
-              onPress={() => changeModalVisibility(false)}
+              onPress={onPress}
             />
           </View>
         </View>

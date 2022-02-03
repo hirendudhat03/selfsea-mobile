@@ -15,7 +15,9 @@ import TabScreen from '../views/TabScreen';
 import Color from '../theme/colors';
 
 import HealthScreen from '../views/HealthScreen';
-import Communities from '../views/Communities';
+
+// import Communities from '../views/Communities';
+
 import NavigationIdentity from '../views/NavigationIdentity';
 import MentorCommunity from '../views/MentorCommunity';
 
@@ -40,7 +42,7 @@ function HomeStackScreen() {
         gestureEnabled: true,
         gestureDirection: 'horizontal',
       }}
-      initialRouteName={screenNames.MentorCommunity}>
+      initialRouteName={screenNames.CommunitiesHome}>
       <HomeStack.Screen
         name={screenNames.CommunitiesHome}
         component={CommunitiesHome}
@@ -53,10 +55,10 @@ function HomeStackScreen() {
         name={screenNames.NavigationIdentity}
         component={NavigationIdentity}
       />
-      <HomeStack.Screen
+      {/* <HomeStack.Screen
         name={screenNames.Communities}
         component={Communities}
-      />
+      /> */}
       <HomeStack.Screen
         name={screenNames.MentorCommunity}
         component={MentorCommunity}

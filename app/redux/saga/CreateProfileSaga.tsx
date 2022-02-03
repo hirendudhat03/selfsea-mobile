@@ -34,6 +34,7 @@ export function* createProfileSaga(action) {
         updateProfileMutation,
         mutationVariables,
       );
+      console.log('create profile data : ', data);
       return { ...data, ...response };
     } catch (e) {
       console.log(e);

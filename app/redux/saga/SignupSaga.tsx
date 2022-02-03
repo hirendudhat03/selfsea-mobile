@@ -41,8 +41,11 @@ export function* signupSaga(action) {
       }
 
       console.log(e.message);
-      Alert.alert(e.message);
-      return null;
+      // Alert.alert(e.message);
+      return {
+        error:
+          'this is an invalid email/password, please visit selfsea.org for more resources.',
+      };
     }
   };
 
@@ -56,9 +59,17 @@ export function* signupSaga(action) {
   );
   console.warn('response saga', response);
 
-  if (response === null) {
-    yield put(SignupResponse(null, false));
-  } else {
-    yield put(SignupResponse(response, false));
-  }
+  // if (response === null) {
+  //   yield put(
+  //     SignupResponse(
+  //       {
+  //         error:
+  //           'this is an invalid email/password, please visit selfsea.org for more resources.',
+  //       },
+  //       false,
+  //     ),
+  //   );
+  // } else {
+  yield put(SignupResponse(response, false));
+  // }
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -17,12 +17,44 @@ import Images from '../theme/images';
 
 import Button from '../component/Button';
 import Auth from '../component/Authentication';
+import auth from '@react-native-firebase/auth';
+import { api } from '../services';
 
 const onPressText = () => {
   Alert.alert('onPressText');
 };
 
 const Login = ({ navigation }) => {
+  // auth().signOut();
+
+  useEffect(() => {
+    auth().onAuthStateChanged(function (user) {
+      console.log('user : ', user);
+      if (user) {
+        const checkTokenFunction = async () => {
+          const idTokenResult = await auth().currentUser.getIdTokenResult();
+          api.setAuthHeader(idTokenResult);
+          console.log('User JWT: ', idTokenResult.token);
+
+          if (idTokenResult.token) {
+            console.log('if condition call');
+            // setInitRoute('DrawerNavigator');
+            navigation.navigate('DrawerNavigator');
+          } else {
+            navigation.navigate('Login');
+          }
+        };
+
+        checkTokenFunction();
+
+        // User is signed in.
+      } else {
+        navigation.navigate('Login');
+        // No user is signed in.
+      }
+    });
+  }, []);
+
   return (
     <View style={styles.container}>
       <ImageBackground
