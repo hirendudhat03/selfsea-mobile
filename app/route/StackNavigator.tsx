@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-// import Home from '../views/Home';
+import Home from '../views/Home';
 import Login from '../views/LoginScreen';
 import Signup from '../views/SignUpWithEmailScreen';
 import TabNavigator from '../route/TabNavigator';

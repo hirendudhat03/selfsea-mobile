@@ -60,7 +60,7 @@ const CommunitiesHome = () => {
       console.log('homeResponse.data if: ', homeResponse.data);
       setTitle(homeResponse.data.currentTermsAndConditions.title);
       setContent(homeResponse.data.currentTermsAndConditions.content);
-      setIsMoalVisiable(homeResponse.data.currentUser.hasAcceptedLatestTerms);
+      setIsMoalVisiable(!homeResponse.data.currentUser.hasAcceptedLatestTerms);
     } else {
       console.log('homeResponse.data : ', homeResponse.data);
     }

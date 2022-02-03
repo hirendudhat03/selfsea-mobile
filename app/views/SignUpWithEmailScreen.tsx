@@ -264,7 +264,6 @@ const Signup = ({ navigation }) => {
           navigation,
         ),
       );
-      navigation.navigate('CreateProfile');
     }
   };
 
@@ -472,13 +471,10 @@ const Signup = ({ navigation }) => {
             ]}
             onPress={() => SignupValidation()}
             disabled={
-              passwordScore < 3 ||
               circleFillEmail !== true ||
               circleFillPassword !== true ||
               circleFillBirth !== true ||
               circleFillUser !== true
-                ? true
-                : false
             }
           />
         </View>
@@ -508,8 +504,8 @@ const Signup = ({ navigation }) => {
           <ModalPicker
             changeModalVisibility={changeBirthVisibility}
             type={Constant.modal.MODAL}
-            textTitle={modalBoxes.TITLES.BIRTH_MONTH}
-            descriptionData={modalBoxes.BIRTH_DESCRIPTION}
+            textTitle={'selfsea birth month'}
+            descriptionData={birthnData}
             numberOfLines={3}
             button={Constant.buttons.CLOSE}
             text={'close'}

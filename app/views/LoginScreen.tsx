@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -19,11 +19,11 @@ import Images from '../theme/images';
 
 import Button from '../component/Button';
 import Auth from '../component/Authentication';
-import auth from '@react-native-firebase/auth';
-import { api } from '../services';
 // import InstagramLogin from 'react-native-instagram-login';
 import { auths } from '../config/static';
 import { Theme } from '../assets/styles';
+import auth from "@react-native-firebase/auth";
+import { api } from "../services";
 
 const onPressText = () => {
   Alert.alert('onPressText');
@@ -42,8 +42,6 @@ const Login = ({ navigation }) => {
           console.log('User JWT: ', idTokenResult.token);
 
           if (idTokenResult.token) {
-            console.log('if condition call');
-            // setInitRoute('DrawerNavigator');
             navigation.navigate('DrawerNavigator');
           } else {
             navigation.navigate('Login');
@@ -150,7 +148,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   headerView: {
-    flex: 1.2,
+    // flex: 1.2,
+    marginTop: 100,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -158,7 +157,7 @@ const styles = StyleSheet.create({
     flex: 1.8,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginTop: -10,
+    marginTop: 50,
   },
   contentText: {
     fontFamily: Fonts.CALIBRE,

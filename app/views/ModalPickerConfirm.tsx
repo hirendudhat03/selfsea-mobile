@@ -106,7 +106,7 @@ const ModalPicker = ({
               type={button}
               text={text}
               style={styles.buttonStyle}
-              onPress={onPress}
+              onPress={onPress || changeModalVisibility}
             />
           </View>
         </View>
