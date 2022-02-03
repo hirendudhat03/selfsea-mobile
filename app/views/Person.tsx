@@ -1,17 +1,24 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { View, Text, SafeAreaView } from 'react-native';
+import Color from '../theme/colors';
+import LinearGradient from 'react-native-linear-gradient';
+import { Theme } from '../assets/styles';
 
-const Person = () => {
+const Person = ({ navigation }) => {
+  var theme = Theme();
+  console.log(navigation);
   return (
-    <View style={styles.viewStyle}>
-      <Text>Tab Person</Text>
-    </View>
+    <SafeAreaView style={theme.container}>
+      <LinearGradient
+        colors={[Color.BASE_COLOR_LIGHT_BLUE, Color.COLOR_LIGHT]}
+        style={theme.linearGradientHeader}>
+        <View style={theme.contentView}>
+          <View style={theme.blankViewStyle}>
+            <Text style={theme.textStyle}>Profiles WIP.</Text>
+          </View>
+        </View>
+      </LinearGradient>
+    </SafeAreaView>
   );
 };
-const styles = StyleSheet.create({
-  viewStyle: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-});
 export default Person;

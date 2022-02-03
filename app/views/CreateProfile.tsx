@@ -56,6 +56,7 @@ const CreateProfile = ({ navigation }) => {
         navigation,
       ),
     );
+    navigation.navigate('Home');
   };
 
   // const pronounsResponse = useSelector(state => state.PronounsReducer);

@@ -255,6 +255,7 @@ const Signup = ({ navigation }) => {
           navigation,
         ),
       );
+      navigation.navigate('CreateProfile');
     }
   };
 
@@ -305,8 +306,8 @@ const Signup = ({ navigation }) => {
           <TextInput
             maxLength={64}
             type={Constant.textInput.LARGE_INPUT}
-            placeholder={'email@address.com'}
-            label={'email'}
+            placeholder={auths.EMAIL_PLACEHOLDER}
+            label={auths.EMAIL_LABEL}
             style={styles.inputTextStyle}
             onChangeText={text => {
               selectFill(text);
@@ -497,8 +498,8 @@ const Signup = ({ navigation }) => {
         <ModalPicker
           changeModalVisibility={changeBirthVisibility}
           type={Constant.modal.MODAL}
-          textTitle={'selfsea birth month'}
-          descriptionData={birthnData}
+          textTitle={modalBoxes.TITLES.BIRTH_MONTH}
+          descriptionData={modalBoxes.BIRTH_DESCRIPTION}
           numberOfLines={3}
           button={Constant.buttons.CLOSE}
           text={'close'}

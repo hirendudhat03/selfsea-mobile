@@ -1,3 +1,3 @@
-import CommunityCard from "./cards/communityCard";
+import CommunityCard from './cards/communityCard';
 
 export const CommonCommunityCard = CommunityCard;

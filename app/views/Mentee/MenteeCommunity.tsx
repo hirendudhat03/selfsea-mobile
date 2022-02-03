@@ -1,27 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList } from 'react-native';
 import Color from '../../theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
 import { CommonCommunityCard } from '../../common';
 import { Theme } from '../../assets/styles';
 
-const DATA = [{
-  "alert":false
-}, {
-  "alert":true
-},{
-  "alert":false
-},{
-  "alert":false
-},{
-  "alert":true
-}];
+const DATA = [
+  {
+    alert: false,
+  },
+  {
+    alert: true,
+  },
+  {
+    alert: false,
+  },
+  {
+    alert: false,
+  },
+  {
+    alert: true,
+  },
+];
 
 const MenteeCommunity = ({ navigation }) => {
   var theme = Theme();
-  const [menteeCommunity, setMenteeCommunity] = useState([DATA]);
+  const [menteeCommunity, setMenteeCommunity] = useState(DATA);
 
-  const renderItem = (item) => (
+  useEffect(() => {
+    setMenteeCommunity(DATA);
+  }, []);
+
+  const renderItem = item => (
     <CommonCommunityCard navigation={navigation} alert={item.item.alert} />
   );
 
@@ -43,7 +53,7 @@ const MenteeCommunity = ({ navigation }) => {
         <LinearGradient
           colors={['rgba(255, 255, 255, 0.22)', Color.COLOR_LIGHT]}
           style={theme.linearGradient}>
-          <FlatList data={DATA} renderItem={renderItem} />
+          <FlatList data={menteeCommunity} renderItem={renderItem} />
         </LinearGradient>
       )}
     </View>

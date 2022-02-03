@@ -22,6 +22,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LoginRequest } from '../redux/actions/LoginAction';
 
 import Loader from '../component/Loader';
+import { auths } from '../config/static';
+
+// import Loader from '../component/Loader';
 
 const Signin = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -211,7 +214,7 @@ const Signin = ({ navigation }) => {
           {/* <Text onPress={() => SigninValidation()}>asd</Text> */}
           <Button
             type={Constant.buttons.PRIMARY}
-            text={'sign in'}
+            text={auths.SIGNIN_BUTTON}
             style={styles.buttonStyle}
             onPress={() => SigninValidation()}
           />
@@ -293,6 +296,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  bottomContentStyle: { flexDirection: 'row' },
 });
 
 export default Signin;

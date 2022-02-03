@@ -12,6 +12,7 @@ import Button from '../component/Button';
 
 import LinearGradient from 'react-native-linear-gradient';
 import { useDispatch } from 'react-redux';
+import { Theme } from '../assets/styles';
 import { HomeRequest } from '../redux/actions/HomeAction';
 
 const DATA = [{}, {}, {}, {}];
@@ -72,6 +73,8 @@ const CommunitiesHome = ({ navigation }) => {
       </View>
     </View>
   );
+
+  console.log('Theme', Theme);
 
   return (
     <View style={styles.container}>

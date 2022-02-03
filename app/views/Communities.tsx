@@ -1,8 +1,6 @@
 import React from 'react';
 import { Dimensions } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import Mycommunity from './Mycommunity';
-import AllCommunities from './AllCommunities';
 import Color from '../theme/colors';
 import Font from '../theme/fonts';
 
