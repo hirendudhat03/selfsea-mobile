@@ -23,7 +23,7 @@ import Color from '../theme/colors';
 import Dropdown from '../component/Dropdown';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { SignupRequest } from '../redux/actions/SignupAction';
+import { SignupRequest, SignupResponse } from '../redux/actions/SignupAction';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import Loader from '../component/Loader';
@@ -95,9 +95,13 @@ const Signup = ({ navigation }) => {
 
     console.log('year::', year);
   }, []);
+
+  useEffect(() => {}, []);
+
   useEffect(() => {
     if (signupRes.data) {
       console.log('signupRes.data if: ', signupRes.data);
+      dispatch(SignupResponse(null, false));
       setEmailError(signupRes.data.error);
     } else {
       console.log('signupRes.data : ', signupRes.data);

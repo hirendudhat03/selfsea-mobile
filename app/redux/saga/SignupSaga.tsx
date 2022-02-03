@@ -13,7 +13,10 @@ export function* signupSaga(action) {
         Password,
       );
 
-      await response.user.sendEmailVerification();
+      const token = await response.user.getIdToken();
+      console.log('token : ', token);
+
+      // await response.user.sendEmailVerification();
 
       const mutationVariables = {
         email,
@@ -27,10 +30,10 @@ export function* signupSaga(action) {
         mutationVariables,
       );
       console.log('data::', data);
-      action.navigation.navigate('Signin');
+      action.navigation.navigate('DrawerNavigator');
       return { ...data, ...response };
     } catch (e) {
-      console.log("klasjdlkasjld");
+      console.log('klasjdlkasjld');
       if (e.code === 'auth/email-already-in-use') {
         console.log('That email address is already in use!');
         Alert.alert('That email address is already in use!');
