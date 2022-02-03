@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import {
   View,
   Text,
@@ -22,8 +22,10 @@ import Auth from '../component/Authentication';
 // import InstagramLogin from 'react-native-instagram-login';
 import { auths } from '../config/static';
 import { Theme } from '../assets/styles';
-import auth from "@react-native-firebase/auth";
-import { api } from "../services";
+import auth from '@react-native-firebase/auth';
+import { api } from '../services';
+import { SignupRequest, SignupResponse } from '../redux/actions/SignupAction';
+import { useDispatch } from 'react-redux';
 
 const onPressText = () => {
   Alert.alert('onPressText');
@@ -31,6 +33,7 @@ const onPressText = () => {
 
 const Login = ({ navigation }) => {
   // auth().signOut();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     auth().onAuthStateChanged(function (user) {
@@ -41,11 +44,11 @@ const Login = ({ navigation }) => {
           api.setAuthHeader(idTokenResult.token);
           console.log('User JWT: ', idTokenResult.token);
 
-          if (idTokenResult.token) {
-            navigation.navigate('DrawerNavigator');
-          } else {
-            navigation.navigate('Login');
-          }
+          // if (idTokenResult.token) {
+          //   navigation.navigate('DrawerNavigator');
+          // } else {
+          //   navigation.navigate('Login');
+          // }
         };
 
         checkTokenFunction();
@@ -97,7 +100,10 @@ const Login = ({ navigation }) => {
               type={Constant.buttons.PRIMARY}
               text={auths.SIGNUP_WITH_EMAIL}
               style={[theme.marginTop8]}
-              onPress={() => navigation.navigate('Signup')}
+              onPress={() => {
+                dispatch(SignupResponse(null, false));
+                navigation.navigate('Signup');
+              }}
             />
             <Text style={styles.contentText}>{auths.SIGNUP_AGREEMENT_L1}</Text>
             <View style={[theme.row]}>

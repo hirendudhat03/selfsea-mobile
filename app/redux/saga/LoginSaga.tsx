@@ -45,7 +45,7 @@ export function* loginSaga(action) {
           };
           Getuser();
         } else {
-          action.navigation.navigate('CreateProfile');
+          action.navigation.navigate('DrawerNavigator');
         }
       });
       // } else {

@@ -37,12 +37,13 @@
 	<true/>
   <key>NSAppTransportSecurity</key>
   <dict>
-    <!--Include to allow all connections (DANGER)-->
     <key>NSAllowsArbitraryLoads</key>
-        <true/>
+    <true/>
   </dict>
+	<key>NSCameraUsageDescription</key>
+	<string>SelfSea</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>SelfSea</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>CalibreBlack.otf</string>
