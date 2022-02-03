@@ -39,7 +39,7 @@ const Login = ({ navigation }) => {
         const checkTokenFunction = async () => {
           const idTokenResult = await auth().currentUser.getIdTokenResult();
           api.setAuthHeader(idTokenResult.token);
-          // console.log('User JWT: ', idTokenResult.token);
+          console.log('User JWT: ', idTokenResult.token);
 
           if (idTokenResult.token) {
             console.log('if condition call');
