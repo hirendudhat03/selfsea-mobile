@@ -12,7 +12,7 @@ export function HomeRequest(navigation, loader) {
   return {
     type: 'HOME_REQUEST',
 
-    navigation: navigation,
+    // navigation: navigation,
     loader: loader,
   };
 }

@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import Constant from '../theme/constant';
 import Fonts from '../theme/fonts';
@@ -42,7 +36,7 @@ const Signin = ({ navigation }) => {
     }
   };
 
-  const [focus, setFocus] = useState<boolean>();
+  const [focus, setFocus] = useState<boolean>(true);
 
   const selectFocus = () => {
     if (focus) {
@@ -114,7 +108,7 @@ const Signin = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      {/* <Loader value={loginRes.loader} /> */}
+      <Loader value={loginRes.loader} />
 
       <Header
         type={Constant.navigatioHeader.PAGE_HEADER}
@@ -122,47 +116,6 @@ const Signin = ({ navigation }) => {
         label={'sign in'}
         onPress={() => navigation.goBack()}
       />
-      {/* <View style={{ flex: 1, paddingTop: 100 }}>
-        <TextInputCom
-          type={Constant.textInput.LARGE_INPUT}
-          placeholder={'email@address.com'}
-          label={'email'}
-          style={styles.inputTextStyle}
-          onChangeText={text => {
-            selectFill(text);
-          }}
-          value={email}
-          helperText={emailError}
-          checkRight={undefined}
-          onTouchStart={() => handleTouch()}
-          borderColor={emailBorder}
-        />
-
-        <TextInputCom
-          type={Constant.textInput.LARGE_INPUT}
-          label={'password'}
-          style={styles.inputTextStyle}
-          onChangeText={text => {
-            selectFillPassword(text);
-          }}
-          value={password}
-          helperText={passwordError}
-          iconVisible={true}
-          secureTextEntry={focus !== true ? focus : true}
-          secureTextEntryChange={selectFocus}
-          checkRight={undefined}
-          onTouchStart={() => handleTouchpasswordBorder()}
-          borderColor={passwordBorder}
-        />
-
-        <Text onPress={() => SigninValidation()}>asd</Text>
-        <Button
-          type={Constant.buttons.PRIMARY}
-          text={'sign in'}
-          style={styles.buttonStyle}
-          onPress={() => SigninValidation()}
-        />
-      </View> */}
 
       <ScrollView>
         <View style={styles.contentView}>
@@ -197,8 +150,7 @@ const Signin = ({ navigation }) => {
             onTouchStart={() => handleTouchpasswordBorder()}
             borderColor={passwordBorder}
           />
-          {/* <TextInput placeholder="enter email"></TextInput>
-          <TextInput placeholder="enter password"></TextInput> */}
+
           <Text
             style={styles.contentText}
             onPress={() => navigation.navigate('ForgotPassword')}>
@@ -211,7 +163,6 @@ const Signin = ({ navigation }) => {
             text={'keep me signed in'}
           />
 
-          {/* <Text onPress={() => SigninValidation()}>asd</Text> */}
           <Button
             type={Constant.buttons.PRIMARY}
             text={auths.SIGNIN_BUTTON}

@@ -20,6 +20,8 @@ target 'SelfseaMobile' do
 
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-async-storage/async-storage'
 
+  pod 'react-native-ffmpeg', :path => '../node_modules/react-native-ffmpeg'
+
   target 'SelfseaMobileTests' do
     inherit! :complete
     # Pods for testing

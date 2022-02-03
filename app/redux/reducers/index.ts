@@ -5,6 +5,7 @@ import { SignupReducer } from './SignupReducer';
 import { CreateProfileReducer } from './CreateProfileReducer';
 import { HomeReducer } from './HomeReducer';
 import { MenuReducer } from './MenuReducer';
+import { AcceptReducer } from './AcceptTermReducer';
 
 export default combineReducers({
   LoginReducer,
@@ -12,4 +13,5 @@ export default combineReducers({
   CreateProfileReducer,
   HomeReducer,
   MenuReducer,
+  AcceptReducer,
 });

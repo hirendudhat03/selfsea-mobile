@@ -35,7 +35,14 @@ const countries = ['visible to everyone', 'visible only to mentors'];
 const descriptionData = [
   {
     title:
-      'visible to everyone means all other users can see your profile fields and post history. visible only to mentors means only our trained mentors can see your profile fields and post history.no one will be able to see your email address!',
+      'visible to everyone means all other users can see your profile fields and post history. ',
+  },
+  {
+    title:
+      'visible only to mentors means only our trained mentors can see your profile fields and post history.',
+  },
+  {
+    title: '.no one will be able to see your email address!',
   },
 ];
 
@@ -72,7 +79,7 @@ const CreateProfile = ({ navigation }) => {
 
   useEffect(() => {
     sectionDispatch();
-    AsyncStorage.setItem('currentUser12', 'true');
+    AsyncStorage.setItem('currentUser_role', 'true');
   }, []);
 
   const [profile, setProfile] = useState('');
@@ -84,11 +91,12 @@ const CreateProfile = ({ navigation }) => {
 
   const [pronouns, setPronouns] = useState('');
   const [pronounsDropDown, setPronounsDropDown] = useState([
-    'she/her/ella',
-    ' he/him/his',
-    'they/them/theirs',
-    'ze/hir/hirs',
-    'ze/zir/zirs',
+    { name: 'she/her/ella' },
+
+    { name: ' he/him/his' },
+    { name: 'they/them/theirs' },
+    { name: 'ze/hir/hirs' },
+    { name: 'ze/zir/zirs' },
   ]);
   const [selectPronounsDropDown, setSelectPronounsDropDown] = useState([]);
 
@@ -662,8 +670,23 @@ const CreateProfile = ({ navigation }) => {
           text={'take me to selfsea'}
           style={[
             styles.buttonStyle,
-            { backgroundColor: Color.BASE_COLOR_ORANGE },
+            // selectPronounsDropDown.length === 0 ||
+            // selectOrientationDropDown.length === 0 ||
+            // selectGenderDropDown.length === 0 ||
+            // selectRaceDropDown.length === 0 ||
+            // selectLocationDropDown.length === 0
+            //   ? { backgroundColor: Color.BUTTON_DISABLE_COLOR }
+            //   : { backgroundColor: Color.BASE_COLOR_ORANGE },
           ]}
+          // disabled={
+          //   selectPronounsDropDown.length === 0 ||
+          //   selectOrientationDropDown.length === 0 ||
+          //   selectGenderDropDown.length === 0 ||
+          //   selectRaceDropDown.length === 0 ||
+          //   selectLocationDropDown.length === 0
+          //     ? true
+          //     : false
+          // }
         />
       </View>
 
