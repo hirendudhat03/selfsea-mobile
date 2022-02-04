@@ -174,17 +174,12 @@ const Signin = ({ navigation }) => {
         <View style={styles.bottomView}>
           <Text style={styles.bottomText}>or</Text>
           <Auth
-            text={'Continue with Google'}
+            text={'continue with Google'}
             icon={Images.Google}
             type={Constant.authLogin.GOOGLE}
           />
           <Auth
-            text={'Continue with Instagram'}
-            icon={Images.Instagram}
-            type={Constant.authLogin.INSTAGRAM}
-          />
-          <Auth
-            text={'Continue with Apple'}
+            text={'continue with Apple'}
             icon={Images.Apple}
             type={Constant.authLogin.APPLE}
           />
