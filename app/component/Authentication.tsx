@@ -22,6 +22,7 @@ import auth, { firebase } from '@react-native-firebase/auth';
 import 'react-native-get-random-values';
 import { v4 as uuid } from 'uuid';
 import { decode } from 'base-64';
+import Alert from "./Alert";
 
 interface Props {
   text: string;
