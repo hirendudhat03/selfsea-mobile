@@ -141,7 +141,9 @@ const Signup = ({ navigation }) => {
       setEmailBorder(Color.COMMUNITY_ORANGE);
       setEmailError('Please enter email address. ');
     } else if (
-      text.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null
+      text.match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      ) === null
     ) {
       setEmailBorder(Color.COMMUNITY_ORANGE);
       setEmailError('Please enter a valid email address. ');
@@ -298,7 +300,7 @@ const Signup = ({ navigation }) => {
       return Color.BASE_COLOR_ORANGE;
     }
     if (passwordScore === 3 && barNumber <= 2) {
-      return Color.BASE_COLOR_GREEN;
+      return Color.BASE_COLOR_ORANGE;
     }
     if (passwordScore > 3 && barNumber <= 3) {
       return Color.BASE_COLOR_GREEN;

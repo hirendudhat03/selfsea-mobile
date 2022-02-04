@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import {
   Image,
-  ImageSourcePropType,
+  ImageSourcePropType, Platform,
   StyleSheet,
   Text,
-  TouchableOpacity,
-} from 'react-native';
+  TouchableOpacity
+} from "react-native";
 import Color from '../theme/colors';
 // @ts-ignore
 import {
@@ -113,9 +113,9 @@ const Authentication = ({ text, icon, type }: Props) => {
   const authLogin = async () => {
     console.log('key : ', type);
     if (type === Constant.authLogin.GOOGLE) {
-      _signIn();
+      // _signIn();
     } else if (type === Constant.authLogin.INSTAGRAM) {
-      instagramLogin.show();
+      // instagramLogin.show();
     } else if (type === Constant.authLogin.APPLE) {
       if (Platform.OS === 'ios') {
         const appleAuthRequestResponse = await appleAuth.performRequest({
