@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   Modal,
   KeyboardAvoidingView,
+  Platform,
+  SafeAreaView,
 } from 'react-native';
 
 import ModalPicker from './ModalPickerConfirm';
@@ -139,7 +141,7 @@ const Signup = ({ navigation }) => {
       setEmailBorder(Color.COMMUNITY_ORANGE);
       setEmailError('Please enter email address. ');
     } else if (
-      text.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/) === null
+      text.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null
     ) {
       setEmailBorder(Color.COMMUNITY_ORANGE);
       setEmailError('Please enter a valid email address. ');
@@ -183,6 +185,10 @@ const Signup = ({ navigation }) => {
       setUserNameError(text.length + '/20');
       setCircleFillUser(false);
     } else if (text.length < 3) {
+      setUserNameBorder(Color.COMMUNITY_ORANGE);
+      setUserNameError(text.length + '/20');
+      setCircleFillUser(false);
+    } else if (text.match(/\s/) !== null) {
       setUserNameBorder(Color.COMMUNITY_ORANGE);
       setUserNameError(text.length + '/20');
       setCircleFillUser(false);
@@ -246,7 +252,7 @@ const Signup = ({ navigation }) => {
     } else if (!email) {
       setEmailError('Please enter email address.');
     } else if (
-      email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/) === null
+      email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null
     ) {
       setEmailError('Please enter a valid email address.');
     } else if (!Password) {
@@ -301,7 +307,9 @@ const Signup = ({ navigation }) => {
   };
 
   return (
-    <KeyboardAvoidingView behavior="padding" style={styles.container}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : ''}
+      style={{ flex: 1 }}>
       <View style={styles.container}>
         <Loader value={signupRes.loader} />
         <Header

@@ -22,7 +22,7 @@ import auth, { firebase } from '@react-native-firebase/auth';
 import 'react-native-get-random-values';
 import { v4 as uuid } from 'uuid';
 import { decode } from 'base-64';
-import Alert from "./Alert";
+import Alert from './Alert';
 
 interface Props {
   text: string;
@@ -185,7 +185,10 @@ const Authentication = ({ text, icon, type }: Props) => {
   };
 
   return (
-    <TouchableOpacity style={styles.container} onPress={() => authLogin()}>
+    <TouchableOpacity
+      style={styles.container}
+      // onPress={() => authLogin()}
+    >
       <Image style={styles.image} source={icon} />
       <Text style={styles.text}>{text}</Text>
 
