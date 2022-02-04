@@ -16,7 +16,7 @@ export function* signupSaga(action) {
       const token = await response.user.getIdToken();
       console.log('token : ', token);
 
-      // await response.user.sendEmailVerification();
+      await response.user.sendEmailVerification();
 
       const mutationVariables = {
         email,

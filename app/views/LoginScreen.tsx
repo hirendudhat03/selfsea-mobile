@@ -30,7 +30,7 @@ const onPressText = () => {
 };
 
 const Login = ({ navigation }) => {
-  auth().signOut();
+  // auth().signOut();
 
   useEffect(() => {
     auth().onAuthStateChanged(function (user) {
