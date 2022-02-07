@@ -47,12 +47,14 @@ const Login = ({ navigation }) => {
               text={auths.CONTINUE_WITH_GOOGLE}
               icon={Images.Google}
               type={Constant.authLogin.GOOGLE}
+              navigation={navigation}
             />
             {/* <Auth text={auths.CONTINUE_WITH_INSTA} icon={Images.Instagram} type={Constant.authLogin.INSTAGRAM} /> */}
             <Auth
               text={auths.CONTINUE_WITH_APPLE}
               icon={Images.Apple}
               type={Constant.authLogin.APPLE}
+              navigation={navigation}
             />
             {/* <InstagramLogin
               ref={ref => (instagramLogin = ref)}

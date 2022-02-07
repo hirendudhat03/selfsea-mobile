@@ -22,11 +22,12 @@ export function* signupSaga(action) {
         birthYear: parseFloat(birthYear),
         username: userName,
       };
+
       const data = await api.client.request(
         createUserMutation,
         mutationVariables,
       );
-      console.log('data::', data);
+
       action.navigation.navigate('Signin');
       return { ...data, ...response };
     } catch (e) {
@@ -39,9 +40,6 @@ export function* signupSaga(action) {
         console.log('That email address is invalid!');
         Alert.alert('That email address is invalid!');
       }
-
-      console.log(e.message);
-      Alert.alert(e.message);
       return null;
     }
   };

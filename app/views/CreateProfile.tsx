@@ -72,16 +72,16 @@ const CreateProfile = ({ navigation }) => {
 
   useEffect(() => {
     dispatch(ProunounsRequest());
-    setPronounsDropDown(...pronounsResponse);
+    setPronounsDropDown((pronounsResponse!==null)?[...pronounsResponse]:pronounsResponse);
 
     dispatch(OrientationRequest());
-    setOrientationDropDown(...orientationResponse);
+    setOrientationDropDown(orientationResponse? [...orientationResponse]:orientationResponse);
 
     dispatch(GenderRequest());
-    setGenderDropDown(...genderResponse);
+    setGenderDropDown(genderResponse?[...genderResponse]:genderResponse);
 
     dispatch(EthnicityRequest());
-    setRaceDropDown(...ethnicityResponse);
+    setRaceDropDown(ethnicityResponse?[...ethnicityResponse]:ethnicityResponse);
   }, [
     dispatch,
     pronounsResponse,
@@ -327,7 +327,7 @@ const CreateProfile = ({ navigation }) => {
         label={'create your profile'}
         onPress={() => navigation.goBack()}
       />
-      <View style={styles.contentView}>
+      {/* <View style={styles.contentView}>
         <ScrollView style={styles.scrollView}>
           <View style={styles.textViewStyle}>
             <Text
@@ -713,7 +713,7 @@ const CreateProfile = ({ navigation }) => {
           button={Constant.buttons.CLOSE}
           text={'close'}
         />
-      </Modal>
+      </Modal> */}
     </View>
   );
 };

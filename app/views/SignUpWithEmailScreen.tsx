@@ -31,16 +31,19 @@ const zxcvbn = require('zxcvbn');
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
 
-const Signup = ({ navigation }) => {
+const Signup = ({ route, navigation }) => {
   const dispatch = useDispatch();
 
   const [years, setYear] = useState<number[]>([]);
+
+  console.log("checkkkkkk",route.params)
 
   useEffect(() => {
     let year = [];
     let currentYear = new Date().getFullYear();
     let startYear = 1900;
-
+    (route.params !== undefined &&  route.params.email !== "") && setCircleFillEmail(true);
+    (route.params !== undefined &&  route.params.email !== "") && setEmail(route.params.email);
     while (currentYear >= startYear) {
       year.push(currentYear--);
     }
@@ -65,6 +68,8 @@ const Signup = ({ navigation }) => {
   const [birthYearError, setBirthYearError] = useState<string>('');
 
   const [passwordScore, setPasswordScore] = useState<0 | 1 | 2 | 3 | 4>(0);
+
+  const [loader, setLoader] = useState<boolean>(false);
 
   const [focus, setFocus] = useState<boolean>();
   const selectFocus = () => {
@@ -174,42 +179,81 @@ const Signup = ({ navigation }) => {
   };
 
   const SignupValidation = (text: string) => {
-    if (
-      !email &&
-      !Password &&
-      birthMonth === '' &&
-      birthYear === '' &&
-      !userName
-    ) {
-      setEmailError('Please enter email address.');
-      setPasswordError('Password must contain a number.');
-      setUserNameError(text.length + '/20');
+    if(route.params === undefined){
+      if (
+        !email &&
+        !Password &&
+        birthMonth === '' &&
+        birthYear === '' &&
+        !userName
+      ) {
+        setEmailError('Please enter email address.');
+        (route.params === undefined) && setPasswordError('Password must contain a number.');
+        setUserNameError(text.length + '/20');
 
-      setEmail('');
-      setUserName('');
-      setPassword('');
-    } else if (!email) {
-      setEmailError('Please enter email address.');
-    } else if (
-      email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/) === null
-    ) {
-      setEmailError('Please enter a valid email address.');
-    } else if (!Password) {
-      setPasswordError('Password must contain a number.');
-    } else if (!userName) {
-      setUserNameError(text.length + '/20');
-    } else {
-      dispatch(
-        SignupRequest(
-          email,
-          Password,
-          birthMonth,
-          birthYear,
-          userName,
-          navigation,
-        ),
-      );
-      navigation.navigate('CreateProfile');
+        setEmail('');
+        setUserName('');
+        setPassword('');
+      } else if (!email) {
+        setEmailError('Please enter email address.');
+      } else if (
+        email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/) === null
+      ) {
+        setEmailError('Please enter a valid email address.');
+      } else if (!Password) {
+        (route.params === undefined) && setPasswordError('Password must contain a number.');
+      } else if (!userName) {
+        setUserNameError(text.length + '/20');
+      } else {
+        console.log("Here2")
+        dispatch(
+          SignupRequest(
+            email,
+            Password,
+            birthMonth,
+            birthYear,
+            userName,
+            navigation,
+            loader
+          ),
+        );
+        navigation.navigate('CreateProfile');
+      }
+    }else{
+      if (
+        !email &&
+        birthMonth === '' &&
+        birthYear === '' &&
+        !userName
+      ) {
+        setEmailError('Please enter email address.');
+        setUserNameError(text.length + '/20');
+
+        setEmail('');
+        setUserName('');
+      } else if (!email) {
+        setEmailError('Please enter email address.');
+      } else if (
+        email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/) === null
+      ) {
+        setEmailError('Please enter a valid email address.');
+      } else if (!userName) {
+        setUserNameError(text.length + '/20');
+      } else {
+        
+        dispatch(
+          SignupRequest(
+            email,
+            Password,
+            birthMonth,
+            birthYear,
+            userName,
+            navigation,
+            loader
+          ),
+        );
+        navigation.navigate('CreateProfile');
+      }
     }
   };
 
@@ -262,10 +306,11 @@ const Signup = ({ navigation }) => {
             placeholder={auths.EMAIL_PLACEHOLDER}
             label={auths.EMAIL_LABEL}
             style={styles.inputTextStyle}
+            editable={(route.params===undefined)?true:false} 
             onChangeText={text => {
               selectFill(text);
             }}
-            value={email}
+            value={(route.params===undefined)? email:route.params.email}
             helperText={emailError}
             iconVisibleFill={true}
             checkRight={true}
@@ -273,55 +318,58 @@ const Signup = ({ navigation }) => {
             onTouchStart={() => handleTouch()}
             borderColor={emailBorder}
           />
-
-          <TextInput
-            type={Constant.textInput.LARGE_INPUT}
-            label={'password'}
-            style={styles.inputTextStyle}
-            onChangeText={text => {
-              selectFillPassword(text);
-              const response = zxcvbn(text);
-              setPasswordScore(response.score);
-              setPasswordError(response.feedback.suggestions);
-              setCircleFillPassword(response.score >= 3);
-            }}
-            value={Password}
-            helperText={PasswordError}
-            iconVisible={true}
-            secureTextEntry={focus !== true ? focus : true}
-            secureTextEntryChange={selectFocus}
-            iconVisibleFill={true}
-            checkRight={true}
-            circleFill={circleFillPassword}
-            onTouchStart={() => handleTouchpasswordBorder()}
-            borderColor={passwordBorder}
-          />
-          <View style={styles.viewStyle}>
-            <View
-              style={[
-                styles.passwordStyle,
-                { backgroundColor: passwordStrengthColor(0) },
-              ]}
+          {(route.params==undefined) &&
+            <TextInput
+              type={Constant.textInput.LARGE_INPUT}
+              label={'password'}
+              style={styles.inputTextStyle}
+              onChangeText={text => {
+                selectFillPassword(text);
+                const response = zxcvbn(text);
+                setPasswordScore(response.score);
+                setPasswordError(response.feedback.suggestions);
+                setCircleFillPassword(response.score >= 3);
+              }}
+              value={Password}
+              helperText={PasswordError}
+              iconVisible={true}
+              secureTextEntry={focus !== true ? focus : true}
+              secureTextEntryChange={selectFocus}
+              iconVisibleFill={true}
+              checkRight={true}
+              circleFill={circleFillPassword}
+              onTouchStart={() => handleTouchpasswordBorder()}
+              borderColor={passwordBorder}
             />
-            <View
-              style={[
-                styles.passwordStyle,
-                { backgroundColor: passwordStrengthColor(1) },
-              ]}
-            />
-            <View
-              style={[
-                styles.passwordStyle,
-                { backgroundColor: passwordStrengthColor(2) },
-              ]}
-            />
-            <View
-              style={[
-                styles.passwordStyle,
-                { backgroundColor: passwordStrengthColor(3) },
-              ]}
-            />
-          </View>
+          }
+          {(route.params==undefined) &&
+            <View style={styles.viewStyle}>
+              <View
+                style={[
+                  styles.passwordStyle,
+                  { backgroundColor: passwordStrengthColor(0) },
+                ]}
+              />
+              <View
+                style={[
+                  styles.passwordStyle,
+                  { backgroundColor: passwordStrengthColor(1) },
+                ]}
+              />
+              <View
+                style={[
+                  styles.passwordStyle,
+                  { backgroundColor: passwordStrengthColor(2) },
+                ]}
+              />
+              <View
+                style={[
+                  styles.passwordStyle,
+                  { backgroundColor: passwordStrengthColor(3) },
+                ]}
+              />
+            </View>
+          }
 
           <View style={styles.monthView}>
             <View style={styles.rowView}>
@@ -401,6 +449,7 @@ const Signup = ({ navigation }) => {
         </View>
       </ScrollView>
       <View style={styles.bottomView}>
+      {(route.params==undefined) ?
         <Button
           type={Constant.buttons.PRIMARY}
           text={auths.CREATE_ACCOUNT_BUTTON}
@@ -423,7 +472,28 @@ const Signup = ({ navigation }) => {
               ? true
               : false
           }
+        />:
+        <Button
+          type={Constant.buttons.PRIMARY}
+          text={auths.CREATE_ACCOUNT_BUTTON}
+          style={[
+            styles.buttonStyle,
+            circleFillEmail !== true ||
+            circleFillBirth !== true ||
+            circleFillUser !== true
+              ? { backgroundColor: Color.BUTTON_DISABLE_COLOR }
+              : { backgroundColor: Color.BASE_COLOR_ORANGE },
+          ]}
+          onPress={() => SignupValidation()}
+          disabled={
+            circleFillEmail !== true ||
+            circleFillBirth !== true ||
+            circleFillUser !== true
+              ? true
+              : false
+          }
         />
+      }
       </View>
       <Modal
         transparent={false}

@@ -25,11 +25,9 @@ import { auths } from '../config/static';
 
 // import Loader from '../component/Loader';
 
-const Signin = ({ navigation }) => {
+const Signin = ({ route, navigation }) => {
   const dispatch = useDispatch();
   const loginRes = useSelector(state => state.LoginReducer);
-
-  console.log('LoginReducer : ', JSON.stringify(loginRes));
 
   const [isSelectedCheckBox, setISSelectionCheckBox] = useState(false);
 
