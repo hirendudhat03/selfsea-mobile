@@ -9,6 +9,7 @@ import {
   Image,
   TextInput,
   Modal,
+  KeyboardAvoidingView,
 } from 'react-native';
 import ModalPicker from './ModalPickerConfirm';
 
@@ -24,10 +25,9 @@ import Badges from '../component/Badges';
 import { useDispatch, useSelector } from 'react-redux';
 import { CreateProfileRequest } from '../redux/actions/CreateProfileAction';
 
-import { ProunounsRequest } from '../redux/actions/PronounsAction';
-import { OrientationRequest } from '../redux/actions/OrientationAction';
-import { GenderRequest } from '../redux/actions/GenderAction';
-import { EthnicityRequest } from '../redux/actions/EthnicityAction';
+import Loader from '../component/Loader';
+import { DropDownRequest } from '../redux/actions/MenuAction';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const height = Dimensions.get('window').height;
 
@@ -36,12 +36,21 @@ const countries = ['visible to everyone', 'visible only to mentors'];
 const descriptionData = [
   {
     title:
-      'visible to everyone means all other users can see your profile fields and post history. visible only to mentors means only our trained mentors can see your profile fields and post history.no one will be able to see your email address!',
+      'visible to everyone means all other users can see your profile fields and post history. ',
+  },
+  {
+    title:
+      'visible only to mentors means only our trained mentors can see your profile fields and post history.',
+  },
+  {
+    title: 'no one will be able to see your email address!',
   },
 ];
 
 const CreateProfile = ({ navigation }) => {
   const dispatch = useDispatch();
+  const menuResponse = useSelector(state => state.MenuReducer);
+  console.log('MenuReducer : ', JSON.stringify(menuResponse));
 
   const onPressDispatch = () => {
     dispatch(
@@ -55,44 +64,24 @@ const CreateProfile = ({ navigation }) => {
         navigation,
       ),
     );
-    navigation.navigate('Home');
   };
 
-  const pronounsResponse = useSelector(state => state.PronounsReducer);
-  console.log('ProunounsResponse::: ', JSON.stringify(pronounsResponse));
+  // const pronounsResponse = useSelector(state => state.PronounsReducer);
+  // console.log('ProunounsResponse::: ', JSON.stringify(pronounsResponse));
 
-  const orientationResponse = useSelector(state => state.OrientationReducer);
-  console.log('orientationResponse::: ', JSON.stringify(orientationResponse));
-
-  const genderResponse = useSelector(state => state.GenderReducer);
-  console.log('genderResponse::: ', JSON.stringify(genderResponse));
-
-  const ethnicityResponse = useSelector(state => state.EthnicityReducer);
-  console.log('ethnicityResponse::: ', JSON.stringify(ethnicityResponse));
+  const sectionDispatch = () => {
+    dispatch(DropDownRequest());
+    // console.log({menuResponse})
+    setPronounsDropDown(menuResponse.pronouns);
+    setOrientationDropDown(menuResponse.orientations);
+    setGenderDropDown(menuResponse.genders);
+    setRaceDropDown(menuResponse.ethnicities);
+  };
 
   useEffect(() => {
-    dispatch(ProunounsRequest());
-    setPronounsDropDown((pronounsResponse!==null)?[...pronounsResponse]:pronounsResponse);
-
-    dispatch(OrientationRequest());
-    setOrientationDropDown(orientationResponse? [...orientationResponse]:orientationResponse);
-
-    dispatch(GenderRequest());
-    setGenderDropDown(genderResponse?[...genderResponse]:genderResponse);
-
-    dispatch(EthnicityRequest());
-    setRaceDropDown(ethnicityResponse?[...ethnicityResponse]:ethnicityResponse);
-  }, [
-    dispatch,
-    pronounsResponse,
-    orientationResponse,
-    genderResponse,
-    ethnicityResponse,
-    setPronounsDropDown,
-    setOrientationDropDown,
-    setGenderDropDown,
-    setRaceDropDown,
-  ]);
+    sectionDispatch();
+    AsyncStorage.setItem('currentUser_role', 'true');
+  }, []);
 
   const [profile, setProfile] = useState('');
 
@@ -104,6 +93,7 @@ const CreateProfile = ({ navigation }) => {
   const [pronouns, setPronouns] = useState('');
   const [pronounsDropDown, setPronounsDropDown] = useState([
     { name: 'she/her/ella' },
+
     { name: ' he/him/his' },
     { name: 'they/them/theirs' },
     { name: 'ze/hir/hirs' },
@@ -321,13 +311,15 @@ const CreateProfile = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <Loader value={menuResponse.loader} />
+
       <Header
         type={Constant.navigatioHeader.PAGE_HEADER}
         leftIcon={Images.Arrowsquare}
         label={'create your profile'}
         onPress={() => navigation.goBack()}
       />
-      {/* <View style={styles.contentView}>
+      <KeyboardAvoidingView style={styles.contentView} behavior={'padding'}>
         <ScrollView style={styles.scrollView}>
           <View style={styles.textViewStyle}>
             <Text
@@ -670,7 +662,7 @@ const CreateProfile = ({ navigation }) => {
             ) : null}
           </View>
         </ScrollView>
-      </View>
+      </KeyboardAvoidingView>
 
       <View style={styles.bottomView}>
         <Button
@@ -679,23 +671,23 @@ const CreateProfile = ({ navigation }) => {
           text={'take me to selfsea'}
           style={[
             styles.buttonStyle,
-            selectPronounsDropDown.length === 0 ||
-            selectOrientationDropDown.length === 0 ||
-            selectGenderDropDown.length === 0 ||
-            selectRaceDropDown.length === 0 ||
-            selectLocationDropDown.length === 0
-              ? { backgroundColor: Color.BUTTON_DISABLE_COLOR }
-              : { backgroundColor: Color.BASE_COLOR_ORANGE },
+            // selectPronounsDropDown.length === 0 ||
+            // selectOrientationDropDown.length === 0 ||
+            // selectGenderDropDown.length === 0 ||
+            // selectRaceDropDown.length === 0 ||
+            // selectLocationDropDown.length === 0
+            //   ? { backgroundColor: Color.BUTTON_DISABLE_COLOR }
+            //   : { backgroundColor: Color.BASE_COLOR_ORANGE },
           ]}
-          disabled={
-            selectPronounsDropDown.length === 0 ||
-            selectOrientationDropDown.length === 0 ||
-            selectGenderDropDown.length === 0 ||
-            selectRaceDropDown.length === 0 ||
-            selectLocationDropDown.length === 0
-              ? true
-              : false
-          }
+          // disabled={
+          //   selectPronounsDropDown.length === 0 ||
+          //   selectOrientationDropDown.length === 0 ||
+          //   selectGenderDropDown.length === 0 ||
+          //   selectRaceDropDown.length === 0 ||
+          //   selectLocationDropDown.length === 0
+          //     ? true
+          //     : false
+          // }
         />
       </View>
 
@@ -713,7 +705,7 @@ const CreateProfile = ({ navigation }) => {
           button={Constant.buttons.CLOSE}
           text={'close'}
         />
-      </Modal> */}
+      </Modal>
     </View>
   );
 };

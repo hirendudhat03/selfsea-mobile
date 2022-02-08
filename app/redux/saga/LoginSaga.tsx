@@ -16,24 +16,42 @@ export function* loginSaga(action) {
 
     try {
       const response = await auth().signInWithEmailAndPassword(email, password);
-      if (response.user.emailVerified) {
-        const token = await response.user.getIdToken();
-        console.log('token : ', token);
-        await AsyncStorage.setItem('jwtToken', token);
-        api.setAuthHeader(token);
 
-        const data = await api.client.request(currentUserQuery);
-        if (data.currentUser === null) {
-          action.navigation.navigate('CreateProfile');
+      // if (response.user.emailVerified) {
+      const token = await response.user.getIdToken();
+      console.log('token : ', token);
+      await AsyncStorage.setItem('jwtToken', token);
+      api.setAuthHeader(token);
+
+      AsyncStorage.getItem('currentUser_role').then(value => {
+        console.log('value:', value);
+        if (value === 'true') {
+          const Getuser = async () => {
+            const data = await api.client.request(currentUserQuery);
+            console.log('data:', JSON.stringify(data));
+
+            if (data.currentUser.roles[0].name === 'MENTEE') {
+              action.navigation.navigate('DrawerNavigator');
+            }
+            if (data.currentUser.roles[0].name === 'MENTOR') {
+              action.navigation.navigate('DrawerNavigator');
+            }
+            if (data.currentUser.roles[0].name === 'MODERATOR') {
+              action.navigation.navigate('DrawerNavigator');
+            }
+            if (data.currentUser.roles[0].name === 'ADMIN') {
+              action.navigation.navigate('DrawerNavigator');
+            }
+          };
+          Getuser();
         } else {
           action.navigation.navigate('DrawerNavigator');
         }
-        console.log('data:', data);
-        return data;
-      } else {
-        console.log('not verified');
-        Alert.alert('not verified');
-      }
+      });
+      // } else {
+      //   console.log('not verified');
+      //   Alert.alert('not verified');
+      // }
 
       return response;
     } catch (e) {
@@ -57,7 +75,7 @@ export function* loginSaga(action) {
       }
 
       console.log('e : ', e);
-      Alert.alert(e);
+      // Alert.alert(e.message);
       return null;
     }
   };

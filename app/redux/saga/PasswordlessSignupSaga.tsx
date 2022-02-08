@@ -4,14 +4,21 @@ import { call, put } from 'redux-saga/effects';
 import { createUserMutation } from '../../graphql/mutations/UserMutation';
 import { Alert } from 'react-native';
 import { SignupResponse } from '../actions/SignupAction';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
-export function* signupSaga(action) {
-  const Signup = async (email, Password, birthMonth, birthYear, userName) => {
+export function* passwordlessSignupSaga(action) {
+  const Signup = async (email, birthMonth, birthYear, userName) => {
     try {
-      const response = await auth().createUserWithEmailAndPassword(
-        email,
-        Password,
-      );
+      // const response = await auth().signInWithCredential(email);
+      var tokens = await GoogleSignin.getTokens();
+
+      var credToken =
+        action.userInfo.idToken !== null
+          ? action.userInfo.idToken
+          : tokens.accessToken;
+      const googleCredential = auth.GoogleAuthProvider.credential(credToken);
+
+      await auth().signInWithCredential(googleCredential);
 
       const token = await response.user.getIdToken();
       api.setAuthHeader(token);
@@ -58,12 +65,11 @@ export function* signupSaga(action) {
   const response = yield call(
     Signup,
     action.email,
-    action.Password,
     action.birthMonth,
     action.birthYear,
     action.userName,
   );
-  console.warn('response saga', response);
+  console.warn('passwordless response saga', response);
 
   // if (response === null) {
   //   yield put(

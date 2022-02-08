@@ -1,6 +1,5 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import {
-  Alert,
   Image,
   ImageSourcePropType,
   Platform,
@@ -20,43 +19,53 @@ import {
   appleAuth,
   appleAuthAndroid,
 } from '@invertase/react-native-apple-authentication';
-import auth, { firebase } from '@react-native-firebase/auth';
+import auth from '@react-native-firebase/auth';
 import 'react-native-get-random-values';
 import { v4 as uuid } from 'uuid';
 import { decode } from 'base-64';
-import { isEmpty } from 'rxjs';
+import Alert from './Alert';
 
 interface Props {
   text: string;
   icon?: ImageSourcePropType;
   type: string;
-  navigation: object
+  navigation: object;
 }
 
 const Authentication = ({ text, icon, type, navigation }: Props) => {
-  let instagramLogin = useRef();
+  // let instagramLogin = useRef();
   const rawNonce = uuid();
   const state = uuid();
+  // useEffect(() => {
+  //   GoogleSignin.configure({
+  //     // Mandatory method to call before calling signIn()
+  //     // scopes: ['https://www.googleapis.com/auth/drive.readonly'],
+  //     // Repleace with your webClientId
+  //     // Generated from Firebase console
+  //     webClientId:
+  //       '651815828852-ieos3aa4gougfirdnf52carf51q8v52v.apps.googleusercontent.com',
+  //   });
+  // }, []);
+
   const _signIn = async () => {
     console.log('handlePressGoogleLogin');
     GoogleSignin.configure({
-      // androidClientId: '3A:84:C8:28:4A:5F:82:9F:12:8B:71:46:C9:87:0F:68:E6:38:7E:AE',
+      // androidClientId: '',
       // iosClientId: '880711382534-k6q6jmtatddtll7u9qfmn31cbc1ckav1.apps.googleusercontent.com',
-      webClientId:"313603573096-9rs3f0u8cgun05a44vbt9d6bjsqc7m43.apps.googleusercontent.com"
+      webClientId:
+        '597759932954-hj037g8cqseqq6dpukg26752k305sqpl.apps.googleusercontent.com',
     });
 
     try {
       GoogleSignin.signIn()
         .then(async userInfo => {
           console.log(JSON.stringify(userInfo));
-          var tokens = await GoogleSignin.getTokens();
 
-          var credToken = (userInfo.idToken!== null)?userInfo.idToken:tokens.accessToken;
-          const googleCredential = auth.GoogleAuthProvider.credential(credToken);
-          
-          await auth().signInWithCredential(googleCredential);
-      
-          navigation.navigate('Signup', {type:"social", email:userInfo.user.email});
+          navigation.navigate('Signup', {
+            type: 'social',
+            email: userInfo.user.email,
+            userInfo: userInfo,
+          });
         })
         .catch(e => {
           console.log('ERROR IS: ' + e);
@@ -89,7 +98,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
         Alert.alert('Play Services Not Available or Outdated');
       } else {
-        console.log("YO ke hai");
+        console.log('YO ke hai');
         Alert.alert(error.message);
       }
     }
@@ -114,7 +123,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
     if (type === Constant.authLogin.GOOGLE) {
       _signIn();
     } else if (type === Constant.authLogin.INSTAGRAM) {
-      instagramLogin.show();
+      // instagramLogin.show();
     } else if (type === Constant.authLogin.APPLE) {
       if (Platform.OS === 'ios') {
         const appleAuthRequestResponse = await appleAuth.performRequest({
@@ -123,7 +132,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
         });
         // console.log('UserData', appleAuthRequestResponse);
 
-        const credentialState = await appleAuth.getCredentialStateForUser(
+        await appleAuth.getCredentialStateForUser(
           appleAuthRequestResponse.user,
         );
 
@@ -135,20 +144,17 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
         const { identityToken, nonce, email, fullName } =
           appleAuthRequestResponse;
         auth.AppleAuthProvider.credential(identityToken, nonce);
-        const appleCredential = auth.AppleAuthProvider.credential(identityToken, nonce);
+        const appleCredential = auth.AppleAuthProvider.credential(
+          identityToken,
+          nonce,
+        );
         auth().signInWithCredential(appleCredential);
+
+        navigation.navigate('DrawerNavigator');
+
         // Alert.alert(parseJwt(identityToken).email, parseJwt(identityToken).sub);
         // console.log('heraa', credentialState);
-        // console.log(
-        //   'Apple Credentials',
-        //   email,
-        //   fullName,
-        //   nonce,
-        //   'Anshh',
-        //   identityToken,
-        // );
-
-
+        console.log('Apple Credentials', email, fullName);
       } else {
         console.log('scope', appleAuthAndroid.Scope);
         appleAuthAndroid.configure({
@@ -174,21 +180,26 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
 
         // Open the browser window for user sign in
         const response = await appleAuthAndroid.signIn();
-        console.log("Apple Login Firebase",response.id_token, "NONCEEEE", response.nonce);
-        const appleCredential = auth.AppleAuthProvider.credential(response.id_token, response.nonce);
-        auth().signInWithCredential(appleCredential);
+        console.log(
+          'Apple Login Firebase',
+          response.id_token,
+          'NONCEEEE',
+          response.nonce,
+        );
+        // const appleCredential = auth.AppleAuthProvider.credential(response.id_token, response.nonce);
+        // auth().signInWithCredential(appleCredential);
 
-        navigation.navigate();
+        navigation.navigate('DrawerNavigator');
 
         // console.log(
         //   'Android Apple Response',
         //   response,
         //   parseJwt(response.id_token),
         // );
-        Alert.alert(
-          parseJwt(response.id_token).email,
-          parseJwt(response.id_token).sub,
-        );
+        // Alert.alert(
+        //   parseJwt(response.id_token).email,
+        //   parseJwt(response.id_token).sub,
+        // );
       }
     }
   };

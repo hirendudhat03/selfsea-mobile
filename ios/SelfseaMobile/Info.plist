@@ -27,7 +27,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.313603573096-10jh0c32gl6sr2ajm7oqpo09f1v496i1</string>
+				<string>com.googleusercontent.apps.597759932954-5p7j28bdtmp1jktls8sbq4oh0pbm65af</string>
 			</array>
 		</dict>
 	</array>
@@ -35,27 +35,15 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSAllowsArbitraryLoads</key>
-	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-		<key>CFBundleTypeRole</key>
-		<string>Editor</string>
-		<key>CFBundleURLSchemes</key>
-		<array>
-			<string>com.googleusercontent.apps.107731993306-6s44u18onibp6gi0ddj94si1aifshhg6</string>
-		</array>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>localhost</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-		</dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>SelfSea</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>SelfSea</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>CalibreBlack.otf</string>

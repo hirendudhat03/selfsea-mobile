@@ -15,10 +15,11 @@ import TabScreen from '../views/TabScreen';
 import Color from '../theme/colors';
 
 import HealthScreen from '../views/HealthScreen';
-import Communities from '../views/Communities';
+
+// import Communities from '../views/Communities';
+
 import NavigationIdentity from '../views/NavigationIdentity';
 import MentorCommunity from '../views/MentorCommunity';
-import MenteeCommunity from '../views/Mentee/MenteeCommunity';
 
 export const screenNames = {
   CommunitiesHome: 'CommunitiesHome',
@@ -27,7 +28,6 @@ export const screenNames = {
   Communities: 'Communities',
   homeStack: 'HomeStackScreen',
   MentorCommunity: 'MentorCommunity',
-  MenteeCommunity: 'MenteeCommunity',
 };
 
 const height = Dimensions.get('window').height;
@@ -42,7 +42,7 @@ function HomeStackScreen() {
         gestureEnabled: true,
         gestureDirection: 'horizontal',
       }}
-      initialRouteName={screenNames.Communities}>
+      initialRouteName={screenNames.CommunitiesHome}>
       <HomeStack.Screen
         name={screenNames.CommunitiesHome}
         component={CommunitiesHome}
@@ -55,17 +55,13 @@ function HomeStackScreen() {
         name={screenNames.NavigationIdentity}
         component={NavigationIdentity}
       />
-      <HomeStack.Screen
+      {/* <HomeStack.Screen
         name={screenNames.Communities}
         component={Communities}
-      />
+      /> */}
       <HomeStack.Screen
         name={screenNames.MentorCommunity}
         component={MentorCommunity}
-      />
-      <HomeStack.Screen
-        name={screenNames.MenteeCommunity}
-        component={MenteeCommunity}
       />
     </HomeStack.Navigator>
   );

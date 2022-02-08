@@ -5,11 +5,11 @@ const initialState = {
   loader: false,
 };
 
-console.log('call EthnicityReducer');
+console.log('call AcceptTerm');
 
-export const EthnicityReducer = CreateReducer(initialState, {
-  ['ETHNICITY_RESPONSE'](state, action) {
-    console.log('call ETHNICITY_RESPONSE');
+export const AcceptReducer = CreateReducer(initialState, {
+  ['ACCEPT_RESPONSE'](state, action) {
+    console.log('call ACCEPT_RESPONSE');
     console.log('state : ', state);
     console.log('action : ', action);
     return {
@@ -17,8 +17,8 @@ export const EthnicityReducer = CreateReducer(initialState, {
       loader: action.loader,
     };
   },
-  ['ETHNICITY_REQUEST'](state, action) {
-    console.log('call  ETHNICITY__REQUEST');
+  ['ACCEPT_REQUEST'](state, action) {
+    console.log('callACCEPT_REQUEST');
     console.log('state : ', state);
     console.log('action : ', action);
     return {

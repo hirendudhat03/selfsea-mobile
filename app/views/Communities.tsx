@@ -3,7 +3,6 @@ import { Dimensions } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Color from '../theme/colors';
 import Font from '../theme/fonts';
-import MenteeCommunity from './Mentee/MenteeCommunity';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -33,14 +32,14 @@ const Communities = () => {
       }}>
       <Tab.Screen
         name="Mycommunity"
-        component={MenteeCommunity}
+        component={Mycommunity}
         options={{
           tabBarLabel: 'my communities',
         }}
       />
       <Tab.Screen
         name="AllCommunities"
-        component={MenteeCommunity}
+        component={AllCommunities}
         options={{
           tabBarLabel: 'all communities',
         }}

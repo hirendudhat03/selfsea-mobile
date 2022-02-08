@@ -1,10 +1,10 @@
-import Images from '../theme/images';
 import React from 'react';
 import { Text, View, StyleSheet, Image } from 'react-native';
 import Color from '../theme/colors';
 import Constant from '../theme/constant';
 import Font from '../theme/fonts';
 import { Theme } from '../assets/styles';
+import images from '../theme/images';
 
 interface Props {
   type: string;
@@ -24,10 +24,6 @@ const Alert = ({ type, text }: Props) => {
           ? styles.modWarning
           : type === Constant.alert.SUCCESS
           ? styles.actionSuccessView
-          : type === Constant.alert.MENTEE
-          ? styles.actionSuccessView
-          : type === Constant.alert.MENTEE_FADE
-          ? styles.actionRemoveMenteeView
           : type === Constant.alert.INFO
           ? styles.actionInfoView
           : null
@@ -62,7 +58,7 @@ const Alert = ({ type, text }: Props) => {
         {(type === Constant.alert.MENTEE ||
           type === Constant.alert.MENTEE_FADE) && (
           <View style={[styles.touchableStyle, theme.width10p]}>
-            <Image source={Images.Infocircle} />
+            <Image source={images.Infocircle} />
           </View>
         )}
       </View>
@@ -167,15 +163,6 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     letterSpacing: 0,
     color: Color.BASE_COLOR_DARK_SUCCESSTEXT,
-  },
-  actionFadeText: {
-    fontFamily: 'HelveticaNeue',
-    fontSize: 16,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
-    lineHeight: 24,
-    letterSpacing: 0,
-    color: Color.CONTENT_COLOR_BLACK_TEXT,
   },
   actionInfoView: {
     paddingVertical: 12,

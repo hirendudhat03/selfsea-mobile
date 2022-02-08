@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  // ActivityIndicator,
-  // Modal,
-} from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import Constant from '../theme/constant';
 import Fonts from '../theme/fonts';
@@ -15,19 +8,23 @@ import Images from '../theme/images';
 
 import Button from '../component/Button';
 import Auth from '../component/Authentication';
-import TextInput from '../component/CustomTextInput';
+import TextInputCom from '../component/CustomTextInput';
 import CheckBox from '../component/Checkbox';
 import Header from '../component/Header';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginRequest } from '../redux/actions/LoginAction';
+
+import Loader from '../component/Loader';
 import { auths } from '../config/static';
 
 // import Loader from '../component/Loader';
 
 const Signin = ({ route, navigation }) => {
   const dispatch = useDispatch();
+
   const loginRes = useSelector(state => state.LoginReducer);
+  console.log('LoginReducer : ', JSON.stringify(loginRes), route);
 
   const [isSelectedCheckBox, setISSelectionCheckBox] = useState(false);
 
@@ -39,7 +36,7 @@ const Signin = ({ route, navigation }) => {
     }
   };
 
-  const [focus, setFocus] = useState<boolean>();
+  const [focus, setFocus] = useState<boolean>(true);
 
   const selectFocus = () => {
     if (focus) {
@@ -105,13 +102,13 @@ const Signin = ({ route, navigation }) => {
     } else if (!password) {
       setPasswordError('Password Required');
     } else {
-      dispatch(LoginRequest(email, password, navigation, true));
+      dispatch(LoginRequest(email, password, navigation));
     }
   };
 
   return (
     <View style={styles.container}>
-      {/* <Loader value={loginRes.loader} /> */}
+      <Loader value={loginRes.loader} />
 
       <Header
         type={Constant.navigatioHeader.PAGE_HEADER}
@@ -119,9 +116,10 @@ const Signin = ({ route, navigation }) => {
         label={'sign in'}
         onPress={() => navigation.goBack()}
       />
+
       <ScrollView>
         <View style={styles.contentView}>
-          <TextInput
+          <TextInputCom
             type={Constant.textInput.LARGE_INPUT}
             placeholder={'email@address.com'}
             label={'email'}
@@ -136,7 +134,7 @@ const Signin = ({ route, navigation }) => {
             borderColor={emailBorder}
           />
 
-          <TextInput
+          <TextInputCom
             type={Constant.textInput.LARGE_INPUT}
             label={'password'}
             style={styles.inputTextStyle}
@@ -152,16 +150,17 @@ const Signin = ({ route, navigation }) => {
             onTouchStart={() => handleTouchpasswordBorder()}
             borderColor={passwordBorder}
           />
+
           <Text
             style={styles.contentText}
             onPress={() => navigation.navigate('ForgotPassword')}>
-            forgot your password?{' '}
+            forgot your password?
           </Text>
           <CheckBox
             onPressCheckbox={selectCheckBox}
             style={styles.checkBox}
             isSelectedCheckBox={isSelectedCheckBox}
-            text={auths.KEEP_ME_SIGNED_IN}
+            text={'keep me signed in'}
           />
 
           <Button
@@ -170,35 +169,25 @@ const Signin = ({ route, navigation }) => {
             style={styles.buttonStyle}
             onPress={() => SigninValidation()}
           />
-
           <View style={styles.bottomContentStyle} />
         </View>
         <View style={styles.bottomView}>
           <Text style={styles.bottomText}>or</Text>
           <Auth
-            text={auths.CONTINUE_WITH_GOOGLE}
+            text={'continue with Google'}
             icon={Images.Google}
             type={Constant.authLogin.GOOGLE}
           />
           {/* <Auth
-            text={auths.CONTINUE_WITH_INSTA}
+            text={'continue with Instagram'}
             icon={Images.Instagram}
             type={Constant.authLogin.INSTAGRAM}
           /> */}
           <Auth
-            text={auths.CONTINUE_WITH_APPLE}
+            text={'continue with Apple'}
             icon={Images.Apple}
             type={Constant.authLogin.APPLE}
           />
-          {/* <AppleButton
-            buttonStyle={AppleButton.Style.WHITE}
-            buttonType={AppleButton.Type.SIGN_IN}
-            style={{
-              width: 160, // You must specify a width
-              height: 45, // You must specify a height
-            }}
-            onPress={() => console.log("Anshuman Gupta")}
-          /> */}
         </View>
       </ScrollView>
     </View>
@@ -249,7 +238,15 @@ const styles = StyleSheet.create({
   },
   inputTextStyle: { fontSize: 18 },
   buttonStyle: { marginTop: 10, marginBottom: 10 },
-  bottomContentStyle: { flexDirection: 'row' },
+  bottomContentStyle: {
+    flexDirection: 'row',
+  },
+  containerLoader: {
+    flex: 1,
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 
 export default Signin;

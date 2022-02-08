@@ -28,3 +28,24 @@ export function SignupRequest(
     loader: loader,
   };
 }
+
+export function SignupRequestWithoutPassword(
+  email,
+  birthMonth,
+  birthYear,
+  userName,
+  navigation,
+  loader,
+  userInfo,
+) {
+  return {
+    type: 'PASSWORDLESS_SIGNUP_REQUEST',
+    email: email,
+    birthMonth: birthMonth,
+    birthYear: birthYear,
+    userName: userName,
+    navigation: navigation,
+    loader: loader,
+    userInfo: userInfo,
+  };
+}

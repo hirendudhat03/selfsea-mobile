@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   Text,
@@ -9,7 +9,6 @@ import {
   Linking,
   SafeAreaView,
   Alert,
-  ScrollView,
 } from 'react-native';
 
 import Constant from '../theme/constant';
@@ -22,12 +21,45 @@ import Auth from '../component/Authentication';
 // import InstagramLogin from 'react-native-instagram-login';
 import { auths } from '../config/static';
 import { Theme } from '../assets/styles';
+import auth from '@react-native-firebase/auth';
+import { api } from '../services';
+import { SignupResponse } from '../redux/actions/SignupAction';
+import { useDispatch } from 'react-redux';
 
 const onPressText = () => {
   Alert.alert('onPressText');
 };
 
 const Login = ({ navigation }) => {
+  // auth().signOut();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    auth().onAuthStateChanged(function (user) {
+      console.log('user : ', user);
+      if (user) {
+        const checkTokenFunction = async () => {
+          const idTokenResult = await auth().currentUser.getIdTokenResult();
+          api.setAuthHeader(idTokenResult.token);
+          console.log('User JWT: ', idTokenResult.token);
+
+          if (idTokenResult.token !== null) {
+            navigation.navigate('DrawerNavigator');
+          } else {
+            navigation.navigate('Login');
+          }
+        };
+
+        checkTokenFunction();
+
+        // User is signed in.
+      } else {
+        navigation.navigate('Login');
+        // No user is signed in.
+      }
+    });
+  }, [navigation]);
+
   var theme = Theme();
   //Need to use once we finalize about Insta Login
   // let instagramLogin = useRef();
@@ -38,7 +70,8 @@ const Login = ({ navigation }) => {
         source={Images.Background}
         resizeMode="stretch"
         style={styles.image}>
-        <ScrollView>
+        <View style={styles.containerView}>
+          {/* <ScrollView > */}
           <View style={styles.headerView}>
             <Image source={Images.Logo} />
           </View>
@@ -69,7 +102,10 @@ const Login = ({ navigation }) => {
               type={Constant.buttons.PRIMARY}
               text={auths.SIGNUP_WITH_EMAIL}
               style={[theme.marginTop8]}
-              onPress={() => navigation.navigate('Signup')}
+              onPress={() => {
+                dispatch(SignupResponse(null, false));
+                navigation.navigate('Signup');
+              }}
             />
             <Text style={styles.contentText}>{auths.SIGNUP_AGREEMENT_L1}</Text>
             <View style={[theme.row]}>
@@ -92,6 +128,8 @@ const Login = ({ navigation }) => {
                 </Text>
               </TouchableOpacity>
             </View>
+          </View>
+          <View style={styles.signinBottomView}>
             <View style={styles.bottomView}>
               <Text style={styles.bottomText} onPress={() => onPressText()}>
                 {auths.ALREADY_HAVE_ACCOUNT}
@@ -105,7 +143,8 @@ const Login = ({ navigation }) => {
               />
             </View>
           </View>
-        </ScrollView>
+          {/* </ScrollView> */}
+        </View>
       </ImageBackground>
     </SafeAreaView>
   );
@@ -120,8 +159,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   headerView: {
-    // flex: 1.2,
-    marginTop: 100,
+    flex: 1.2,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -129,7 +167,6 @@ const styles = StyleSheet.create({
     flex: 1.8,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginTop: 50,
   },
   contentText: {
     fontFamily: Fonts.CALIBRE,
@@ -157,9 +194,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   bottomView: {
-    flex: 1.1,
     justifyContent: 'center',
-    marginTop: 50,
     alignItems: 'center',
   },
   bottomText: {
@@ -184,6 +219,8 @@ const styles = StyleSheet.create({
   },
   buttonStyle: { marginTop: 8 },
   conditionViewStyle: { flexDirection: 'row' },
+  containerView: { flex: 1 },
+  signinBottomView: { flex: 1, justifyContent: 'flex-end' },
 });
 
 export default Login;

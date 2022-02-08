@@ -1,42 +1,50 @@
 {
   "project_info": {
-    "project_number": "313603573096",
-    "project_id": "selfsea-mobile",
-    "storage_bucket": "selfsea-mobile.appspot.com"
+    "project_number": "597759932954",
+    "project_id": "selfsea-dev",
+    "storage_bucket": "selfsea-dev.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:313603573096:android:684d6f4beded3a03fd02dd",
+        "mobilesdk_app_id": "1:597759932954:android:773623efedf43481a1efa3",
         "android_client_info": {
           "package_name": "com.selfseamobile"
         }
       },
       "oauth_client": [
         {
-          "client_id": "313603573096-t5p2ev0nr2767mj5sei2bt3p2hrl1spj.apps.googleusercontent.com",
+          "client_id": "597759932954-n6ddoinq68ukpiq2jjfc7bli9ucrcgfj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.selfseamobile",
-            "certificate_hash": "3a84c8284a5f829f128b7146c9870f68e6387eae"
+            "certificate_hash": "6037df3087324b9d406e9f5f4f462b56246dfe1a"
           }
         },
         {
-          "client_id": "313603573096-9rs3f0u8cgun05a44vbt9d6bjsqc7m43.apps.googleusercontent.com",
+          "client_id": "597759932954-hj037g8cqseqq6dpukg26752k305sqpl.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAyF_YyfT3SYryT5QN-owd1WPHXIFtwDlc"
+          "current_key": "AIzaSyAnL2G1eSKLYypP6-g1FaCctRJ7j3Z2M1E"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "313603573096-9rs3f0u8cgun05a44vbt9d6bjsqc7m43.apps.googleusercontent.com",
+              "client_id": "597759932954-hj037g8cqseqq6dpukg26752k305sqpl.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "597759932954-5p7j28bdtmp1jktls8sbq4oh0pbm65af.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.selfseamobile",
+                "app_store_id": "1604374862"
+              }
             }
           ]
         }
