@@ -17,7 +17,7 @@ export function* acceptSaga(action) {
       return data;
     } catch (e) {
       console.log(e);
-      Alert.alert(e);
+      Alert.alert('something went to wrong condition');
       return null;
     }
   };

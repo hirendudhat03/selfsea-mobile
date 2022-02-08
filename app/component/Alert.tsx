@@ -3,8 +3,8 @@ import { Text, View, StyleSheet } from 'react-native';
 import Color from '../theme/colors';
 import Constant from '../theme/constant';
 import Font from '../theme/fonts';
+import Images from '../theme/images';
 import { Theme } from '../assets/styles';
-
 
 interface Props {
   type: string;

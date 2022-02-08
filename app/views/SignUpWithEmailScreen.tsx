@@ -10,6 +10,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
+  Alert,
 } from 'react-native';
 
 import ModalPicker from './ModalPickerConfirm';
@@ -77,6 +78,13 @@ const birthnData = [
   },
 ];
 
+const ageData = [
+  {
+    title:
+      'sorry, but the selfsea communities feature is only available to young people between the ages of 13 and 18. check out our web-app for resources, and stories from young people who have been there www.selfsea.org.',
+  },
+];
+
 const Signup = ({ navigation }) => {
   const dispatch = useDispatch();
 
@@ -132,6 +140,53 @@ const Signup = ({ navigation }) => {
     }
   };
 
+  const countAge = () => {
+    console.log('===========================================');
+
+    var today = new Date();
+    console.log('today::', today);
+
+    var bodYear = new Date(birthYear);
+
+    var age = today.getFullYear() - bodYear;
+    console.log('age::===::', age);
+
+    var m = today.getMonth();
+    console.log('m::', m);
+
+    var setMonthIndex;
+
+    month.map((item, index) => {
+      console.log('i:', item);
+      console.log('index:', index);
+
+      if (birthMonth === item) {
+        setMonthIndex = index;
+        console.log('index are same : ', index);
+      }
+    });
+
+    if (age > 18 || setMonthIndex < m) {
+      // Alert.alert('your age is not valid');
+      changeAgeVisibility(true);
+    } else if (age < 13 || setMonthIndex > m) {
+      Alert.alert('your age is not between 13-18 years.');
+    } else {
+      // Alert.alert('your are valid to use selfsea.');
+      dispatch(
+        SignupRequest(
+          email,
+          Password,
+          birthMonth,
+          birthYear,
+          userName,
+          navigation,
+        ),
+      );
+    }
+    console.log('age::', age);
+    return age;
+  };
   const [circleFillEmail, setCircleFillEmail] = useState<boolean>();
 
   const selectFill = (text: string) => {
@@ -236,6 +291,11 @@ const Signup = ({ navigation }) => {
     setIsBirthVisiable(bool);
   };
 
+  const [isAgeValid, setIsAgeValid] = useState(false);
+  const changeAgeVisibility = (bool: boolean) => {
+    setIsAgeValid(bool);
+  };
+
   const SignupValidation = (text: string) => {
     if (
       !email &&
@@ -261,17 +321,20 @@ const Signup = ({ navigation }) => {
       setPasswordError('Password must contain a number.');
     } else if (!userName) {
       setUserNameError(text.length + '/20');
+      // } else if (birthMonth !== '' && birthYear !== '') {
+      //   countAge();
     } else {
-      dispatch(
-        SignupRequest(
-          email,
-          Password,
-          birthMonth,
-          birthYear,
-          userName,
-          navigation,
-        ),
-      );
+      // dispatch(
+      //   SignupRequest(
+      //     email,
+      //     Password,
+      //     birthMonth,
+      //     birthYear,
+      //     userName,
+      //     navigation,
+      //   ),
+      // );
+      countAge();
     }
   };
 
@@ -311,7 +374,7 @@ const Signup = ({ navigation }) => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : ''}
-      style={{ flex: 1 }}>
+      style={styles.keyboardAvoidingStyle}>
       <View style={styles.container}>
         <Loader value={signupRes.loader} />
         <Header
@@ -521,6 +584,23 @@ const Signup = ({ navigation }) => {
             text={'close'}
           />
         </Modal>
+        <Modal
+          transparent={false}
+          animationType="fade"
+          visible={isAgeValid}
+          onRequestClose={() => changeAgeVisibility(false)}>
+          <ModalPicker
+            changeModalVisibility={changeAgeVisibility}
+            type={Constant.modal.MODAL}
+            textTitle={'Mentee age more than 18'}
+            // smallText={'your age is not valid'}
+            descriptionData={ageData}
+            numberOfLines={6}
+            button={Constant.buttons.CLOSE}
+            text={'close'}
+            // onPress={() => navigation.navigate('Login')}
+          />
+        </Modal>
       </View>
     </KeyboardAvoidingView>
   );
@@ -670,6 +750,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  keyboardAvoidingStyle: {
+    flex: 1,
   },
 });
 export default Signup;

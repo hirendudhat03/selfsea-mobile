@@ -9,7 +9,7 @@ import {
   Linking,
   SafeAreaView,
   Alert,
-  ScrollView,
+  // ScrollView,
 } from 'react-native';
 
 import Constant from '../theme/constant';

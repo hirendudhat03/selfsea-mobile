@@ -19,20 +19,25 @@ export function* signupSaga(action) {
 
       await response.user.sendEmailVerification();
 
-      const mutationVariables = {
-        email,
-        authId: response.user.uid,
-        birthMonth: birthMonth.toUpperCase(),
-        birthYear: parseFloat(birthYear),
-        username: userName,
-      };
-      const data = await api.client.request(
-        createUserMutation,
-        mutationVariables,
-      );
-      console.log('data::', data);
-      action.navigation.navigate('DrawerNavigator');
-      return { ...data, ...response };
+      try {
+        const mutationVariables = {
+          email,
+          authId: response.user.uid,
+          birthMonth: birthMonth.toUpperCase(),
+          birthYear: parseFloat(birthYear),
+          username: userName,
+        };
+        const data = await api.client.request(
+          createUserMutation,
+          mutationVariables,
+        );
+        console.log('data::', data);
+        action.navigation.navigate('CreateProfile');
+
+        return { ...data, ...response };
+      } catch (e) {
+        Alert.alert('something went to worng.');
+      }
     } catch (e) {
       console.log('klasjdlkasjld');
       if (e.code === 'auth/email-already-in-use') {

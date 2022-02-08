@@ -64,7 +64,6 @@ PODS:
     - AppAuth/Core (~> 1.4)
     - GTMSessionFetcher/Core (~> 1.5)
   - GTMSessionFetcher/Core (1.7.0)
-  - mobile-ffmpeg-https (4.4)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
@@ -271,15 +270,9 @@ PODS:
     - glog
   - react-native-cookies (5.0.1):
     - React-Core
-  - react-native-ffmpeg (0.5.2):
-    - React
-    - react-native-ffmpeg/https (= 0.5.2)
-  - react-native-ffmpeg/https (0.5.2):
-    - mobile-ffmpeg-https (= 4.4)
-    - React
   - react-native-get-random-values (1.7.2):
     - React-Core
-  - react-native-pager-view (6.0.0-rc.0):
+  - react-native-pager-view (5.4.9):
     - React-Core
   - react-native-safe-area-context (3.3.2):
     - React-Core
@@ -421,7 +414,6 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - "react-native-cookies (from `../node_modules/@react-native-community/cookies`)"
-  - react-native-ffmpeg (from `../node_modules/react-native-ffmpeg`)
   - react-native-get-random-values (from `../node_modules/react-native-get-random-values`)
   - react-native-pager-view (from `../node_modules/react-native-pager-view`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
@@ -461,7 +453,6 @@ SPEC REPOS:
     - GoogleUtilities
     - GTMAppAuth
     - GTMSessionFetcher
-    - mobile-ffmpeg-https
     - nanopb
     - PromisesObjC
 
@@ -504,8 +495,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   react-native-cookies:
     :path: "../node_modules/@react-native-community/cookies"
-  react-native-ffmpeg:
-    :path: "../node_modules/react-native-ffmpeg"
   react-native-get-random-values:
     :path: "../node_modules/react-native-get-random-values"
   react-native-pager-view:
@@ -569,16 +558,15 @@ SPEC CHECKSUMS:
   FirebaseCore: 2f4f85b453cc8fea4bb2b37e370007d2bcafe3f0
   FirebaseCoreDiagnostics: 64d9709d804a6c25bd77841371c1fcfd909d5601
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
-  glog: 5337263514dd6f09803962437687240c5dc39aa4
+  glog: 85ecdd10ee8d8ec362ef519a6a45ff9aa27b2e85
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleSignIn: fd381840dbe7c1137aa6dc30849a5c3e070c034a
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
   GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
   GTMSessionFetcher: 43748f93435c2aa068b1cbe39655aaf600652e91
-  mobile-ffmpeg-https: 311fc4a8f671cf36d1d6b8f421e8246b790978d9
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
-  RCT-Folly: a21c126816d8025b547704b777a2ba552f3d9fa9
+  RCT-Folly: 803a9cfd78114b2ec0f140cfa6fa2a6bafb2d685
   RCTRequired: 1af97c470c81e8cbb92c5ae42c4838ea95761743
   RCTTypeSafety: 809546c781453daf95eb1c40aa8b6970a4487028
   React: 8b9ebb24b000a0d76f3df4efae639744a9456f06
@@ -591,11 +579,10 @@ SPEC CHECKSUMS:
   React-jsinspector: c9d1ddf4b1efbcf90323e3581ccff200cf4de346
   React-logger: 5d42caeaf0c31a9b29efb33e10e7f7031f958bfd
   react-native-cookies: ce50e42ace7cf0dd47769260ca5bbe8eee607e4e
-  react-native-ffmpeg: 587fa045f985d775107f4b8cbb6c79df0ad68e63
   react-native-get-random-values: 30b3f74ca34e30e2e480de48e4add2706a40ac8f
-  react-native-pager-view: a4834c4b7fe672ec53f38928f0ced5e32443c371
-  react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
-  react-native-webview: 162b6453d074e0b1c7025242bb7a939b6f72b9e7
+  react-native-pager-view: 311c10a4eead1be627cad59062aa059d8108b943
+  react-native-safe-area-context: 5cf05f49df9d17261e40e518481f2e334c6cd4b5
+  react-native-webview: de5e884d2b4de766c2bdc5d664621b1e4e988427
   React-perflogger: 9454d63e7027e0830fa3e527628558160684f5dd
   React-RCTActionSheet: 240d798e2f5bd1ba2e85503a00fd390f560e6827
   React-RCTAnimation: 0ebf0df36838057097b8c6a30d1036531f8c7b1e
@@ -609,15 +596,15 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 4512c9287cc72ba30bb1d5e01e6bde7a69f2d22b
   ReactCommon: af6dd2c8c0de935841fa809caf41b2093bb9075c
   RNAppleAuthentication: 63c2127ace11985b94f852fc480eb84145653712
-  RNCAsyncStorage: 6bd5a7ba3dde1c3facba418aa273f449bdc5437a
+  RNCAsyncStorage: 105173940b40e85e274023966567ac11b7683cf8
   RNFBApp: 16bdf8b75b84631513da3d5f5e2520a436ec9b29
   RNFBAuth: 7eb50d60c82b4a59018b0c7a1d4afdd1250eff74
   RNGestureHandler: bf572f552ea324acd5b5464b8d30755b2d8c1de6
-  RNGoogleSignin: c4381751eefd73c552b923ba347a9bfc6f18771c
+  RNGoogleSignin: aeb29e549e6748da3e5847516fdd1327c85894c5
   RNReanimated: 1326679461fa5d2399d54c18ca1432ba3e816b9e
   RNScreens: d6da2b9e29cf523832c2542f47bf1287318b1868
   Yoga: 3f5bfc54ce164fcd5b5d7f9f4232182d6298dd56
 
-PODFILE CHECKSUM: 71dcfd625dd9b3dac3b41bf44883adbcc65b3166
+PODFILE CHECKSUM: 6b2e742243de2e34ca776238d252b83900952a4b
 
 COCOAPODS: 1.11.2

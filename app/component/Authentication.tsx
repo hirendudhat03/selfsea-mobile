@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import {
   Image,
-  ImageSourcePropType, Platform,
+  ImageSourcePropType,
+  Platform,
   StyleSheet,
   Text,
-  TouchableOpacity
-} from "react-native";
+  TouchableOpacity,
+} from 'react-native';
 import Color from '../theme/colors';
 // @ts-ignore
 import {

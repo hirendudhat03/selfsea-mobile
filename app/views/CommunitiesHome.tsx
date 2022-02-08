@@ -40,7 +40,7 @@ const descriptionData = [
   },
 ];
 
-const CommunitiesHome = () => {
+const CommunitiesHome = ({ navigation }) => {
   const [title, setTitle] = useState(null);
   const [content, setContent] = useState(null);
   // const [hasAcceptedLatestTerms, setHasAcceptedLatestTerms] = useState(null);
@@ -87,7 +87,7 @@ const CommunitiesHome = () => {
           type={Constant.buttons.CLOSE}
           text={'join'}
           style={styles.buttonStyle}
-          //onPress={() => dispatch(HomeRequest(navigation))}
+          onPress={() => dispatch(HomeRequest(navigation))}
         />
       </View>
     </View>

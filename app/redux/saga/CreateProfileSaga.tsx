@@ -38,7 +38,7 @@ export function* createProfileSaga(action) {
       return { ...data, ...response };
     } catch (e) {
       console.log(e);
-      Alert.alert(e);
+      Alert.alert('something went to wrong create profile');
       return null;
     }
   };
