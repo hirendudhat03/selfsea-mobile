@@ -29,12 +29,16 @@ export function* createProfileSaga(action) {
         isPrivate: true,
         location: 'xyz',
         bio: 'abc',
+        pronouns: selectPronounsDropDown,
+        orientations: selectOrientationDropDown,
+        genders: selectGenderDropDown,
+        ethnicities: selectRaceDropDown,
       };
       const data = await api.client.request(
         updateProfileMutation,
         mutationVariables,
       );
-      console.log('create profile data : ', data);
+      console.log('create profile data : ', JSON.stringify(data));
       return { ...data, ...response };
     } catch (e) {
       console.log(e);
@@ -55,10 +59,10 @@ export function* createProfileSaga(action) {
 
   if (response === undefined) {
   } else {
-    action.navigation.navigate('TabNavigator');
+    action.navigation.navigate('DrawerNavigator');
   }
 
-  console.warn('response saga', response);
+  console.warn('createProfile response saga', JSON.stringify(response));
   if (response === null) {
     yield put(CreateProfileResponse(null, false));
   } else {

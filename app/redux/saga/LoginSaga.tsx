@@ -25,7 +25,7 @@ export function* loginSaga(action) {
 
       AsyncStorage.getItem('currentUser_role').then(value => {
         console.log('value:', value);
-        if (value === 'true') {
+        if (value === 'false') {
           const Getuser = async () => {
             try {
               const data = await api.client.request(currentUserQuery);
@@ -49,7 +49,7 @@ export function* loginSaga(action) {
           };
           Getuser();
         } else {
-          action.navigation.navigate('DrawerNavigator');
+          action.navigation.navigate('CreateProfile');
         }
       });
       // } else {

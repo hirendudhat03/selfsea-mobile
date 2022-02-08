@@ -29,25 +29,42 @@ export const updateProfileMutation = gql`
     $isPrivate: Boolean!
     $location: String!
     $bio: String!
+    $pronouns: [ProfileAssignmentsInput!]
+    $orientations: [ProfileAssignmentsInput!]
+    $genders: [ProfileAssignmentsInput!]
+    $ethnicities: [ProfileAssignmentsInput!]
   ) {
     updateProfile(
-      input: { isPrivate: $isPrivate, location: $location, bio: $bio }
+      input: {
+        isPrivate: $isPrivate
+        location: $location
+        bio: $bio
+        pronouns: $pronouns
+        genders: $genders
+        orientations: $orientations
+        ethnicities: $ethnicities
+      }
     ) {
       id
       isPrivate
       location
       bio
+      pronouns {
+        id
+      }
+      genders {
+        id
+      }
+      orientations {
+        id
+      }
+      ethnicities {
+        id
+      }
     }
   }
 `;
-// $pronouns: [ProfileAssignmentsInput!]
-// $orientations: [ProfileAssignmentsInput!]
-// $genders: [ProfileAssignmentsInput!]
-// $ethnicities: [ProfileAssignmentsInput!]
-// genders: $genders
-// orientations: $orientations
-// ethnicities: $ethnicities
-// pronouns: $pronouns
+
 export const acceptCurrentTermsMutation = gql`
   mutation {
     acceptCurrentTerms {

@@ -27,7 +27,6 @@ import { CreateProfileRequest } from '../redux/actions/CreateProfileAction';
 
 import Loader from '../component/Loader';
 import { DropDownRequest } from '../redux/actions/MenuAction';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const height = Dimensions.get('window').height;
 
@@ -58,9 +57,9 @@ const CreateProfile = ({ navigation }) => {
         profile,
         selectPronounsDropDown,
         selectOrientationDropDown,
-        selectLocationDropDown,
-        selectRaceDropDown,
         selectGenderDropDown,
+        selectRaceDropDown,
+        selectLocationDropDown,
         navigation,
       ),
     );
@@ -71,17 +70,20 @@ const CreateProfile = ({ navigation }) => {
 
   const sectionDispatch = () => {
     dispatch(DropDownRequest());
-    // console.log({menuResponse})
-    setPronounsDropDown(menuResponse.pronouns);
-    setOrientationDropDown(menuResponse.orientations);
-    setGenderDropDown(menuResponse.genders);
-    setRaceDropDown(menuResponse.ethnicities);
   };
 
   useEffect(() => {
-    sectionDispatch();
-    AsyncStorage.setItem('currentUser_role', 'true');
-  }, []);
+    console.log('menuResponse : ', menuResponse);
+
+    if (menuResponse.pronouns !== null) {
+      setPronounsDropDown(menuResponse.pronouns);
+      setOrientationDropDown(menuResponse.orientations);
+      setGenderDropDown(menuResponse.genders);
+      setRaceDropDown(menuResponse.ethnicities);
+    } else {
+      sectionDispatch();
+    }
+  }, [menuResponse]);
 
   const [profile, setProfile] = useState('');
 
@@ -91,14 +93,7 @@ const CreateProfile = ({ navigation }) => {
   };
 
   const [pronouns, setPronouns] = useState('');
-  const [pronounsDropDown, setPronounsDropDown] = useState([
-    { name: 'she/her/ella' },
-
-    { name: ' he/him/his' },
-    { name: 'they/them/theirs' },
-    { name: 'ze/hir/hirs' },
-    { name: 'ze/zir/zirs' },
-  ]);
+  const [pronounsDropDown, setPronounsDropDown] = useState([]);
   const [selectPronounsDropDown, setSelectPronounsDropDown] = useState([]);
 
   const clickDropDownItem = (item, val) => {
@@ -126,15 +121,7 @@ const CreateProfile = ({ navigation }) => {
   };
 
   const [orientation, setOrientation] = useState('');
-  const [orientationDropDown, setOrientationDropDown] = useState([
-    { name: 'gay/lesbian' },
-    { name: 'heterosexual/straight' },
-    { name: 'bisexual' },
-    { name: 'asexual' },
-    { name: 'pansexual' },
-    { name: 'queer' },
-    { name: 'something else' },
-  ]);
+  const [orientationDropDown, setOrientationDropDown] = useState([]);
   const [selectOrientationDropDown, setSelectOrientationDropDown] = useState(
     [],
   );
@@ -164,16 +151,7 @@ const CreateProfile = ({ navigation }) => {
   };
 
   const [gender, setGender] = useState('');
-  const [genderDropDown, setGenderDropDown] = useState([
-    { name: 'cisgender' },
-    { name: 'genderqueer' },
-    { name: 'gender non-binary' },
-    { name: 'gender fluid' },
-    { name: 'man/boy' },
-    { name: 'transgender' },
-    { name: 'woman/girl' },
-    { name: 'something else' },
-  ]);
+  const [genderDropDown, setGenderDropDown] = useState([]);
   const [selectGenderDropDown, setSelectGenderDropDown] = useState([]);
 
   const genderDropDownItem = (item, val) => {
@@ -201,23 +179,7 @@ const CreateProfile = ({ navigation }) => {
   };
 
   const [race, setRace] = useState('');
-  const [raceDropDown, setRaceDropDown] = useState([
-    { name: 'American Indian' },
-    { name: 'Mixed Race / Mixed Ethnicity' },
-    { name: 'Native American' },
-    { name: 'Alaska Native' },
-    { name: ' Asian or Asian American' },
-    { name: 'Black or African American' },
-    { name: 'Hispanic' },
-    { name: 'Latino' },
-    { name: 'Latina' },
-    { name: 'Latine' },
-    { name: 'Latinx' },
-    { name: 'Middle Eastern or North African' },
-    { name: 'Native Hawaiian or Pacific Islander' },
-    { name: 'White' },
-    { name: 'something else' },
-  ]);
+  const [raceDropDown, setRaceDropDown] = useState([]);
   const [selectRaceDropDown, setSelectRaceDropDown] = useState([]);
 
   const raceDropDownItem = (item, val) => {

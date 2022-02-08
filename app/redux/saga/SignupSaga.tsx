@@ -4,6 +4,7 @@ import { call, put } from 'redux-saga/effects';
 import { createUserMutation } from '../../graphql/mutations/UserMutation';
 import { Alert } from 'react-native';
 import { SignupResponse } from '../actions/SignupAction';
+import { isUsernameValidQuery } from '../../graphql/queries/UserProfile';
 
 export function* signupSaga(action) {
   const Signup = async (email, Password, birthMonth, birthYear, userName) => {
@@ -20,21 +21,38 @@ export function* signupSaga(action) {
       await response.user.sendEmailVerification();
 
       try {
-        const mutationVariables = {
-          email,
-          authId: response.user.uid,
-          birthMonth: birthMonth.toUpperCase(),
-          birthYear: parseFloat(birthYear),
-          username: userName,
-        };
-        const data = await api.client.request(
-          createUserMutation,
-          mutationVariables,
-        );
-        console.log('data::', data);
-        action.navigation.navigate('CreateProfile');
+        const username = await api.client.request(isUsernameValidQuery);
+        console.log('username::', JSON.stringify(username));
 
-        return { ...data, ...response };
+        if (username.isUsernameValid.isValid) {
+          return {
+            errorname: 'username',
+            error: 'this username is taken.',
+          };
+        } else {
+          action.navigation.navigate('Signin');
+
+          // try {
+          //   const mutationVariables = {
+          //     email,
+          //     authId: response.user.uid,
+          //     birthMonth: birthMonth.toUpperCase(),
+          //     birthYear: parseFloat(birthYear),
+          //     username: userName,
+          //   };
+          //   const data = await api.client.request(
+          //     createUserMutation,
+          //     mutationVariables,
+          //   );
+          //   console.log('data::', data);
+          //   action.navigation.navigate('Signin');
+
+          //   return { ...data, ...response };
+          // } catch (e) {
+          //   Alert.alert('something went to worng.');
+          // }
+        }
+        return userName;
       } catch (e) {
         Alert.alert('something went to worng.');
       }
@@ -53,6 +71,7 @@ export function* signupSaga(action) {
       console.log(e.message);
       // Alert.alert(e.message);
       return {
+        errorname: 'email',
         error:
           'this is an invalid email/password, please visit selfsea.org for more resources.',
       };

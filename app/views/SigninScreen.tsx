@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import Constant from '../theme/constant';
@@ -14,13 +14,16 @@ import Header from '../component/Header';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginRequest } from '../redux/actions/LoginAction';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Loader from '../component/Loader';
 import { auths } from '../config/static';
 
-// import Loader from '../component/Loader';
-
 const Signin = ({ navigation }) => {
+  useEffect(() => {
+    AsyncStorage.setItem('currentUser_role', 'false');
+  }, []);
+
   const dispatch = useDispatch();
 
   const loginRes = useSelector(state => state.LoginReducer);
@@ -73,10 +76,10 @@ const Signin = ({ navigation }) => {
       setPasswordError(' ');
     }
   };
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('abcd@abcde.com');
   const [emailError, setEmailError] = useState('');
 
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState('Sidebench@12345');
   const [passwordError, setPasswordError] = useState('');
 
   const [emailBorder, setEmailBorder] = useState('');

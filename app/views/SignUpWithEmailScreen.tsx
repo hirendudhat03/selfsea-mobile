@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 
 import ModalPicker from './ModalPickerConfirm';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Button from '../component/Button';
 import TextInput from '../component/CustomTextInput';
@@ -104,13 +105,20 @@ const Signup = ({ navigation }) => {
     setYear(year);
 
     console.log('year::', year);
+
+    AsyncStorage.setItem('currentUser_role', 'true');
   }, []);
   useEffect(() => {
     if (signupRes.data) {
       console.log('signupRes.data if: ', signupRes.data);
-      setEmailError(signupRes.data.error);
+      if (signupRes.data.errorname === 'email') {
+        setEmailError(signupRes.data.error);
+      } else {
+        setUserNameError(signupRes.data.error);
+      }
     } else {
       console.log('signupRes.data : ', signupRes.data);
+      // setUserNameError(signupRes.data.error);
     }
   }, [signupRes]);
 
@@ -166,10 +174,11 @@ const Signup = ({ navigation }) => {
       }
     });
 
-    if (age > 18 || setMonthIndex < m) {
+    if (age > 18 || (age === 18 && setMonthIndex < m)) {
       // Alert.alert('your age is not valid');
       changeAgeVisibility(true);
-    } else if (age < 13 || setMonthIndex > m) {
+    } else if (age < 13 || (age === 13 && setMonthIndex > m)) {
+      age--;
       Alert.alert('your age is not between 13-18 years.');
     } else {
       // Alert.alert('your are valid to use selfsea.');
@@ -321,8 +330,6 @@ const Signup = ({ navigation }) => {
       setPasswordError('Password must contain a number.');
     } else if (!userName) {
       setUserNameError(text.length + '/20');
-      // } else if (birthMonth !== '' && birthYear !== '') {
-      //   countAge();
     } else {
       // dispatch(
       //   SignupRequest(

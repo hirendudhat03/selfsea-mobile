@@ -77,3 +77,11 @@ export const currentTermsAndConditionsQuery = gql`
     }
   }
 `;
+
+export const isUsernameValidQuery = gql`
+  query isUsernameValid {
+    isUsernameValid(username: "Sidebench") {
+      isValid
+    }
+  }
+`;
