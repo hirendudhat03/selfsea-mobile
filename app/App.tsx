@@ -6,6 +6,7 @@ import { LogBox } from 'react-native';
 import { Provider } from 'react-redux';
 import store from './redux/store/Store';
 import RootNavigators from './route/Route';
+import Config from 'react-native-config';
 
 console.disableYellowBox = true;
 // console.disableYellowBox = true;
@@ -16,6 +17,8 @@ LogBox.ignoreLogs([
 
 const App = () => {
   const Navigation = RootNavigators;
+
+  console.log('Config : ', JSON.stringify(Config));
 
   return (
     <Provider store={store}>

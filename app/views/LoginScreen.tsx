@@ -26,7 +26,6 @@ import auth from '@react-native-firebase/auth';
 import { api } from '../services';
 import { SignupResponse } from '../redux/actions/SignupAction';
 import { useDispatch } from 'react-redux';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const onPressText = () => {
   Alert.alert('onPressText');
@@ -59,8 +58,6 @@ const Login = ({ navigation }) => {
         // No user is signed in.
       }
     });
-
-    // AsyncStorage.setItem('currentUser_role', 'true');
   }, []);
 
   var theme = Theme();
