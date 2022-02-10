@@ -27,6 +27,7 @@ import { CreateProfileRequest } from '../redux/actions/CreateProfileAction';
 
 import Loader from '../component/Loader';
 import { DropDownRequest } from '../redux/actions/MenuAction';
+import axios from 'react-native-axios';
 
 const height = Dimensions.get('window').height;
 
@@ -67,10 +68,11 @@ const CreateProfile = ({ navigation }) => {
 
   // const pronounsResponse = useSelector(state => state.PronounsReducer);
   // console.log('ProunounsResponse::: ', JSON.stringify(pronounsResponse));
-
+  const sectionDispatch = () => {
+    dispatch(DropDownRequest());
+  };
   useEffect(() => {
     console.log('menuResponse : ', menuResponse);
-
     if (menuResponse.pronouns !== null) {
       setPronounsDropDown(menuResponse.pronouns);
       setOrientationDropDown(menuResponse.orientations);
@@ -79,10 +81,6 @@ const CreateProfile = ({ navigation }) => {
     } else {
       sectionDispatch();
     }
-
-    const sectionDispatch = () => {
-      dispatch(DropDownRequest());
-    };
   }, [dispatch, menuResponse]);
 
   const [profile, setProfile] = useState('');
@@ -208,10 +206,39 @@ const CreateProfile = ({ navigation }) => {
 
   const [location, setLocation] = useState('');
   const [locationDropDown, setLocationDropDown] = useState([
-    { name: '<city>' },
-    { name: '<state>' },
+    // { name: '<city>' },
+    // { name: '<state>' },
   ]);
   const [selectLocationDropDown, setSelectLocationDropDown] = useState([]);
+
+  const getLocationApi = val => {
+    setLocation(val);
+    console.log('fetchAddLatLog : ', val);
+    if (val != '') {
+      console.log('value : ', val);
+      axios({
+        url:
+          'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' +
+          val +
+          '&key=AIzaSyDWJ8cC97oQYX2itSwNl1tb8Dr4T7P3AI4&sessiontoken=1234567890',
+        method: 'get',
+      })
+        .then(res => {
+          console.log('axios : ', val);
+          if (res.status === 200) {
+            console.log('res : ', res.data.predictions);
+            setLocationDropDown(res.data.predictions);
+          } else {
+            console.log('reselse : ', res);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    } else {
+      setLocationDropDown([]);
+    }
+  };
 
   const removeAllPronouns = () => {
     var temp = selectPronounsDropDown;
@@ -583,9 +610,10 @@ const CreateProfile = ({ navigation }) => {
                       : 'type in a City or State'
                   }
                   onChangeText={
-                    selectLocationDropDown.length < 1
-                      ? val => setLocation(val)
-                      : null
+                    val => getLocationApi(val)
+                    // selectLocationDropDown.length < 1
+                    //   ? val => setLocation(val)
+                    //   : null
                   }
                 />
               </View>
@@ -616,7 +644,7 @@ const CreateProfile = ({ navigation }) => {
                     <Text
                       onPress={() => locationDropDownItem(item, 'add')}
                       style={styles.menuTextStyle}>
-                      {item.name}
+                      {item.description}
                     </Text>
                   );
                 })}

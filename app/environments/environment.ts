@@ -1,9 +1,10 @@
 import { production } from './environment.production';
 import { staging } from './environment.staging';
+import Config from 'react-native-config';
 
 const development = {
   production: false,
-  graphqlBaseUrl: 'https://selfsea-api-dev.sidebench.dev/graphql',
+  graphqlBaseUrl: Config.API_URL + '/graphql',
   graphqlTimeoutMs: 10000,
 };
 

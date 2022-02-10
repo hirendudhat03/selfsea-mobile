@@ -32,16 +32,16 @@ export function* loginSaga(action) {
               console.log('data:', JSON.stringify(data));
 
               if (data.currentUser.roles[0].name === 'MENTEE') {
-                action.navigation.navigate('DrawerNavigator');
+                action.navigation.navigate('CreateProfile');
               }
               if (data.currentUser.roles[0].name === 'MENTOR') {
-                action.navigation.navigate('DrawerNavigator');
+                action.navigation.navigate('CreateProfile');
               }
               if (data.currentUser.roles[0].name === 'MODERATOR') {
-                action.navigation.navigate('DrawerNavigator');
+                action.navigation.navigate('CreateProfile');
               }
               if (data.currentUser.roles[0].name === 'ADMIN') {
-                action.navigation.navigate('DrawerNavigator');
+                action.navigation.navigate('CreateProfile');
               }
             } catch (e) {
               Alert.alert('something went to wrong in currentuser');

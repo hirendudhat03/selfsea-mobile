@@ -13,7 +13,7 @@ import {
   // statusCodes,
 } from '@react-native-google-signin/google-signin';
 // import Constant from '../theme/constant';
-// import InstagramLogin from 'react-native-instagram-login';
+import InstagramLogin from 'react-native-instagram-login';
 // import {
 //   appleAuth,
 //   appleAuthAndroid,
@@ -22,7 +22,7 @@ import {
 import 'react-native-get-random-values';
 // import { v4 as uuid } from 'uuid';
 // import { decode } from 'base-64';
-// import Alert from './Alert';
+import Alert from './Alert';
 
 interface Props {
   text: string;
@@ -192,8 +192,8 @@ const Authentication = ({ text, icon }: Props) => {
       <Image style={styles.image} source={icon} />
       <Text style={styles.text}>{text}</Text>
 
-      {/* <InstagramLogin
-        ref={ref => (instagramLogin = ref)}
+      <InstagramLogin
+        // ref={ref => (instagramLogin = ref)}
         appId="321916266462620"
         appSecret="106c0e7f22c7ec3f820e9522cb33d829"
         redirectUrl="https://www.selfsea.org/"
@@ -203,7 +203,7 @@ const Authentication = ({ text, icon }: Props) => {
           Alert.alert('User Id', data.user_id + '');
         }}
         onLoginFailure={(data: any) => console.log('failure', data)}
-      /> */}
+      />
     </TouchableOpacity>
   );
 };

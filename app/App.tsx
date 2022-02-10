@@ -17,8 +17,8 @@ LogBox.ignoreLogs([
 
 const App = () => {
   const Navigation = RootNavigators;
-
-  console.log('Config : ', JSON.stringify(Config));
+  console.log('config:::', Config.API_URL);
+  console.log('Config :::: ', JSON.stringify(Config));
 
   return (
     <Provider store={store}>
