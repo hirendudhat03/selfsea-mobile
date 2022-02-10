@@ -76,10 +76,10 @@ const Signin = ({ navigation }) => {
       setPasswordError(' ');
     }
   };
-  const [email, setEmail] = useState('abcd@abcde.com');
+  const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
 
-  const [password, setPassword] = useState('Sidebench@12345');
+  const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
   const [emailBorder, setEmailBorder] = useState('');
