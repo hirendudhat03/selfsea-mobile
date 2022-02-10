@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  bottomContentStyle: { flexDirection: 'row' },
+  // bottomContentStyle: { flexDirection: 'row' },
 });
 
 export default Signin;

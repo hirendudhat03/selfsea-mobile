@@ -68,10 +68,6 @@ const CreateProfile = ({ navigation }) => {
   // const pronounsResponse = useSelector(state => state.PronounsReducer);
   // console.log('ProunounsResponse::: ', JSON.stringify(pronounsResponse));
 
-  const sectionDispatch = () => {
-    dispatch(DropDownRequest());
-  };
-
   useEffect(() => {
     console.log('menuResponse : ', menuResponse);
 
@@ -83,7 +79,11 @@ const CreateProfile = ({ navigation }) => {
     } else {
       sectionDispatch();
     }
-  }, [menuResponse]);
+
+    const sectionDispatch = () => {
+      dispatch(DropDownRequest());
+    };
+  }, [dispatch, menuResponse]);
 
   const [profile, setProfile] = useState('');
 

@@ -1,7 +1,7 @@
 import auth from '@react-native-firebase/auth';
 import { api } from '../../services';
 import { call, put } from 'redux-saga/effects';
-import { createUserMutation } from '../../graphql/mutations/UserMutation';
+// import { createUserMutation } from '../../graphql/mutations/UserMutation';
 import { Alert } from 'react-native';
 import { SignupResponse } from '../actions/SignupAction';
 import { isUsernameValidQuery } from '../../graphql/queries/UserProfile';

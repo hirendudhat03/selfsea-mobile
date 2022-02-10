@@ -3,8 +3,7 @@ import { staging } from './environment.staging';
 
 const development = {
   production: false,
-  graphqlBaseUrl:
-    'https://selfsea-api-dev.sidebench.dev/graphql',
+  graphqlBaseUrl: 'https://selfsea-api-dev.sidebench.dev/graphql',
   graphqlTimeoutMs: 10000,
 };
 

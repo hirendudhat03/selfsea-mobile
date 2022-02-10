@@ -9,7 +9,7 @@ import {
   Modal,
   KeyboardAvoidingView,
   Platform,
-  SafeAreaView,
+  // SafeAreaView,
   Alert,
 } from 'react-native';
 
@@ -323,7 +323,8 @@ const Signup = ({ navigation }) => {
     } else if (!email) {
       setEmailError('Please enter email address.');
     } else if (
-      email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null
+      email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/) === null
+      // email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null
     ) {
       setEmailError('Please enter a valid email address.');
     } else if (!Password) {

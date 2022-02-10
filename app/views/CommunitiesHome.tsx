@@ -53,7 +53,7 @@ const CommunitiesHome = ({ navigation }) => {
 
   useEffect(() => {
     dispatch(HomeRequest());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (homeResponse.data) {

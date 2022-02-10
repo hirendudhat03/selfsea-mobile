@@ -58,7 +58,7 @@ const Login = ({ navigation }) => {
         // No user is signed in.
       }
     });
-  }, []);
+  }, [navigation]);
 
   var theme = Theme();
   //Need to use once we finalize about Insta Login
