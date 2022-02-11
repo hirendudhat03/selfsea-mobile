@@ -79,9 +79,13 @@ const CreateProfile = ({ navigation }) => {
       setGenderDropDown(menuResponse.genders);
       setRaceDropDown(menuResponse.ethnicities);
     } else {
-      dispatch(DropDownRequest());
+      // dispatch(DropDownRequest());
     }
   }, [dispatch, menuResponse]);
+
+  useEffect(() => {
+    dispatch(DropDownRequest());
+  }, [dispatch]);
 
   const [profile, setProfile] = useState('');
 

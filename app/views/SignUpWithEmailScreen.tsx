@@ -525,15 +525,22 @@ const Signup = ({ navigation }) => {
               onTouchStart={() => handleTouchusernameBorder()}
               borderColor={userNameBorder}
             />
-            <Text
-              style={[
-                styles.helperText,
-                userName.length > 20
-                  ? { color: Color.COMMUNITY_ORANGE }
-                  : { color: Color.BORDER_COLOR_LIGHTGRAY },
-              ]}>
-              {userNameError}
-            </Text>
+            {userNameError === 'this username is taken.' ? (
+              <Text
+                style={[styles.helperText, { color: Color.COMMUNITY_ORANGE }]}>
+                {userNameError}
+              </Text>
+            ) : (
+              <Text
+                style={[
+                  styles.helperText,
+                  userName.length > 20
+                    ? { color: Color.COMMUNITY_ORANGE }
+                    : { color: Color.BORDER_COLOR_LIGHTGRAY },
+                ]}>
+                {userNameError}
+              </Text>
+            )}
           </View>
         </ScrollView>
         <View style={styles.bottomView}>

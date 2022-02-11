@@ -27,8 +27,8 @@ export function* createProfileSaga(action) {
     try {
       const mutationVariables = {
         isPrivate: true,
-        location: 'xyz',
-        bio: 'abc',
+        location: selectLocationDropDown,
+        // bio: 'abc',
         pronouns: selectPronounsDropDown,
         orientations: selectOrientationDropDown,
         genders: selectGenderDropDown,

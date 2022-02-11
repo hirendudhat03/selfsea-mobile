@@ -34,6 +34,7 @@ export function* menuSaga(action) {
       return response;
     } catch (e) {
       console.log('e : ', e);
+      return null;
     }
   };
 
@@ -47,6 +48,7 @@ export function* menuSaga(action) {
       return response;
     } catch (e) {
       console.log('e : ', e);
+      return null;
     }
   };
   const Ethnicity = async () => {
@@ -59,6 +61,7 @@ export function* menuSaga(action) {
       return response;
     } catch (e) {
       console.log('e : ', e);
+      return null;
     }
   };
 
