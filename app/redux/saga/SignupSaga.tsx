@@ -1,7 +1,7 @@
 import auth from '@react-native-firebase/auth';
 import { api } from '../../services';
 import { call, put } from 'redux-saga/effects';
-// import { createUserMutation } from '../../graphql/mutations/UserMutation';
+import { createUserMutation } from '../../graphql/mutations/UserMutation';
 import { Alert } from 'react-native';
 import { SignupResponse } from '../actions/SignupAction';
 import { isUsernameValidQuery } from '../../graphql/queries/UserProfile';
@@ -30,27 +30,25 @@ export function* signupSaga(action) {
             error: 'this username is taken.',
           };
         } else {
-          action.navigation.navigate('Signin');
+          try {
+            const mutationVariables = {
+              email,
+              authId: response.user.uid,
+              birthMonth: birthMonth.toUpperCase(),
+              birthYear: parseFloat(birthYear),
+              username: userName,
+            };
+            const data = await api.client.request(
+              createUserMutation,
+              mutationVariables,
+            );
+            console.log('data::', data);
+            action.navigation.navigate('Signin');
 
-          // try {
-          //   const mutationVariables = {
-          //     email,
-          //     authId: response.user.uid,
-          //     birthMonth: birthMonth.toUpperCase(),
-          //     birthYear: parseFloat(birthYear),
-          //     username: userName,
-          //   };
-          //   const data = await api.client.request(
-          //     createUserMutation,
-          //     mutationVariables,
-          //   );
-          //   console.log('data::', data);
-          //   action.navigation.navigate('Signin');
-
-          //   return { ...data, ...response };
-          // } catch (e) {
-          //   Alert.alert('something went to worng.');
-          // }
+            return { ...data, ...response };
+          } catch (e) {
+            Alert.alert('something went to worng.');
+          }
         }
         return userName;
       } catch (e) {

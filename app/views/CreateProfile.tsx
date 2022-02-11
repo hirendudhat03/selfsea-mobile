@@ -68,9 +68,9 @@ const CreateProfile = ({ navigation }) => {
 
   // const pronounsResponse = useSelector(state => state.PronounsReducer);
   // console.log('ProunounsResponse::: ', JSON.stringify(pronounsResponse));
-  const sectionDispatch = () => {
-    dispatch(DropDownRequest());
-  };
+  // const sectionDispatch = () => {
+
+  // };
   useEffect(() => {
     console.log('menuResponse : ', menuResponse);
     if (menuResponse.pronouns !== null) {
@@ -79,7 +79,7 @@ const CreateProfile = ({ navigation }) => {
       setGenderDropDown(menuResponse.genders);
       setRaceDropDown(menuResponse.ethnicities);
     } else {
-      sectionDispatch();
+      dispatch(DropDownRequest());
     }
   }, [dispatch, menuResponse]);
 
@@ -214,7 +214,7 @@ const CreateProfile = ({ navigation }) => {
   const getLocationApi = val => {
     setLocation(val);
     console.log('fetchAddLatLog : ', val);
-    if (val != '') {
+    if (val !== '') {
       console.log('value : ', val);
       axios({
         url:
