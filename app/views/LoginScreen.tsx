@@ -45,17 +45,17 @@ const Login = ({ navigation }) => {
           api.setAuthHeader(idTokenResult.token);
           console.log('User JWT: ', idTokenResult.token);
 
-          if (idTokenResult.token) {
-            navigation.navigate('DrawerNavigator');
-          } else {
-            navigation.navigate('Login');
-          }
+          // if (idTokenResult.token) {
+          //   navigation.navigate('DrawerNavigator');
+          // } else {
+          //   navigation.navigate('Login');
+          // }
         };
         checkTokenFunction();
 
         // User is signed in.
       } else {
-        navigation.navigate('Login');
+        // navigation.navigate('Login');
         // No user is signed in.
       }
     });

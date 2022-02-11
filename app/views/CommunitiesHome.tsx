@@ -16,6 +16,8 @@ import { Theme } from '../assets/styles';
 import { HomeRequest } from '../redux/actions/HomeAction';
 import { AcceptRequest } from '../redux/actions/AcceptTermAction';
 
+// import Loader from '../component/Loader';
+
 const DATA = [{}, {}, {}, {}];
 
 const descriptionData = [
@@ -72,6 +74,8 @@ const CommunitiesHome = ({ navigation }) => {
 
   const renderItem = () => (
     <View style={styles.viewStyle}>
+      {/* <Loader value={loginRes.loader} /> */}
+
       <View style={styles.imageView}>
         <Image source={Images.LogoTab} style={styles.iconStyle} />
       </View>
