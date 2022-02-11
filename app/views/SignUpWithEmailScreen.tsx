@@ -14,7 +14,6 @@ import {
 } from 'react-native';
 
 import ModalPicker from './ModalPickerConfirm';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Button from '../component/Button';
 import TextInput from '../component/CustomTextInput';
@@ -106,7 +105,7 @@ const Signup = ({ navigation }) => {
 
     console.log('year::', year);
 
-    AsyncStorage.setItem('currentUser_role', 'true');
+    // AsyncStorage.setItem('currentUser_role', 'true');
   }, []);
   useEffect(() => {
     if (signupRes.data) {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import Constant from '../theme/constant';
@@ -14,15 +14,15 @@ import Header from '../component/Header';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginRequest } from '../redux/actions/LoginAction';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Loader from '../component/Loader';
 import { auths } from '../config/static';
 
 const Signin = ({ navigation }) => {
-  useEffect(() => {
-    AsyncStorage.setItem('currentUser_role', 'false');
-  }, []);
+  // useEffect(() => {
+  //   AsyncStorage.setItem('currentUser_role', 'false');
+  // }, []);
 
   const dispatch = useDispatch();
 

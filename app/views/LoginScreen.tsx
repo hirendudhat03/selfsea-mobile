@@ -26,7 +26,7 @@ import auth from '@react-native-firebase/auth';
 import { api } from '../services';
 import { SignupResponse } from '../redux/actions/SignupAction';
 import { useDispatch } from 'react-redux';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const onPressText = () => {
   Alert.alert('onPressText');
@@ -45,11 +45,11 @@ const Login = ({ navigation }) => {
           api.setAuthHeader(idTokenResult.token);
           console.log('User JWT: ', idTokenResult.token);
 
-          // if (idTokenResult.token) {
-          //   navigation.navigate('DrawerNavigator');
-          // } else {
-          //   navigation.navigate('Login');
-          // }
+          if (idTokenResult.token) {
+            navigation.navigate('DrawerNavigator');
+          } else {
+            navigation.navigate('Login');
+          }
         };
         checkTokenFunction();
 
@@ -105,6 +105,7 @@ const Login = ({ navigation }) => {
               style={[theme.marginTop8]}
               onPress={() => {
                 dispatch(SignupResponse(null, false));
+                AsyncStorage.setItem('currentUser_role', 'true');
                 navigation.navigate('Signup');
               }}
             />
@@ -140,7 +141,10 @@ const Login = ({ navigation }) => {
               <Button
                 type={Constant.buttons.CLOSE}
                 text={auths.SIGNIN_BUTTON}
-                onPress={() => navigation.navigate('Signin')}
+                onPress={() => {
+                  AsyncStorage.setItem('currentUser_role', 'false');
+                  navigation.navigate('Signin');
+                }}
               />
             </View>
           </View>

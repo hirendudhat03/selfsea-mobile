@@ -240,6 +240,34 @@ const CreateProfile = ({ navigation }) => {
     }
   };
 
+  const locationDropDownItem = (item, val) => {
+    setLocation('');
+
+    if (val === 'add') {
+      var temp = selectLocationDropDown;
+      temp.push(item);
+      setSelectLocationDropDown([...temp]);
+      console.log('newDatatemp', temp);
+
+      const newData = locationDropDown.filter(
+        itemData => itemData.description !== item.description,
+      );
+      console.log('newData', newData);
+      setLocationDropDown([...newData]);
+    } else {
+      var temp = locationDropDown;
+      temp.push(item);
+      setLocationDropDown([...temp]);
+      console.log('temp', temp);
+
+      const temp1 = selectLocationDropDown.filter(
+        itemData => itemData.description !== item.description,
+      );
+      console.log('temp1', temp1);
+      setSelectLocationDropDown([...temp1]);
+    }
+  };
+
   const removeAllPronouns = () => {
     var temp = selectPronounsDropDown;
     setSelectPronounsDropDown([]);
@@ -272,30 +300,6 @@ const CreateProfile = ({ navigation }) => {
     setSelectLocationDropDown([]);
 
     setLocationDropDown([...temp, ...locationDropDown]);
-  };
-
-  const locationDropDownItem = (item, val) => {
-    setLocation('');
-
-    if (val === 'add') {
-      var temp = selectLocationDropDown;
-      temp.push(item);
-      setSelectLocationDropDown([...temp]);
-
-      const newData = locationDropDown.filter(
-        itemData => itemData.name !== item.name,
-      );
-      setLocationDropDown([...newData]);
-    } else {
-      var temp = locationDropDown;
-      temp.push(item);
-      setLocationDropDown([...temp]);
-
-      const temp1 = selectLocationDropDown.filter(
-        itemData => itemData.name !== item.name,
-      );
-      setSelectLocationDropDown([...temp1]);
-    }
   };
 
   return (
@@ -595,7 +599,7 @@ const CreateProfile = ({ navigation }) => {
                   return (
                     <Badges
                       type={Constant.badges.MULTISELECT}
-                      text={item.name}
+                      text={item.description}
                       rigthIcon={Images.Circle}
                       onPress={() => locationDropDownItem(item)}
                     />
@@ -610,10 +614,10 @@ const CreateProfile = ({ navigation }) => {
                       : 'type in a City or State'
                   }
                   onChangeText={
-                    val => getLocationApi(val)
-                    // selectLocationDropDown.length < 1
-                    //   ? val => setLocation(val)
-                    //   : null
+                    // val => getLocationApi(val)
+                    selectLocationDropDown.length < 1
+                      ? val => getLocationApi(val)
+                      : null
                   }
                 />
               </View>
@@ -622,7 +626,7 @@ const CreateProfile = ({ navigation }) => {
                   onPress={() =>
                     selectLocationDropDown.length !== 0
                       ? removeAllLocation()
-                      : setLocation(' ')
+                      : setLocation('')
                   }
                   style={styles.touchableStyle}>
                   <Image

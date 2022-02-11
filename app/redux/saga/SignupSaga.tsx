@@ -24,7 +24,7 @@ export function* signupSaga(action) {
         const username = await api.client.request(isUsernameValidQuery);
         console.log('username::', JSON.stringify(username));
 
-        if (username.isUsernameValid.isValid) {
+        if (!username.isUsernameValid.isValid) {
           return {
             errorname: 'username',
             error: 'this username is taken.',
