@@ -33,7 +33,7 @@ const onPressText = () => {
 };
 
 const Login = ({ navigation }) => {
-  auth().signOut();
+  // auth().signOut();
   const dispatch = useDispatch();
 
   useEffect(() => {
