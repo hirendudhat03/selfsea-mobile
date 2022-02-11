@@ -33,33 +33,23 @@ const onPressText = () => {
 };
 
 const Login = ({ navigation }) => {
-  // auth().signOut();
+  auth().signOut();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    auth().onAuthStateChanged(function (user) {
-      console.log('user : ', user);
-      if (user) {
-        const checkTokenFunction = async () => {
-          const idTokenResult = await auth().currentUser.getIdTokenResult();
-          api.setAuthHeader(idTokenResult.token);
-          console.log('User JWT: ', idTokenResult.token);
-
-          // if (idTokenResult.token) {
-          //   navigation.navigate('DrawerNavigator');
-          // } else {
-          //   navigation.navigate('Login');
-          // }
-        };
-        checkTokenFunction();
-
-        // User is signed in.
-      } else {
-        // navigation.navigate('Login');
-        // No user is signed in.
+    const checkUser = async () => {
+      if (auth().currentUser) {
+        const idTokenResult = await auth().currentUser.getIdTokenResult();
+        api.setAuthHeader(idTokenResult.token);
+        console.log('User JWT: ', idTokenResult.token);
+        if (idTokenResult.token) {
+          navigation.navigate('DrawerNavigator');
+        } else {
+          navigation.navigate('Login');
+        }
       }
-    });
-
+    };
+    checkUser();
     // AsyncStorage.setItem('currentUser_role', 'true');
   }, [navigation]);
 

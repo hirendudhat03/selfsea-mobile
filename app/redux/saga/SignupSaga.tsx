@@ -9,19 +9,10 @@ import { isUsernameValidQuery } from '../../graphql/queries/UserProfile';
 export function* signupSaga(action) {
   const Signup = async (email, Password, birthMonth, birthYear, userName) => {
     try {
-      const response = await auth().createUserWithEmailAndPassword(
-        email,
-        Password,
-      );
-
-      const token = await response.user.getIdToken();
-      api.setAuthHeader(token);
-      console.log('token : ', token);
-
-      await response.user.sendEmailVerification();
-
       try {
-        const username = await api.client.request(isUsernameValidQuery);
+        const username = await api.client.request(isUsernameValidQuery, {
+          username: userName,
+        });
         console.log('username::', JSON.stringify(username));
 
         if (!username.isUsernameValid.isValid) {
@@ -30,6 +21,17 @@ export function* signupSaga(action) {
             error: 'this username is taken.',
           };
         } else {
+          const response = await auth().createUserWithEmailAndPassword(
+            email,
+            Password,
+          );
+
+          const token = await response.user.getIdToken();
+          api.setAuthHeader(token);
+          console.log('token : ', token);
+
+          await response.user.sendEmailVerification();
+
           try {
             const mutationVariables = {
               email,
@@ -38,24 +40,45 @@ export function* signupSaga(action) {
               birthYear: parseFloat(birthYear),
               username: userName,
             };
+            console.log('mutationVariables::', mutationVariables);
             const data = await api.client.request(
               createUserMutation,
               mutationVariables,
             );
-            console.log('data::', data);
+            console.log('mutationVariables::', data);
             action.navigation.navigate('Signin');
 
             return { ...data, ...response };
           } catch (e) {
-            Alert.alert('something went to worng.');
+            console.log({ errorHere: e });
+            // Alert.alert('something went to worng.');
           }
         }
         return userName;
       } catch (e) {
-        Alert.alert('something went to worng.');
+        // console.log({e});
+
+        console.log({ code: e.code });
+        if (e.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+          Alert.alert('That email address is already in use!');
+        }
+
+        if (e.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+          Alert.alert('That email address is invalid!');
+        }
+
+        console.log(e.message);
+        // Alert.alert(e.message);
+        return {
+          errorname: 'email',
+          error:
+            'this is an invalid email/password, please visit selfsea.org for more resources.',
+        };
       }
     } catch (e) {
-      console.log('klasjdlkasjld');
+      // console.log({e});
       if (e.code === 'auth/email-already-in-use') {
         console.log('That email address is already in use!');
         Alert.alert('That email address is already in use!');
