@@ -25,7 +25,7 @@ import Badges from '../component/Badges';
 import { useDispatch, useSelector } from 'react-redux';
 import { CreateProfileRequest } from '../redux/actions/CreateProfileAction';
 
-import Loader from '../component/Loader';
+// import Loader from '../component/Loader';
 import { DropDownRequest } from '../redux/actions/MenuAction';
 import axios from 'react-native-axios';
 
