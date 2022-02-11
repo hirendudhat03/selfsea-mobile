@@ -79,8 +79,8 @@ export const currentTermsAndConditionsQuery = gql`
 `;
 
 export const isUsernameValidQuery = gql`
-  query isUsernameValid {
-    isUsernameValid(username: "Sidebench") {
+  query isUsernameValid($username: String!) {
+    isUsernameValid(username: $username) {
       isValid
     }
   }
