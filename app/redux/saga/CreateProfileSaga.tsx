@@ -27,8 +27,8 @@ export function* createProfileSaga(action) {
     try {
       const mutationVariables = {
         isPrivate: true,
-        location: selectLocationDropDown,
-        // bio: 'abc',
+        location: selectLocationDropDown[0].description,
+        bio: 'required',
         pronouns: selectPronounsDropDown,
         orientations: selectOrientationDropDown,
         genders: selectGenderDropDown,
@@ -57,7 +57,7 @@ export function* createProfileSaga(action) {
     action.selectLocationDropDown,
   );
 
-  if (response === undefined) {
+  if (response === null) {
   } else {
     action.navigation.navigate('DrawerNavigator');
   }
