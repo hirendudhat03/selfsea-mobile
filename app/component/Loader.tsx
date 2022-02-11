@@ -2,7 +2,7 @@ import React from 'react';
 import { View, ActivityIndicator, StyleSheet, Modal } from 'react-native';
 
 interface Props {
-  value: Boolean;
+  value: boolean;
 }
 
 const Loader = ({ value }: Props) => {

@@ -305,10 +305,9 @@ const CreateProfile = ({ navigation }) => {
 
     setLocationDropDown([...temp, ...locationDropDown]);
   };
-
   return (
     <View style={styles.container}>
-      <Loader value={menuResponse.loader} />
+      {/*{menuResponse.loader && <Loader value={menuResponse.loader} />}*/}
 
       <Header
         type={Constant.navigatioHeader.PAGE_HEADER}
