@@ -4,8 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
-import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
-//import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 //import com.facebook.react.shell.MainReactPackage;
 //import com.BV.LinearGradient.LinearGradientPackage;
 //import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -20,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 import com.facebook.react.bridge.JSIModulePackage;
 import com.swmansion.reanimated.ReanimatedJSIModulePackage;
-import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
+
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -33,17 +31,16 @@ public class MainApplication extends Application implements ReactApplication {
 
 
 
-
-
         protected List<ReactPackage> getPackages() {
           @SuppressWarnings("UnnecessaryLocalVariable")
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           //packages.add(new MyReactNativePackage());
-//            packages.add(new MainReactPackage(),
-//            new ReactNativeConfigPackage();
-//            packages.add(new ReactNativeConfigPackage());
+          //packages.add(new MainReactPackage(),
+          //new ReactNativeConfigPackage();
+          //packages.add(new ReactNativeConfigPackage());
           return packages;
+
 
         }
 

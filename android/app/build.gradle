@@ -90,9 +90,9 @@ apply from: "../../node_modules/react-native/react.gradle"
 
 
 project.ext.envConfigFiles = [
-    debug: ".env.development",
+    debug: ".env",
     release: ".env.production",
-    anothercustombuild: ".env",
+    anothercustombuild: ".env.staging",
 ]
 
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
@@ -185,6 +185,7 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
+
 
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
