@@ -40,6 +40,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+  <key>UIUserInterfaceStyle</key>
+  <string>Light</string>
 	<key>NSCameraUsageDescription</key>
 	<string>SelfSea</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
