@@ -1,10 +1,87 @@
 version: 2.1
 
+orbs:
+  android: circleci/android@1.0
+
 workflows:
   version: 2
   lint-and-test:
     jobs:
       - lint-and-test
+  deploy:
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              only:
+                - development
+                - staging
+
+get_key_file: &get_key_file
+  run:
+    name: Add Google Play service file & keystore
+    command: |
+      echo "$GOOGLE_PLAY_SERVICE_KEYS" > ~/google-key-file.json;
+      echo $ANDROID_KEYSTORE | base64 -d > ~/keystore.jks;
+
+node_dependencies: &node_dependencies
+  run:
+    name: Install node dependencies
+    command:
+      npm install
+
+ruby_dependencies: &ruby_dependencies
+  run:
+    name: Download Ruby Dependencies
+    command: |
+      cd android;
+      bundle check || bundle install --path vendor/bundle
+
+android_dependencies: &android_dependencies
+  run:
+    name: Download Android Dependencies
+    command: cd android && ./gradlew androidDependencies
+
+npm_key: &npm_key
+  node-{{ checksum "package-lock.json" }}
+
+gradle_key: &gradle_key
+  jar-{{ checksum "android/gradle/wrapper/gradle-wrapper.properties" }}-{{ checksum "android/build.gradle" }}-{{ checksum "android/app/build.gradle" }}
+  
+gems_key: &gems_key
+  gem-{{ checksum "android/Gemfile.lock" }}
+
+restore_npm_cache: &restore_npm_cache
+  restore_cache:
+    key: *npm_key
+  
+restore_gradle_cache: &restore_gradle_cache
+  restore_cache:
+    key: *gradle_key
+    
+restore_gems_cache: &restore_gems_cache
+  restore_cache:
+    key: *gems_key
+
+save_npm_cache: &save_npm_cache
+  save_cache:
+    key: *npm_key
+    paths:
+      - node_modules
+
+save_gradle_cache: &save_gradle_cache
+  save_cache:
+    key: *gradle_key
+    paths:
+      - ~/.gradle
+      - ~/.m2
+
+save_gems_cache: &save_gems_cache
+  save_cache:
+    key: *gems_key
+    paths:
+      - android/vendor/bundle
+
 jobs:
   lint-and-test:
     docker:
@@ -16,3 +93,33 @@ jobs:
       - run: npm run lint
       # We allow no tests for now
       - run: npm test -- --passWithNoTests
+  deploy:
+    docker:
+      - image: circleci/android:api-29-node
+    # macos:
+    #   xcode: "13.2.1"
+    steps:
+      - checkout
+      - *get_key_file
+      - *restore_npm_cache
+      - *restore_gradle_cache
+      - *restore_gems_cache
+      - *node_dependencies
+      - *ruby_dependencies
+      - *android_dependencies
+      - *save_npm_cache
+      - *save_gradle_cache
+      - *save_gems_cache
+      - run:
+          name: Build / deploy with fastlane
+          command: |
+            cd android;
+            mkdir /tmp/artifacts;
+            if [[ $CIRCLE_BRANCH =~ ^staging$ ]]; then
+              bundle exec fastlane submit_build
+            else
+              bundle exec fastlane build_development
+              mv app/build/outputs/bundle/debug/app-debug.aab /tmp/artifacts
+            fi
+      - store_artifacts:
+          path: /tmp/artifacts
