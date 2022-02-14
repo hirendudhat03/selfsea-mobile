@@ -8,22 +8,17 @@ import Images from '../theme/images';
 
 import Button from '../component/Button';
 import Auth from '../component/Authentication';
-import TextInputCom from '../component/CustomTextInput';
+import TextInput from '../component/CustomTextInput';
 import CheckBox from '../component/Checkbox';
 import Header from '../component/Header';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginRequest } from '../redux/actions/LoginAction';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Loader from '../component/Loader';
 import { auths } from '../config/static';
 
 const Signin = ({ navigation }) => {
-  // useEffect(() => {
-  //   AsyncStorage.setItem('currentUser_role', 'false');
-  // }, []);
-
   const dispatch = useDispatch();
 
   const loginRes = useSelector(state => state.LoginReducer);
@@ -122,7 +117,7 @@ const Signin = ({ navigation }) => {
 
       <ScrollView>
         <View style={styles.contentView}>
-          <TextInputCom
+          <TextInput
             type={Constant.textInput.LARGE_INPUT}
             placeholder={'email@address.com'}
             label={'email'}
@@ -137,7 +132,7 @@ const Signin = ({ navigation }) => {
             borderColor={emailBorder}
           />
 
-          <TextInputCom
+          <TextInput
             type={Constant.textInput.LARGE_INPUT}
             label={'password'}
             style={styles.inputTextStyle}
@@ -181,11 +176,7 @@ const Signin = ({ navigation }) => {
             icon={Images.Google}
             type={Constant.authLogin.GOOGLE}
           />
-          {/* <Auth
-            text={'continue with Instagram'}
-            icon={Images.Instagram}
-            type={Constant.authLogin.INSTAGRAM}
-          /> */}
+
           <Auth
             text={'continue with Apple'}
             icon={Images.Apple}
@@ -250,7 +241,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  // bottomContentStyle: { flexDirection: 'row' },
 });
 
 export default Signin;

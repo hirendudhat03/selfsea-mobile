@@ -8,11 +8,10 @@ export function HomeResponse(data, loader) {
   };
 }
 
-export function HomeRequest(navigation, loader) {
+export function HomeRequest(loader) {
   return {
     type: 'HOME_REQUEST',
 
-    // navigation: navigation,
     loader: loader,
   };
 }

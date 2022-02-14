@@ -3,7 +3,7 @@ import { View, Text, FlatList } from 'react-native';
 import Color from '../../theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
 import { CommonCommunityCard } from '../../common';
-import { Theme } from '../../assets/styles';
+import { Theme } from '../../styles';
 
 const DATA = [
   {

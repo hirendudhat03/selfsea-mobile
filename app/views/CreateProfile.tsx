@@ -10,6 +10,7 @@ import {
   TextInput,
   Modal,
   KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import ModalPicker from './ModalPickerConfirm';
 
@@ -66,22 +67,25 @@ const CreateProfile = ({ navigation }) => {
     );
   };
 
-  // const pronounsResponse = useSelector(state => state.PronounsReducer);
-  // console.log('ProunounsResponse::: ', JSON.stringify(pronounsResponse));
-  // const sectionDispatch = () => {
-
-  // };
   useEffect(() => {
     console.log('menuResponse : ', menuResponse);
+
     if (menuResponse.pronouns !== null) {
       setPronounsDropDown(menuResponse.pronouns);
-      setOrientationDropDown(menuResponse.orientations);
-      setGenderDropDown(menuResponse.genders);
-      setRaceDropDown(menuResponse.ethnicities);
-    } else {
-      // dispatch(DropDownRequest());
     }
-  }, [dispatch, menuResponse]);
+
+    if (menuResponse.orientations !== null) {
+      setOrientationDropDown(menuResponse.orientations);
+    }
+
+    if (menuResponse.genders !== null) {
+      setGenderDropDown(menuResponse.genders);
+    }
+
+    if (menuResponse.ethnicities !== null) {
+      setRaceDropDown(menuResponse.ethnicities);
+    }
+  }, [menuResponse]);
 
   useEffect(() => {
     dispatch(DropDownRequest());
@@ -209,10 +213,7 @@ const CreateProfile = ({ navigation }) => {
   };
 
   const [location, setLocation] = useState('');
-  const [locationDropDown, setLocationDropDown] = useState([
-    // { name: '<city>' },
-    // { name: '<state>' },
-  ]);
+  const [locationDropDown, setLocationDropDown] = useState([]);
   const [selectLocationDropDown, setSelectLocationDropDown] = useState([]);
 
   const getLocationApi = val => {
@@ -315,7 +316,9 @@ const CreateProfile = ({ navigation }) => {
         label={'create your profile'}
         onPress={() => navigation.goBack()}
       />
-      <KeyboardAvoidingView style={styles.contentView} behavior={'padding'}>
+      <KeyboardAvoidingView
+        style={styles.contentView}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <ScrollView style={styles.scrollView}>
           <View style={styles.textViewStyle}>
             <Text

@@ -15,8 +15,6 @@ import CreateNewPassword from '../views/CreateNewPassword';
 const stackNavigator = () => {
   const Stack = createStackNavigator();
 
-  // const [initRoute] = useState('Login');
-
   return (
     // initRoute && (
     <Stack.Navigator initialRouteName={'Login'}>
@@ -71,7 +69,6 @@ const stackNavigator = () => {
       <Stack.Screen name="Mentees" component={Mentees} />
     </Stack.Navigator>
   );
-  // );
 };
 
 export default stackNavigator;

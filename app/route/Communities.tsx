@@ -14,7 +14,6 @@ const height = Dimensions.get('window').height;
 const Communities = ({ navigation }) => {
   console.log(navigation);
   return (
-    // <SafeAreaView style={{ flex: 1 }}>
     <Tab.Navigator
       tabBarOptions={{
         activeTintColor: Color.BASE_COLOR_WHITE,
@@ -50,7 +49,6 @@ const Communities = ({ navigation }) => {
         }}
       />
     </Tab.Navigator>
-    // </SafeAreaView>
   );
 };
 export default Communities;

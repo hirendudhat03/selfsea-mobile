@@ -8,7 +8,6 @@ import {
   userEthnicityQuery,
 } from '../../graphql/queries/UserProfile';
 import { DropDownResponse } from '../actions/MenuAction';
-// import { Alert } from 'react-native';
 
 export function* menuSaga(action) {
   const Pronouns = async () => {

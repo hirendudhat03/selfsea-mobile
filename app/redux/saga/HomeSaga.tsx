@@ -21,7 +21,6 @@ export function* homeSaga(action) {
     } catch (e) {
       console.log('e:', e);
       Alert.alert('something went to wrong home Page');
-      // Alert.alert(e);
       return null;
     }
   };
@@ -29,7 +28,6 @@ export function* homeSaga(action) {
   const response = yield call(Home);
   console.warn('Homeresponse saga', response);
 
-  // action.navigation.navigate('Communities');
   if (response === null) {
     yield put(HomeResponse(null, false));
   } else {

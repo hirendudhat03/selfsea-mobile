@@ -26,10 +26,6 @@ export function* signupSaga(action) {
             Password,
           );
 
-          const token = await response.user.getIdToken();
-          api.setAuthHeader(token);
-          console.log('token : ', token);
-
           await response.user.sendEmailVerification();
 
           try {
@@ -56,8 +52,6 @@ export function* signupSaga(action) {
         }
         return userName;
       } catch (e) {
-        // console.log({e});
-
         console.log({ code: e.code });
         if (e.code === 'auth/email-already-in-use') {
           console.log('That email address is already in use!');
@@ -70,7 +64,6 @@ export function* signupSaga(action) {
         }
 
         console.log(e.message);
-        // Alert.alert(e.message);
         return {
           errorname: 'email',
           error:
@@ -78,7 +71,6 @@ export function* signupSaga(action) {
         };
       }
     } catch (e) {
-      // console.log({e});
       if (e.code === 'auth/email-already-in-use') {
         console.log('That email address is already in use!');
         Alert.alert('That email address is already in use!');
@@ -90,7 +82,6 @@ export function* signupSaga(action) {
       }
 
       console.log(e.message);
-      // Alert.alert(e.message);
       return {
         errorname: 'email',
         error:
@@ -109,17 +100,5 @@ export function* signupSaga(action) {
   );
   console.warn('response saga', response);
 
-  // if (response === null) {
-  //   yield put(
-  //     SignupResponse(
-  //       {
-  //         error:
-  //           'this is an invalid email/password, please visit selfsea.org for more resources.',
-  //       },
-  //       false,
-  //     ),
-  //   );
-  // } else {
   yield put(SignupResponse(response, false));
-  // }
 }

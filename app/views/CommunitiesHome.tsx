@@ -12,7 +12,7 @@ import Button from '../component/Button';
 
 import LinearGradient from 'react-native-linear-gradient';
 import { useDispatch, useSelector } from 'react-redux';
-import { Theme } from '../assets/styles';
+import { Theme } from '../styles';
 import { HomeRequest } from '../redux/actions/HomeAction';
 import { AcceptRequest } from '../redux/actions/AcceptTermAction';
 
@@ -45,7 +45,6 @@ const descriptionData = [
 const CommunitiesHome = ({ navigation }) => {
   const [title, setTitle] = useState(null);
   const [content, setContent] = useState(null);
-  // const [hasAcceptedLatestTerms, setHasAcceptedLatestTerms] = useState(null);
   const [isModalVisible, setIsMoalVisiable] = useState(null);
 
   const dispatch = useDispatch();

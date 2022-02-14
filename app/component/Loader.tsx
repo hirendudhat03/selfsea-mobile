@@ -14,11 +14,9 @@ const Loader = ({ value }: Props) => {
       onRequestClose={() => {
         console.log('Modal has been closed.');
       }}>
-      {/* value ? ( */}
       <View style={styles.Container}>
         <ActivityIndicator size="large" color="black" />
       </View>
-      {/* ) : null */}
     </Modal>
   );
 };

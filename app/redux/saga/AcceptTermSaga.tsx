@@ -25,7 +25,6 @@ export function* acceptSaga(action) {
   const response = yield call(Accept);
   console.warn('response saga', response);
 
-  // action.navigation.navigate('Communities');
   if (response === null) {
     yield put(AcceptResponse(null, false));
   } else {

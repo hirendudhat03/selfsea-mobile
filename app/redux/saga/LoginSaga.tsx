@@ -79,7 +79,6 @@ export function* loginSaga(action) {
       }
 
       console.log('e : ', e);
-      // Alert.alert(e.message);
       return null;
     }
   };

@@ -9,7 +9,6 @@ import {
   Modal,
   KeyboardAvoidingView,
   Platform,
-  // SafeAreaView,
   Alert,
 } from 'react-native';
 
@@ -23,7 +22,7 @@ import Constant from '../theme/constant';
 import Images from '../theme/images';
 import Font from '../theme/fonts';
 import Color from '../theme/colors';
-import Dropdown from '../component/Dropdown';
+import BirthDateInput from '../component/BirthDateInput';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { SignupRequest } from '../redux/actions/SignupAction';
@@ -104,8 +103,6 @@ const Signup = ({ navigation }) => {
     setYear(year);
 
     console.log('year::', year);
-
-    // AsyncStorage.setItem('currentUser_role', 'true');
   }, []);
   useEffect(() => {
     if (signupRes.data) {
@@ -117,7 +114,6 @@ const Signup = ({ navigation }) => {
       }
     } else {
       console.log('signupRes.data : ', signupRes.data);
-      // setUserNameError(signupRes.data.error);
     }
   }, [signupRes]);
 
@@ -131,10 +127,10 @@ const Signup = ({ navigation }) => {
   const [userNameError, setUserNameError] = useState<string>('0/20');
 
   const [birthMonth, setBirthMonth] = useState<string>('');
-  const [birthMonthError, setBirthMonthError] = useState<string>('');
+  const [setBirthMonthError] = useState<string>('');
 
   const [birthYear, setBirthYear] = useState<string>('');
-  const [birthYearError, setBirthYearError] = useState<string>('');
+  const [setBirthYearError] = useState<string>('');
 
   const [passwordScore, setPasswordScore] = useState<0 | 1 | 2 | 3 | 4>(0);
 
@@ -174,13 +170,11 @@ const Signup = ({ navigation }) => {
     });
 
     if (age > 18 || (age === 18 && setMonthIndex < m)) {
-      // Alert.alert('your age is not valid');
       changeAgeVisibility(true);
     } else if (age < 13 || (age === 13 && setMonthIndex > m)) {
       age--;
       Alert.alert('your age is not between 13-18 years.');
     } else {
-      // Alert.alert('your are valid to use selfsea.');
       dispatch(
         SignupRequest(
           email,
@@ -323,7 +317,6 @@ const Signup = ({ navigation }) => {
       setEmailError('Please enter email address.');
     } else if (
       email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/) === null
-      // email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) === null
     ) {
       setEmailError('Please enter a valid email address.');
     } else if (!Password) {
@@ -331,16 +324,6 @@ const Signup = ({ navigation }) => {
     } else if (!userName) {
       setUserNameError(text.length + '/20');
     } else {
-      // dispatch(
-      //   SignupRequest(
-      //     email,
-      //     Password,
-      //     birthMonth,
-      //     birthYear,
-      //     userName,
-      //     navigation,
-      //   ),
-      // );
       countAge();
     }
   };
@@ -472,35 +455,26 @@ const Signup = ({ navigation }) => {
                 <Text style={styles.birthYearText}>birth year</Text>
               </View>
             </View>
-            <View style={styles.monthViewBottom}>
-              <Dropdown
-                optionList={month}
-                onSelect={value => {
-                  selectFillmonth(value);
-                }}
-                defaultButtonText={'select one'}
-                icon={Images.DropdownIcon}
-                helperText={birthMonthError}
-                value={birthMonth}
-                style={{ width: width * 0.48 }}
-              />
-              <View style={styles.yearDropdown}>
-                <Dropdown
-                  optionList={years}
-                  onSelect={value => {
-                    selectFillBirth(value);
-                  }}
-                  defaultButtonText={'select one'}
-                  style={{ width: width * 0.3 }}
-                  icon={Images.DropdownIcon}
-                  helperText={birthYearError}
-                  iconVisibleFill={true}
-                  checkRight={true}
-                  value={birthYear}
-                  circleFill={circleFillBirth}
-                />
-              </View>
-            </View>
+
+            <BirthDateInput
+              monthOptionList={month}
+              onSelectMonth={value => {
+                selectFillmonth(value);
+              }}
+              defaultMonthButtonText={'select one'}
+              monthValue={birthMonth}
+              monthStyle={{ width: width * 0.48 }}
+              yearOptionList={years}
+              onSelectYear={value => {
+                selectFillBirth(value);
+              }}
+              defaultYearButtonText={'select one'}
+              yearStyle={{ width: width * 0.31 }}
+              iconVisibleFill={true}
+              checkRight={true}
+              yearValue={birthYear}
+              circleFill={circleFillBirth}
+            />
 
             <View style={styles.userName}>
               <Text style={styles.birthMonthText}>username</Text>

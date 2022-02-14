@@ -122,7 +122,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
     paddingHorizontal: 30,
-    // opacity: -8,
   },
   modal: {
     backgroundColor: Color.BASE_COLOR_WHITE,
