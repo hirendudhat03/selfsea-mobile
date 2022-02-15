@@ -1,4 +1,4 @@
-package com.selfseamobile;
+package com.phe.selfsea;
 
 import com.facebook.react.ReactActivity;
 import android.os.Bundle;

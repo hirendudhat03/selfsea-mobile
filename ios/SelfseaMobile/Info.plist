@@ -40,8 +40,6 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-  <key>UIUserInterfaceStyle</key>
-  <string>Light</string>
 	<key>NSCameraUsageDescription</key>
 	<string>SelfSea</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
@@ -91,6 +89,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>
