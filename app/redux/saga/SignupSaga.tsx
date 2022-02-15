@@ -35,7 +35,7 @@ export function* signupSaga(action) {
       action.navigation.navigate('DrawerNavigator');
       return { ...data, ...response };
     } catch (e: any) {
-      console.log('klasjdlkasjld');
+      // console.log('klasjdlkasjld');
       if (e.code === 'auth/email-already-in-use') {
         console.log('That email address is already in use!');
         Alert.alert('That email address is already in use!');

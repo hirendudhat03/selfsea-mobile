@@ -104,16 +104,14 @@ const Signup = ({ route, navigation }) => {
       year.push(currentYear--);
     }
     setYear(year);
-
-    console.log('year::', year);
   }, [route]);
 
   useEffect(() => {
     if (signupRes.data) {
-      console.log('signupRes.data if: ', signupRes.data);
+      // console.log('signupRes.data if: ', signupRes.data);
       setEmailError(signupRes.data.error);
     } else {
-      console.log('signupRes.data : ', signupRes.data);
+      // console.log('signupRes.data : ', signupRes.data);
     }
   }, [signupRes]);
 
@@ -315,6 +313,7 @@ const Signup = ({ route, navigation }) => {
             navigation,
             false,
             route.params.userInfo,
+            route.params.type
           ),
         );
       }
@@ -368,59 +367,6 @@ const Signup = ({ route, navigation }) => {
         />
         <ScrollView>
           <View style={styles.contentView}>
-            {route.params === undefined && (
-              <TextInput
-                type={Constant.textInput.LARGE_INPUT}
-                label={'password'}
-                style={styles.inputTextStyle}
-                onChangeText={text => {
-                  selectFillPassword(text);
-                  const response = zxcvbn(text);
-                  setPasswordScore(response.score);
-                  setPasswordError(response.feedback.suggestions);
-                  setCircleFillPassword(response.score >= 3);
-                }}
-                value={Password}
-                helperText={PasswordError}
-                iconVisible={true}
-                secureTextEntry={focus !== true ? focus : true}
-                secureTextEntryChange={selectFocus}
-                iconVisibleFill={true}
-                checkRight={true}
-                circleFill={circleFillPassword}
-                onTouchStart={() => handleTouchpasswordBorder()}
-                borderColor={passwordBorder}
-              />
-            )}
-            {route.params === undefined && (
-              <View style={styles.viewStyle}>
-                <View
-                  style={[
-                    styles.passwordStyle,
-                    { backgroundColor: passwordStrengthColor(0) },
-                  ]}
-                />
-                <View
-                  style={[
-                    styles.passwordStyle,
-                    { backgroundColor: passwordStrengthColor(1) },
-                  ]}
-                />
-                <View
-                  style={[
-                    styles.passwordStyle,
-                    { backgroundColor: passwordStrengthColor(2) },
-                  ]}
-                />
-                <View
-                  style={[
-                    styles.passwordStyle,
-                    { backgroundColor: passwordStrengthColor(3) },
-                  ]}
-                />
-              </View>
-            )}
-
             <TextInput
               maxLength={64}
               type={Constant.textInput.LARGE_INPUT}
@@ -492,58 +438,36 @@ const Signup = ({ route, navigation }) => {
                 />
               </View>
             )}
-            <View style={styles.viewStyle}>
-              <View
-                style={[
-                  styles.passwordStyle,
-                  { backgroundColor: passwordStrengthColor(0) },
-                ]}
-              />
-              <View
-                style={[
-                  styles.passwordStyle,
-                  { backgroundColor: passwordStrengthColor(1) },
-                ]}
-              />
-              <View
-                style={[
-                  styles.passwordStyle,
-                  { backgroundColor: passwordStrengthColor(2) },
-                ]}
-              />
-              <View
-                style={[
-                  styles.passwordStyle,
-                  { backgroundColor: passwordStrengthColor(3) },
-                ]}
-              />
-            </View>
-
-            <View style={styles.monthView}>
-              <View style={styles.rowView}>
-                <Text style={styles.birthMonthText}>birth month</Text>
-                <TouchableOpacity
-                  style={styles.touchableStyle}
-                  onPress={() => changeBirthVisibility(true)}>
-                  <Image source={Images.Infocircle} style={styles.infoIcon} />
-                </TouchableOpacity>
+            
+            <View style={{flexDirection:'row', width:"90%", marginTop:10, marginBottom:7}}>
+              <View style={styles.monthView}>
+                {/* <View style={styles.rowView}> */}
+                  <Text style={styles.birthMonthText}>birth month</Text>
+                  <TouchableOpacity
+                    style={styles.touchableStyle}
+                    onPress={() => changeBirthVisibility(true)}>
+                    <Image source={Images.Infocircle} style={styles.infoIcon} />
+                  </TouchableOpacity>
+                {/* </View> */}
               </View>
               <View style={styles.yearView}>
                 <Text style={styles.birthYearText}>birth year</Text>
               </View>
             </View>
-            <View style={styles.monthViewBottom}>
-              <Dropdown
-                optionList={month}
-                onSelect={value => {
-                  selectFillmonth(value);
-                }}
-                defaultButtonText={'select one'}
-                icon={Images.DropdownIcon}
-                helperText={birthMonthError}
-                value={birthMonth}
-                style={{ width: width * 0.48 }}
-              />
+            <View style={{flexDirection:'row'}}>
+              <View style={styles.monthViewBottom}>
+                <Dropdown
+                  optionList={month}
+                  onSelect={value => {
+                    selectFillmonth(value);
+                  }}
+                  defaultButtonText={'select one'}
+                  icon={Images.DropdownIcon}
+                  helperText={birthMonthError}
+                  value={birthMonth}
+                  style={{ width: width * 0.40 }}
+                />
+              </View>
               <View style={styles.yearDropdown}>
                 <Dropdown
                   optionList={years}
@@ -551,7 +475,7 @@ const Signup = ({ route, navigation }) => {
                     selectFillBirth(value);
                   }}
                   defaultButtonText={'select one'}
-                  style={{ width: width * 0.3 }}
+                  style={{ width: width * 0.40 }}
                   icon={Images.DropdownIcon}
                   helperText={birthYearError}
                   iconVisibleFill={true}
@@ -561,7 +485,6 @@ const Signup = ({ route, navigation }) => {
                 />
               </View>
             </View>
-
             <View style={styles.userName}>
               <Text style={styles.birthMonthText}>username</Text>
               <TouchableOpacity
@@ -724,24 +647,26 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   monthView: {
-    width: '90%',
+    width: '45%',
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignSelf: 'flex-start',
-    marginHorizontal: 20,
-    marginVertical: 3,
-    marginTop: height * 0.02,
+    // justifyContent: 'space-between',
+    // alignSelf: 'flex-start',
+    // marginHorizontal: 20,
+    // marginVertical: 3,
+    marginRight:7,
+    // marginTop: height * 0.02,
+    // backgroundColor:'green'
   },
   monthViewBottom: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     alignSelf: 'flex-start',
-    marginHorizontal: 19,
+    // marginHorizontal: 19,
   },
   rowView: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     paddingVertical: 4,
   },
   yearView: {

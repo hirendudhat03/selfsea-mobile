@@ -2,33 +2,39 @@ import auth from '@react-native-firebase/auth';
 import { api } from '../../services';
 import { call, put } from 'redux-saga/effects';
 import { createUserMutation } from '../../graphql/mutations/UserMutation';
-import { Alert } from 'react-native';
+import { Alert, Platform } from 'react-native';
 import { SignupResponse } from '../actions/SignupAction';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 export function* passwordlessSignupSaga(action) {
   const Signup = async (email, birthMonth, birthYear, userName) => {
     try {
-      // const response = await auth().signInWithCredential(email);
-      var tokens = await GoogleSignin.getTokens();
+      var token : any = '';
+      var response : any = '';
+      if(action.platform == "google"){
+        var tokens = await GoogleSignin.getTokens();
 
-      var credToken =
+        var credToken =
         action.userInfo.idToken !== null
           ? action.userInfo.idToken
           : tokens.accessToken;
-      const googleCredential = auth.GoogleAuthProvider.credential(credToken);
-
-      await auth().signInWithCredential(googleCredential);
-
-      const token = await response.user.getIdToken();
+        const googleCredential = auth.GoogleAuthProvider.credential(credToken);
+        response = await auth().signInWithCredential(googleCredential);
+        await response.user.sendEmailVerification();
+      }
+      
+      if(action.platform == "apple"){
+        token = action.token
+      }
+      
       api.setAuthHeader(token);
       console.log('token : ', token);
 
-      await response.user.sendEmailVerification();
+      // await response.user.sendEmailVerification();
 
       const mutationVariables = {
         email,
-        authId: response.user.uid,
+        authId: response?.user?.uid,
         birthMonth: birthMonth.toUpperCase(),
         birthYear: parseFloat(birthYear),
         username: userName,
@@ -39,6 +45,7 @@ export function* passwordlessSignupSaga(action) {
         mutationVariables,
       );
       console.log('data::', data);
+     
       action.navigation.navigate('DrawerNavigator');
       return { ...data, ...response };
     } catch (e: any) {
@@ -53,11 +60,11 @@ export function* passwordlessSignupSaga(action) {
         Alert.alert('That email address is invalid!');
       }
 
-      console.log(e.message);
+      console.log("MESG",e.message);
       // Alert.alert(e.message);
       return {
         error:
-          'this is an invalid email/password, please visit selfsea.org for more resources.',
+          'this is anssssss invalid email/password, please visit selfsea.org for more resources.',
       };
     }
   };

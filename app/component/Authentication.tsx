@@ -60,12 +60,24 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
       GoogleSignin.signIn()
         .then(async userInfo => {
           console.log(JSON.stringify(userInfo));
+          var tokens = await GoogleSignin.getTokens();
 
-          navigation.navigate('Signup', {
-            type: 'social',
-            email: userInfo.user.email,
-            userInfo: userInfo,
-          });
+          var credToken =
+          userInfo.idToken !== null
+            ? userInfo.idToken
+            : tokens.accessToken;
+          const googleCredential = auth.GoogleAuthProvider.credential(credToken);
+          var response = await auth().signInWithCredential(googleCredential);
+          if(response.additionalUserInfo?.isNewUser === false){
+            navigation.navigate('DrawerNavigator');
+          }else{
+            navigation.navigate('Signup', {
+              type: 'google',
+              email: userInfo.user.email,
+              userInfo: userInfo,
+            });
+          }
+
         })
         .catch(e => {
           console.log('ERROR IS: ' + e);
@@ -104,6 +116,99 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
     }
   };
 
+  const _signInApple = async () => {
+    if (Platform.OS === 'ios') {
+      const appleAuthRequestResponse = await appleAuth.performRequest({
+        requestedOperation: appleAuth.Operation.LOGIN,
+        requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+      });
+      // console.log('UserData', appleAuthRequestResponse);
+
+      await appleAuth.getCredentialStateForUser(
+        appleAuthRequestResponse.user,
+      );
+
+      if (!appleAuthRequestResponse.identityToken) {
+        throw 'Apple Sign-In failed - no identify token returned';
+      }
+
+      // Create a Firebase credential from the response
+      const { identityToken, nonce, email, fullName } = appleAuthRequestResponse;
+      auth.AppleAuthProvider.credential(identityToken, nonce);
+      const appleCredential = auth.AppleAuthProvider.credential(
+        identityToken,
+        nonce,
+      );
+      const credentials = await auth().signInWithCredential(appleCredential);
+      // console.log("iOS Response",response);
+      if(credentials.additionalUserInfo?.isNewUser === false){
+        navigation.navigate('DrawerNavigator');
+      }else{
+        navigation.navigate('Signup', {
+          type: 'apple',
+          email: email,
+          userInfo: { identityToken, nonce, email, fullName },
+          token: identityToken
+        });
+      }
+      // navigation.navigate('DrawerNavigator');
+      // navigation.navigate('Signup', {
+      //   type: 'apple',
+      //   email: email,
+      //   userInfo: { identityToken, nonce, email, fullName },
+      //   token: identityToken
+      // });
+    } else {
+
+      appleAuthAndroid.configure({
+        // The Service ID you registered with Apple
+        clientId: 'com.selfsea',
+
+        // Return URL added to your Apple dev console. We intercept this redirect, but it must still match
+        // the URL you provided to Apple. It can be an empty route on your backend as it's never called.
+        redirectUri: 'https://www.selfsea.org',
+
+        // The type of response requested - code, id_token, or both.
+        responseType: appleAuthAndroid.ResponseType.ALL,
+
+        // The amount of user information requested from Apple.
+        scope: appleAuthAndroid.Scope.ALL,
+
+        // Random nonce value that will be SHA256 hashed before sending to Apple.
+        nonce: rawNonce,
+
+        // Unique state value used to prevent CSRF attacks. A UUID will be generated if nothing is provided.
+        state,
+      });
+
+      // Open the browser window for user sign in
+      const response = await appleAuthAndroid.signIn();
+      // console.log("AppleRespo",response)
+      // console.log("anshuman",parseJwt(response.id_token));
+      
+      var userInfo = parseJwt(response.id_token);
+      let token = response.id_token
+      const appleCredential = auth.AppleAuthProvider.credential(
+        token,
+        response.nonce,
+      );
+      let credentials = await auth().signInWithCredential(appleCredential)
+      console.log("credentialsss",credentials);
+      if(credentials.additionalUserInfo?.isNewUser === false){
+        navigation.navigate('DrawerNavigator');
+      }else{
+        navigation.navigate('Signup', {
+          type: 'apple',
+          email: userInfo.email,
+          userInfo: userInfo,
+          token: response.id_token
+        });
+      }
+
+      
+    }
+  }
+
   function parseJwt(token) {
     let base64Url = token.split('.')[1];
     let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -125,82 +230,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
     } else if (type === Constant.authLogin.INSTAGRAM) {
       // instagramLogin.show();
     } else if (type === Constant.authLogin.APPLE) {
-      if (Platform.OS === 'ios') {
-        const appleAuthRequestResponse = await appleAuth.performRequest({
-          requestedOperation: appleAuth.Operation.LOGIN,
-          requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
-        });
-        // console.log('UserData', appleAuthRequestResponse);
-
-        await appleAuth.getCredentialStateForUser(
-          appleAuthRequestResponse.user,
-        );
-
-        if (!appleAuthRequestResponse.identityToken) {
-          throw 'Apple Sign-In failed - no identify token returned';
-        }
-
-        // Create a Firebase credential from the response
-        const { identityToken, nonce, email, fullName } =
-          appleAuthRequestResponse;
-        auth.AppleAuthProvider.credential(identityToken, nonce);
-        const appleCredential = auth.AppleAuthProvider.credential(
-          identityToken,
-          nonce,
-        );
-        auth().signInWithCredential(appleCredential);
-
-        navigation.navigate('DrawerNavigator');
-
-        // Alert.alert(parseJwt(identityToken).email, parseJwt(identityToken).sub);
-        // console.log('heraa', credentialState);
-        console.log('Apple Credentials', email, fullName);
-      } else {
-        console.log('scope', appleAuthAndroid.Scope);
-        appleAuthAndroid.configure({
-          // The Service ID you registered with Apple
-          clientId: 'com.selfsea',
-
-          // Return URL added to your Apple dev console. We intercept this redirect, but it must still match
-          // the URL you provided to Apple. It can be an empty route on your backend as it's never called.
-          redirectUri: 'https://www.selfsea.org',
-
-          // The type of response requested - code, id_token, or both.
-          responseType: appleAuthAndroid.ResponseType.ALL,
-
-          // The amount of user information requested from Apple.
-          scope: appleAuthAndroid.Scope.ALL,
-
-          // Random nonce value that will be SHA256 hashed before sending to Apple.
-          nonce: rawNonce,
-
-          // Unique state value used to prevent CSRF attacks. A UUID will be generated if nothing is provided.
-          state,
-        });
-
-        // Open the browser window for user sign in
-        const response = await appleAuthAndroid.signIn();
-        console.log(
-          'Apple Login Firebase',
-          response.id_token,
-          'NONCEEEE',
-          response.nonce,
-        );
-        // const appleCredential = auth.AppleAuthProvider.credential(response.id_token, response.nonce);
-        // auth().signInWithCredential(appleCredential);
-
-        navigation.navigate('DrawerNavigator');
-
-        // console.log(
-        //   'Android Apple Response',
-        //   response,
-        //   parseJwt(response.id_token),
-        // );
-        // Alert.alert(
-        //   parseJwt(response.id_token).email,
-        //   parseJwt(response.id_token).sub,
-        // );
-      }
+      _signInApple();
     }
   };
 
@@ -209,7 +239,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
       <Image style={styles.image} source={icon} />
       <Text style={styles.text}>{text}</Text>
 
-      <InstagramLogin
+      {/* <InstagramLogin
         ref={ref => (instagramLogin = ref)}
         appId="321916266462620"
         appSecret="106c0e7f22c7ec3f820e9522cb33d829"
@@ -220,7 +250,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
           Alert.alert('User Id', data.user_id + '');
         }}
         onLoginFailure={(data: any) => console.log('failure', data)}
-      />
+      /> */}
     </TouchableOpacity>
   );
 };

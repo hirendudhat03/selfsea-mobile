@@ -37,6 +37,7 @@ export function SignupRequestWithoutPassword(
   navigation,
   loader,
   userInfo,
+  platform
 ) {
   return {
     type: 'PASSWORDLESS_SIGNUP_REQUEST',
@@ -47,5 +48,6 @@ export function SignupRequestWithoutPassword(
     navigation: navigation,
     loader: loader,
     userInfo: userInfo,
+    platform:platform
   };
 }
