@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Image,
   ImageSourcePropType,
@@ -11,7 +11,7 @@ import Color from '../theme/colors';
 // @ts-ignore
 import {
   GoogleSignin,
-  statusCodes,
+  // statusCodes,
 } from '@react-native-google-signin/google-signin';
 import Constant from '../theme/constant';
 import InstagramLogin from 'react-native-instagram-login';
@@ -21,9 +21,8 @@ import {
 } from '@invertase/react-native-apple-authentication';
 import auth from '@react-native-firebase/auth';
 import 'react-native-get-random-values';
-import { v4 as uuid } from 'uuid';
-import { decode } from 'base-64';
-import Alert from './Alert';
+// import { v4 as uuid } from 'uuid';
+// import { decode } from 'base-64';
 
 interface Props {
   text: string;

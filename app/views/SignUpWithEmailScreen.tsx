@@ -9,6 +9,10 @@ import {
   Modal,
   KeyboardAvoidingView,
   Platform,
+<<<<<<< HEAD
+=======
+  Alert,
+>>>>>>> f8b0659539b2a8646dd84ca6c33f39129048452c
 } from 'react-native';
 
 import ModalPicker from './ModalPickerConfirm';
@@ -21,7 +25,7 @@ import Constant from '../theme/constant';
 import Images from '../theme/images';
 import Font from '../theme/fonts';
 import Color from '../theme/colors';
-import Dropdown from '../component/Dropdown';
+import BirthDateInput from '../component/BirthDateInput';
 
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -80,7 +84,18 @@ const birthnData = [
   },
 ];
 
+<<<<<<< HEAD
 const Signup = ({ route, navigation }) => {
+=======
+const ageData = [
+  {
+    title:
+      'sorry, but the selfsea communities feature is only available to young people between the ages of 13 and 18. check out our web-app for resources, and stories from young people who have been there www.selfsea.org.',
+  },
+];
+
+const Signup = ({ navigation }) => {
+>>>>>>> f8b0659539b2a8646dd84ca6c33f39129048452c
   const dispatch = useDispatch();
 
   const signupRes = useSelector(state => state.SignupReducer);
@@ -108,8 +123,17 @@ const Signup = ({ route, navigation }) => {
 
   useEffect(() => {
     if (signupRes.data) {
+<<<<<<< HEAD
       // console.log('signupRes.data if: ', signupRes.data);
       setEmailError(signupRes.data.error);
+=======
+      console.log('signupRes.data if: ', signupRes.data);
+      if (signupRes.data.errorname === 'email') {
+        setEmailError(signupRes.data.error);
+      } else {
+        setUserNameError(signupRes.data.error);
+      }
+>>>>>>> f8b0659539b2a8646dd84ca6c33f39129048452c
     } else {
       // console.log('signupRes.data : ', signupRes.data);
     }
@@ -125,10 +149,10 @@ const Signup = ({ route, navigation }) => {
   const [userNameError, setUserNameError] = useState<string>('0/20');
 
   const [birthMonth, setBirthMonth] = useState<string>('');
-  const [birthMonthError, setBirthMonthError] = useState<string>('');
+  // const [setBirthMonthError] = useState<string>('');
 
   const [birthYear, setBirthYear] = useState<string>('');
-  const [birthYearError, setBirthYearError] = useState<string>('');
+  // const [setBirthYearError] = useState<string>('');
 
   const [passwordScore, setPasswordScore] = useState<0 | 1 | 2 | 3 | 4>(0);
 
@@ -141,6 +165,52 @@ const Signup = ({ route, navigation }) => {
     }
   };
 
+  const countAge = () => {
+    console.log('===========================================');
+
+    var today = new Date();
+    console.log('today::', today);
+
+    var bodYear = new Date(birthYear);
+
+    var age = today.getFullYear() - bodYear;
+    console.log('age::===::', age);
+
+    var m = today.getMonth();
+    console.log('m::', m);
+
+    var setMonthIndex;
+
+    month.map((item, index) => {
+      console.log('i:', item);
+      console.log('index:', index);
+
+      if (birthMonth === item) {
+        setMonthIndex = index;
+        console.log('index are same : ', index);
+      }
+    });
+
+    if (age > 18 || (age === 18 && setMonthIndex < m)) {
+      changeAgeVisibility(true);
+    } else if (age < 13 || (age === 13 && setMonthIndex > m)) {
+      age--;
+      Alert.alert('your age is not between 13-18 years.');
+    } else {
+      dispatch(
+        SignupRequest(
+          email,
+          Password,
+          birthMonth,
+          birthYear,
+          userName,
+          navigation,
+        ),
+      );
+    }
+    console.log('age::', age);
+    return age;
+  };
   const [circleFillEmail, setCircleFillEmail] = useState<boolean>();
 
   const selectFill = (text: string) => {
@@ -219,7 +289,7 @@ const Signup = ({ route, navigation }) => {
     if (value === '' || birthMonth === '') {
       setCircleFillBirth(false);
     } else {
-      setBirthYearError(' ');
+      // setBirthYearError(' ');
       setCircleFillBirth(true);
     }
   };
@@ -228,7 +298,7 @@ const Signup = ({ route, navigation }) => {
     setBirthMonth(value);
 
     if (value === '' || birthYear === '') {
-      setBirthMonthError('');
+      // setBirthMonthError('');
       setCircleFillBirth(false);
     } else {
       setCircleFillBirth(true);
@@ -245,7 +315,13 @@ const Signup = ({ route, navigation }) => {
     setIsBirthVisiable(bool);
   };
 
+  const [isAgeValid, setIsAgeValid] = useState(false);
+  const changeAgeVisibility = (bool: boolean) => {
+    setIsAgeValid(bool);
+  };
+
   const SignupValidation = (text: string) => {
+<<<<<<< HEAD
     if (route.params === undefined) {
       if (
         !email &&
@@ -317,6 +393,34 @@ const Signup = ({ route, navigation }) => {
           ),
         );
       }
+=======
+    if (
+      !email &&
+      !Password &&
+      birthMonth === '' &&
+      birthYear === '' &&
+      !userName
+    ) {
+      setEmailError('Please enter email address.');
+      setPasswordError('Password must contain a number.');
+      setUserNameError(text.length + '/20');
+
+      setEmail('');
+      setUserName('');
+      setPassword('');
+    } else if (!email) {
+      setEmailError('Please enter email address.');
+    } else if (
+      email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/) === null
+    ) {
+      setEmailError('Please enter a valid email address.');
+    } else if (!Password) {
+      setPasswordError('Password must contain a number.');
+    } else if (!userName) {
+      setUserNameError(text.length + '/20');
+    } else {
+      countAge();
+>>>>>>> f8b0659539b2a8646dd84ca6c33f39129048452c
     }
   };
 
@@ -356,7 +460,11 @@ const Signup = ({ route, navigation }) => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : ''}
+<<<<<<< HEAD
       style={styles.flex1}>
+=======
+      style={styles.keyboardAvoidingStyle}>
+>>>>>>> f8b0659539b2a8646dd84ca6c33f39129048452c
       <View style={styles.container}>
         <Loader value={signupRes.loader} />
         <Header
@@ -454,6 +562,7 @@ const Signup = ({ route, navigation }) => {
                 <Text style={styles.birthYearText}>birth year</Text>
               </View>
             </View>
+<<<<<<< HEAD
             <View style={{flexDirection:'row'}}>
               <View style={styles.monthViewBottom}>
                 <Dropdown
@@ -485,6 +594,29 @@ const Signup = ({ route, navigation }) => {
                 />
               </View>
             </View>
+=======
+
+            <BirthDateInput
+              monthOptionList={month}
+              onSelectMonth={value => {
+                selectFillmonth(value);
+              }}
+              defaultMonthButtonText={'select one'}
+              monthValue={birthMonth}
+              monthStyle={{ width: width * 0.48 }}
+              yearOptionList={years}
+              onSelectYear={value => {
+                selectFillBirth(value);
+              }}
+              defaultYearButtonText={'select one'}
+              yearStyle={{ width: width * 0.31 }}
+              iconVisibleFill={true}
+              checkRight={true}
+              yearValue={birthYear}
+              circleFill={circleFillBirth}
+            />
+
+>>>>>>> f8b0659539b2a8646dd84ca6c33f39129048452c
             <View style={styles.userName}>
               <Text style={styles.birthMonthText}>username</Text>
               <TouchableOpacity
@@ -508,15 +640,22 @@ const Signup = ({ route, navigation }) => {
               onTouchStart={() => handleTouchusernameBorder()}
               borderColor={userNameBorder}
             />
-            <Text
-              style={[
-                styles.helperText,
-                userName.length > 20
-                  ? { color: Color.COMMUNITY_ORANGE }
-                  : { color: Color.BORDER_COLOR_LIGHTGRAY },
-              ]}>
-              {userNameError}
-            </Text>
+            {userNameError === 'this username is taken.' ? (
+              <Text
+                style={[styles.helperText, { color: Color.COMMUNITY_ORANGE }]}>
+                {userNameError}
+              </Text>
+            ) : (
+              <Text
+                style={[
+                  styles.helperText,
+                  userName.length > 20
+                    ? { color: Color.COMMUNITY_ORANGE }
+                    : { color: Color.BORDER_COLOR_LIGHTGRAY },
+                ]}>
+                {userNameError}
+              </Text>
+            )}
           </View>
         </ScrollView>
         <View style={styles.bottomView}>
@@ -598,6 +737,23 @@ const Signup = ({ route, navigation }) => {
             numberOfLines={3}
             button={Constant.buttons.CLOSE}
             text={'close'}
+          />
+        </Modal>
+        <Modal
+          transparent={false}
+          animationType="fade"
+          visible={isAgeValid}
+          onRequestClose={() => changeAgeVisibility(false)}>
+          <ModalPicker
+            changeModalVisibility={changeAgeVisibility}
+            type={Constant.modal.MODAL}
+            textTitle={'Mentee age more than 18'}
+            // smallText={'your age is not valid'}
+            descriptionData={ageData}
+            numberOfLines={6}
+            button={Constant.buttons.CLOSE}
+            text={'close'}
+            // onPress={() => navigation.navigate('Login')}
           />
         </Modal>
       </View>
@@ -751,6 +907,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  keyboardAvoidingStyle: {
+    flex: 1,
   },
 });
 export default Signup;

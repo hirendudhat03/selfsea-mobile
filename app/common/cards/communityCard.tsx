@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
 import Images from '../../theme/images';
-import { Theme } from '../../assets/styles';
+import { Theme } from '../../styles';
 import Alert from '../../component/Alert';
 import Constant from '../../theme/constant';
 import { useRoute } from '@react-navigation/native';

@@ -1,6 +1,6 @@
-import Color from '../../theme/colors';
+import Color from '../theme/colors';
 import { StyleSheet } from 'react-native';
-import Font from '../../theme/fonts';
+import Font from '../theme/fonts';
 export const theme = () => {
   return StyleSheet.create({
     width100p: {
@@ -19,7 +19,6 @@ export const theme = () => {
     },
     communityCardView: {
       paddingVertical: 12,
-      // flexDirection: 'row',
       borderRadius: 6,
       backgroundColor: Color.BASE_COLOR_WHITE,
       marginVertical: 5,

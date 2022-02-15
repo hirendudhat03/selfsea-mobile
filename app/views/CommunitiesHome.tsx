@@ -12,9 +12,11 @@ import Button from '../component/Button';
 
 import LinearGradient from 'react-native-linear-gradient';
 import { useDispatch, useSelector } from 'react-redux';
-// import { Theme } from '../assets/styles';
+import { Theme } from '../styles';
 import { HomeRequest } from '../redux/actions/HomeAction';
 import { AcceptRequest } from '../redux/actions/AcceptTermAction';
+
+// import Loader from '../component/Loader';
 
 const DATA = [{}, {}, {}, {}];
 
@@ -40,10 +42,9 @@ const descriptionData = [
   },
 ];
 
-const CommunitiesHome = () => {
+const CommunitiesHome = ({ navigation }) => {
   const [title, setTitle] = useState(null);
   const [content, setContent] = useState(null);
-  // const [hasAcceptedLatestTerms, setHasAcceptedLatestTerms] = useState(null);
   const [isModalVisible, setIsMoalVisiable] = useState(null);
 
   const dispatch = useDispatch();
@@ -53,7 +54,7 @@ const CommunitiesHome = () => {
 
   useEffect(() => {
     dispatch(HomeRequest());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (homeResponse.data) {
@@ -72,6 +73,8 @@ const CommunitiesHome = () => {
 
   const renderItem = () => (
     <View style={styles.viewStyle}>
+      {/* <Loader value={loginRes.loader} /> */}
+
       <View style={styles.imageView}>
         <Image source={Images.LogoTab} style={styles.iconStyle} />
       </View>
@@ -87,7 +90,7 @@ const CommunitiesHome = () => {
           type={Constant.buttons.CLOSE}
           text={'join'}
           style={styles.buttonStyle}
-          //onPress={() => dispatch(HomeRequest(navigation))}
+          onPress={() => dispatch(HomeRequest(navigation))}
         />
       </View>
     </View>

@@ -8,7 +8,7 @@ import Images from '../theme/images';
 
 import Button from '../component/Button';
 import Auth from '../component/Authentication';
-import TextInputCom from '../component/CustomTextInput';
+import TextInput from '../component/CustomTextInput';
 import CheckBox from '../component/Checkbox';
 import Header from '../component/Header';
 
@@ -17,8 +17,6 @@ import { LoginRequest } from '../redux/actions/LoginAction';
 
 import Loader from '../component/Loader';
 import { auths } from '../config/static';
-
-// import Loader from '../component/Loader';
 
 const Signin = ({ route, navigation }) => {
   const dispatch = useDispatch();
@@ -119,7 +117,7 @@ const Signin = ({ route, navigation }) => {
 
       <ScrollView>
         <View style={styles.contentView}>
-          <TextInputCom
+          <TextInput
             type={Constant.textInput.LARGE_INPUT}
             placeholder={'email@address.com'}
             label={'email'}
@@ -134,7 +132,7 @@ const Signin = ({ route, navigation }) => {
             borderColor={emailBorder}
           />
 
-          <TextInputCom
+          <TextInput
             type={Constant.textInput.LARGE_INPUT}
             label={'password'}
             style={styles.inputTextStyle}
@@ -178,11 +176,7 @@ const Signin = ({ route, navigation }) => {
             icon={Images.Google}
             type={Constant.authLogin.GOOGLE}
           />
-          {/* <Auth
-            text={'continue with Instagram'}
-            icon={Images.Instagram}
-            type={Constant.authLogin.INSTAGRAM}
-          /> */}
+
           <Auth
             text={'continue with Apple'}
             icon={Images.Apple}

@@ -10,6 +10,7 @@ import {
   TextInput,
   Modal,
   KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import ModalPicker from './ModalPickerConfirm';
 
@@ -25,9 +26,9 @@ import Badges from '../component/Badges';
 import { useDispatch, useSelector } from 'react-redux';
 import { CreateProfileRequest } from '../redux/actions/CreateProfileAction';
 
-import Loader from '../component/Loader';
+// import Loader from '../component/Loader';
 import { DropDownRequest } from '../redux/actions/MenuAction';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'react-native-axios';
 
 const height = Dimensions.get('window').height;
 
@@ -58,30 +59,37 @@ const CreateProfile = ({ navigation }) => {
         profile,
         selectPronounsDropDown,
         selectOrientationDropDown,
-        selectLocationDropDown,
-        selectRaceDropDown,
         selectGenderDropDown,
+        selectRaceDropDown,
+        selectLocationDropDown,
         navigation,
       ),
     );
   };
 
-  // const pronounsResponse = useSelector(state => state.PronounsReducer);
-  // console.log('ProunounsResponse::: ', JSON.stringify(pronounsResponse));
+  useEffect(() => {
+    console.log('menuResponse : ', menuResponse);
 
-  const sectionDispatch = () => {
-    dispatch(DropDownRequest());
-    // console.log({menuResponse})
-    setPronounsDropDown(menuResponse.pronouns);
-    setOrientationDropDown(menuResponse.orientations);
-    setGenderDropDown(menuResponse.genders);
-    setRaceDropDown(menuResponse.ethnicities);
-  };
+    if (menuResponse.pronouns !== null) {
+      setPronounsDropDown(menuResponse.pronouns);
+    }
+
+    if (menuResponse.orientations !== null) {
+      setOrientationDropDown(menuResponse.orientations);
+    }
+
+    if (menuResponse.genders !== null) {
+      setGenderDropDown(menuResponse.genders);
+    }
+
+    if (menuResponse.ethnicities !== null) {
+      setRaceDropDown(menuResponse.ethnicities);
+    }
+  }, [menuResponse]);
 
   useEffect(() => {
-    sectionDispatch();
-    AsyncStorage.setItem('currentUser_role', 'true');
-  }, []);
+    dispatch(DropDownRequest());
+  }, [dispatch]);
 
   const [profile, setProfile] = useState('');
 
@@ -91,14 +99,7 @@ const CreateProfile = ({ navigation }) => {
   };
 
   const [pronouns, setPronouns] = useState('');
-  const [pronounsDropDown, setPronounsDropDown] = useState([
-    { name: 'she/her/ella' },
-
-    { name: ' he/him/his' },
-    { name: 'they/them/theirs' },
-    { name: 'ze/hir/hirs' },
-    { name: 'ze/zir/zirs' },
-  ]);
+  const [pronounsDropDown, setPronounsDropDown] = useState([]);
   const [selectPronounsDropDown, setSelectPronounsDropDown] = useState([]);
 
   const clickDropDownItem = (item, val) => {
@@ -126,15 +127,7 @@ const CreateProfile = ({ navigation }) => {
   };
 
   const [orientation, setOrientation] = useState('');
-  const [orientationDropDown, setOrientationDropDown] = useState([
-    { name: 'gay/lesbian' },
-    { name: 'heterosexual/straight' },
-    { name: 'bisexual' },
-    { name: 'asexual' },
-    { name: 'pansexual' },
-    { name: 'queer' },
-    { name: 'something else' },
-  ]);
+  const [orientationDropDown, setOrientationDropDown] = useState([]);
   const [selectOrientationDropDown, setSelectOrientationDropDown] = useState(
     [],
   );
@@ -164,16 +157,7 @@ const CreateProfile = ({ navigation }) => {
   };
 
   const [gender, setGender] = useState('');
-  const [genderDropDown, setGenderDropDown] = useState([
-    { name: 'cisgender' },
-    { name: 'genderqueer' },
-    { name: 'gender non-binary' },
-    { name: 'gender fluid' },
-    { name: 'man/boy' },
-    { name: 'transgender' },
-    { name: 'woman/girl' },
-    { name: 'something else' },
-  ]);
+  const [genderDropDown, setGenderDropDown] = useState([]);
   const [selectGenderDropDown, setSelectGenderDropDown] = useState([]);
 
   const genderDropDownItem = (item, val) => {
@@ -201,23 +185,7 @@ const CreateProfile = ({ navigation }) => {
   };
 
   const [race, setRace] = useState('');
-  const [raceDropDown, setRaceDropDown] = useState([
-    { name: 'American Indian' },
-    { name: 'Mixed Race / Mixed Ethnicity' },
-    { name: 'Native American' },
-    { name: 'Alaska Native' },
-    { name: ' Asian or Asian American' },
-    { name: 'Black or African American' },
-    { name: 'Hispanic' },
-    { name: 'Latino' },
-    { name: 'Latina' },
-    { name: 'Latine' },
-    { name: 'Latinx' },
-    { name: 'Middle Eastern or North African' },
-    { name: 'Native Hawaiian or Pacific Islander' },
-    { name: 'White' },
-    { name: 'something else' },
-  ]);
+  const [raceDropDown, setRaceDropDown] = useState([]);
   const [selectRaceDropDown, setSelectRaceDropDown] = useState([]);
 
   const raceDropDownItem = (item, val) => {
@@ -245,11 +213,65 @@ const CreateProfile = ({ navigation }) => {
   };
 
   const [location, setLocation] = useState('');
-  const [locationDropDown, setLocationDropDown] = useState([
-    { name: '<city>' },
-    { name: '<state>' },
-  ]);
+  const [locationDropDown, setLocationDropDown] = useState([]);
   const [selectLocationDropDown, setSelectLocationDropDown] = useState([]);
+
+  const getLocationApi = val => {
+    setLocation(val);
+    console.log('fetchAddLatLog : ', val);
+    if (val !== '') {
+      console.log('value : ', val);
+      axios({
+        url:
+          'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' +
+          val +
+          '&key=AIzaSyDWJ8cC97oQYX2itSwNl1tb8Dr4T7P3AI4&sessiontoken=1234567890',
+        method: 'get',
+      })
+        .then(res => {
+          console.log('axios : ', val);
+          if (res.status === 200) {
+            console.log('res : ', res.data.predictions);
+            setLocationDropDown(res.data.predictions);
+          } else {
+            console.log('reselse : ', res);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    } else {
+      setLocationDropDown([]);
+    }
+  };
+
+  const locationDropDownItem = (item, val) => {
+    setLocation('');
+
+    if (val === 'add') {
+      var temp = selectLocationDropDown;
+      temp.push(item);
+      setSelectLocationDropDown([...temp]);
+      console.log('newDatatemp', temp);
+
+      const newData = locationDropDown.filter(
+        itemData => itemData.description !== item.description,
+      );
+      console.log('newData', newData);
+      setLocationDropDown([...newData]);
+    } else {
+      var temp = locationDropDown;
+      temp.push(item);
+      setLocationDropDown([...temp]);
+      console.log('temp', temp);
+
+      const temp1 = selectLocationDropDown.filter(
+        itemData => itemData.description !== item.description,
+      );
+      console.log('temp1', temp1);
+      setSelectLocationDropDown([...temp1]);
+    }
+  };
 
   const removeAllPronouns = () => {
     var temp = selectPronounsDropDown;
@@ -284,34 +306,9 @@ const CreateProfile = ({ navigation }) => {
 
     setLocationDropDown([...temp, ...locationDropDown]);
   };
-
-  const locationDropDownItem = (item, val) => {
-    setLocation('');
-
-    if (val === 'add') {
-      var temp = selectLocationDropDown;
-      temp.push(item);
-      setSelectLocationDropDown([...temp]);
-
-      const newData = locationDropDown.filter(
-        itemData => itemData.name !== item.name,
-      );
-      setLocationDropDown([...newData]);
-    } else {
-      var temp = locationDropDown;
-      temp.push(item);
-      setLocationDropDown([...temp]);
-
-      const temp1 = selectLocationDropDown.filter(
-        itemData => itemData.name !== item.name,
-      );
-      setSelectLocationDropDown([...temp1]);
-    }
-  };
-
   return (
     <View style={styles.container}>
-      <Loader value={menuResponse.loader} />
+      {/*{menuResponse.loader && <Loader value={menuResponse.loader} />}*/}
 
       <Header
         type={Constant.navigatioHeader.PAGE_HEADER}
@@ -319,7 +316,9 @@ const CreateProfile = ({ navigation }) => {
         label={'create your profile'}
         onPress={() => navigation.goBack()}
       />
-      <KeyboardAvoidingView style={styles.contentView} behavior={'padding'}>
+      <KeyboardAvoidingView
+        style={styles.contentView}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <ScrollView style={styles.scrollView}>
           <View style={styles.textViewStyle}>
             <Text
@@ -606,7 +605,7 @@ const CreateProfile = ({ navigation }) => {
                   return (
                     <Badges
                       type={Constant.badges.MULTISELECT}
-                      text={item.name}
+                      text={item.description}
                       rigthIcon={Images.Circle}
                       onPress={() => locationDropDownItem(item)}
                     />
@@ -621,8 +620,9 @@ const CreateProfile = ({ navigation }) => {
                       : 'type in a City or State'
                   }
                   onChangeText={
+                    // val => getLocationApi(val)
                     selectLocationDropDown.length < 1
-                      ? val => setLocation(val)
+                      ? val => getLocationApi(val)
                       : null
                   }
                 />
@@ -632,7 +632,7 @@ const CreateProfile = ({ navigation }) => {
                   onPress={() =>
                     selectLocationDropDown.length !== 0
                       ? removeAllLocation()
-                      : setLocation(' ')
+                      : setLocation('')
                   }
                   style={styles.touchableStyle}>
                   <Image
@@ -654,7 +654,7 @@ const CreateProfile = ({ navigation }) => {
                     <Text
                       onPress={() => locationDropDownItem(item, 'add')}
                       style={styles.menuTextStyle}>
-                      {item.name}
+                      {item.description}
                     </Text>
                   );
                 })}

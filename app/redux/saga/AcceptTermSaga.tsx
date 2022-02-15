@@ -17,7 +17,7 @@ export function* acceptSaga(action) {
       return data;
     } catch (e) {
       console.log(e);
-      Alert.alert(e);
+      Alert.alert('something went to wrong condition');
       return null;
     }
   };
@@ -25,7 +25,6 @@ export function* acceptSaga(action) {
   const response = yield call(Accept);
   console.warn('response saga', response);
 
-  // action.navigation.navigate('Communities');
   if (response === null) {
     yield put(AcceptResponse(null, false));
   } else {

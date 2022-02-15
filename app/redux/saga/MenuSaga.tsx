@@ -8,7 +8,6 @@ import {
   userEthnicityQuery,
 } from '../../graphql/queries/UserProfile';
 import { DropDownResponse } from '../actions/MenuAction';
-import { Alert } from 'react-native';
 
 export function* menuSaga(action) {
   const Pronouns = async () => {
@@ -21,7 +20,6 @@ export function* menuSaga(action) {
       return response;
     } catch (e) {
       console.log('e : ', e);
-      Alert.alert(e);
       return null;
     }
   };
@@ -35,7 +33,7 @@ export function* menuSaga(action) {
       return response;
     } catch (e) {
       console.log('e : ', e);
-      Alert.alert(e);
+      return null;
     }
   };
 
@@ -49,7 +47,7 @@ export function* menuSaga(action) {
       return response;
     } catch (e) {
       console.log('e : ', e);
-      Alert.alert(e);
+      return null;
     }
   };
   const Ethnicity = async () => {
@@ -62,7 +60,7 @@ export function* menuSaga(action) {
       return response;
     } catch (e) {
       console.log('e : ', e);
-      Alert.alert(e);
+      return null;
     }
   };
 

@@ -25,27 +25,31 @@ export function* loginSaga(action) {
 
       AsyncStorage.getItem('currentUser_role').then(value => {
         console.log('value:', value);
-        if (value === 'true') {
+        if (value === 'false') {
           const Getuser = async () => {
-            const data = await api.client.request(currentUserQuery);
-            console.log('data:', JSON.stringify(data));
+            try {
+              const data = await api.client.request(currentUserQuery);
+              console.log('data:', JSON.stringify(data));
 
-            if (data.currentUser.roles[0].name === 'MENTEE') {
-              action.navigation.navigate('DrawerNavigator');
-            }
-            if (data.currentUser.roles[0].name === 'MENTOR') {
-              action.navigation.navigate('DrawerNavigator');
-            }
-            if (data.currentUser.roles[0].name === 'MODERATOR') {
-              action.navigation.navigate('DrawerNavigator');
-            }
-            if (data.currentUser.roles[0].name === 'ADMIN') {
-              action.navigation.navigate('DrawerNavigator');
+              if (data.currentUser.roles[0].name === 'MENTEE') {
+                action.navigation.navigate('DrawerNavigator');
+              }
+              if (data.currentUser.roles[0].name === 'MENTOR') {
+                action.navigation.navigate('DrawerNavigator');
+              }
+              if (data.currentUser.roles[0].name === 'MODERATOR') {
+                action.navigation.navigate('DrawerNavigator');
+              }
+              if (data.currentUser.roles[0].name === 'ADMIN') {
+                action.navigation.navigate('DrawerNavigator');
+              }
+            } catch (e) {
+              Alert.alert('something went to wrong in currentuser');
             }
           };
           Getuser();
         } else {
-          action.navigation.navigate('DrawerNavigator');
+          action.navigation.navigate('CreateProfile');
         }
       });
       // } else {
@@ -75,7 +79,6 @@ export function* loginSaga(action) {
       }
 
       console.log('e : ', e);
-      // Alert.alert(e.message);
       return null;
     }
   };

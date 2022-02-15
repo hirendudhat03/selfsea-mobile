@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, SafeAreaView } from 'react-native';
 import Color from '../theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
-import { Theme } from '../assets/styles';
+import { Theme } from '../styles';
 
 const Bell = ({ navigation }) => {
   var theme = Theme();

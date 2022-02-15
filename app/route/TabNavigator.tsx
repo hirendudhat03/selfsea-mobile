@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Image, StyleSheet, Dimensions } from 'react-native';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-// import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createStackNavigator } from '@react-navigation/stack';
 import Images from '../theme/images';
 

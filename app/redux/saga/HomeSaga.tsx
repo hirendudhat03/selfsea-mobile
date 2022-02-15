@@ -19,16 +19,15 @@ export function* homeSaga(action) {
 
       return { ...response, ...currentUserData };
     } catch (e) {
-      console.log(e);
-      // Alert.alert(e);
+      console.log('e:', e);
+      Alert.alert('something went to wrong home Page');
       return null;
     }
   };
 
   const response = yield call(Home);
-  console.warn('response saga', response);
+  console.warn('Homeresponse saga', response);
 
-  // action.navigation.navigate('Communities');
   if (response === null) {
     yield put(HomeResponse(null, false));
   } else {

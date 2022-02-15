@@ -2,7 +2,7 @@ import React from 'react';
 import { View, ActivityIndicator, StyleSheet, Modal } from 'react-native';
 
 interface Props {
-  value: Boolean;
+  value: boolean;
 }
 
 const Loader = ({ value }: Props) => {
@@ -14,11 +14,9 @@ const Loader = ({ value }: Props) => {
       onRequestClose={() => {
         console.log('Modal has been closed.');
       }}>
-      {/* value ? ( */}
       <View style={styles.Container}>
         <ActivityIndicator size="large" color="black" />
       </View>
-      {/* ) : null */}
     </Modal>
   );
 };

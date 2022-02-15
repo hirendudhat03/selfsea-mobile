@@ -18,13 +18,13 @@ import Images from '../theme/images';
 
 import Button from '../component/Button';
 import Auth from '../component/Authentication';
-// import InstagramLogin from 'react-native-instagram-login';
 import { auths } from '../config/static';
-import { Theme } from '../assets/styles';
+import { Theme } from '../styles';
 import auth from '@react-native-firebase/auth';
 import { api } from '../services';
 import { SignupResponse } from '../redux/actions/SignupAction';
 import { useDispatch } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const onPressText = () => {
   Alert.alert('onPressText');
@@ -35,29 +35,19 @@ const Login = ({ navigation }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    auth().onAuthStateChanged(function (user) {
-      console.log('user : ', user);
-      if (user) {
-        const checkTokenFunction = async () => {
-          const idTokenResult = await auth().currentUser.getIdTokenResult();
-          api.setAuthHeader(idTokenResult.token);
-          console.log('User JWT: ', idTokenResult.token);
-
-          if (idTokenResult.token !== null) {
-            navigation.navigate('DrawerNavigator');
-          } else {
-            navigation.navigate('Login');
-          }
-        };
-
-        checkTokenFunction();
-
-        // User is signed in.
-      } else {
-        navigation.navigate('Login');
-        // No user is signed in.
+    const checkUser = async () => {
+      if (auth().currentUser) {
+        const idTokenResult = await auth().currentUser.getIdTokenResult();
+        api.setAuthHeader(idTokenResult.token);
+        console.log('User JWT: ', idTokenResult.token);
+        // if (idTokenResult.token) {
+        //   navigation.navigate('DrawerNavigator');
+        // } else {
+        //   navigation.navigate('Login');
+        // }
       }
-    });
+    };
+    checkUser();
   }, [navigation]);
 
   var theme = Theme();
@@ -71,7 +61,6 @@ const Login = ({ navigation }) => {
         resizeMode="stretch"
         style={styles.image}>
         <View style={styles.containerView}>
-          {/* <ScrollView > */}
           <View style={styles.headerView}>
             <Image source={Images.Logo} />
           </View>
@@ -82,28 +71,20 @@ const Login = ({ navigation }) => {
               type={Constant.authLogin.GOOGLE}
               navigation={navigation}
             />
-            {/* <Auth text={auths.CONTINUE_WITH_INSTA} icon={Images.Instagram} type={Constant.authLogin.INSTAGRAM} /> */}
             <Auth
               text={auths.CONTINUE_WITH_APPLE}
               icon={Images.Apple}
               type={Constant.authLogin.APPLE}
               navigation={navigation}
             />
-            {/* <InstagramLogin
-              ref={ref => (instagramLogin = ref)}
-              appId="321916266462620"
-              appSecret="106c0e7f22c7ec3f820e9522cb33d829"
-              redirectUrl="https://www.selfsea.org/"
-              scopes={['user_profile', 'user_media']}
-              onLoginSuccess={(data: any) => console.log('Login Success', data)}
-              onLoginFailure={(data: any) => console.log('failure', data)}
-            /> */}
+
             <Button
               type={Constant.buttons.PRIMARY}
               text={auths.SIGNUP_WITH_EMAIL}
               style={[theme.marginTop8]}
               onPress={() => {
                 dispatch(SignupResponse(null, false));
+                AsyncStorage.setItem('currentUser_role', 'true');
                 navigation.navigate('Signup');
               }}
             />
@@ -139,11 +120,13 @@ const Login = ({ navigation }) => {
               <Button
                 type={Constant.buttons.CLOSE}
                 text={auths.SIGNIN_BUTTON}
-                onPress={() => navigation.navigate('Signin')}
+                onPress={() => {
+                  AsyncStorage.setItem('currentUser_role', 'false');
+                  navigation.navigate('Signin');
+                }}
               />
             </View>
           </View>
-          {/* </ScrollView> */}
         </View>
       </ImageBackground>
     </SafeAreaView>
