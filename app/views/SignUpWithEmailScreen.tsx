@@ -127,10 +127,10 @@ const Signup = ({ navigation }) => {
   const [userNameError, setUserNameError] = useState<string>('0/20');
 
   const [birthMonth, setBirthMonth] = useState<string>('');
-  const [setBirthMonthError] = useState<string>('');
+  // const [setBirthMonthError] = useState<string>('');
 
   const [birthYear, setBirthYear] = useState<string>('');
-  const [setBirthYearError] = useState<string>('');
+  // const [setBirthYearError] = useState<string>('');
 
   const [passwordScore, setPasswordScore] = useState<0 | 1 | 2 | 3 | 4>(0);
 
@@ -267,7 +267,7 @@ const Signup = ({ navigation }) => {
     if (value === '' || birthMonth === '') {
       setCircleFillBirth(false);
     } else {
-      setBirthYearError(' ');
+      // setBirthYearError(' ');
       setCircleFillBirth(true);
     }
   };
@@ -276,7 +276,7 @@ const Signup = ({ navigation }) => {
     setBirthMonth(value);
 
     if (value === '' || birthYear === '') {
-      setBirthMonthError('');
+      // setBirthMonthError('');
       setCircleFillBirth(false);
     } else {
       setCircleFillBirth(true);
