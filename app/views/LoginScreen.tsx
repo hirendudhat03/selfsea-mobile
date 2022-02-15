@@ -47,7 +47,7 @@ const Login = ({ navigation }) => {
         // }
       }
     };
-    checkUser();
+    // checkUser();
   }, [navigation]);
 
   var theme = Theme();
