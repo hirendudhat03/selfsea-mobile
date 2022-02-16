@@ -51,7 +51,7 @@ export function* signupSaga(action) {
           }
         }
         return userName;
-      } catch (e: any) {
+      } catch (e) {
         console.log({ code: e.code });
         if (e.code === 'auth/email-already-in-use') {
           console.log('That email address is already in use!');
@@ -70,7 +70,7 @@ export function* signupSaga(action) {
             'this is an invalid email/password, please visit selfsea.org for more resources.',
         };
       }
-    } catch (e: any) {
+    } catch (e) {
       if (e.code === 'auth/email-already-in-use') {
         console.log('That email address is already in use!');
         Alert.alert('That email address is already in use!');

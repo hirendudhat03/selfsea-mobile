@@ -9,10 +9,7 @@ import {
   Modal,
   KeyboardAvoidingView,
   Platform,
-<<<<<<< HEAD
-=======
   Alert,
->>>>>>> f8b0659539b2a8646dd84ca6c33f39129048452c
 } from 'react-native';
 
 import ModalPicker from './ModalPickerConfirm';
@@ -84,9 +81,6 @@ const birthnData = [
   },
 ];
 
-<<<<<<< HEAD
-const Signup = ({ route, navigation }) => {
-=======
 const ageData = [
   {
     title:
@@ -94,16 +88,15 @@ const ageData = [
   },
 ];
 
-const Signup = ({ navigation }) => {
->>>>>>> f8b0659539b2a8646dd84ca6c33f39129048452c
+const Signup = ({ route, navigation }) => {
   const dispatch = useDispatch();
 
   const signupRes = useSelector(state => state.SignupReducer);
-  console.log('signupResReducer : ', JSON.stringify(signupRes));
+  // console.log('signupResReducer : ', JSON.stringify(signupRes));
 
   const [years, setYear] = useState<number[]>([]);
 
-  console.log('checkkkkkk', route.params);
+  // console.log('checkkkkkk', route.params);
 
   useEffect(() => {
     let year = [];
@@ -123,17 +116,12 @@ const Signup = ({ navigation }) => {
 
   useEffect(() => {
     if (signupRes.data) {
-<<<<<<< HEAD
       // console.log('signupRes.data if: ', signupRes.data);
-      setEmailError(signupRes.data.error);
-=======
-      console.log('signupRes.data if: ', signupRes.data);
       if (signupRes.data.errorname === 'email') {
         setEmailError(signupRes.data.error);
       } else {
         setUserNameError(signupRes.data.error);
       }
->>>>>>> f8b0659539b2a8646dd84ca6c33f39129048452c
     } else {
       // console.log('signupRes.data : ', signupRes.data);
     }
@@ -165,7 +153,7 @@ const Signup = ({ navigation }) => {
     }
   };
 
-  const countAge = () => {
+  const countAge = (isPasswordless:boolean) => {
     console.log('===========================================');
 
     var today = new Date();
@@ -197,16 +185,36 @@ const Signup = ({ navigation }) => {
       age--;
       Alert.alert('your age is not between 13-18 years.');
     } else {
-      dispatch(
-        SignupRequest(
-          email,
-          Password,
-          birthMonth,
-          birthYear,
-          userName,
-          navigation,
-        ),
-      );
+      if(isPasswordless === true){
+
+        console.log("PasswordLess UId",route.params.credentials.user.uid)
+
+        dispatch(
+          SignupRequestWithoutPassword(
+            email,
+            birthMonth,
+            birthYear,
+            userName,
+            navigation,
+            false,
+            route.params.userInfo,
+            route.params.type,
+            route.params.credentials.user.uid
+          ),
+        );
+      }else{
+        dispatch(
+          SignupRequest(
+            email,
+            Password,
+            birthMonth,
+            birthYear,
+            userName,
+            navigation,
+            false,
+          ),
+        );
+      }
     }
     console.log('age::', age);
     return age;
@@ -321,7 +329,6 @@ const Signup = ({ navigation }) => {
   };
 
   const SignupValidation = (text: string) => {
-<<<<<<< HEAD
     if (route.params === undefined) {
       if (
         !email &&
@@ -334,7 +341,7 @@ const Signup = ({ navigation }) => {
         route.params === undefined &&
           setPasswordError('Password must contain a number.');
         setUserNameError(text.length + '/20');
-
+  
         setEmail('');
         setUserName('');
         setPassword('');
@@ -351,24 +358,15 @@ const Signup = ({ navigation }) => {
         setUserNameError(text.length + '/20');
       } else {
         console.log('Here2');
-        dispatch(
-          SignupRequest(
-            email,
-            Password,
-            birthMonth,
-            birthYear,
-            userName,
-            navigation,
-            false,
-          ),
-        );
+        countAge(false);
+       
         navigation.navigate('CreateProfile');
       }
     } else {
       if (!email && birthMonth === '' && birthYear === '' && !userName) {
         setEmailError('Please enter email address.');
         setUserNameError(text.length + '/20');
-
+  
         setEmail('');
         setUserName('');
       } else if (!email) {
@@ -380,50 +378,10 @@ const Signup = ({ navigation }) => {
       } else if (!userName) {
         setUserNameError(text.length + '/20');
       } else {
-        dispatch(
-          SignupRequestWithoutPassword(
-            email,
-            birthMonth,
-            birthYear,
-            userName,
-            navigation,
-            false,
-            route.params.userInfo,
-            route.params.type
-          ),
-        );
+        countAge(true);
       }
-=======
-    if (
-      !email &&
-      !Password &&
-      birthMonth === '' &&
-      birthYear === '' &&
-      !userName
-    ) {
-      setEmailError('Please enter email address.');
-      setPasswordError('Password must contain a number.');
-      setUserNameError(text.length + '/20');
-
-      setEmail('');
-      setUserName('');
-      setPassword('');
-    } else if (!email) {
-      setEmailError('Please enter email address.');
-    } else if (
-      email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/) === null
-    ) {
-      setEmailError('Please enter a valid email address.');
-    } else if (!Password) {
-      setPasswordError('Password must contain a number.');
-    } else if (!userName) {
-      setUserNameError(text.length + '/20');
-    } else {
-      countAge();
->>>>>>> f8b0659539b2a8646dd84ca6c33f39129048452c
-    }
-  };
-
+    };
+  }
   const [emailBorder, setEmailBorder] = useState('');
   const handleTouch = () => {
     setEmailBorder(Color.BASE_COLOR_LIGHT_BLUE);
@@ -460,11 +418,7 @@ const Signup = ({ navigation }) => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : ''}
-<<<<<<< HEAD
-      style={styles.flex1}>
-=======
       style={styles.keyboardAvoidingStyle}>
->>>>>>> f8b0659539b2a8646dd84ca6c33f39129048452c
       <View style={styles.container}>
         <Loader value={signupRes.loader} />
         <Header
@@ -562,39 +516,6 @@ const Signup = ({ navigation }) => {
                 <Text style={styles.birthYearText}>birth year</Text>
               </View>
             </View>
-<<<<<<< HEAD
-            <View style={{flexDirection:'row'}}>
-              <View style={styles.monthViewBottom}>
-                <Dropdown
-                  optionList={month}
-                  onSelect={value => {
-                    selectFillmonth(value);
-                  }}
-                  defaultButtonText={'select one'}
-                  icon={Images.DropdownIcon}
-                  helperText={birthMonthError}
-                  value={birthMonth}
-                  style={{ width: width * 0.40 }}
-                />
-              </View>
-              <View style={styles.yearDropdown}>
-                <Dropdown
-                  optionList={years}
-                  onSelect={value => {
-                    selectFillBirth(value);
-                  }}
-                  defaultButtonText={'select one'}
-                  style={{ width: width * 0.40 }}
-                  icon={Images.DropdownIcon}
-                  helperText={birthYearError}
-                  iconVisibleFill={true}
-                  checkRight={true}
-                  value={birthYear}
-                  circleFill={circleFillBirth}
-                />
-              </View>
-            </View>
-=======
 
             <BirthDateInput
               monthOptionList={month}
@@ -616,7 +537,6 @@ const Signup = ({ navigation }) => {
               circleFill={circleFillBirth}
             />
 
->>>>>>> f8b0659539b2a8646dd84ca6c33f39129048452c
             <View style={styles.userName}>
               <Text style={styles.birthMonthText}>username</Text>
               <TouchableOpacity

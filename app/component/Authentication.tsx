@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   Image,
   ImageSourcePropType,
@@ -9,20 +9,17 @@ import {
 } from 'react-native';
 import Color from '../theme/colors';
 // @ts-ignore
-import {
-  GoogleSignin,
-  // statusCodes,
-} from '@react-native-google-signin/google-signin';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import Constant from '../theme/constant';
-import InstagramLogin from 'react-native-instagram-login';
+// import InstagramLogin from 'react-native-instagram-login';
 import {
   appleAuth,
   appleAuthAndroid,
 } from '@invertase/react-native-apple-authentication';
 import auth from '@react-native-firebase/auth';
 import 'react-native-get-random-values';
-// import { v4 as uuid } from 'uuid';
-// import { decode } from 'base-64';
+import { v4 as uuid } from 'uuid';
+import { decode } from 'base-64';
 
 interface Props {
   text: string;
@@ -35,30 +32,16 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
   // let instagramLogin = useRef();
   const rawNonce = uuid();
   const state = uuid();
-  // useEffect(() => {
-  //   GoogleSignin.configure({
-  //     // Mandatory method to call before calling signIn()
-  //     // scopes: ['https://www.googleapis.com/auth/drive.readonly'],
-  //     // Repleace with your webClientId
-  //     // Generated from Firebase console
-  //     webClientId:
-  //       '651815828852-ieos3aa4gougfirdnf52carf51q8v52v.apps.googleusercontent.com',
-  //   });
-  // }, []);
 
   const _signIn = async () => {
     console.log('handlePressGoogleLogin');
     GoogleSignin.configure({
-      // androidClientId: '',
-      // iosClientId: '880711382534-k6q6jmtatddtll7u9qfmn31cbc1ckav1.apps.googleusercontent.com',
-      webClientId:
-        '597759932954-hj037g8cqseqq6dpukg26752k305sqpl.apps.googleusercontent.com',
+      webClientId: '597759932954-hj037g8cqseqq6dpukg26752k305sqpl.apps.googleusercontent.com',
     });
 
     try {
       GoogleSignin.signIn()
         .then(async userInfo => {
-          console.log(JSON.stringify(userInfo));
           var tokens = await GoogleSignin.getTokens();
 
           var credToken =
@@ -68,7 +51,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
           const googleCredential = auth.GoogleAuthProvider.credential(credToken);
           var response = await auth().signInWithCredential(googleCredential);
           if(response.additionalUserInfo?.isNewUser === false){
-            navigation.navigate('DrawerNavigator');
+            navigation.replace('DrawerNavigator');
           }else{
             navigation.navigate('Signup', {
               type: 'google',
@@ -101,7 +84,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
           }
         });
     } catch (error: any) {
-      console.error('Message', JSON.stringify(error));
+      // console.error('Message', JSON.stringify(error));
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         Alert.alert('User Cancelled the Login Flow');
       } else if (error.code === statusCodes.IN_PROGRESS) {
@@ -109,7 +92,6 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
         Alert.alert('Play Services Not Available or Outdated');
       } else {
-        console.log('YO ke hai');
         Alert.alert(error.message);
       }
     }
@@ -121,7 +103,6 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
         requestedOperation: appleAuth.Operation.LOGIN,
         requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
       });
-      // console.log('UserData', appleAuthRequestResponse);
 
       await appleAuth.getCredentialStateForUser(
         appleAuthRequestResponse.user,
@@ -139,24 +120,18 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
         nonce,
       );
       const credentials = await auth().signInWithCredential(appleCredential);
-      // console.log("iOS Response",response);
+      
       if(credentials.additionalUserInfo?.isNewUser === false){
-        navigation.navigate('DrawerNavigator');
+        navigation.replace('DrawerNavigator');
       }else{
         navigation.navigate('Signup', {
           type: 'apple',
           email: email,
-          userInfo: { identityToken, nonce, email, fullName },
-          token: identityToken
+          userInfo: { identityToken, nonce, email, fullName},
+          token: identityToken,
+          credentials: credentials
         });
       }
-      // navigation.navigate('DrawerNavigator');
-      // navigation.navigate('Signup', {
-      //   type: 'apple',
-      //   email: email,
-      //   userInfo: { identityToken, nonce, email, fullName },
-      //   token: identityToken
-      // });
     } else {
 
       appleAuthAndroid.configure({
@@ -182,8 +157,6 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
 
       // Open the browser window for user sign in
       const response = await appleAuthAndroid.signIn();
-      // console.log("AppleRespo",response)
-      // console.log("anshuman",parseJwt(response.id_token));
       
       var userInfo = parseJwt(response.id_token);
       let token = response.id_token
@@ -192,15 +165,17 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
         response.nonce,
       );
       let credentials = await auth().signInWithCredential(appleCredential)
-      console.log("credentialsss",credentials);
+      await credentials.user.sendEmailVerification();
+      
       if(credentials.additionalUserInfo?.isNewUser === false){
-        navigation.navigate('DrawerNavigator');
+        navigation.replace('DrawerNavigator');
       }else{
         navigation.navigate('Signup', {
           type: 'apple',
           email: userInfo.email,
           userInfo: userInfo,
-          token: response.id_token
+          token: response.id_token,
+          credentials: credentials
         });
       }
 

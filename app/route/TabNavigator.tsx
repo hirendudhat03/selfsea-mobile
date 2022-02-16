@@ -36,10 +36,10 @@ const HomeStack = createStackNavigator();
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator
-      headerMode={'none'}
       screenOptions={{
         gestureEnabled: true,
         gestureDirection: 'horizontal',
+        headerShown: false
       }}
       initialRouteName={screenNames.CommunitiesHome}>
       <HomeStack.Screen

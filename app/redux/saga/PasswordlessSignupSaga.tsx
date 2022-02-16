@@ -28,13 +28,14 @@ export function* passwordlessSignupSaga(action) {
       }
       
       api.setAuthHeader(token);
-      console.log('token : ', token);
+      // console.log('token : ', token);
 
       // await response.user.sendEmailVerification();
+      console.log("Action", action.uid);
 
       const mutationVariables = {
         email,
-        authId: response?.user?.uid,
+        authId: action.platform == "apple"?action.uid:response?.user?.uid,
         birthMonth: birthMonth.toUpperCase(),
         birthYear: parseFloat(birthYear),
         username: userName,
