@@ -172,15 +172,16 @@ const Signin = ({ route, navigation }) => {
         <View style={styles.bottomView}>
           <Text style={styles.bottomText}>or</Text>
           <Auth
-            text={'continue with Google'}
+            text={auths.CONTINUE_WITH_GOOGLE}
             icon={Images.Google}
             type={Constant.authLogin.GOOGLE}
+            navigation={navigation}
           />
-
           <Auth
-            text={'continue with Apple'}
+            text={auths.CONTINUE_WITH_APPLE}
             icon={Images.Apple}
             type={Constant.authLogin.APPLE}
+            navigation={navigation}
           />
         </View>
       </ScrollView>
