@@ -247,7 +247,6 @@ const Signup = ({ route, navigation }) => {
   };
 
   const [circleFillPassword, setCircleFillPassword] = useState<boolean>();
-
   const selectFillPassword = (text: string) => {
     console.log('text:::', text);
 
