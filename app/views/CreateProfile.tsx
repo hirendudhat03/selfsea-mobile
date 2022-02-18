@@ -103,7 +103,7 @@ const CreateProfile = ({ navigation }) => {
     ApiResponse[]
   >([]);
 
-  const clickDropDownItem = (item: ApiResponse, val) => {
+  const clickDropDownItem = (item: ApiResponse, val?: string) => {
     setPronouns('');
 
     if (val === 'add') {
@@ -330,7 +330,6 @@ const CreateProfile = ({ navigation }) => {
               optionList={countries}
               onSelect={value => setProfile(value)}
               defaultButtonText={'visible to everyone'}
-              icon={Images.DropdownIcon}
               rowTextStyle={styles.rowTextStyle}
             />
 

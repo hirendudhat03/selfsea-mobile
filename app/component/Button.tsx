@@ -12,13 +12,13 @@ import Constant from '../theme/constant';
 import Font from '../theme/fonts';
 
 interface Props {
-  type: string;
+  type?: string;
   text?: string;
   icon?: ImageSourcePropType;
   disabled?: boolean;
   onPress?: () => void;
-  textStyle: {};
-  style: {};
+  textStyle?: {};
+  style?: {};
 }
 
 const Button = ({

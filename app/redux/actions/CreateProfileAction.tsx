@@ -16,7 +16,7 @@ export function CreateProfileRequest(
   selectRaceDropDown,
   selectLocationDropDown,
   navigation,
-  loader,
+  loader?,
 ) {
   return {
     type: 'CREATE_PROFILE_REQUEST',
