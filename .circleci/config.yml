@@ -119,7 +119,7 @@ jobs:
               bundle exec fastlane submit_build
             else
               bundle exec fastlane build_development
-              mv app/build/outputs/bundle/debug/app-debug.aab /tmp/artifacts
+              mv app/build/outputs/apk/debug/app-debug.apk /tmp/artifacts
             fi
       - store_artifacts:
           path: /tmp/artifacts
