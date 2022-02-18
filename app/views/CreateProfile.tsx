@@ -12,7 +12,10 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
+import { Prediction } from '../types/location';
+import { ApiResponse } from '../types/ProfileApiResponse';
 import ModalPicker from './ModalPickerConfirm';
+import Config from 'react-native-config';
 
 import Constant from '../theme/constant';
 import Font from '../theme/fonts';
@@ -26,7 +29,6 @@ import Badges from '../component/Badges';
 import { useDispatch, useSelector } from 'react-redux';
 import { CreateProfileRequest } from '../redux/actions/CreateProfileAction';
 
-// import Loader from '../component/Loader';
 import { DropDownRequest } from '../redux/actions/MenuAction';
 import axios from 'react-native-axios';
 
@@ -51,7 +53,6 @@ const descriptionData = [
 const CreateProfile = ({ navigation }) => {
   const dispatch = useDispatch();
   const menuResponse = useSelector(state => state.MenuReducer);
-  console.log('MenuReducer : ', JSON.stringify(menuResponse));
 
   const onPressDispatch = () => {
     dispatch(
@@ -68,8 +69,6 @@ const CreateProfile = ({ navigation }) => {
   };
 
   useEffect(() => {
-    console.log('menuResponse : ', menuResponse);
-
     if (menuResponse.pronouns !== null) {
       setPronounsDropDown(menuResponse.pronouns);
     }
@@ -99,26 +98,23 @@ const CreateProfile = ({ navigation }) => {
   };
 
   const [pronouns, setPronouns] = useState('');
-  const [pronounsDropDown, setPronounsDropDown] = useState([]);
-  const [selectPronounsDropDown, setSelectPronounsDropDown] = useState([]);
+  const [pronounsDropDown, setPronounsDropDown] = useState<ApiResponse[]>([]);
+  const [selectPronounsDropDown, setSelectPronounsDropDown] = useState<
+    ApiResponse[]
+  >([]);
 
-  const clickDropDownItem = (item, val) => {
+  const clickDropDownItem = (item: ApiResponse, val) => {
     setPronouns('');
 
     if (val === 'add') {
-      var temp = selectPronounsDropDown;
-      temp.push(item);
-      setSelectPronounsDropDown([...temp]);
+      setSelectPronounsDropDown([...selectPronounsDropDown, item]);
 
       const newData = pronounsDropDown.filter(
         itemdata => itemdata.name !== item.name,
       );
       setPronounsDropDown([...newData]);
     } else {
-      var temp = pronounsDropDown;
-      temp.push(item);
-      setPronounsDropDown([...temp]);
-
+      setPronounsDropDown([...pronounsDropDown, item]);
       const temp1 = selectPronounsDropDown.filter(
         itemdata => itemdata.name !== item.name,
       );
@@ -127,27 +123,25 @@ const CreateProfile = ({ navigation }) => {
   };
 
   const [orientation, setOrientation] = useState('');
-  const [orientationDropDown, setOrientationDropDown] = useState([]);
-  const [selectOrientationDropDown, setSelectOrientationDropDown] = useState(
+  const [orientationDropDown, setOrientationDropDown] = useState<ApiResponse[]>(
     [],
   );
+  const [selectOrientationDropDown, setSelectOrientationDropDown] = useState<
+    ApiResponse[]
+  >([]);
 
-  const orientationDropDownItem = (item, val) => {
+  const orientationDropDownItem = (item: ApiResponse, val?: string) => {
     setOrientation('');
 
     if (val === 'add') {
-      var temp = selectOrientationDropDown;
-      temp.push(item);
-      setSelectOrientationDropDown([...temp]);
+      setSelectOrientationDropDown([...selectOrientationDropDown, item]);
 
       const newData = orientationDropDown.filter(
         itemData => itemData.name !== item.name,
       );
       setOrientationDropDown([...newData]);
     } else {
-      var temp = orientationDropDown;
-      temp.push(item);
-      setOrientationDropDown([...temp]);
+      setOrientationDropDown([...orientationDropDown, item]);
 
       const temp1 = selectOrientationDropDown.filter(
         itemData => itemData.name !== item.name,
@@ -157,25 +151,23 @@ const CreateProfile = ({ navigation }) => {
   };
 
   const [gender, setGender] = useState('');
-  const [genderDropDown, setGenderDropDown] = useState([]);
-  const [selectGenderDropDown, setSelectGenderDropDown] = useState([]);
+  const [genderDropDown, setGenderDropDown] = useState<ApiResponse[]>([]);
+  const [selectGenderDropDown, setSelectGenderDropDown] = useState<
+    ApiResponse[]
+  >([]);
 
-  const genderDropDownItem = (item, val) => {
+  const genderDropDownItem = (item: ApiResponse, val?: string) => {
     setGender('');
 
     if (val === 'add') {
-      var temp = selectGenderDropDown;
-      temp.push(item);
-      setSelectGenderDropDown([...temp]);
+      setSelectGenderDropDown([...selectGenderDropDown, item]);
 
       const newData = genderDropDown.filter(
         itemData => itemData.name !== item.name,
       );
       setGenderDropDown([...newData]);
     } else {
-      var temp = genderDropDown;
-      temp.push(item);
-      setGenderDropDown([...temp]);
+      setGenderDropDown([...genderDropDown, item]);
 
       const temp1 = selectGenderDropDown.filter(
         itemData => itemData.name !== item.name,
@@ -185,25 +177,23 @@ const CreateProfile = ({ navigation }) => {
   };
 
   const [race, setRace] = useState('');
-  const [raceDropDown, setRaceDropDown] = useState([]);
-  const [selectRaceDropDown, setSelectRaceDropDown] = useState([]);
+  const [raceDropDown, setRaceDropDown] = useState<ApiResponse[]>([]);
+  const [selectRaceDropDown, setSelectRaceDropDown] = useState<ApiResponse[]>(
+    [],
+  );
 
-  const raceDropDownItem = (item, val) => {
+  const raceDropDownItem = (item: ApiResponse, val?: string) => {
     setRace('');
 
     if (val === 'add') {
-      var temp = selectRaceDropDown;
-      temp.push(item);
-      setSelectRaceDropDown([...temp]);
+      setSelectRaceDropDown([...selectRaceDropDown, item]);
 
       const newData = raceDropDown.filter(
         itemData => itemData.name !== item.name,
       );
       setRaceDropDown([...newData]);
     } else {
-      var temp = raceDropDown;
-      temp.push(item);
-      setRaceDropDown([...temp]);
+      setRaceDropDown([...raceDropDown, item]);
 
       const temp1 = selectRaceDropDown.filter(
         itemData => itemData.name !== item.name,
@@ -213,8 +203,10 @@ const CreateProfile = ({ navigation }) => {
   };
 
   const [location, setLocation] = useState('');
-  const [locationDropDown, setLocationDropDown] = useState([]);
-  const [selectLocationDropDown, setSelectLocationDropDown] = useState([]);
+  const [locationDropDown, setLocationDropDown] = useState<Prediction[]>([]);
+  const [selectLocationDropDown, setSelectLocationDropDown] = useState<
+    Prediction[]
+  >([]);
 
   const getLocationApi = val => {
     setLocation(val);
@@ -225,7 +217,7 @@ const CreateProfile = ({ navigation }) => {
         url:
           'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' +
           val +
-          '&key=AIzaSyDWJ8cC97oQYX2itSwNl1tb8Dr4T7P3AI4&sessiontoken=1234567890',
+          `&key=${Config.PLACES_API_KEY}&sessiontoken=${Config.SESSION_TOKEN}`,
         method: 'get',
       })
         .then(res => {
@@ -245,14 +237,11 @@ const CreateProfile = ({ navigation }) => {
     }
   };
 
-  const locationDropDownItem = (item, val) => {
+  const locationDropDownItem = (item: Prediction, val?: string) => {
     setLocation('');
 
     if (val === 'add') {
-      var temp = selectLocationDropDown;
-      temp.push(item);
-      setSelectLocationDropDown([...temp]);
-      console.log('newDatatemp', temp);
+      setSelectLocationDropDown([...selectLocationDropDown, item]);
 
       const newData = locationDropDown.filter(
         itemData => itemData.description !== item.description,
@@ -260,11 +249,7 @@ const CreateProfile = ({ navigation }) => {
       console.log('newData', newData);
       setLocationDropDown([...newData]);
     } else {
-      var temp = locationDropDown;
-      temp.push(item);
-      setLocationDropDown([...temp]);
-      console.log('temp', temp);
-
+      setLocationDropDown([...locationDropDown, item]);
       const temp1 = selectLocationDropDown.filter(
         itemData => itemData.description !== item.description,
       );
@@ -669,25 +654,7 @@ const CreateProfile = ({ navigation }) => {
           onPress={() => onPressDispatch()}
           type={Constant.buttons.PRIMARY}
           text={'take me to selfsea'}
-          style={[
-            styles.buttonStyle,
-            // selectPronounsDropDown.length === 0 ||
-            // selectOrientationDropDown.length === 0 ||
-            // selectGenderDropDown.length === 0 ||
-            // selectRaceDropDown.length === 0 ||
-            // selectLocationDropDown.length === 0
-            //   ? { backgroundColor: Color.BUTTON_DISABLE_COLOR }
-            //   : { backgroundColor: Color.BASE_COLOR_ORANGE },
-          ]}
-          // disabled={
-          //   selectPronounsDropDown.length === 0 ||
-          //   selectOrientationDropDown.length === 0 ||
-          //   selectGenderDropDown.length === 0 ||
-          //   selectRaceDropDown.length === 0 ||
-          //   selectLocationDropDown.length === 0
-          //     ? true
-          //     : false
-          // }
+          style={[styles.buttonStyle]}
         />
       </View>
 

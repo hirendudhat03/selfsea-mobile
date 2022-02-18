@@ -2,6 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { api } from '../../services';
+import { CurrentUserApi } from '../../types/CurrentUserApi';
 import { LoginResponse } from '../actions/LoginAction';
 
 import { currentUserQuery } from '../../graphql/queries/UserProfile';
@@ -28,9 +29,9 @@ export function* loginSaga(action) {
         if (value === 'false') {
           const Getuser = async () => {
             try {
-              const data = await api.client.request(currentUserQuery);
-              console.log('data:', JSON.stringify(data));
-
+              const data = await api.client.request<CurrentUserApi>(
+                currentUserQuery,
+              );
               if (data.currentUser.roles[0].name === 'MENTEE') {
                 action.navigation.navigate('DrawerNavigator');
               }

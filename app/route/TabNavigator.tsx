@@ -6,9 +6,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Images from '../theme/images';
 
 import CommunitiesHome from '../views/CommunitiesHome';
-import Bell from '../views/Bell';
+import Notifications from '../views/Notifications';
 import Book from '../views/Book';
-import Person from '../views/Person';
+import Profile from '../views/Profile';
 import TabScreen from '../views/TabScreen';
 
 import Color from '../theme/colors';
@@ -94,7 +94,7 @@ const BottomTabNavigator = () => {
       />
       <Tab.Screen
         name="Bell"
-        component={Bell}
+        component={Notifications}
         options={{
           headerShown: false,
           tabBarLabel: () => {
@@ -141,7 +141,7 @@ const BottomTabNavigator = () => {
       />
       <Tab.Screen
         name="Person"
-        component={Person}
+        component={Profile}
         options={{
           headerShown: false,
           tabBarLabel: () => {

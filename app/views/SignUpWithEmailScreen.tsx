@@ -9,8 +9,9 @@ import {
   Modal,
   KeyboardAvoidingView,
   Platform,
-  Alert,
 } from 'react-native';
+import PasswordInputStrength from '../component/PasswordInputStrength';
+import { availableMonths, useCalculateAge } from '../hooks/calculate-ages';
 
 import ModalPicker from './ModalPickerConfirm';
 
@@ -34,21 +35,6 @@ const zxcvbn = require('zxcvbn');
 
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
-
-const month = [
-  'january',
-  'february',
-  'march',
-  'april',
-  'may',
-  'june',
-  'july',
-  'august',
-  'september',
-  'october',
-  'november',
-  'december',
-];
 
 const descriptionData = [
   {
@@ -132,6 +118,8 @@ const Signup = ({ navigation }) => {
   const [birthYear, setBirthYear] = useState<string>('');
   // const [setBirthYearError] = useState<string>('');
 
+  const userAge = useCalculateAge(birthYear, birthMonth);
+
   const [passwordScore, setPasswordScore] = useState<0 | 1 | 2 | 3 | 4>(0);
 
   const [focus, setFocus] = useState<boolean>(true);
@@ -144,36 +132,8 @@ const Signup = ({ navigation }) => {
   };
 
   const countAge = () => {
-    console.log('===========================================');
-
-    var today = new Date();
-    console.log('today::', today);
-
-    var bodYear = new Date(birthYear);
-
-    var age = today.getFullYear() - bodYear;
-    console.log('age::===::', age);
-
-    var m = today.getMonth();
-    console.log('m::', m);
-
-    var setMonthIndex;
-
-    month.map((item, index) => {
-      console.log('i:', item);
-      console.log('index:', index);
-
-      if (birthMonth === item) {
-        setMonthIndex = index;
-        console.log('index are same : ', index);
-      }
-    });
-
-    if (age > 18 || (age === 18 && setMonthIndex < m)) {
+    if (userAge === null || userAge < 13 || userAge > 18) {
       changeAgeVisibility(true);
-    } else if (age < 13 || (age === 13 && setMonthIndex > m)) {
-      age--;
-      Alert.alert('your age is not between 13-18 years.');
     } else {
       dispatch(
         SignupRequest(
@@ -186,8 +146,6 @@ const Signup = ({ navigation }) => {
         ),
       );
     }
-    console.log('age::', age);
-    return age;
   };
   const [circleFillEmail, setCircleFillEmail] = useState<boolean>();
 
@@ -342,25 +300,6 @@ const Signup = ({ navigation }) => {
     setUserNameBorder(Color.BASE_COLOR_LIGHT_BLUE);
   };
 
-  const passwordStrengthColor = (barNumber: number) => {
-    if (Password === '') {
-      return Color.PASSWORD_NORMAL_COLOR;
-    }
-    if (passwordScore <= 1 && barNumber === 0) {
-      return Color.BORDER_COLOR_WARNING;
-    }
-    if (passwordScore > 1 && passwordScore < 3 && barNumber <= 1) {
-      return Color.BASE_COLOR_ORANGE;
-    }
-    if (passwordScore === 3 && barNumber <= 2) {
-      return Color.BASE_COLOR_ORANGE;
-    }
-    if (passwordScore > 3 && barNumber <= 3) {
-      return Color.BASE_COLOR_GREEN;
-    }
-    return Color.PASSWORD_NORMAL_COLOR;
-  };
-
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : ''}
@@ -416,29 +355,9 @@ const Signup = ({ navigation }) => {
               borderColor={passwordBorder}
             />
             <View style={styles.viewStyle}>
-              <View
-                style={[
-                  styles.passwordStyle,
-                  { backgroundColor: passwordStrengthColor(0) },
-                ]}
-              />
-              <View
-                style={[
-                  styles.passwordStyle,
-                  { backgroundColor: passwordStrengthColor(1) },
-                ]}
-              />
-              <View
-                style={[
-                  styles.passwordStyle,
-                  { backgroundColor: passwordStrengthColor(2) },
-                ]}
-              />
-              <View
-                style={[
-                  styles.passwordStyle,
-                  { backgroundColor: passwordStrengthColor(3) },
-                ]}
+              <PasswordInputStrength
+                passwordScore={passwordScore}
+                password={Password}
               />
             </View>
 
@@ -457,7 +376,7 @@ const Signup = ({ navigation }) => {
             </View>
 
             <BirthDateInput
-              monthOptionList={month}
+              monthOptionList={availableMonths}
               onSelectMonth={value => {
                 selectFillmonth(value);
               }}

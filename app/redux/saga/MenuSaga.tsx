@@ -7,15 +7,21 @@ import {
   userGenderQuery,
   userEthnicityQuery,
 } from '../../graphql/queries/UserProfile';
+import {
+  Ethnicity,
+  Genders,
+  Orientations,
+  Pronouns,
+} from '../../types/ProfileApiResponse';
 import { DropDownResponse } from '../actions/MenuAction';
 
 export function* menuSaga(action) {
-  const Pronouns = async () => {
+  const getPronounces = async () => {
     console.log('call pronounsSaga : ', action);
 
     try {
-      const response = await api.client.request(userPronounsQuery);
-      console.log('response:', response);
+      const response = await api.client.request<Pronouns>(userPronounsQuery);
+      console.log('response.data:', response.pronouns);
 
       return response;
     } catch (e) {
@@ -23,11 +29,13 @@ export function* menuSaga(action) {
       return null;
     }
   };
-  const Orientation = async () => {
+  const getOrientations = async () => {
     console.log('call orientationSaga : ', action);
 
     try {
-      const response = await api.client.request(userOrientationQuery);
+      const response = await api.client.request<Orientations>(
+        userOrientationQuery,
+      );
       console.log('response:', response);
 
       return response;
@@ -37,11 +45,11 @@ export function* menuSaga(action) {
     }
   };
 
-  const Gender = async () => {
+  const getGenders = async () => {
     console.log('call genderSaga : ', action);
 
     try {
-      const response = await api.client.request(userGenderQuery);
+      const response = await api.client.request<Genders>(userGenderQuery);
       console.log('response:', response);
 
       return response;
@@ -50,11 +58,11 @@ export function* menuSaga(action) {
       return null;
     }
   };
-  const Ethnicity = async () => {
+  const getEthnicities = async () => {
     console.log('call ethnicitySaga : ', action);
 
     try {
-      const response = await api.client.request(userEthnicityQuery);
+      const response = await api.client.request<Ethnicity>(userEthnicityQuery);
       console.log('response:', response);
 
       return response;
@@ -65,10 +73,10 @@ export function* menuSaga(action) {
   };
 
   const response = yield all({
-    Pronouns: call(Pronouns),
-    Orientation: call(Orientation),
-    Gender: call(Gender),
-    Ethnicity: call(Ethnicity),
+    Pronouns: call(getPronounces),
+    Orientation: call(getOrientations),
+    Gender: call(getGenders),
+    Ethnicity: call(getEthnicities),
   });
 
   console.warn('dropdown saga', response);

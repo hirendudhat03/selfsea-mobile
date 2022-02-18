@@ -4,7 +4,7 @@ import Color from '../theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
 import { Theme } from '../styles';
 
-const Person = ({ navigation }) => {
+const Notifications = ({ navigation }) => {
   var theme = Theme();
   console.log(navigation);
   return (
@@ -14,11 +14,11 @@ const Person = ({ navigation }) => {
         style={theme.linearGradientHeader}>
         <View style={theme.contentView}>
           <View style={theme.blankViewStyle}>
-            <Text style={theme.textStyle}>Profiles WIP.</Text>
+            <Text style={theme.textStyle}>there are no notifications yet</Text>
           </View>
         </View>
       </LinearGradient>
     </SafeAreaView>
   );
 };
-export default Person;
+export default Notifications;

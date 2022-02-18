@@ -4,7 +4,7 @@ import Color from '../theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
 import { Theme } from '../styles';
 
-const Bell = ({ navigation }) => {
+const Profile = ({ navigation }) => {
   var theme = Theme();
   console.log(navigation);
   return (
@@ -14,11 +14,11 @@ const Bell = ({ navigation }) => {
         style={theme.linearGradientHeader}>
         <View style={theme.contentView}>
           <View style={theme.blankViewStyle}>
-            <Text style={theme.textStyle}>There is no notifications yet.</Text>
+            <Text style={theme.textStyle}>Profiles WIP.</Text>
           </View>
         </View>
       </LinearGradient>
     </SafeAreaView>
   );
 };
-export default Bell;
+export default Profile;

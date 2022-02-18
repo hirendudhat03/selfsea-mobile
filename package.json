@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
+    "android-release": "react-native run-android --variant=release",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "develop": "run-p \"codegen --watch\" start",
@@ -40,7 +41,6 @@
     "react-native-get-random-values": "^1.7.2",
     "react-native-instagram-login": "^2.0.5",
     "react-native-linear-gradient": "^2.5.6",
-    "react-native-pager-view": "^5.4.9",
     "react-native-pager-view": "^5.4.9",
     "react-native-password-strength-meter": "^0.0.5",
     "react-native-reanimated": "^2.3.1",
