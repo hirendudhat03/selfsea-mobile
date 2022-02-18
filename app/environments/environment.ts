@@ -1,10 +1,10 @@
 import { production } from './environment.production';
 import { staging } from './environment.staging';
+import Config from 'react-native-config';
 
 const development = {
   production: false,
-  graphqlBaseUrl:
-    'http://selfseastagingapi-env.eba-zspdnj8e.us-west-2.elasticbeanstalk.com/graphql',
+  graphqlBaseUrl: Config.API_URL + '/graphql',
   graphqlTimeoutMs: 10000,
 };
 

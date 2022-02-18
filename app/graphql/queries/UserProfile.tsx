@@ -42,6 +42,11 @@ export const currentUserQuery = gql`
       id
       authId
       email
+      hasAcceptedLatestTerms
+      roles {
+        id
+        name
+      }
       profile {
         id
         bio
@@ -58,6 +63,25 @@ export const currentUserQuery = gql`
           name
         }
       }
+    }
+  }
+`;
+
+export const currentTermsAndConditionsQuery = gql`
+  query currentTermsAndConditions {
+    currentTermsAndConditions {
+      id
+      title
+      content
+      version
+    }
+  }
+`;
+
+export const isUsernameValidQuery = gql`
+  query isUsernameValid($username: String!) {
+    isUsernameValid(username: $username) {
+      isValid
     }
   }
 `;

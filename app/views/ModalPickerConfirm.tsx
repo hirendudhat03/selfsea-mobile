@@ -10,18 +10,20 @@ import Button from '../component/Button';
 interface Props {
   changeModalVisibility: (bool: boolean) => void;
   textTitle: string;
-  smallText: string;
-  smallTextParagraph: string;
-  firstText: string;
-  secondText: string;
+  smallText?: string;
+  smallTextParagraph?: string;
+  firstText?: string;
+  secondText?: string;
   type: string;
   text: string;
   descriptionData: [];
   numberOfLines: number;
   style?: {};
   button: String;
-  secondType: string;
-  firstType: string;
+  secondType?: string;
+  firstType?: string;
+  onPress?: () => void;
+  onPressPrimary?: () => void;
 }
 
 const ModalPicker = ({
@@ -39,6 +41,8 @@ const ModalPicker = ({
   style,
   secondType,
   firstType,
+  onPress,
+  onPressPrimary,
 }: Props) => {
   return (
     <>
@@ -48,7 +52,7 @@ const ModalPicker = ({
             <Text style={styles.textTitle}>{textTitle}</Text>
             <Text
               style={styles.smallText}
-              numberOfLines={5}
+              numberOfLines={7}
               ellipsizeMode="middle">
               {smallText}
             </Text>
@@ -65,13 +69,13 @@ const ModalPicker = ({
                 type={firstType}
                 text={firstText}
                 style={styles.closeButtonStyle}
-                onPress={() => changeModalVisibility(false)}
+                onPress={onPress || changeModalVisibility}
               />
               <Button
                 type={secondType}
                 text={secondText}
                 style={styles.primaryButtonStyle}
-                onPress={() => changeModalVisibility(false)}
+                onPress={onPressPrimary || changeModalVisibility}
               />
             </View>
           </View>
@@ -104,7 +108,7 @@ const ModalPicker = ({
               type={button}
               text={text}
               style={styles.buttonStyle}
-              onPress={() => changeModalVisibility(false)}
+              onPress={onPress || changeModalVisibility}
             />
           </View>
         </View>
@@ -120,7 +124,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
     paddingHorizontal: 30,
-    // opacity: -8,
   },
   modal: {
     backgroundColor: Color.BASE_COLOR_WHITE,

@@ -14,22 +14,19 @@ const ForgotPassword = ({ navigation }) => {
   const [email, setEmail] = useState(null);
   const [emailError, setEmailError] = useState('');
 
-  const [circleFillEmail, setCircleFillEmail] = useState<boolean>();
-
   const selectFill = text => {
     setEmail(text);
     if (text === '') {
-      setCircleFillEmail(false);
       setEmailBorder(Color.COMMUNITY_ORANGE);
       setEmailError('Please enter email address. ');
     } else if (
-      text.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/) === null
+      text.match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      ) === null
     ) {
       setEmailBorder(Color.COMMUNITY_ORANGE);
-      setEmailError('Please enter a valid email address. ');
-      setCircleFillEmail(false);
+      setEmailError('please enter a valid email address ');
     } else {
-      setCircleFillEmail(true);
       setEmailBorder(Color.BORDER_COLOR_LIGHTGRAY);
       setEmailError('');
     }
@@ -62,7 +59,6 @@ const ForgotPassword = ({ navigation }) => {
             }}
             value={email}
             helperText={emailError}
-            circleFill={circleFillEmail}
             onTouchStart={() => handleTouch()}
             borderColor={emailBorder}
             viewStyle={styles.inputViewStyle}
@@ -76,6 +72,7 @@ const ForgotPassword = ({ navigation }) => {
           text={'send password reset email'}
           style={styles.buttonStyle}
           onPress={() => navigation.navigate('CreateNewPassword')}
+          disabled={!email || emailError !== '' ? true : false}
         />
       </View>
     </View>
@@ -112,7 +109,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   contentInputView: {
-    flex: 1,
+    flex: 0.9,
     justifyContent: 'center',
     marginHorizontal: 20,
   },

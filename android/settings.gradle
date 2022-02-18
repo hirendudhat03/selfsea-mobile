@@ -1,4 +1,8 @@
 rootProject.name = 'SelfseaMobile'
+include ':react-native-config'
+project(':react-native-config').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-config/android')
+include ':react-native-ffmpeg'
+project(':react-native-ffmpeg').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-ffmpeg/android')
 include ':@react-native-async-storage_async-storage'
 project(':@react-native-async-storage_async-storage').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-async-storage/async-storage/android')
 include ':react-native-linear-gradient'
@@ -10,3 +14,4 @@ project(':react-native-reanimated').projectDir = new File(rootProject.projectDir
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 include ':app'
 
+  

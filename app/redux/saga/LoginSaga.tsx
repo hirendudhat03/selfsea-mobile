@@ -2,6 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { api } from '../../services';
+import { CurrentUserApi } from '../../types/CurrentUserApi';
 import { LoginResponse } from '../actions/LoginAction';
 
 import { currentUserQuery } from '../../graphql/queries/UserProfile';
@@ -16,24 +17,46 @@ export function* loginSaga(action) {
 
     try {
       const response = await auth().signInWithEmailAndPassword(email, password);
-      if (response.user.emailVerified) {
-        const token = await response.user.getIdToken();
-        console.log('token : ', token);
-        await AsyncStorage.setItem('jwtToken', token);
-        api.setAuthHeader(token);
 
-        const data = await api.client.request(currentUserQuery);
-        if (data.currentUser === null) {
-          action.navigation.navigate('CreateProfile');
+      // if (response.user.emailVerified) {
+      const token = await response.user.getIdToken();
+      console.log('token : ', token);
+      await AsyncStorage.setItem('jwtToken', token);
+      api.setAuthHeader(token);
+
+      AsyncStorage.getItem('currentUser_role').then(value => {
+        console.log('value:', value);
+        if (value === 'false') {
+          const Getuser = async () => {
+            try {
+              const data = await api.client.request<CurrentUserApi>(
+                currentUserQuery,
+              );
+              if (data.currentUser.roles[0].name === 'MENTEE') {
+                action.navigation.navigate('DrawerNavigator');
+              }
+              if (data.currentUser.roles[0].name === 'MENTOR') {
+                action.navigation.navigate('DrawerNavigator');
+              }
+              if (data.currentUser.roles[0].name === 'MODERATOR') {
+                action.navigation.navigate('DrawerNavigator');
+              }
+              if (data.currentUser.roles[0].name === 'ADMIN') {
+                action.navigation.navigate('DrawerNavigator');
+              }
+            } catch (e) {
+              Alert.alert('something went to wrong in currentuser');
+            }
+          };
+          Getuser();
         } else {
-          action.navigation.navigate('DrawerNavigator');
+          action.navigation.navigate('CreateProfile');
         }
-        console.log('data:', data);
-        return data;
-      } else {
-        console.log('not verified');
-        Alert.alert('not verified');
-      }
+      });
+      // } else {
+      //   console.log('not verified');
+      //   Alert.alert('not verified');
+      // }
 
       return response;
     } catch (e) {
@@ -57,7 +80,6 @@ export function* loginSaga(action) {
       }
 
       console.log('e : ', e);
-      Alert.alert(e);
       return null;
     }
   };

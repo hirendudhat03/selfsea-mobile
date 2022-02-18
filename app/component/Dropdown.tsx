@@ -13,12 +13,12 @@ interface OptionListType {
 interface Props {
   defaultButtonText: string;
   onSelect: (item: string, index: number) => void;
-  optionList: OptionListType[];
+  optionList: OptionListType[] | string[];
   style?: {};
   rowTextStyle?: {};
   checkRight?: boolean;
-  circleFill: string;
-  value: string;
+  circleFill?: string;
+  value?: string;
   iconVisibleFill?: boolean;
 }
 

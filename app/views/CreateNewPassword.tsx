@@ -158,8 +158,10 @@ const CreateNewPassword = ({ navigation }) => {
           smallText={
             'if there is an account associated with the email you entered, an email has been sent with a password reset email. please check your spam forlder. if you do not receive the email within in 24 hours, click the re-send password reset email button below.'
           }
-          button={Constant.buttons.CLOSE}
+          firstType={Constant.buttons.CLOSE}
           firstText={'close'}
+          onPress={() => navigation.navigate('Login')}
+          secondType={Constant.buttons.PRIMARY}
           secondText={'re-send email'}
           type={Constant.modal.MODAL_SUCCESS}
         />

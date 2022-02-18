@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  // ActivityIndicator,
-  // Modal,
-} from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import Constant from '../theme/constant';
 import Fonts from '../theme/fonts';
@@ -22,12 +15,13 @@ import Header from '../component/Header';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginRequest } from '../redux/actions/LoginAction';
 
-// import Loader from '../component/Loader';
+import Loader from '../component/Loader';
+import { auths } from '../config/static';
 
 const Signin = ({ navigation }) => {
   const dispatch = useDispatch();
-  const loginRes = useSelector(state => state.LoginReducer);
 
+  const loginRes = useSelector(state => state.LoginReducer);
   console.log('LoginReducer : ', JSON.stringify(loginRes));
 
   const [isSelectedCheckBox, setISSelectionCheckBox] = useState(false);
@@ -40,7 +34,7 @@ const Signin = ({ navigation }) => {
     }
   };
 
-  const [focus, setFocus] = useState<boolean>();
+  const [focus, setFocus] = useState<boolean>(true);
 
   const selectFocus = () => {
     if (focus) {
@@ -54,12 +48,12 @@ const Signin = ({ navigation }) => {
     setEmail(text);
     if (text === '') {
       setEmailBorder(Color.COMMUNITY_ORANGE);
-      setEmailError('Please enter email address. ');
+      setEmailError('please enter email address. ');
     } else if (
       text.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/) === null
     ) {
       setEmailBorder(Color.COMMUNITY_ORANGE);
-      setEmailError('Please enter a valid email address. ');
+      setEmailError('please enter a valid email address. ');
     } else {
       setEmailBorder(Color.BORDER_COLOR_LIGHTGRAY);
       setEmailError('');
@@ -71,7 +65,7 @@ const Signin = ({ navigation }) => {
     setPassword(text);
     if (text === '') {
       setpasswordBorder(Color.COMMUNITY_ORANGE);
-      setPasswordError('Password must contain a number. ');
+      setPasswordError('password must contain a number. ');
     } else {
       setpasswordBorder(Color.BORDER_COLOR_LIGHTGRAY);
       setPasswordError(' ');
@@ -106,13 +100,13 @@ const Signin = ({ navigation }) => {
     } else if (!password) {
       setPasswordError('Password Required');
     } else {
-      dispatch(LoginRequest(email, password, navigation, true));
+      dispatch(LoginRequest(email, password, navigation));
     }
   };
 
   return (
     <View style={styles.container}>
-      {/* <Loader value={loginRes.loader} /> */}
+      <Loader value={loginRes.loader} />
 
       <Header
         type={Constant.navigatioHeader.PAGE_HEADER}
@@ -120,6 +114,7 @@ const Signin = ({ navigation }) => {
         label={'sign in'}
         onPress={() => navigation.goBack()}
       />
+
       <ScrollView>
         <View style={styles.contentView}>
           <TextInput
@@ -153,10 +148,11 @@ const Signin = ({ navigation }) => {
             onTouchStart={() => handleTouchpasswordBorder()}
             borderColor={passwordBorder}
           />
+
           <Text
             style={styles.contentText}
             onPress={() => navigation.navigate('ForgotPassword')}>
-            forgot your password?{' '}
+            forgot your password?
           </Text>
           <CheckBox
             onPressCheckbox={selectCheckBox}
@@ -167,27 +163,22 @@ const Signin = ({ navigation }) => {
 
           <Button
             type={Constant.buttons.PRIMARY}
-            text={'sign in'}
+            text={auths.SIGNIN_BUTTON}
             style={styles.buttonStyle}
             onPress={() => SigninValidation()}
           />
-
           <View style={styles.bottomContentStyle} />
         </View>
         <View style={styles.bottomView}>
           <Text style={styles.bottomText}>or</Text>
           <Auth
-            text={'Continue with Google'}
+            text={'continue with Google'}
             icon={Images.Google}
             type={Constant.authLogin.GOOGLE}
           />
+
           <Auth
-            text={'Continue with Instagram'}
-            icon={Images.Instagram}
-            type={Constant.authLogin.INSTAGRAM}
-          />
-          <Auth
-            text={'Continue with Apple'}
+            text={'continue with Apple'}
             icon={Images.Apple}
             type={Constant.authLogin.APPLE}
           />
@@ -241,7 +232,15 @@ const styles = StyleSheet.create({
   },
   inputTextStyle: { fontSize: 18 },
   buttonStyle: { marginTop: 10, marginBottom: 10 },
-  bottomContentStyle: { flexDirection: 'row' },
+  bottomContentStyle: {
+    flexDirection: 'row',
+  },
+  containerLoader: {
+    flex: 1,
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 
 export default Signin;

@@ -16,9 +16,8 @@ const stackNavigator = () => {
   const Stack = createStackNavigator();
 
   return (
-    //initRoute && (
-
-    <Stack.Navigator initialRouteName="Login">
+    // initRoute && (
+    <Stack.Navigator initialRouteName={'Login'}>
       <Stack.Screen
         name="Home"
         component={Home}
