@@ -1,8 +1,10 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Image } from 'react-native';
 import Color from '../theme/colors';
 import Constant from '../theme/constant';
 import Font from '../theme/fonts';
+import Images from '../theme/images';
+import { Theme } from '../styles';
 
 interface Props {
   type: string;
@@ -10,6 +12,7 @@ interface Props {
 }
 
 const Alert = ({ type, text }: Props) => {
+  var theme = Theme();
   return (
     <View
       style={
@@ -25,22 +28,40 @@ const Alert = ({ type, text }: Props) => {
           ? styles.actionInfoView
           : null
       }>
-      <Text
-        style={
-          type === Constant.alert.MENTOR
-            ? styles.mentorText
-            : type === Constant.alert.URGENT
-            ? styles.modUrgentText
-            : type === Constant.alert.WARNING
-            ? styles.modWarningText
-            : type === Constant.alert.SUCCESS
-            ? styles.actionSuccessText
-            : type === Constant.alert.INFO
-            ? styles.actionInfoText
-            : null
-        }>
-        {text}
-      </Text>
+      <View style={[theme.row]}>
+        <View
+          style={[
+            type === Constant.alert.MENTEE ||
+            type === Constant.alert.MENTEE_FADE
+              ? theme.width90p
+              : theme.width100p,
+          ]}>
+          <Text
+            style={
+              type === Constant.alert.MENTOR
+                ? styles.mentorText
+                : type === Constant.alert.URGENT
+                ? styles.modUrgentText
+                : type === Constant.alert.WARNING
+                ? styles.modWarningText
+                : type === Constant.alert.MENTEE_FADE
+                ? styles.actionFadeText
+                : type === Constant.alert.SUCCESS
+                ? styles.actionSuccessText
+                : type === Constant.alert.INFO
+                ? styles.actionInfoText
+                : null
+            }>
+            {text}
+          </Text>
+        </View>
+        {(type === Constant.alert.MENTEE ||
+          type === Constant.alert.MENTEE_FADE) && (
+          <View style={[styles.touchableStyle, theme.width10p]}>
+            <Image source={Images.Infocircle} />
+          </View>
+        )}
+      </View>
     </View>
   );
 };
@@ -113,6 +134,27 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingLeft: 15,
   },
+  actionMenteeView: {
+    paddingVertical: 10,
+    borderRadius: 4,
+    backgroundColor: Color.BASE_COLOR_DARK_SUCCESS,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: Color.BORDER_COLOR_SUCCESS,
+    justifyContent: 'center',
+    paddingLeft: 15,
+  },
+  actionRemoveMenteeView: {
+    paddingVertical: 10,
+    borderRadius: 4,
+    backgroundColor: Color.BORDER_COLOR_GRAY,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: Color.BORDER_COLOR_SUCCESS,
+    justifyContent: 'center',
+    paddingLeft: 15,
+    textAlign: 'center',
+  },
   actionSuccessText: {
     fontFamily: 'HelveticaNeue',
     fontSize: 16,
@@ -140,6 +182,10 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     letterSpacing: 0,
     color: Color.BASE_COLOR_DARK_INFOTEXT,
+  },
+  touchableStyle: {
+    justifyContent: 'center',
+    flex: 1,
   },
 });
 

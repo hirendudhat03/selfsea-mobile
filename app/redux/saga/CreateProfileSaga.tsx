@@ -1,6 +1,6 @@
 import { put, call } from 'redux-saga/effects';
 
-import * as CreateProfileAction from '../actions/CreateProfileAction';
+import { CreateProfileResponse } from '../actions/CreateProfileAction';
 
 import { api } from '../../services';
 import { updateProfileMutation } from '../../graphql/mutations/UserMutation';
@@ -27,17 +27,23 @@ export function* createProfileSaga(action) {
     try {
       const mutationVariables = {
         isPrivate: true,
-        location: 'xyz',
-        bio: 'abc',
+        location: selectLocationDropDown[0].description,
+        bio: 'required',
+        pronouns: selectPronounsDropDown,
+        orientations: selectOrientationDropDown,
+        genders: selectGenderDropDown,
+        ethnicities: selectRaceDropDown,
       };
       const data = await api.client.request(
         updateProfileMutation,
         mutationVariables,
       );
+      console.log('create profile data : ', JSON.stringify(data));
       return { ...data, ...response };
     } catch (e) {
       console.log(e);
-      Alert.alert(e);
+      Alert.alert('something went wrong while creating your profile');
+      return null;
     }
   };
 
@@ -51,11 +57,15 @@ export function* createProfileSaga(action) {
     action.selectLocationDropDown,
   );
 
-  if (response === undefined) {
+  if (response === null) {
   } else {
-    action.navigation.navigate('TabNavigator');
+    action.navigation.navigate('DrawerNavigator');
   }
 
-  console.warn('response saga', response);
-  yield put(CreateProfileAction.CreateProfileResponse(response));
+  console.warn('createProfile response saga', JSON.stringify(response));
+  if (response === null) {
+    yield put(CreateProfileResponse(null, false));
+  } else {
+    yield put(CreateProfileResponse(response, false));
+  }
 }

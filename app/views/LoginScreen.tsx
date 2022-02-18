@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
   Linking,
+  SafeAreaView,
   Alert,
 } from 'react-native';
 
@@ -17,77 +18,106 @@ import Images from '../theme/images';
 
 import Button from '../component/Button';
 import Auth from '../component/Authentication';
+import { auths } from '../config/static';
+import { Theme } from '../styles';
+import { SignupResponse } from '../redux/actions/SignupAction';
+import { useDispatch } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const onPressText = () => {
   Alert.alert('onPressText');
 };
 
 const Login = ({ navigation }) => {
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  // below function will be useful when we will work on the remember sign in
+  // const checkUser = async () => {
+  //   if (auth().currentUser) {
+  //     const idTokenResult = await auth().currentUser.getIdTokenResult();
+  //     api.setAuthHeader(idTokenResult.token);
+  //     console.log('User JWT: ', idTokenResult.token);
+  //   }
+  // };
+  // }, [navigation]);
+
+  var theme = Theme();
+
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ImageBackground
         source={Images.Background}
         resizeMode="stretch"
         style={styles.image}>
-        <View style={styles.headerView}>
-          <Image source={Images.Logo} />
-        </View>
-        <View style={styles.contentView}>
-          <Auth
-            text={'continue with Google'}
-            icon={Images.Google}
-            type={Constant.authLogin.GOOGLE}
-          />
-          <Auth
-            text={'continue with Instagram'}
-            icon={Images.Instagram}
-            type={Constant.authLogin.INSTAGRAM}
-          />
-          <Auth
-            text={'continue with Apple'}
-            icon={Images.Apple}
-            type={Constant.authLogin.APPLE}
-          />
+        <View style={styles.containerView}>
+          <View style={styles.headerView}>
+            <Image source={Images.Logo} />
+          </View>
+          <View style={styles.contentView}>
+            <Auth
+              text={auths.CONTINUE_WITH_GOOGLE}
+              icon={Images.Google}
+              type={Constant.authLogin.GOOGLE}
+            />
+            <Auth
+              text={auths.CONTINUE_WITH_APPLE}
+              icon={Images.Apple}
+              type={Constant.authLogin.APPLE}
+            />
 
-          <Button
-            type={Constant.buttons.PRIMARY}
-            text={'sign up with email'}
-            style={styles.buttonStyle}
-            onPress={() => navigation.navigate('Signup')}
-          />
-
-          <Text style={styles.contentText}>
-            by signing up for selfsea, you are agreeing to the
-          </Text>
-          <View style={styles.conditionViewStyle}>
-            <TouchableOpacity
+            <Button
+              type={Constant.buttons.PRIMARY}
+              text={auths.SIGNUP_WITH_EMAIL}
+              style={[theme.marginTop8]}
               onPress={() => {
-                Linking.openURL(Constant.link.PRIVACY_POLICY);
-              }}>
-              <Text style={styles.contentSecondText}>Privacy Policy</Text>
-            </TouchableOpacity>
-            <Text style={styles.contentSecondTextAnd}> and</Text>
-            <TouchableOpacity
-              onPress={() => {
-                Linking.openURL(Constant.link.TERMS_OF_USE);
-              }}>
-              <Text style={styles.contentSecondText}> Terms of Use</Text>
-            </TouchableOpacity>
+                dispatch(SignupResponse(null, false));
+                AsyncStorage.setItem('currentUser_role', 'true');
+                navigation.navigate('Signup');
+              }}
+            />
+            <Text style={styles.contentText}>{auths.SIGNUP_AGREEMENT_L1}</Text>
+            <View style={[theme.row]}>
+              <TouchableOpacity
+                onPress={() => {
+                  Linking.openURL(Constant.link.PRIVACY_POLICY);
+                }}>
+                <Text style={styles.contentSecondText}>
+                  {auths.PRIVACY_POLICY}
+                </Text>
+              </TouchableOpacity>
+              <Text style={styles.contentSecondTextAnd}> and</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  Linking.openURL(Constant.link.TERMS_OF_USE);
+                }}>
+                <Text style={styles.contentSecondText}>
+                  {' '}
+                  {auths.TERMS_CONDITIONS}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={styles.signinBottomView}>
+            <View style={styles.bottomView}>
+              <Text style={styles.bottomText} onPress={() => onPressText()}>
+                {auths.ALREADY_HAVE_ACCOUNT}
+              </Text>
+            </View>
+            <View style={[styles.signinButtonView]}>
+              <Button
+                type={Constant.buttons.CLOSE}
+                text={auths.SIGNIN_BUTTON}
+                onPress={() => {
+                  AsyncStorage.setItem('currentUser_role', 'false');
+                  navigation.navigate('Signin');
+                }}
+              />
+            </View>
           </View>
         </View>
-        <View style={styles.bottomView}>
-          <Text style={styles.bottomText} onPress={() => onPressText()}>
-            already have an account?
-          </Text>
-          <Button
-            type={Constant.buttons.CLOSE}
-            text={'sign in'}
-            onPress={() => navigation.navigate('Signin')}
-            style={styles.signinButton}
-          />
-        </View>
       </ImageBackground>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -108,7 +138,6 @@ const styles = StyleSheet.create({
     flex: 1.8,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginTop: -10,
   },
   contentText: {
     fontFamily: Fonts.CALIBRE,
@@ -136,9 +165,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   bottomView: {
-    flex: 1.1,
     justifyContent: 'center',
-    marginTop: 50,
     alignItems: 'center',
   },
   bottomText: {
@@ -156,8 +183,15 @@ const styles = StyleSheet.create({
     shadowRadius: 1,
     shadowOpacity: 1,
   },
+  signinButtonView: {
+    alignItems: 'center',
+    width: '100%',
+    marginBottom: 50,
+  },
   buttonStyle: { marginTop: 8 },
   conditionViewStyle: { flexDirection: 'row' },
+  containerView: { flex: 1 },
+  signinBottomView: { flex: 1, justifyContent: 'flex-end' },
 });
 
 export default Login;

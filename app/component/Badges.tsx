@@ -17,7 +17,7 @@ interface Props {
   rigthIcon?: ImageSourcePropType;
   text: string;
   onPress: () => void;
-  style: {};
+  style?: {};
 }
 
 const Badges = ({ type, leftIcon, rigthIcon, text, onPress, style }: Props) => {

@@ -88,6 +88,15 @@ project.ext.react = [
 
 apply from: "../../node_modules/react-native/react.gradle"
 
+
+project.ext.envConfigFiles = [
+    debug: ".env",
+    release: ".env.production",
+    staging: ".env.staging",
+]
+
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
 /**
  * Set this to true to create two separate APKs instead of one:
  *   - An APK that only works on ARM devices
@@ -177,6 +186,7 @@ android {
         }
     }
 
+
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
@@ -205,6 +215,10 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
     implementation platform('com.google.firebase:firebase-bom:29.0.3')
     implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.facebook.android:facebook-android-sdk:[8,9)'
+    
+    implementation project(':react-native-config')
+
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'
     }

@@ -9,8 +9,13 @@ import {
   Image,
   TextInput,
   Modal,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
+import { Prediction } from '../types/location';
+import { ApiResponse } from '../types/ProfileApiResponse';
 import ModalPicker from './ModalPickerConfirm';
+import Config from 'react-native-config';
 
 import Constant from '../theme/constant';
 import Font from '../theme/fonts';
@@ -24,10 +29,8 @@ import Badges from '../component/Badges';
 import { useDispatch, useSelector } from 'react-redux';
 import { CreateProfileRequest } from '../redux/actions/CreateProfileAction';
 
-import { ProunounsRequest } from '../redux/actions/PronounsAction';
-import { OrientationRequest } from '../redux/actions/OrientationAction';
-import { GenderRequest } from '../redux/actions/GenderAction';
-import { EthnicityRequest } from '../redux/actions/EthnicityAction';
+import { DropDownRequest } from '../redux/actions/MenuAction';
+import axios from 'react-native-axios';
 
 const height = Dimensions.get('window').height;
 
@@ -36,12 +39,20 @@ const countries = ['visible to everyone', 'visible only to mentors'];
 const descriptionData = [
   {
     title:
-      'visible to everyone means all other users can see your profile fields and post history. visible only to mentors means only our trained mentors can see your profile fields and post history.no one will be able to see your email address!',
+      'visible to everyone means all other users can see your profile fields and post history. ',
+  },
+  {
+    title:
+      'visible only to mentors means only our trained mentors can see your profile fields and post history.',
+  },
+  {
+    title: 'no one will be able to see your email address!',
   },
 ];
 
 const CreateProfile = ({ navigation }) => {
   const dispatch = useDispatch();
+  const menuResponse = useSelector(state => state.MenuReducer);
 
   const onPressDispatch = () => {
     dispatch(
@@ -49,49 +60,35 @@ const CreateProfile = ({ navigation }) => {
         profile,
         selectPronounsDropDown,
         selectOrientationDropDown,
-        selectLocationDropDown,
-        selectRaceDropDown,
         selectGenderDropDown,
+        selectRaceDropDown,
+        selectLocationDropDown,
         navigation,
       ),
     );
   };
 
-  const pronounsResponse = useSelector(state => state.PronounsReducer);
-  console.log('ProunounsResponse::: ', JSON.stringify(pronounsResponse));
+  useEffect(() => {
+    if (menuResponse.pronouns !== null) {
+      setPronounsDropDown(menuResponse.pronouns);
+    }
 
-  const orientationResponse = useSelector(state => state.OrientationReducer);
-  console.log('orientationResponse::: ', JSON.stringify(orientationResponse));
+    if (menuResponse.orientations !== null) {
+      setOrientationDropDown(menuResponse.orientations);
+    }
 
-  const genderResponse = useSelector(state => state.GenderReducer);
-  console.log('genderResponse::: ', JSON.stringify(genderResponse));
+    if (menuResponse.genders !== null) {
+      setGenderDropDown(menuResponse.genders);
+    }
 
-  const ethnicityResponse = useSelector(state => state.EthnicityReducer);
-  console.log('ethnicityResponse::: ', JSON.stringify(ethnicityResponse));
+    if (menuResponse.ethnicities !== null) {
+      setRaceDropDown(menuResponse.ethnicities);
+    }
+  }, [menuResponse]);
 
   useEffect(() => {
-    dispatch(ProunounsRequest());
-    setPronounsDropDown(...pronounsResponse);
-
-    dispatch(OrientationRequest());
-    setOrientationDropDown(...orientationResponse);
-
-    dispatch(GenderRequest());
-    setGenderDropDown(...genderResponse);
-
-    dispatch(EthnicityRequest());
-    setRaceDropDown(...ethnicityResponse);
-  }, [
-    dispatch,
-    pronounsResponse,
-    orientationResponse,
-    genderResponse,
-    ethnicityResponse,
-    setPronounsDropDown,
-    setOrientationDropDown,
-    setGenderDropDown,
-    setRaceDropDown,
-  ]);
+    dispatch(DropDownRequest());
+  }, [dispatch]);
 
   const [profile, setProfile] = useState('');
 
@@ -101,32 +98,23 @@ const CreateProfile = ({ navigation }) => {
   };
 
   const [pronouns, setPronouns] = useState('');
-  const [pronounsDropDown, setPronounsDropDown] = useState([
-    { name: 'she/her/ella' },
-    { name: ' he/him/his' },
-    { name: 'they/them/theirs' },
-    { name: 'ze/hir/hirs' },
-    { name: 'ze/zir/zirs' },
-  ]);
-  const [selectPronounsDropDown, setSelectPronounsDropDown] = useState([]);
+  const [pronounsDropDown, setPronounsDropDown] = useState<ApiResponse[]>([]);
+  const [selectPronounsDropDown, setSelectPronounsDropDown] = useState<
+    ApiResponse[]
+  >([]);
 
-  const clickDropDownItem = (item, val) => {
+  const clickDropDownItem = (item: ApiResponse, val?: string) => {
     setPronouns('');
 
     if (val === 'add') {
-      var temp = selectPronounsDropDown;
-      temp.push(item);
-      setSelectPronounsDropDown([...temp]);
+      setSelectPronounsDropDown([...selectPronounsDropDown, item]);
 
       const newData = pronounsDropDown.filter(
         itemdata => itemdata.name !== item.name,
       );
       setPronounsDropDown([...newData]);
     } else {
-      var temp = pronounsDropDown;
-      temp.push(item);
-      setPronounsDropDown([...temp]);
-
+      setPronounsDropDown([...pronounsDropDown, item]);
       const temp1 = selectPronounsDropDown.filter(
         itemdata => itemdata.name !== item.name,
       );
@@ -135,35 +123,25 @@ const CreateProfile = ({ navigation }) => {
   };
 
   const [orientation, setOrientation] = useState('');
-  const [orientationDropDown, setOrientationDropDown] = useState([
-    { name: 'gay/lesbian' },
-    { name: 'heterosexual/straight' },
-    { name: 'bisexual' },
-    { name: 'asexual' },
-    { name: 'pansexual' },
-    { name: 'queer' },
-    { name: 'something else' },
-  ]);
-  const [selectOrientationDropDown, setSelectOrientationDropDown] = useState(
+  const [orientationDropDown, setOrientationDropDown] = useState<ApiResponse[]>(
     [],
   );
+  const [selectOrientationDropDown, setSelectOrientationDropDown] = useState<
+    ApiResponse[]
+  >([]);
 
-  const orientationDropDownItem = (item, val) => {
+  const orientationDropDownItem = (item: ApiResponse, val?: string) => {
     setOrientation('');
 
     if (val === 'add') {
-      var temp = selectOrientationDropDown;
-      temp.push(item);
-      setSelectOrientationDropDown([...temp]);
+      setSelectOrientationDropDown([...selectOrientationDropDown, item]);
 
       const newData = orientationDropDown.filter(
         itemData => itemData.name !== item.name,
       );
       setOrientationDropDown([...newData]);
     } else {
-      var temp = orientationDropDown;
-      temp.push(item);
-      setOrientationDropDown([...temp]);
+      setOrientationDropDown([...orientationDropDown, item]);
 
       const temp1 = selectOrientationDropDown.filter(
         itemData => itemData.name !== item.name,
@@ -173,34 +151,23 @@ const CreateProfile = ({ navigation }) => {
   };
 
   const [gender, setGender] = useState('');
-  const [genderDropDown, setGenderDropDown] = useState([
-    { name: 'cisgender' },
-    { name: 'genderqueer' },
-    { name: 'gender non-binary' },
-    { name: 'gender fluid' },
-    { name: 'man/boy' },
-    { name: 'transgender' },
-    { name: 'woman/girl' },
-    { name: 'something else' },
-  ]);
-  const [selectGenderDropDown, setSelectGenderDropDown] = useState([]);
+  const [genderDropDown, setGenderDropDown] = useState<ApiResponse[]>([]);
+  const [selectGenderDropDown, setSelectGenderDropDown] = useState<
+    ApiResponse[]
+  >([]);
 
-  const genderDropDownItem = (item, val) => {
+  const genderDropDownItem = (item: ApiResponse, val?: string) => {
     setGender('');
 
     if (val === 'add') {
-      var temp = selectGenderDropDown;
-      temp.push(item);
-      setSelectGenderDropDown([...temp]);
+      setSelectGenderDropDown([...selectGenderDropDown, item]);
 
       const newData = genderDropDown.filter(
         itemData => itemData.name !== item.name,
       );
       setGenderDropDown([...newData]);
     } else {
-      var temp = genderDropDown;
-      temp.push(item);
-      setGenderDropDown([...temp]);
+      setGenderDropDown([...genderDropDown, item]);
 
       const temp1 = selectGenderDropDown.filter(
         itemData => itemData.name !== item.name,
@@ -210,41 +177,23 @@ const CreateProfile = ({ navigation }) => {
   };
 
   const [race, setRace] = useState('');
-  const [raceDropDown, setRaceDropDown] = useState([
-    { name: 'American Indian' },
-    { name: 'Mixed Race / Mixed Ethnicity' },
-    { name: 'Native American' },
-    { name: 'Alaska Native' },
-    { name: ' Asian or Asian American' },
-    { name: 'Black or African American' },
-    { name: 'Hispanic' },
-    { name: 'Latino' },
-    { name: 'Latina' },
-    { name: 'Latine' },
-    { name: 'Latinx' },
-    { name: 'Middle Eastern or North African' },
-    { name: 'Native Hawaiian or Pacific Islander' },
-    { name: 'White' },
-    { name: 'something else' },
-  ]);
-  const [selectRaceDropDown, setSelectRaceDropDown] = useState([]);
+  const [raceDropDown, setRaceDropDown] = useState<ApiResponse[]>([]);
+  const [selectRaceDropDown, setSelectRaceDropDown] = useState<ApiResponse[]>(
+    [],
+  );
 
-  const raceDropDownItem = (item, val) => {
+  const raceDropDownItem = (item: ApiResponse, val?: string) => {
     setRace('');
 
     if (val === 'add') {
-      var temp = selectRaceDropDown;
-      temp.push(item);
-      setSelectRaceDropDown([...temp]);
+      setSelectRaceDropDown([...selectRaceDropDown, item]);
 
       const newData = raceDropDown.filter(
         itemData => itemData.name !== item.name,
       );
       setRaceDropDown([...newData]);
     } else {
-      var temp = raceDropDown;
-      temp.push(item);
-      setRaceDropDown([...temp]);
+      setRaceDropDown([...raceDropDown, item]);
 
       const temp1 = selectRaceDropDown.filter(
         itemData => itemData.name !== item.name,
@@ -254,11 +203,60 @@ const CreateProfile = ({ navigation }) => {
   };
 
   const [location, setLocation] = useState('');
-  const [locationDropDown, setLocationDropDown] = useState([
-    { name: '<city>' },
-    { name: '<state>' },
-  ]);
-  const [selectLocationDropDown, setSelectLocationDropDown] = useState([]);
+  const [locationDropDown, setLocationDropDown] = useState<Prediction[]>([]);
+  const [selectLocationDropDown, setSelectLocationDropDown] = useState<
+    Prediction[]
+  >([]);
+
+  const getLocationApi = val => {
+    setLocation(val);
+    console.log('fetchAddLatLog : ', val);
+    if (val !== '') {
+      console.log('value : ', val);
+      axios({
+        url:
+          'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' +
+          val +
+          `&key=${Config.PLACES_API_KEY}&sessiontoken=${Config.SESSION_TOKEN}`,
+        method: 'get',
+      })
+        .then(res => {
+          console.log('axios : ', val);
+          if (res.status === 200) {
+            console.log('res : ', res.data.predictions);
+            setLocationDropDown(res.data.predictions);
+          } else {
+            console.log('reselse : ', res);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    } else {
+      setLocationDropDown([]);
+    }
+  };
+
+  const locationDropDownItem = (item: Prediction, val?: string) => {
+    setLocation('');
+
+    if (val === 'add') {
+      setSelectLocationDropDown([...selectLocationDropDown, item]);
+
+      const newData = locationDropDown.filter(
+        itemData => itemData.description !== item.description,
+      );
+      console.log('newData', newData);
+      setLocationDropDown([...newData]);
+    } else {
+      setLocationDropDown([...locationDropDown, item]);
+      const temp1 = selectLocationDropDown.filter(
+        itemData => itemData.description !== item.description,
+      );
+      console.log('temp1', temp1);
+      setSelectLocationDropDown([...temp1]);
+    }
+  };
 
   const removeAllPronouns = () => {
     var temp = selectPronounsDropDown;
@@ -293,40 +291,19 @@ const CreateProfile = ({ navigation }) => {
 
     setLocationDropDown([...temp, ...locationDropDown]);
   };
-
-  const locationDropDownItem = (item, val) => {
-    setLocation('');
-
-    if (val === 'add') {
-      var temp = selectLocationDropDown;
-      temp.push(item);
-      setSelectLocationDropDown([...temp]);
-
-      const newData = locationDropDown.filter(
-        itemData => itemData.name !== item.name,
-      );
-      setLocationDropDown([...newData]);
-    } else {
-      var temp = locationDropDown;
-      temp.push(item);
-      setLocationDropDown([...temp]);
-
-      const temp1 = selectLocationDropDown.filter(
-        itemData => itemData.name !== item.name,
-      );
-      setSelectLocationDropDown([...temp1]);
-    }
-  };
-
   return (
     <View style={styles.container}>
+      {/*{menuResponse.loader && <Loader value={menuResponse.loader} />}*/}
+
       <Header
         type={Constant.navigatioHeader.PAGE_HEADER}
         leftIcon={Images.Arrowsquare}
         label={'create your profile'}
         onPress={() => navigation.goBack()}
       />
-      <View style={styles.contentView}>
+      <KeyboardAvoidingView
+        style={styles.contentView}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <ScrollView style={styles.scrollView}>
           <View style={styles.textViewStyle}>
             <Text
@@ -353,7 +330,6 @@ const CreateProfile = ({ navigation }) => {
               optionList={countries}
               onSelect={value => setProfile(value)}
               defaultButtonText={'visible to everyone'}
-              icon={Images.DropdownIcon}
               rowTextStyle={styles.rowTextStyle}
             />
 
@@ -613,7 +589,7 @@ const CreateProfile = ({ navigation }) => {
                   return (
                     <Badges
                       type={Constant.badges.MULTISELECT}
-                      text={item.name}
+                      text={item.description}
                       rigthIcon={Images.Circle}
                       onPress={() => locationDropDownItem(item)}
                     />
@@ -628,8 +604,9 @@ const CreateProfile = ({ navigation }) => {
                       : 'type in a City or State'
                   }
                   onChangeText={
+                    // val => getLocationApi(val)
                     selectLocationDropDown.length < 1
-                      ? val => setLocation(val)
+                      ? val => getLocationApi(val)
                       : null
                   }
                 />
@@ -639,7 +616,7 @@ const CreateProfile = ({ navigation }) => {
                   onPress={() =>
                     selectLocationDropDown.length !== 0
                       ? removeAllLocation()
-                      : setLocation(' ')
+                      : setLocation('')
                   }
                   style={styles.touchableStyle}>
                   <Image
@@ -661,7 +638,7 @@ const CreateProfile = ({ navigation }) => {
                     <Text
                       onPress={() => locationDropDownItem(item, 'add')}
                       style={styles.menuTextStyle}>
-                      {item.name}
+                      {item.description}
                     </Text>
                   );
                 })}
@@ -669,32 +646,14 @@ const CreateProfile = ({ navigation }) => {
             ) : null}
           </View>
         </ScrollView>
-      </View>
+      </KeyboardAvoidingView>
 
       <View style={styles.bottomView}>
         <Button
           onPress={() => onPressDispatch()}
           type={Constant.buttons.PRIMARY}
           text={'take me to selfsea'}
-          style={[
-            styles.buttonStyle,
-            selectPronounsDropDown.length === 0 ||
-            selectOrientationDropDown.length === 0 ||
-            selectGenderDropDown.length === 0 ||
-            selectRaceDropDown.length === 0 ||
-            selectLocationDropDown.length === 0
-              ? { backgroundColor: Color.BUTTON_DISABLE_COLOR }
-              : { backgroundColor: Color.BASE_COLOR_ORANGE },
-          ]}
-          disabled={
-            selectPronounsDropDown.length === 0 ||
-            selectOrientationDropDown.length === 0 ||
-            selectGenderDropDown.length === 0 ||
-            selectRaceDropDown.length === 0 ||
-            selectLocationDropDown.length === 0
-              ? true
-              : false
-          }
+          style={[styles.buttonStyle]}
         />
       </View>
 
