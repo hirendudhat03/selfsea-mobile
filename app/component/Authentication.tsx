@@ -9,7 +9,10 @@ import {
 } from 'react-native';
 import Color from '../theme/colors';
 // @ts-ignore
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {
+  GoogleSignin,
+  statusCodes
+} from "@react-native-google-signin/google-signin";
 import Constant from '../theme/constant';
 // import InstagramLogin from 'react-native-instagram-login';
 import {
@@ -20,6 +23,7 @@ import auth from '@react-native-firebase/auth';
 import 'react-native-get-random-values';
 import { v4 as uuid } from 'uuid';
 import { decode } from 'base-64';
+import Alert from "./Alert";
 
 interface Props {
   text: string;
@@ -36,7 +40,8 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
   const _signIn = async () => {
     console.log('handlePressGoogleLogin');
     GoogleSignin.configure({
-      webClientId: '597759932954-hj037g8cqseqq6dpukg26752k305sqpl.apps.googleusercontent.com',
+      webClientId:
+        '597759932954-hj037g8cqseqq6dpukg26752k305sqpl.apps.googleusercontent.com',
     });
 
     try {
@@ -104,36 +109,34 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
         requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
       });
 
-      await appleAuth.getCredentialStateForUser(
-        appleAuthRequestResponse.user,
-      );
+      await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user);
 
       if (!appleAuthRequestResponse.identityToken) {
         throw 'Apple Sign-In failed - no identify token returned';
       }
 
       // Create a Firebase credential from the response
-      const { identityToken, nonce, email, fullName } = appleAuthRequestResponse;
+      const { identityToken, nonce, email, fullName } =
+        appleAuthRequestResponse;
       auth.AppleAuthProvider.credential(identityToken, nonce);
       const appleCredential = auth.AppleAuthProvider.credential(
         identityToken,
         nonce,
       );
       const credentials = await auth().signInWithCredential(appleCredential);
-      
-      if(credentials.additionalUserInfo?.isNewUser === false){
+
+      if (credentials.additionalUserInfo?.isNewUser === false) {
         navigation.navigate('DrawerNavigator');
-      }else{
+      } else {
         navigation.navigate('Signup', {
           type: 'apple',
           email: email,
-          userInfo: { identityToken, nonce, email, fullName},
+          userInfo: { identityToken, nonce, email, fullName },
           token: identityToken,
-          credentials: credentials
+          credentials: credentials,
         });
       }
     } else {
-
       appleAuthAndroid.configure({
         // The Service ID you registered with Apple
         clientId: 'com.selfsea',
@@ -157,31 +160,29 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
 
       // Open the browser window for user sign in
       const response = await appleAuthAndroid.signIn();
-      
+
       var userInfo = parseJwt(response.id_token);
-      let token = response.id_token
+      let token = response.id_token;
       const appleCredential = auth.AppleAuthProvider.credential(
         token,
         response.nonce,
       );
-      let credentials = await auth().signInWithCredential(appleCredential)
+      let credentials = await auth().signInWithCredential(appleCredential);
       await credentials.user.sendEmailVerification();
-      
-      if(credentials.additionalUserInfo?.isNewUser === false){
+
+      if (credentials.additionalUserInfo?.isNewUser === false) {
         navigation.navigate('DrawerNavigator');
-      }else{
+      } else {
         navigation.navigate('Signup', {
           type: 'apple',
           email: userInfo.email,
           userInfo: userInfo,
           token: response.id_token,
-          credentials: credentials
+          credentials: credentials,
         });
       }
-
-      
     }
-  }
+  };
 
   function parseJwt(token) {
     let base64Url = token.split('.')[1];

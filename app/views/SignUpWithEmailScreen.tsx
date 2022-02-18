@@ -153,7 +153,7 @@ const Signup = ({ route, navigation }) => {
     }
   };
 
-  const countAge = (isPasswordless:boolean) => {
+  const countAge = (isPasswordless: boolean) => {
     console.log('===========================================');
 
     var today = new Date();
@@ -185,9 +185,8 @@ const Signup = ({ route, navigation }) => {
       age--;
       Alert.alert('your age is not between 13-18 years.');
     } else {
-      if(isPasswordless === true){
-
-        console.log("PasswordLess UId",route.params.credentials.user.uid)
+      if (isPasswordless === true) {
+        console.log('PasswordLess UId', route.params.userInfo.user.uid);
 
         dispatch(
           SignupRequestWithoutPassword(
@@ -199,10 +198,10 @@ const Signup = ({ route, navigation }) => {
             false,
             route.params.userInfo,
             route.params.type,
-            route.params.credentials.user.uid
+            route.params.userInfo.user.uid,
           ),
         );
-      }else{
+      } else {
         dispatch(
           SignupRequest(
             email,
@@ -340,7 +339,7 @@ const Signup = ({ route, navigation }) => {
         route.params === undefined &&
           setPasswordError('Password must contain a number.');
         setUserNameError(text.length + '/20');
-  
+
         setEmail('');
         setUserName('');
         setPassword('');
@@ -358,14 +357,14 @@ const Signup = ({ route, navigation }) => {
       } else {
         console.log('Here2');
         countAge(false);
-       
+
         navigation.navigate('CreateProfile');
       }
     } else {
       if (!email && birthMonth === '' && birthYear === '' && !userName) {
         setEmailError('Please enter email address.');
         setUserNameError(text.length + '/20');
-  
+
         setEmail('');
         setUserName('');
       } else if (!email) {
@@ -379,8 +378,8 @@ const Signup = ({ route, navigation }) => {
       } else {
         countAge(true);
       }
-    };
-  }
+    }
+  };
   const [emailBorder, setEmailBorder] = useState('');
   const handleTouch = () => {
     setEmailBorder(Color.BASE_COLOR_LIGHT_BLUE);
@@ -499,16 +498,22 @@ const Signup = ({ route, navigation }) => {
                 />
               </View>
             )}
-            
-            <View style={{flexDirection:'row', width:"90%", marginTop:10, marginBottom:7}}>
+
+            <View
+              style={{
+                flexDirection: 'row',
+                width: '90%',
+                marginTop: 10,
+                marginBottom: 7,
+              }}>
               <View style={styles.monthView}>
                 {/* <View style={styles.rowView}> */}
-                  <Text style={styles.birthMonthText}>birth month</Text>
-                  <TouchableOpacity
-                    style={styles.touchableStyle}
-                    onPress={() => changeBirthVisibility(true)}>
-                    <Image source={Images.Infocircle} style={styles.infoIcon} />
-                  </TouchableOpacity>
+                <Text style={styles.birthMonthText}>birth month</Text>
+                <TouchableOpacity
+                  style={styles.touchableStyle}
+                  onPress={() => changeBirthVisibility(true)}>
+                  <Image source={Images.Infocircle} style={styles.infoIcon} />
+                </TouchableOpacity>
                 {/* </View> */}
               </View>
               <View style={styles.yearView}>
@@ -728,7 +733,7 @@ const styles = StyleSheet.create({
     // alignSelf: 'flex-start',
     // marginHorizontal: 20,
     // marginVertical: 3,
-    marginRight:7,
+    marginRight: 7,
     // marginTop: height * 0.02,
     // backgroundColor:'green'
   },
