@@ -30,7 +30,7 @@ platform :android do
 
   desc "Generate a development build"
   lane :build_development do
-    gradle(task: "bundle", build_type: "Debug")
+    gradle(task: "assemble", build_type: "Debug")
   end
 
 end
