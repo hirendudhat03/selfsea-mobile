@@ -20,7 +20,7 @@ export function* homeSaga(action) {
       return { ...response, ...currentUserData };
     } catch (e) {
       console.log('e:', e);
-      Alert.alert('something went to wrong home Page');
+      Alert.alert('something went wrong while loading the home page');
       return null;
     }
   };

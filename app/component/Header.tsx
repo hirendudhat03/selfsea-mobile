@@ -20,9 +20,9 @@ interface Props {
   text?: string;
   onPress: () => void;
   underlineText?: string;
-  descriptionText: string;
+  descriptionText?: string;
   style?: {};
-  onPressRight: () => void;
+  onPressRight?: () => void;
 }
 
 const Header = ({

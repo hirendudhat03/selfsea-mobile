@@ -10,20 +10,20 @@ import Button from '../component/Button';
 interface Props {
   changeModalVisibility: (bool: boolean) => void;
   textTitle: string;
-  smallText: string;
-  smallTextParagraph: string;
-  firstText: string;
-  secondText: string;
+  smallText?: string;
+  smallTextParagraph?: string;
+  firstText?: string;
+  secondText?: string;
   type: string;
   text: string;
   descriptionData: [];
   numberOfLines: number;
   style?: {};
   button: String;
-  secondType: string;
-  firstType: string;
-  onPress: () => void;
-  onPressPrimary: () => void;
+  secondType?: string;
+  firstType?: string;
+  onPress?: () => void;
+  onPressPrimary?: () => void;
 }
 
 const ModalPicker = ({

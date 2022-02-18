@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -20,8 +20,6 @@ import Button from '../component/Button';
 import Auth from '../component/Authentication';
 import { auths } from '../config/static';
 import { Theme } from '../styles';
-import auth from '@react-native-firebase/auth';
-import { api } from '../services';
 import { SignupResponse } from '../redux/actions/SignupAction';
 import { useDispatch } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -31,28 +29,24 @@ const onPressText = () => {
 };
 
 const Login = ({ navigation }) => {
+<<<<<<< HEAD
   auth().signOut();
+=======
+>>>>>>> d3b2e592d7b12b7d965f081aa8949fe3397b9537
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const checkUser = async () => {
-      if (auth().currentUser) {
-        const idTokenResult = await auth().currentUser.getIdTokenResult();
-        api.setAuthHeader(idTokenResult.token);
-        console.log('User JWT: ', idTokenResult.token);
-        // if (idTokenResult.token) {
-        //   navigation.navigate('DrawerNavigator');
-        // } else {
-        //   navigation.navigate('Login');
-        // }
-      }
-    };
-    checkUser();
-  }, [navigation]);
+  // useEffect(() => {
+  // below function will be useful when we will work on the remember sign in
+  // const checkUser = async () => {
+  //   if (auth().currentUser) {
+  //     const idTokenResult = await auth().currentUser.getIdTokenResult();
+  //     api.setAuthHeader(idTokenResult.token);
+  //     console.log('User JWT: ', idTokenResult.token);
+  //   }
+  // };
+  // }, [navigation]);
 
   var theme = Theme();
-  //Need to use once we finalize about Insta Login
-  // let instagramLogin = useRef();
 
   return (
     <SafeAreaView style={styles.container}>

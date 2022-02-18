@@ -48,12 +48,12 @@ const Signin = ({ route, navigation }) => {
     setEmail(text);
     if (text === '') {
       setEmailBorder(Color.COMMUNITY_ORANGE);
-      setEmailError('Please enter email address. ');
+      setEmailError('please enter email address. ');
     } else if (
       text.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/) === null
     ) {
       setEmailBorder(Color.COMMUNITY_ORANGE);
-      setEmailError('Please enter a valid email address. ');
+      setEmailError('please enter a valid email address. ');
     } else {
       setEmailBorder(Color.BORDER_COLOR_LIGHTGRAY);
       setEmailError('');
@@ -65,7 +65,7 @@ const Signin = ({ route, navigation }) => {
     setPassword(text);
     if (text === '') {
       setpasswordBorder(Color.COMMUNITY_ORANGE);
-      setPasswordError('Password must contain a number. ');
+      setPasswordError('password must contain a number. ');
     } else {
       setpasswordBorder(Color.BORDER_COLOR_LIGHTGRAY);
       setPasswordError(' ');
