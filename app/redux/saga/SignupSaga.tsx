@@ -1,23 +1,15 @@
 import auth from '@react-native-firebase/auth';
 import { api } from '../../services';
 import { call, put } from 'redux-saga/effects';
-import { createUserMutation } from '../../graphql/mutations/UserMutation';
-import { UsernameValidResponse } from '../../types/UsernameValidResponse';
 import { SignupResponse } from '../actions/SignupAction';
-import { isUsernameValidQuery } from '../../graphql/queries/UserProfile';
 
-export function* signupSaga(action) {
+export function* signUpSaga(action) {
   const Signup = async (email, Password, birthMonth, birthYear, userName) => {
     try {
-      const username = await api.client.request<UsernameValidResponse>(
-        isUsernameValidQuery,
-        {
-          username: userName,
-        },
-      );
+      const username = await api.isUsernameValid({ username: userName });
       console.log('username::', JSON.stringify(username.isUsernameValid));
 
-      if (!username.isUsernameValid.isValid) {
+      if (!username?.isUsernameValid?.isValid) {
         return {
           errorname: 'username',
           error: 'this username is taken.',
@@ -39,10 +31,8 @@ export function* signupSaga(action) {
             username: userName,
           };
           console.log('mutationVariables::', mutationVariables);
-          const data = await api.client.request(
-            createUserMutation,
-            mutationVariables,
-          );
+          const data = await api.createUser(mutationVariables);
+
           console.log('mutationVariables::', data);
           action.navigation.navigate('Signin');
 

@@ -3,7 +3,6 @@ import { put, call } from 'redux-saga/effects';
 import { CreateProfileResponse } from '../actions/CreateProfileAction';
 
 import { api } from '../../services';
-import { updateProfileMutation } from '../../graphql/mutations/UserMutation';
 import { Alert } from 'react-native';
 
 export function* createProfileSaga(action) {
@@ -15,7 +14,7 @@ export function* createProfileSaga(action) {
     selectRaceDropDown,
     selectLocationDropDown,
   ) => {
-    console.log('call createprofileSaga : ', action);
+    console.log('call createProfileSaga : ', action);
     console.log('profile : ', profile);
 
     console.log('Pronouns : ', selectPronounsDropDown);
@@ -34,10 +33,7 @@ export function* createProfileSaga(action) {
         genders: selectGenderDropDown,
         ethnicities: selectRaceDropDown,
       };
-      const data = await api.client.request(
-        updateProfileMutation,
-        mutationVariables,
-      );
+      const data = await api.updateProfile(mutationVariables);
       console.log('create profile data : ', JSON.stringify(data));
       return { ...data, ...response };
     } catch (e) {
