@@ -3,16 +3,16 @@ import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import Images from '../theme/images';
 
-import Switch from '../component/Switch';
-import CheckBox from '../component/Checkbox';
-import Radio from '../component/Radio';
-import Button from '../component/Button';
-import Alert from '../component/Alert';
-import Badges from '../component/Badges';
+import Switch from '../components/Switch';
+import CheckBox from '../components/Checkbox';
+import Radio from '../components/Radio';
+import Button from '../components/Button';
+import Alert from '../components/Alert';
+import Badges from '../components/Badges';
 import Constant from '../theme/constant';
-import Dropdown from '../component/Dropdown';
-import TextInput from '../component/CustomTextInput';
-import Header from '../component/Header';
+import Dropdown from '../components/Dropdown';
+import TextInput from '../components/CustomTextInput';
+import Header from '../components/Header';
 import Color from '../theme/colors';
 
 import { useSelector } from 'react-redux';

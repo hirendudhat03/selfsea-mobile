@@ -20,10 +20,10 @@ import Font from '../theme/fonts';
 import Color from '../theme/colors';
 import Images from '../theme/images';
 
-import Header from '../component/Header';
-import Dropdown from '../component/Dropdown';
-import Button from '../component/Button';
-import Badges from '../component/Badges';
+import Header from '../components/Header';
+import Dropdown from '../components/Dropdown';
+import Button from '../components/Button';
+import Badges from '../components/Badges';
 import { useDispatch, useSelector } from 'react-redux';
 import { CreateProfileRequest } from '../redux/actions/CreateProfileAction';
 

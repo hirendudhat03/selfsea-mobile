@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import Dropdown from '../component/Dropdown';
+import Dropdown from '../components/Dropdown';
 
 interface OptionListType {
   title: string;
