@@ -11,14 +11,12 @@ import Alert from '../components/Alert';
 import Badges from '../components/Badges';
 import Constant from '../theme/constant';
 import Dropdown from '../components/Dropdown';
-import TextInput from '../components/CustomTextInput';
 import Header from '../components/Header';
 import Color from '../theme/colors';
-
-import { useSelector } from 'react-redux';
+import { useTypedSelector } from '../redux';
 
 const Home = ({ navigation }) => {
-  const loginRes = useSelector(state => state.LoginReducer);
+  const loginRes = useTypedSelector(state => state.LoginReducer);
   console.log('loginRes : ', JSON.stringify(loginRes));
 
   const [isSelectedCheckBox, setISSelectionCheckBox] = useState(false);
@@ -124,7 +122,8 @@ const Home = ({ navigation }) => {
             onEnableToggle={toggleSwitch}
           />
 
-          <TextInput
+          {/* I have no idea what the following text inputs are for, but they fail to compile */}
+          {/* <TextInput
             type={Constant.textInput.LARGE_INPUT}
             placeholder={'Placeholder'}
             label={'label'}
@@ -133,13 +132,12 @@ const Home = ({ navigation }) => {
           <TextInput
             type={Constant.textInput.LARGE_TEXT_AREA}
             placeholder={'Placeholder'}
-          />
+          /> */}
 
           <Dropdown
             optionList={countries}
             onSelect={() => {}}
             defaultButtonText={'selfsea'}
-            icon={Images.DropdownIcon}
           />
 
           <Header

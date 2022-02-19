@@ -25,11 +25,12 @@ import Font from '../theme/fonts';
 import Color from '../theme/colors';
 import BirthDateInput from '../components/BirthDateInput';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { SignUpRequest } from '../redux/actions/SignUpAction';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import Loader from '../components/Loader';
+import { useTypedSelector } from '../redux';
 
 const zxcvbn = require('zxcvbn');
 
@@ -73,13 +74,13 @@ const ageData = [
 const SignUp = ({ navigation }) => {
   const dispatch = useDispatch();
 
-  const signUpRes = useSelector(state => state.SignUpReducer);
+  const signUpRes = useTypedSelector(state => state.SignUpReducer);
   console.log('signUpResReducer : ', JSON.stringify(signUpRes));
 
   const [years, setYear] = useState<number[]>([]);
 
   useEffect(() => {
-    let year = [];
+    let year: number[] = [];
     let currentYear = new Date().getFullYear();
     let startYear = 1900;
 
@@ -302,7 +303,7 @@ const SignUp = ({ navigation }) => {
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : ''}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       style={styles.keyboardAvoidingStyle}>
       <View style={styles.container}>
         <Loader value={signUpRes.loader} />
@@ -383,7 +384,7 @@ const SignUp = ({ navigation }) => {
               defaultMonthButtonText={'select one'}
               monthValue={birthMonth}
               monthStyle={{ width: width * 0.48 }}
-              yearOptionList={years}
+              yearOptionList={years.map(y => y.toString())}
               onSelectYear={value => {
                 selectFillBirth(value);
               }}
@@ -449,7 +450,7 @@ const SignUp = ({ navigation }) => {
                 ? { backgroundColor: Color.BUTTON_DISABLE_COLOR }
                 : { backgroundColor: Color.BASE_COLOR_ORANGE },
             ]}
-            onPress={() => SignUpValidation()}
+            onPress={() => SignUpValidation(userName)}
             disabled={
               circleFillEmail !== true ||
               circleFillPassword !== true ||

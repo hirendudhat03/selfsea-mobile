@@ -15,7 +15,7 @@ export function SignUpRequest(
   birthYear,
   userName,
   navigation,
-  loader,
+  loader?: unknown,
 ) {
   return {
     type: 'SIGN_UP_REQUEST',

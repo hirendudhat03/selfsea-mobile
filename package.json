@@ -11,9 +11,10 @@
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "build": "tsc",
     "codegen": "graphql-codegen --config codegen.yml",
     "prepare": "husky install",
-    "pre-commit": "npm run spell-check:new && npm run lint && npm run test",
+    "pre-commit": "npm run spell-check:new && npm run lint && npm run test && npm run build",
     "spell-check:new": "git diff --cached --name-only | cspell --no-must-find-files --no-progress --file-list stdin",
     "spell-check:all": "cspell \"**\"",
     "build-android-debug": "cd android && ./gradlew clean && ./gradlew assembleDebug && cd .."

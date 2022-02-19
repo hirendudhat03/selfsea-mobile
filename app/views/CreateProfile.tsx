@@ -23,7 +23,7 @@ import Header from '../components/Header';
 import Dropdown from '../components/Dropdown';
 import Button from '../components/Button';
 import Badges from '../components/Badges';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { CreateProfileRequest } from '../redux/actions/CreateProfileAction';
 
 import { DropDownRequest } from '../redux/actions/MenuAction';
@@ -35,6 +35,7 @@ import {
   Pronoun,
   SexualOrientation,
 } from 'app/generated/graphql';
+import { useTypedSelector } from '../redux';
 
 const height = Dimensions.get('window').height;
 
@@ -56,7 +57,7 @@ const descriptionData = [
 
 const CreateProfile = ({ navigation }) => {
   const dispatch = useDispatch();
-  const menuResponse = useSelector(state => state.MenuReducer);
+  const menuResponse = useTypedSelector(state => state.MenuReducer);
 
   const onPressDispatch = () => {
     dispatch(
@@ -357,7 +358,7 @@ const CreateProfile = ({ navigation }) => {
                   onChangeText={
                     selectPronounsDropDown.length < 3
                       ? val => setPronouns(val)
-                      : null
+                      : undefined
                   }
                 />
               </View>
@@ -375,7 +376,6 @@ const CreateProfile = ({ navigation }) => {
                         ? Images.xCircle
                         : Images.plusCircle
                     }
-                    style={styles.passwordIcon}
                   />
                 </TouchableOpacity>
               </View>
@@ -419,7 +419,7 @@ const CreateProfile = ({ navigation }) => {
                   onChangeText={
                     selectOrientationDropDown.length < 3
                       ? val => setOrientation(val)
-                      : null
+                      : undefined
                   }
                 />
               </View>
@@ -437,7 +437,6 @@ const CreateProfile = ({ navigation }) => {
                         ? Images.xCircle
                         : Images.plusCircle
                     }
-                    style={styles.passwordIcon}
                   />
                 </TouchableOpacity>
               </View>
@@ -482,7 +481,7 @@ const CreateProfile = ({ navigation }) => {
                   onChangeText={
                     selectGenderDropDown.length < 3
                       ? val => setGender(val)
-                      : null
+                      : undefined
                   }
                 />
               </View>
@@ -500,7 +499,6 @@ const CreateProfile = ({ navigation }) => {
                         ? Images.xCircle
                         : Images.plusCircle
                     }
-                    style={styles.passwordIcon}
                   />
                 </TouchableOpacity>
               </View>
@@ -542,7 +540,9 @@ const CreateProfile = ({ navigation }) => {
                       : 'asian american, arab, native hawaiian'
                   }
                   onChangeText={
-                    selectRaceDropDown.length < 3 ? val => setRace(val) : null
+                    selectRaceDropDown.length < 3
+                      ? val => setRace(val)
+                      : undefined
                   }
                 />
               </View>
@@ -560,7 +560,6 @@ const CreateProfile = ({ navigation }) => {
                         ? Images.xCircle
                         : Images.plusCircle
                     }
-                    style={styles.passwordIcon}
                   />
                 </TouchableOpacity>
               </View>
@@ -606,7 +605,7 @@ const CreateProfile = ({ navigation }) => {
                     // val => getLocationApi(val)
                     selectLocationDropDown.length < 1
                       ? val => getLocationApi(val)
-                      : null
+                      : undefined
                   }
                 />
               </View>
@@ -624,7 +623,6 @@ const CreateProfile = ({ navigation }) => {
                         ? Images.xCircle
                         : Images.plusCircle
                     }
-                    style={styles.passwordIcon}
                   />
                 </TouchableOpacity>
               </View>

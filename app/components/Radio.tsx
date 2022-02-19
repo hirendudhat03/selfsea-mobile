@@ -4,7 +4,7 @@ import Color from '../theme/colors';
 
 interface Props {
   text: string;
-  enable: boolean;
+  enable?: boolean;
   isSelectedRadioButton: boolean;
   onPressRadioButton: () => void;
 }

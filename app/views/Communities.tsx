@@ -12,12 +12,12 @@ const height = Dimensions.get('window').height;
 const Communities = () => {
   return (
     <Tab.Navigator
-      tabBarOptions={{
-        activeTintColor: Color.BASE_COLOR_WHITE,
-        indicatorStyle: {
+      screenOptions={{
+        tabBarActiveTintColor: Color.BASE_COLOR_WHITE,
+        tabBarIndicatorStyle: {
           opacity: 0,
         },
-        labelStyle: {
+        tabBarLabelStyle: {
           textTransform: 'none',
           fontSize: 20,
           fontFamily: Font.CALIBRE,
@@ -26,7 +26,7 @@ const Communities = () => {
           lineHeight: 145,
           textAlign: 'center',
         },
-        style: {
+        tabBarStyle: {
           backgroundColor: Color.BASE_COLOR_LIGHT_BLUE,
           height: height / 7.6,
         },

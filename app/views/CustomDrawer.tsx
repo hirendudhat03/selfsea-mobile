@@ -5,11 +5,14 @@ import Color from '../theme/colors';
 import Font from '../theme/fonts';
 import Images from '../theme/images';
 
-import { DrawerItem } from '@react-navigation/drawer';
+import {
+  DrawerContentComponentProps,
+  DrawerItem,
+} from '@react-navigation/drawer';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface Props {
-  props: () => void;
+  props: DrawerContentComponentProps;
 }
 
 const Drawer = ({ props }: Props) => {
@@ -58,10 +61,11 @@ const Drawer = ({ props }: Props) => {
                   <Text style={styles.menuText}>Communities</Text>
                 </View>
               )}
+              onPress={() => {}}
             />
             <DrawerItem
               style={styles.drawerItem}
-              focused={focus === 1 ? true : false}
+              focused={focus === '1' ? true : false}
               label={() => (
                 <View style={styles.drawerView}>
                   <Text style={styles.menuText}>Users</Text>
@@ -204,7 +208,7 @@ const Drawer = ({ props }: Props) => {
 
             <DrawerItem
               style={styles.drawerItem}
-              focused={focus === 1 ? true : false}
+              focused={focus === '1' ? true : false}
               label={() => (
                 <View style={styles.drawerView}>
                   <Text style={styles.menuText}>Moderation Queue</Text>
@@ -344,7 +348,7 @@ const Drawer = ({ props }: Props) => {
             )}
             <DrawerItem
               style={styles.drawerItem}
-              focused={focus === 1 ? true : false}
+              focused={focus === '1' ? true : false}
               label={() => (
                 <View style={styles.drawerView}>
                   <Text style={styles.menuText}>My Account</Text>

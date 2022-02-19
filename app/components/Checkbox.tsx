@@ -9,7 +9,7 @@ interface Props {
   enable?: boolean;
   isSelectedCheckBox: boolean;
   onPressCheckbox: () => void;
-  style: {};
+  style?: {};
 }
 
 const CheckBox = ({

@@ -188,7 +188,7 @@ const Authentication = ({ text, icon }: Props) => {
       style={styles.container}
       // onPress={() => authLogin()}
     >
-      <Image style={styles.image} source={icon} />
+      {icon && <Image style={styles.image} source={icon} />}
       <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>
   );

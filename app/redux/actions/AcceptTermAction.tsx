@@ -8,7 +8,7 @@ export function AcceptResponse(data, loader) {
   };
 }
 
-export function AcceptRequest(loader) {
+export function AcceptRequest(loader?: unknown) {
   return {
     type: 'ACCEPT_REQUEST',
     loader: loader,
