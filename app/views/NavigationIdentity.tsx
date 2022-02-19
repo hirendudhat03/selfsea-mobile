@@ -25,15 +25,16 @@ const NavigationIdentity = ({ navigation }) => {
     changeModalVisibility(true);
   }, []);
 
-  const [isModalVisible, setIsMoalVisiable] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const changeModalVisibility = (bool: boolean) => {
-    setIsMoalVisiable(bool);
+    setIsModalVisible(bool);
   };
 
   const renderItem = () => (
     <View style={styles.viewStyle}>
       <View style={styles.bottomView}>
         <View style={styles.inputView}>
+          {/* cspell:disable-next-line */}
           <Text style={styles.titleText}>@litliy </Text>
 
           <Text style={styles.titleTextSmall}>(they/them)</Text>
@@ -79,12 +80,12 @@ const NavigationIdentity = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Header
-        type={Constant.navigatioHeader.COMMUNITY_HEADER}
-        leftIcon={Images.Arrowsquare}
+        type={Constant.navigationHeader.COMMUNITY_HEADER}
+        leftIcon={Images.ArrowSquare}
         label={'navigating identity'}
         rightIcon={Images.Dots}
         descriptionText={
-          'a community to discuss questions and situations related to gender identity, sexual orientation, raceand ethnicity'
+          'a community to discuss questions and situations related to gender identity, sexual orientation, race and ethnicity'
         }
         onPress={() => navigation.goBack()}
         onPressRight={() => Alert.alert('setting')}
@@ -104,7 +105,7 @@ const NavigationIdentity = ({ navigation }) => {
           type={Constant.modal.MODAL_SUCCESS}
           textTitle={'congrats on joining your first community!'}
           smallText={
-            'selfsea was designed together with young people, as a place where you’ll see yourself reflected within a supportive and inclusive community that prioritizes your identity and experiences.'
+            "selfsea was designed together with young people, as a place where you'll see yourself reflected within a supportive and inclusive community that prioritizes your identity and experiences."
           }
           smallTextParagraph={
             "you have the option of selecting content warnings if there are topics you'd prefer not to see. when you select a content warning, any posts containing that warning will be greyed out. you can add and edit content warnings in your profile settings."

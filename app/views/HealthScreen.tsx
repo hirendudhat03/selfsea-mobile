@@ -21,15 +21,16 @@ const HealthScreen = ({ navigation }) => {
   const [health] = useState([DATA]);
 
   const renderItem = () => (
-    <View style={styles.viewStyleFlatlist}>
+    <View style={styles.viewStyleFlatList}>
       <Button
         type={Constant.buttons.DESKTOP}
-        text={'this post need a responed'}
+        text={'this post needs a response'}
         style={styles.desktopStyle}
         textStyle={styles.buttonTextStyle}
       />
 
       <View style={styles.headerTextView}>
+        {/* cspell:disable-next-line */}
         <Text style={styles.headerTextStyle}>@romanticpokemon4</Text>
         <Image source={Images.Dots} style={styles.iconStyle} />
       </View>
@@ -70,8 +71,8 @@ const HealthScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Header
-        type={Constant.navigatioHeader.COMMUNITY_HEADER}
-        leftIcon={Images.Arrowsquare}
+        type={Constant.navigationHeader.COMMUNITY_HEADER}
+        leftIcon={Images.ArrowSquare}
         rightIcon={Images.Dots}
         label={'BIPOC+ mental health'}
         descriptionText={
@@ -85,7 +86,7 @@ const HealthScreen = ({ navigation }) => {
         {health.length !== 0 ? (
           <LinearGradient
             colors={['rgba(255, 255, 255, 0.22)', Color.COLOR_LIGHT]}
-            style={styles.linearGradientFlatlist}>
+            style={styles.linearGradientFlatList}>
             <View style={styles.sessionStyle}>
               <Text style={styles.sessionText}>
                 live session today from 4pm-7pm EST
@@ -173,7 +174,7 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     color: Color.CONTENT_COLOR_BLACK_TEXT,
   },
-  linearGradientFlatlist: {
+  linearGradientFlatList: {
     flex: 1,
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
@@ -212,7 +213,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
 
-  viewStyleFlatlist: {
+  viewStyleFlatList: {
     borderRadius: 6,
     backgroundColor: Color.BASE_COLOR_WHITE,
     marginVertical: 5,

@@ -1,14 +1,14 @@
-export function SignupResponse(data, loader) {
+export function SignUpResponse(data, loader) {
   console.log('call SaveLoginResponse : ', data);
 
   return {
-    type: 'SIGNUP_RESPONSE',
+    type: 'SIGN_UP_RESPONSE',
     payload: data,
     loader: loader,
   };
 }
 
-export function SignupRequest(
+export function SignUpRequest(
   email,
   Password,
   birthMonth,
@@ -18,7 +18,7 @@ export function SignupRequest(
   loader,
 ) {
   return {
-    type: 'SIGNUP_REQUEST',
+    type: 'SIGN_UP_REQUEST',
     email: email,
     Password: Password,
     birthMonth: birthMonth,

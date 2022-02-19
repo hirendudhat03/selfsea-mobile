@@ -58,7 +58,7 @@ const Alert = ({ type, text }: Props) => {
         {(type === Constant.alert.MENTEE ||
           type === Constant.alert.MENTEE_FADE) && (
           <View style={[styles.touchableStyle, theme.width10p]}>
-            <Image source={Images.Infocircle} />
+            <Image source={Images.InfoCircle} />
           </View>
         )}
       </View>
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
     lineHeight: 24,
     letterSpacing: 0,
-    color: Color.BASE_COLOR_DARK_SUCCESSTEXT,
+    color: Color.BASE_COLOR_DARK_SUCCESS_TEXT,
   },
   actionInfoView: {
     paddingVertical: 12,
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
     lineHeight: 24,
     letterSpacing: 0,
-    color: Color.BASE_COLOR_DARK_INFOTEXT,
+    color: Color.BASE_COLOR_DARK_INFO_TEXT,
   },
   touchableStyle: {
     justifyContent: 'center',

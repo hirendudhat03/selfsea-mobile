@@ -1,4 +1,4 @@
-import { auths, communities } from './static';
+import { authText, communities } from './static';
 
 export { config } from './config';
-export default { auths, communities };
+export default { authText, communities };

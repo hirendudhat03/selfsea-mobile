@@ -19,9 +19,9 @@ import LinearGradient from 'react-native-linear-gradient';
 const DATA = [{}, {}, {}, {}];
 
 const CommunitiesHome = () => {
-  const [isModalVisible, setIsMoalVisiable] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const changeModalVisibility = (bool: boolean) => {
-    setIsMoalVisiable(bool);
+    setIsModalVisible(bool);
   };
 
   const descriptionData = [

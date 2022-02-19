@@ -10,11 +10,24 @@
     "peerhealthexchange",
     "ethnicities",
     "mentee",
-    "ellipsize"
+    "mentees",
+    "ellipsize",
+    "png",
+    "pngs",
+    "zxcvbn",
+    "genderfluid",
+    "BIPOC",
+    "codegen"
   ],
   "flagWords": [],
   "ignorePaths": [
     "package.json",
-    "package-lock.json"
+    "package-lock.json",
+    "node_modules",
+    "build",
+    "android",
+    "ios",
+    "app/generated",
+    "app/assets"
   ]
 }

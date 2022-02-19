@@ -12,8 +12,6 @@ import {
 import Color from '../theme/colors';
 import Images from '../theme/images';
 import Constant from '../theme/constant';
-// @ts-ignore
-
 import Dropdown from './Dropdown';
 import Button from './Button';
 import fonts from 'app/theme/fonts';
@@ -23,7 +21,7 @@ const height = Dimensions.get('window').height;
 
 interface Props {
   text: string;
-  headertext: string;
+  headerText: string;
   placeholder: string;
   data: [];
   visible: boolean;
@@ -32,7 +30,7 @@ interface Props {
 
 const ModalView = ({
   text,
-  headertext,
+  headerText,
   placeholder,
   data,
   visible,
@@ -42,7 +40,7 @@ const ModalView = ({
     <Modal animationType="slide" transparent={true} visible={visible}>
       <View style={styles.Container}>
         <View style={styles.headerView}>
-          <Text style={styles.headerText}>{headertext}</Text>
+          <Text style={styles.headerText}>{headerText}</Text>
           <View style={styles.contentView}>
             <TouchableOpacity style={styles.circle} onPress={closeModal}>
               <Image source={Images.Cross} style={styles.circleIcon} />

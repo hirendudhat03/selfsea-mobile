@@ -45,7 +45,7 @@ const descriptionData = [
 const CommunitiesHome = ({ navigation }) => {
   const [title, setTitle] = useState(null);
   const [content, setContent] = useState(null);
-  const [isModalVisible, setIsMoalVisiable] = useState(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -61,14 +61,14 @@ const CommunitiesHome = ({ navigation }) => {
       console.log('homeResponse.data if: ', homeResponse.data);
       setTitle(homeResponse.data.currentTermsAndConditions.title);
       setContent(homeResponse.data.currentTermsAndConditions.content);
-      setIsMoalVisiable(!homeResponse.data.currentUser.hasAcceptedLatestTerms);
+      setIsModalVisible(!homeResponse.data.currentUser.hasAcceptedLatestTerms);
     } else {
       console.log('homeResponse.data : ', homeResponse.data);
     }
   }, [homeResponse]);
 
   const changeModalVisibility = (bool: boolean) => {
-    setIsMoalVisiable(bool);
+    setIsModalVisible(bool);
   };
 
   const renderItem = () => (
@@ -101,7 +101,7 @@ const CommunitiesHome = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Header
-        type={Constant.navigatioHeader.PAGE_HEADER}
+        type={Constant.navigationHeader.PAGE_HEADER}
         label={'selfsea communities'}
         style={styles.headerView}
       />

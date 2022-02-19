@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import TabNavigator from '../route/TabNavigator';
-import Customdrawer from '../views/CustomDrawer';
+import CustomDrawer from '../views/CustomDrawer';
 
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
   return (
     <Drawer.Navigator
-      drawerContent={props => <Customdrawer props={props} />}
+      drawerContent={props => <CustomDrawer props={props} />}
       initialRouteName="TabNavigator">
       <Drawer.Screen
         name="TabNavigator"

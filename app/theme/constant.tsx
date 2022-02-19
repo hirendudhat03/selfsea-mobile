@@ -15,7 +15,7 @@ export default {
     ACTIVE: 'active',
     INACTIVE: 'inactive',
     DESCRIPTOR: 'descriptor',
-    MULTISELECT: 'multi-Select',
+    MULTI_SELECT: 'multi-Select',
   },
   buttons: {
     DESKTOP: 'desktop',
@@ -23,7 +23,7 @@ export default {
     MOBILE: 'mobile',
     PRIMARY: 'primary',
     CLOSE: 'close',
-    SELFSEASEND: 'selfseaSend',
+    SELFSEA_SEND: 'selfseaSend',
   },
   textInput: {
     LARGE_INPUT: 'largeInput',
@@ -34,10 +34,10 @@ export default {
     INSTAGRAM: 'instagram',
     APPLE: 'apple',
   },
-  navigatioHeader: {
-    PAGE_HEADER: 'pageheader',
+  navigationHeader: {
+    PAGE_HEADER: 'pageHeader',
     POST: 'post',
-    COMMUNITY_HEADER: 'communityheader',
+    COMMUNITY_HEADER: 'communityHeader',
   },
   link: {
     PRIVACY_POLICY: 'https://www.peerhealthexchange.org/privacy-policy',
