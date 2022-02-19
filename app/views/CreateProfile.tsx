@@ -13,7 +13,6 @@ import {
   Platform,
 } from 'react-native';
 import { Prediction } from '../types/location';
-import { ApiResponse } from '../types/ProfileApiResponse';
 import ModalPicker from './ModalPickerConfirm';
 import Constant from '../theme/constant';
 import Font from '../theme/fonts';
@@ -30,6 +29,12 @@ import { CreateProfileRequest } from '../redux/actions/CreateProfileAction';
 import { DropDownRequest } from '../redux/actions/MenuAction';
 import axios from 'react-native-axios';
 import { config } from '../config';
+import {
+  Ethnicity,
+  Gender,
+  Pronoun,
+  SexualOrientation,
+} from 'app/generated/graphql';
 
 const height = Dimensions.get('window').height;
 
@@ -91,45 +96,41 @@ const CreateProfile = ({ navigation }) => {
 
   const [profile, setProfile] = useState('');
 
-  const [isModalVisible, setIsMoalVisiable] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const changeModalVisibility = (bool: boolean) => {
-    setIsMoalVisiable(bool);
+    setIsModalVisible(bool);
   };
 
   const [pronouns, setPronouns] = useState('');
-  const [pronounsDropDown, setPronounsDropDown] = useState<ApiResponse[]>([]);
+  const [pronounsDropDown, setPronounsDropDown] = useState<Pronoun[]>([]);
   const [selectPronounsDropDown, setSelectPronounsDropDown] = useState<
-    ApiResponse[]
+    Pronoun[]
   >([]);
 
-  const clickDropDownItem = (item: ApiResponse, val?: string) => {
+  const clickDropDownItem = (item: Pronoun, val?: string) => {
     setPronouns('');
 
     if (val === 'add') {
       setSelectPronounsDropDown([...selectPronounsDropDown, item]);
 
-      const newData = pronounsDropDown.filter(
-        itemdata => itemdata.name !== item.name,
-      );
+      const newData = pronounsDropDown.filter(p => p.name !== item.name);
       setPronounsDropDown([...newData]);
     } else {
       setPronounsDropDown([...pronounsDropDown, item]);
-      const temp1 = selectPronounsDropDown.filter(
-        itemdata => itemdata.name !== item.name,
-      );
+      const temp1 = selectPronounsDropDown.filter(p => p.name !== item.name);
       setSelectPronounsDropDown([...temp1]);
     }
   };
 
   const [orientation, setOrientation] = useState('');
-  const [orientationDropDown, setOrientationDropDown] = useState<ApiResponse[]>(
-    [],
-  );
+  const [orientationDropDown, setOrientationDropDown] = useState<
+    SexualOrientation[]
+  >([]);
   const [selectOrientationDropDown, setSelectOrientationDropDown] = useState<
-    ApiResponse[]
+    SexualOrientation[]
   >([]);
 
-  const orientationDropDownItem = (item: ApiResponse, val?: string) => {
+  const orientationDropDownItem = (item: SexualOrientation, val?: string) => {
     setOrientation('');
 
     if (val === 'add') {
@@ -150,12 +151,12 @@ const CreateProfile = ({ navigation }) => {
   };
 
   const [gender, setGender] = useState('');
-  const [genderDropDown, setGenderDropDown] = useState<ApiResponse[]>([]);
-  const [selectGenderDropDown, setSelectGenderDropDown] = useState<
-    ApiResponse[]
-  >([]);
+  const [genderDropDown, setGenderDropDown] = useState<Gender[]>([]);
+  const [selectGenderDropDown, setSelectGenderDropDown] = useState<Gender[]>(
+    [],
+  );
 
-  const genderDropDownItem = (item: ApiResponse, val?: string) => {
+  const genderDropDownItem = (item: Gender, val?: string) => {
     setGender('');
 
     if (val === 'add') {
@@ -176,12 +177,10 @@ const CreateProfile = ({ navigation }) => {
   };
 
   const [race, setRace] = useState('');
-  const [raceDropDown, setRaceDropDown] = useState<ApiResponse[]>([]);
-  const [selectRaceDropDown, setSelectRaceDropDown] = useState<ApiResponse[]>(
-    [],
-  );
+  const [raceDropDown, setRaceDropDown] = useState<Ethnicity[]>([]);
+  const [selectRaceDropDown, setSelectRaceDropDown] = useState<Ethnicity[]>([]);
 
-  const raceDropDownItem = (item: ApiResponse, val?: string) => {
+  const raceDropDownItem = (item: Ethnicity, val?: string) => {
     setRace('');
 
     if (val === 'add') {
@@ -216,6 +215,7 @@ const CreateProfile = ({ navigation }) => {
         url:
           'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' +
           val +
+          // cspell:disable-next-line
           `&key=${config.PLACES_API_KEY}&sessiontoken=${config.PLACES_SESSION_TOKEN}`,
         method: 'get',
       })
@@ -225,7 +225,7 @@ const CreateProfile = ({ navigation }) => {
             console.log('res : ', res.data.predictions);
             setLocationDropDown(res.data.predictions);
           } else {
-            console.log('reselse : ', res);
+            console.log('res else : ', res);
           }
         })
         .catch(err => {

@@ -9,7 +9,8 @@
     "phe",
     "peerhealthexchange",
     "ethnicities",
-    "mentee"
+    "mentee",
+    "ellipsize"
   ],
   "flagWords": [],
   "ignorePaths": [
