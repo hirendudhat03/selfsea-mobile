@@ -1,0 +1,32 @@
+# There are multiple small queries in this file, as these are all "lookup"
+# queries. The queries are all just retrieving the available options for
+# things such as gender and pronouns. Generally speaking, we only want one
+# graphql query or mutation per file.
+
+query getEthnicities {
+  ethnicities {
+    id
+    name
+  }
+}
+
+query getPronouns {
+  pronouns {
+    id
+    name
+  }
+}
+
+query getOrientations {
+  orientations {
+    id
+    name
+  }
+}
+
+query getGenders {
+  genders {
+    id
+    name
+  }
+}

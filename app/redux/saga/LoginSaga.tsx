@@ -2,10 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { api } from '../../services';
-import { CurrentUserApi } from '../../types/CurrentUserApi';
 import { LoginResponse } from '../actions/LoginAction';
-
-import { currentUserQuery } from '../../graphql/queries/UserProfile';
 import { Alert } from 'react-native';
 
 export function* loginSaga(action) {
@@ -27,28 +24,26 @@ export function* loginSaga(action) {
       AsyncStorage.getItem('currentUser_role').then(value => {
         console.log('value:', value);
         if (value === 'false') {
-          const Getuser = async () => {
+          const GetUser = async () => {
             try {
-              const data = await api.client.request<CurrentUserApi>(
-                currentUserQuery,
-              );
-              if (data.currentUser.roles[0].name === 'MENTEE') {
+              const data = await api.currentUser();
+              if (data?.currentUser?.roles[0].name === 'MENTEE') {
                 action.navigation.navigate('DrawerNavigator');
               }
-              if (data.currentUser.roles[0].name === 'MENTOR') {
+              if (data?.currentUser?.roles[0].name === 'MENTOR') {
                 action.navigation.navigate('DrawerNavigator');
               }
-              if (data.currentUser.roles[0].name === 'MODERATOR') {
+              if (data?.currentUser?.roles[0].name === 'MODERATOR') {
                 action.navigation.navigate('DrawerNavigator');
               }
-              if (data.currentUser.roles[0].name === 'ADMIN') {
+              if (data?.currentUser?.roles[0].name === 'ADMIN') {
                 action.navigation.navigate('DrawerNavigator');
               }
             } catch (e) {
-              Alert.alert('something went to wrong in currentuser');
+              Alert.alert('something went to wrong in current user');
             }
           };
-          Getuser();
+          GetUser();
         } else {
           action.navigation.navigate('CreateProfile');
         }
@@ -59,8 +54,12 @@ export function* loginSaga(action) {
       // }
 
       return response;
-    } catch (e) {
-      if (e.code === 'auth/user-not-found') {
+    } catch (e: unknown) {
+      if (!isBadRequestError(e)) {
+        Alert.alert('something went wrong while logging in');
+        return;
+      }
+      if (e.code && e.code === 'auth/user-not-found') {
         console.log('That email address is not found!');
         Alert.alert('That email address is not found!');
       }
@@ -92,3 +91,6 @@ export function* loginSaga(action) {
     yield put(LoginResponse(response, false));
   }
 }
+
+const isBadRequestError = (e: unknown): e is { code: string } =>
+  !!e && typeof e === 'object' && 'code' in e;

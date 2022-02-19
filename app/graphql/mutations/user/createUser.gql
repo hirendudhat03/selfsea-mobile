@@ -1,0 +1,21 @@
+mutation createUser(
+  $email: String!
+  $authId: String!
+  $birthMonth: Month!
+  $birthYear: Float!
+  $username: String!
+) {
+  createUser(
+    input: {
+      email: $email
+      authId: $authId
+      birthMonth: $birthMonth
+      birthYear: $birthYear
+      username: $username
+    }
+  ) {
+    id
+    authId
+    email
+  }
+}
