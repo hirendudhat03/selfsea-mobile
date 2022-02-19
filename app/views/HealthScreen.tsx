@@ -7,9 +7,9 @@ import Font from '../theme/fonts';
 import Images from '../theme/images';
 
 import LinearGradient from 'react-native-linear-gradient';
-import Header from '../component/Header';
-import Button from '../component/Button';
-import Badges from '../component/Badges';
+import Header from '../components/Header';
+import Button from '../components/Button';
+import Badges from '../components/Badges';
 
 import { useSelector } from 'react-redux';
 

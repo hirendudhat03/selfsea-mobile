@@ -3,9 +3,9 @@ import { View, Text, StyleSheet, Modal } from 'react-native';
 
 import ModalPicker from './ModalPickerConfirm';
 
-import Button from '../component/Button';
-import TextInput from '../component/CustomTextInput';
-import Header from '../component/Header';
+import Button from '../components/Button';
+import TextInput from '../components/CustomTextInput';
+import Header from '../components/Header';
 
 import Constant from '../theme/constant';
 import Images from '../theme/images';

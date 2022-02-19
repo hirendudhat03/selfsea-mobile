@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-import Button from '../component/Button';
-import TextInput from '../component/CustomTextInput';
-import Header from '../component/Header';
+import Button from '../components/Button';
+import TextInput from '../components/CustomTextInput';
+import Header from '../components/Header';
 
 import Constant from '../theme/constant';
 import Images from '../theme/images';

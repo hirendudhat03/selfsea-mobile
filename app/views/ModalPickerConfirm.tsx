@@ -5,7 +5,7 @@ import Font from '../theme/fonts';
 import Color from '../theme/colors';
 import Constant from '../theme/constant';
 
-import Button from '../component/Button';
+import Button from '../components/Button';
 
 interface Props {
   changeModalVisibility: (bool: boolean) => void;

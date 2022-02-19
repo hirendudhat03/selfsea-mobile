@@ -2,15 +2,15 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 import Images from '../../theme/images';
 import { Theme } from '../../styles';
-import Alert from '../../component/Alert';
+import Alert from '../Alert';
 import Constant from '../../theme/constant';
 import { useRoute } from '@react-navigation/native';
-import Button from '../../component/Button';
+import Button from '../Button';
 
-const CommunityCard = ({ navigation, alert }) => {
+export const CommunityCard = ({ navigation: _nav, alert }) => {
   var theme = Theme();
   const route = useRoute();
-  console.log(route.name, navigation);
+
   return (
     <View style={theme.communityCardView}>
       <View style={[theme.row]}>

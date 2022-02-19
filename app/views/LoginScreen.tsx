@@ -16,8 +16,8 @@ import Fonts from '../theme/fonts';
 import Color from '../theme/colors';
 import Images from '../theme/images';
 
-import Button from '../component/Button';
-import Auth from '../component/Authentication';
+import Button from '../components/Button';
+import Auth from '../components/Authentication';
 import { auths } from '../config/static';
 import { Theme } from '../styles';
 import { SignupResponse } from '../redux/actions/SignupAction';

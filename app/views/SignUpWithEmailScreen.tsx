@@ -10,26 +10,26 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import PasswordInputStrength from '../component/PasswordInputStrength';
+import PasswordInputStrength from '../components/PasswordInputStrength';
 import { availableMonths, useCalculateAge } from '../hooks/calculate-ages';
 
 import ModalPicker from './ModalPickerConfirm';
 
-import Button from '../component/Button';
-import TextInput from '../component/CustomTextInput';
-import Header from '../component/Header';
+import Button from '../components/Button';
+import TextInput from '../components/CustomTextInput';
+import Header from '../components/Header';
 
 import Constant from '../theme/constant';
 import Images from '../theme/images';
 import Font from '../theme/fonts';
 import Color from '../theme/colors';
-import BirthDateInput from '../component/BirthDateInput';
+import BirthDateInput from '../components/BirthDateInput';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { SignupRequest } from '../redux/actions/SignupAction';
 import { ScrollView } from 'react-native-gesture-handler';
 
-import Loader from '../component/Loader';
+import Loader from '../components/Loader';
 
 const zxcvbn = require('zxcvbn');
 

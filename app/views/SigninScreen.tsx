@@ -6,16 +6,16 @@ import Fonts from '../theme/fonts';
 import Color from '../theme/colors';
 import Images from '../theme/images';
 
-import Button from '../component/Button';
-import Auth from '../component/Authentication';
-import TextInput from '../component/CustomTextInput';
-import CheckBox from '../component/Checkbox';
-import Header from '../component/Header';
+import Button from '../components/Button';
+import Auth from '../components/Authentication';
+import TextInput from '../components/CustomTextInput';
+import CheckBox from '../components/Checkbox';
+import Header from '../components/Header';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginRequest } from '../redux/actions/LoginAction';
 
-import Loader from '../component/Loader';
+import Loader from '../components/Loader';
 import { auths } from '../config/static';
 
 const Signin = ({ navigation }) => {

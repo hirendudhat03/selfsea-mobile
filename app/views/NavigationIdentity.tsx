@@ -15,8 +15,8 @@ import Font from '../theme/fonts';
 import ModalPicker from './ModalPickerConfirm';
 
 import LinearGradient from 'react-native-linear-gradient';
-import Header from '../component/Header';
-import Badges from '../component/Badges';
+import Header from '../components/Header';
+import Badges from '../components/Badges';
 
 const DATA = [{}, {}, {}, {}];
 

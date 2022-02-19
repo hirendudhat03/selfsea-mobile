@@ -7,8 +7,8 @@ import Color from '../theme/colors';
 import Font from '../theme/fonts';
 import Images from '../theme/images';
 
-import Header from '../component/Header';
-import Button from '../component/Button';
+import Header from '../components/Header';
+import Button from '../components/Button';
 
 import LinearGradient from 'react-native-linear-gradient';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,7 +16,7 @@ import { Theme } from '../styles';
 import { HomeRequest } from '../redux/actions/HomeAction';
 import { AcceptRequest } from '../redux/actions/AcceptTermAction';
 
-// import Loader from '../component/Loader';
+// import Loader from '../components/Loader';
 
 const DATA = [{}, {}, {}, {}];
 
