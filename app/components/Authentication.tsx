@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Color from '../theme/colors';
-// @ts-ignore
+// cspell:words signin
 import {
   GoogleSignin,
   // statusCodes,
@@ -33,9 +33,10 @@ const Authentication = ({ text, icon }: Props) => {
     GoogleSignin.configure({
       // Mandatory method to call before calling signIn()
       // scopes: ['https://www.googleapis.com/auth/drive.readonly'],
-      // Repleace with your webClientId
+      // Replace with your webClientId
       // Generated from Firebase console
       webClientId:
+        // cspell:disable-next-line
         '651815828852-ieos3aa4gougfirdnf52carf51q8v52v.apps.googleusercontent.com',
     });
   }, []);
@@ -44,6 +45,7 @@ const Authentication = ({ text, icon }: Props) => {
   //   console.log('handlePressGoogleLogin');
   //   GoogleSignin.configure({
   //     // androidClientId: '3A:84:C8:28:4A:5F:82:9F:12:8B:71:46:C9:87:0F:68:E6:38:7E:AE',
+  //     // cspell:disable-next-line
   //     // iosClientId: '880711382534-k6q6jmtatddtll7u9qfmn31cbc1ckav1.apps.googleusercontent.com',
   //   });
 
@@ -135,13 +137,12 @@ const Authentication = ({ text, icon }: Props) => {
   //         appleAuthRequestResponse;
   //       auth.AppleAuthProvider.credential(identityToken, nonce);
   //       Alert.alert(parseJwt(identityToken).email, parseJwt(identityToken).sub);
-  //       console.log('heraa', credentialState);
+  //       console.log('here', credentialState);
   //       console.log(
   //         'Apple Credentials',
   //         email,
   //         fullName,
   //         nonce,
-  //         'Anshh',
   //         identityToken,
   //       );
   //     } else {

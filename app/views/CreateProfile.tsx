@@ -295,8 +295,8 @@ const CreateProfile = ({ navigation }) => {
       {/*{menuResponse.loader && <Loader value={menuResponse.loader} />}*/}
 
       <Header
-        type={Constant.navigatioHeader.PAGE_HEADER}
-        leftIcon={Images.Arrowsquare}
+        type={Constant.navigationHeader.PAGE_HEADER}
+        leftIcon={Images.ArrowSquare}
         label={'create your profile'}
         onPress={() => navigation.goBack()}
       />
@@ -321,7 +321,7 @@ const CreateProfile = ({ navigation }) => {
               <TouchableOpacity
                 style={styles.touchableStyle}
                 onPress={() => changeModalVisibility(true)}>
-                <Image source={Images.Infocircle} style={styles.infoIcon} />
+                <Image source={Images.InfoCircle} style={styles.infoIcon} />
               </TouchableOpacity>
             </View>
 
@@ -339,9 +339,9 @@ const CreateProfile = ({ navigation }) => {
                 {selectPronounsDropDown.map(item => {
                   return (
                     <Badges
-                      type={Constant.badges.MULTISELECT}
+                      type={Constant.badges.MULTI_SELECT}
                       text={item.name}
-                      rigthIcon={Images.Circle}
+                      rightIcon={Images.Circle}
                       onPress={() => clickDropDownItem(item)}
                     />
                   );
@@ -401,9 +401,9 @@ const CreateProfile = ({ navigation }) => {
                 {selectOrientationDropDown.map(item => {
                   return (
                     <Badges
-                      type={Constant.badges.MULTISELECT}
+                      type={Constant.badges.MULTI_SELECT}
                       text={item.name}
-                      rigthIcon={Images.Circle}
+                      rightIcon={Images.Circle}
                       onPress={() => orientationDropDownItem(item)}
                     />
                   );
@@ -464,9 +464,9 @@ const CreateProfile = ({ navigation }) => {
                 {selectGenderDropDown.map(item => {
                   return (
                     <Badges
-                      type={Constant.badges.MULTISELECT}
+                      type={Constant.badges.MULTI_SELECT}
                       text={item.name}
-                      rigthIcon={Images.Circle}
+                      rightIcon={Images.Circle}
                       onPress={() => genderDropDownItem(item)}
                     />
                   );
@@ -526,9 +526,9 @@ const CreateProfile = ({ navigation }) => {
                 {selectRaceDropDown.map(item => {
                   return (
                     <Badges
-                      type={Constant.badges.MULTISELECT}
+                      type={Constant.badges.MULTI_SELECT}
                       text={item.name}
-                      rigthIcon={Images.Circle}
+                      rightIcon={Images.Circle}
                       onPress={() => raceDropDownItem(item)}
                     />
                   );
@@ -587,9 +587,9 @@ const CreateProfile = ({ navigation }) => {
                 {selectLocationDropDown.map(item => {
                   return (
                     <Badges
-                      type={Constant.badges.MULTISELECT}
+                      type={Constant.badges.MULTI_SELECT}
                       text={item.description}
-                      rigthIcon={Images.Circle}
+                      rightIcon={Images.Circle}
                       onPress={() => locationDropDownItem(item)}
                     />
                   );

@@ -16,9 +16,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LoginRequest } from '../redux/actions/LoginAction';
 
 import Loader from '../components/Loader';
-import { auths } from '../config/static';
+import { authText } from '../config/static';
 
-const Signin = ({ navigation }) => {
+const SignIn = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const loginRes = useSelector(state => state.LoginReducer);
@@ -64,10 +64,10 @@ const Signin = ({ navigation }) => {
     console.log('text:::', text);
     setPassword(text);
     if (text === '') {
-      setpasswordBorder(Color.COMMUNITY_ORANGE);
+      setPasswordBorder(Color.COMMUNITY_ORANGE);
       setPasswordError('password must contain a number. ');
     } else {
-      setpasswordBorder(Color.BORDER_COLOR_LIGHTGRAY);
+      setPasswordBorder(Color.BORDER_COLOR_LIGHTGRAY);
       setPasswordError(' ');
     }
   };
@@ -82,12 +82,12 @@ const Signin = ({ navigation }) => {
     setEmailBorder(Color.BASE_COLOR_LIGHT_BLUE);
   };
 
-  const [passwordBorder, setpasswordBorder] = useState('');
-  const handleTouchpasswordBorder = () => {
-    setpasswordBorder(Color.BASE_COLOR_LIGHT_BLUE);
+  const [passwordBorder, setPasswordBorder] = useState('');
+  const handleTouchPasswordBorder = () => {
+    setPasswordBorder(Color.BASE_COLOR_LIGHT_BLUE);
   };
 
-  const SigninValidation = async () => {
+  const SignInValidation = async () => {
     if (!email && !password) {
       setEmailError('Email Required');
       setPasswordError('Password Required');
@@ -109,8 +109,8 @@ const Signin = ({ navigation }) => {
       <Loader value={loginRes.loader} />
 
       <Header
-        type={Constant.navigatioHeader.PAGE_HEADER}
-        leftIcon={Images.Arrowsquare}
+        type={Constant.navigationHeader.PAGE_HEADER}
+        leftIcon={Images.ArrowSquare}
         label={'sign in'}
         onPress={() => navigation.goBack()}
       />
@@ -145,7 +145,7 @@ const Signin = ({ navigation }) => {
             secureTextEntry={focus !== true ? focus : true}
             secureTextEntryChange={selectFocus}
             checkRight={undefined}
-            onTouchStart={() => handleTouchpasswordBorder()}
+            onTouchStart={() => handleTouchPasswordBorder()}
             borderColor={passwordBorder}
           />
 
@@ -163,9 +163,9 @@ const Signin = ({ navigation }) => {
 
           <Button
             type={Constant.buttons.PRIMARY}
-            text={auths.SIGNIN_BUTTON}
+            text={authText.SIGN_IN_BUTTON}
             style={styles.buttonStyle}
-            onPress={() => SigninValidation()}
+            onPress={() => SignInValidation()}
           />
           <View style={styles.bottomContentStyle} />
         </View>
@@ -243,4 +243,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Signin;
+export default SignIn;

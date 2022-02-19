@@ -39,8 +39,8 @@ const ForgotPassword = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Header
-        type={Constant.navigatioHeader.PAGE_HEADER}
-        leftIcon={Images.Arrowsquare}
+        type={Constant.navigationHeader.PAGE_HEADER}
+        leftIcon={Images.ArrowSquare}
         label={'forgot password'}
         onPress={() => navigation.goBack()}
       />

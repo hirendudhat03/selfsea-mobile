@@ -27,7 +27,7 @@ interface Props {
   secureTextEntryChange?: () => void;
   secureTextEntry?: boolean;
   iconVisible?: boolean;
-  textInputstyle: {};
+  textInputStyle: {};
   checkRight?: boolean;
   circleFill?: String;
   iconVisibleFill?: boolean;
@@ -51,7 +51,7 @@ const CustomTextInput = ({
   secureTextEntryChange,
   iconVisible,
   secureTextEntry,
-  textInputstyle,
+  textInputStyle,
   checkRight,
   iconVisibleFill,
   circleFill,
@@ -86,7 +86,7 @@ const CustomTextInput = ({
               ) : null}
               <TextInput
                 maxLength={maxLength}
-                style={[styles.textInputStyle, textInputstyle]}
+                style={[styles.textInputStyle, textInputStyle]}
                 placeholder={placeholder}
                 onChangeText={onChangeText}
                 secureTextEntry={secureTextEntry}

@@ -39,7 +39,7 @@ const Header = ({
 }: Props) => {
   return (
     <>
-      {type === Constant.navigatioHeader.PAGE_HEADER ? (
+      {type === Constant.navigationHeader.PAGE_HEADER ? (
         <View style={[styles.primaryPageHeaderView, style]}>
           <View style={styles.primaryPageHeaderRow}>
             <TouchableOpacity onPress={onPress}>
@@ -52,7 +52,7 @@ const Header = ({
           </View>
         </View>
       ) : null}
-      {type === Constant.navigatioHeader.POST ? (
+      {type === Constant.navigationHeader.POST ? (
         <View style={[styles.createPostView, style]}>
           <TouchableOpacity>
             <Image source={leftIcon} />
@@ -68,7 +68,7 @@ const Header = ({
           </View>
         </View>
       ) : null}
-      {type === Constant.navigatioHeader.COMMUNITY_HEADER ? (
+      {type === Constant.navigationHeader.COMMUNITY_HEADER ? (
         <View style={[styles.communityHeader, style]}>
           <View style={styles.communityImageView}>
             <TouchableOpacity onPress={onPress}>

@@ -7,9 +7,9 @@ const initialState = {
 
 console.log('call CreateProfile');
 
-export const SignupReducer = CreateReducer(initialState, {
-  ['SIGNUP_RESPONSE'](state, action) {
-    console.log('call SIGNUP_RESPONSE');
+export const SignUpReducer = CreateReducer(initialState, {
+  ['SIGN_UP_RESPONSE'](state, action) {
+    console.log('call SIGN_UP_RESPONSE');
     console.log('state : ', state);
     console.log('action : ', action);
     return {
@@ -17,8 +17,8 @@ export const SignupReducer = CreateReducer(initialState, {
       loader: action.loader,
     };
   },
-  ['SIGNUP_REQUEST'](state, action) {
-    console.log('call SIGNUP_REQUEST');
+  ['SIGN_UP_REQUEST'](state, action) {
+    console.log('call SIGN_UP_REQUEST');
     console.log('state : ', state);
     console.log('action : ', action);
     return {

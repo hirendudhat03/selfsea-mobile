@@ -14,13 +14,13 @@ import Font from '../theme/fonts';
 interface Props {
   type: string;
   leftIcon?: ImageSourcePropType;
-  rigthIcon?: ImageSourcePropType;
+  rightIcon?: ImageSourcePropType;
   text: string;
   onPress: () => void;
   style?: {};
 }
 
-const Badges = ({ type, leftIcon, rigthIcon, text, onPress, style }: Props) => {
+const Badges = ({ type, leftIcon, rightIcon, text, onPress, style }: Props) => {
   return (
     <View
       style={
@@ -36,7 +36,7 @@ const Badges = ({ type, leftIcon, rigthIcon, text, onPress, style }: Props) => {
           ? styles.inActiveView
           : type === Constant.badges.DESCRIPTOR
           ? styles.descriptorView
-          : type === Constant.badges.MULTISELECT
+          : type === Constant.badges.MULTI_SELECT
           ? styles.multiSelectView
           : null
       }>
@@ -60,15 +60,15 @@ const Badges = ({ type, leftIcon, rigthIcon, text, onPress, style }: Props) => {
             ? styles.inActiveText
             : type === Constant.badges.DESCRIPTOR
             ? styles.descriptorText
-            : type === Constant.badges.MULTISELECT
+            : type === Constant.badges.MULTI_SELECT
             ? styles.multiSelectText
             : null
         }>
         {text}
       </Text>
-      {rigthIcon ? (
+      {rightIcon ? (
         <TouchableOpacity onPress={onPress}>
-          <Image source={rigthIcon} style={styles.rightIconStyle} />
+          <Image source={rightIcon} style={styles.rightIconStyle} />
         </TouchableOpacity>
       ) : null}
     </View>

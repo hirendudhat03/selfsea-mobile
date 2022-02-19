@@ -52,7 +52,7 @@ const Drawer = ({ props }: Props) => {
         <ScrollView>
           <View>
             <DrawerItem
-              style={styles.communites}
+              style={styles.communities}
               label={() => (
                 <View style={styles.communityText}>
                   <Text style={styles.menuText}>Communities</Text>
@@ -496,7 +496,7 @@ const styles = StyleSheet.create({
     width: '73%',
     height: '20%',
   },
-  communites: {
+  communities: {
     height: 50,
     borderBottomWidth: 2,
     borderBottomColor: Color.BASE_COLOR_LIGHTGRAY,

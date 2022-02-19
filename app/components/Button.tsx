@@ -43,7 +43,7 @@ const Button = ({
           ? [styles.primaryView, style]
           : type === Constant.buttons.CLOSE
           ? [styles.closeButtonView, style]
-          : type === Constant.buttons.SELFSEASEND
+          : type === Constant.buttons.SELFSEA_SEND
           ? styles.selfseaSendView
           : null
       }
