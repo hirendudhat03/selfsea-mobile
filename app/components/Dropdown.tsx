@@ -3,7 +3,6 @@ import { Image, StyleSheet, View } from 'react-native';
 import Color from '../theme/colors';
 import Images from '../theme/images';
 import SelectDropdown from 'react-native-select-dropdown';
-// @ts-ignore
 
 interface OptionListType {
   title: string;
@@ -17,7 +16,7 @@ interface Props {
   style?: {};
   rowTextStyle?: {};
   checkRight?: boolean;
-  circleFill?: string;
+  circleFill?: boolean;
   value?: string;
   iconVisibleFill?: boolean;
 }

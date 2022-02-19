@@ -11,10 +11,11 @@ import Header from '../components/Header';
 import Button from '../components/Button';
 
 import LinearGradient from 'react-native-linear-gradient';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Theme } from '../styles';
 import { HomeRequest } from '../redux/actions/HomeAction';
 import { AcceptRequest } from '../redux/actions/AcceptTermAction';
+import { useTypedSelector } from '../redux';
 
 // import Loader from '../components/Loader';
 
@@ -43,13 +44,13 @@ const descriptionData = [
 ];
 
 const CommunitiesHome = ({ navigation }) => {
-  const [title, setTitle] = useState(null);
-  const [content, setContent] = useState(null);
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const dispatch = useDispatch();
 
-  const homeResponse = useSelector(state => state.HomeReducer);
+  const homeResponse = useTypedSelector(state => state.HomeReducer);
   console.log('HomeReducer123 : ', JSON.stringify(homeResponse));
 
   useEffect(() => {

@@ -183,6 +183,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     color: Color.BASE_COLOR_DARK_INFO_TEXT,
   },
+  actionFadeText: {},
   touchableStyle: {
     justifyContent: 'center',
     flex: 1,

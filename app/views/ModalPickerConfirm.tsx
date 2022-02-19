@@ -7,6 +7,10 @@ import Constant from '../theme/constant';
 
 import Button from '../components/Button';
 
+interface IDescriptionItem {
+  title: string;
+}
+
 interface Props {
   changeModalVisibility: (bool: boolean) => void;
   textTitle: string;
@@ -15,11 +19,11 @@ interface Props {
   firstText?: string;
   secondText?: string;
   type: string;
-  text: string;
-  descriptionData: [];
-  numberOfLines: number;
+  text?: string;
+  descriptionData?: IDescriptionItem[];
+  numberOfLines?: number;
   style?: {};
-  button: String;
+  button?: string;
   secondType?: string;
   firstType?: string;
   onPress?: () => void;
@@ -69,13 +73,13 @@ const ModalPicker = ({
                 type={firstType}
                 text={firstText}
                 style={styles.closeButtonStyle}
-                onPress={onPress || changeModalVisibility}
+                onPress={onPress || (() => changeModalVisibility(false))}
               />
               <Button
                 type={secondType}
                 text={secondText}
                 style={styles.primaryButtonStyle}
-                onPress={onPressPrimary || changeModalVisibility}
+                onPress={onPressPrimary || (() => changeModalVisibility(false))}
               />
             </View>
           </View>
@@ -94,7 +98,7 @@ const ModalPicker = ({
               </Text>
             ) : null}
 
-            {descriptionData.map(item => {
+            {descriptionData?.map(item => {
               return (
                 <Text
                   style={[styles.descriptionText, style]}
@@ -108,7 +112,7 @@ const ModalPicker = ({
               type={button}
               text={text}
               style={styles.buttonStyle}
-              onPress={onPress || changeModalVisibility}
+              onPress={onPress || (() => changeModalVisibility(false))}
             />
           </View>
         </View>

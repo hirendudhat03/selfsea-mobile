@@ -57,7 +57,7 @@ const ForgotPassword = ({ navigation }) => {
             onChangeText={text => {
               selectFill(text);
             }}
-            value={email}
+            value={email || undefined}
             helperText={emailError}
             onTouchStart={() => handleTouch()}
             borderColor={emailBorder}

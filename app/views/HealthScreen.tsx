@@ -10,12 +10,11 @@ import LinearGradient from 'react-native-linear-gradient';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import Badges from '../components/Badges';
-
-import { useSelector } from 'react-redux';
+import { useTypedSelector } from '../redux';
 
 const DATA = [{}, {}, {}, {}];
 const HealthScreen = ({ navigation }) => {
-  const homeResponse = useSelector(state => state.HomeReducer);
+  const homeResponse = useTypedSelector(state => state.HomeReducer);
   console.log(' homeResponse: ', JSON.stringify(homeResponse));
 
   const [health] = useState([DATA]);

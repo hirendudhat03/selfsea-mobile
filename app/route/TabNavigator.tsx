@@ -36,8 +36,8 @@ const HomeStack = createStackNavigator();
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator
-      headerMode={'none'}
       screenOptions={{
+        headerShown: false,
         gestureEnabled: true,
         gestureDirection: 'horizontal',
       }}

@@ -18,7 +18,7 @@ interface Props {
   leftIcon?: ImageSourcePropType;
   rightIcon?: ImageSourcePropType;
   text?: string;
-  onPress: () => void;
+  onPress?: () => void;
   underlineText?: string;
   descriptionText?: string;
   style?: {};
@@ -43,11 +43,11 @@ const Header = ({
         <View style={[styles.primaryPageHeaderView, style]}>
           <View style={styles.primaryPageHeaderRow}>
             <TouchableOpacity onPress={onPress}>
-              <Image source={leftIcon} />
+              {leftIcon && <Image source={leftIcon} />}
             </TouchableOpacity>
             <Text style={styles.primaryPageHeaderText}>{label}</Text>
             <TouchableOpacity>
-              <Image source={rightIcon} />
+              {rightIcon && <Image source={rightIcon} />}
             </TouchableOpacity>
           </View>
         </View>
@@ -55,7 +55,7 @@ const Header = ({
       {type === Constant.navigationHeader.POST ? (
         <View style={[styles.createPostView, style]}>
           <TouchableOpacity>
-            <Image source={leftIcon} />
+            {leftIcon && <Image source={leftIcon} />}
           </TouchableOpacity>
           <Text style={styles.createPostText}>
             {label} <Text style={styles.createPostTextSmall}>{text}</Text>
@@ -63,7 +63,9 @@ const Header = ({
           <View style={styles.downView}>
             <Text style={styles.underlineText}>{underlineText}</Text>
             <TouchableOpacity>
-              <Image source={rightIcon} style={styles.downIconStyle} />
+              {rightIcon && (
+                <Image source={rightIcon} style={styles.downIconStyle} />
+              )}
             </TouchableOpacity>
           </View>
         </View>
@@ -72,10 +74,12 @@ const Header = ({
         <View style={[styles.communityHeader, style]}>
           <View style={styles.communityImageView}>
             <TouchableOpacity onPress={onPress}>
-              <Image source={leftIcon} />
+              {leftIcon && <Image source={leftIcon} />}
             </TouchableOpacity>
             <TouchableOpacity onPress={onPressRight}>
-              <Image source={rightIcon} style={styles.rightIconStyle} />
+              {rightIcon && (
+                <Image source={rightIcon} style={styles.rightIconStyle} />
+              )}
             </TouchableOpacity>
           </View>
           <Text style={styles.communityHeaderText}>{label}</Text>

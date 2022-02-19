@@ -7,7 +7,7 @@ interface Props {
   text?: string;
   onEnableToggle: () => void;
   isEnabled: boolean;
-  ios_backgroundColor: String;
+  ios_backgroundColor?: string;
 }
 
 const styles = StyleSheet.create({

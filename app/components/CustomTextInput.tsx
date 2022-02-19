@@ -19,25 +19,25 @@ const height = Dimensions.get('window').height;
 interface Props {
   type: string;
   placeholder?: string;
-  helperText: string;
+  helperText?: string;
   label?: string;
   style: {};
   onChangeText: (text: string) => void;
-  value: string;
+  value?: string;
   secureTextEntryChange?: () => void;
   secureTextEntry?: boolean;
   iconVisible?: boolean;
-  textInputStyle: {};
+  textInputStyle?: {};
   checkRight?: boolean;
-  circleFill?: String;
+  circleFill?: boolean;
   iconVisibleFill?: boolean;
-  viewStyle: {};
+  viewStyle?: {};
   onTouchStart?: () => void;
   borderColor: string;
   onTouchEnd?: () => void;
-  defaultValue: string;
-  text: string;
-  maxLength: number;
+  defaultValue?: string;
+  text?: string;
+  maxLength?: number;
 }
 
 const CustomTextInput = ({
@@ -91,7 +91,6 @@ const CustomTextInput = ({
                 onChangeText={onChangeText}
                 secureTextEntry={secureTextEntry}
                 value={value}
-                circleFill={circleFill}
                 onTouchStart={onTouchStart}
                 onTouchEnd={onTouchEnd}
                 defaultValue={defaultValue}

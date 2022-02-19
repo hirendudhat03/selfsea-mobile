@@ -12,16 +12,17 @@ import TextInput from '../components/CustomTextInput';
 import CheckBox from '../components/Checkbox';
 import Header from '../components/Header';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { LoginRequest } from '../redux/actions/LoginAction';
 
 import Loader from '../components/Loader';
 import { authText } from '../config/static';
+import { useTypedSelector } from '../redux';
 
 const SignIn = ({ navigation }) => {
   const dispatch = useDispatch();
 
-  const loginRes = useSelector(state => state.LoginReducer);
+  const loginRes = useTypedSelector(state => state.LoginReducer);
   console.log('LoginReducer : ', JSON.stringify(loginRes));
 
   const [isSelectedCheckBox, setISSelectionCheckBox] = useState(false);
@@ -174,13 +175,13 @@ const SignIn = ({ navigation }) => {
           <Auth
             text={'continue with Google'}
             icon={Images.Google}
-            type={Constant.authLogin.GOOGLE}
+            // type={Constant.authLogin.GOOGLE}
           />
 
           <Auth
             text={'continue with Apple'}
             icon={Images.Apple}
-            type={Constant.authLogin.APPLE}
+            // type={Constant.authLogin.APPLE}
           />
         </View>
       </ScrollView>

@@ -10,18 +10,18 @@ interface OptionListType {
 interface Props {
   defaultMonthButtonText: string;
   onSelectMonth: (item: string, index: number) => void;
-  monthOptionList: OptionListType[];
+  monthOptionList: OptionListType[] | string[];
   monthRowTextStyle?: {};
   monthStyle?: {};
   monthValue: string;
 
   defaultYearButtonText: string;
   onSelectYear: (item: string, index: number) => void;
-  yearOptionList: OptionListType[];
+  yearOptionList: OptionListType[] | string[];
   yearStyle?: {};
   yearRowTextStyle?: {};
   checkRight?: boolean;
-  circleFill: string;
+  circleFill?: boolean;
   yearValue: string;
   iconVisibleFill?: boolean;
 }
