@@ -14,7 +14,7 @@
     "codegen": "graphql-codegen --config codegen.yml",
     "prepare": "husky install",
     "pre-commit": "npm run spell-check:new && npm run lint && npm run test",
-    "spell-check:new": "git diff --name-only | cspell --no-must-find-files --no-progress --file-list stdin",
+    "spell-check:new": "git diff --cached --name-only | cspell --no-must-find-files --no-progress --file-list stdin",
     "build-android-debug": "cd android && ./gradlew clean && ./gradlew assembleDebug && cd .."
   },
   "dependencies": {
