@@ -15,8 +15,6 @@ import {
 import { Prediction } from '../types/location';
 import { ApiResponse } from '../types/ProfileApiResponse';
 import ModalPicker from './ModalPickerConfirm';
-import Config from 'react-native-config';
-
 import Constant from '../theme/constant';
 import Font from '../theme/fonts';
 import Color from '../theme/colors';
@@ -31,6 +29,7 @@ import { CreateProfileRequest } from '../redux/actions/CreateProfileAction';
 
 import { DropDownRequest } from '../redux/actions/MenuAction';
 import axios from 'react-native-axios';
+import { config } from '../config';
 
 const height = Dimensions.get('window').height;
 
@@ -217,7 +216,7 @@ const CreateProfile = ({ navigation }) => {
         url:
           'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' +
           val +
-          `&key=${Config.PLACES_API_KEY}&sessiontoken=${Config.SESSION_TOKEN}`,
+          `&key=${config.PLACES_API_KEY}&sessiontoken=${config.PLACES_SESSION_TOKEN}`,
         method: 'get',
       })
         .then(res => {
