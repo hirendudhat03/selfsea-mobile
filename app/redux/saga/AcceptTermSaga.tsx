@@ -4,14 +4,12 @@ import { api } from '../../services';
 
 import { AcceptResponse } from '../actions/AcceptTermAction';
 
-import { acceptCurrentTermsMutation } from '../../graphql/mutations/UserMutation';
-
 export function* acceptSaga(action) {
   const Accept = async () => {
     console.log('call homeSaga : ', action);
 
     try {
-      const data = await api.client.request(acceptCurrentTermsMutation);
+      const data = await api.acceptCurrentTerms();
       console.log('data accept:::::', data);
 
       return data;

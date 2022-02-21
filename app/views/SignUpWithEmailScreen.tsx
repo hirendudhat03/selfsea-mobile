@@ -10,30 +10,28 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import PasswordInputStrength from '../component/PasswordInputStrength';
+import PasswordInputStrength from '../components/PasswordInputStrength';
 import { availableMonths, useCalculateAge } from '../hooks/calculate-ages';
 
 import ModalPicker from './ModalPickerConfirm';
 
-import Button from '../component/Button';
-import TextInput from '../component/CustomTextInput';
-import Header from '../component/Header';
+import Button from '../components/Button';
+import TextInput from '../components/CustomTextInput';
+import Header from '../components/Header';
 
 import Constant from '../theme/constant';
 import Images from '../theme/images';
 import Font from '../theme/fonts';
 import Color from '../theme/colors';
-import BirthDateInput from '../component/BirthDateInput';
+import BirthDateInput from '../components/BirthDateInput';
 
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  SignupRequest,
-  SignupRequestWithoutPassword,
-} from '../redux/actions/SignupAction';
+import { useDispatch } from 'react-redux';
+import { SignUpRequest, SignupRequestWithoutPassword, } from '../redux/actions/SignUpAction';
 import { ScrollView } from 'react-native-gesture-handler';
 
-import Loader from '../component/Loader';
-import { auths } from '../config/static';
+import Loader from '../components/Loader';
+import { useTypedSelector } from '../redux';
+import { authText } from '../config/static';
 
 const zxcvbn = require('zxcvbn');
 
@@ -53,7 +51,7 @@ const descriptionData = [
   },
 ];
 
-const birthnData = [
+const birthData = [
   {
     title: 'selfsea is just for the users between the ages 13-18.',
   },
@@ -74,18 +72,16 @@ const ageData = [
   },
 ];
 
-const Signup = ({ route, navigation }) => {
+const SignUp = ({ route, navigation }) => {
   const dispatch = useDispatch();
 
-  const signupRes = useSelector(state => state.SignupReducer);
-  // console.log('signupResReducer : ', JSON.stringify(signupRes));
+  const signUpRes = useTypedSelector(state => state.SignUpReducer);
+  console.log('signUpResReducer : ', JSON.stringify(signUpRes));
 
   const [years, setYear] = useState<number[]>([]);
 
-  // console.log('checkkkkkk', route.params);
-
   useEffect(() => {
-    let year = [];
+    let year: number[] = [];
     let currentYear = new Date().getFullYear();
     let startYear = 1900;
     route.params !== undefined &&
@@ -100,18 +96,19 @@ const Signup = ({ route, navigation }) => {
     setYear(year);
   }, [route]);
 
+
   useEffect(() => {
-    if (signupRes.data) {
-      // console.log('signupRes.data if: ', signupRes.data);
-      if (signupRes.data.errorname === 'email') {
-        setEmailError(signupRes.data.error);
+    if (signUpRes.data) {
+      console.log('signUpRes.data if: ', signUpRes.data);
+      if (signUpRes.data.errorName === 'email') {
+        setEmailError(signUpRes.data.error);
       } else {
-        setUserNameError(signupRes.data.error);
+        setUserNameError(signUpRes.data.error);
       }
     } else {
-      // console.log('signupRes.data : ', signupRes.data);
+      console.log('signUpRes.data : ', signUpRes.data);
     }
-  }, [signupRes]);
+  }, [signUpRes]);
 
   const [email, setEmail] = useState<string>('');
   const [emailError, setEmailError] = useState('');
@@ -163,7 +160,7 @@ const Signup = ({ route, navigation }) => {
         );
       } else {
         dispatch(
-          SignupRequest(
+          SignUpRequest(
             email,
             Password,
             birthMonth,
@@ -209,14 +206,14 @@ const Signup = ({ route, navigation }) => {
 
     setPassword(text);
     if (text === '') {
-      setpasswordBorder(Color.COMMUNITY_ORANGE);
+      setPasswordBorder(Color.COMMUNITY_ORANGE);
       setPasswordError('Password must contain a number.');
       setCircleFillPassword(false);
     } else if (text.length < 8 || text.length > 255) {
-      setpasswordBorder(Color.COMMUNITY_ORANGE);
+      setPasswordBorder(Color.COMMUNITY_ORANGE);
       setPasswordError('your password must be less than 255 characters.');
     } else {
-      setpasswordBorder(Color.BORDER_COLOR_LIGHTGRAY);
+      setPasswordBorder(Color.BORDER_COLOR_LIGHTGRAY);
       setPasswordError('');
     }
   };
@@ -258,7 +255,7 @@ const Signup = ({ route, navigation }) => {
     }
   };
 
-  const selectFillmonth = value => {
+  const selectFillMonth = value => {
     setBirthMonth(value);
 
     if (value === '' || birthYear === '') {
@@ -269,14 +266,14 @@ const Signup = ({ route, navigation }) => {
     }
   };
 
-  const [isModalVisible, setIsMoalVisiable] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const changeModalVisibility = (bool: boolean) => {
-    setIsMoalVisiable(bool);
+    setIsModalVisible(bool);
   };
 
-  const [isBirthVisible, setIsBirthVisiable] = useState(false);
+  const [isBirthVisible, setIsBirthVisible] = useState(false);
   const changeBirthVisibility = (bool: boolean) => {
-    setIsBirthVisiable(bool);
+    setIsBirthVisible(bool);
   };
 
   const [isAgeValid, setIsAgeValid] = useState(false);
@@ -284,7 +281,7 @@ const Signup = ({ route, navigation }) => {
     setIsAgeValid(bool);
   };
 
-  const SignupValidation = (text: string) => {
+  const SignUpValidation = (text: string) => {
     if (route.params === undefined) {
       if (
         !email &&
@@ -343,24 +340,24 @@ const Signup = ({ route, navigation }) => {
     setEmailBorder(Color.BASE_COLOR_LIGHT_BLUE);
   };
 
-  const [passwordBorder, setpasswordBorder] = useState('');
-  const handleTouchpasswordBorder = () => {
-    setpasswordBorder(Color.BASE_COLOR_LIGHT_BLUE);
+  const [passwordBorder, setPasswordBorder] = useState('');
+  const handleTouchPasswordBorder = () => {
+    setPasswordBorder(Color.BASE_COLOR_LIGHT_BLUE);
   };
   const [userNameBorder, setUserNameBorder] = useState('');
-  const handleTouchusernameBorder = () => {
+  const handleTouchUsernameBorder = () => {
     setUserNameBorder(Color.BASE_COLOR_LIGHT_BLUE);
   };
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : ''}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       style={styles.keyboardAvoidingStyle}>
       <View style={styles.container}>
-        <Loader value={signupRes.loader} />
+        <Loader value={signUpRes.loader} />
         <Header
-          type={Constant.navigatioHeader.PAGE_HEADER}
-          leftIcon={Images.Arrowsquare}
+          type={Constant.navigationHeader.PAGE_HEADER}
+          leftIcon={Images.ArrowSquare}
           label={'sign up with email'}
           onPress={() => navigation.goBack()}
         />
@@ -404,7 +401,7 @@ const Signup = ({ route, navigation }) => {
               iconVisibleFill={true}
               checkRight={true}
               circleFill={circleFillPassword}
-              onTouchStart={() => handleTouchpasswordBorder()}
+              onTouchStart={() => handleTouchPasswordBorder()}
               borderColor={passwordBorder}
             />
             {route.params === undefined && (
@@ -430,7 +427,7 @@ const Signup = ({ route, navigation }) => {
                 <TouchableOpacity
                   style={styles.touchableStyle}
                   onPress={() => changeBirthVisibility(true)}>
-                  <Image source={Images.Infocircle} style={styles.infoIcon} />
+                  <Image source={Images.InfoCircle} style={styles.infoIcon} />
                 </TouchableOpacity>
                 {/* </View> */}
               </View>
@@ -442,12 +439,12 @@ const Signup = ({ route, navigation }) => {
             <BirthDateInput
               monthOptionList={availableMonths}
               onSelectMonth={value => {
-                selectFillmonth(value);
+                selectFillMonth(value);
               }}
               defaultMonthButtonText={'select one'}
               monthValue={birthMonth}
               monthStyle={{ width: width * 0.48 }}
-              yearOptionList={years}
+              yearOptionList={years.map(y => y.toString())}
               onSelectYear={value => {
                 selectFillBirth(value);
               }}
@@ -464,7 +461,7 @@ const Signup = ({ route, navigation }) => {
               <TouchableOpacity
                 style={styles.touchableStyle}
                 onPress={() => changeModalVisibility(true)}>
-                <Image source={Images.Infocircle} style={styles.infoIcon} />
+                <Image source={Images.InfoCircle} style={styles.infoIcon} />
               </TouchableOpacity>
             </View>
             <TextInput
@@ -479,7 +476,7 @@ const Signup = ({ route, navigation }) => {
               iconVisibleFill={true}
               checkRight={true}
               circleFill={circleFillUser}
-              onTouchStart={() => handleTouchusernameBorder()}
+              onTouchStart={() => handleTouchUsernameBorder()}
               borderColor={userNameBorder}
             />
             {userNameError === 'this username is taken.' ? (
@@ -504,7 +501,7 @@ const Signup = ({ route, navigation }) => {
           {route.params === undefined ? (
             <Button
               type={Constant.buttons.PRIMARY}
-              text={auths.CREATE_ACCOUNT_BUTTON}
+              text={authText.CREATE_ACCOUNT_BUTTON}
               style={[
                 styles.buttonStyle,
                 circleFillEmail !== true ||
@@ -514,7 +511,7 @@ const Signup = ({ route, navigation }) => {
                   ? { backgroundColor: Color.BUTTON_DISABLE_COLOR }
                   : { backgroundColor: Color.BASE_COLOR_ORANGE },
               ]}
-              onPress={() => SignupValidation()}
+              onPress={() => SignUpValidation(userName)}
               disabled={
                 passwordScore < 3 ||
                 circleFillEmail !== true ||
@@ -528,7 +525,7 @@ const Signup = ({ route, navigation }) => {
           ) : (
             <Button
               type={Constant.buttons.PRIMARY}
-              text={auths.CREATE_ACCOUNT_BUTTON}
+              text={authText.CREATE_ACCOUNT_BUTTON}
               style={[
                 styles.buttonStyle,
                 circleFillEmail !== true ||
@@ -537,7 +534,7 @@ const Signup = ({ route, navigation }) => {
                   ? { backgroundColor: Color.BUTTON_DISABLE_COLOR }
                   : { backgroundColor: Color.BASE_COLOR_ORANGE },
               ]}
-              onPress={() => SignupValidation()}
+              onPress={() => SignUpValidation(userName)}
               disabled={
                 circleFillEmail !== true ||
                 circleFillBirth !== true ||
@@ -575,7 +572,7 @@ const Signup = ({ route, navigation }) => {
             changeModalVisibility={changeBirthVisibility}
             type={Constant.modal.MODAL}
             textTitle={'selfsea birth month'}
-            descriptionData={birthnData}
+            descriptionData={birthData}
             numberOfLines={3}
             button={Constant.buttons.CLOSE}
             text={'close'}
@@ -754,4 +751,4 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-export default Signup;
+export default SignUp;

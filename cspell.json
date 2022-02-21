@@ -1,0 +1,33 @@
+{
+  // Version of the setting file.  Always 0.2
+  "version": "0.2",
+  // language - current active spelling language
+  "language": "en",
+  // words - list of words to be always considered correct
+  "words": [
+    "selfsea",
+    "phe",
+    "peerhealthexchange",
+    "ethnicities",
+    "mentee",
+    "mentees",
+    "ellipsize",
+    "png",
+    "pngs",
+    "zxcvbn",
+    "genderfluid",
+    "BIPOC",
+    "codegen"
+  ],
+  "flagWords": [],
+  "ignorePaths": [
+    "package.json",
+    "package-lock.json",
+    "node_modules",
+    "build",
+    "android",
+    "ios",
+    "app/generated",
+    "app/assets"
+  ]
+}

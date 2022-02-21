@@ -8,7 +8,7 @@ export function DropDownResponse(data, loader) {
   };
 }
 
-export function DropDownRequest(loader) {
+export function DropDownRequest(loader?: unknown) {
   return {
     type: 'DROPDOWN_REQUEST',
     loader: loader,

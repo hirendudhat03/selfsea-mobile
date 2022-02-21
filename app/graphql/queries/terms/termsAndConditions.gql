@@ -1,0 +1,8 @@
+query currentTermsAndConditions {
+  currentTermsAndConditions {
+    id
+    title
+    content
+    version
+  }
+}

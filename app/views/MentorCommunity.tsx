@@ -5,7 +5,7 @@ import Color from '../theme/colors';
 import Font from '../theme/fonts';
 import Images from '../theme/images';
 
-import Switch from '../component/Switch';
+import Switch from '../components/Switch';
 
 import LinearGradient from 'react-native-linear-gradient';
 

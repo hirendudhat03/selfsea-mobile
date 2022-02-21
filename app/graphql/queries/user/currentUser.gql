@@ -1,0 +1,28 @@
+query currentUser {
+  currentUser {
+    id
+    authId
+    email
+    hasAcceptedLatestTerms
+    roles {
+      id
+      name
+    }
+    profile {
+      id
+      bio
+      genders {
+        id
+        name
+      }
+      pronouns {
+        id
+        name
+      }
+      orientations {
+        id
+        name
+      }
+    }
+  }
+}

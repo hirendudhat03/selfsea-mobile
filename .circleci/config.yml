@@ -5,9 +5,9 @@ orbs:
 
 workflows:
   version: 2
-  lint-and-test:
+  lint-build-test:
     jobs:
-      - lint-and-test
+      - lint-build-test
   deploy:
     jobs:
       - deploy:
@@ -83,7 +83,7 @@ save_gems_cache: &save_gems_cache
       - android/vendor/bundle
 
 jobs:
-  lint-and-test:
+  lint-build-test:
     docker:
       - image: cimg/node:lts
     steps:
@@ -91,8 +91,8 @@ jobs:
       - run: node --version
       - run: npm install
       - run: npm run lint
-      # We allow no tests for now
-      - run: npm test -- --passWithNoTests
+      - run: npm run build
+      - run: npm test
   deploy:
     docker:
       - image: circleci/android:api-29-node
@@ -119,7 +119,7 @@ jobs:
               bundle exec fastlane submit_build
             else
               bundle exec fastlane build_development
-              mv app/build/outputs/bundle/debug/app-debug.aab /tmp/artifacts
+              mv app/build/outputs/apk/debug/app-debug.apk /tmp/artifacts
             fi
       - store_artifacts:
           path: /tmp/artifacts

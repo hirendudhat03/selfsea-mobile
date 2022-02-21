@@ -205,6 +205,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
     } else if (type === Constant.authLogin.INSTAGRAM) {
       // instagramLogin.show();
     } else if (type === Constant.authLogin.APPLE) {
+      console.log("Here")
       _signInApple();
     }
   };

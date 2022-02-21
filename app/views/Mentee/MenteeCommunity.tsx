@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList } from 'react-native';
 import Color from '../../theme/colors';
 import LinearGradient from 'react-native-linear-gradient';
-import { CommonCommunityCard } from '../../common';
+import { CommunityCard } from '../../components/cards';
 import { Theme } from '../../styles';
 
 const DATA = [
@@ -32,7 +32,7 @@ const MenteeCommunity = ({ navigation }) => {
   }, []);
 
   const renderItem = item => (
-    <CommonCommunityCard navigation={navigation} alert={item.item.alert} />
+    <CommunityCard navigation={navigation} alert={item.item.alert} />
   );
 
   return (

@@ -3,9 +3,9 @@ import { View, Text, StyleSheet, Modal } from 'react-native';
 
 import ModalPicker from './ModalPickerConfirm';
 
-import Button from '../component/Button';
-import TextInput from '../component/CustomTextInput';
-import Header from '../component/Header';
+import Button from '../components/Button';
+import TextInput from '../components/CustomTextInput';
+import Header from '../components/Header';
 
 import Constant from '../theme/constant';
 import Images from '../theme/images';
@@ -18,9 +18,9 @@ const CreateNewPassword = ({ navigation }) => {
     changeModalVisibility(true);
   }, []);
 
-  const [isModalVisible, setIsMoalVisiable] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const changeModalVisibility = (bool: boolean) => {
-    setIsMoalVisiable(bool);
+    setIsModalVisible(bool);
   };
 
   const [Password, setPassword] = useState('');
@@ -33,11 +33,11 @@ const CreateNewPassword = ({ navigation }) => {
     console.log('text:::', text);
     setPassword(text);
     if (text === '') {
-      setpasswordBorder(Color.COMMUNITY_ORANGE);
+      setPasswordBorder(Color.COMMUNITY_ORANGE);
       setPasswordError('Password must contain a number.');
       setCircleFillPassword(false);
     } else {
-      setpasswordBorder(Color.BORDER_COLOR_LIGHTGRAY);
+      setPasswordBorder(Color.BORDER_COLOR_LIGHTGRAY);
       setPasswordError('');
       setCircleFillPassword(true);
     }
@@ -52,9 +52,9 @@ const CreateNewPassword = ({ navigation }) => {
     }
   };
 
-  const [passwordBorder, setpasswordBorder] = useState('');
-  const handleTouchpasswordBorder = () => {
-    setpasswordBorder(Color.BASE_COLOR_LIGHT_BLUE);
+  const [passwordBorder, setPasswordBorder] = useState('');
+  const handleTouchPasswordBorder = () => {
+    setPasswordBorder(Color.BASE_COLOR_LIGHT_BLUE);
   };
 
   const passwordStrengthColor = (barNumber: number) => {
@@ -79,8 +79,8 @@ const CreateNewPassword = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Header
-        type={Constant.navigatioHeader.PAGE_HEADER}
-        leftIcon={Images.Arrowsquare}
+        type={Constant.navigationHeader.PAGE_HEADER}
+        leftIcon={Images.ArrowSquare}
         label={'create new password'}
         onPress={() => navigation.goBack()}
       />
@@ -107,7 +107,7 @@ const CreateNewPassword = ({ navigation }) => {
             secureTextEntry={focus === undefined ? true : focus}
             secureTextEntryChange={selectFocus}
             circleFill={circleFillPassword}
-            onTouchStart={() => handleTouchpasswordBorder()}
+            onTouchStart={() => handleTouchPasswordBorder()}
             borderColor={passwordBorder}
             viewStyle={styles.inputViewStyle}
           />
@@ -156,7 +156,7 @@ const CreateNewPassword = ({ navigation }) => {
           changeModalVisibility={changeModalVisibility}
           textTitle={'success!'}
           smallText={
-            'if there is an account associated with the email you entered, an email has been sent with a password reset email. please check your spam forlder. if you do not receive the email within in 24 hours, click the re-send password reset email button below.'
+            'if there is an account associated with the email you entered, an email has been sent with a password reset email. please check your spam folder. if you do not receive the email within in 24 hours, click the re-send password reset email button below.'
           }
           firstType={Constant.buttons.CLOSE}
           firstText={'close'}

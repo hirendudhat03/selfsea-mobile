@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Color from '../theme/colors';
 import Font from '../theme/fonts';
-import Mycommunity from './Mycommunity';
+import MyCommunity from './MyCommunity';
 import AllCommunities from './AllCommunities';
 const Tab = createMaterialTopTabNavigator();
 
@@ -12,12 +12,12 @@ const height = Dimensions.get('window').height;
 const Communities = () => {
   return (
     <Tab.Navigator
-      tabBarOptions={{
-        activeTintColor: Color.BASE_COLOR_WHITE,
-        indicatorStyle: {
+      screenOptions={{
+        tabBarActiveTintColor: Color.BASE_COLOR_WHITE,
+        tabBarIndicatorStyle: {
           opacity: 0,
         },
-        labelStyle: {
+        tabBarLabelStyle: {
           textTransform: 'none',
           fontSize: 20,
           fontFamily: Font.CALIBRE,
@@ -26,14 +26,14 @@ const Communities = () => {
           lineHeight: 145,
           textAlign: 'center',
         },
-        style: {
+        tabBarStyle: {
           backgroundColor: Color.BASE_COLOR_LIGHT_BLUE,
           height: height / 7.6,
         },
       }}>
       <Tab.Screen
-        name="Mycommunity"
-        component={Mycommunity}
+        name="MyCommunity"
+        component={MyCommunity}
         options={{
           tabBarLabel: 'my communities',
         }}

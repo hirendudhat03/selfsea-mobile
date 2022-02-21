@@ -16,11 +16,11 @@ import Fonts from '../theme/fonts';
 import Color from '../theme/colors';
 import Images from '../theme/images';
 
-import Button from '../component/Button';
-import Auth from '../component/Authentication';
-import { auths } from '../config/static';
+import Button from '../components/Button';
+import Auth from '../components/Authentication';
+import { authText } from '../config/static';
 import { Theme } from '../styles';
-import { SignupResponse } from '../redux/actions/SignupAction';
+import { SignUpResponse } from '../redux/actions/SignUpAction';
 import { useDispatch } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -56,13 +56,13 @@ const Login = ({ navigation }) => {
           </View>
           <View style={styles.contentView}>
             <Auth
-              text={auths.CONTINUE_WITH_GOOGLE}
+              text={authText.CONTINUE_WITH_GOOGLE}
               icon={Images.Google}
               type={Constant.authLogin.GOOGLE}
               navigation={navigation}
             />
             <Auth
-              text={auths.CONTINUE_WITH_APPLE}
+              text={authText.CONTINUE_WITH_APPLE}
               icon={Images.Apple}
               type={Constant.authLogin.APPLE}
               navigation={navigation}
@@ -70,22 +70,24 @@ const Login = ({ navigation }) => {
 
             <Button
               type={Constant.buttons.PRIMARY}
-              text={auths.SIGNUP_WITH_EMAIL}
+              text={authText.SIGN_UP_WITH_EMAIL}
               style={[theme.marginTop8]}
               onPress={() => {
-                dispatch(SignupResponse(null, false));
+                dispatch(SignUpResponse(null, false));
                 AsyncStorage.setItem('currentUser_role', 'true');
-                navigation.navigate('Signup');
+                navigation.navigate('SignUp');
               }}
             />
-            <Text style={styles.contentText}>{auths.SIGNUP_AGREEMENT_L1}</Text>
+            <Text style={styles.contentText}>
+              {authText.SIGN_UP_AGREEMENT_L1}
+            </Text>
             <View style={[theme.row]}>
               <TouchableOpacity
                 onPress={() => {
                   Linking.openURL(Constant.link.PRIVACY_POLICY);
                 }}>
                 <Text style={styles.contentSecondText}>
-                  {auths.PRIVACY_POLICY}
+                  {authText.PRIVACY_POLICY}
                 </Text>
               </TouchableOpacity>
               <Text style={styles.contentSecondTextAnd}> and</Text>
@@ -95,24 +97,24 @@ const Login = ({ navigation }) => {
                 }}>
                 <Text style={styles.contentSecondText}>
                   {' '}
-                  {auths.TERMS_CONDITIONS}
+                  {authText.TERMS_CONDITIONS}
                 </Text>
               </TouchableOpacity>
             </View>
           </View>
-          <View style={styles.signinBottomView}>
+          <View style={styles.signInBottomView}>
             <View style={styles.bottomView}>
               <Text style={styles.bottomText} onPress={() => onPressText()}>
-                {auths.ALREADY_HAVE_ACCOUNT}
+                {authText.ALREADY_HAVE_ACCOUNT}
               </Text>
             </View>
-            <View style={[styles.signinButtonView]}>
+            <View style={[styles.signInButtonView]}>
               <Button
                 type={Constant.buttons.CLOSE}
-                text={auths.SIGNIN_BUTTON}
+                text={authText.SIGN_IN_BUTTON}
                 onPress={() => {
                   AsyncStorage.setItem('currentUser_role', 'false');
-                  navigation.navigate('Signin');
+                  navigation.navigate('SignIn');
                 }}
               />
             </View>
@@ -176,7 +178,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: Color.DESCRIPTION_COLOR_TEXT,
   },
-  signinButton: {
+  signInButton: {
     shadowColor: 'rgba(0, 0, 0, 0.24)',
     shadowOffset: {
       width: 0,
@@ -185,7 +187,7 @@ const styles = StyleSheet.create({
     shadowRadius: 1,
     shadowOpacity: 1,
   },
-  signinButtonView: {
+  signInButtonView: {
     alignItems: 'center',
     width: '100%',
     marginBottom: 50,
@@ -193,7 +195,7 @@ const styles = StyleSheet.create({
   buttonStyle: { marginTop: 8 },
   conditionViewStyle: { flexDirection: 'row' },
   containerView: { flex: 1 },
-  signinBottomView: { flex: 1, justifyContent: 'flex-end' },
+  signInBottomView: { flex: 1, justifyContent: 'flex-end' },
 });
 
 export default Login;

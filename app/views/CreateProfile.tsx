@@ -13,24 +13,29 @@ import {
   Platform,
 } from 'react-native';
 import { Prediction } from '../types/location';
-import { ApiResponse } from '../types/ProfileApiResponse';
 import ModalPicker from './ModalPickerConfirm';
-import Config from 'react-native-config';
-
 import Constant from '../theme/constant';
 import Font from '../theme/fonts';
 import Color from '../theme/colors';
 import Images from '../theme/images';
 
-import Header from '../component/Header';
-import Dropdown from '../component/Dropdown';
-import Button from '../component/Button';
-import Badges from '../component/Badges';
-import { useDispatch, useSelector } from 'react-redux';
+import Header from '../components/Header';
+import Dropdown from '../components/Dropdown';
+import Button from '../components/Button';
+import Badges from '../components/Badges';
+import { useDispatch } from 'react-redux';
 import { CreateProfileRequest } from '../redux/actions/CreateProfileAction';
 
 import { DropDownRequest } from '../redux/actions/MenuAction';
 import axios from 'react-native-axios';
+import {
+  Ethnicity,
+  Gender,
+  Pronoun,
+  SexualOrientation,
+} from 'app/generated/graphql';
+import { useTypedSelector } from '../redux';
+import config from '../config';
 
 const height = Dimensions.get('window').height;
 
@@ -52,7 +57,7 @@ const descriptionData = [
 
 const CreateProfile = ({ navigation }) => {
   const dispatch = useDispatch();
-  const menuResponse = useSelector(state => state.MenuReducer);
+  const menuResponse = useTypedSelector(state => state.MenuReducer);
 
   const onPressDispatch = () => {
     dispatch(
@@ -92,45 +97,41 @@ const CreateProfile = ({ navigation }) => {
 
   const [profile, setProfile] = useState('');
 
-  const [isModalVisible, setIsMoalVisiable] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const changeModalVisibility = (bool: boolean) => {
-    setIsMoalVisiable(bool);
+    setIsModalVisible(bool);
   };
 
   const [pronouns, setPronouns] = useState('');
-  const [pronounsDropDown, setPronounsDropDown] = useState<ApiResponse[]>([]);
+  const [pronounsDropDown, setPronounsDropDown] = useState<Pronoun[]>([]);
   const [selectPronounsDropDown, setSelectPronounsDropDown] = useState<
-    ApiResponse[]
+    Pronoun[]
   >([]);
 
-  const clickDropDownItem = (item: ApiResponse, val?: string) => {
+  const clickDropDownItem = (item: Pronoun, val?: string) => {
     setPronouns('');
 
     if (val === 'add') {
       setSelectPronounsDropDown([...selectPronounsDropDown, item]);
 
-      const newData = pronounsDropDown.filter(
-        itemdata => itemdata.name !== item.name,
-      );
+      const newData = pronounsDropDown.filter(p => p.name !== item.name);
       setPronounsDropDown([...newData]);
     } else {
       setPronounsDropDown([...pronounsDropDown, item]);
-      const temp1 = selectPronounsDropDown.filter(
-        itemdata => itemdata.name !== item.name,
-      );
+      const temp1 = selectPronounsDropDown.filter(p => p.name !== item.name);
       setSelectPronounsDropDown([...temp1]);
     }
   };
 
   const [orientation, setOrientation] = useState('');
-  const [orientationDropDown, setOrientationDropDown] = useState<ApiResponse[]>(
-    [],
-  );
+  const [orientationDropDown, setOrientationDropDown] = useState<
+    SexualOrientation[]
+  >([]);
   const [selectOrientationDropDown, setSelectOrientationDropDown] = useState<
-    ApiResponse[]
+    SexualOrientation[]
   >([]);
 
-  const orientationDropDownItem = (item: ApiResponse, val?: string) => {
+  const orientationDropDownItem = (item: SexualOrientation, val?: string) => {
     setOrientation('');
 
     if (val === 'add') {
@@ -151,12 +152,12 @@ const CreateProfile = ({ navigation }) => {
   };
 
   const [gender, setGender] = useState('');
-  const [genderDropDown, setGenderDropDown] = useState<ApiResponse[]>([]);
-  const [selectGenderDropDown, setSelectGenderDropDown] = useState<
-    ApiResponse[]
-  >([]);
+  const [genderDropDown, setGenderDropDown] = useState<Gender[]>([]);
+  const [selectGenderDropDown, setSelectGenderDropDown] = useState<Gender[]>(
+    [],
+  );
 
-  const genderDropDownItem = (item: ApiResponse, val?: string) => {
+  const genderDropDownItem = (item: Gender, val?: string) => {
     setGender('');
 
     if (val === 'add') {
@@ -177,12 +178,10 @@ const CreateProfile = ({ navigation }) => {
   };
 
   const [race, setRace] = useState('');
-  const [raceDropDown, setRaceDropDown] = useState<ApiResponse[]>([]);
-  const [selectRaceDropDown, setSelectRaceDropDown] = useState<ApiResponse[]>(
-    [],
-  );
+  const [raceDropDown, setRaceDropDown] = useState<Ethnicity[]>([]);
+  const [selectRaceDropDown, setSelectRaceDropDown] = useState<Ethnicity[]>([]);
 
-  const raceDropDownItem = (item: ApiResponse, val?: string) => {
+  const raceDropDownItem = (item: Ethnicity, val?: string) => {
     setRace('');
 
     if (val === 'add') {
@@ -217,7 +216,8 @@ const CreateProfile = ({ navigation }) => {
         url:
           'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' +
           val +
-          `&key=${Config.PLACES_API_KEY}&sessiontoken=${Config.SESSION_TOKEN}`,
+          // cspell:disable-next-line
+          `&key=${config.config.PLACES_API_KEY}&sessiontoken=${config.config.PLACES_SESSION_TOKEN}`,
         method: 'get',
       })
         .then(res => {
@@ -226,7 +226,7 @@ const CreateProfile = ({ navigation }) => {
             console.log('res : ', res.data.predictions);
             setLocationDropDown(res.data.predictions);
           } else {
-            console.log('reselse : ', res);
+            console.log('res else : ', res);
           }
         })
         .catch(err => {
@@ -296,8 +296,8 @@ const CreateProfile = ({ navigation }) => {
       {/*{menuResponse.loader && <Loader value={menuResponse.loader} />}*/}
 
       <Header
-        type={Constant.navigatioHeader.PAGE_HEADER}
-        leftIcon={Images.Arrowsquare}
+        type={Constant.navigationHeader.PAGE_HEADER}
+        leftIcon={Images.ArrowSquare}
         label={'create your profile'}
         onPress={() => navigation.goBack()}
       />
@@ -322,7 +322,7 @@ const CreateProfile = ({ navigation }) => {
               <TouchableOpacity
                 style={styles.touchableStyle}
                 onPress={() => changeModalVisibility(true)}>
-                <Image source={Images.Infocircle} style={styles.infoIcon} />
+                <Image source={Images.InfoCircle} style={styles.infoIcon} />
               </TouchableOpacity>
             </View>
 
@@ -340,9 +340,9 @@ const CreateProfile = ({ navigation }) => {
                 {selectPronounsDropDown.map(item => {
                   return (
                     <Badges
-                      type={Constant.badges.MULTISELECT}
+                      type={Constant.badges.MULTI_SELECT}
                       text={item.name}
-                      rigthIcon={Images.Circle}
+                      rightIcon={Images.Circle}
                       onPress={() => clickDropDownItem(item)}
                     />
                   );
@@ -358,7 +358,7 @@ const CreateProfile = ({ navigation }) => {
                   onChangeText={
                     selectPronounsDropDown.length < 3
                       ? val => setPronouns(val)
-                      : null
+                      : undefined
                   }
                 />
               </View>
@@ -376,7 +376,6 @@ const CreateProfile = ({ navigation }) => {
                         ? Images.xCircle
                         : Images.plusCircle
                     }
-                    style={styles.passwordIcon}
                   />
                 </TouchableOpacity>
               </View>
@@ -402,9 +401,9 @@ const CreateProfile = ({ navigation }) => {
                 {selectOrientationDropDown.map(item => {
                   return (
                     <Badges
-                      type={Constant.badges.MULTISELECT}
+                      type={Constant.badges.MULTI_SELECT}
                       text={item.name}
-                      rigthIcon={Images.Circle}
+                      rightIcon={Images.Circle}
                       onPress={() => orientationDropDownItem(item)}
                     />
                   );
@@ -420,7 +419,7 @@ const CreateProfile = ({ navigation }) => {
                   onChangeText={
                     selectOrientationDropDown.length < 3
                       ? val => setOrientation(val)
-                      : null
+                      : undefined
                   }
                 />
               </View>
@@ -438,7 +437,6 @@ const CreateProfile = ({ navigation }) => {
                         ? Images.xCircle
                         : Images.plusCircle
                     }
-                    style={styles.passwordIcon}
                   />
                 </TouchableOpacity>
               </View>
@@ -465,9 +463,9 @@ const CreateProfile = ({ navigation }) => {
                 {selectGenderDropDown.map(item => {
                   return (
                     <Badges
-                      type={Constant.badges.MULTISELECT}
+                      type={Constant.badges.MULTI_SELECT}
                       text={item.name}
-                      rigthIcon={Images.Circle}
+                      rightIcon={Images.Circle}
                       onPress={() => genderDropDownItem(item)}
                     />
                   );
@@ -483,7 +481,7 @@ const CreateProfile = ({ navigation }) => {
                   onChangeText={
                     selectGenderDropDown.length < 3
                       ? val => setGender(val)
-                      : null
+                      : undefined
                   }
                 />
               </View>
@@ -501,7 +499,6 @@ const CreateProfile = ({ navigation }) => {
                         ? Images.xCircle
                         : Images.plusCircle
                     }
-                    style={styles.passwordIcon}
                   />
                 </TouchableOpacity>
               </View>
@@ -527,9 +524,9 @@ const CreateProfile = ({ navigation }) => {
                 {selectRaceDropDown.map(item => {
                   return (
                     <Badges
-                      type={Constant.badges.MULTISELECT}
+                      type={Constant.badges.MULTI_SELECT}
                       text={item.name}
-                      rigthIcon={Images.Circle}
+                      rightIcon={Images.Circle}
                       onPress={() => raceDropDownItem(item)}
                     />
                   );
@@ -543,7 +540,9 @@ const CreateProfile = ({ navigation }) => {
                       : 'asian american, arab, native hawaiian'
                   }
                   onChangeText={
-                    selectRaceDropDown.length < 3 ? val => setRace(val) : null
+                    selectRaceDropDown.length < 3
+                      ? val => setRace(val)
+                      : undefined
                   }
                 />
               </View>
@@ -561,7 +560,6 @@ const CreateProfile = ({ navigation }) => {
                         ? Images.xCircle
                         : Images.plusCircle
                     }
-                    style={styles.passwordIcon}
                   />
                 </TouchableOpacity>
               </View>
@@ -588,9 +586,9 @@ const CreateProfile = ({ navigation }) => {
                 {selectLocationDropDown.map(item => {
                   return (
                     <Badges
-                      type={Constant.badges.MULTISELECT}
+                      type={Constant.badges.MULTI_SELECT}
                       text={item.description}
-                      rigthIcon={Images.Circle}
+                      rightIcon={Images.Circle}
                       onPress={() => locationDropDownItem(item)}
                     />
                   );
@@ -607,7 +605,7 @@ const CreateProfile = ({ navigation }) => {
                     // val => getLocationApi(val)
                     selectLocationDropDown.length < 1
                       ? val => getLocationApi(val)
-                      : null
+                      : undefined
                   }
                 />
               </View>
@@ -625,7 +623,6 @@ const CreateProfile = ({ navigation }) => {
                         ? Images.xCircle
                         : Images.plusCircle
                     }
-                    style={styles.passwordIcon}
                   />
                 </TouchableOpacity>
               </View>
