@@ -29,10 +29,6 @@ const onPressText = () => {
 };
 
 const Login = ({ navigation }) => {
-<<<<<<< HEAD
-  auth().signOut();
-=======
->>>>>>> d3b2e592d7b12b7d965f081aa8949fe3397b9537
   const dispatch = useDispatch();
 
   // useEffect(() => {
