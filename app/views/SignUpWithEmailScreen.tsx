@@ -114,10 +114,8 @@ const SignUp = ({ navigation }) => {
   const [userNameError, setUserNameError] = useState<string>('0/20');
 
   const [birthMonth, setBirthMonth] = useState<string>('');
-  // const [setBirthMonthError] = useState<string>('');
 
   const [birthYear, setBirthYear] = useState<string>('');
-  // const [setBirthYearError] = useState<string>('');
 
   const userAge = useCalculateAge(birthYear, birthMonth);
 
@@ -226,7 +224,6 @@ const SignUp = ({ navigation }) => {
     if (value === '' || birthMonth === '') {
       setCircleFillBirth(false);
     } else {
-      // setBirthYearError(' ');
       setCircleFillBirth(true);
     }
   };
@@ -235,7 +232,6 @@ const SignUp = ({ navigation }) => {
     setBirthMonth(value);
 
     if (value === '' || birthYear === '') {
-      // setBirthMonthError('');
       setCircleFillBirth(false);
     } else {
       setCircleFillBirth(true);
