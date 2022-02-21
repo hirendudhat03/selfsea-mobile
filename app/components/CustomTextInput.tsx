@@ -201,12 +201,10 @@ const styles = StyleSheet.create({
   },
   helperText: {
     width: '90%',
-    height: 14,
     fontFamily: Font.CALIBRE,
     fontSize: 12,
     fontWeight: 'normal',
     fontStyle: 'normal',
-    lineHeight: 16,
     letterSpacing: 0,
     color: Color.COMMUNITY_ORANGE,
   },
