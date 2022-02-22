@@ -3,7 +3,7 @@ import { api } from '../../services';
 import { call, put } from 'redux-saga/effects';
 import { createUserMutation } from '../../graphql/mutations/UserMutation';
 import { Alert } from 'react-native';
-import { SignupResponse } from '../actions/SignupAction';
+import { SignUpResponse } from '../actions/SignupAction';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 export function* passwordlessSignupSaga(action) {
@@ -90,6 +90,6 @@ export function* passwordlessSignupSaga(action) {
   //     ),
   //   );
   // } else {
-  yield put(SignupResponse(response, false));
+  yield put(SignUpResponse(response, false));
   // }
 }

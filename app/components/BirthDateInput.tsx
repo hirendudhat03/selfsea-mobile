@@ -14,7 +14,6 @@ interface Props {
   monthRowTextStyle?: {};
   monthStyle?: {};
   monthValue: string;
-
   defaultYearButtonText: string;
   onSelectYear: (item: string, index: number) => void;
   yearOptionList: OptionListType[];
@@ -32,7 +31,6 @@ const BirthDateInput = ({
   monthOptionList,
   monthStyle,
   monthValue,
-
   defaultYearButtonText,
   onSelectYear,
   yearOptionList,

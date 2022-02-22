@@ -29,7 +29,7 @@ export function SignUpRequest(
   };
 }
 
-export function SignupRequestWithoutPassword(
+export function SignUpRequestWithoutPassword(
   email,
   birthMonth,
   birthYear,

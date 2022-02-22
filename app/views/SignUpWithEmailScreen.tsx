@@ -244,7 +244,7 @@ const SignUp = ({ route, navigation }) => {
     }
   };
 
-  const [circleFillBirth, setCircleFillBirth] = useState<boolean>();
+  const [circleFillBirth, setCircleFillBirth] = useState<boolean>(false);
 
   const selectFillBirth = value => {
     setBirthYear(value);
