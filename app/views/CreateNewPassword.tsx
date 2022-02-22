@@ -110,6 +110,10 @@ const CreateNewPassword = ({ navigation }) => {
             onTouchStart={() => handleTouchPasswordBorder()}
             borderColor={passwordBorder}
             viewStyle={styles.inputViewStyle}
+            defaultValue={''}
+            text={''}
+            maxLength={0}
+            editable={true}
           />
           <View style={styles.viewStyle}>
             <View

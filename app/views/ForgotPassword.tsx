@@ -62,6 +62,10 @@ const ForgotPassword = ({ navigation }) => {
             onTouchStart={() => handleTouch()}
             borderColor={emailBorder}
             viewStyle={styles.inputViewStyle}
+            defaultValue={''}
+            text={''}
+            maxLength={100}
+            editable={true}
           />
         </View>
       </View>
