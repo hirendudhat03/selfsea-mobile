@@ -1,6 +1,7 @@
 import { takeEvery, all } from 'redux-saga/effects';
 
 import { loginSaga } from './LoginSaga';
+//// eslint-disable-next-line
 import { signUpSaga } from './SignUpSaga';
 import { createProfileSaga } from './CreateProfileSaga';
 import { homeSaga } from './HomeSaga';
