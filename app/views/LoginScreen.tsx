@@ -22,7 +22,6 @@ import { authText } from '../config/static';
 import { Theme } from '../styles';
 import { SignUpResponse } from '../redux/actions/SignUpAction';
 import { useDispatch } from 'react-redux';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const onPressText = () => {
   Alert.alert('onPressText');
@@ -74,7 +73,6 @@ const Login = ({ navigation }) => {
               style={[theme.marginTop8]}
               onPress={() => {
                 dispatch(SignUpResponse(null, false));
-                AsyncStorage.setItem('currentUser_role', 'true');
                 navigation.navigate('SignUp');
               }}
             />
@@ -113,7 +111,6 @@ const Login = ({ navigation }) => {
                 type={Constant.buttons.CLOSE}
                 text={authText.SIGN_IN_BUTTON}
                 onPress={() => {
-                  AsyncStorage.setItem('currentUser_role', 'false');
                   navigation.navigate('SignIn');
                 }}
               />
