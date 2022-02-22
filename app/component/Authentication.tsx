@@ -1,12 +1,11 @@
 import React from 'react';
 import {
   Image,
-  ImageSourcePropType,
   Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
-  Alert
+  Alert,
 } from 'react-native';
 import Color from '../theme/colors';
 // @ts-ignore
@@ -211,10 +210,8 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
 
   return (
     <TouchableOpacity style={styles.container} onPress={() => authLogin()}>
-      
       <Image style={styles.image} source={icon} />
       <Text style={styles.text}>{text}</Text>
-
       {/* <InstagramLogin
         ref={ref => (instagramLogin = ref)}
         appId="321916266462620"
