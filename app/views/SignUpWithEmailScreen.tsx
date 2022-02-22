@@ -406,7 +406,7 @@ const SignUp = ({ route, navigation }) => {
                 defaultValue={''}
                 text={''}
                 maxLength={0}
-                editable={false}
+                editable={true}
               />
             )}
             {route.params === undefined && (
@@ -477,7 +477,7 @@ const SignUp = ({ route, navigation }) => {
               onTouchStart={() => handleTouchUsernameBorder()}
               borderColor={userNameBorder}
               defaultValue={''}
-              editable={false}
+              editable={true}
             />
             {userNameError === 'this username is taken.' ? (
               <Text

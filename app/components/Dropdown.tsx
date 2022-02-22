@@ -12,7 +12,8 @@ interface OptionListType {
 interface Props {
   defaultButtonText: string;
   onSelect: (item: string, index: number) => void;
-  optionList: OptionListType[] | string[];
+  // optionList: OptionListType[] | string[];
+  optionList: any;
   style?: {};
   rowTextStyle?: {};
   checkRight?: boolean;

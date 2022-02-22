@@ -27,7 +27,7 @@ import { decode } from 'base-64';
 
 interface Props {
   text: string;
-  icon?: ImageSourcePropType;
+  icon?: any;
   type: string;
   navigation: any;
 }

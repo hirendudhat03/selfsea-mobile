@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  Alert
 } from 'react-native';
 import Color from '../theme/colors';
 // @ts-ignore
@@ -23,13 +24,13 @@ import auth from '@react-native-firebase/auth';
 import 'react-native-get-random-values';
 import { v4 as uuid } from 'uuid';
 import { decode } from 'base-64';
-import Alert from './Alert';
+// import Alert from '../components/Alert';
 
 interface Props {
   text: string;
-  icon?: ImageSourcePropType;
+  icon?: any;
   type: string;
-  navigation: object;
+  navigation: any;
 }
 
 const Authentication = ({ text, icon, type, navigation }: Props) => {
@@ -160,7 +161,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
       const response = await appleAuthAndroid.signIn();
 
       var userInfo = parseJwt(response.id_token);
-      let token = response.id_token;
+      let token = response.id_token ?? null;
       const appleCredential = auth.AppleAuthProvider.credential(
         token,
         response.nonce,
@@ -210,6 +211,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
 
   return (
     <TouchableOpacity style={styles.container} onPress={() => authLogin()}>
+      
       <Image style={styles.image} source={icon} />
       <Text style={styles.text}>{text}</Text>
 

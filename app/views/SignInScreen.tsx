@@ -133,8 +133,8 @@ const SignIn = ({ route, navigation }) => {
             borderColor={emailBorder}
             defaultValue={''}
             text={''}
-            maxLength={0}
-            editable={false}
+            maxLength={100}
+            editable={true}
           />
 
           <TextInput
@@ -154,8 +154,8 @@ const SignIn = ({ route, navigation }) => {
             borderColor={passwordBorder}
             defaultValue={''}
             text={''}
-            maxLength={0}
-            editable={false}
+            maxLength={100}
+            editable={true}
           />
 
           <Text
