@@ -369,7 +369,7 @@ const SignUp = ({ route, navigation }) => {
               style={styles.inputTextStyle}
               onChangeText={text => {
                 selectFill(text);
-              }}
+              } }
               value={email}
               helperText={emailError}
               iconVisibleFill={true}
@@ -377,9 +377,11 @@ const SignUp = ({ route, navigation }) => {
               circleFill={circleFillEmail}
               onTouchStart={() => handleTouch()}
               borderColor={emailBorder}
-              editable={route.params === undefined ? true : false}
+              editable={route.params === undefined ? true : false} 
+              defaultValue={''} 
+              text={''}            
             />
-
+            {route.params === undefined && (
             <TextInput
               type={Constant.textInput.LARGE_INPUT}
               label={'password'}
@@ -390,7 +392,7 @@ const SignUp = ({ route, navigation }) => {
                 setPasswordScore(response.score);
                 setPasswordError(response.feedback.suggestions);
                 setCircleFillPassword(response.score >= 2);
-              }}
+              } }
               value={Password}
               helperText={PasswordError}
               iconVisible={true}
@@ -400,8 +402,12 @@ const SignUp = ({ route, navigation }) => {
               checkRight={true}
               circleFill={circleFillPassword}
               onTouchStart={() => handleTouchPasswordBorder()}
-              borderColor={passwordBorder}
-            />
+              borderColor={passwordBorder} 
+              defaultValue={''} 
+              text={''} 
+              maxLength={0} 
+              editable={false}
+            />)}
             {route.params === undefined && (
               <View style={styles.viewStyle}>
                 <PasswordInputStrength
@@ -463,12 +469,14 @@ const SignUp = ({ route, navigation }) => {
               style={styles.inputTextStyle}
               onChangeText={text => {
                 selectFillUser(text);
-              }}
+              } }
               iconVisibleFill={true}
               checkRight={true}
               circleFill={circleFillUser}
               onTouchStart={() => handleTouchUsernameBorder()}
-              borderColor={userNameBorder}
+              borderColor={userNameBorder} 
+              defaultValue={''} 
+              editable={false}            
             />
             {userNameError === 'this username is taken.' ? (
               <Text

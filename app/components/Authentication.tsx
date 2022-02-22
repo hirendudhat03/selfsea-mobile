@@ -161,7 +161,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
       const response = await appleAuthAndroid.signIn();
 
       var userInfo = parseJwt(response.id_token);
-      let token = response.id_token;
+      let token = response.id_token??null;
       const appleCredential = auth.AppleAuthProvider.credential(
         token,
         response.nonce,

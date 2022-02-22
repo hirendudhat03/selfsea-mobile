@@ -34,7 +34,11 @@ export function* signUpSaga(action) {
           const data = await api.createUser(mutationVariables);
 
           console.log('mutationVariables::', data);
-          action.navigation.navigate('SignIn');
+          const token = await response.user.getIdToken();
+
+          await api.setAuthHeader(token);
+
+          action.navigation.navigate('CreateProfile');
 
           return { ...data, ...response };
         } catch (e) {
