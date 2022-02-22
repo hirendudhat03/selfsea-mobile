@@ -6,20 +6,19 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  Alert
+  Alert,
 } from 'react-native';
 import Color from '../theme/colors';
 // @ts-ignore
 import {
   GoogleSignin,
-  statusCodes
-} from "@react-native-google-signin/google-signin";
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 import Constant from '../theme/constant';
 // import InstagramLogin from 'react-native-instagram-login';
 import {
   appleAuth,
   appleAuthAndroid,
-  AppleRequestOperation,
 } from '@invertase/react-native-apple-authentication';
 import auth from '@react-native-firebase/auth';
 import 'react-native-get-random-values';
@@ -41,10 +40,9 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
   const _signIn = async () => {
     console.log('handlePressGoogleLogin');
     GoogleSignin.configure({
-      webClientId:'597759932954-hj037g8cqseqq6dpukg26752k305sqpl.apps.googleusercontent.com',
+      webClientId:
+        '597759932954-hj037g8cqseqq6dpukg26752k305sqpl.apps.googleusercontent.com',
     });
-
-    
 
     try {
       GoogleSignin.signOut();
@@ -53,21 +51,19 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
           var tokens = await GoogleSignin.getTokens();
 
           var credToken =
-          userInfo.idToken !== null
-            ? userInfo.idToken
-            : tokens.accessToken;
-          const googleCredential = auth.GoogleAuthProvider.credential(credToken);
+            userInfo.idToken !== null ? userInfo.idToken : tokens.accessToken;
+          const googleCredential =
+            auth.GoogleAuthProvider.credential(credToken);
           var response = await auth().signInWithCredential(googleCredential);
-          if(response.additionalUserInfo?.isNewUser === false){
-            navigation.navigate('DrawerNavigator');
-          }else{
-            navigation.navigate('Signup', {
+          if (response.additionalUserInfo?.isNewUser === false) {
+            navigation.replace('DrawerNavigator');
+          } else {
+            navigation.navigate('SignUp', {
               type: 'google',
               email: userInfo.user.email,
               userInfo: userInfo,
             });
           }
-
         })
         .catch(e => {
           console.log('ERROR IS: ' + e);
@@ -119,19 +115,19 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
       }
 
       // Create a Firebase credential from the response
-      const { identityToken, nonce, email, fullName } =
-        appleAuthRequestResponse;
+      // const { identityToken, nonce, email, fullName
+      const { identityToken, nonce } = appleAuthRequestResponse;
       auth.AppleAuthProvider.credential(identityToken, nonce);
       const appleCredential = auth.AppleAuthProvider.credential(
         identityToken,
         nonce,
       );
       const credentials = await auth().signInWithCredential(appleCredential);
-      console.log("Credentials Information: ", credentials);
+      console.log('Credentials Information: ', credentials);
       if (credentials.additionalUserInfo?.isNewUser === false) {
-        navigation.navigate('DrawerNavigator');
+        navigation.replace('DrawerNavigator');
       } else {
-        navigation.navigate('Signup', {
+        navigation.navigate('SignUp', {
           type: 'apple',
           email: credentials.additionalUserInfo?.profile?.email,
           userInfo: credentials.additionalUserInfo,
@@ -176,7 +172,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
       if (credentials.additionalUserInfo?.isNewUser === false) {
         navigation.navigate('DrawerNavigator');
       } else {
-        navigation.navigate('Signup', {
+        navigation.navigate('SignUp', {
           type: 'apple',
           email: userInfo.email,
           userInfo: userInfo,

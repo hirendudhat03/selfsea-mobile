@@ -8,7 +8,6 @@ import Images from '../theme/images';
 import CommunitiesHome from '../views/CommunitiesHome';
 import Notifications from '../views/Notifications';
 import Book from '../views/Book';
-import Profile from '../views/Profile';
 import TabScreen from '../views/TabScreen';
 import Color from '../theme/colors';
 
@@ -40,7 +39,6 @@ function HomeStackScreen() {
         headerShown: false,
         gestureEnabled: true,
         gestureDirection: 'horizontal',
-        headerShown: false
       }}
       initialRouteName={screenNames.CommunitiesHome}>
       <HomeStack.Screen

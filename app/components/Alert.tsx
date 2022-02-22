@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
   touchableStyle: {
     justifyContent: 'center',
     flex: 1,
-  }
+  },
 });
 
 export default Alert;

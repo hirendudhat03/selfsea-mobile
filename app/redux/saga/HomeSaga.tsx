@@ -6,7 +6,7 @@ import { Alert } from 'react-native';
 export function* homeSaga(action) {
   const Home = async () => {
     console.log('call homeSaga : ', action);
-    
+
     try {
       const response = await api.currentTermsAndConditions();
       console.log('response:', response);

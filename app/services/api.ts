@@ -1,4 +1,3 @@
-
 import config from '../config';
 import { GraphQLClient } from 'graphql-request';
 import { getSdk, SdkFunctionWrapper } from '../generated/graphql';

@@ -26,7 +26,10 @@ import Color from '../theme/colors';
 import BirthDateInput from '../components/BirthDateInput';
 
 import { useDispatch } from 'react-redux';
-import { SignUpRequest, SignupRequestWithoutPassword, } from '../redux/actions/SignUpAction';
+import {
+  SignUpRequest,
+  SignUpRequestWithoutPassword,
+} from '../redux/actions/SignUpAction';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import Loader from '../components/Loader';
@@ -96,7 +99,6 @@ const SignUp = ({ route, navigation }) => {
     setYear(year);
   }, [route]);
 
-
   useEffect(() => {
     if (signUpRes.data) {
       console.log('signUpRes.data if: ', signUpRes.data);
@@ -146,7 +148,7 @@ const SignUp = ({ route, navigation }) => {
         console.log('PasswordLess UId', route.params.userInfo.user.uid);
 
         dispatch(
-          SignupRequestWithoutPassword(
+          SignUpRequestWithoutPassword(
             email,
             birthMonth,
             birthYear,
@@ -405,22 +407,15 @@ const SignUp = ({ route, navigation }) => {
               borderColor={passwordBorder}
             />
             {route.params === undefined && (
-            <View style={styles.viewStyle}>
-              <PasswordInputStrength
-                passwordScore={passwordScore}
-                password={Password}
-              />
-            </View>
+              <View style={styles.viewStyle}>
+                <PasswordInputStrength
+                  passwordScore={passwordScore}
+                  password={Password}
+                />
+              </View>
             )}
-           
 
-            <View
-              style={{
-                flexDirection: 'row',
-                width: '90%',
-                marginTop: 10,
-                marginBottom: 7,
-              }}>
+            <View style={styles.commonView}>
               <View style={styles.monthView}>
                 {/* <View style={styles.rowView}> */}
                 <Text style={styles.birthMonthText}>birth month</Text>
@@ -749,6 +744,12 @@ const styles = StyleSheet.create({
   },
   keyboardAvoidingStyle: {
     flex: 1,
+  },
+  commonView: {
+    flexDirection: 'row',
+    width: '90%',
+    marginTop: 10,
+    marginBottom: 7,
   },
 });
 export default SignUp;

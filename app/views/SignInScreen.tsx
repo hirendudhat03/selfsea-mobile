@@ -23,7 +23,7 @@ const SignIn = ({ route, navigation }) => {
   const dispatch = useDispatch();
 
   const loginRes = useTypedSelector(state => state.LoginReducer);
-  console.log('LoginReducer : ', JSON.stringify(loginRes));
+  console.log('LoginReducer : ', route);
 
   const [isSelectedCheckBox, setISSelectionCheckBox] = useState(false);
 
@@ -125,12 +125,17 @@ const SignIn = ({ route, navigation }) => {
             style={styles.inputTextStyle}
             onChangeText={text => {
               selectFill(text);
-            } }
+            }}
             value={email}
             helperText={emailError}
             checkRight={undefined}
             onTouchStart={() => handleTouch()}
-            borderColor={emailBorder} defaultValue={''} text={''} maxLength={0} editable={false}          />
+            borderColor={emailBorder}
+            defaultValue={''}
+            text={''}
+            maxLength={0}
+            editable={false}
+          />
 
           <TextInput
             type={Constant.textInput.LARGE_INPUT}
@@ -138,7 +143,7 @@ const SignIn = ({ route, navigation }) => {
             style={styles.inputTextStyle}
             onChangeText={text => {
               selectFillPassword(text);
-            } }
+            }}
             value={password}
             helperText={passwordError}
             iconVisible={true}
@@ -146,7 +151,12 @@ const SignIn = ({ route, navigation }) => {
             secureTextEntryChange={selectFocus}
             checkRight={undefined}
             onTouchStart={() => handleTouchPasswordBorder()}
-            borderColor={passwordBorder} defaultValue={''} text={''} maxLength={0} editable={false}          />
+            borderColor={passwordBorder}
+            defaultValue={''}
+            text={''}
+            maxLength={0}
+            editable={false}
+          />
 
           <Text
             style={styles.contentText}

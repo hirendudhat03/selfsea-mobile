@@ -2,7 +2,6 @@ import { call, put } from 'redux-saga/effects';
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { api } from '../../services';
-import { CurrentUserApi } from '../../types/CurrentUserApi';
 import { LoginResponse } from '../actions/LoginAction';
 import { Alert } from 'react-native';
 
