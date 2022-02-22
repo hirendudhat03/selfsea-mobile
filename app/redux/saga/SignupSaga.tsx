@@ -30,9 +30,10 @@ export function* signUpSaga(action) {
             birthYear: parseFloat(birthYear),
             username: userName,
           };
-
+          console.log('mutationVariables::', mutationVariables);
           const data = await api.createUser(mutationVariables);
 
+          console.log('mutationVariables::', data);
           const token = await response.user.getIdToken();
 
           await api.setAuthHeader(token);
