@@ -1,7 +1,7 @@
 import auth from '@react-native-firebase/auth';
 import { api } from '../../services';
 import { call, put } from 'redux-saga/effects';
-import { createUserMutation } from '../../graphql/mutations/UserMutation';
+// import { createUserMutation } from '../../graphql/mutations/UserMutation';
 import { Alert } from 'react-native';
 import { SignUpResponse } from '../actions/SignUpAction';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
@@ -29,7 +29,7 @@ export function* passwordlessSignupSaga(action) {
 
       api.setAuthHeader(token);
       // console.log('token : ', token);
-
+      // api.currentUser(token);
       // await response.user.sendEmailVerification();
       console.log('Action', action.uid);
 
@@ -41,16 +41,18 @@ export function* passwordlessSignupSaga(action) {
         username: userName,
       };
 
-      const data = await api.client.request(
-        createUserMutation,
-        mutationVariables,
-      );
-      console.log('data::', data);
+      // const data = await api.client.request(
+      //   createUserMutation,
+      //   mutationVariables,
+      // );
 
-      action.navigation.navigate('DrawerNavigator');
+      const data = await api.createUser(mutationVariables);
+
+      // console.log('data::', data);
+      console.log('UserInfo', action.userInfo);
+      action.navigation.navigate('CreateProfile');
       return { ...data, ...response };
     } catch (e: any) {
-      console.log('klasjdlkasjld');
       if (e.code === 'auth/email-already-in-use') {
         console.log('That email address is already in use!');
         Alert.alert('That email address is already in use!');
@@ -61,11 +63,10 @@ export function* passwordlessSignupSaga(action) {
         Alert.alert('That email address is invalid!');
       }
 
-      console.log('MESG', e.message);
-      // Alert.alert(e.message);
+      console.log('Error Message Passwordless Saga', e.message);
       return {
         error:
-          'this is anssssss invalid email/password, please visit selfsea.org for more resources.',
+          'this is an invalid email/password, please visit selfsea.org for more resources.',
       };
     }
   };
