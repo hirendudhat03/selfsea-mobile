@@ -138,13 +138,11 @@ const SignUp = ({ route, navigation }) => {
     }
   };
 
-  const countAge = (isPasswordless: boolean) => {
+  const countAge = (isPasswordLess: boolean) => {
     if (userAge === null || userAge < 13 || userAge > 18) {
       changeAgeVisibility(true);
     } else {
-      if (isPasswordless === true) {
-        console.log('PasswordLess UId', route.params.userInfo.user.uid);
-
+      if (isPasswordLess) {
         dispatch(
           SignUpRequestWithoutPassword(
             email,
@@ -167,7 +165,7 @@ const SignUp = ({ route, navigation }) => {
             birthYear,
             userName,
             navigation,
-            false,
+            true,
           ),
         );
       }
@@ -288,44 +286,41 @@ const SignUp = ({ route, navigation }) => {
         birthYear === '' &&
         !userName
       ) {
-        setEmailError('Please enter email address.');
+        setEmailError('please enter email address.');
         route.params === undefined &&
-          setPasswordError('Password must contain a number.');
+          setPasswordError('password must contain a number.');
         setUserNameError(text.length + '/20');
 
         setEmail('');
         setUserName('');
         setPassword('');
       } else if (!email) {
-        setEmailError('Please enter email address.');
+        setEmailError('please enter email address.');
       } else if (
         email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/) === null
       ) {
-        setEmailError('Please enter a valid email address.');
+        setEmailError('please enter a valid email address.');
       } else if (!Password) {
         route.params === undefined &&
-          setPasswordError('Password must contain a number.');
+          setPasswordError('password must contain a number.');
       } else if (!userName) {
         setUserNameError(text.length + '/20');
       } else {
-        console.log('Here2');
         countAge(false);
-
-        navigation.navigate('CreateProfile');
       }
     } else {
       if (!email && birthMonth === '' && birthYear === '' && !userName) {
-        setEmailError('Please enter email address.');
+        setEmailError('please enter email address.');
         setUserNameError(text.length + '/20');
 
         setEmail('');
         setUserName('');
       } else if (!email) {
-        setEmailError('Please enter email address.');
+        setEmailError('please enter email address.');
       } else if (
         email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/) === null
       ) {
-        setEmailError('Please enter a valid email address.');
+        setEmailError('please enter a valid email address.');
       } else if (!userName) {
         setUserNameError(text.length + '/20');
       } else {
@@ -377,7 +372,7 @@ const SignUp = ({ route, navigation }) => {
               circleFill={circleFillEmail}
               onTouchStart={() => handleTouch()}
               borderColor={emailBorder}
-              editable={route.params === undefined ? true : false}
+              editable={route.params === undefined}
               defaultValue={''}
               text={''}
             />
@@ -405,7 +400,6 @@ const SignUp = ({ route, navigation }) => {
                 borderColor={passwordBorder}
                 defaultValue={''}
                 text={''}
-                maxLength={20}
                 editable={true}
               />
             )}
@@ -501,25 +495,22 @@ const SignUp = ({ route, navigation }) => {
           {route.params === undefined ? (
             <Button
               type={Constant.buttons.PRIMARY}
-              text={authText.CREATE_ACCOUNT_BUTTON}
+              text={'create account'}
               style={[
                 styles.buttonStyle,
                 circleFillEmail !== true ||
                 circleFillPassword !== true ||
-                circleFillBirth !== true ||
+                !circleFillBirth ||
                 circleFillUser !== true
                   ? { backgroundColor: Color.BUTTON_DISABLE_COLOR }
                   : { backgroundColor: Color.BASE_COLOR_ORANGE },
               ]}
               onPress={() => SignUpValidation(userName)}
               disabled={
-                passwordScore < 3 ||
                 circleFillEmail !== true ||
                 circleFillPassword !== true ||
-                circleFillBirth !== true ||
+                !circleFillBirth ||
                 circleFillUser !== true
-                  ? true
-                  : false
               }
             />
           ) : (
@@ -529,7 +520,7 @@ const SignUp = ({ route, navigation }) => {
               style={[
                 styles.buttonStyle,
                 circleFillEmail !== true ||
-                circleFillBirth !== true ||
+                !circleFillBirth ||
                 circleFillUser !== true
                   ? { backgroundColor: Color.BUTTON_DISABLE_COLOR }
                   : { backgroundColor: Color.BASE_COLOR_ORANGE },
