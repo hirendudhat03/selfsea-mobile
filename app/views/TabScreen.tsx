@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 const TabScreen = () => {
   return (
     <View style={styles.viewStyle}>
-      <Text>Tab strat screen</Text>
+      <Text>Tab screen</Text>
     </View>
   );
 };

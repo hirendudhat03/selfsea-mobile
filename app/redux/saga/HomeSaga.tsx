@@ -1,21 +1,17 @@
 import { put, call } from 'redux-saga/effects';
 import { api } from '../../services';
-
 import { HomeResponse } from '../actions/HomeAction';
-import {
-  currentTermsAndConditionsQuery,
-  currentUserQuery,
-} from '../../graphql/queries/UserProfile';
 import { Alert } from 'react-native';
+
 export function* homeSaga(action) {
   const Home = async () => {
     console.log('call homeSaga : ', action);
-    
+
     try {
-      const response = await api.client.request(currentTermsAndConditionsQuery);
+      const response = await api.currentTermsAndConditions();
       console.log('response:', response);
 
-      const currentUserData = await api.client.request(currentUserQuery);
+      const currentUserData = await api.currentUser();
 
       return { ...response, ...currentUserData };
     } catch (e) {
@@ -26,7 +22,7 @@ export function* homeSaga(action) {
   };
 
   const response = yield call(Home);
-  console.warn('Homeresponse saga', response);
+  console.warn('HomeResponse saga', response);
 
   if (response === null) {
     yield put(HomeResponse(null, false));

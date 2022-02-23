@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-import Button from '../component/Button';
-import TextInput from '../component/CustomTextInput';
-import Header from '../component/Header';
+import Button from '../components/Button';
+import TextInput from '../components/CustomTextInput';
+import Header from '../components/Header';
 
 import Constant from '../theme/constant';
 import Images from '../theme/images';
@@ -39,8 +39,8 @@ const ForgotPassword = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Header
-        type={Constant.navigatioHeader.PAGE_HEADER}
-        leftIcon={Images.Arrowsquare}
+        type={Constant.navigationHeader.PAGE_HEADER}
+        leftIcon={Images.ArrowSquare}
         label={'forgot password'}
         onPress={() => navigation.goBack()}
       />
@@ -57,11 +57,15 @@ const ForgotPassword = ({ navigation }) => {
             onChangeText={text => {
               selectFill(text);
             }}
-            value={email}
+            value={email || undefined}
             helperText={emailError}
             onTouchStart={() => handleTouch()}
             borderColor={emailBorder}
             viewStyle={styles.inputViewStyle}
+            defaultValue={''}
+            text={''}
+            maxLength={100}
+            editable={true}
           />
         </View>
       </View>

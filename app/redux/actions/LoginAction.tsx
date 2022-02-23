@@ -8,7 +8,7 @@ export function LoginResponse(data, loader) {
   };
 }
 
-export function LoginRequest(email, password, navigation, loader) {
+export function LoginRequest(email, password, navigation, loader?: unknown) {
   return {
     type: 'LOGIN_REQUEST',
     email: email,

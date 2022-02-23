@@ -3,22 +3,20 @@ import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import Images from '../theme/images';
 
-import Switch from '../component/Switch';
-import CheckBox from '../component/Checkbox';
-import Radio from '../component/Radio';
-import Button from '../component/Button';
-import Alert from '../component/Alert';
-import Badges from '../component/Badges';
+import Switch from '../components/Switch';
+import CheckBox from '../components/Checkbox';
+import Radio from '../components/Radio';
+import Button from '../components/Button';
+import Alert from '../components/Alert';
+import Badges from '../components/Badges';
 import Constant from '../theme/constant';
-import Dropdown from '../component/Dropdown';
-import TextInput from '../component/CustomTextInput';
-import Header from '../component/Header';
+import Dropdown from '../components/Dropdown';
+import Header from '../components/Header';
 import Color from '../theme/colors';
-
-import { useSelector } from 'react-redux';
+import { useTypedSelector } from '../redux';
 
 const Home = ({ navigation }) => {
-  const loginRes = useSelector(state => state.LoginReducer);
+  const loginRes = useTypedSelector(state => state.LoginReducer);
   console.log('loginRes : ', JSON.stringify(loginRes));
 
   const [isSelectedCheckBox, setISSelectionCheckBox] = useState(false);
@@ -94,9 +92,9 @@ const Home = ({ navigation }) => {
           <Badges type={Constant.badges.INACTIVE} text={'inactive'} />
           <Badges type={Constant.badges.DESCRIPTOR} text={'[profile item]'} />
           <Badges
-            type={Constant.badges.MULTISELECT}
+            type={Constant.badges.MULTI_SELECT}
             text={'they/them'}
-            rigthIcon={Images.Circle}
+            rightIcon={Images.Circle}
           />
           <Button type={Constant.buttons.DESKTOP} text={'Primary Button'} />
           <Button type={Constant.buttons.SECONDARY} text={'Secondary'} />
@@ -105,7 +103,7 @@ const Home = ({ navigation }) => {
           <Button type={Constant.buttons.PRIMARY} text={'primary button'} />
 
           <Button type={Constant.buttons.CLOSE} text={'Close'} />
-          <Button type={Constant.buttons.SELFSEASEND} icon={Images.Send} />
+          <Button type={Constant.buttons.SELFSEA_SEND} icon={Images.Send} />
 
           <Radio
             onPressRadioButton={selectRadioButton}
@@ -124,7 +122,8 @@ const Home = ({ navigation }) => {
             onEnableToggle={toggleSwitch}
           />
 
-          <TextInput
+          {/* I have no idea what the following text inputs are for, but they fail to compile */}
+          {/* <TextInput
             type={Constant.textInput.LARGE_INPUT}
             placeholder={'Placeholder'}
             label={'label'}
@@ -133,24 +132,23 @@ const Home = ({ navigation }) => {
           <TextInput
             type={Constant.textInput.LARGE_TEXT_AREA}
             placeholder={'Placeholder'}
-          />
+          /> */}
 
           <Dropdown
             optionList={countries}
             onSelect={() => {}}
             defaultButtonText={'selfsea'}
-            icon={Images.DropdownIcon}
           />
 
           <Header
-            type={Constant.navigatioHeader.PAGE_HEADER}
+            type={Constant.navigationHeader.PAGE_HEADER}
             leftIcon={Images.Pencil}
             rightIcon={Images.Gear}
             label={'page title'}
             style={{ backgroundColor: Color.COMMUNITY_MAROON }}
           />
           <Header
-            type={Constant.navigatioHeader.PAGE_HEADER}
+            type={Constant.navigationHeader.PAGE_HEADER}
             leftIcon={Images.Pencil}
             rightIcon={Images.Gear}
             label={'page title'}
@@ -158,14 +156,14 @@ const Home = ({ navigation }) => {
           />
 
           <Header
-            type={Constant.navigatioHeader.PAGE_HEADER}
+            type={Constant.navigationHeader.PAGE_HEADER}
             leftIcon={Images.Pencil}
             rightIcon={Images.Gear}
             label={'page title'}
           />
           <Header
-            type={Constant.navigatioHeader.COMMUNITY_HEADER}
-            leftIcon={Images.Arrowsquare}
+            type={Constant.navigationHeader.COMMUNITY_HEADER}
+            leftIcon={Images.ArrowSquare}
             rightIcon={Images.Dots}
             label={'navigating identity'}
             descriptionText={
@@ -175,12 +173,12 @@ const Home = ({ navigation }) => {
           />
 
           <Header
-            type={Constant.navigatioHeader.POST}
+            type={Constant.navigationHeader.POST}
             leftIcon={Images.Arrow}
             text={'in'}
             label={'create a post'}
             rightIcon={Images.Downarrow}
-            underlinetext={'select a community'}
+            underlineText={'select a community'}
           />
         </View>
       </ScrollView>

@@ -7,16 +7,17 @@ import Color from '../theme/colors';
 import Font from '../theme/fonts';
 import Images from '../theme/images';
 
-import Header from '../component/Header';
-import Button from '../component/Button';
+import Header from '../components/Header';
+import Button from '../components/Button';
 
 import LinearGradient from 'react-native-linear-gradient';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Theme } from '../styles';
 import { HomeRequest } from '../redux/actions/HomeAction';
 import { AcceptRequest } from '../redux/actions/AcceptTermAction';
+import { useTypedSelector } from '../redux';
 
-// import Loader from '../component/Loader';
+// import Loader from '../components/Loader';
 
 const DATA = [{}, {}, {}, {}];
 
@@ -43,13 +44,13 @@ const descriptionData = [
 ];
 
 const CommunitiesHome = ({ navigation }) => {
-  const [title, setTitle] = useState(null);
-  const [content, setContent] = useState(null);
-  const [isModalVisible, setIsMoalVisiable] = useState(null);
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const dispatch = useDispatch();
 
-  const homeResponse = useSelector(state => state.HomeReducer);
+  const homeResponse = useTypedSelector(state => state.HomeReducer);
   console.log('HomeReducer123 : ', JSON.stringify(homeResponse));
 
   useEffect(() => {
@@ -58,17 +59,17 @@ const CommunitiesHome = ({ navigation }) => {
 
   useEffect(() => {
     if (homeResponse.data) {
-      console.log('homeResponse.data if: ', homeResponse?.data);
-      setTitle(homeResponse?.data?.currentTermsAndConditions?.title);
-      setContent(homeResponse?.data?.currentTermsAndConditions?.content);
-      // setIsMoalVisiable(!homeResponse?.data?.currentUser?.hasAcceptedLatestTerms);
+      console.log('homeResponse.data if: ', homeResponse.data);
+      setTitle(homeResponse.data.currentTermsAndConditions.title);
+      setContent(homeResponse.data.currentTermsAndConditions.content);
+      setIsModalVisible(!homeResponse.data.currentUser.hasAcceptedLatestTerms);
     } else {
-      console.log('homeResponse.data sssss : ', homeResponse.data);
+      console.log('homeResponse.data : ', homeResponse.data);
     }
   }, [homeResponse]);
 
   const changeModalVisibility = (bool: boolean) => {
-    setIsMoalVisiable(bool);
+    setIsModalVisible(bool);
   };
 
   const renderItem = () => (
@@ -96,12 +97,12 @@ const CommunitiesHome = ({ navigation }) => {
     </View>
   );
 
-  // console.log('Theme', Theme);
+  console.log('Theme', Theme);
 
   return (
     <View style={styles.container}>
       <Header
-        type={Constant.navigatioHeader.PAGE_HEADER}
+        type={Constant.navigationHeader.PAGE_HEADER}
         label={'selfsea communities'}
         style={styles.headerView}
       />

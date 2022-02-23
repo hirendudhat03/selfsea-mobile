@@ -8,9 +8,7 @@ import Images from '../theme/images';
 import CommunitiesHome from '../views/CommunitiesHome';
 import Notifications from '../views/Notifications';
 import Book from '../views/Book';
-import Profile from '../views/Profile';
 import TabScreen from '../views/TabScreen';
-
 import Color from '../theme/colors';
 
 import HealthScreen from '../views/HealthScreen';
@@ -19,6 +17,7 @@ import HealthScreen from '../views/HealthScreen';
 
 import NavigationIdentity from '../views/NavigationIdentity';
 import MentorCommunity from '../views/MentorCommunity';
+import Settings from '../views/Settings';
 
 export const screenNames = {
   CommunitiesHome: 'CommunitiesHome',
@@ -37,9 +36,9 @@ function HomeStackScreen() {
   return (
     <HomeStack.Navigator
       screenOptions={{
+        headerShown: false,
         gestureEnabled: true,
         gestureDirection: 'horizontal',
-        headerShown: false
       }}
       initialRouteName={screenNames.CommunitiesHome}>
       <HomeStack.Screen
@@ -140,8 +139,9 @@ const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Person"
-        component={Profile}
+        name="Profile"
+        // component={Profile}
+        component={Settings}
         options={{
           headerShown: false,
           tabBarLabel: () => {

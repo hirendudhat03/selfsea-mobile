@@ -1,4 +1,4 @@
-export function HomeResponse(data, loader) {
+export function HomeResponse(data?: unknown, loader?: unknown) {
   console.log('call SaveHomeResponse : ', data);
 
   return {
@@ -8,10 +8,9 @@ export function HomeResponse(data, loader) {
   };
 }
 
-export function HomeRequest(loader) {
+export function HomeRequest(loader?: unknown) {
   return {
     type: 'HOME_REQUEST',
-
     loader: loader,
   };
 }

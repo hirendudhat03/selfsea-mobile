@@ -2,10 +2,7 @@ import { call, put } from 'redux-saga/effects';
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { api } from '../../services';
-import { CurrentUserApi } from '../../types/CurrentUserApi';
 import { LoginResponse } from '../actions/LoginAction';
-
-import { currentUserQuery } from '../../graphql/queries/UserProfile';
 import { Alert } from 'react-native';
 
 export function* loginSaga(action) {
@@ -24,43 +21,36 @@ export function* loginSaga(action) {
       await AsyncStorage.setItem('jwtToken', token);
       api.setAuthHeader(token);
 
-      AsyncStorage.getItem('currentUser_role').then(value => {
-        console.log('value:', value);
-        if (value === 'false') {
-          const Getuser = async () => {
-            try {
-              const data = await api.client.request<CurrentUserApi>(
-                currentUserQuery,
-              );
-              if (data.currentUser.roles[0].name === 'MENTEE') {
-                action.navigation.navigate('DrawerNavigator');
-              }
-              if (data.currentUser.roles[0].name === 'MENTOR') {
-                action.navigation.navigate('DrawerNavigator');
-              }
-              if (data.currentUser.roles[0].name === 'MODERATOR') {
-                action.navigation.navigate('DrawerNavigator');
-              }
-              if (data.currentUser.roles[0].name === 'ADMIN') {
-                action.navigation.navigate('DrawerNavigator');
-              }
-            } catch (e) {
-              Alert.alert('something went to wrong in currentuser');
-            }
-          };
-          Getuser();
-        } else {
-          action.navigation.navigate('CreateProfile');
-        }
-      });
+      const data = await api.currentUser();
+      if (data?.currentUser?.roles[0].name === 'MENTEE') {
+        // In future it will be role based redirect
+        action.navigation.navigate('DrawerNavigator');
+      }
+      if (data?.currentUser?.roles[0].name === 'MENTOR') {
+        // In future it will be role based redirect
+        action.navigation.navigate('DrawerNavigator');
+      }
+      if (data?.currentUser?.roles[0].name === 'MODERATOR') {
+        // In future it will be role based redirect
+        action.navigation.navigate('DrawerNavigator');
+      }
+      if (data?.currentUser?.roles[0].name === 'ADMIN') {
+        // In future it will be role based redirect
+        action.navigation.navigate('DrawerNavigator');
+      }
+
       // } else {
       //   console.log('not verified');
       //   Alert.alert('not verified');
       // }
 
       return response;
-    } catch (e) {
-      if (e.code === 'auth/user-not-found') {
+    } catch (e: unknown) {
+      if (!isBadRequestError(e)) {
+        Alert.alert('something went wrong while logging in');
+        return;
+      }
+      if (e.code && e.code === 'auth/user-not-found') {
         console.log('That email address is not found!');
         Alert.alert('That email address is not found!');
       }
@@ -92,3 +82,6 @@ export function* loginSaga(action) {
     yield put(LoginResponse(response, false));
   }
 }
+
+const isBadRequestError = (e: unknown): e is { code: string } =>
+  !!e && typeof e === 'object' && 'code' in e;

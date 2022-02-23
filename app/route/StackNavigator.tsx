@@ -2,10 +2,10 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../views/Home';
 import Login from '../views/LoginScreen';
-import Signup from '../views/SignUpWithEmailScreen';
+import SignUp from '../views/SignUpWithEmailScreen';
 import TabNavigator from '../route/TabNavigator';
 import DrawerNavigator from '../route/DrawerNavigator';
-import Signin from '../views/SigninScreen';
+import SignIn from '../views/SignInScreen';
 import All from '../views/All';
 import Mentees from '../views/Mentees';
 import CreateProfile from '../views/CreateProfile';
@@ -31,8 +31,8 @@ const stackNavigator = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Signup"
-        component={Signup}
+        name="SignUp"
+        component={SignUp}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -46,8 +46,8 @@ const stackNavigator = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Signin"
-        component={Signin}
+        name="SignIn"
+        component={SignIn}
         options={{ headerShown: false }}
       />
       <Stack.Screen

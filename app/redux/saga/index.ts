@@ -1,7 +1,8 @@
 import { takeEvery, all } from 'redux-saga/effects';
 
 import { loginSaga } from './LoginSaga';
-import { signupSaga } from './SignupSaga';
+//// eslint-disable-next-line
+import { signUpSaga } from './SignupSaga';
 import { createProfileSaga } from './CreateProfileSaga';
 import { homeSaga } from './HomeSaga';
 import { menuSaga } from './MenuSaga';
@@ -11,7 +12,7 @@ import { passwordlessSignupSaga } from './PasswordlessSignupSaga';
 export default function* root_saga() {
   yield all([
     takeEvery('LOGIN_REQUEST', loginSaga),
-    takeEvery('SIGNUP_REQUEST', signupSaga),
+    takeEvery('SIGN_UP_REQUEST', signUpSaga),
     takeEvery('PASSWORDLESS_SIGNUP_REQUEST', passwordlessSignupSaga),
     takeEvery('CREATE_PROFILE_REQUEST', createProfileSaga),
     takeEvery('HOME_REQUEST', homeSaga),

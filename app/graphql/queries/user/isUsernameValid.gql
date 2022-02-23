@@ -1,0 +1,5 @@
+query isUsernameValid($username: String!) {
+  isUsernameValid(username: $username) {
+    isValid
+  }
+}

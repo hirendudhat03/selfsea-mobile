@@ -5,11 +5,14 @@ import Color from '../theme/colors';
 import Font from '../theme/fonts';
 import Images from '../theme/images';
 
-import { DrawerItem } from '@react-navigation/drawer';
+import {
+  DrawerContentComponentProps,
+  DrawerItem,
+} from '@react-navigation/drawer';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface Props {
-  props: () => void;
+  props: DrawerContentComponentProps;
 }
 
 const Drawer = ({ props }: Props) => {
@@ -52,16 +55,17 @@ const Drawer = ({ props }: Props) => {
         <ScrollView>
           <View>
             <DrawerItem
-              style={styles.communites}
+              style={styles.communities}
               label={() => (
                 <View style={styles.communityText}>
                   <Text style={styles.menuText}>Communities</Text>
                 </View>
               )}
+              onPress={() => {}}
             />
             <DrawerItem
               style={styles.drawerItem}
-              focused={focus === 1 ? true : false}
+              focused={focus === '1' ? true : false}
               label={() => (
                 <View style={styles.drawerView}>
                   <Text style={styles.menuText}>Users</Text>
@@ -204,7 +208,7 @@ const Drawer = ({ props }: Props) => {
 
             <DrawerItem
               style={styles.drawerItem}
-              focused={focus === 1 ? true : false}
+              focused={focus === '1' ? true : false}
               label={() => (
                 <View style={styles.drawerView}>
                   <Text style={styles.menuText}>Moderation Queue</Text>
@@ -344,7 +348,7 @@ const Drawer = ({ props }: Props) => {
             )}
             <DrawerItem
               style={styles.drawerItem}
-              focused={focus === 1 ? true : false}
+              focused={focus === '1' ? true : false}
               label={() => (
                 <View style={styles.drawerView}>
                   <Text style={styles.menuText}>My Account</Text>
@@ -496,7 +500,7 @@ const styles = StyleSheet.create({
     width: '73%',
     height: '20%',
   },
-  communites: {
+  communities: {
     height: 50,
     borderBottomWidth: 2,
     borderBottomColor: Color.BASE_COLOR_LIGHTGRAY,

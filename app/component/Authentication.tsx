@@ -1,18 +1,18 @@
 import React from 'react';
 import {
   Image,
-  ImageSourcePropType,
   Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import Color from '../theme/colors';
 // @ts-ignore
 import {
   GoogleSignin,
-  statusCodes
-} from "@react-native-google-signin/google-signin";
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 import Constant from '../theme/constant';
 // import InstagramLogin from 'react-native-instagram-login';
 import {
@@ -23,13 +23,13 @@ import auth from '@react-native-firebase/auth';
 import 'react-native-get-random-values';
 import { v4 as uuid } from 'uuid';
 import { decode } from 'base-64';
-import Alert from "./Alert";
+// import Alert from '../components/Alert';
 
 interface Props {
   text: string;
-  icon?: ImageSourcePropType;
+  icon?: any;
   type: string;
-  navigation: object;
+  navigation: any;
 }
 
 const Authentication = ({ text, icon, type, navigation }: Props) => {
@@ -50,21 +50,19 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
           var tokens = await GoogleSignin.getTokens();
 
           var credToken =
-          userInfo.idToken !== null
-            ? userInfo.idToken
-            : tokens.accessToken;
-          const googleCredential = auth.GoogleAuthProvider.credential(credToken);
+            userInfo.idToken !== null ? userInfo.idToken : tokens.accessToken;
+          const googleCredential =
+            auth.GoogleAuthProvider.credential(credToken);
           var response = await auth().signInWithCredential(googleCredential);
-          if(response.additionalUserInfo?.isNewUser === false){
+          if (response.additionalUserInfo?.isNewUser === false) {
             navigation.navigate('DrawerNavigator');
-          }else{
+          } else {
             navigation.navigate('Signup', {
               type: 'google',
               email: userInfo.user.email,
               userInfo: userInfo,
             });
           }
-
         })
         .catch(e => {
           console.log('ERROR IS: ' + e);
@@ -162,7 +160,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
       const response = await appleAuthAndroid.signIn();
 
       var userInfo = parseJwt(response.id_token);
-      let token = response.id_token;
+      let token = response.id_token ?? null;
       const appleCredential = auth.AppleAuthProvider.credential(
         token,
         response.nonce,
@@ -205,6 +203,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
     } else if (type === Constant.authLogin.INSTAGRAM) {
       // instagramLogin.show();
     } else if (type === Constant.authLogin.APPLE) {
+      console.log('Here');
       _signInApple();
     }
   };
@@ -213,7 +212,6 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
     <TouchableOpacity style={styles.container} onPress={() => authLogin()}>
       <Image style={styles.image} source={icon} />
       <Text style={styles.text}>{text}</Text>
-
       {/* <InstagramLogin
         ref={ref => (instagramLogin = ref)}
         appId="321916266462620"

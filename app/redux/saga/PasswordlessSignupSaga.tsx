@@ -2,40 +2,40 @@ import auth from '@react-native-firebase/auth';
 import { api } from '../../services';
 import { call, put } from 'redux-saga/effects';
 import { createUserMutation } from '../../graphql/mutations/UserMutation';
-import { Alert, Platform } from 'react-native';
-import { SignupResponse } from '../actions/SignupAction';
+import { Alert } from 'react-native';
+import { SignUpResponse } from '../actions/SignUpAction';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 export function* passwordlessSignupSaga(action) {
   const Signup = async (email, birthMonth, birthYear, userName) => {
     try {
-      var token : any = '';
-      var response : any = '';
-      if(action.platform == "google"){
+      var token: any = '';
+      var response: any = '';
+      if (action.platform === 'google') {
         var tokens = await GoogleSignin.getTokens();
 
         var credToken =
-        action.userInfo.idToken !== null
-          ? action.userInfo.idToken
-          : tokens.accessToken;
+          action.userInfo.idToken !== null
+            ? action.userInfo.idToken
+            : tokens.accessToken;
         const googleCredential = auth.GoogleAuthProvider.credential(credToken);
         response = await auth().signInWithCredential(googleCredential);
         await response.user.sendEmailVerification();
       }
-      
-      if(action.platform == "apple"){
-        token = action.token
+
+      if (action.platform === 'apple') {
+        token = action.token;
       }
-      
+
       api.setAuthHeader(token);
       // console.log('token : ', token);
 
       // await response.user.sendEmailVerification();
-      console.log("Action", action.uid);
+      console.log('Action', action.uid);
 
       const mutationVariables = {
         email,
-        authId: action.platform == "apple"?action.uid:response?.user?.uid,
+        authId: action.platform === 'apple' ? action.uid : response?.user?.uid,
         birthMonth: birthMonth.toUpperCase(),
         birthYear: parseFloat(birthYear),
         username: userName,
@@ -46,7 +46,7 @@ export function* passwordlessSignupSaga(action) {
         mutationVariables,
       );
       console.log('data::', data);
-     
+
       action.navigation.navigate('DrawerNavigator');
       return { ...data, ...response };
     } catch (e: any) {
@@ -61,7 +61,7 @@ export function* passwordlessSignupSaga(action) {
         Alert.alert('That email address is invalid!');
       }
 
-      console.log("MESG",e.message);
+      console.log('MESG', e.message);
       // Alert.alert(e.message);
       return {
         error:
@@ -90,6 +90,6 @@ export function* passwordlessSignupSaga(action) {
   //     ),
   //   );
   // } else {
-  yield put(SignupResponse(response, false));
+  yield put(SignUpResponse(response, false));
   // }
 }
