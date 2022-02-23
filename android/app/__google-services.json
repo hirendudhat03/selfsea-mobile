@@ -68,7 +68,6 @@
       "oauth_client": [
         {
           "client_id": "597759932954-lp1uvvpjku9rf65ie6kvnekfilj66j43.apps.googleusercontent.com",
-<<<<<<< HEAD
           "client_type": 1,
           "android_info": {
             "package_name": "com.selfseamobile",
@@ -84,23 +83,6 @@
           }
         },
         {
-=======
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.selfseamobile",
-            "certificate_hash": "2462340ff37eedc7c501e00e0f4109d5b0a3a5f2"
-          }
-        },
-        {
-          "client_id": "597759932954-n6ddoinq68ukpiq2jjfc7bli9ucrcgfj.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.selfseamobile",
-            "certificate_hash": "6037df3087324b9d406e9f5f4f462b56246dfe1a"
-          }
-        },
-        {
->>>>>>> f8b0659539b2a8646dd84ca6c33f39129048452c
           "client_id": "597759932954-hj037g8cqseqq6dpukg26752k305sqpl.apps.googleusercontent.com",
           "client_type": 3
         }
