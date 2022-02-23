@@ -26,11 +26,15 @@ import Color from '../theme/colors';
 import BirthDateInput from '../components/BirthDateInput';
 
 import { useDispatch } from 'react-redux';
-import { SignUpRequest } from '../redux/actions/SignUpAction';
+import {
+  SignUpRequest,
+  SignUpRequestWithoutPassword,
+} from '../redux/actions/SignUpAction';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import Loader from '../components/Loader';
 import { useTypedSelector } from '../redux';
+import { authText } from '../config/static';
 
 const zxcvbn = require('zxcvbn');
 
@@ -71,7 +75,7 @@ const ageData = [
   },
 ];
 
-const SignUp = ({ navigation }) => {
+const SignUp = ({ route, navigation }) => {
   const dispatch = useDispatch();
 
   const signUpRes = useTypedSelector(state => state.SignUpReducer);
@@ -83,14 +87,18 @@ const SignUp = ({ navigation }) => {
     let year: number[] = [];
     let currentYear = new Date().getFullYear();
     let startYear = 1900;
-
+    route.params !== undefined &&
+      route.params.email !== '' &&
+      setCircleFillEmail(true);
+    route.params !== undefined &&
+      route.params.email !== '' &&
+      setEmail(route.params.email);
     while (currentYear >= startYear) {
       year.push(currentYear--);
     }
     setYear(year);
+  }, [route]);
 
-    console.log('year::', year);
-  }, []);
   useEffect(() => {
     if (signUpRes.data) {
       console.log('signUpRes.data if: ', signUpRes.data);
@@ -130,20 +138,39 @@ const SignUp = ({ navigation }) => {
     }
   };
 
-  const countAge = () => {
+  const countAge = (isPasswordless: boolean) => {
     if (userAge === null || userAge < 13 || userAge > 18) {
       changeAgeVisibility(true);
     } else {
-      dispatch(
-        SignUpRequest(
-          email,
-          Password,
-          birthMonth,
-          birthYear,
-          userName,
-          navigation,
-        ),
-      );
+      if (isPasswordless === true) {
+        console.log('PasswordLess UId', route.params.userInfo.user.uid);
+
+        dispatch(
+          SignUpRequestWithoutPassword(
+            email,
+            birthMonth,
+            birthYear,
+            userName,
+            navigation,
+            false,
+            route.params.userInfo,
+            route.params.type,
+            route.params.userInfo.user.uid,
+          ),
+        );
+      } else {
+        dispatch(
+          SignUpRequest(
+            email,
+            Password,
+            birthMonth,
+            birthYear,
+            userName,
+            navigation,
+            false,
+          ),
+        );
+      }
     }
   };
   const [circleFillEmail, setCircleFillEmail] = useState<boolean>();
@@ -174,7 +201,6 @@ const SignUp = ({ navigation }) => {
   };
 
   const [circleFillPassword, setCircleFillPassword] = useState<boolean>();
-
   const selectFillPassword = (text: string) => {
     console.log('text:::', text);
 
@@ -216,7 +242,7 @@ const SignUp = ({ navigation }) => {
     }
   };
 
-  const [circleFillBirth, setCircleFillBirth] = useState<boolean>();
+  const [circleFillBirth, setCircleFillBirth] = useState<boolean>(false);
 
   const selectFillBirth = value => {
     setBirthYear(value);
@@ -254,35 +280,59 @@ const SignUp = ({ navigation }) => {
   };
 
   const SignUpValidation = (text: string) => {
-    if (
-      !email &&
-      !Password &&
-      birthMonth === '' &&
-      birthYear === '' &&
-      !userName
-    ) {
-      setEmailError('Please enter email address.');
-      setPasswordError('Password must contain a number.');
-      setUserNameError(text.length + '/20');
+    if (route.params === undefined) {
+      if (
+        !email &&
+        !Password &&
+        birthMonth === '' &&
+        birthYear === '' &&
+        !userName
+      ) {
+        setEmailError('Please enter email address.');
+        route.params === undefined &&
+          setPasswordError('Password must contain a number.');
+        setUserNameError(text.length + '/20');
 
-      setEmail('');
-      setUserName('');
-      setPassword('');
-    } else if (!email) {
-      setEmailError('Please enter email address.');
-    } else if (
-      email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/) === null
-    ) {
-      setEmailError('Please enter a valid email address.');
-    } else if (!Password) {
-      setPasswordError('Password must contain a number.');
-    } else if (!userName) {
-      setUserNameError(text.length + '/20');
+        setEmail('');
+        setUserName('');
+        setPassword('');
+      } else if (!email) {
+        setEmailError('Please enter email address.');
+      } else if (
+        email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/) === null
+      ) {
+        setEmailError('Please enter a valid email address.');
+      } else if (!Password) {
+        route.params === undefined &&
+          setPasswordError('Password must contain a number.');
+      } else if (!userName) {
+        setUserNameError(text.length + '/20');
+      } else {
+        console.log('Here2');
+        countAge(false);
+
+        navigation.navigate('CreateProfile');
+      }
     } else {
-      countAge();
+      if (!email && birthMonth === '' && birthYear === '' && !userName) {
+        setEmailError('Please enter email address.');
+        setUserNameError(text.length + '/20');
+
+        setEmail('');
+        setUserName('');
+      } else if (!email) {
+        setEmailError('Please enter email address.');
+      } else if (
+        email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/) === null
+      ) {
+        setEmailError('Please enter a valid email address.');
+      } else if (!userName) {
+        setUserNameError(text.length + '/20');
+      } else {
+        countAge(true);
+      }
     }
   };
-
   const [emailBorder, setEmailBorder] = useState('');
   const handleTouch = () => {
     setEmailBorder(Color.BASE_COLOR_LIGHT_BLUE);
@@ -327,45 +377,57 @@ const SignUp = ({ navigation }) => {
               circleFill={circleFillEmail}
               onTouchStart={() => handleTouch()}
               borderColor={emailBorder}
+              editable={route.params === undefined ? true : false}
+              defaultValue={''}
+              text={''}
             />
-
-            <TextInput
-              type={Constant.textInput.LARGE_INPUT}
-              label={'password'}
-              style={styles.inputTextStyle}
-              onChangeText={text => {
-                selectFillPassword(text);
-                const response = zxcvbn(text);
-                setPasswordScore(response.score);
-                setPasswordError(response.feedback.suggestions);
-                setCircleFillPassword(response.score >= 2);
-              }}
-              value={Password}
-              helperText={PasswordError}
-              iconVisible={true}
-              secureTextEntry={focus !== true ? focus : true}
-              secureTextEntryChange={selectFocus}
-              iconVisibleFill={true}
-              checkRight={true}
-              circleFill={circleFillPassword}
-              onTouchStart={() => handleTouchPasswordBorder()}
-              borderColor={passwordBorder}
-            />
-            <View style={styles.viewStyle}>
-              <PasswordInputStrength
-                passwordScore={passwordScore}
-                password={Password}
+            {route.params === undefined && (
+              <TextInput
+                type={Constant.textInput.LARGE_INPUT}
+                label={'password'}
+                style={styles.inputTextStyle}
+                onChangeText={text => {
+                  selectFillPassword(text);
+                  const response = zxcvbn(text);
+                  setPasswordScore(response.score);
+                  setPasswordError(response.feedback.suggestions);
+                  setCircleFillPassword(response.score >= 2);
+                }}
+                value={Password}
+                helperText={PasswordError}
+                iconVisible={true}
+                secureTextEntry={focus !== true ? focus : true}
+                secureTextEntryChange={selectFocus}
+                iconVisibleFill={true}
+                checkRight={true}
+                circleFill={circleFillPassword}
+                onTouchStart={() => handleTouchPasswordBorder()}
+                borderColor={passwordBorder}
+                defaultValue={''}
+                text={''}
+                maxLength={0}
+                editable={true}
               />
-            </View>
+            )}
+            {route.params === undefined && (
+              <View style={styles.viewStyle}>
+                <PasswordInputStrength
+                  passwordScore={passwordScore}
+                  password={Password}
+                />
+              </View>
+            )}
 
-            <View style={styles.monthView}>
-              <View style={styles.rowView}>
+            <View style={styles.commonView}>
+              <View style={styles.monthView}>
+                {/* <View style={styles.rowView}> */}
                 <Text style={styles.birthMonthText}>birth month</Text>
                 <TouchableOpacity
                   style={styles.touchableStyle}
                   onPress={() => changeBirthVisibility(true)}>
                   <Image source={Images.InfoCircle} style={styles.infoIcon} />
                 </TouchableOpacity>
+                {/* </View> */}
               </View>
               <View style={styles.yearView}>
                 <Text style={styles.birthYearText}>birth year</Text>
@@ -414,6 +476,8 @@ const SignUp = ({ navigation }) => {
               circleFill={circleFillUser}
               onTouchStart={() => handleTouchUsernameBorder()}
               borderColor={userNameBorder}
+              defaultValue={''}
+              editable={true}
             />
             {userNameError === 'this username is taken.' ? (
               <Text
@@ -434,26 +498,52 @@ const SignUp = ({ navigation }) => {
           </View>
         </ScrollView>
         <View style={styles.bottomView}>
-          <Button
-            type={Constant.buttons.PRIMARY}
-            text={'create account'}
-            style={[
-              styles.buttonStyle,
-              circleFillEmail !== true ||
-              circleFillPassword !== true ||
-              circleFillBirth !== true ||
-              circleFillUser !== true
-                ? { backgroundColor: Color.BUTTON_DISABLE_COLOR }
-                : { backgroundColor: Color.BASE_COLOR_ORANGE },
-            ]}
-            onPress={() => SignUpValidation(userName)}
-            disabled={
-              circleFillEmail !== true ||
-              circleFillPassword !== true ||
-              circleFillBirth !== true ||
-              circleFillUser !== true
-            }
-          />
+          {route.params === undefined ? (
+            <Button
+              type={Constant.buttons.PRIMARY}
+              text={authText.CREATE_ACCOUNT_BUTTON}
+              style={[
+                styles.buttonStyle,
+                circleFillEmail !== true ||
+                circleFillPassword !== true ||
+                circleFillBirth !== true ||
+                circleFillUser !== true
+                  ? { backgroundColor: Color.BUTTON_DISABLE_COLOR }
+                  : { backgroundColor: Color.BASE_COLOR_ORANGE },
+              ]}
+              onPress={() => SignUpValidation(userName)}
+              disabled={
+                passwordScore < 3 ||
+                circleFillEmail !== true ||
+                circleFillPassword !== true ||
+                circleFillBirth !== true ||
+                circleFillUser !== true
+                  ? true
+                  : false
+              }
+            />
+          ) : (
+            <Button
+              type={Constant.buttons.PRIMARY}
+              text={authText.CREATE_ACCOUNT_BUTTON}
+              style={[
+                styles.buttonStyle,
+                circleFillEmail !== true ||
+                circleFillBirth !== true ||
+                circleFillUser !== true
+                  ? { backgroundColor: Color.BUTTON_DISABLE_COLOR }
+                  : { backgroundColor: Color.BASE_COLOR_ORANGE },
+              ]}
+              onPress={() => SignUpValidation(userName)}
+              disabled={
+                circleFillEmail !== true ||
+                circleFillBirth !== true ||
+                circleFillUser !== true
+                  ? true
+                  : false
+              }
+            />
+          )}
         </View>
         <Modal
           transparent={false}
@@ -530,7 +620,7 @@ const styles = StyleSheet.create({
     width: 19,
     height: 19,
   },
-
+  flex1: { flex: 1 },
   bottomView: {
     flex: 0.7,
     alignItems: 'center',
@@ -552,24 +642,26 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   monthView: {
-    width: '90%',
+    width: '45%',
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignSelf: 'flex-start',
-    marginHorizontal: 20,
-    marginVertical: 3,
-    marginTop: height * 0.02,
+    // justifyContent: 'space-between',
+    // alignSelf: 'flex-start',
+    // marginHorizontal: 20,
+    // marginVertical: 3,
+    marginRight: 7,
+    // marginTop: height * 0.02,
+    // backgroundColor:'green'
   },
   monthViewBottom: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     alignSelf: 'flex-start',
-    marginHorizontal: 19,
+    // marginHorizontal: 19,
   },
   rowView: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     paddingVertical: 4,
   },
   yearView: {
@@ -657,6 +749,12 @@ const styles = StyleSheet.create({
   },
   keyboardAvoidingStyle: {
     flex: 1,
+  },
+  commonView: {
+    flexDirection: 'row',
+    width: '90%',
+    marginTop: 10,
+    marginBottom: 7,
   },
 });
 export default SignUp;

@@ -35,9 +35,10 @@ interface Props {
   onTouchStart?: () => void;
   borderColor: string;
   onTouchEnd?: () => void;
-  defaultValue?: string;
-  text?: string;
-  maxLength?: number;
+  defaultValue: string;
+  text: string;
+  maxLength: number;
+  editable: boolean;
 }
 
 const CustomTextInput = ({
@@ -62,6 +63,7 @@ const CustomTextInput = ({
   defaultValue,
   text,
   maxLength,
+  editable,
 }: Props) => {
   return (
     <>
@@ -90,6 +92,7 @@ const CustomTextInput = ({
                 placeholder={placeholder}
                 onChangeText={onChangeText}
                 secureTextEntry={secureTextEntry}
+                editable={editable}
                 value={value}
                 onTouchStart={onTouchStart}
                 onTouchEnd={onTouchEnd}

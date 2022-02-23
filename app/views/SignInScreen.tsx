@@ -19,11 +19,11 @@ import Loader from '../components/Loader';
 import { authText } from '../config/static';
 import { useTypedSelector } from '../redux';
 
-const SignIn = ({ navigation }) => {
+const SignIn = ({ route, navigation }) => {
   const dispatch = useDispatch();
 
   const loginRes = useTypedSelector(state => state.LoginReducer);
-  console.log('LoginReducer : ', JSON.stringify(loginRes));
+  console.log('LoginReducer : ', route);
 
   const [isSelectedCheckBox, setISSelectionCheckBox] = useState(false);
 
@@ -131,6 +131,10 @@ const SignIn = ({ navigation }) => {
             checkRight={undefined}
             onTouchStart={() => handleTouch()}
             borderColor={emailBorder}
+            defaultValue={''}
+            text={''}
+            maxLength={100}
+            editable={true}
           />
 
           <TextInput
@@ -148,6 +152,10 @@ const SignIn = ({ navigation }) => {
             checkRight={undefined}
             onTouchStart={() => handleTouchPasswordBorder()}
             borderColor={passwordBorder}
+            defaultValue={''}
+            text={''}
+            maxLength={100}
+            editable={true}
           />
 
           <Text
@@ -175,13 +183,15 @@ const SignIn = ({ navigation }) => {
           <Auth
             text={'continue with Google'}
             icon={Images.Google}
-            // type={Constant.authLogin.GOOGLE}
+            type={Constant.authLogin.GOOGLE}
+            navigation={navigation}
           />
 
           <Auth
             text={'continue with Apple'}
             icon={Images.Apple}
-            // type={Constant.authLogin.APPLE}
+            type={Constant.authLogin.APPLE}
+            navigation={navigation}
           />
         </View>
       </ScrollView>

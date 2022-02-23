@@ -1,195 +1,229 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   Image,
-  ImageSourcePropType,
+  Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import Color from '../theme/colors';
-// cspell:words signin
+// @ts-ignore
 import {
   GoogleSignin,
-  // statusCodes,
+  statusCodes,
 } from '@react-native-google-signin/google-signin';
-// import Constant from '../theme/constant';
-// import {
-//   appleAuth,
-//   appleAuthAndroid,
-// } from '@invertase/react-native-apple-authentication';
-// import auth, { firebase } from '@react-native-firebase/auth';
+import Constant from '../theme/constant';
+// import InstagramLogin from 'react-native-instagram-login';
+import {
+  appleAuth,
+  appleAuthAndroid,
+} from '@invertase/react-native-apple-authentication';
+import auth from '@react-native-firebase/auth';
 import 'react-native-get-random-values';
-// import { v4 as uuid } from 'uuid';
-// import { decode } from 'base-64';
+import { v4 as uuid } from 'uuid';
+import { decode } from 'base-64';
 
 interface Props {
   text: string;
-  icon?: ImageSourcePropType;
-  // type: string;
+  icon?: any;
+  type: string;
+  navigation: any;
 }
 
-const Authentication = ({ text, icon }: Props) => {
-  useEffect(() => {
+const Authentication = ({ text, icon, type, navigation }: Props) => {
+  // let instagramLogin = useRef();
+  const rawNonce = uuid();
+  const state = uuid();
+
+  const _signIn = async () => {
+    console.log('handlePressGoogleLogin');
     GoogleSignin.configure({
-      // Mandatory method to call before calling signIn()
-      // scopes: ['https://www.googleapis.com/auth/drive.readonly'],
-      // Replace with your webClientId
-      // Generated from Firebase console
       webClientId:
-        // cspell:disable-next-line
-        '651815828852-ieos3aa4gougfirdnf52carf51q8v52v.apps.googleusercontent.com',
+        '597759932954-hj037g8cqseqq6dpukg26752k305sqpl.apps.googleusercontent.com',
     });
-  }, []);
 
-  // const _signIn = async () => {
-  //   console.log('handlePressGoogleLogin');
-  //   GoogleSignin.configure({
-  //     // androidClientId: '3A:84:C8:28:4A:5F:82:9F:12:8B:71:46:C9:87:0F:68:E6:38:7E:AE',
-  //     // cspell:disable-next-line
-  //     // iosClientId: '880711382534-k6q6jmtatddtll7u9qfmn31cbc1ckav1.apps.googleusercontent.com',
-  //   });
+    try {
+      GoogleSignin.signOut();
+      GoogleSignin.signIn()
+        .then(async userInfo => {
+          var tokens = await GoogleSignin.getTokens();
 
-  //   try {
-  //     GoogleSignin.signIn()
-  //       .then(async userInfo => {
-  //         console.log(JSON.stringify(userInfo));
-  //         // var emailMethodRes = await auth().fetchSignInMethodsForEmail(userInfo.user.email);
-  //         var emailMethodRes = await firebase
-  //           .auth()
-  //           .createUserWithEmailAndPassword(userInfo.user.email, '123456');
-  //         console.log('Email Methods', emailMethodRes);
-  //         Alert.alert(userInfo.user.givenName, userInfo.user.email);
-  //       })
-  //       .catch(e => {
-  //         console.log('ERROR IS: ' + e);
-  //         switch (e.code) {
-  //           case 'auth/email-already-in-use':
-  //             console.log('Email address already in use.');
-  //             break;
-  //           case 'auth/invalid-email':
-  //             console.log('Email address is invalid.');
-  //             break;
-  //           case 'auth/operation-not-allowed':
-  //             console.log('e during sign up.');
-  //             break;
-  //           case 'auth/weak-password':
-  //             console.log(
-  //               'Password is not strong enough. Add additional characters including special characters and numbers.',
-  //             );
-  //             break;
-  //           default:
-  //             console.log(e.message);
-  //             break;
-  //         }
-  //       });
-  //   } catch (error: any) {
-  //     console.error('Message', JSON.stringify(error));
-  //     if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-  //       Alert.alert('User Cancelled the Login Flow');
-  //     } else if (error.code === statusCodes.IN_PROGRESS) {
-  //       Alert.alert('Signing In');
-  //     } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-  //       Alert.alert('Play Services Not Available or Outdated');
-  //     } else {
-  //       Alert.alert(error.message);
-  //     }
-  //   }
-  // };
+          var credToken =
+            userInfo.idToken !== null ? userInfo.idToken : tokens.accessToken;
+          const googleCredential =
+            auth.GoogleAuthProvider.credential(credToken);
+          var response = await auth().signInWithCredential(googleCredential);
+          if (response.additionalUserInfo?.isNewUser === false) {
+            navigation.replace('DrawerNavigator');
+          } else {
+            navigation.navigate('SignUp', {
+              type: 'google',
+              email: userInfo.user.email,
+              userInfo: userInfo,
+            });
+          }
+        })
+        .catch(e => {
+          console.log('ERROR IS: ' + e);
+          switch (e.code) {
+            case 'auth/email-already-in-use':
+              console.log('Email address already in use.');
+              break;
+            case 'auth/invalid-email':
+              console.log('Email address is invalid.');
+              break;
+            case 'auth/operation-not-allowed':
+              console.log('e during sign up.');
+              break;
+            case 'auth/weak-password':
+              console.log(
+                'Password is not strong enough. Add additional characters including special characters and numbers.',
+              );
+              break;
+            default:
+              console.log(e.message);
+              break;
+          }
+        });
+    } catch (error: any) {
+      // console.error('Message', JSON.stringify(error));
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        Alert.alert('User Cancelled the Login Flow');
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        Alert.alert('Signing In');
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        Alert.alert('Play Services Not Available or Outdated');
+      } else {
+        Alert.alert(error.message);
+      }
+    }
+  };
 
-  // function parseJwt(token) {
-  //   let base64Url = token.split('.')[1];
-  //   let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  //   let jsonPayload = decodeURIComponent(
-  //     decode(base64)
-  //       .split('')
-  //       .map(function (c) {
-  //         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-  //       })
-  //       .join(''),
-  //   );
-  //   return JSON.parse(jsonPayload);
-  // }
+  const _signInApple = async () => {
+    if (Platform.OS === 'ios') {
+      const appleAuthRequestResponse = await appleAuth.performRequest({
+        requestedOperation: appleAuth.Operation.LOGIN,
+        requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+      });
 
-  // const authLogin = async () => {
-  //   console.log('key : ', type);
-  //   if (type === Constant.authLogin.GOOGLE) {
-  //     // _signIn();
-  //   } else if (type === Constant.authLogin.INSTAGRAM) {
-  //     // instagramLogin.show();
-  //   } else if (type === Constant.authLogin.APPLE) {
-  //     if (Platform.OS === 'ios') {
-  //       const appleAuthRequestResponse = await appleAuth.performRequest({
-  //         requestedOperation: appleAuth.Operation.LOGIN,
-  //         requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
-  //       });
-  //       console.log('UserData', appleAuthRequestResponse);
+      await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user);
 
-  //       const credentialState = await appleAuth.getCredentialStateForUser(
-  //         appleAuthRequestResponse.user,
-  //       );
+      if (!appleAuthRequestResponse.identityToken) {
+        throw 'Apple Sign-In failed - no identify token returned';
+      }
 
-  //       if (!appleAuthRequestResponse.identityToken) {
-  //         throw 'Apple Sign-In failed - no identify token returned';
-  //       }
+      // Create a Firebase credential from the response
+      // const { identityToken, nonce, email, fullName
+      const { identityToken, nonce } = appleAuthRequestResponse;
+      auth.AppleAuthProvider.credential(identityToken, nonce);
+      const appleCredential = auth.AppleAuthProvider.credential(
+        identityToken,
+        nonce,
+      );
+      const credentials = await auth().signInWithCredential(appleCredential);
+      console.log('Credentials Information: ', credentials);
+      if (credentials.additionalUserInfo?.isNewUser === false) {
+        navigation.replace('DrawerNavigator');
+      } else {
+        navigation.navigate('SignUp', {
+          type: 'apple',
+          email: credentials.additionalUserInfo?.profile?.email,
+          userInfo: credentials.additionalUserInfo,
+          token: identityToken,
+          credentials: credentials,
+        });
+      }
+    } else {
+      appleAuthAndroid.configure({
+        // The Service ID you registered with Apple
+        clientId: 'com.selfsea',
 
-  //       // Create a Firebase credential from the response
-  //       const { identityToken, nonce, email, fullName } =
-  //         appleAuthRequestResponse;
-  //       auth.AppleAuthProvider.credential(identityToken, nonce);
-  //       Alert.alert(parseJwt(identityToken).email, parseJwt(identityToken).sub);
-  //       console.log('here', credentialState);
-  //       console.log(
-  //         'Apple Credentials',
-  //         email,
-  //         fullName,
-  //         nonce,
-  //         identityToken,
-  //       );
-  //     } else {
-  //       console.log('scope', appleAuthAndroid.Scope);
-  //       appleAuthAndroid.configure({
-  //         // The Service ID you registered with Apple
-  //         clientId: 'com.selfsea',
+        // Return URL added to your Apple dev console. We intercept this redirect, but it must still match
+        // the URL you provided to Apple. It can be an empty route on your backend as it's never called.
+        redirectUri: 'https://www.selfsea.org',
 
-  //         // Return URL added to your Apple dev console. We intercept this redirect, but it must still match
-  //         // the URL you provided to Apple. It can be an empty route on your backend as it's never called.
-  //         redirectUri: 'https://www.selfsea.org',
+        // The type of response requested - code, id_token, or both.
+        responseType: appleAuthAndroid.ResponseType.ALL,
 
-  //         // The type of response requested - code, id_token, or both.
-  //         responseType: appleAuthAndroid.ResponseType.ALL,
+        // The amount of user information requested from Apple.
+        scope: appleAuthAndroid.Scope.ALL,
 
-  //         // The amount of user information requested from Apple.
-  //         scope: appleAuthAndroid.Scope.ALL,
+        // Random nonce value that will be SHA256 hashed before sending to Apple.
+        nonce: rawNonce,
 
-  //         // Random nonce value that will be SHA256 hashed before sending to Apple.
-  //         nonce: rawNonce,
+        // Unique state value used to prevent CSRF attacks. A UUID will be generated if nothing is provided.
+        state,
+      });
 
-  //         // Unique state value used to prevent CSRF attacks. A UUID will be generated if nothing is provided.
-  //         state,
-  //       });
+      // Open the browser window for user sign in
+      const response = await appleAuthAndroid.signIn();
 
-  //       // Open the browser window for user sign in
-  //       const response = await appleAuthAndroid.signIn();
-  //       console.log(
-  //         'Android Apple Response',
-  //         response,
-  //         parseJwt(response.id_token),
-  //       );
-  //       Alert.alert(
-  //         parseJwt(response.id_token).email,
-  //         parseJwt(response.id_token).sub,
-  //       );
-  //     }
-  //   }
-  // };
+      var userInfo = parseJwt(response.id_token);
+      let token = response.id_token ?? null;
+      const appleCredential = auth.AppleAuthProvider.credential(
+        token,
+        response.nonce,
+      );
+      let credentials = await auth().signInWithCredential(appleCredential);
+      await credentials.user.sendEmailVerification();
+
+      if (credentials.additionalUserInfo?.isNewUser === false) {
+        navigation.navigate('DrawerNavigator');
+      } else {
+        navigation.navigate('SignUp', {
+          type: 'apple',
+          email: userInfo.email,
+          userInfo: userInfo,
+          token: response.id_token,
+          credentials: credentials,
+        });
+      }
+    }
+  };
+
+  function parseJwt(token) {
+    let base64Url = token.split('.')[1];
+    let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    let jsonPayload = decodeURIComponent(
+      decode(base64)
+        .split('')
+        .map(function (c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join(''),
+    );
+    return JSON.parse(jsonPayload);
+  }
+
+  const authLogin = async () => {
+    console.log('key : ', type);
+    if (type === Constant.authLogin.GOOGLE) {
+      _signIn();
+    } else if (type === Constant.authLogin.INSTAGRAM) {
+      // instagramLogin.show();
+    } else if (type === Constant.authLogin.APPLE) {
+      _signInApple();
+    }
+  };
 
   return (
-    <TouchableOpacity
-      style={styles.container}
-      // onPress={() => authLogin()}
-    >
-      {icon && <Image style={styles.image} source={icon} />}
+    <TouchableOpacity style={styles.container} onPress={() => authLogin()}>
+      <Image style={styles.image} source={icon} />
       <Text style={styles.text}>{text}</Text>
+
+      {/* <InstagramLogin
+        ref={ref => (instagramLogin = ref)}
+        appId="321916266462620"
+        appSecret="106c0e7f22c7ec3f820e9522cb33d829"
+        redirectUrl="https://www.selfsea.org/"
+        scopes={['user_profile', 'user_media']}
+        onLoginSuccess={(data: any) => {
+          console.log('Login Success', data);
+          Alert.alert('User Id', data.user_id + '');
+        }}
+        onLoginFailure={(data: any) => console.log('failure', data)}
+      /> */}
     </TouchableOpacity>
   );
 };

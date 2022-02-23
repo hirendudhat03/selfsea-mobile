@@ -17,7 +17,8 @@
     "pre-commit": "npm run spell-check:new && npm run lint && npm run test && npm run build",
     "spell-check:new": "git diff --cached --name-only | cspell --no-must-find-files --no-progress --file-list stdin",
     "spell-check:all": "cspell \"**\"",
-    "build-android-debug": "cd android && ./gradlew clean && ./gradlew assembleDebug && cd .."
+    "build-android-debug": "cd android && ./gradlew clean && ./gradlew assembleDebug && cd ..",
+    "clean": "cd android && ./gradlew clean && cd .."
   },
   "dependencies": {
     "@apollo/client": "^3.5.7",
@@ -42,7 +43,7 @@
     "react-native-axios": "^0.17.1",
     "react-native-config": "^1.4.5",
     "react-native-dotenv": "^3.3.1",
-    "react-native-gesture-handler": "^2.1.0",
+    "react-native-gesture-handler": "^2.1.1",
     "react-native-get-random-values": "^1.7.2",
     "react-native-instagram-login": "^2.0.5",
     "react-native-linear-gradient": "^2.5.6",

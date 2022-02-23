@@ -26,4 +26,13 @@ export const SignUpReducer = CreateReducer(initialState, {
       loader: action.loader,
     };
   },
+  ['PASSWORDLESS_SIGNUP_REQUEST'](state, action) {
+    console.log('call SIGNUP_REQUEST');
+    console.log('state : ', state);
+    console.log('action : ', action);
+    return {
+      action: action,
+      loader: action.loader,
+    };
+  },
 });

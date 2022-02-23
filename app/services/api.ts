@@ -1,4 +1,4 @@
-import { config } from '../config';
+import config from '../config';
 import { GraphQLClient } from 'graphql-request';
 import { getSdk, SdkFunctionWrapper } from '../generated/graphql';
 const errorWrapper: SdkFunctionWrapper = async action => {
@@ -9,8 +9,8 @@ const errorWrapper: SdkFunctionWrapper = async action => {
   }
 };
 export const api = (() => {
-  const client = new GraphQLClient(config.GRAPHQL_BASE_URL, {
-    timeout: config.GRAPHQL_TIMEOUT_MS,
+  const client = new GraphQLClient(config.config.GRAPHQL_BASE_URL, {
+    timeout: config.config.GRAPHQL_TIMEOUT_MS,
   });
   return {
     client,

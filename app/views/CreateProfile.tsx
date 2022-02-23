@@ -28,7 +28,6 @@ import { CreateProfileRequest } from '../redux/actions/CreateProfileAction';
 
 import { DropDownRequest } from '../redux/actions/MenuAction';
 import axios from 'react-native-axios';
-import { config } from '../config';
 import {
   Ethnicity,
   Gender,
@@ -36,6 +35,7 @@ import {
   SexualOrientation,
 } from 'app/generated/graphql';
 import { useTypedSelector } from '../redux';
+import config from '../config';
 
 const height = Dimensions.get('window').height;
 
@@ -217,7 +217,7 @@ const CreateProfile = ({ navigation }) => {
           'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' +
           val +
           // cspell:disable-next-line
-          `&key=${config.PLACES_API_KEY}&sessiontoken=${config.PLACES_SESSION_TOKEN}`,
+          `&key=${config.config.PLACES_API_KEY}&sessiontoken=${config.config.PLACES_SESSION_TOKEN}`,
         method: 'get',
       })
         .then(res => {

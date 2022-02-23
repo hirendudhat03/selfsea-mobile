@@ -5,7 +5,7 @@ const initialState = {
   loader: false,
 };
 
-console.log('call loginReducer');
+// console.log('call loginReducer');
 
 export const LoginReducer = CreateReducer(initialState, {
   ['LOGIN_RESPONSE'](state, action) {

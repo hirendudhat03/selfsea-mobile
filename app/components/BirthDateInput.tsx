@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import Dropdown from '../components/Dropdown';
+import Dropdown from './Dropdown';
 
 interface OptionListType {
   title: string;
@@ -10,18 +10,17 @@ interface OptionListType {
 interface Props {
   defaultMonthButtonText: string;
   onSelectMonth: (item: string, index: number) => void;
-  monthOptionList: OptionListType[] | string[];
+  monthOptionList: object;
   monthRowTextStyle?: {};
   monthStyle?: {};
   monthValue: string;
-
   defaultYearButtonText: string;
   onSelectYear: (item: string, index: number) => void;
-  yearOptionList: OptionListType[] | string[];
+  yearOptionList: object;
   yearStyle?: {};
   yearRowTextStyle?: {};
   checkRight?: boolean;
-  circleFill?: boolean;
+  circleFill: boolean;
   yearValue: string;
   iconVisibleFill?: boolean;
 }
@@ -32,7 +31,6 @@ const BirthDateInput = ({
   monthOptionList,
   monthStyle,
   monthValue,
-
   defaultYearButtonText,
   onSelectYear,
   yearOptionList,

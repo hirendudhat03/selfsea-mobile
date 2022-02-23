@@ -57,12 +57,14 @@ const Login = ({ navigation }) => {
             <Auth
               text={authText.CONTINUE_WITH_GOOGLE}
               icon={Images.Google}
-              // type={Constant.authLogin.GOOGLE}
+              type={Constant.authLogin.GOOGLE}
+              navigation={navigation}
             />
             <Auth
               text={authText.CONTINUE_WITH_APPLE}
               icon={Images.Apple}
-              // type={Constant.authLogin.APPLE}
+              type={Constant.authLogin.APPLE}
+              navigation={navigation}
             />
 
             <Button
