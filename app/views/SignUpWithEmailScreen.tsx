@@ -411,7 +411,6 @@ const SignUp = ({ route, navigation }) => {
                 />
               </View>
             )}
-
             <View style={styles.commonView}>
               <View style={styles.monthView}>
                 {/* <View style={styles.rowView}> */}
@@ -427,7 +426,6 @@ const SignUp = ({ route, navigation }) => {
                 <Text style={styles.birthYearText}>birth year</Text>
               </View>
             </View>
-
             <BirthDateInput
               monthOptionList={availableMonths}
               onSelectMonth={value => {
@@ -435,19 +433,18 @@ const SignUp = ({ route, navigation }) => {
               }}
               defaultMonthButtonText={'select one'}
               monthValue={birthMonth}
-              monthStyle={{ width: width * 0.48 }}
+              monthStyle={{ width: width * 0.4 }}
               yearOptionList={years.map(y => y.toString())}
               onSelectYear={value => {
                 selectFillBirth(value);
               }}
               defaultYearButtonText={'select one'}
-              yearStyle={{ width: width * 0.31 }}
+              yearStyle={{ width: width * 0.4 }}
               iconVisibleFill={true}
               checkRight={true}
               yearValue={birthYear}
               circleFill={circleFillBirth}
             />
-
             <View style={styles.userName}>
               <Text style={styles.birthMonthText}>username</Text>
               <TouchableOpacity
