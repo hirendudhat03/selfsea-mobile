@@ -405,7 +405,7 @@ const SignUp = ({ route, navigation }) => {
                 borderColor={passwordBorder}
                 defaultValue={''}
                 text={''}
-                maxLength={0}
+                maxLength={20}
                 editable={true}
               />
             )}

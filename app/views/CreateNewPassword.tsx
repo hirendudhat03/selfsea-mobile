@@ -112,7 +112,7 @@ const CreateNewPassword = ({ navigation }) => {
             viewStyle={styles.inputViewStyle}
             defaultValue={''}
             text={''}
-            maxLength={0}
+            maxLength={20}
             editable={true}
           />
           <View style={styles.viewStyle}>
