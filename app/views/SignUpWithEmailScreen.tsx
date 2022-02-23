@@ -621,7 +621,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 2,
   },
   passwordlessBottomView: {
-    flex: 0.5,
+    flex: 0.4,
     alignItems: 'center',
     borderTopColor: Color.BORDER_COLOR,
     borderTopWidth: 2,
