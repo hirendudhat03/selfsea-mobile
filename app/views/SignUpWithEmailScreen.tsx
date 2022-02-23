@@ -488,7 +488,12 @@ const SignUp = ({ route, navigation }) => {
             )}
           </View>
         </ScrollView>
-        <View style={route.params === undefined ? styles.bottomView:styles.passwordlessBottomView}>
+        <View
+          style={
+            route.params === undefined
+              ? styles.bottomView
+              : styles.passwordlessBottomView
+          }>
           {route.params === undefined ? (
             <Button
               type={Constant.buttons.PRIMARY}
@@ -615,7 +620,7 @@ const styles = StyleSheet.create({
     borderTopColor: Color.BORDER_COLOR,
     borderTopWidth: 2,
   },
-  passwordlessBottomView:{
+  passwordlessBottomView: {
     flex: 0.5,
     alignItems: 'center',
     borderTopColor: Color.BORDER_COLOR,
