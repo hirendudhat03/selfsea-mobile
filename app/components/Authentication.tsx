@@ -125,7 +125,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
         nonce,
       );
       const credentials = await auth().signInWithCredential(appleCredential);
-
+      console.log('CREDDS', credentials.user);
       var email = credentials.additionalUserInfo?.profile?.email;
       const isUnique = await api.isEmailUnique({ email: email });
       if (isUnique.isEmailUnique === false) {

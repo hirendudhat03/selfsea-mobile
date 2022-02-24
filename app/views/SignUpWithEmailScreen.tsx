@@ -154,7 +154,7 @@ const SignUp = ({ route, navigation }) => {
             false,
             route.params.userInfo,
             route.params.type,
-            route.params.userInfo.user.uid,
+            route.params.credentials.user.uid,
           ),
         );
       } else {

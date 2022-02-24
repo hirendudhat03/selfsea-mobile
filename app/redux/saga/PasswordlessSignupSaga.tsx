@@ -13,6 +13,7 @@ export function* passwordlessSignupSaga(action) {
       console.log('username::', JSON.stringify(username.isUsernameValid));
 
       if (!username?.isUsernameValid?.isValid) {
+        console.log('HERE7');
         return {
           errorName: 'username',
           error: 'this username is taken.',
@@ -41,6 +42,7 @@ export function* passwordlessSignupSaga(action) {
         api.setAuthHeader(token);
         // api.currentUser(token);
         // await response.user.sendEmailVerification();
+        console.log('Undefined!!');
         console.log('Action', action.uid);
 
         const mutationVariables = {
