@@ -190,7 +190,7 @@ android {
 
     buildTypes {
         debug {
-            signingConfig null
+
             if (nativeArchitectures) {
                 ndk {
                     abiFilters nativeArchitectures.split(',')
