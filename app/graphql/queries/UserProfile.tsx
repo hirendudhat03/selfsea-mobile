@@ -85,3 +85,10 @@ export const isUsernameValidQuery = gql`
     }
   }
 `;
+
+export const isEmailUnique = gql`
+  query isEmailUnique($email: String!) {
+    isUsernameValid(email: $email);
+    
+  }
+`;

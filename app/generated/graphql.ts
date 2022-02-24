@@ -29,7 +29,7 @@ export type ApprovePostInput = {
 
 export type ApprovedPost = BaseObject & {
   claimerId?: Maybe<Scalars['String']>;
-  communities: Array<Community>;
+  community: Community;
   communityId: Scalars['String'];
   createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
@@ -39,12 +39,6 @@ export type ApprovedPost = BaseObject & {
   reviewerId: Scalars['String'];
   totalApprovedComments: Scalars['Int'];
   updatedAt: Scalars['DateTime'];
-};
-
-
-export type ApprovedPostCommunitiesArgs = {
-  filter?: InputMaybe<CommunityFilter>;
-  sorting?: InputMaybe<Array<CommunitySort>>;
 };
 
 export type ApprovedPostAggregateGroupBy = {
@@ -78,20 +72,11 @@ export type ApprovedPostEdge = {
 export type ApprovedPostFilter = {
   and?: InputMaybe<Array<ApprovedPostFilter>>;
   claimerId?: InputMaybe<StringFieldComparison>;
-  community?: InputMaybe<ApprovedPostFilterCommunityFilter>;
   createdAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   or?: InputMaybe<Array<ApprovedPostFilter>>;
   postContent?: InputMaybe<ApprovedPostFilterPostContentFilter>;
   postContentId?: InputMaybe<StringFieldComparison>;
-};
-
-export type ApprovedPostFilterCommunityFilter = {
-  and?: InputMaybe<Array<ApprovedPostFilterCommunityFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<ApprovedPostFilterCommunityFilter>>;
 };
 
 export type ApprovedPostFilterPostContentFilter = {
@@ -204,18 +189,10 @@ export type CommunityEdge = {
 
 export type CommunityFilter = {
   and?: InputMaybe<Array<CommunityFilter>>;
-  communityUsers?: InputMaybe<CommunityFilterCommunityUserRoleFilter>;
   createdAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<CommunityFilter>>;
-};
-
-export type CommunityFilterCommunityUserRoleFilter = {
-  and?: InputMaybe<Array<CommunityFilterCommunityUserRoleFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<CommunityFilterCommunityUserRoleFilter>>;
 };
 
 export type CommunityMaxAggregate = {
@@ -638,18 +615,9 @@ export type PendingPost = BaseObject & {
 
 export type PendingPostFilter = {
   and?: InputMaybe<Array<PendingPostFilter>>;
-  community?: InputMaybe<PendingPostFilterCommunityFilter>;
   createdAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   or?: InputMaybe<Array<PendingPostFilter>>;
-};
-
-export type PendingPostFilterCommunityFilter = {
-  and?: InputMaybe<Array<PendingPostFilterCommunityFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<PendingPostFilterCommunityFilter>>;
 };
 
 export type PendingPostSort = {
@@ -771,6 +739,7 @@ export type Query = {
   currentUser?: Maybe<User>;
   ethnicities?: Maybe<Array<Ethnicity>>;
   genders?: Maybe<Array<Gender>>;
+  isEmailUnique: Scalars['Boolean'];
   isUserBanned: IsUserBannedResponse;
   isUsernameValid?: Maybe<UsernameValidationResponse>;
   myCommunities: CommunityConnection;
@@ -811,6 +780,11 @@ export type QueryCommunityPostsArgs = {
   filter?: InputMaybe<ApprovedPostFilter>;
   paging?: InputMaybe<CursorPaging>;
   sorting?: InputMaybe<Array<ApprovedPostSort>>;
+};
+
+
+export type QueryIsEmailUniqueArgs = {
+  email: Scalars['String'];
 };
 
 
@@ -1384,18 +1358,9 @@ export type WithheldPost = BaseObject & {
 
 export type WithheldPostFilter = {
   and?: InputMaybe<Array<WithheldPostFilter>>;
-  community?: InputMaybe<WithheldPostFilterCommunityFilter>;
   createdAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   or?: InputMaybe<Array<WithheldPostFilter>>;
-};
-
-export type WithheldPostFilterCommunityFilter = {
-  and?: InputMaybe<Array<WithheldPostFilterCommunityFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<WithheldPostFilterCommunityFilter>>;
 };
 
 export type WithheldPostSort = {
@@ -1414,7 +1379,7 @@ export type WithholdPostInput = {
   reason: Scalars['String'];
 };
 
-export type CurrentUserFieldsFragment = { id: string, username?: string | null, createdAt: any, updatedAt: any };
+export type CurrentUserFieldsFragment = { id: string, username?: string | null | undefined, createdAt: any, updatedAt: any };
 
 export type UpdateProfileMutationVariables = Exact<{
   isPrivate: Scalars['Boolean'];
@@ -1427,7 +1392,7 @@ export type UpdateProfileMutationVariables = Exact<{
 }>;
 
 
-export type UpdateProfileMutation = { updateProfile: { id: string, isPrivate: boolean, location?: string | null, bio?: string | null, pronouns: Array<{ id: string }>, genders: Array<{ id: string }>, orientations: Array<{ id: string }>, ethnicities: Array<{ id: string }> } };
+export type UpdateProfileMutation = { updateProfile: { id: string, isPrivate: boolean, location?: string | null | undefined, bio?: string | null | undefined, pronouns: Array<{ id: string }>, genders: Array<{ id: string }>, orientations: Array<{ id: string }>, ethnicities: Array<{ id: string }> } };
 
 export type AcceptCurrentTermsMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -1448,39 +1413,46 @@ export type CreateUserMutation = { createUser: { id: string, authId: string, ema
 export type CurrentTermsAndConditionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CurrentTermsAndConditionsQuery = { currentTermsAndConditions?: { id: string, title: string, content: string, version: number } | null };
+export type CurrentTermsAndConditionsQuery = { currentTermsAndConditions?: { id: string, title: string, content: string, version: number } | null | undefined };
 
 export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CurrentUserQuery = { currentUser?: { id: string, authId: string, email: string, hasAcceptedLatestTerms: boolean, roles: Array<{ id: string, name: UserRole }>, profile?: { id: string, bio?: string | null, genders: Array<{ id: string, name: string }>, pronouns: Array<{ id: string, name: string }>, orientations: Array<{ id: string, name: string }> } | null } | null };
+export type CurrentUserQuery = { currentUser?: { id: string, authId: string, email: string, hasAcceptedLatestTerms: boolean, roles: Array<{ id: string, name: UserRole }>, profile?: { id: string, bio?: string | null | undefined, genders: Array<{ id: string, name: string }>, pronouns: Array<{ id: string, name: string }>, orientations: Array<{ id: string, name: string }> } | null | undefined } | null | undefined };
+
+export type IsEmailUniqueQueryVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type IsEmailUniqueQuery = { isEmailUnique: boolean };
 
 export type IsUsernameValidQueryVariables = Exact<{
   username: Scalars['String'];
 }>;
 
 
-export type IsUsernameValidQuery = { isUsernameValid?: { isValid: boolean } | null };
+export type IsUsernameValidQuery = { isUsernameValid?: { isValid: boolean } | null | undefined };
 
 export type GetEthnicitiesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetEthnicitiesQuery = { ethnicities?: Array<{ id: string, name: string }> | null };
+export type GetEthnicitiesQuery = { ethnicities?: Array<{ id: string, name: string }> | null | undefined };
 
 export type GetPronounsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPronounsQuery = { pronouns?: Array<{ id: string, name: string }> | null };
+export type GetPronounsQuery = { pronouns?: Array<{ id: string, name: string }> | null | undefined };
 
 export type GetOrientationsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetOrientationsQuery = { orientations?: Array<{ id: string, name: string }> | null };
+export type GetOrientationsQuery = { orientations?: Array<{ id: string, name: string }> | null | undefined };
 
 export type GetGendersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetGendersQuery = { genders?: Array<{ id: string, name: string }> | null };
+export type GetGendersQuery = { genders?: Array<{ id: string, name: string }> | null | undefined };
 
 export const CurrentUserFieldsFragmentDoc = gql`
     fragment CurrentUserFields on User {
@@ -1572,6 +1544,11 @@ export const CurrentUserDocument = gql`
   }
 }
     `;
+export const IsEmailUniqueDocument = gql`
+    query isEmailUnique($email: String!) {
+  isEmailUnique(email: $email)
+}
+    `;
 export const IsUsernameValidDocument = gql`
     query isUsernameValid($username: String!) {
   isUsernameValid(username: $username) {
@@ -1633,6 +1610,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     currentUser(variables?: CurrentUserQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CurrentUserQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<CurrentUserQuery>(CurrentUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'currentUser');
+    },
+    isEmailUnique(variables: IsEmailUniqueQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<IsEmailUniqueQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<IsEmailUniqueQuery>(IsEmailUniqueDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'isEmailUnique');
     },
     isUsernameValid(variables: IsUsernameValidQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<IsUsernameValidQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<IsUsernameValidQuery>(IsUsernameValidDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'isUsernameValid');

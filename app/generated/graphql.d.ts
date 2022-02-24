@@ -45,6 +45,15 @@ declare module '*/termsAndConditions.gql' {
 }
     
 
+declare module '*/isEmailUnique.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const isEmailUnique: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/isUsernameValid.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
