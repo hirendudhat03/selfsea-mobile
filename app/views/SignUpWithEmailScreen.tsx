@@ -79,7 +79,7 @@ const SignUp = ({ route, navigation }) => {
   const dispatch = useDispatch();
 
   const signUpRes = useTypedSelector(state => state.SignUpReducer);
-  console.log('signUpResReducer : ', JSON.stringify(signUpRes));
+  // console.log('signUpResReducer : ', JSON.stringify(signUpRes));
 
   const [years, setYear] = useState<number[]>([]);
 
@@ -143,6 +143,9 @@ const SignUp = ({ route, navigation }) => {
       changeAgeVisibility(true);
     } else {
       if (isPasswordLess) {
+        console.log('Here4');
+        console.log('UID', route.params.credentials);
+
         dispatch(
           SignUpRequestWithoutPassword(
             email,
@@ -153,10 +156,12 @@ const SignUp = ({ route, navigation }) => {
             false,
             route.params.userInfo,
             route.params.type,
-            route.params.userInfo.user.uid,
+            route.params.credentials.user.uid,
           ),
         );
       } else {
+        console.log('Here5');
+
         dispatch(
           SignUpRequest(
             email,
@@ -309,6 +314,7 @@ const SignUp = ({ route, navigation }) => {
         countAge(false);
       }
     } else {
+      console.log('Here1');
       if (!email && birthMonth === '' && birthYear === '' && !userName) {
         setEmailError('please enter email address.');
         setUserNameError(text.length + '/20');
@@ -324,6 +330,7 @@ const SignUp = ({ route, navigation }) => {
       } else if (!userName) {
         setUserNameError(text.length + '/20');
       } else {
+        console.log('Here2');
         countAge(true);
       }
     }
@@ -411,7 +418,6 @@ const SignUp = ({ route, navigation }) => {
                 />
               </View>
             )}
-
             <View style={styles.commonView}>
               <View style={styles.monthView}>
                 {/* <View style={styles.rowView}> */}
@@ -427,7 +433,6 @@ const SignUp = ({ route, navigation }) => {
                 <Text style={styles.birthYearText}>birth year</Text>
               </View>
             </View>
-
             <BirthDateInput
               monthOptionList={availableMonths}
               onSelectMonth={value => {
@@ -435,19 +440,18 @@ const SignUp = ({ route, navigation }) => {
               }}
               defaultMonthButtonText={'select one'}
               monthValue={birthMonth}
-              monthStyle={{ width: width * 0.48 }}
+              monthStyle={{ width: width * 0.4 }}
               yearOptionList={years.map(y => y.toString())}
               onSelectYear={value => {
                 selectFillBirth(value);
               }}
               defaultYearButtonText={'select one'}
-              yearStyle={{ width: width * 0.31 }}
+              yearStyle={{ width: width * 0.4 }}
               iconVisibleFill={true}
               checkRight={true}
               yearValue={birthYear}
               circleFill={circleFillBirth}
             />
-
             <View style={styles.userName}>
               <Text style={styles.birthMonthText}>username</Text>
               <TouchableOpacity
@@ -491,11 +495,16 @@ const SignUp = ({ route, navigation }) => {
             )}
           </View>
         </ScrollView>
-        <View style={styles.bottomView}>
+        <View
+          style={
+            route.params === undefined
+              ? styles.bottomView
+              : styles.passwordlessBottomView
+          }>
           {route.params === undefined ? (
             <Button
               type={Constant.buttons.PRIMARY}
-              text={'create account'}
+              text={authText.CREATE_ACCOUNT_BUTTON}
               style={[
                 styles.buttonStyle,
                 circleFillEmail !== true ||
@@ -618,7 +627,12 @@ const styles = StyleSheet.create({
     borderTopColor: Color.BORDER_COLOR,
     borderTopWidth: 2,
   },
-
+  passwordlessBottomView: {
+    flex: 0.4,
+    alignItems: 'center',
+    borderTopColor: Color.BORDER_COLOR,
+    borderTopWidth: 2,
+  },
   viewStyle: {
     flexDirection: 'row',
     justifyContent: 'space-between',
