@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "android-release": "react-native run-android --variant=release",
+    "android-dev-debug": "ENVFILE=.env react-native run-android --variant=devDebug",
+    "android-staging-debug": "ENVFILE=.env.staging react-native run-android --variant=stagingDebug",
+    "android-dev-release": "ENVFILE=.env react-native run-android --variant=devRelease",
+    "android-staging-release": "ENVFILE=.env.staging react-native run-android --variant=stagingRelease",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "develop": "run-p \"codegen --watch\" start",

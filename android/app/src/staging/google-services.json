@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "196320634339",
+    "project_id": "selfsea-staging",
+    "storage_bucket": "selfsea-staging.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:196320634339:android:389c87ac8fe6f730376cd6",
+        "android_client_info": {
+          "package_name": "com.phe.selfsea"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "196320634339-kf6conaa4rcvt6919d2o2vqvpk6lkq9g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.phe.selfsea",
+            "certificate_hash": "9d29adcd2bf6e2db8c74cdc1ea70bf76de8c60ee"
+          }
+        },
+        {
+          "client_id": "196320634339-qv162icph88gs5k6g0eq2cdoq6ft1gbr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfkk4opQr3f_g94oxQ7jPJrHVYUZM_1dk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "196320634339-qv162icph88gs5k6g0eq2cdoq6ft1gbr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "196320634339-sj7ersrlsku71ua2910ti6k1vbf06m82.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.selfseamobile",
+                "app_store_id": "1604374862"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
