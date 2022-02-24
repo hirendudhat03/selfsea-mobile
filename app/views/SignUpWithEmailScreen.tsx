@@ -144,6 +144,8 @@ const SignUp = ({ route, navigation }) => {
     } else {
       if (isPasswordLess) {
         console.log('Here4');
+        console.log('UID', route.params.credentials);
+
         dispatch(
           SignUpRequestWithoutPassword(
             email,
@@ -154,7 +156,7 @@ const SignUp = ({ route, navigation }) => {
             false,
             route.params.userInfo,
             route.params.type,
-            route.params.userInfo.user.uid,
+            route.params.credentials.user.uid,
           ),
         );
       } else {
@@ -502,7 +504,7 @@ const SignUp = ({ route, navigation }) => {
           {route.params === undefined ? (
             <Button
               type={Constant.buttons.PRIMARY}
-              text={'create account'}
+              text={authText.CREATE_ACCOUNT_BUTTON}
               style={[
                 styles.buttonStyle,
                 circleFillEmail !== true ||

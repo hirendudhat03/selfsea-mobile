@@ -54,7 +54,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
             userInfo.idToken !== null ? userInfo.idToken : tokens.accessToken;
           const googleCredential =
             auth.GoogleAuthProvider.credential(credToken);
-          await auth().signInWithCredential(googleCredential);
+          var credentials = await auth().signInWithCredential(googleCredential);
           var email = userInfo.user.email;
           const isUnique = await api.isEmailUnique({ email: email });
           if (isUnique.isEmailUnique === false) {
@@ -64,6 +64,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
               type: 'google',
               email: userInfo.user.email,
               userInfo: userInfo,
+              credentials: credentials,
             });
           }
         })
@@ -125,7 +126,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
         nonce,
       );
       const credentials = await auth().signInWithCredential(appleCredential);
-
+      console.log('CREDDS', credentials.user);
       var email = credentials.additionalUserInfo?.profile?.email;
       const isUnique = await api.isEmailUnique({ email: email });
       if (isUnique.isEmailUnique === false) {
