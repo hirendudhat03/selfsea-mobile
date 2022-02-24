@@ -55,7 +55,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
             auth.GoogleAuthProvider.credential(credToken);
           var response = await auth().signInWithCredential(googleCredential);
           if (response.additionalUserInfo?.isNewUser === false) {
-            navigation.navigate('DrawerNavigator');
+            navigation.replace('DrawerNavigator');
           } else {
             navigation.navigate('Signup', {
               type: 'google',
@@ -124,7 +124,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
       const credentials = await auth().signInWithCredential(appleCredential);
 
       if (credentials.additionalUserInfo?.isNewUser === false) {
-        navigation.navigate('DrawerNavigator');
+        navigation.replace('DrawerNavigator');
       } else {
         navigation.navigate('Signup', {
           type: 'apple',
@@ -169,7 +169,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
       await credentials.user.sendEmailVerification();
 
       if (credentials.additionalUserInfo?.isNewUser === false) {
-        navigation.navigate('DrawerNavigator');
+        navigation.replace('DrawerNavigator');
       } else {
         navigation.navigate('Signup', {
           type: 'apple',

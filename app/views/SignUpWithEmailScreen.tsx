@@ -504,7 +504,7 @@ const SignUp = ({ route, navigation }) => {
           {route.params === undefined ? (
             <Button
               type={Constant.buttons.PRIMARY}
-              text={'create account'}
+              text={authText.CREATE_ACCOUNT_BUTTON}
               style={[
                 styles.buttonStyle,
                 circleFillEmail !== true ||
