@@ -79,7 +79,7 @@ const SignUp = ({ route, navigation }) => {
   const dispatch = useDispatch();
 
   const signUpRes = useTypedSelector(state => state.SignUpReducer);
-  console.log('signUpResReducer : ', JSON.stringify(signUpRes));
+  // console.log('signUpResReducer : ', JSON.stringify(signUpRes));
 
   const [years, setYear] = useState<number[]>([]);
 
@@ -143,6 +143,7 @@ const SignUp = ({ route, navigation }) => {
       changeAgeVisibility(true);
     } else {
       if (isPasswordLess) {
+        console.log('Here4');
         dispatch(
           SignUpRequestWithoutPassword(
             email,
@@ -157,6 +158,8 @@ const SignUp = ({ route, navigation }) => {
           ),
         );
       } else {
+        console.log('Here5');
+
         dispatch(
           SignUpRequest(
             email,
@@ -309,6 +312,7 @@ const SignUp = ({ route, navigation }) => {
         countAge(false);
       }
     } else {
+      console.log('Here1');
       if (!email && birthMonth === '' && birthYear === '' && !userName) {
         setEmailError('please enter email address.');
         setUserNameError(text.length + '/20');
@@ -324,6 +328,7 @@ const SignUp = ({ route, navigation }) => {
       } else if (!userName) {
         setUserNameError(text.length + '/20');
       } else {
+        console.log('Here2');
         countAge(true);
       }
     }

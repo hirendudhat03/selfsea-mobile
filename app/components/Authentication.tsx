@@ -23,6 +23,7 @@ import auth from '@react-native-firebase/auth';
 import 'react-native-get-random-values';
 import { v4 as uuid } from 'uuid';
 import { decode } from 'base-64';
+import { api } from '../services';
 
 interface Props {
   text: string;
@@ -53,8 +54,10 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
             userInfo.idToken !== null ? userInfo.idToken : tokens.accessToken;
           const googleCredential =
             auth.GoogleAuthProvider.credential(credToken);
-          var response = await auth().signInWithCredential(googleCredential);
-          if (response.additionalUserInfo?.isNewUser === false) {
+          await auth().signInWithCredential(googleCredential);
+          var email = userInfo.user.email;
+          const isUnique = await api.isEmailUnique({ email: email });
+          if (isUnique.isEmailUnique === false) {
             navigation.replace('DrawerNavigator');
           } else {
             navigation.navigate('SignUp', {
@@ -122,8 +125,10 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
         nonce,
       );
       const credentials = await auth().signInWithCredential(appleCredential);
-      console.log('Credentials Information: ', credentials);
-      if (credentials.additionalUserInfo?.isNewUser === false) {
+
+      var email = credentials.additionalUserInfo?.profile?.email;
+      const isUnique = await api.isEmailUnique({ email: email });
+      if (isUnique.isEmailUnique === false) {
         navigation.replace('DrawerNavigator');
       } else {
         navigation.navigate('SignUp', {
@@ -168,8 +173,10 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
       let credentials = await auth().signInWithCredential(appleCredential);
       await credentials.user.sendEmailVerification();
 
-      if (credentials.additionalUserInfo?.isNewUser === false) {
-        navigation.navigate('DrawerNavigator');
+      var email = credentials.additionalUserInfo?.profile?.email;
+      const isUnique = await api.isEmailUnique({ email: email });
+      if (isUnique.isEmailUnique === false) {
+        navigation.replace('DrawerNavigator');
       } else {
         navigation.navigate('SignUp', {
           type: 'apple',
