@@ -64,7 +64,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
               type: 'google',
               email: userInfo.user.email,
               userInfo: userInfo,
-              credentials: credentials
+              credentials: credentials,
             });
           }
         })
