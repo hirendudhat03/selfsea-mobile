@@ -58,7 +58,9 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
           var credentials = await auth().signInWithCredential(googleCredential);
           var email = userInfo.user.email;
           const isUnique = await api.isEmailUnique({ email: email });
-          if (isUnique.isEmailUnique === false) {
+          if (!isUnique.isEmailUnique) {
+            const apiToken = await credentials.user.getIdToken();
+            api.setAuthHeader(apiToken);
             navigation.replace('DrawerNavigator');
           } else {
             navigation.navigate('SignUp', {
@@ -127,10 +129,11 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
         nonce,
       );
       const credentials = await auth().signInWithCredential(appleCredential);
-      console.log('CREDDS', credentials.user);
       var email = credentials.additionalUserInfo?.profile?.email;
       const isUnique = await api.isEmailUnique({ email: email });
-      if (isUnique.isEmailUnique === false) {
+      if (!isUnique.isEmailUnique) {
+        const apiToken = await credentials.user.getIdToken();
+        api.setAuthHeader(apiToken);
         navigation.replace('DrawerNavigator');
       } else {
         navigation.navigate('SignUp', {
@@ -177,7 +180,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
 
       var email = credentials.additionalUserInfo?.profile?.email;
       const isUnique = await api.isEmailUnique({ email: email });
-      if (isUnique.isEmailUnique === false) {
+      if (!isUnique.isEmailUnique) {
         navigation.replace('DrawerNavigator');
       } else {
         navigation.navigate('SignUp', {
