@@ -144,6 +144,8 @@ const SignUp = ({ route, navigation }) => {
     } else {
       if (isPasswordLess) {
         console.log('Here4');
+        console.log("UID",route.params.credentials);
+        
         dispatch(
           SignUpRequestWithoutPassword(
             email,
