@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   Linking,
   SafeAreaView,
-  Alert,
 } from 'react-native';
 
 import Constant from '../theme/constant';
@@ -22,10 +21,6 @@ import { authText } from '../config/static';
 import { Theme } from '../styles';
 import { SignUpResponse } from '../redux/actions/SignUpAction';
 import { useDispatch } from 'react-redux';
-
-const onPressText = () => {
-  Alert.alert('onPressText');
-};
 
 const Login = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -102,7 +97,7 @@ const Login = ({ navigation }) => {
           </View>
           <View style={styles.signInBottomView}>
             <View style={styles.bottomView}>
-              <Text style={styles.bottomText} onPress={() => onPressText()}>
+              <Text style={styles.bottomText}>
                 {authText.ALREADY_HAVE_ACCOUNT}
               </Text>
             </View>

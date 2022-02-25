@@ -45,7 +45,7 @@ const descriptionData = [
 
 const CommunitiesHome = ({ navigation }) => {
   const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  // const [content, setContent] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const dispatch = useDispatch();
@@ -61,7 +61,7 @@ const CommunitiesHome = ({ navigation }) => {
     if (homeResponse.data) {
       console.log('homeResponse.data if: ', homeResponse.data);
       setTitle(homeResponse.data.currentTermsAndConditions.title);
-      setContent(homeResponse.data.currentTermsAndConditions.content);
+      // setContent(homeResponse.data.currentTermsAndConditions.content);
       setIsModalVisible(!homeResponse.data.currentUser.hasAcceptedLatestTerms);
     } else {
       console.log('homeResponse.data : ', homeResponse.data);
@@ -122,7 +122,7 @@ const CommunitiesHome = ({ navigation }) => {
           changeModalVisibility={changeModalVisibility}
           type={Constant.modal.MODAL}
           textTitle={title}
-          smallText={content}
+          // smallText={content}
           descriptionData={descriptionData}
           style={styles.descriptionTextStyle}
           numberOfLines={4}

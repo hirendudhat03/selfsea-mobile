@@ -34,7 +34,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import Loader from '../components/Loader';
 import { useTypedSelector } from '../redux';
-import { authText } from '../config/static';
+import { ageData, authText } from '../config/static';
 
 const zxcvbn = require('zxcvbn');
 
@@ -68,13 +68,6 @@ const birthData = [
   },
 ];
 
-const ageData = [
-  {
-    title:
-      'sorry, but the selfsea communities feature is only available to young people between the ages of 13 and 18. check out our web-app for resources, and stories from young people who have been there www.selfsea.org.',
-  },
-];
-
 const SignUp = ({ route, navigation }) => {
   const dispatch = useDispatch();
 
@@ -82,7 +75,8 @@ const SignUp = ({ route, navigation }) => {
   // console.log('signUpResReducer : ', JSON.stringify(signUpRes));
 
   const [years, setYear] = useState<number[]>([]);
-
+  const [userAgeMessage, setUserAgeMessage] = useState<any>();
+  const [userAgeHeader, setUserAgeHeader] = useState<string>('');
   useEffect(() => {
     let year: number[] = [];
     let currentYear = new Date().getFullYear();
@@ -140,7 +134,16 @@ const SignUp = ({ route, navigation }) => {
 
   const countAge = (isPasswordLess: boolean) => {
     if (userAge === null || userAge < 13 || userAge > 18) {
-      changeAgeVisibility(true);
+      if (userAge === null || userAge < 13) {
+        changeAgeVisibility(true);
+        setUserAgeMessage(ageData.less);
+        setUserAgeHeader(ageData.header.minor);
+      }
+      if (userAge === null || userAge > 18) {
+        changeAgeVisibility(true);
+        setUserAgeMessage(ageData.greater);
+        setUserAgeHeader(ageData.header.major);
+      }
     } else {
       if (isPasswordLess) {
         console.log('Here4');
@@ -586,9 +589,9 @@ const SignUp = ({ route, navigation }) => {
           <ModalPicker
             changeModalVisibility={changeAgeVisibility}
             type={Constant.modal.MODAL}
-            textTitle={'Mentee age more than 18'}
+            textTitle={userAgeHeader}
             // smallText={'your age is not valid'}
-            descriptionData={ageData}
+            descriptionData={userAgeMessage}
             numberOfLines={6}
             button={Constant.buttons.CLOSE}
             text={'close'}

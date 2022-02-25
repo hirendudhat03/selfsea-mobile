@@ -71,4 +71,23 @@ export const master = {
   ],
 };
 
+export const ageData = {
+  greater: [
+    {
+      title:
+        'sorry, but the selfsea communities feature is only available to young people between the ages of 13 and 18. you can find lots of great resources on our web-app at www.selfsea.org or apply to be a Peer Health Navigator in the communities here.',
+    },
+  ],
+  less: [
+    {
+      title:
+        'sorry, but the selfsea communities feature is only available to young people between the ages of 13 and 18. check out our web-app for resources, and stories from young people who have been there www.selfsea.org.',
+    },
+  ],
+  header: {
+    major: 'Mentee age more than 18',
+    minor: 'Mentee age less than 13',
+  },
+};
+
 export const communities = {};
