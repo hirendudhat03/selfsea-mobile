@@ -39,9 +39,15 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
 
   const _signIn = async () => {
     console.log('handlePressGoogleLogin');
+    // Dev Web Client id
+    // GoogleSignin.configure({
+    //   webClientId:
+    //     '597759932954-hj037g8cqseqq6dpukg26752k305sqpl.apps.googleusercontent.com',
+    // });
+    //Stg web client id
     GoogleSignin.configure({
       webClientId:
-        '597759932954-hj037g8cqseqq6dpukg26752k305sqpl.apps.googleusercontent.com',
+        '196320634339-qv162icph88gs5k6g0eq2cdoq6ft1gbr.apps.googleusercontent.com',
     });
 
     try {
