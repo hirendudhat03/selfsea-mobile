@@ -159,7 +159,7 @@ const SignUp = ({ route, navigation }) => {
             birthYear,
             userName,
             navigation,
-            false,
+            true,
             route.params.userInfo,
             route.params.type,
             route.params.credentials.user.uid,

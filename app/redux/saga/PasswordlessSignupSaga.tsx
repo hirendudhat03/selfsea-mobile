@@ -55,7 +55,9 @@ export function* passwordlessSignupSaga(action) {
         };
 
         const data = await api.createUser(mutationVariables);
-        action.navigation.navigate('DrawerNavigator');
+        action.navigation.pop();
+        action.navigation.push('CreateProfile');
+        // action.navigation.navigate('DrawerNavigator');
         return { ...data, ...response };
       }
     } catch (e: any) {

@@ -159,7 +159,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
 
         // Return URL added to your Apple dev console. We intercept this redirect, but it must still match
         // the URL you provided to Apple. It can be an empty route on your backend as it's never called.
-        redirectUri: 'https://www.selfsea.org',
+        redirectUri: 'https://selfsea-staging.firebaseapp.com/__/auth/handler',
 
         // The type of response requested - code, id_token, or both.
         responseType: appleAuthAndroid.ResponseType.ALL,
@@ -184,13 +184,13 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
         response.nonce,
       );
       let credentials = await auth().signInWithCredential(appleCredential);
-      await credentials.user.sendEmailVerification();
 
       var email = credentials.additionalUserInfo?.profile?.email;
       const isUnique = await api.isEmailUnique({ email: email });
       if (!isUnique.isEmailUnique) {
         navigation.replace('DrawerNavigator');
       } else {
+        await credentials.user.sendEmailVerification();
         navigation.navigate('SignUp', {
           type: 'apple',
           email: userInfo.email,

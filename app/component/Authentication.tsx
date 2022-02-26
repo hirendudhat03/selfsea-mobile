@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import config from '../config';
 import Color from '../theme/colors';
 // @ts-ignore
 import {
@@ -39,9 +38,10 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
   const state = uuid();
 
   const _signIn = async () => {
-    console.log(config.config.GOOGLE_WEB_CLIENT_ID);
+    console.log('handlePressGoogleLogin');
     GoogleSignin.configure({
-      webClientId: config.config.GOOGLE_WEB_CLIENT_ID,
+      webClientId:
+        '597759932954-hj037g8cqseqq6dpukg26752k305sqpl.apps.googleusercontent.com',
     });
 
     try {
