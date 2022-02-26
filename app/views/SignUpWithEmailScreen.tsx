@@ -98,8 +98,10 @@ const SignUp = ({ route, navigation }) => {
       console.log('signUpRes.data if: ', signUpRes.data);
       if (signUpRes.data.errorName === 'email') {
         setEmailError(signUpRes.data.error);
+        setCircleFillEmail(false);
       } else {
         setUserNameError(signUpRes.data.error);
+        setCircleFillUser(false);
       }
     } else {
       console.log('signUpRes.data : ', signUpRes.data);
@@ -118,6 +120,7 @@ const SignUp = ({ route, navigation }) => {
   const [birthMonth, setBirthMonth] = useState<string>('');
 
   const [birthYear, setBirthYear] = useState<string>('');
+  // const [toClear, setToClear] = useState<boolean>(false);
 
   const userAge = useCalculateAge(birthYear, birthMonth);
 
