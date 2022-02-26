@@ -162,13 +162,7 @@ android {
     }
 
     signingConfigs {
-        staging {
-            storeFile file('selfea-keystore.keystore')
-            storePassword 'Development@1234'
-            keyAlias 'selfea'
-            keyPassword 'Development@1234'
-        }
-        dev {
+        debug {
             storeFile file('debug.keystore')
             storePassword 'android'
             keyAlias 'androiddebugkey'
@@ -176,21 +170,8 @@ android {
         }
     }
 
-    flavorDimensions "selfseaFlavors"
-    productFlavors {
-        staging {
-            dimension "selfseaFlavors"
-            signingConfig signingConfigs.staging
-        }
-        dev {
-            dimension "selfseaFlavors"
-            signingConfig signingConfigs.dev
-        }
-    }
-
     buildTypes {
         debug {
-
             if (nativeArchitectures) {
                 ndk {
                     abiFilters nativeArchitectures.split(',')
@@ -200,7 +181,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-
+            signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }

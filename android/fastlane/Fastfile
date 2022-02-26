@@ -33,4 +33,9 @@ platform :android do
     gradle(task: "assemble", build_type: "Debug")
   end
 
+  desc "Test generating an app bundle"
+  lane :generate_app_bundle do
+    gradle(task: "bundle")
+  end
+
 end
