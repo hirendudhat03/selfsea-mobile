@@ -39,6 +39,14 @@ Submit a new staging build
 
 Generate a development build
 
+### android generate_app_bundle
+
+```sh
+[bundle exec] fastlane android generate_app_bundle
+```
+
+Test generating an app bundle
+
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.
