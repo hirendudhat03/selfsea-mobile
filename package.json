@@ -4,10 +4,6 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "android-dev-debug": "ENVFILE=.env react-native run-android --variant=devDebug",
-    "android-staging-debug": "ENVFILE=.env.staging react-native run-android --variant=stagingDebug",
-    "android-dev-release": "cd android && ./gradlew clean && cd .. && ENVFILE=.env react-native run-android --variant=devRelease",
-    "android-staging-release": "cd android && ./gradlew clean && cd .. && ENVFILE=.env.staging react-native run-android --variant=stagingRelease",
     "ios:dev": "react-native run-ios --scheme 'SelfseaMobile'",
     "ios:staging": "react-native run-ios --scheme 'SelfseaMobileStaging'",
     "start": "react-native start",
