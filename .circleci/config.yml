@@ -116,8 +116,10 @@ jobs:
             cd android;
             mkdir /tmp/artifacts;
             if [[ $CIRCLE_BRANCH =~ ^staging$ ]]; then
+              export ENVFILE=.env.staging
               bundle exec fastlane submit_build
             else
+              export ENVFILE=.env
               bundle exec fastlane build_development
               mv app/build/outputs/apk/debug/app-debug.apk /tmp/artifacts
             fi

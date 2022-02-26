@@ -249,3 +249,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+
+project.logger.lifecycle("Using API at " + project.env.get("API_BASE_URL"))
