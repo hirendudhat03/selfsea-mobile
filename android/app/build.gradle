@@ -170,6 +170,16 @@ android {
         }
     }
 
+    flavorDimensions "selfseaFlavors"
+    productFlavors {
+        staging {
+            dimension "selfseaFlavors"
+        }
+        dev {
+            dimension "selfseaFlavors"
+        }
+    }
+
     buildTypes {
         debug {
             if (nativeArchitectures) {
