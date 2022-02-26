@@ -30,7 +30,12 @@ platform :android do
 
   desc "Generate a development build"
   lane :build_development do
-    gradle(task: "assemble", build_type: "Debug")
+    gradle(task: "assemble", build_type: "Debug", flavor: ENV["BUILD_FLAVOR"])
+  end
+
+  desc "Test generating an app bundle"
+  lane :generate_app_bundle do
+    gradle(task: "bundle", flavor: ENV["BUILD_FLAVOR"])
   end
 
 end

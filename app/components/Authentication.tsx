@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
+import config from '../config';
 import Color from '../theme/colors';
 // @ts-ignore
 import {
@@ -38,6 +39,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
   const state = uuid();
 
   const _signIn = async () => {
+    console.log(config.config.GOOGLE_WEB_CLIENT_ID);
     console.log('handlePressGoogleLogin');
     // Dev Web Client id
     // GoogleSignin.configure({
@@ -46,8 +48,9 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
     // });
     //Stg web client id
     GoogleSignin.configure({
-      webClientId:
-        '196320634339-qv162icph88gs5k6g0eq2cdoq6ft1gbr.apps.googleusercontent.com',
+      // webClientId:
+      //   '196320634339-qv162icph88gs5k6g0eq2cdoq6ft1gbr.apps.googleusercontent.com',
+      webClientId: config.config.GOOGLE_WEB_CLIENT_ID,
     });
 
     try {
@@ -63,7 +66,9 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
           var credentials = await auth().signInWithCredential(googleCredential);
           var email = userInfo.user.email;
           const isUnique = await api.isEmailUnique({ email: email });
-          if (isUnique.isEmailUnique === false) {
+          if (!isUnique.isEmailUnique) {
+            const apiToken = await credentials.user.getIdToken();
+            api.setAuthHeader(apiToken);
             navigation.replace('DrawerNavigator');
           } else {
             navigation.navigate('SignUp', {
@@ -132,10 +137,11 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
         nonce,
       );
       const credentials = await auth().signInWithCredential(appleCredential);
-      console.log('CREDDS', credentials.user);
       var email = credentials.additionalUserInfo?.profile?.email;
       const isUnique = await api.isEmailUnique({ email: email });
-      if (isUnique.isEmailUnique === false) {
+      if (!isUnique.isEmailUnique) {
+        const apiToken = await credentials.user.getIdToken();
+        api.setAuthHeader(apiToken);
         navigation.replace('DrawerNavigator');
       } else {
         navigation.navigate('SignUp', {
@@ -182,7 +188,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
 
       var email = credentials.additionalUserInfo?.profile?.email;
       const isUnique = await api.isEmailUnique({ email: email });
-      if (isUnique.isEmailUnique === false) {
+      if (!isUnique.isEmailUnique) {
         navigation.replace('DrawerNavigator');
       } else {
         navigation.navigate('SignUp', {

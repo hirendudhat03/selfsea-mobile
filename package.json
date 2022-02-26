@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "android-release": "react-native run-android --variant=release",
-    "ios": "react-native run-ios",
+    "ios:dev": "react-native run-ios --scheme 'SelfseaMobile'",
+    "ios:staging": "react-native run-ios --scheme 'SelfseaMobileStaging'",
     "start": "react-native start",
     "develop": "run-p \"codegen --watch\" start",
     "test": "jest",
