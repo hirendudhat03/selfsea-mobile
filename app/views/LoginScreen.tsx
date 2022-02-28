@@ -1,62 +1,29 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
-  View,
-  Text,
-  ImageBackground,
-  StyleSheet,
   Image,
-  TouchableOpacity,
+  ImageBackground,
   Linking,
   SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
+import { useDispatch } from 'react-redux';
+import Auth from '../components/Authentication';
+
+import Button from '../components/Button';
+import { authText } from '../config/static';
+import { SignUpResponse } from '../redux/actions/SignUpAction';
+import { Theme } from '../styles';
+import Color from '../theme/colors';
 
 import Constant from '../theme/constant';
 import Fonts from '../theme/fonts';
-import Color from '../theme/colors';
 import Images from '../theme/images';
-
-import Button from '../components/Button';
-import Auth from '../components/Authentication';
-import { authText } from '../config/static';
-import { Theme } from '../styles';
-import { SignUpResponse } from '../redux/actions/SignUpAction';
-import { useDispatch } from 'react-redux';
-import auth from '@react-native-firebase/auth';
-import { api } from '../services';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({ navigation }) => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    // below function will be useful when we will work on the remember sign in
-    const checkUser = async () => {
-      const user = auth().currentUser;
-      if (user) {
-        const idTokenResult = await user.getIdTokenResult();
-        api.setAuthHeader(idTokenResult.token);
-        console.log('User JWT: ', idTokenResult.token);
-
-        if (idTokenResult.token) {
-          const today = new Date();
-          console.log('Current:::', today.toLocaleDateString());
-          AsyncStorage.getItem('keepSignin').then((value: any) => {
-            console.log('value ;', value);
-
-            if (value < today.toLocaleDateString()) {
-              auth().signOut();
-              navigation.navigate('SignIn');
-            } else {
-              navigation.navigate('TabNavigator');
-            }
-          });
-        } else {
-          navigation.navigate('Login');
-        }
-      }
-    };
-    checkUser();
-  }, [navigation]);
 
   var theme = Theme();
 

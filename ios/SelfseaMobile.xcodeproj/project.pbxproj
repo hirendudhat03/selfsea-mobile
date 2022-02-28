@@ -27,7 +27,6 @@
 		4114505227758D82001B5C0E /* Calibre-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2CFD1BD252DB48199ED3F1FC /* Calibre-ThinItalic.otf */; };
 		4120142227C8BBCD001CD160 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4120142127C8BBCD001CD160 /* GoogleService-Info.plist */; };
 		5B7E3E03279738F6000DD488 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E3E02279738F6000DD488 /* Empty.swift */; };
-		6172F2D35A4C3AA820D92908 /* libPods-SelfseaMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423831EA8574132BED9D8CC /* libPods-SelfseaMobile.a */; };
 		7EF68E3733C33B6898317E18 /* libPods-SelfseaMobile-SelfseaMobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFE59519B596E51CEFDCCC0 /* libPods-SelfseaMobile-SelfseaMobileTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -109,7 +108,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6172F2D35A4C3AA820D92908 /* libPods-SelfseaMobile.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

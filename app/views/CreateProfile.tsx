@@ -590,7 +590,7 @@ const CreateProfile = ({ navigation }) => {
                   return (
                     <Badges
                       type={Constant.badges.MULTI_SELECT}
-                      text={item.description}
+                      text={`${item.terms[0].value}, ${item.terms[1].value}`}
                       rightIcon={Images.Circle}
                       onPress={() => locationDropDownItem(item)}
                     />
@@ -638,7 +638,7 @@ const CreateProfile = ({ navigation }) => {
                     <Text
                       onPress={() => locationDropDownItem(item, 'add')}
                       style={styles.menuTextStyle}>
-                      {item.description}
+                      {`${item.terms[0].value}, ${item.terms[1].value}`}
                     </Text>
                   );
                 })}

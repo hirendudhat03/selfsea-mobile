@@ -77,6 +77,8 @@ const birthData = [
 //   },
 // ];
 
+const EMAIL_REGEX = new RegExp(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/);
+
 const SignUp = ({ route, navigation }) => {
   const dispatch = useDispatch();
 
@@ -198,14 +200,10 @@ const SignUp = ({ route, navigation }) => {
     if (text === '') {
       setCircleFillEmail(false);
       setEmailBorder(Color.COMMUNITY_ORANGE);
-      setEmailError('Please enter email address. ');
-    } else if (
-      text.match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      ) === null
-    ) {
+      setEmailError('please enter email address.');
+    } else if (text.match(EMAIL_REGEX) === null) {
       setEmailBorder(Color.COMMUNITY_ORANGE);
-      setEmailError('Please enter a valid email address. ');
+      setEmailError('please enter a valid email address.');
       setCircleFillEmail(false);
     } else if (text.length > 64) {
       setEmailBorder(Color.COMMUNITY_ORANGE);
@@ -320,9 +318,7 @@ const SignUp = ({ route, navigation }) => {
         setPassword('');
       } else if (!email) {
         setEmailError('please enter email address.');
-      } else if (
-        email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/) === null
-      ) {
+      } else if (email.match(EMAIL_REGEX) === null) {
         setEmailError('please enter a valid email address.');
       } else if (!Password) {
         route.params === undefined &&
@@ -342,9 +338,7 @@ const SignUp = ({ route, navigation }) => {
         setUserName('');
       } else if (!email) {
         setEmailError('please enter email address.');
-      } else if (
-        email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/) === null
-      ) {
+      } else if (email.match(EMAIL_REGEX) === null) {
         setEmailError('please enter a valid email address.');
       } else if (!userName) {
         setUserNameError(text.length + '/20');
@@ -613,7 +607,7 @@ const SignUp = ({ route, navigation }) => {
                 sorry, but the selfsea communities feature is only available to
                 young people between the ages of 13 and 18. check out our
                 web-app for resources, and stories from young people who have
-                been there
+                been there{' '}
                 <Text
                   style={styles.hyperlinkText}
                   onPress={() => Linking.openURL(Constant.link.TERMS_OF_USE)}>
@@ -653,7 +647,7 @@ const SignUp = ({ route, navigation }) => {
                 sorry, but the selfsea communities feature is only available to
                 young people between the ages of 13 and 18. check out our
                 web-app for resources, and stories from young people who have
-                been there
+                been there{' '}
                 <Text
                   style={styles.hyperlinkText}
                   onPress={() => Linking.openURL(Constant.link.TERMS_OF_USE)}>
