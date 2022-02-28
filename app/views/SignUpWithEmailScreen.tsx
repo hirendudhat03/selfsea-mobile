@@ -35,7 +35,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import Loader from '../components/Loader';
 import { useTypedSelector } from '../redux';
-import { ageData, authText } from '../config/static';
+import { authText } from '../config/static';
 
 const zxcvbn = require('zxcvbn');
 
@@ -70,8 +70,6 @@ const birthData = [
   },
 ];
 
-<<<<<<< Updated upstream
-=======
 // const ageData = [
 //   {
 //     title:
@@ -79,7 +77,6 @@ const birthData = [
 //   },
 // ];
 
->>>>>>> Stashed changes
 const SignUp = ({ route, navigation }) => {
   const dispatch = useDispatch();
 
@@ -87,8 +84,8 @@ const SignUp = ({ route, navigation }) => {
   // console.log('signUpResReducer : ', JSON.stringify(signUpRes));
 
   const [years, setYear] = useState<number[]>([]);
-  const [userAgeMessage, setUserAgeMessage] = useState<any>();
-  const [userAgeHeader, setUserAgeHeader] = useState<string>('');
+  // const [userAgeMessage, setUserAgeMessage] = useState<any>();
+  // const [userAgeHeader, setUserAgeHeader] = useState<string>('');
   useEffect(() => {
     let year: number[] = [];
     let currentYear = new Date().getFullYear();
@@ -150,14 +147,14 @@ const SignUp = ({ route, navigation }) => {
   const countAge = (isPasswordLess: boolean) => {
     if (userAge === null || userAge < 13 || userAge > 18) {
       if (userAge === null || userAge < 13) {
-        changeAgeVisibility(true);
-        setUserAgeMessage(ageData.less);
-        setUserAgeHeader(ageData.header.minor);
+        changeLessAgeVisibility(true);
+        // setUserAgeMessage(ageData.less);
+        // setUserAgeHeader(ageData.header.minor);
       }
       if (userAge === null || userAge > 18) {
         changeAgeVisibility(true);
-        setUserAgeMessage(ageData.greater);
-        setUserAgeHeader(ageData.header.major);
+        // setUserAgeMessage(ageData.greater);
+        // setUserAgeHeader(ageData.header.major);
       }
     } else {
       if (isPasswordLess) {
@@ -299,7 +296,11 @@ const SignUp = ({ route, navigation }) => {
   const changeAgeVisibility = (bool: boolean) => {
     setIsAgeValid(bool);
   };
+  const [isLessAgeValid, setLessIsAgeValid] = useState(false);
 
+  const changeLessAgeVisibility = (bool: boolean) => {
+    setLessIsAgeValid(bool);
+  };
   const SignUpValidation = (text: string) => {
     if (route.params === undefined) {
       if (
@@ -601,19 +602,6 @@ const SignUp = ({ route, navigation }) => {
           animationType="fade"
           visible={isAgeValid}
           onRequestClose={() => changeAgeVisibility(false)}>
-<<<<<<< Updated upstream
-          <ModalPicker
-            changeModalVisibility={changeAgeVisibility}
-            type={Constant.modal.MODAL}
-            textTitle={userAgeHeader}
-            // smallText={'your age is not valid'}
-            descriptionData={userAgeMessage}
-            numberOfLines={6}
-            button={Constant.buttons.CLOSE}
-            text={'close'}
-            // onPress={() => navigation.navigate('Login')}
-          />
-=======
           <View style={styles.modalContainer}>
             <View style={styles.modal}>
               <Text style={styles.textTitle}>Mentee age more than 18</Text>
@@ -647,7 +635,40 @@ const SignUp = ({ route, navigation }) => {
               />
             </View>
           </View>
->>>>>>> Stashed changes
+        </Modal>
+
+        <Modal
+          transparent={false}
+          animationType="fade"
+          visible={isLessAgeValid}
+          onRequestClose={() => changeLessAgeVisibility(false)}>
+          <View style={styles.modalContainer}>
+            <View style={styles.modal}>
+              <Text style={styles.textTitle}>Mentee age less than 13</Text>
+
+              <Text
+                style={styles.descriptionText}
+                numberOfLines={8}
+                ellipsizeMode="middle">
+                sorry, but the selfsea communities feature is only available to
+                young people between the ages of 13 and 18. check out our
+                web-app for resources, and stories from young people who have
+                been there
+                <Text
+                  style={styles.hyperlinkText}
+                  onPress={() => Linking.openURL(Constant.link.TERMS_OF_USE)}>
+                  www.selfsea.org
+                </Text>{' '}
+              </Text>
+
+              <Button
+                type={Constant.buttons.CLOSE}
+                text={'close'}
+                style={styles.modalButtonStyle}
+                onPress={() => changeLessAgeVisibility(false)}
+              />
+            </View>
+          </View>
         </Modal>
       </View>
     </KeyboardAvoidingView>

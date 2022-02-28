@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   Text,
@@ -21,22 +21,13 @@ import { authText } from '../config/static';
 import { Theme } from '../styles';
 import { SignUpResponse } from '../redux/actions/SignUpAction';
 import { useDispatch } from 'react-redux';
+import auth from '@react-native-firebase/auth';
+import { api } from '../services';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({ navigation }) => {
   const dispatch = useDispatch();
 
-<<<<<<< Updated upstream
-  // useEffect(() => {
-  // below function will be useful when we will work on the remember sign in
-  // const checkUser = async () => {
-  //   if (auth().currentUser) {
-  //     const idTokenResult = await auth().currentUser.getIdTokenResult();
-  //     api.setAuthHeader(idTokenResult.token);
-  //     console.log('User JWT: ', idTokenResult.token);
-  //   }
-  // };
-  // }, [navigation]);
-=======
   useEffect(() => {
     // below function will be useful when we will work on the remember sign in
     const checkUser = async () => {
@@ -66,7 +57,6 @@ const Login = ({ navigation }) => {
     };
     checkUser();
   }, [navigation]);
->>>>>>> Stashed changes
 
   var theme = Theme();
 
