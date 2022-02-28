@@ -2,6 +2,9 @@ package com.phe.selfsea;
 
 import com.facebook.react.ReactActivity;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatDelegate;
+
 import com.facebook.FacebookSdk;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -24,6 +27,8 @@ public class MainActivity extends ReactActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(null);
+    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
   }
 
 //  @Override

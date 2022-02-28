@@ -55,7 +55,7 @@ export function* createProfileSaga(action) {
 
   if (response === null) {
   } else {
-    action.navigation.navigate('DrawerNavigator');
+    action.navigation.navigate('TabNavigator');
   }
 
   console.warn('createProfile response saga', JSON.stringify(response));

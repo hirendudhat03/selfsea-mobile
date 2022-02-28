@@ -9,6 +9,7 @@ import {
   Modal,
   KeyboardAvoidingView,
   Platform,
+  Linking,
 } from 'react-native';
 import PasswordInputStrength from '../components/PasswordInputStrength';
 import { availableMonths, useCalculateAge } from '../hooks/calculate-ages';
@@ -40,6 +41,7 @@ const zxcvbn = require('zxcvbn');
 
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
+const modalwidth = Dimensions.get('window').width - 50;
 
 const descriptionData = [
   {
@@ -68,6 +70,16 @@ const birthData = [
   },
 ];
 
+<<<<<<< Updated upstream
+=======
+// const ageData = [
+//   {
+//     title:
+//       'sorry, but the selfsea communities feature is only available to young people between the ages of 13 and 18. check out our web-app for resources, and stories from young people who have been there www.selfsea.org or apply to be a peer Health Navigator in the communities here.',
+//   },
+// ];
+
+>>>>>>> Stashed changes
 const SignUp = ({ route, navigation }) => {
   const dispatch = useDispatch();
 
@@ -589,6 +601,7 @@ const SignUp = ({ route, navigation }) => {
           animationType="fade"
           visible={isAgeValid}
           onRequestClose={() => changeAgeVisibility(false)}>
+<<<<<<< Updated upstream
           <ModalPicker
             changeModalVisibility={changeAgeVisibility}
             type={Constant.modal.MODAL}
@@ -600,6 +613,41 @@ const SignUp = ({ route, navigation }) => {
             text={'close'}
             // onPress={() => navigation.navigate('Login')}
           />
+=======
+          <View style={styles.modalContainer}>
+            <View style={styles.modal}>
+              <Text style={styles.textTitle}>Mentee age more than 18</Text>
+
+              <Text
+                style={styles.descriptionText}
+                numberOfLines={8}
+                ellipsizeMode="middle">
+                sorry, but the selfsea communities feature is only available to
+                young people between the ages of 13 and 18. check out our
+                web-app for resources, and stories from young people who have
+                been there
+                <Text
+                  style={styles.hyperlinkText}
+                  onPress={() => Linking.openURL(Constant.link.TERMS_OF_USE)}>
+                  www.selfsea.org
+                </Text>{' '}
+                or apply to be a peer Health Navigator in the communities{' '}
+                <Text
+                  style={styles.hyperlinkText}
+                  onPress={() => Linking.openURL(Constant.link.TERMS_OF_USE)}>
+                  here.
+                </Text>
+              </Text>
+
+              <Button
+                type={Constant.buttons.CLOSE}
+                text={'close'}
+                style={styles.modalButtonStyle}
+                onPress={() => changeAgeVisibility(false)}
+              />
+            </View>
+          </View>
+>>>>>>> Stashed changes
         </Modal>
       </View>
     </KeyboardAvoidingView>
@@ -655,24 +703,17 @@ const styles = StyleSheet.create({
   monthView: {
     width: '45%',
     flexDirection: 'row',
-    // justifyContent: 'space-between',
-    // alignSelf: 'flex-start',
-    // marginHorizontal: 20,
-    // marginVertical: 3,
+
     marginRight: 7,
-    // marginTop: height * 0.02,
-    // backgroundColor:'green'
   },
   monthViewBottom: {
     flexDirection: 'row',
-    // justifyContent: 'space-between',
+
     alignSelf: 'flex-start',
-    // marginHorizontal: 19,
   },
   rowView: {
     flexDirection: 'row',
-    // justifyContent: 'center',
-    // alignItems: 'center',
+
     paddingVertical: 4,
   },
   yearView: {
@@ -767,5 +808,42 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 7,
   },
+  //modal style
+  modalContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    paddingHorizontal: 40,
+  },
+  modal: {
+    backgroundColor: Color.BASE_COLOR_WHITE,
+    borderRadius: 10,
+    height: 'auto',
+    width: modalwidth,
+    padding: 19,
+  },
+  textTitle: {
+    fontFamily: Font.CALIBRE,
+    fontSize: 24,
+    fontWeight: 'bold',
+    fontStyle: 'normal',
+    lineHeight: 24,
+    letterSpacing: 0,
+    textAlign: 'center',
+    color: Color.CONTENT_COLOR_BLACK_TEXT,
+  },
+  descriptionText: {
+    fontFamily: Font.CALIBRE,
+    fontSize: 17,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    letterSpacing: 0,
+    textAlign: 'center',
+    color: Color.CONTENT_COLOR_BLACK_TEXT,
+    marginVertical: 10,
+  },
+  hyperlinkText: { color: 'blue', textDecorationLine: 'underline' },
+  modalButtonStyle: { marginVertical: 10, width: '100%' },
 });
 export default SignUp;

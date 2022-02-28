@@ -108,6 +108,7 @@ const ModalPicker = ({
                 </Text>
               );
             })}
+
             <Button
               type={button}
               text={text}

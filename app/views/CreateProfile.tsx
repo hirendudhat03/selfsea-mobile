@@ -216,8 +216,11 @@ const CreateProfile = ({ navigation }) => {
         url:
           'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' +
           val +
-          // cspell:disable-next-line
-          `&key=${config.config.PLACES_API_KEY}&sessiontoken=${config.config.PLACES_SESSION_TOKEN}`,
+          `&key=${config.config.PLACES_API_KEY}&sessiontoken=${config.config.PLACES_SESSION_TOKEN}` +
+          '&components=country:us&types=(cities)',
+        // 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input' +
+        // val +
+        // `&key=${config.config.PLACES_API_KEY}&sessiontoken=${config.config.PLACES_SESSION_TOKEN}`+'&components=country:us&types=(cities)'
         method: 'get',
       })
         .then(res => {

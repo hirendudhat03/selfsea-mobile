@@ -25,6 +25,7 @@ import { useDispatch } from 'react-redux';
 const Login = ({ navigation }) => {
   const dispatch = useDispatch();
 
+<<<<<<< Updated upstream
   // useEffect(() => {
   // below function will be useful when we will work on the remember sign in
   // const checkUser = async () => {
@@ -35,6 +36,37 @@ const Login = ({ navigation }) => {
   //   }
   // };
   // }, [navigation]);
+=======
+  useEffect(() => {
+    // below function will be useful when we will work on the remember sign in
+    const checkUser = async () => {
+      const user = auth().currentUser;
+      if (user) {
+        const idTokenResult = await user.getIdTokenResult();
+        api.setAuthHeader(idTokenResult.token);
+        console.log('User JWT: ', idTokenResult.token);
+
+        if (idTokenResult.token) {
+          const today = new Date();
+          console.log('Current:::', today.toLocaleDateString());
+          AsyncStorage.getItem('keepSignin').then((value: any) => {
+            console.log('value ;', value);
+
+            if (value < today.toLocaleDateString()) {
+              auth().signOut();
+              navigation.navigate('SignIn');
+            } else {
+              navigation.navigate('TabNavigator');
+            }
+          });
+        } else {
+          navigation.navigate('Login');
+        }
+      }
+    };
+    checkUser();
+  }, [navigation]);
+>>>>>>> Stashed changes
 
   var theme = Theme();
 
