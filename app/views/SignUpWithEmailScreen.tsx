@@ -9,6 +9,7 @@ import {
   Modal,
   KeyboardAvoidingView,
   Platform,
+  Linking,
 } from 'react-native';
 import PasswordInputStrength from '../components/PasswordInputStrength';
 import { availableMonths, useCalculateAge } from '../hooks/calculate-ages';
@@ -34,12 +35,13 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import Loader from '../components/Loader';
 import { useTypedSelector } from '../redux';
-import { ageData, authText } from '../config/static';
+import { authText } from '../config/static';
 
 const zxcvbn = require('zxcvbn');
 
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
+const modalwidth = Dimensions.get('window').width - 50;
 
 const descriptionData = [
   {
@@ -68,6 +70,15 @@ const birthData = [
   },
 ];
 
+// const ageData = [
+//   {
+//     title:
+//       'sorry, but the selfsea communities feature is only available to young people between the ages of 13 and 18. check out our web-app for resources, and stories from young people who have been there www.selfsea.org or apply to be a peer Health Navigator in the communities here.',
+//   },
+// ];
+
+const EMAIL_REGEX = new RegExp(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/);
+
 const SignUp = ({ route, navigation }) => {
   const dispatch = useDispatch();
 
@@ -75,8 +86,8 @@ const SignUp = ({ route, navigation }) => {
   // console.log('signUpResReducer : ', JSON.stringify(signUpRes));
 
   const [years, setYear] = useState<number[]>([]);
-  const [userAgeMessage, setUserAgeMessage] = useState<any>();
-  const [userAgeHeader, setUserAgeHeader] = useState<string>('');
+  // const [userAgeMessage, setUserAgeMessage] = useState<any>();
+  // const [userAgeHeader, setUserAgeHeader] = useState<string>('');
   useEffect(() => {
     let year: number[] = [];
     let currentYear = new Date().getFullYear();
@@ -138,14 +149,14 @@ const SignUp = ({ route, navigation }) => {
   const countAge = (isPasswordLess: boolean) => {
     if (userAge === null || userAge < 13 || userAge > 18) {
       if (userAge === null || userAge < 13) {
-        changeAgeVisibility(true);
-        setUserAgeMessage(ageData.less);
-        setUserAgeHeader(ageData.header.minor);
+        changeLessAgeVisibility(true);
+        // setUserAgeMessage(ageData.less);
+        // setUserAgeHeader(ageData.header.minor);
       }
       if (userAge === null || userAge > 18) {
         changeAgeVisibility(true);
-        setUserAgeMessage(ageData.greater);
-        setUserAgeHeader(ageData.header.major);
+        // setUserAgeMessage(ageData.greater);
+        // setUserAgeHeader(ageData.header.major);
       }
     } else {
       if (isPasswordLess) {
@@ -189,14 +200,10 @@ const SignUp = ({ route, navigation }) => {
     if (text === '') {
       setCircleFillEmail(false);
       setEmailBorder(Color.COMMUNITY_ORANGE);
-      setEmailError('Please enter email address. ');
-    } else if (
-      text.match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      ) === null
-    ) {
+      setEmailError('please enter email address.');
+    } else if (text.match(EMAIL_REGEX) === null) {
       setEmailBorder(Color.COMMUNITY_ORANGE);
-      setEmailError('Please enter a valid email address. ');
+      setEmailError('please enter a valid email address.');
       setCircleFillEmail(false);
     } else if (text.length > 64) {
       setEmailBorder(Color.COMMUNITY_ORANGE);
@@ -287,7 +294,11 @@ const SignUp = ({ route, navigation }) => {
   const changeAgeVisibility = (bool: boolean) => {
     setIsAgeValid(bool);
   };
+  const [isLessAgeValid, setLessIsAgeValid] = useState(false);
 
+  const changeLessAgeVisibility = (bool: boolean) => {
+    setLessIsAgeValid(bool);
+  };
   const SignUpValidation = (text: string) => {
     if (route.params === undefined) {
       if (
@@ -307,9 +318,7 @@ const SignUp = ({ route, navigation }) => {
         setPassword('');
       } else if (!email) {
         setEmailError('please enter email address.');
-      } else if (
-        email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/) === null
-      ) {
+      } else if (email.match(EMAIL_REGEX) === null) {
         setEmailError('please enter a valid email address.');
       } else if (!Password) {
         route.params === undefined &&
@@ -329,9 +338,7 @@ const SignUp = ({ route, navigation }) => {
         setUserName('');
       } else if (!email) {
         setEmailError('please enter email address.');
-      } else if (
-        email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/) === null
-      ) {
+      } else if (email.match(EMAIL_REGEX) === null) {
         setEmailError('please enter a valid email address.');
       } else if (!userName) {
         setUserNameError(text.length + '/20');
@@ -589,17 +596,73 @@ const SignUp = ({ route, navigation }) => {
           animationType="fade"
           visible={isAgeValid}
           onRequestClose={() => changeAgeVisibility(false)}>
-          <ModalPicker
-            changeModalVisibility={changeAgeVisibility}
-            type={Constant.modal.MODAL}
-            textTitle={userAgeHeader}
-            // smallText={'your age is not valid'}
-            descriptionData={userAgeMessage}
-            numberOfLines={6}
-            button={Constant.buttons.CLOSE}
-            text={'close'}
-            // onPress={() => navigation.navigate('Login')}
-          />
+          <View style={styles.modalContainer}>
+            <View style={styles.modal}>
+              <Text style={styles.textTitle}>Mentee age more than 18</Text>
+
+              <Text
+                style={styles.descriptionText}
+                numberOfLines={8}
+                ellipsizeMode="middle">
+                sorry, but the selfsea communities feature is only available to
+                young people between the ages of 13 and 18. check out our
+                web-app for resources, and stories from young people who have
+                been there{' '}
+                <Text
+                  style={styles.hyperlinkText}
+                  onPress={() => Linking.openURL(Constant.link.TERMS_OF_USE)}>
+                  www.selfsea.org
+                </Text>{' '}
+                or apply to be a peer Health Navigator in the communities{' '}
+                <Text
+                  style={styles.hyperlinkText}
+                  onPress={() => Linking.openURL(Constant.link.TERMS_OF_USE)}>
+                  here.
+                </Text>
+              </Text>
+
+              <Button
+                type={Constant.buttons.CLOSE}
+                text={'close'}
+                style={styles.modalButtonStyle}
+                onPress={() => changeAgeVisibility(false)}
+              />
+            </View>
+          </View>
+        </Modal>
+
+        <Modal
+          transparent={false}
+          animationType="fade"
+          visible={isLessAgeValid}
+          onRequestClose={() => changeLessAgeVisibility(false)}>
+          <View style={styles.modalContainer}>
+            <View style={styles.modal}>
+              <Text style={styles.textTitle}>Mentee age less than 13</Text>
+
+              <Text
+                style={styles.descriptionText}
+                numberOfLines={8}
+                ellipsizeMode="middle">
+                sorry, but the selfsea communities feature is only available to
+                young people between the ages of 13 and 18. check out our
+                web-app for resources, and stories from young people who have
+                been there{' '}
+                <Text
+                  style={styles.hyperlinkText}
+                  onPress={() => Linking.openURL(Constant.link.TERMS_OF_USE)}>
+                  www.selfsea.org
+                </Text>{' '}
+              </Text>
+
+              <Button
+                type={Constant.buttons.CLOSE}
+                text={'close'}
+                style={styles.modalButtonStyle}
+                onPress={() => changeLessAgeVisibility(false)}
+              />
+            </View>
+          </View>
         </Modal>
       </View>
     </KeyboardAvoidingView>
@@ -655,24 +718,17 @@ const styles = StyleSheet.create({
   monthView: {
     width: '45%',
     flexDirection: 'row',
-    // justifyContent: 'space-between',
-    // alignSelf: 'flex-start',
-    // marginHorizontal: 20,
-    // marginVertical: 3,
+
     marginRight: 7,
-    // marginTop: height * 0.02,
-    // backgroundColor:'green'
   },
   monthViewBottom: {
     flexDirection: 'row',
-    // justifyContent: 'space-between',
+
     alignSelf: 'flex-start',
-    // marginHorizontal: 19,
   },
   rowView: {
     flexDirection: 'row',
-    // justifyContent: 'center',
-    // alignItems: 'center',
+
     paddingVertical: 4,
   },
   yearView: {
@@ -767,5 +823,42 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 7,
   },
+  //modal style
+  modalContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    paddingHorizontal: 40,
+  },
+  modal: {
+    backgroundColor: Color.BASE_COLOR_WHITE,
+    borderRadius: 10,
+    height: 'auto',
+    width: modalwidth,
+    padding: 19,
+  },
+  textTitle: {
+    fontFamily: Font.CALIBRE,
+    fontSize: 24,
+    fontWeight: 'bold',
+    fontStyle: 'normal',
+    lineHeight: 24,
+    letterSpacing: 0,
+    textAlign: 'center',
+    color: Color.CONTENT_COLOR_BLACK_TEXT,
+  },
+  descriptionText: {
+    fontFamily: Font.CALIBRE,
+    fontSize: 17,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    letterSpacing: 0,
+    textAlign: 'center',
+    color: Color.CONTENT_COLOR_BLACK_TEXT,
+    marginVertical: 10,
+  },
+  hyperlinkText: { color: 'blue', textDecorationLine: 'underline' },
+  modalButtonStyle: { marginVertical: 10, width: '100%' },
 });
 export default SignUp;

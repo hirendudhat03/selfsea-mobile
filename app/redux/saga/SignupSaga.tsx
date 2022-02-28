@@ -38,7 +38,8 @@ export function* signUpSaga(action) {
 
           await api.setAuthHeader(token);
 
-          action.navigation.navigate('CreateProfile');
+          action.navigation.pop();
+          action.navigation.push('CreateProfile');
 
           return { ...data, ...response };
         } catch (e) {

@@ -1,40 +1,29 @@
 import React from 'react';
 import {
-  View,
-  Text,
-  ImageBackground,
-  StyleSheet,
   Image,
-  TouchableOpacity,
+  ImageBackground,
   Linking,
   SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
+import { useDispatch } from 'react-redux';
+import Auth from '../components/Authentication';
+
+import Button from '../components/Button';
+import { authText } from '../config/static';
+import { SignUpResponse } from '../redux/actions/SignUpAction';
+import { Theme } from '../styles';
+import Color from '../theme/colors';
 
 import Constant from '../theme/constant';
 import Fonts from '../theme/fonts';
-import Color from '../theme/colors';
 import Images from '../theme/images';
-
-import Button from '../components/Button';
-import Auth from '../components/Authentication';
-import { authText } from '../config/static';
-import { Theme } from '../styles';
-import { SignUpResponse } from '../redux/actions/SignUpAction';
-import { useDispatch } from 'react-redux';
 
 const Login = ({ navigation }) => {
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  // below function will be useful when we will work on the remember sign in
-  // const checkUser = async () => {
-  //   if (auth().currentUser) {
-  //     const idTokenResult = await auth().currentUser.getIdTokenResult();
-  //     api.setAuthHeader(idTokenResult.token);
-  //     console.log('User JWT: ', idTokenResult.token);
-  //   }
-  // };
-  // }, [navigation]);
 
   var theme = Theme();
 

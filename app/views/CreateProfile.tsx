@@ -216,8 +216,11 @@ const CreateProfile = ({ navigation }) => {
         url:
           'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' +
           val +
-          // cspell:disable-next-line
-          `&key=${config.config.PLACES_API_KEY}&sessiontoken=${config.config.PLACES_SESSION_TOKEN}`,
+          `&key=${config.config.PLACES_API_KEY}&sessiontoken=${config.config.PLACES_SESSION_TOKEN}` +
+          '&components=country:us&types=(cities)',
+        // 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input' +
+        // val +
+        // `&key=${config.config.PLACES_API_KEY}&sessiontoken=${config.config.PLACES_SESSION_TOKEN}`+'&components=country:us&types=(cities)'
         method: 'get',
       })
         .then(res => {
@@ -587,7 +590,7 @@ const CreateProfile = ({ navigation }) => {
                   return (
                     <Badges
                       type={Constant.badges.MULTI_SELECT}
-                      text={item.description}
+                      text={`${item.terms[0].value}, ${item.terms[1].value}`}
                       rightIcon={Images.Circle}
                       onPress={() => locationDropDownItem(item)}
                     />
@@ -635,7 +638,7 @@ const CreateProfile = ({ navigation }) => {
                     <Text
                       onPress={() => locationDropDownItem(item, 'add')}
                       style={styles.menuTextStyle}>
-                      {item.description}
+                      {`${item.terms[0].value}, ${item.terms[1].value}`}
                     </Text>
                   );
                 })}

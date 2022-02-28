@@ -24,19 +24,19 @@ export function* loginSaga(action) {
       const data = await api.currentUser();
       if (data?.currentUser?.roles[0].name === 'MENTEE') {
         // In future it will be role based redirect
-        action.navigation.navigate('DrawerNavigator');
+        action.navigation.replace('TabNavigator');
       }
       if (data?.currentUser?.roles[0].name === 'MENTOR') {
         // In future it will be role based redirect
-        action.navigation.navigate('DrawerNavigator');
+        action.navigation.replace('TabNavigator');
       }
       if (data?.currentUser?.roles[0].name === 'MODERATOR') {
         // In future it will be role based redirect
-        action.navigation.navigate('DrawerNavigator');
+        action.navigation.replace('TabNavigator');
       }
       if (data?.currentUser?.roles[0].name === 'ADMIN') {
         // In future it will be role based redirect
-        action.navigation.navigate('DrawerNavigator');
+        action.navigation.replace('TabNavigator');
       }
 
       // } else {
