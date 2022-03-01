@@ -19,7 +19,7 @@ export function* loginSaga(action) {
       const token = await response.user.getIdToken();
       console.log('token : ', token);
       await AsyncStorage.setItem('jwtToken', token);
-      api.setAuthHeader(token);
+      await api.setAuthHeader(token);
 
       const data = await api.currentUser();
       if (data?.currentUser?.roles[0].name === 'MENTEE') {

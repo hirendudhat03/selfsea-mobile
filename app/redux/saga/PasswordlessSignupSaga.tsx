@@ -25,41 +25,43 @@ export function* passwordlessSignupSaga(action) {
         if (action.platform === 'google') {
           var tokens = await GoogleSignin.getTokens();
 
-          var credToken =
+          token =
             action.userInfo.idToken !== null
               ? action.userInfo.idToken
               : tokens.accessToken;
           const googleCredential =
-            auth.GoogleAuthProvider.credential(credToken);
+            auth.GoogleAuthProvider.credential(token);
           response = await auth().signInWithCredential(googleCredential);
+          const apiToken = await response.user.getIdToken();
+          await api.setAuthHeader(apiToken);
           await response.user.sendEmailVerification();
         }
 
         if (action.platform === 'apple') {
           token = action.token;
+          // await api.setAuthHeader(token);
         }
 
-        api.setAuthHeader(token);
-        // api.currentUser(token);
-        // await response.user.sendEmailVerification();
-        console.log('Undefined!!');
-        console.log('Action', action.uid);
+        try{
+          const mutationVariables = {
+            email,
+            authId:
+              action.platform === 'apple' ? action.uid : response?.user?.uid,
+            birthMonth: birthMonth.toUpperCase(),
+            birthYear: parseFloat(birthYear),
+            username: userName,
+          };
 
-        const mutationVariables = {
-          email,
-          authId:
-            action.platform === 'apple' ? action.uid : response?.user?.uid,
-          birthMonth: birthMonth.toUpperCase(),
-          birthYear: parseFloat(birthYear),
-          username: userName,
-        };
-
-        const data = await api.createUser(mutationVariables);
-        action.navigation.pop();
-        action.navigation.push('CreateProfile');
-        // action.navigation.navigate('DrawerNavigator');
-        return { ...data, ...response };
+          const data = await api.createUser(mutationVariables);
+          action.navigation.pop();
+          action.navigation.push('CreateProfile');
+          return { ...data, ...response };
+        } catch(e){
+          console.log({ error: e });
+        }
       }
+
+      return userName;
     } catch (e: any) {
       if (e.code === 'auth/email-already-in-use') {
         console.log('That email address is already in use!');

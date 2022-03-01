@@ -68,7 +68,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
           const isUnique = await api.isEmailUnique({ email: email });
           if (!isUnique.isEmailUnique) {
             const apiToken = await credentials.user.getIdToken();
-            api.setAuthHeader(apiToken);
+            await api.setAuthHeader(apiToken);
             navigation.replace('DrawerNavigator');
           } else {
             navigation.navigate('SignUp', {
@@ -141,7 +141,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
       const isUnique = await api.isEmailUnique({ email: email });
       if (!isUnique.isEmailUnique) {
         const apiToken = await credentials.user.getIdToken();
-        api.setAuthHeader(apiToken);
+        await api.setAuthHeader(apiToken);
         navigation.replace('DrawerNavigator');
       } else {
         navigation.navigate('SignUp', {
@@ -188,8 +188,12 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
       var email = credentials.additionalUserInfo?.profile?.email;
       const isUnique = await api.isEmailUnique({ email: email });
       if (!isUnique.isEmailUnique) {
+        const apiToken = await credentials.user.getIdToken();
+        await api.setAuthHeader(apiToken);
         navigation.replace('DrawerNavigator');
       } else {
+        const apiToken = await credentials.user.getIdToken();
+        await api.setAuthHeader(apiToken);
         await credentials.user.sendEmailVerification();
         navigation.navigate('SignUp', {
           type: 'apple',
