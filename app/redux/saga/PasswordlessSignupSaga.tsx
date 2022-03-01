@@ -29,8 +29,7 @@ export function* passwordlessSignupSaga(action) {
             action.userInfo.idToken !== null
               ? action.userInfo.idToken
               : tokens.accessToken;
-          const googleCredential =
-            auth.GoogleAuthProvider.credential(token);
+          const googleCredential = auth.GoogleAuthProvider.credential(token);
           response = await auth().signInWithCredential(googleCredential);
           const apiToken = await response.user.getIdToken();
           await api.setAuthHeader(apiToken);
@@ -42,7 +41,7 @@ export function* passwordlessSignupSaga(action) {
           // await api.setAuthHeader(token);
         }
 
-        try{
+        try {
           const mutationVariables = {
             email,
             authId:
@@ -56,7 +55,7 @@ export function* passwordlessSignupSaga(action) {
           action.navigation.pop();
           action.navigation.push('CreateProfile');
           return { ...data, ...response };
-        } catch(e){
+        } catch (e) {
           console.log({ error: e });
         }
       }
