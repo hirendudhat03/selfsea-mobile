@@ -42,6 +42,7 @@ export default {
   link: {
     PRIVACY_POLICY: 'https://www.peerhealthexchange.org/privacy-policy',
     TERMS_OF_USE: 'https://www.peerhealthexchange.org/terms-of-service',
+    SELFSEA: 'http://www.selfsea.org',
   },
   modal: {
     MODAL: 'Modal',

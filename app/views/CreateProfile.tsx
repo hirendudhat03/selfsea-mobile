@@ -218,9 +218,6 @@ const CreateProfile = ({ navigation }) => {
           val +
           `&key=${config.config.PLACES_API_KEY}&sessiontoken=${config.config.PLACES_SESSION_TOKEN}` +
           '&components=country:us&types=(cities)',
-        // 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input' +
-        // val +
-        // `&key=${config.config.PLACES_API_KEY}&sessiontoken=${config.config.PLACES_SESSION_TOKEN}`+'&components=country:us&types=(cities)'
         method: 'get',
       })
         .then(res => {
@@ -363,6 +360,7 @@ const CreateProfile = ({ navigation }) => {
                       ? val => setPronouns(val)
                       : undefined
                   }
+                  caretHidden={selectPronounsDropDown.length < 3 ? false : true}
                 />
               </View>
               <View style={styles.imageView}>
@@ -423,6 +421,9 @@ const CreateProfile = ({ navigation }) => {
                     selectOrientationDropDown.length < 3
                       ? val => setOrientation(val)
                       : undefined
+                  }
+                  caretHidden={
+                    selectOrientationDropDown.length < 3 ? false : true
                   }
                 />
               </View>
@@ -486,6 +487,7 @@ const CreateProfile = ({ navigation }) => {
                       ? val => setGender(val)
                       : undefined
                   }
+                  caretHidden={selectGenderDropDown.length < 3 ? false : true}
                 />
               </View>
               <View style={styles.imageView}>
@@ -547,6 +549,7 @@ const CreateProfile = ({ navigation }) => {
                       ? val => setRace(val)
                       : undefined
                   }
+                  caretHidden={selectRaceDropDown.length < 3 ? false : true}
                 />
               </View>
               <View style={styles.imageView}>
@@ -610,6 +613,7 @@ const CreateProfile = ({ navigation }) => {
                       ? val => getLocationApi(val)
                       : undefined
                   }
+                  caretHidden={selectLocationDropDown.length < 1 ? false : true}
                 />
               </View>
               <View style={styles.imageView}>
