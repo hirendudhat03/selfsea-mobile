@@ -101,6 +101,7 @@ const SignIn = ({ route, navigation }) => {
     } else if (!password) {
       setPasswordError('Password Required');
     } else {
+      // navigation.replace('TabNavigator');
       dispatch(LoginRequest(email, password, navigation));
     }
   };

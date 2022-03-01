@@ -1,0 +1,108 @@
+{
+  "project_info": {
+    "project_number": "597759932954",
+    "project_id": "selfsea-dev",
+    "storage_bucket": "selfsea-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:597759932954:android:4103f8694f2fdcfaa1efa3",
+        "android_client_info": {
+          "package_name": "com.phe.selfsea"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "597759932954-sl3h8j70hnpds25ppvefk3n08dga7hjt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.phe.selfsea",
+            "certificate_hash": "6037df3087324b9d406e9f5f4f462b56246dfe1a"
+          }
+        },
+        {
+          "client_id": "597759932954-ulkb5lao94ob9vclgiooc0imacfdi8k0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.phe.selfsea",
+            "certificate_hash": "2462340ff37eedc7c501e00e0f4109d5b0a3a5f2"
+          }
+        },
+        {
+          "client_id": "597759932954-hj037g8cqseqq6dpukg26752k305sqpl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnL2G1eSKLYypP6-g1FaCctRJ7j3Z2M1E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "597759932954-hj037g8cqseqq6dpukg26752k305sqpl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "597759932954-5p7j28bdtmp1jktls8sbq4oh0pbm65af.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.selfseamobile",
+                "app_store_id": "1604374862"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:597759932954:android:773623efedf43481a1efa3",
+        "android_client_info": {
+          "package_name": "com.selfseamobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "597759932954-n6ddoinq68ukpiq2jjfc7bli9ucrcgfj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.selfseamobile",
+            "certificate_hash": "6037df3087324b9d406e9f5f4f462b56246dfe1a"
+          }
+        },
+        {
+          "client_id": "597759932954-hj037g8cqseqq6dpukg26752k305sqpl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnL2G1eSKLYypP6-g1FaCctRJ7j3Z2M1E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "597759932954-hj037g8cqseqq6dpukg26752k305sqpl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "597759932954-5p7j28bdtmp1jktls8sbq4oh0pbm65af.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.selfseamobile",
+                "app_store_id": "1604374862"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
