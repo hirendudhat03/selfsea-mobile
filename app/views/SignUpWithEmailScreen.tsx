@@ -610,13 +610,13 @@ const SignUp = ({ route, navigation }) => {
                 been there{' '}
                 <Text
                   style={styles.hyperlinkText}
-                  onPress={() => Linking.openURL(Constant.link.TERMS_OF_USE)}>
+                  onPress={() => Linking.openURL(Constant.link.SELFSEA)}>
                   www.selfsea.org
                 </Text>{' '}
                 or apply to be a peer Health Navigator in the communities{' '}
                 <Text
                   style={styles.hyperlinkText}
-                  onPress={() => Linking.openURL(Constant.link.TERMS_OF_USE)}>
+                  onPress={() => Linking.openURL(Constant.link.SELFSEA)}>
                   here.
                 </Text>
               </Text>
@@ -650,7 +650,7 @@ const SignUp = ({ route, navigation }) => {
                 been there{' '}
                 <Text
                   style={styles.hyperlinkText}
-                  onPress={() => Linking.openURL(Constant.link.TERMS_OF_USE)}>
+                  onPress={() => Linking.openURL(Constant.link.SELFSEA)}>
                   www.selfsea.org
                 </Text>{' '}
               </Text>

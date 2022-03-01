@@ -19,6 +19,8 @@ import Loader from '../components/Loader';
 import { authText } from '../config/static';
 import { useTypedSelector } from '../redux';
 
+const EMAIL_REGEX = new RegExp(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/);
+
 const SignIn = ({ route, navigation }) => {
   const dispatch = useDispatch();
 
@@ -50,9 +52,7 @@ const SignIn = ({ route, navigation }) => {
     if (text === '') {
       setEmailBorder(Color.COMMUNITY_ORANGE);
       setEmailError('please enter email address. ');
-    } else if (
-      text.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/) === null
-    ) {
+    } else if (text.match(EMAIL_REGEX) === null) {
       setEmailBorder(Color.COMMUNITY_ORANGE);
       setEmailError('please enter a valid email address. ');
     } else {
@@ -94,13 +94,12 @@ const SignIn = ({ route, navigation }) => {
       setPasswordError('Password Required');
     } else if (!email) {
       setEmailError('Email Required');
-    } else if (
-      email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/) === null
-    ) {
+    } else if (email.match(EMAIL_REGEX) === null) {
       setEmailError('Valid email Required');
     } else if (!password) {
       setPasswordError('Password Required');
     } else {
+      // navigation.replace('TabNavigator');
       dispatch(LoginRequest(email, password, navigation));
     }
   };
