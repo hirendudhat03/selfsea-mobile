@@ -76,6 +76,7 @@
 		41CA1FCA279EB2B10042598E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4DCE71D9D8CF4E84BF3ACDC7 /* Calibre-Semibold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Calibre-Semibold.otf"; path = "../app/assets/fonts/Calibre-Semibold.otf"; sourceTree = "<group>"; };
 		55C5F16058FF456C8EF46772 /* Calibre-LightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Calibre-LightItalic.otf"; path = "../app/assets/fonts/Calibre-LightItalic.otf"; sourceTree = "<group>"; };
+		5B11C41127CAA6D200AF623F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5B2EC88C2792F44B00F0FC45 /* SelfseaMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = SelfseaMobile.entitlements; path = SelfseaMobile/SelfseaMobile.entitlements; sourceTree = "<group>"; };
 		5B7E3E01279738F6000DD488 /* SelfseaMobile-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SelfseaMobile-Bridging-Header.h"; sourceTree = "<group>"; };
 		5B7E3E02279738F6000DD488 /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
@@ -542,6 +543,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = CC6U96YGMM;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -571,6 +573,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = CC6U96YGMM;
 				INFOPLIST_FILE = SelfseaMobileTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -596,7 +599,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SelfseaMobile/SelfseaMobile.entitlements;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_TEAM = KPHB4646P6;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = SelfseaMobile/Info.plist;
@@ -629,7 +632,7 @@
 				CODE_SIGN_ENTITLEMENTS = SelfseaMobile/SelfseaMobile.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_TEAM = KPHB4646P6;
 				INFOPLIST_FILE = SelfseaMobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
