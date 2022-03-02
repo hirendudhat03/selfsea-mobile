@@ -26,7 +26,12 @@ interface Props {
   button?: string;
   secondType?: string;
   firstType?: string;
+  descriptionStartText?: string;
+  descriptionMiddleText?: string;
+  hyperLinkText?: string;
+  hyperLinkSecondText?: string;
   onPress?: () => void;
+  onPressLink?: () => void;
   onPressPrimary?: () => void;
 }
 
@@ -45,6 +50,11 @@ const ModalPicker = ({
   style,
   secondType,
   firstType,
+  descriptionStartText,
+  descriptionMiddleText,
+  hyperLinkText,
+  hyperLinkSecondText,
+  onPressLink,
   onPress,
   onPressPrimary,
 }: Props) => {
@@ -108,6 +118,34 @@ const ModalPicker = ({
                 </Text>
               );
             })}
+
+            <Button
+              type={button}
+              text={text}
+              style={styles.buttonStyle}
+              onPress={onPress || (() => changeModalVisibility(false))}
+            />
+          </View>
+        </View>
+      ) : null}
+      {type === Constant.modal.MODAL_AGE ? (
+        <View style={styles.container}>
+          <View style={styles.modal}>
+            <Text style={styles.textTitle}>{textTitle}</Text>
+
+            <Text
+              style={styles.descriptionText}
+              numberOfLines={8}
+              ellipsizeMode="middle">
+              {descriptionStartText}
+              <Text style={styles.hyperlinkText} onPress={onPressLink}>
+                {hyperLinkText}{' '}
+              </Text>{' '}
+              {descriptionMiddleText}
+              <Text style={styles.hyperlinkText} onPress={onPressLink}>
+                {hyperLinkSecondText}
+              </Text>
+            </Text>
 
             <Button
               type={button}
@@ -183,5 +221,9 @@ const styles = StyleSheet.create({
   closeButtonStyle: { padding: 12, width: '35%' },
   buttonContentView: { flexDirection: 'row', justifyContent: 'space-between' },
   buttonStyle: { marginVertical: 10, width: '100%' },
+  hyperlinkText: {
+    color: Color.BASE_COLOR_DARK_BLUE,
+    textDecorationLine: 'underline',
+  },
 });
 export default ModalPicker;

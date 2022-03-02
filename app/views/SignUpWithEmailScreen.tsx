@@ -35,13 +35,12 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import Loader from '../components/Loader';
 import { useTypedSelector } from '../redux';
-import { authText } from '../config/static';
+import { authText, ageData } from '../config/static';
 
 const zxcvbn = require('zxcvbn');
 
 const height = Dimensions.get('window').height;
 const width = Dimensions.get('window').width;
-const modalwidth = Dimensions.get('window').width - 50;
 
 const descriptionData = [
   {
@@ -70,13 +69,6 @@ const birthData = [
   },
 ];
 
-// const ageData = [
-//   {
-//     title:
-//       'sorry, but the selfsea communities feature is only available to young people between the ages of 13 and 18. check out our web-app for resources, and stories from young people who have been there www.selfsea.org or apply to be a peer Health Navigator in the communities here.',
-//   },
-// ];
-
 const EMAIL_REGEX = new RegExp(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/);
 
 const SignUp = ({ route, navigation }) => {
@@ -86,8 +78,7 @@ const SignUp = ({ route, navigation }) => {
   // console.log('signUpResReducer : ', JSON.stringify(signUpRes));
 
   const [years, setYear] = useState<number[]>([]);
-  // const [userAgeMessage, setUserAgeMessage] = useState<any>();
-  // const [userAgeHeader, setUserAgeHeader] = useState<string>('');
+
   useEffect(() => {
     let year: number[] = [];
     let currentYear = new Date().getFullYear();
@@ -134,6 +125,10 @@ const SignUp = ({ route, navigation }) => {
   // const [toClear, setToClear] = useState<boolean>(false);
 
   const userAge = useCalculateAge(birthYear, birthMonth);
+  const [userAgeMessage, setUserAgeMessage] = useState<any>();
+  const [userAgeMidMessage, setUserAgeMidMessage] = useState<any>();
+  const [userAgeLastMessage, setUserAgeLastMessage] = useState<any>();
+  const [userAgeHeader, setUserAgeHeader] = useState<string>('');
 
   const [passwordScore, setPasswordScore] = useState<0 | 1 | 2 | 3 | 4>(0);
 
@@ -149,14 +144,18 @@ const SignUp = ({ route, navigation }) => {
   const countAge = (isPasswordLess: boolean) => {
     if (userAge === null || userAge < 13 || userAge > 18) {
       if (userAge === null || userAge < 13) {
-        changeLessAgeVisibility(true);
-        // setUserAgeMessage(ageData.less);
-        // setUserAgeHeader(ageData.header.minor);
+        changeAgeVisibility(true);
+        setUserAgeMessage(ageData.descriptions.less);
+        setUserAgeHeader(ageData.header.minor);
+        setUserAgeMidMessage('');
+        setUserAgeLastMessage('');
       }
       if (userAge === null || userAge > 18) {
         changeAgeVisibility(true);
-        // setUserAgeMessage(ageData.greater);
-        // setUserAgeHeader(ageData.header.major);
+        setUserAgeMessage(ageData.descriptions.greater);
+        setUserAgeHeader(ageData.header.major);
+        setUserAgeMidMessage(ageData.descriptions.greatermiddle);
+        setUserAgeLastMessage(ageData.descriptions.greaterlast);
       }
     } else {
       if (isPasswordLess) {
@@ -294,11 +293,7 @@ const SignUp = ({ route, navigation }) => {
   const changeAgeVisibility = (bool: boolean) => {
     setIsAgeValid(bool);
   };
-  const [isLessAgeValid, setLessIsAgeValid] = useState(false);
 
-  const changeLessAgeVisibility = (bool: boolean) => {
-    setLessIsAgeValid(bool);
-  };
   const SignUpValidation = (text: string) => {
     if (route.params === undefined) {
       if (
@@ -596,73 +591,19 @@ const SignUp = ({ route, navigation }) => {
           animationType="fade"
           visible={isAgeValid}
           onRequestClose={() => changeAgeVisibility(false)}>
-          <View style={styles.modalContainer}>
-            <View style={styles.modal}>
-              <Text style={styles.textTitle}>Mentee age more than 18</Text>
-
-              <Text
-                style={styles.descriptionText}
-                numberOfLines={8}
-                ellipsizeMode="middle">
-                sorry, but the selfsea communities feature is only available to
-                young people between the ages of 13 and 18. check out our
-                web-app for resources, and stories from young people who have
-                been there{' '}
-                <Text
-                  style={styles.hyperlinkText}
-                  onPress={() => Linking.openURL(Constant.link.SELFSEA)}>
-                  www.selfsea.org
-                </Text>{' '}
-                or apply to be a peer Health Navigator in the communities{' '}
-                <Text
-                  style={styles.hyperlinkText}
-                  onPress={() => Linking.openURL(Constant.link.SELFSEA)}>
-                  here.
-                </Text>
-              </Text>
-
-              <Button
-                type={Constant.buttons.CLOSE}
-                text={'close'}
-                style={styles.modalButtonStyle}
-                onPress={() => changeAgeVisibility(false)}
-              />
-            </View>
-          </View>
-        </Modal>
-
-        <Modal
-          transparent={false}
-          animationType="fade"
-          visible={isLessAgeValid}
-          onRequestClose={() => changeLessAgeVisibility(false)}>
-          <View style={styles.modalContainer}>
-            <View style={styles.modal}>
-              <Text style={styles.textTitle}>Mentee age less than 13</Text>
-
-              <Text
-                style={styles.descriptionText}
-                numberOfLines={8}
-                ellipsizeMode="middle">
-                sorry, but the selfsea communities feature is only available to
-                young people between the ages of 13 and 18. check out our
-                web-app for resources, and stories from young people who have
-                been there{' '}
-                <Text
-                  style={styles.hyperlinkText}
-                  onPress={() => Linking.openURL(Constant.link.SELFSEA)}>
-                  www.selfsea.org
-                </Text>{' '}
-              </Text>
-
-              <Button
-                type={Constant.buttons.CLOSE}
-                text={'close'}
-                style={styles.modalButtonStyle}
-                onPress={() => changeLessAgeVisibility(false)}
-              />
-            </View>
-          </View>
+          <ModalPicker
+            changeModalVisibility={changeAgeVisibility}
+            type={Constant.modal.MODAL_AGE}
+            textTitle={userAgeHeader}
+            descriptionStartText={userAgeMessage}
+            hyperLinkText={ageData.links.link}
+            onPressLink={() => Linking.openURL(Constant.link.SELFSEA)}
+            numberOfLines={8}
+            button={Constant.buttons.CLOSE}
+            text={'close'}
+            descriptionMiddleText={userAgeMidMessage}
+            hyperLinkSecondText={userAgeLastMessage}
+          />
         </Modal>
       </View>
     </KeyboardAvoidingView>
@@ -823,42 +764,5 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 7,
   },
-  //modal style
-  modalContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.4)',
-    paddingHorizontal: 40,
-  },
-  modal: {
-    backgroundColor: Color.BASE_COLOR_WHITE,
-    borderRadius: 10,
-    height: 'auto',
-    width: modalwidth,
-    padding: 19,
-  },
-  textTitle: {
-    fontFamily: Font.CALIBRE,
-    fontSize: 24,
-    fontWeight: 'bold',
-    fontStyle: 'normal',
-    lineHeight: 24,
-    letterSpacing: 0,
-    textAlign: 'center',
-    color: Color.CONTENT_COLOR_BLACK_TEXT,
-  },
-  descriptionText: {
-    fontFamily: Font.CALIBRE,
-    fontSize: 17,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
-    letterSpacing: 0,
-    textAlign: 'center',
-    color: Color.CONTENT_COLOR_BLACK_TEXT,
-    marginVertical: 10,
-  },
-  hyperlinkText: { color: 'blue', textDecorationLine: 'underline' },
-  modalButtonStyle: { marginVertical: 10, width: '100%' },
 });
 export default SignUp;

@@ -47,5 +47,6 @@ export default {
   modal: {
     MODAL: 'Modal',
     MODAL_SUCCESS: 'Success',
+    MODAL_AGE: 'Age',
   },
 };
