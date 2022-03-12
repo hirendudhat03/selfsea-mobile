@@ -17,12 +17,12 @@ const Settings = ({ navigation }) => {
     }
 
     if (Platform.OS === 'ios') {
-      // await AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove);
+      await AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove);
     } else {
       await AsyncStorage.clear();
     }
 
-    navigation.replace('Login');
+    navigation.replace('AuthStack');
   };
 
   return (

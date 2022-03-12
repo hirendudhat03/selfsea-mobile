@@ -29,6 +29,7 @@
 		5B7E3E03279738F6000DD488 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E3E02279738F6000DD488 /* Empty.swift */; };
 		7EF68E3733C33B6898317E18 /* libPods-SelfseaMobile-SelfseaMobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFE59519B596E51CEFDCCC0 /* libPods-SelfseaMobile-SelfseaMobileTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		B0B93C558B21DBA701E1416D /* libPods-SelfseaMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423831EA8574132BED9D8CC /* libPods-SelfseaMobile.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,7 +77,6 @@
 		41CA1FCA279EB2B10042598E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4DCE71D9D8CF4E84BF3ACDC7 /* Calibre-Semibold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Calibre-Semibold.otf"; path = "../app/assets/fonts/Calibre-Semibold.otf"; sourceTree = "<group>"; };
 		55C5F16058FF456C8EF46772 /* Calibre-LightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Calibre-LightItalic.otf"; path = "../app/assets/fonts/Calibre-LightItalic.otf"; sourceTree = "<group>"; };
-		5B11C41127CAA6D200AF623F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5B2EC88C2792F44B00F0FC45 /* SelfseaMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = SelfseaMobile.entitlements; path = SelfseaMobile/SelfseaMobile.entitlements; sourceTree = "<group>"; };
 		5B7E3E01279738F6000DD488 /* SelfseaMobile-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SelfseaMobile-Bridging-Header.h"; sourceTree = "<group>"; };
 		5B7E3E02279738F6000DD488 /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
@@ -109,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0B93C558B21DBA701E1416D /* libPods-SelfseaMobile.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

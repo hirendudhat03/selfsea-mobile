@@ -69,7 +69,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
           if (!isUnique.isEmailUnique) {
             const apiToken = await credentials.user.getIdToken();
             await api.setAuthHeader(apiToken);
-            navigation.replace('DrawerNavigator');
+            navigation.replace('TabNavigator');
           } else {
             navigation.navigate('SignUp', {
               type: 'google',
@@ -142,7 +142,7 @@ const Authentication = ({ text, icon, type, navigation }: Props) => {
       if (!isUnique.isEmailUnique) {
         const apiToken = await credentials.user.getIdToken();
         await api.setAuthHeader(apiToken);
-        navigation.replace('DrawerNavigator');
+        navigation.replace('TabNavigator');
       } else {
         navigation.navigate('SignUp', {
           type: 'apple',
